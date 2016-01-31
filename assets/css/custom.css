@@ -307,6 +307,10 @@ footer .glyphicon {
     width: 80%;
 }
 
+.training {
+    margin: 10% 0;
+}
+
 @media screen and (max-width: 768px) {
     .startPilatesDimensions {
         width: 250px;
@@ -323,11 +327,11 @@ footer .glyphicon {
         min-height: 450px;
     }
 
-    .quote h3{
+    .quote h3 {
         font-size: 36px;
     }
 
-    .quote footer{
+    .quote footer {
         font-size: 19px;
     }
 }
