@@ -307,9 +307,49 @@ footer .glyphicon {
     width: 80%;
 }
 
+
+
+.comment-container {
+    width: 45%;
+    margin: 10% 0;
+    font-family: RobotoThinItalic, Arial, sans-serif;
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+
+.comment {
+    margin-bottom: 35px;
+    font-size: 35px;
+    display: inline-block;
+    width: 80%;
+}
+
+.openQuote, .closeQuote {
+    display: inline-block;
+    width: 44px;
+    height: 40px;
+}
+
+.openQuote {
+    vertical-align: top;
+    background: url("../img/openQuote.png") no-repeat;
+}
+
+.closeQuote {
+    vertical-align: bottom;
+    background: url("../img/closeQuote.png") no-repeat;
+}
+
+.author{
+    width: 100%;
+    float: left;
+}
+
 .training {
     margin: 10% 0;
 }
+
 
 @media screen and (max-width: 768px) {
     .startPilatesDimensions {
