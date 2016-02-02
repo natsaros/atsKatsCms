@@ -6,8 +6,7 @@ $(document).ready(function () {
     });
 
     // Add smooth scrolling to all links in navbar + footer link
-    $(".navbar a, footer a[href='#myPage']").on('click', function (event) {
-
+    $(document).on('click','footer a.toTop', function (event) {
         // Prevent default anchor click behavior
         event.preventDefault();
 
@@ -21,7 +20,7 @@ $(document).ready(function () {
         }, 900, function () {
 
             // Add hash (#) to URL when done scrolling (default click behavior)
-            window.location.hash = hash;
+            //window.location.hash = hash;
         });
     });
 

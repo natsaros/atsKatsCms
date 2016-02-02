@@ -58,6 +58,10 @@ body {
     color: #2d200c;
 }
 
+:focus, a:focus {
+    outline: none
+}
+
 .slideanim {
     visibility: hidden;
 }
@@ -141,6 +145,18 @@ body {
     border-radius: 0;
 }
 
+.navbar-nav {
+    text-align: center;
+}
+
+.navbar-default .navbar-collapse {
+    border: none;
+}
+
+.navbar-collapse li {
+    text-align: center;
+}
+
 .navbar li a, .navbar .navbar-brand {
     /*add here underline*/
     /*color: #fff;*/
@@ -159,12 +175,6 @@ body {
 .navbar-default .navbar-toggle {
     border-color: transparent;
     color: white !important;
-}
-
-footer .glyphicon {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #f4511e;
 }
 
 #myCarousel {
@@ -305,9 +315,9 @@ footer .glyphicon {
     display: inline-block;
     vertical-align: middle;
     width: 80%;
+    font-family: RobotoLight, Arial, sans-serif;
+    font-size: 46px;
 }
-
-
 
 .comment-container {
     width: 45%;
@@ -316,6 +326,7 @@ footer .glyphicon {
     color: white;
     position: relative;
     display: inline-block;
+    cursor: default;
 }
 
 .comment {
@@ -341,7 +352,7 @@ footer .glyphicon {
     background: url("../img/closeQuote.png") no-repeat;
 }
 
-.author{
+.author {
     width: 100%;
     float: left;
 }
@@ -350,6 +361,49 @@ footer .glyphicon {
     margin: 10% 0;
 }
 
+/*Footer Start*/
+
+footer {
+    margin: 20px 0;
+}
+
+footer .glyphicon {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #2c2207;
+}
+
+footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+footer li a {
+    font-family: RobotoRegural, Arial, sans-serif;
+    color: #2c2207;
+    font-size: 17px;
+}
+
+footer li a:hover, footer li a:active, footer li a:visited, footer li a:focus {
+    color: #2c2207;
+    text-decoration: none;
+}
+
+footer .extraInfo {
+    font-family: RobotoRegural, Arial, sans-serif;
+    color: #2c2207;
+    margin: 10px 0;
+    display: inline-block;
+    cursor: default;
+}
+
+/*Footer End*/
 
 @media screen and (max-width: 768px) {
     .startPilatesDimensions {
