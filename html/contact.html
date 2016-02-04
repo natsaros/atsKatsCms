@@ -8,10 +8,83 @@
     <link rel="stylesheet" href="../assets/css/custom.css">
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="../assets/js/custom.js"></script>
 </head>
-<body id="myPage">
+<body id="contact">
 <div class="include" data-include="header"></div>
+
+<div class="container-fluid belowHeader text-center">
+    <div class="row row-no-padding">
+        <div class="col-sm-12">
+            <div class="contactHeader grayish">
+                <div class="contactTitle">Let's talk about fitness</div>
+                <div class="contactSubTitle">Tell us about why you want to join us</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="formContainer">
+        <div class="row"><h1 class="text-center">Contact Us</h1></div>
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                <input class="form-control" id="name" name="name" placeholder="Full name" type="text" required>
+            </div>
+            <div class="col-sm-4 form-group">
+                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+            </div>
+            <div class="col-sm-4 form-group">
+                <input class="form-control" id="phone" name="phone" placeholder="Phone number(optional)" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 form-group">
+                <textarea class="form-control" id="comments" name="comments"
+                          placeholder="Tell us about your project in your main goal, what would you like to achieve?"
+                          rows="5"></textarea>
+            </div>
+            <div class="col-sm-4 form-group">
+                <textarea class="form-control" id="interest" name="comments"
+                          placeholder="Which services are you interested in?" rows="5"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-default" type="submit">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row row-no-padding brown_background">
+        <div class="col-sm-6">
+            <div class="textContainer h450">
+                <div class="textHolder">
+                    <div class="textHolderInside">
+                        <h2>Check where our studio is</h2>
+
+                        <p>
+                            Ξεκινήστε να γυμνάζεστε σωστά, με άτομα πιστοποιημένα στο είδος τους! Αγαπάτε το σώμα σας
+                            και μάθετε γιατι πρέπει να γυμναζεστε!
+
+                            Χαριλάου Τρικούπη 17, 16675 Γλυφάδα, Ελλάδα
+                            Τηλ: 6976582735
+                            Email: pkasfiki@gmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div id="googleMap" style="height:450px;width:100%;"></div>
+        </div>
+    </div>
+</div>
+
 
 <div class="include" data-include="footer"></div>
 </body>
