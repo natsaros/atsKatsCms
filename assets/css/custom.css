@@ -66,8 +66,8 @@ textarea { resize: vertical; }
 .comment-container { width: 45%; margin: 10% 0; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; color: white; position: relative; display: inline-block; cursor: default; }
 .comment { margin-bottom: 35px; font-size: 35px; display: inline-block; width: 80%; }
 .openQuote, .closeQuote { display: inline-block; width: 44px; height: 40px; }
-.openQuote { vertical-align: top; background: url("../img/openQuote.png") no-repeat; }
-.closeQuote { vertical-align: bottom; background: url("../img/closeQuote.png") no-repeat; }
+.openQuote { vertical-align: top;background: url("../img/openQuote.png") no-repeat;background-size: contain;}
+.closeQuote { vertical-align: bottom; background: url("../img/closeQuote.png") no-repeat;background-size: contain;}
 .author { width: 100%; float: left; }
 .training { margin: 7% 0; }
 .fundamentals { margin-top: 40px; }
