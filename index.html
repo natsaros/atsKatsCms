@@ -4,15 +4,42 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/bootstrap.js"></script>
-    <script src="../assets/js/custom.js"></script>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png"/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/custom.js"></script>
 </head>
 <body id="home">
 
-<div class="include" data-include="header"></div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo.png" alt="Fitness House" class="img-responsive">
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="html/about.html">About</a></li>
+                <li><a href="html/program.html">Program</a></li>
+                <!--<li><a href="#blog">Blog</a></li>-->
+                <li><a href="html/contact.html">Contact</a></li>
+                <!--<li><a href="#bookNow">Book Now</a></li>-->
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container-fluid belowHeader">
     <div class="row row-no-padding">
@@ -49,7 +76,7 @@
                                     nec in. An sed euripidis deseruisse, ei tamquam lucilius pri.
                                 </p>
                             </div>
-                            <img src="../assets/img/carousel.png" alt="" class="img-responsive myCarouselImg">
+                            <img src="assets/img/carousel.png" alt="" class="img-responsive myCarouselImg">
                         </div>
                     </div>
                     <div class="item">
@@ -72,7 +99,7 @@
                                     nec in. An sed euripidis deseruisse, ei tamquam lucilius pri.
                                 </p>
                             </div>
-                            <img src="../assets/img/carousel.png" alt="" class="img-responsive myCarouselImg">
+                            <img src="assets/img/carousel.png" alt="" class="img-responsive myCarouselImg">
                         </div>
                     </div>
                     <div class="item">
@@ -95,7 +122,7 @@
                                     nec in. An sed euripidis deseruisse, ei tamquam lucilius pri.
                                 </p>
                             </div>
-                            <img src="../assets/img/carousel.png" alt="" class="img-responsive myCarouselImg">
+                            <img src="assets/img/carousel.png" alt="" class="img-responsive myCarouselImg">
                         </div>
                     </div>
                 </div>
@@ -116,10 +143,18 @@
 
 <div class="container-fluid text-center">
     <div class="training">
-        <h2>Training fundamentals</h2>
         <div class="row">
+            <div class="col-sm-12">
+                <div class="headerTitle">
+                    <p>Training fundamentals</p>
+                    <div class="titlesBorder"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row fundamentals">
             <div class="col-sm-4">
-                <img src="../assets/img/breathing.png" alt="breathing">
+                <img src="assets/img/breathing.png" alt="breathing">
                 <h4>BREATHING</h4>
 
                 <p>Nam alienum o
@@ -128,7 +163,7 @@
                     id, tacimates prodesset has no.</p>
             </div>
             <div class="col-sm-4">
-                <img src="../assets/img/sequencing.png" alt="sequencing">
+                <img src="assets/img/sequencing.png" alt="sequencing">
                 <h4>SEQUENCING</h4>
 
                 <p>Nam alienum o
@@ -137,7 +172,7 @@
                     id, tacimates prodesset has no.</p>
             </div>
             <div class="col-sm-4">
-                <img src="../assets/img/simplicity.png" alt="simplicity">
+                <img src="assets/img/simplicity.png" alt="simplicity">
                 <h4>SIMPLICITY</h4>
 
                 <p>Nam alienum o
@@ -155,8 +190,10 @@
             <div class="textContainer h450">
                 <div class="textHolder">
                     <div class="textHolderInside">
-                        <h2>Pilates meets your needs</h2>
-
+                        <div class="headerTitle">
+                            <p>Pilates meets your needs</p>
+                            <div class="titlesBorder"></div>
+                        </div>
                         <p>
                             We believe Pilates mindfully influences the body and positively changes the way we live our
                             lives.
@@ -191,46 +228,34 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid text-center">
     <div class="row row-no-padding grayish">
         <div class="col-sm-12">
-            <div id="commentsCarousel" class="carousel slide text-center" data-ride="carousel">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <div class="comment-container">
-                            <div class="openQuote"></div>
-                            <div class="comment">Ένας ζεστός χώρος με ακομα πιο ζέστη οικοδέσποινα! Το καλυτερο στη
-                                ΓλυφΑδα! Μακραν....
-                            </div>
-                            <div class="closeQuote"></div>
-                            <div class="author">Eleni Kouppa</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="comment-container">
-                            <div class="openQuote"></div>
-                            <div class="comment">Bliiiiissss</div>
-                            <div class="closeQuote"></div>
-                            <div class="author">Katerina Spania</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="comment-container">
-                            <div class="openQuote"></div>
-                            <div class="comment">Ηρεμία και ένταση, ένας συνδυασμός με απόλυτη αρμονία, το σώμα
-                                αναζωογονημένο και η ψυχολογία στο ζενίθ με τη γυμνάστρια μας!!!
-                            </div>
-                            <div class="closeQuote"></div>
-                            <div class="author">Xristina Karolina Zaxou</div>
-                        </div>
-                    </div>
+            <div class="comment-container">
+                <div class="openQuote"></div>
+                <div class="comment">In 10 sessions, you feel better, 20 sessions you look better, 30 sessions you have
+                    a completely new body.
                 </div>
+                <div class="closeQuote"></div>
+                <div class="author">Joseph Pilates</div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="include" data-include="footer"></div>
+<footer class="container text-center">
+    <a class="toTop grayish" href="#home" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="html/about.html">About</a></li>
+        <li><a href="html/program.html">Program</a></li>
+        <!--<li><a href="#blog">Blog</a></li>-->
+        <li><a href="html/contact.html">Contact</a></li>
+        <!--<li><a href="#bookNow">Book Now</a></li>-->
+    </ul>
+    <div class="extraInfo">&copy; 2015 Copyright</div>
+</footer>
 </body>
 </html>

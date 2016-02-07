@@ -1,9 +1,7 @@
 $(document).ready(function () {
-    var includes = $('.include');
-    $.each(includes, function () {
-        var file = $(this).data('include') + '.html';
-        $(this).load(file);
-    });
+
+    var body = $('body');
+    $('footer .toTop').attr('href', '#' + body.attr('id'));
 
     // Add smooth scrolling to all links in navbar + footer link
     $(document).on('click', 'footer a.toTop', function (event) {
@@ -23,15 +21,10 @@ $(document).ready(function () {
             //window.location.hash = hash;
         });
     });
-    if ($('body').attr('id') == 'contact') {
+    if (body.attr('id') == 'contact') {
         mapInit();
     }
 
-});
-
-$(window).load(function () {
-
-    $('footer .toTop').attr('href', '#' + $('body').attr('id'));
 });
 
 function initialize(myCenter) {

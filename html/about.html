@@ -4,6 +4,9 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png"/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
+          rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <script src="../assets/js/jquery.min.js"></script>
@@ -11,7 +14,31 @@
     <script src="../assets/js/custom.js"></script>
 </head>
 <body id="about">
-<div class="include" data-include="header"></div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../assets/img/logo.png" alt="Fitness House" class="img-responsive">
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="program.html">Program</a></li>
+                <!--<li><a href="#blog">Blog</a></li>-->
+                <li><a href="contact.html">Contact</a></li>
+                <!--<li><a href="#bookNow">Book Now</a></li>-->
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container-fluid belowHeader">
     <div class="row row-no-padding">
@@ -33,9 +60,19 @@
         <div class="col-sm-6">
             <div class="aboutIntroduceMyselfInfo">
                 <div>
-                    <h1>Let me introduce myself</h1>
-                    <div class="aboutIntroduceMyselfBorder"></div>
-                    We believe Pilates mindfully influences the body and positively changes the way we live our lives. As movement experts, we have helped a wide range of conditions -- back pain, shoulder injuries, hip replacements, spine pathologies, osteoporosis, MS and many more. We also work with athletes and dancers to find more control, strength and flexibility to power their performance and improve results.
+                    <div class="headerTitle">
+                        <p>Let me introduce myself</p>
+                        <div class="titlesBorder"></div>
+                    </div>
+                    <p>
+                        We believe Pilates mindfully influences the body and positively changes the way we live our
+                        lives.
+                        As movement experts, we have helped a wide range of conditions -- back pain, shoulder injuries,
+                        hip
+                        replacements, spine pathologies, osteoporosis, MS and many more. We also work with athletes and
+                        dancers to find more control, strength and flexibility to power their performance and improve
+                        results.
+                    </p>
                 </div>
             </div>
         </div>
@@ -68,107 +105,443 @@
 </div>
 
 
-<div class="container-fluid text-center">
-    <div class="row row-no-padding">
+<div class="container text-center">
+    <div class="row">
+        <div class="headerTitle">
+            <p>Timetable</p>
+            <div class="titlesBorder"></div>
+        </div>
+    </div>
+    <div class="row mobile">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#monday">Δευτέρα</a>
+                    </h4>
+                </div>
+                <div id="monday" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="col-sm-1">10:30 - 11:30</th>
+                                    <th class="col-sm-1">12:00 - 13:00</th>
+                                    <th class="col-sm-1">13:00 - 14:00</th>
+                                    <th class="col-sm-1">16:00 - 17:00</th>
+                                    <th class="col-sm-1">18:00 - 19:00</th>
+                                    <th class="col-sm-1">19:00 - 20:00</th>
+                                    <th class="col-sm-1">20:00 - 21:00</th>
+                                    <th class="col-sm-1">21:00 - 22:00</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Aerial Yoga</td>
+                                    <td></td>
+                                    <td>Pilates</td>
+                                    <td>Aerial Yoga</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#tuesday">Τρίτη</a>
+                    </h4>
+                </div>
+                <div id="tuesday" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th class="col-sm-1">10:30 - 11:30</th>
+                                <th class="col-sm-1">12:00 - 13:00</th>
+                                <th class="col-sm-1">13:00 - 14:00</th>
+                                <th class="col-sm-1">16:00 - 17:00</th>
+                                <th class="col-sm-1">18:00 - 19:00</th>
+                                <th class="col-sm-1">19:00 - 20:00</th>
+                                <th class="col-sm-1">20:00 - 21:00</th>
+                                <th class="col-sm-1">21:00 - 22:00</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Pilates</td>
+                                <td></td>
+                                <td></td>
+                                <td>Tuesday's Surpise</td>
+                                <td></td>
+                                <td>Pilates</td>
+                                <td>Zumba</td>
+                                <td>Pilates Power</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#wednesday">Τετάρτη</a>
+                    </h4>
+                </div>
+                <div id="wednesday" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th class="col-sm-1">10:30 - 11:30</th>
+                                <th class="col-sm-1">12:00 - 13:00</th>
+                                <th class="col-sm-1">13:00 - 14:00</th>
+                                <th class="col-sm-1">16:00 - 17:00</th>
+                                <th class="col-sm-1">18:00 - 19:00</th>
+                                <th class="col-sm-1">19:00 - 20:00</th>
+                                <th class="col-sm-1">20:00 - 21:00</th>
+                                <th class="col-sm-1">21:00 - 22:00</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td>Aerial Fitness</td>
+                                <td></td>
+                                <td></td>
+                                <td>Pilates</td>
+                                <td>Aerial Yoga</td>
+                                <td>Pilates Power</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#thursday">Πέμπτη</a>
+                    </h4>
+                </div>
+                <div id="thursday" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th class="col-sm-1">10:30 - 11:30</th>
+                                <th class="col-sm-1">12:00 - 13:00</th>
+                                <th class="col-sm-1">13:00 - 14:00</th>
+                                <th class="col-sm-1">16:00 - 17:00</th>
+                                <th class="col-sm-1">18:00 - 19:00</th>
+                                <th class="col-sm-1">19:00 - 20:00</th>
+                                <th class="col-sm-1">20:00 - 21:00</th>
+                                <th class="col-sm-1">21:00 - 22:00</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Pilates</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Pilates</td>
+                                <td>Zumba</td>
+                                <td>Pilates Power</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#friday">Παρασκευή</a>
+                    </h4>
+                </div>
+                <div id="friday" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th class="col-sm-1">10:30 - 11:30</th>
+                                <th class="col-sm-1">12:00 - 13:00</th>
+                                <th class="col-sm-1">13:00 - 14:00</th>
+                                <th class="col-sm-1">16:00 - 17:00</th>
+                                <th class="col-sm-1">18:00 - 19:00</th>
+                                <th class="col-sm-1">19:00 - 20:00</th>
+                                <th class="col-sm-1">20:00 - 21:00</th>
+                                <th class="col-sm-1">21:00 - 22:00</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Aerial Fitness</td>
+                                <td></td>
+                                <td></td>
+                                <td>Pilates Power</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#saturday">Σάββατο</a>
+                    </h4>
+                </div>
+                <div id="saturday" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th class="col-sm-1">10:30 - 11:30</th>
+                                <th class="col-sm-1">12:00 - 13:00</th>
+                                <th class="col-sm-1">13:00 - 14:00</th>
+                                <th class="col-sm-1">16:00 - 17:00</th>
+                                <th class="col-sm-1">18:00 - 19:00</th>
+                                <th class="col-sm-1">19:00 - 20:00</th>
+                                <th class="col-sm-1">20:00 - 21:00</th>
+                                <th class="col-sm-1">21:00 - 22:00</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td>Aerial Fitness</td>
+                                <td></td>
+                                <td></td>
+                                <td>Cross Training</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- <div class="row">
         <div class="col-sm-12">
-            <div class="aboutTimetableTitle">
-                <h1>Timetable</h1>
+            <div class="row">
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-1">Δευτέρα</div>
+                <div class="col-sm-2">Τρίτη</div>
+                <div class="col-sm-2">Τετάρτη</div>
+                <div class="col-sm-2">Πέμπτη</div>
+                <div class="col-sm-2">Παρασκευή</div>
+                <div class="col-sm-1">Σάββατο</div>
+                <div class="col-sm-1">&nbsp;</div>
             </div>
-            <div class="aboutTimetableBorder"></div>
-            <div class="aboutTimetableDiv">
-                <table class="aboutTimeTable table">
-                    <thead>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <th>Δευτέρα</th>
-                        <th>Τρίτη</th>
-                        <th>Τετάρτη</th>
-                        <th>Πέμπτη</th>
-                        <th>Παρασκευή</th>
-                        <th>Σάββατο</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>10:30 - 11:30</td>
-                        <td>&nbsp;</td>
-                        <td>Pilates</td>
-                        <td>&nbsp;</td>
-                        <td>Pilates</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>12:00 - 13:00</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>Aerial Fitness</td>
-                        <td>&nbsp;</td>
-                        <td>Aerial Fitness</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>13:00 - 14:00</td>
-                        <td>Aerial Yoga</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>16:00 - 17:00</td>
-                        <td>&nbsp;</td>
-                        <td>Tuesday's Surpise</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>Aerial Fitness</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>18:00 - 19:00</td>
-                        <td>Pilates</td>
-                        <td>&nbsp;</td>
-                        <td>Pilates</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>Cross Training</td>
-                    </tr>
-                    <tr>
-                        <td>19:00 - 20:00</td>
-                        <td>Aerial Yoga</td>
-                        <td>Pilates</td>
-                        <td>Aerial Yoga</td>
-                        <td>Pilates</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>20:00 - 21:00</td>
-                        <td>&nbsp;</td>
-                        <td>Zumba</td>
-                        <td>Pilates Power</td>
-                        <td>Zumba</td>
-                        <td>Pilates Power</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>21:00 - 22:00</td>
-                        <td>&nbsp;</td>
-                        <td>Pilates Power</td>
-                        <td>&nbsp;</td>
-                        <td>Pilates Power</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="row">
+                <div class="col-sm-2">10:30 - 11:30</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-2">Pilates</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">Pilates</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
             </div>
+            <div class="row">
+                <div class="col-sm-2">12:00 - 13:00</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">Aerial Fitness</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-1">Aerial Fitness</div>
+                <div class="col-sm-1">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">13:00 - 14:00</div>
+                <div class="col-sm-1">Aerial Yoga</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">16:00 - 17:00</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-2">Tuesday's Surpise</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">Aerial Fitness</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">18:00 - 19:00</div>
+                <div class="col-sm-1">Pilates</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">Pilates</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-1">Cross Training</div>
+                <div class="col-sm-1">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">19:00 - 20:00</div>
+                <div class="col-sm-1">Aerial Yoga</div>
+                <div class="col-sm-2">Pilates</div>
+                <div class="col-sm-2">Aerial Yoga</div>
+                <div class="col-sm-2">Pilates</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">20:00 - 21:00</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-2">Zumba</div>
+                <div class="col-sm-2">Pilates Power</div>
+                <div class="col-sm-2">Zumba</div>
+                <div class="col-sm-2">Pilates Power</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">21:00 - 22:00</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-2">Pilates Power</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-2">Pilates Power</div>
+                <div class="col-sm-2">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-1">&nbsp;</div>
+            </div>
+        </div>
+    </div>-->
+    <div class="row desktop">
+        <div class="col-sm-12">
+            <table class="aboutTimeTable table table-responsive">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Δευτέρα</th>
+                    <th>Τρίτη</th>
+                    <th>Τετάρτη</th>
+                    <th>Πέμπτη</th>
+                    <th>Παρασκευή</th>
+                    <th>Σάββατο</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>10:30 - 11:30</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>12:00 - 13:00</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Aerial Fitness</td>
+                    <td>&nbsp;</td>
+                    <td>Aerial Fitness</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>13:00 - 14:00</td>
+                    <td>Aerial Yoga</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>16:00 - 17:00</td>
+                    <td>&nbsp;</td>
+                    <td>Tuesday's Surpise</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Aerial Fitness</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>18:00 - 19:00</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Cross Training</td>
+                </tr>
+                <tr>
+                    <td>19:00 - 20:00</td>
+                    <td>Aerial Yoga</td>
+                    <td>Pilates</td>
+                    <td>Aerial Yoga</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>20:00 - 21:00</td>
+                    <td>&nbsp;</td>
+                    <td>Zumba</td>
+                    <td>Pilates Power</td>
+                    <td>Zumba</td>
+                    <td>Pilates Power</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>21:00 - 22:00</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates Power</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates Power</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-<div class="include" data-include="footer" data-totop="about"></div>
+<footer class="container text-center">
+    <a class="toTop grayish" href="#home" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="program.html">Program</a></li>
+        <!--<li><a href="#blog">Blog</a></li>-->
+        <li><a href="contact.html">Contact</a></li>
+        <!--<li><a href="#bookNow">Book Now</a></li>-->
+    </ul>
+    <div class="extraInfo">&copy; 2015 Copyright</div>
+</footer>
 </body>
 </html>
 
