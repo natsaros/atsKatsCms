@@ -28,13 +28,13 @@ textarea { resize: vertical; }
 .h600 { height: 600px; min-height: 600px; }
 
 .navbar { margin-bottom: 0; background-color: white; z-index: 9999; border: 0; font-size: 12px; letter-spacing: 4px; border-radius: 0; /*line-height: 1.42857143 !important;*/ }
-.navbar-nav { text-align: center; }
+.navbar-nav { text-align: center; margin-top: 15px;}
 .navbar-default .navbar-collapse { border: none; }
 .navbar-collapse li { text-align: center; }
 .navbar li a, .navbar .navbar-brand { /*add here underline color: #fff;*/ }
 .navbar .navbar-brand { height: auto; }
 .navbar-nav li a:hover, .navbar-nav li.active a { /*add here underline color: #f4511e !important; background-color: #fff !important;*/ }
-.navbar-default .navbar-toggle { border-color: transparent; color: white !important; }
+.navbar-default .navbar-toggle { border-color: transparent; color: white !important; margin-top: 25px;}
 
 .headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 40px; display: inline-block; margin: 10px 0 20px 0; }
 .titlesBorder { margin: 20px auto; border: 2px solid #FDC300; border-radius: 2px; width: 70%; }
@@ -86,16 +86,18 @@ footer a.toTop:before { content: ''; display: inline-block; height: 100%; vertic
 footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vertical-align: middle; top: 0; left: -1px; }
 /*Footer End*/
 
-.contactHeader { padding: 50px 0; color: white; }
-.contactHeader .contactSubTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 26px; }
+.heroHeader { padding: 90px 0; color: white; }
+.heroHeader .heroSubTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 26px; }
 .contactInfo { display: inline-block; width: 80%; }
 .formContainer { float: left; width: 100%; margin: 85px 0; }
 .formContainer .row { margin: 20px 0; }
 .form-control:focus { border-color: #665041; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 80, 65, .6); box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 80, 65, .6); }
 
-.aboutHero { height: 360px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; text-align: center; }
-.aboutHero:before { content: ""; height: 100%; display: inline-block; vertical-align: middle; }
-.aboutHeroTitle { display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; }
+
+.aboutHero{/*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; text-align: center; padding: 100px 0;}
+/*.aboutHero:before{ content: ""; height: 100%; display: inline-block; vertical-align: middle; }*/
+.aboutHeroTitle{ display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding:100px 0;}
+
 .aboutIntroduceMyselfImageContainer { padding: 70px 30px 0 170px; height: 380px; }
 .aboutIntroduceMyselfImage { height: 100%; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutIntroduceMyselfInfo { text-align: center; padding: 50px 140px 25px 30px; font-size: 18px; }
@@ -115,6 +117,12 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .aboutTimeTable tr:last-child td:first-child { border-bottom-left-radius: 4px; }
 .aboutTimeTable tr:last-child td:last-child { border-bottom-right-radius: 4px; }
 
+
+.programHero { /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; text-align: center;padding: 100px 0; }
+/*.programHero:before { content: ""; height: 100%; display: inline-block; vertical-align: middle; }*/
+.programHeroTitle { display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding: 100px 0}
+
+
 .panel-group { margin: 20px; }
 .panel-group a[data-toggle="collapse"] { display: inline-block; width: 100%; }
 .panel-body { padding: 0; }
@@ -123,6 +131,14 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .mobile { display: none; }
 .desktop { display: block; }
 
+@media screen and (min-width: 768px) and (max-width: 960px) {
+    .quote h3 { font-size: 42px; }
+    .quote footer { font-size: 23px; }
+    .comment{font-size: 23px;}
+    .openQuote, .closeQuote {width: 23px; height: 23px; }
+    .motoContainer{font-size:32px;}
+}
+
 @media screen and (max-width: 768px) {
     .mobile { display: block; } .desktop { display: none; }
     .startPilatesDimensions { width: 250px; height: 250px; }
@@ -130,4 +146,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .h600 { height: 450px; min-height: 450px; }
     .quote h3 { font-size: 36px; }
     .quote footer { font-size: 19px; }
+    .comment{font-size: 19px;}
+    .openQuote, .closeQuote {width: 12px; height: 12px; }
+    .motoContainer{font-size:23px;}
+    .headerTitle{font-size: 32px;}
 }
