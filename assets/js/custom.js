@@ -52,6 +52,17 @@ function mapInit() {
     google.maps.event.addDomListener(window, 'load', initialize(myCenter));
 }
 
+function postContact(submit) {
+    $submit = $(submit);
+    $form = $submit.closest('form');
+    $('<input>').attr({
+        type: 'hidden',
+        name: 'submit',
+        value: 'true'
+    }).appendTo($form);
+
+    $form.submit();
+}
 $(window).scroll(function () {
     $(".slideanim").each(function () {
         var pos = $(this).offset().top;

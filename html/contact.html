@@ -56,44 +56,47 @@
 </div>
 
 <div class="container">
-    <div class="formContainer">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <div class="headerTitle">
-                    <p>Contact Us</p>
-                    <div class="titlesBorder"></div>
+    <form action="../php/contact.php" method="post">
+        <div class="formContainer">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="headerTitle">
+                        <p>Contact Us</p>
+                        <div class="titlesBorder"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Full name" type="text" required>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <input class="form-control" id="phone" name="phone" placeholder="Phone number(optional)"
+                           type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 form-group">
+                <textarea class="form-control" id="comments" name="goal"
+                          placeholder="Tell us about your project in your main goal, what would you like to achieve?"
+                          rows="5"></textarea>
+                </div>
+                <div class="col-sm-4 form-group">
+                <textarea class="form-control" id="interest" name="interested"
+                          placeholder="Which services are you interested in?" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <button class="btn btn-default" type="submit" onclick="postContact(this)">Send message</button>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4 form-group">
-                <input class="form-control" id="name" name="name" placeholder="Full name" type="text" required>
-            </div>
-            <div class="col-sm-4 form-group">
-                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-            </div>
-            <div class="col-sm-4 form-group">
-                <input class="form-control" id="phone" name="phone" placeholder="Phone number(optional)" type="text">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-8 form-group">
-                <textarea class="form-control" id="comments" name="comments"
-                          placeholder="Tell us about your project in your main goal, what would you like to achieve?"
-                          rows="5"></textarea>
-            </div>
-            <div class="col-sm-4 form-group">
-                <textarea class="form-control" id="interest" name="comments"
-                          placeholder="Which services are you interested in?" rows="5"></textarea>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-4">
-                <button class="btn btn-default" type="submit">Send message</button>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
 
 <div class="container-fluid text-center">
