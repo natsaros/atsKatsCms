@@ -25,7 +25,6 @@ textarea { resize: vertical; }
 
 /*TODO to be removed. No height allowed in responsive!!!*/
 .h450 { height: 450px; min-height: 450px; }
-.h600 { height: 600px; min-height: 600px; }
 
 .navbar { margin-bottom: 0; background-color: white; z-index: 9999; border: 0; font-size: 12px; letter-spacing: 4px; border-radius: 0; /*line-height: 1.42857143 !important;*/ }
 .navbar-nav { text-align: center; margin-top: 15px;}
@@ -36,6 +35,44 @@ textarea { resize: vertical; }
 .navbar-nav li a:hover, .navbar-nav li.active a { /*add here underline color: #f4511e !important; background-color: #fff !important;*/ }
 .navbar-default .navbar-toggle { border-color: transparent; color: white !important; margin-top: 25px;}
 
+
+.btn-default {
+    color: #fff;
+    background-color: #fdc300;
+    border-color: #fdc300;
+}
+.btn-default:focus,
+.btn-default.focus {
+    color: #fff;
+    background-color: #fdbd16;
+    border-color: #fdbd16;
+}
+.btn-default:hover {
+    color: #fff;
+    background-color: #fdbd16;
+    border-color: #fdbd16;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: #c5930c;
+    border-color: #c5930c;
+}
+.btn-default:active:hover,
+.btn-default.active:hover,
+.open > .dropdown-toggle.btn-default:hover,
+.btn-default:active:focus,
+.btn-default.active:focus,
+.open > .dropdown-toggle.btn-default:focus,
+.btn-default:active.focus,
+.btn-default.active.focus,
+.open > .dropdown-toggle.btn-default.focus {
+    color: #fff;
+    background-color: #c5930c;
+    border-color: #c5930c;
+}
+
 .headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 40px; display: inline-block; margin: 10px 0 20px 0; }
 .titlesBorder { margin: 20px auto; border: 2px solid #FDC300; border-radius: 2px; width: 70%; }
 
@@ -43,7 +80,11 @@ textarea { resize: vertical; }
 
 .carousel-container { float: left; width: 100%; }
 .carousel-container:before { content: ""; height: 100%; display: inline-block; vertical-align: middle; }
-.carousel-info { vertical-align: middle; display: inline-block; width: 85%; color: white; position: relative; z-index: 100; text-align: center; }
+.carousel-container#first{background: url("../img/reformer.JPG") no-repeat center 65% /cover; }
+.carousel-container#second{background: url("../img/pilatesRoom.JPG") no-repeat center 30% /cover; }
+.carousel-container#third{background: url("../img/reformer.JPG") no-repeat center 65% /cover; }
+
+.carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 100; text-align: center; }
 .carousel-info > p { width: 60%; display: inline-block; }
 .carousel-container > img { width: 100%; top: 0; position: absolute; }
 .carousel-indicators li { background-color: white; border: none; margin: 0 15px; }
@@ -53,7 +94,7 @@ textarea { resize: vertical; }
 .quote h3 { font-family: Roboto, sans-serif; font-weight: 300; font-style: italic; font-size: 62px; line-height: 1.375em; margin: 70px 0; text-align: left; }
 .quote footer { color: #fdc300; font-size: 26px; text-align: right; }
 .textContainer { position: relative; text-align: center; }
-.textHolder { display: inline-block; height: 100%; position: absolute; top: 0; left: 0; }
+.textHolder { display: inline-block; position: relative; margin:10% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
 .textHolderInside { display: inline-block; vertical-align: middle; width: 80%; color: white; }
 .imageHolder { background: url("../img/pil_home.png") no-repeat center 30% /cover; }
@@ -143,7 +184,6 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .mobile { display: block; } .desktop { display: none; }
     .startPilatesDimensions { width: 250px; height: 250px; }
     .h450 { height: 300px; min-height: 300px; }
-    .h600 { height: 450px; min-height: 450px; }
     .quote h3 { font-size: 36px; }
     .quote footer { font-size: 19px; }
     .comment{font-size: 19px;}

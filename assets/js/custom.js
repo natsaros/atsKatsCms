@@ -34,7 +34,7 @@ function initialize(myCenter) {
         center: myCenter,
         zoom: 16,
         scrollwheel: false,
-        draggable: true,
+        draggable: !("ontouchend" in document),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
