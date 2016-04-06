@@ -190,4 +190,9 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .openQuote, .closeQuote {width: 12px; height: 12px; }
     .motoContainer{font-size:23px;}
     .headerTitle{font-size: 32px;}
+    .table{margin-bottom: 0;}
+    .timeTable tr td:first-child{width: 50%; border-right: 2px solid #ddd;}
+    footer li a{font-size: 14px;}
+    footer a.toTop{width: 35px;height: 35px;right:3%;}
+    footer .glyphicon{font-size:15px;}
 }
