@@ -179,6 +179,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .openQuote, .closeQuote {width: 23px; height: 23px; }
     .motoContainer{font-size:32px;}
     .aboutTimeTable td:first-child{padding: 8px 8px 8px 12px;}
+    .aboutIntroduceMyselfImageContainer{padding: 70px 0 0 0;}
+    .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;}
 }
 
 @media screen and (max-width: 768px) {
@@ -200,4 +202,6 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .panel-default > .panel-heading{background-color: #423427;color:#fff;border-color: #423427;}
     .panel-default>.panel-heading+.panel-collapse>.panel-body{border:0;}
     .panel-default {border-color: #423427;}
+    .aboutIntroduceMyselfImageContainer{padding: 70px 0 0 0;}
+    .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;font-size: 16px;}
 }
