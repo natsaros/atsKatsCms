@@ -178,6 +178,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .comment{font-size: 23px;}
     .openQuote, .closeQuote {width: 23px; height: 23px; }
     .motoContainer{font-size:32px;}
+    .aboutTimeTable td:first-child{padding: 8px 8px 8px 12px;}
 }
 
 @media screen and (max-width: 768px) {
@@ -190,9 +191,13 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .openQuote, .closeQuote {width: 12px; height: 12px; }
     .motoContainer{font-size:23px;}
     .headerTitle{font-size: 32px;}
-    .table{margin-bottom: 0;}
-    .timeTable tr td:first-child{width: 50%; border-right: 2px solid #ddd;}
+    .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
+    .timeTable .table td{border-top: 1px solid #423427;font-size: 15px;}
+    .timeTable .table tr td:first-child{width: 50%; border-right: 1px solid #423427;}
     footer li a{font-size: 14px;}
     footer a.toTop{width: 35px;height: 35px;right:3%;}
     footer .glyphicon{font-size:15px;}
+    .panel-default > .panel-heading{background-color: #423427;color:#fff;border-color: #423427;}
+    .panel-default>.panel-heading+.panel-collapse>.panel-body{border:0;}
+    .panel-default {border-color: #423427;}
 }
