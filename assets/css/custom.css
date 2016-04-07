@@ -96,7 +96,7 @@ textarea { resize: vertical; }
 .textContainer { position: relative; text-align: center; }
 .textHolder { display: inline-block; position: relative; margin:10% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
-.textHolderInside { display: inline-block; vertical-align: middle; width: 80%; color: white; }
+.textHolderInside { display: inline-block; vertical-align: middle; width: 80%; color: white; font-size:20px;}
 .imageHolder { background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .parallaxImage { background: url("../img/parallaxBookNow.png") no-repeat fixed center bottom / cover; display: inline-block; width: 100%; }
 .parallaxImage:before { content: ''; display: inline-block; vertical-align: middle; height: 100%; }
@@ -140,7 +140,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 /*.aboutHero:before{ content: ""; height: 100%; display: inline-block; vertical-align: middle; }*/
 .aboutHeroTitle{ display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding:100px 0;}
 
-.aboutIntroduceMyselfImageContainer { padding: 70px 30px 0 170px; height: 380px; }
+.aboutIntroduceMyselfImageContainer { padding: 70px 30px 0 170px; height: 380px;height: 445px;}
 .aboutIntroduceMyselfImage { height: 100%; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutIntroduceMyselfInfo { text-align: center; padding: 50px 140px 25px 30px; font-size: 18px; }
 .aboutImageBigLeft { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
@@ -177,13 +177,17 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .carousel-info{max-height: 380px;min-height: 380px;}
     .quote h3 { font-size: 40px;text-shadow: 3px 0 1px #000;}
     .quote footer { font-size: 22px;text-shadow:none;}
-    .headerTitle{font-size: 30px;}
+    .headerTitle{font-size: 28px;}
+    .heroHeader .heroSubTitle{font-size: 20px;}
+    .textHolderInside {font-size:18px;}
     .comment{font-size: 23px;}
     .openQuote, .closeQuote {width: 23px; height: 23px; }
     .motoContainer{font-size:32px;}
     .aboutTimeTable td:first-child{padding: 8px 8px 8px 12px;}
     .aboutIntroduceMyselfImageContainer{padding: 70px 0 0 0;}
     .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;}
+    .programHero { padding: 104px 0; }
+    .aboutHero{padding: 104px 0;}
 }
 
 @media screen and (max-width: 768px) {
@@ -193,13 +197,14 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .carousel-info{max-height: 250px;min-height: 250px;}
     .carousel-indicators li{width: 8px; height: 8px;}
     .carousel-indicators .active{width: 9px; height: 9px;}
-    .quote h3 { font-size: 22px;text-shadow: 1px 1px 0 #000;}
-    .quote footer { font-size: 13px;text-shadow:none;}
+    .quote h3 { font-size: 25px;text-shadow: 1px 1px 0 #000;}
+    .quote footer { font-size: 15px;text-shadow:none;}
     .comment{font-size: 19px;}
     .openQuote, .closeQuote {width: 12px; height: 12px; }
     .motoContainer{font-size:23px;}
-    .headerTitle{font-size: 18px;}
-    .heroHeader .heroSubTitle{font-size: 17px;}
+    .headerTitle{font-size: 20px;}
+    .textHolderInside {font-size:16px;}
+    .heroHeader .heroSubTitle{font-size: 16px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
     .timeTable .table td{border-top: 1px solid #423427;font-size: 15px;}
     .timeTable .table tr td:first-child{width: 50%; border-right: 1px solid #423427;}
