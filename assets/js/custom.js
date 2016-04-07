@@ -27,6 +27,20 @@ $(document).ready(function () {
         mapInit();
     }
 
+    $('nav').mouseenter(function () {
+            var $class = $(this).attr('class');
+            if ($class.indexOf('scrolling') > -1
+                && $class.indexOf('opacity70') > -1) {
+                $(this).removeClass('opacity70');
+            }
+        })
+        .mouseleave(function () {
+            var $class = $(this).attr('class');
+            if ($class.indexOf('scrolling') > -1
+                && $class.indexOf('opacity70') <= 0) {
+                $(this).addClass('opacity70');
+            }
+        });
 });
 
 function initialize(myCenter) {
@@ -64,6 +78,21 @@ function postContact(submit) {
     $form.submit();
 }
 $(window).scroll(function () {
+    $('.navbar-brand').each(function () {
+        var winTop = $(window).scrollTop();
+        var belowHeaderTop = $('.belowHeader').offset().top;
+        var nav = $(this).closest('nav');
+        var isHover = $(this).closest('nav:hover').length != 0;
+
+        if (winTop > belowHeaderTop + 10 && !isHover) {
+            nav.addClass("opacity70");
+            nav.addClass("scrolling");
+        } else {
+            nav.removeClass("opacity70");
+            nav.removeClass("scrolling");
+        }
+    });
+
     $(".slideanim").each(function () {
         var pos = $(this).offset().top;
         var winTop = $(window).scrollTop();

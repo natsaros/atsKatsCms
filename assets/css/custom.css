@@ -24,67 +24,42 @@ textarea { resize: vertical; }
 /*Color Pallete End*/
 
 /*TODO to be removed. No height allowed in responsive!!!*/
-.h450 { height: 450px; min-height: 450px; }
 .indexImageHeight{height: 545px; min-height: 545px;}
-.navbar { margin-bottom: 0; background-color: white; z-index: 9999; border: 0; font-size: 12px; letter-spacing: 4px; border-radius: 0; /*line-height: 1.42857143 !important;*/ }
-.navbar-nav { text-align: center; margin-top: 15px;}
+.navbar { margin-bottom: 0; background-color: white; z-index: 9999; border: 0; font-size: 12px; letter-spacing: 4px; border-radius: 0;-webkit-transition: opacity .5s; -moz-transition: opacity .5s; -ms-transition: opacity .5s; -o-transition: opacity .5s; transition: opacity .5s;}
+.navbar:hover{opacity: 1; -moz-opacity: 1; -webkit-opacity: 1;}
+.navbar-nav { text-align: center;}
 .navbar-default .navbar-collapse { border: none; }
 .navbar-collapse li { text-align: center; }
 .navbar li a, .navbar .navbar-brand { /*add here underline color: #fff;*/ }
-.navbar .navbar-brand { height: auto; }
+.navbar .navbar-brand {left:15px;position: absolute; text-align: center; border-radius: 50%; padding: 0; margin: 0 !important; width: 110px; height: 110px; background-color: white;display: block;}
+.navbar .navbar-brand:before {content: ''; display: inline-block; vertical-align: middle; height: 100%;} .navbar .navbar-brand >img{    display: inline-block; vertical-align: middle;}
+.navbar .navbar-brand:hover{background-color: white;}
+.navbar.opacity70{opacity: .7; -moz-opacity: .7; -webkit-opacity: .7;}
+
 .navbar-nav li a:hover, .navbar-nav li.active a { /*add here underline color: #f4511e !important; background-color: #fff !important;*/ }
-.navbar-default .navbar-toggle { border-color: transparent; color: white !important; margin-top: 25px;}
+.navbar-default .navbar-toggle { border-color: transparent; color: white !important;}
 
 
-.btn-default {
-    color: #fff;
-    background-color: #fdc300;
-    border-color: #fdc300;
-}
-.btn-default:focus,
-.btn-default.focus {
-    color: #fff;
-    background-color: #fdbd16;
-    border-color: #fdbd16;
-}
-.btn-default:hover {
-    color: #fff;
-    background-color: #fdbd16;
-    border-color: #fdbd16;
-}
+.btn-default { color: #fff; background-color: #fdc300; border-color: #fdc300; }
+.btn-default:focus, .btn-default.focus { color: #fff; background-color: #fdbd16; border-color: #fdbd16; }
+.btn-default:hover { color: #fff; background-color: #fdbd16; border-color: #fdbd16; }
 .btn-default:active,
 .btn-default.active,
-.open > .dropdown-toggle.btn-default {
-    color: #fff;
-    background-color: #c5930c;
-    border-color: #c5930c;
-}
-.btn-default:active:hover,
-.btn-default.active:hover,
-.open > .dropdown-toggle.btn-default:hover,
-.btn-default:active:focus,
-.btn-default.active:focus,
-.open > .dropdown-toggle.btn-default:focus,
-.btn-default:active.focus,
-.btn-default.active.focus,
-.open > .dropdown-toggle.btn-default.focus {
-    color: #fff;
-    background-color: #c5930c;
-    border-color: #c5930c;
-}
+.open > .dropdown-toggle.btn-default { color: #fff; background-color: #c5930c; border-color: #c5930c; }
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus { color: #fff; background-color: #c5930c; border-color: #c5930c; }
 
-.headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 40px; display: inline-block; margin: 10px 0 20px 0; }
+.headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 38px; display: inline-block; margin: 10px 0 20px 0; }
 .titlesBorder { margin: 20px auto; border: 2px solid #FDC300; border-radius: 2px; width: 70%; }
 
-.belowHeader { margin-top: 85px; }
-
+.belowHeader { margin-top: 50px; }
 .carousel-container { float: left; width: 100%;}
 .carousel-container:before { content: ""; height: 100%; display: inline-block; vertical-align: middle; }
-.carousel-container#first{background: url("../img/reformer.JPG") no-repeat center 65% /cover; }
-.carousel-container#second{background: url("../img/pilatesRoom.JPG") no-repeat center 30% /cover; }
-.carousel-container#third{background: url("../img/reformer.JPG") no-repeat center 65% /cover; }
 
-.carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 100; text-align: center;max-height: 427px;min-height: 427px;}
+.carousel-container#first{background: url("../img/reformer_m.jpg") no-repeat center 65% /cover; }
+.carousel-container#second{background: url("../img/aerialRoom_m.jpg") no-repeat center 65% /cover; }
+.carousel-container#third{background: url("../img/pilatesRoom_m.jpg") no-repeat center 65% /cover; }
+
+.carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 100; text-align: center;max-height: 427px;}
 .carousel-info > p { width: 60%; display: inline-block; }
 .carousel-container > img { width: 100%; top: 0; position: absolute; }
 .carousel-indicators li { background-color: white; border: none; margin: 0 15px; }
@@ -98,11 +73,14 @@ textarea { resize: vertical; }
 .textHolder { display: inline-block; position: relative; margin:10% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
 .textHolderInside { display: inline-block; vertical-align: middle; width: 80%; color: white; font-size:20px;}
-.imageHolder { background: url("../img/pil_home.png") no-repeat center 30% /cover; }
-.parallaxImage { background: url("../img/parallaxBookNow.png") no-repeat fixed center bottom / cover; display: inline-block; width: 100%; }
+.imageHolder { background: url("../img/meetsNeeds.jpg") no-repeat right /cover; }
+
+/*.parallaxImage { background: url("../img/parallaxBookNow.png") no-repeat fixed center bottom / cover; display: inline-block; width: 100%; }*/
+.parallaxImage { background: url("../img/paraPen.jpg") no-repeat fixed center / cover; display: inline-block; width: 100%; opacity: .6; -moz-opacity: .6; -webkit-opacity: .6; }
+
 .parallaxImage:before { content: ''; display: inline-block; vertical-align: middle; height: 100%; }
 .startPilatesDimensions { height: 350px; width: 350px; }
-.startPilates { box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); -webkit-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); -moz-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); background-color: #5f574a; opacity: 0.85; vertical-align: middle; display: inline-block; }
+.startPilates { box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); -webkit-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); -moz-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); background-color: #5f574a; opacity: 0.85; vertical-align: middle; display: inline-block; margin:10% 0;}
 .startPilates:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
 .motoContainer { color: white; display: inline-block; vertical-align: middle; width: 80%; font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 46px; }
 .comment-container { width: 45%; margin: 10% 0; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; color: white; position: relative; display: inline-block; cursor: default; }
@@ -141,7 +119,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 /*.aboutHero:before{ content: ""; height: 100%; display: inline-block; vertical-align: middle; }*/
 .aboutHeroTitle{ display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding:100px 0;}
 
-.aboutIntroduceMyselfImageContainer { padding: 70px 30px 0 170px; height: 380px;height: 445px;}
+.aboutIntroduceMyselfImageContainer { padding: 70px 30px 0 170px; height: 445px;}
 .aboutIntroduceMyselfImage { height: 100%; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutIntroduceMyselfInfo { text-align: center; padding: 50px 140px 25px 30px; font-size: 18px; }
 .aboutImageBigLeft { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
@@ -176,14 +154,15 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .mapContainer{min-height:540px;width:100%;}
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
-    .carousel-info{max-height: 380px;min-height: 380px;}
+    .carousel-info{max-height: 380px;}
     .quote h3 { font-size: 40px;text-shadow: 3px 0 1px #000;}
     .quote footer { font-size: 22px;text-shadow:none;}
-    .headerTitle{font-size: 28px;}
+    .headerTitle{font-size: 26px;}
     .heroHeader .heroSubTitle{font-size: 20px;}
     .textHolderInside {font-size:18px;}
     .comment{font-size: 23px;}
     .openQuote, .closeQuote {width: 23px; height: 23px; }
+    .startPilatesDimensions { width: 245px; height: 245px; }
     .motoContainer{font-size:32px;}
     .aboutTimeTable td:first-child{padding: 8px 8px 8px 12px;}
     .aboutIntroduceMyselfImageContainer{padding: 70px 0 0 0;}
@@ -196,9 +175,9 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 
 @media screen and (max-width: 768px) {
     .mobile { display: block; } .desktop { display: none; }
+
     .startPilatesDimensions { width: 250px; height: 250px; }
-    .h450 { height: 300px; min-height: 300px; }
-    .carousel-info{max-height: 250px;min-height: 250px;}
+    .carousel-info{max-height: 380px;}
     .carousel-indicators li{width: 8px; height: 8px;}
     .carousel-indicators .active{width: 9px; height: 9px;}
     .quote h3 { font-size: 25px;text-shadow: 1px 1px 0 #000;}
@@ -226,4 +205,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .mapContainer{min-height:450px;width:100%;}
     .generalTextContainer {max-height:373px;}
     .indexImageHeight { height: 300px; min-height: 300px; }
+}
+
+@media screen and (max-width: 512px) {
+    .startPilatesDimensions { width: 200px; height: 200px; }
 }
