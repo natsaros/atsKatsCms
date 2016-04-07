@@ -25,7 +25,7 @@ textarea { resize: vertical; }
 
 /*TODO to be removed. No height allowed in responsive!!!*/
 .h450 { height: 450px; min-height: 450px; }
-
+.indexImageHeight{height: 545px; min-height: 545px;}
 .navbar { margin-bottom: 0; background-color: white; z-index: 9999; border: 0; font-size: 12px; letter-spacing: 4px; border-radius: 0; /*line-height: 1.42857143 !important;*/ }
 .navbar-nav { text-align: center; margin-top: 15px;}
 .navbar-default .navbar-collapse { border: none; }
@@ -93,7 +93,8 @@ textarea { resize: vertical; }
 .quote { width: 80%; display: inline-block; }
 .quote h3 { font-family: Roboto, sans-serif; font-weight: 300; font-style: italic; font-size: 65px; line-height: 1.375em; margin: 70px 0; text-align: center;text-shadow: 4px 2px 1px #000;}
 .quote footer { color: #fdc300; font-size: 26px; text-align: right;text-shadow:none;}
-.textContainer { position: relative; text-align: center; }
+.contactTextContainer { position: relative; text-align: center;max-height:540px;}
+.generalTextContainer { position: relative; text-align: center;max-height:545px;}
 .textHolder { display: inline-block; position: relative; margin:10% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
 .textHolderInside { display: inline-block; vertical-align: middle; width: 80%; color: white; font-size:20px;}
@@ -172,6 +173,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .panel-body th:hover, .panel-body td:hover { cursor: default; }
 .mobile { display: none; }
 .desktop { display: block; }
+.mapContainer{min-height:540px;width:100%;}
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
     .carousel-info{max-height: 380px;min-height: 380px;}
@@ -188,6 +190,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;}
     .programHero { padding: 104px 0; }
     .aboutHero{padding: 104px 0;}
+    .generalTextContainer {max-height:500px;}
+    .indexImageHeight { height: 500px; min-height: 500px; }
 }
 
 @media screen and (max-width: 768px) {
@@ -202,7 +206,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .comment{font-size: 19px;}
     .openQuote, .closeQuote {width: 12px; height: 12px; }
     .motoContainer{font-size:23px;}
-    .headerTitle{font-size: 20px;}
+    .headerTitle{font-size: 22px;}
     .textHolderInside {font-size:16px;}
     .heroHeader .heroSubTitle{font-size: 16px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
@@ -218,4 +222,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;font-size: 16px;}
     .programHero { padding: 102px 0; }
     .aboutHero{padding: 102px 0;}
+    .contactTextContainer {max-height:415px;}
+    .mapContainer{min-height:450px;width:100%;}
+    .generalTextContainer {max-height:373px;}
+    .indexImageHeight { height: 300px; min-height: 300px; }
 }
