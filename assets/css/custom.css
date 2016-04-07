@@ -78,21 +78,21 @@ textarea { resize: vertical; }
 
 .belowHeader { margin-top: 85px; }
 
-.carousel-container { float: left; width: 100%; }
+.carousel-container { float: left; width: 100%;}
 .carousel-container:before { content: ""; height: 100%; display: inline-block; vertical-align: middle; }
 .carousel-container#first{background: url("../img/reformer.JPG") no-repeat center 65% /cover; }
 .carousel-container#second{background: url("../img/pilatesRoom.JPG") no-repeat center 30% /cover; }
 .carousel-container#third{background: url("../img/reformer.JPG") no-repeat center 65% /cover; }
 
-.carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 100; text-align: center;text-shadow: 4px 2px 1px #000;}
+.carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 100; text-align: center;max-height: 427px;min-height: 427px;}
 .carousel-info > p { width: 60%; display: inline-block; }
 .carousel-container > img { width: 100%; top: 0; position: absolute; }
 .carousel-indicators li { background-color: white; border: none; margin: 0 15px; }
 .carousel-indicators li.active { background-color: #fdc300; margin: 0 15px; }
 
-.quote { width: 90%; display: inline-block; }
-.quote h3 { font-family: Roboto, sans-serif; font-weight: 300; font-style: italic; font-size: 65px; line-height: 1.375em; margin: 70px 0; text-align: center; }
-.quote footer { color: #fdc300; font-size: 26px; text-align: right; }
+.quote { width: 80%; display: inline-block; }
+.quote h3 { font-family: Roboto, sans-serif; font-weight: 300; font-style: italic; font-size: 65px; line-height: 1.375em; margin: 70px 0; text-align: center;text-shadow: 4px 2px 1px #000;}
+.quote footer { color: #fdc300; font-size: 26px; text-align: right;text-shadow:none;}
 .textContainer { position: relative; text-align: center; }
 .textHolder { display: inline-block; position: relative; margin:10% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
@@ -174,8 +174,10 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .desktop { display: block; }
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
-    .quote h3 { font-size: 50px; }
-    .quote footer { font-size: 20px; }
+    .carousel-info{max-height: 380px;min-height: 380px;}
+    .quote h3 { font-size: 40px;text-shadow: 3px 0 1px #000;}
+    .quote footer { font-size: 22px;text-shadow:none;}
+    .headerTitle{font-size: 30px;}
     .comment{font-size: 23px;}
     .openQuote, .closeQuote {width: 23px; height: 23px; }
     .motoContainer{font-size:32px;}
@@ -188,15 +190,15 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .mobile { display: block; } .desktop { display: none; }
     .startPilatesDimensions { width: 250px; height: 250px; }
     .h450 { height: 300px; min-height: 300px; }
-    .carousel-info{text-shadow: 1px 1px 0 #000;}
+    .carousel-info{max-height: 250px;min-height: 250px;}
     .carousel-indicators li{width: 8px; height: 8px;}
     .carousel-indicators .active{width: 9px; height: 9px;}
-    .quote h3 { font-size: 21px; }
-    .quote footer { font-size: 13px; }
+    .quote h3 { font-size: 22px;text-shadow: 1px 1px 0 #000;}
+    .quote footer { font-size: 13px;text-shadow:none;}
     .comment{font-size: 19px;}
     .openQuote, .closeQuote {width: 12px; height: 12px; }
     .motoContainer{font-size:23px;}
-    .headerTitle{font-size: 22px;}
+    .headerTitle{font-size: 18px;}
     .heroHeader .heroSubTitle{font-size: 17px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
     .timeTable .table td{border-top: 1px solid #423427;font-size: 15px;}
