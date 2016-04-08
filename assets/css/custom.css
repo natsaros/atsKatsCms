@@ -151,6 +151,10 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .mobile { display: none; }
 .desktop { display: block; }
 .mapContainer{min-height:540px;width:100%;}
+.carousel-fade .carousel-inner .item {opacity: .7;transition-property: opacity;}
+.carousel-fade .carousel-inner .active {opacity: 1;}
+.carousel-fade .carousel-inner .active.left,.carousel-fade .carousel-inner .active.right {left: 0;opacity: 1;z-index: 1;}
+.carousel-fade .carousel-inner .next.left,.carousel-fade .carousel-inner .prev.right {opacity: .95;}
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
     .carousel-info{max-height: 380px;}
