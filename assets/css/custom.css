@@ -59,6 +59,7 @@ textarea { resize: vertical; }
 .navbar-default .navbar-collapse { border: none; }
 .navbar-collapse li { text-align: center; }
 .navbar li a, .navbar .navbar-brand { /*add here underline color: #fff;*/ }
+.navbar-default .navbar-nav>.active>a{background-color: #96877D;color: #fff;}
 .navbar .navbar-brand {left:15px;position: absolute; text-align: center; border-radius: 50%; padding: 0; margin: 0 !important; width: 110px; height: 110px; background-color: white;display: block;}
 .navbar .navbar-brand:before {content: ''; display: inline-block; vertical-align: middle; height: 100%;} .navbar .navbar-brand >img{    display: inline-block; vertical-align: middle;}
 .navbar .navbar-brand:hover{background-color: white;}
@@ -99,7 +100,7 @@ textarea { resize: vertical; }
 .generalTextContainer { position: relative; text-align: center; }
 .textHolder { display: inline-block; position: relative; margin:10% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
-.textHolderInside { display: inline-block; vertical-align: middle; width: 80%; color: white; font-size:20px;}
+.textHolderInside { display: inline-block; vertical-align: middle; width: 85%; color: white; font-size:20px;}
 .imageHolder { background: url("../img/meetsNeeds.jpg") no-repeat right /cover; }
 
 /*.parallaxImage { background: url("../img/parallaxBookNow.png") no-repeat fixed center bottom / cover; display: inline-block; width: 100%; }*/
@@ -146,9 +147,9 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 /*.aboutHero:before{ content: ""; height: 100%; display: inline-block; vertical-align: middle; }*/
 .aboutHeroTitle{ display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding:100px 0;}
 
-.aboutIntroduceMyselfImageContainer { padding: 70px 30px 0 170px; height: 445px;}
+.aboutIntroduceMyselfImageContainer {min-height: 500px;height: 500px;text-align: right;padding: 70px 60px 0;}
 .aboutIntroduceMyselfImage { height: 100%; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
-.aboutIntroduceMyselfInfo { text-align: center; padding: 50px 140px 25px 30px; font-size: 18px; }
+.aboutIntroduceMyselfInfo { text-align: center; padding: 70px 50px 0 0; font-size: 18px; }
 .aboutImageBigLeft { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutImageBigRight { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutImageSmallCenterUp { height: 250px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
@@ -196,11 +197,9 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .startPilatesDimensions { width: 245px; height: 245px; }
     .motoContainer{font-size:32px;}
     .aboutTimeTable td:first-child{padding: 8px 8px 8px 12px;}
-    .aboutIntroduceMyselfImageContainer{padding: 70px 0 0 0;}
     .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;}
     .programHero { padding: 104px 0; }
     .aboutHero{padding: 104px 0;}
-    /*.generalTextContainer {max-height:500px;}*/
     .indexImageHeight { height: 500px; min-height: 500px; }
 }
 
@@ -233,8 +232,6 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .programHero { padding: 102px 0; }
     .aboutHero{padding: 102px 0;}
     .mapContainer{min-height:450px;width:100%;}
-    /*.contactTextContainer {max-height:415px;}*/
-    /*.generalTextContainer {max-height:373px;}*/
     .indexImageHeight { height: 300px; min-height: 300px; }
 }
 
