@@ -3,7 +3,7 @@
 $errors = '';
 
 if (isset($_POST['submit'])) {
-    $myemail = 'info@fitnesshousebypenny.gr';
+    $myemail = 'natsaros@gmail.com';
 
     $name = $_POST['name'];
     $email_address = $_POST['email'];

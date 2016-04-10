@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="row row-no-padding">
         <div class="col-sm-12">
             <div class="meetOurTeamContainer">
@@ -80,7 +80,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <div class="container-fluid">
     <div class="row row-no-padding">
