@@ -1,9 +1,7 @@
 <?php
-
 $errors = '';
-
 if (isset($_POST['submit'])) {
-    $myemail = 'natsaros@gmail.com';
+    $myEmail = 'info@fitnesshousebypenny.gr';
 
     $name = $_POST['name'];
     $email_address = $_POST['email'];
@@ -24,19 +22,22 @@ if (isset($_POST['submit'])) {
 
     //TODO-FIXME : server side error handling,now only html5 form handling
     if (empty($errors)) {
-        $to = $myemail;
+        $to = $myEmail;
         $email_subject = "Fitness House Contact from: $name";
-        $email_body = "\n
-        Name: $name \n
-        Email: $email_address\n\n";
+        $email_body = "\n";
+        $email_body .= "Name:" . $name . "\n";
+        $email_body .= "Email:" . $email_address . "\n\n";
         if (!empty($goal)) {
-            $email_body .= "\tGoals: \n \t$goal\n\n";
+            $email_body .= "\tGoals: \n \t " . $goal . "\n\n";
         }
-        $email_body .= "\tInterested in : \n \t $interested \n";
+        $email_body .= "\tInterested in : \n \t" . $interested . "\n";
 
-
-        $headers = "From: $myemail\n";
+        $headers = 'MIME-Version: 1.1';
+        $headers .= 'Content-type: text/html; charset=utf-8';
+        $headers .= "From: $myEmail\n";
         $headers .= "Reply-To: $email_address";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+
         mail($to, $email_subject, $email_body, $headers);
 
 
@@ -60,7 +61,7 @@ if (isset($_POST['submit'])) {
 </div>
 
 <div class="container">
-    <form action="index.php?id=contact" method="post">
+    <form action="index.php?id=contact" method="post" accept-charset="utf-8">
         <div class="formContainer">
             <div class="row">
                 <div class="col-sm-12 text-center">
@@ -123,7 +124,7 @@ if (isset($_POST['submit'])) {
 
                                 Χαριλάου Τρικούπη 17, 16675 Γλυφάδα, Ελλάδα<br>
                                 Τηλ: 6976582735<br>
-                                Email: pkasfiki@gmail.com
+                                Email: info@fitnesshousebypenny.gr
                             </p>
                         </div>
                     </div>

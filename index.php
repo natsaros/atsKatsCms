@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="gr">
+<?php header("Content-type: text/html; charset=utf-8"); ?>
 <?php
 $REQUEST_URI = $_SERVER['REQUEST_URI'];
 $REQUEST_URI = preg_replace("/[^\/]+$/", "", $REQUEST_URI);
