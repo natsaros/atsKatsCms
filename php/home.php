@@ -1,46 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Fitness House</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png"/>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
-          rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.js"></script>
-    <script src="assets/js/custom.js"></script>
-</head>
-<body id="home">
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
-                <img src="assets/img/logo.png" alt="Fitness House" class="img-responsive">
-            </a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="index.html">Αρχική</a></li>
-                <li><a href="html/about.html">Πληροφορίες</a></li>
-                <li><a href="html/program.html">Πρόγραμμα</a></li>
-                <!--<li><a href="#blog">Blog</a></li>-->
-                <li><a href="html/contact.html">Επικοινωνία</a></li>
-                <!--<li><a href="#bookNow">Book Now</a></li>-->
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <div class="container-fluid belowHeader">
     <div class="row row-no-padding">
         <div class="col-sm-12">
@@ -66,7 +23,7 @@
                         </div>
                     </div>
 
-                   <div class="item">
+                    <div class="item">
                         <div class="carousel-container" id="second">
                             <div class="carousel-info">
                                 <div class="quote">
@@ -96,7 +53,6 @@
         </div>
     </div>
 </div>
-
 <div class="container-fluid text-center">
     <div class="training">
         <div class="row">
@@ -110,7 +66,7 @@
 
         <div class="row fundamentals">
             <div class="col-sm-4">
-                <img src="assets/img/breathing.png" alt="breathing">
+                <img src="<?php $REQUEST_URI ?>assets/img/breathing.png" alt="breathing">
                 <h4>BREATHING</h4>
 
                 <p>Nam alienum o
@@ -119,7 +75,7 @@
                     id, tacimates prodesset has no.</p>
             </div>
             <div class="col-sm-4">
-                <img src="assets/img/sequencing.png" alt="sequencing">
+                <img src="<?php $REQUEST_URI ?>assets/img/sequencing.png" alt="sequencing">
                 <h4>SEQUENCING</h4>
 
                 <p>Nam alienum o
@@ -128,7 +84,7 @@
                     id, tacimates prodesset has no.</p>
             </div>
             <div class="col-sm-4">
-                <img src="assets/img/simplicity.png" alt="simplicity">
+                <img src=<?php $REQUEST_URI ?>"assets/img/simplicity.png" alt="simplicity">
                 <h4>SIMPLICITY</h4>
 
                 <p>Nam alienum o
@@ -139,7 +95,6 @@
         </div>
     </div>
 </div>
-
 <div class="container-fluid text-center">
     <div class="row row-no-padding brown_background">
         <div class="col-sm-6">
@@ -151,9 +106,12 @@
                             <div class="titlesBorder"></div>
                         </div>
                         <p>
-                            Η μέθοδος Pilates ανανεώνει και τονώνει το μυϊκό σύστημα προκαλώντας συγχρόνως ένα αίσθημα σωματικής και πνευματικής ευεξίας!
-                            Βοηθά το σώμα να εργάζεται συνδυαστικά με συνεχή ροή και ακρίβεια κινήσεων ώστε να αποφεύγεται ο κίνδυνος τραυματισμών!
-                            Η ενδυνάμωση, ο έλεγχος, η ευλυγισία και ο συντονισμός είναι τα βασικά οφέλη της μεθόδου που σου αλλάζουν όχι μόνο το σώμα αλλά και τον τρόπο ζωής!
+                            Η μέθοδος Pilates ανανεώνει και τονώνει το μυϊκό σύστημα προκαλώντας συγχρόνως ένα αίσθημα
+                            σωματικής και πνευματικής ευεξίας!
+                            Βοηθά το σώμα να εργάζεται συνδυαστικά με συνεχή ροή και ακρίβεια κινήσεων ώστε να
+                            αποφεύγεται ο κίνδυνος τραυματισμών!
+                            Η ενδυνάμωση, ο έλεγχος, η ευλυγισία και ο συντονισμός είναι τα βασικά οφέλη της μεθόδου που
+                            σου αλλάζουν όχι μόνο το σώμα αλλά και τον τρόπο ζωής!
                         </p>
                     </div>
                 </div>
@@ -164,7 +122,6 @@
         </div>
     </div>
 </div>
-
 <div class="container-fluid text-center">
     <div class="row row-no-padding">
         <div class="col-sm-12">
@@ -176,7 +133,6 @@
         </div>
     </div>
 </div>
-
 <div class="container-fluid text-center">
     <div class="row row-no-padding grayish">
         <div class="col-sm-12">
@@ -191,20 +147,3 @@
         </div>
     </div>
 </div>
-
-<footer class="container text-center">
-    <a class="toTop grayish" href="#home" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <ul>
-        <li><a href="index.html">Αρχική</a></li>
-        <li><a href="html/about.html">Πληροφορίες</a></li>
-        <li><a href="html/program.html">Πρόγραμμα</a></li>
-        <!--<li><a href="#blog">Blog</a></li>-->
-        <li><a href="html/contact.html">Επικοινωνία</a></li>
-        <!--<li><a href="#bookNow">Book Now</a></li>-->
-    </ul>
-    <div class="extraInfo">&copy; 2015 Copyright</div>
-</footer>
-</body>
-</html>

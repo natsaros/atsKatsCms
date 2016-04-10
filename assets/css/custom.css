@@ -59,13 +59,12 @@ textarea { resize: vertical; }
 .navbar-default .navbar-collapse { border: none; }
 .navbar-collapse li { text-align: center; }
 .navbar li a, .navbar .navbar-brand { /*add here underline color: #fff;*/ }
-.navbar-default .navbar-nav>.active>a{background-color: #96877D;color: #fff;}
 .navbar .navbar-brand {left:15px;position: absolute; text-align: center; border-radius: 50%; padding: 0; margin: 0 !important; width: 110px; height: 110px; background-color: white;display: block;}
 .navbar .navbar-brand:before {content: ''; display: inline-block; vertical-align: middle; height: 100%;} .navbar .navbar-brand >img{    display: inline-block; vertical-align: middle;}
 .navbar .navbar-brand:hover{background-color: white;}
 .navbar.opacity70{opacity: .7; -moz-opacity: .7; -webkit-opacity: .7;}
 
-.navbar-nav li a:hover, .navbar-nav li.active a { /*add here underline color: #f4511e !important; background-color: #fff !important;*/ }
+.navbar-nav li a:hover, .navbar-nav li.active a {background-color: #96877D!important;color: #fff!important; }
 .navbar-default .navbar-toggle { border-color: transparent; color: white !important;}
 
 

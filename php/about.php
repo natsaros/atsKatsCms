@@ -1,47 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Fitness House</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Fitness house">
-    <meta name="keywords" content="pilates,aerial,yoga,fitness house,fitness,elliniko,glyfada,peny,kasfiki,personal trainer">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png"/>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
-          rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/bootstrap.js"></script>
-    <script src="../assets/js/custom.js"></script>
-</head>
-<body id="about">
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="../index_test.html">
-                <img src="../assets/img/logo.png" alt="Fitness House" class="img-responsive">
-            </a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../index_test.html">Αρχική</a></li>
-                <li class="active"><a href="about.html">Το Studio</a></li>
-                <li><a href="program.html">Πρόγραμμα</a></li>
-                <!--<li><a href="#blog">Blog</a></li>-->
-                <li><a href="contact.html">Επικοινωνία</a></li>
-                <!--<li><a href="#bookNow">Book Now</a></li>-->
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <div class="container-fluid belowHeader text-center">
     <div class="row row-no-padding">
         <div class="col-sm-12">
@@ -150,22 +106,3 @@
         </div>
     </div>
 </div>
-
-<footer class="container text-center">
-    <a class="toTop grayish" href="#home" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <ul>
-        <li><a href="../index_test.html">Αρχική</a></li>
-        <li><a href="about.html">Το Studio</a></li>
-        <li><a href="program.html">Πρόγραμμα</a></li>
-        <!--<li><a href="#blog">Blog</a></li>-->
-        <li><a href="contact.html">Επικοινωνία</a></li>
-        <!--<li><a href="#bookNow">Book Now</a></li>-->
-    </ul>
-    <div class="extraInfo">&copy; 2015 Copyright</div>
-</footer>
-</body>
-</html>
-
-
