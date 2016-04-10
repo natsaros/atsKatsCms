@@ -31,19 +31,18 @@
                     <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
                 </div>
                 <div class="col-sm-4 form-group">
-                    <input class="form-control" id="phone" name="phone" placeholder="Αριθμός Τηλεφώνου (Προαιτετικό)"
-                           type="text">
+                    <input class="form-control" id="phone" name="phone" placeholder="Τηλέφωνο" type="text">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-8 form-group">
                 <textarea class="form-control" id="comments" name="goal"
-                          placeholder="Tell us about your project in your main goal, what would you like to achieve?"
+                          placeholder="Τί θες να επιτύχεις; Ποιος είναι ο στόχος;"
                           rows="5"></textarea>
                 </div>
                 <div class="col-sm-4 form-group">
                 <textarea class="form-control" id="interest" name="interested"
-                          placeholder="Which services are you interested in?" rows="5"></textarea>
+                          placeholder="Για ποιές υπηρεσίες μας ενδιαφέρεσαι;" rows="5"></textarea>
                 </div>
             </div>
 

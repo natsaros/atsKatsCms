@@ -11,6 +11,101 @@
     </div>
 </div>
 <div class="container timeTableContainer text-center">
+    <div class="row desktop">
+        <div class="headerTitle">
+            <p>Πρόγραμμα</p>
+            <div class="titlesBorder"></div>
+        </div>
+        <div class="col-sm-12">
+            <table class="aboutTimeTable table table-responsive">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Δευτέρα</th>
+                    <th>Τρίτη</th>
+                    <th>Τετάρτη</th>
+                    <th>Πέμπτη</th>
+                    <th>Παρασκευή</th>
+                    <th>Σάββατο</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>10:30 - 11:30</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>12:00 - 13:00</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Aerial Fitness</td>
+                    <td>&nbsp;</td>
+                    <td>Aerial Fitness</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>13:00 - 14:00</td>
+                    <td>Aerial Yoga</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>16:00 - 17:00</td>
+                    <td>&nbsp;</td>
+                    <td>Tuesday's Surpise</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Aerial Fitness</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>18:00 - 19:00</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Cross Training</td>
+                </tr>
+                <tr>
+                    <td>19:00 - 20:00</td>
+                    <td>Aerial Yoga</td>
+                    <td>Pilates</td>
+                    <td>Aerial Yoga</td>
+                    <td>Pilates</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>20:00 - 21:00</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates Power</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates Power</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>21:00 - 22:00</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates Power</td>
+                    <td>&nbsp;</td>
+                    <td>Pilates Power</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="row mobile">
         <div class="headerTitle">
             <p>Timetable</p>
@@ -181,100 +276,24 @@
             </div>
         </div>
     </div>
-
-    <div class="row desktop">
-        <div class="headerTitle">
-            <p>Πρόγραμμα</p>
-            <div class="titlesBorder"></div>
-        </div>
+    <div class="row">
         <div class="col-sm-12">
-            <table class="aboutTimeTable table table-responsive">
-                <thead>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>Δευτέρα</th>
-                    <th>Τρίτη</th>
-                    <th>Τετάρτη</th>
-                    <th>Πέμπτη</th>
-                    <th>Παρασκευή</th>
-                    <th>Σάββατο</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>10:30 - 11:30</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>12:00 - 13:00</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Aerial Fitness</td>
-                    <td>&nbsp;</td>
-                    <td>Aerial Fitness</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>13:00 - 14:00</td>
-                    <td>Aerial Yoga</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>16:00 - 17:00</td>
-                    <td>&nbsp;</td>
-                    <td>Tuesday's Surpise</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Aerial Fitness</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>18:00 - 19:00</td>
-                    <td>Pilates</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Cross Training</td>
-                </tr>
-                <tr>
-                    <td>19:00 - 20:00</td>
-                    <td>Aerial Yoga</td>
-                    <td>Pilates</td>
-                    <td>Aerial Yoga</td>
-                    <td>Pilates</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>20:00 - 21:00</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates Power</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates Power</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>21:00 - 22:00</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates Power</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates Power</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="generalTextContainer">
+                <div class="textHolder">
+                    <div class="textHolderInside">
+                        <div class="headerTitle">
+                            <p>Σημείωση</p>
+                            <div class="titlesBorder"></div>
+                        </div>
+
+                        <div class="contactInfo">
+                            <p>
+                                Τα μαθήματα του pilates equipment κλείνονται κατόπιν ραντεβου
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

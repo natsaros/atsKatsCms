@@ -22,24 +22,12 @@ textarea { resize: vertical; }
 
 @media all and (transform-3d), (-webkit-transform-3d) {
     .carousel-fade .carousel-inner > .item.next,
-    .carousel-fade .carousel-inner > .item.active.right {
-        opacity: 0;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
+    .carousel-fade .carousel-inner > .item.active.right { opacity: 0; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
     .carousel-fade .carousel-inner > .item.prev,
-    .carousel-fade .carousel-inner > .item.active.left {
-        opacity: 0;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
+    .carousel-fade .carousel-inner > .item.active.left { opacity: 0; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
     .carousel-fade .carousel-inner > .item.next.left,
     .carousel-fade .carousel-inner > .item.prev.right,
-    .carousel-fade .carousel-inner > .item.active {
-        opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
+    .carousel-fade .carousel-inner > .item.active { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
 }
 
 /*Color Pallete Start*/
@@ -64,9 +52,9 @@ textarea { resize: vertical; }
 .navbar .navbar-brand:hover{background-color: white;}
 .navbar.opacity70{opacity: .7; -moz-opacity: .7; -webkit-opacity: .7;}
 
-.navbar-nav li a:hover, .navbar-nav li.active a {background-color: #96877D!important;color: #fff!important; }
+.navbar-nav li.active a {background-color: #96877D!important;color: #fff!important; }
+.navbar-nav li a:hover { background-color: transparent !important; color: #2d200c!important;}
 .navbar-default .navbar-toggle { border-color: transparent; color: white !important;}
-
 
 .btn-default { color: #fff; background-color: #fdc300; border-color: #fdc300; }
 .btn-default:focus, .btn-default.focus { color: #fff; background-color: #fdbd16; border-color: #fdbd16; }
@@ -100,6 +88,7 @@ textarea { resize: vertical; }
 .textHolder { display: inline-block; position: relative; margin:10% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
 .textHolderInside { display: inline-block; vertical-align: middle; width: 85%; color: white; font-size:20px;}
+#program .textHolderInside{ color: #2d200c;}
 .imageHolder { background: url("../img/meetsNeeds.jpg") no-repeat right /cover; }
 
 /*.parallaxImage { background: url("../img/parallaxBookNow.png") no-repeat fixed center bottom / cover; display: inline-block; width: 100%; }*/
