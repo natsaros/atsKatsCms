@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<?php $REQUEST_URI ?>index.php?id='home'">
+            <a class="navbar-brand" href="<?php $REQUEST_URI ?>index.php?id=home">
                 <img src="<?php $REQUEST_URI ?>assets/img/logo.png" alt="Fitness House" class="img-responsive">
             </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
