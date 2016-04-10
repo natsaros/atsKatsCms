@@ -172,14 +172,15 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .carousel-fade .carousel-inner .active {opacity: 1;}
 .carousel-fade .carousel-inner .active.left,.carousel-fade .carousel-inner .active.right {left: 0;opacity: 1;z-index: 1;}
 .carousel-fade .carousel-inner .next.left,.carousel-fade .carousel-inner .prev.right {opacity: .95;}
-.meetOurTeamContainer{background-color:#E0DBD7;text-align:center;margin-top: 70px;padding: 50px 0 70px 0;}
-.partnersContainer{height: 440px;padding: 30px 0 0 0;width:40%;}
-.partner{height: 326px;overflow: hidden;}
+.meetOurTeamContainer{background-color:#E0DBD7;text-align:center;margin-top: 70px;padding: 50px 0;}
+.partnersContainer{width:40%;}
+.partner{height: 356px;overflow: hidden;    padding: 30px 0 0 0;}
 .partnerImage{cursor: pointer;height: 326px;width: 209px;box-shadow: 0px 1px 7px #888;margin-top: 5px;-webkit-transition: all 300ms ease-out;-moz-transition: all 300ms ease-out;-o-transition: all 300ms ease-out;-ms-transition: all 300ms ease-out;transition: all 300ms ease-out;}
 .partnerAP{background: url("../img/poulopoulos.jpg") no-repeat center 30% /cover;margin: 0 auto;}
 .partner .simple-caption {margin: 0 auto;background-color: rgba(0,0,0,0.6);color: #fff;z-index: 100;-webkit-transition: all 300ms ease-out;-moz-transition: all 300ms ease-out;-o-transition: all 300ms ease-out;-ms-transition: all 300ms ease-out;transition: all 300ms ease-out;height: 50px;width: 209px;display: block;bottom: -50px;line-height: 50px;text-align: center;font-size:16px;font-weight: 700;}
-.partner:hover .simple-caption {margin: 0 auto;-moz-transform: translateY(-100%);-o-transform: translateY(-100%);-webkit-transform: translateY(-100%);transform: translateY(-100%);}
-.partnerCV{font-size: 18px; text-align: left;padding: 0 15%;}
+.partner:not(.partnerImageFade):hover .simple-caption {margin: 0 auto;-moz-transform: translateY(-100%);-o-transform: translateY(-100%);-webkit-transform: translateY(-100%);transform: translateY(-100%);}
+.partnerCV{font-size: 18px; text-align: left;padding: 0 15%;background-color: #E0DBD7;}
+.partnerImageFade{opacity:.3;transition: opacity .5s ease-in-out; -moz-transition: opacity .5s ease-in-out; -webkit-transition: opacity .5s ease-in-out;}
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
     .carousel-info{max-height: 380px;}

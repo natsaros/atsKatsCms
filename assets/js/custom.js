@@ -41,6 +41,14 @@ $(document).ready(function () {
                 $(this).addClass('opacity70');
             }
         });
+
+    $('.partner').on('click', function(){
+        if ($(this).hasClass('partnerImageFade')){
+            $(this).removeClass('partnerImageFade');
+            $('.partnerCV .collapse').removeClass('in');
+        }
+        $('.partner').not(this).addClass('partnerImageFade');
+    });
 });
 
 function initialize(myCenter) {

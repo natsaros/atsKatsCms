@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<!--<div class="container-fluid">
+<div class="container-fluid">
     <div class="row row-no-padding">
         <div class="col-sm-12">
             <div class="meetOurTeamContainer">
@@ -46,41 +46,48 @@
                     <div class="titlesBorder"></div>
                 </div>
                 <div class="container partnersContainer">
-                    <div class="col-sm-6 partner">
+                    <div class="col-sm-6 partner" data-toggle="collapse" data-target="#partnerAP">
                         <div class="partnerImage partnerAP"></div>
                         <span class="simple-caption">
                         <p>Αναστάσιος Πουλόπουλος</p>
                         </span>
                     </div>
-                    <div class="col-sm-6 partner">
+                    <div class="col-sm-6 partner" data-toggle="collapse" data-target="#partner2">
                         <div class="partnerImage partnerAP"></div>
                         <span class="simple-caption">
                         <p>Partner 2</p>
                     </span>
                     </div>
                 </div>
-                <div class="partnerCV">
-                    Ο Πουλόπουλος Αναστάσιος διατηρεί εδώ και 15 χρόνια ένα πρότυπο
-                    κέντρο αποκατάστασης μυοσκελετικών παθήσεων στην περιοχή της
-                    Γλυφάδας.<br/><br/>
-                    Η εμπειρία του στον αθλητικό χώρο από την συνεργασία του
-                    με τις ομάδες μπάσκετ ΑΡΗΣ Γλυφάδας και Α.Ν.Ο.Γ Γλυφάδας,
-                    με τα σωματεία του στίβου της Γλυφάδας (και σε συνδιαμό με την
-                    συνεχής επιμόρφωση του συνιστά μια ολοκληρωμένη αποκατάσταση
-                    των μυοσκελετικών προβλημάτων αλλά και των αθλητικών κακώσεων.)***DEN KATALABAINW TI THELEI NA PEI EDW***<br/><br/>
-                    <strong>Πτυχία</strong><br/><br/>
-                    - Απόφοιτος Α.Τ.Ε.Ι Θεσσαλονίκης στο τμήμα Φυσικοθεραπείας, 2000<br/>
-                    - Απόφοιτος Α.Τ.Ε.Ι Αθήνας στο τμήμα Τεχνολoγία Ιατρικών Εργαστηρίων, 1994<br/><br/>
-                    <strong>Μεταπτυχιακή εκπαίδευση</strong><br/><br/>
-                    - Certification of kinematic taping concept,  International Kinematic Taping Academy of Holland, 2014<br/>
-                    - Certification of Mulligan’s concept – Mobilization with Movement, 2013<br/>
-                    - Certification of Structural Osteopathy and Soft Chiropractic, Ackermann College Chiropractic of Sweden, 2012<br/>
-                    - Certification of Myofascial and Trigger Point Therapy, Myotherapy College of Utah, 2005<br/>
-                </div>
             </div>
         </div>
     </div>
-</div>-->
+    <div class="row partnerCV">
+        <div class="collapse" id="partnerAP">
+            Ο Πουλόπουλος Αναστάσιος διατηρεί εδώ και 15 χρόνια ένα πρότυπο
+            κέντρο αποκατάστασης μυοσκελετικών παθήσεων στην περιοχή της
+            Γλυφάδας.<br/><br/>
+            Η εμπειρία του στον αθλητικό χώρο από την συνεργασία του
+            με τις ομάδες μπάσκετ ΑΡΗΣ Γλυφάδας και Α.Ν.Ο.Γ Γλυφάδας,
+            με τα σωματεία του στίβου της Γλυφάδας (και σε συνδιαμό με την
+            συνεχής επιμόρφωση του συνιστά μια ολοκληρωμένη αποκατάσταση
+            των μυοσκελετικών προβλημάτων αλλά και των αθλητικών κακώσεων.)***DEN KATALABAINW TI THELEI NA PEI EDW***<br/><br/>
+            <strong>Πτυχία</strong><br/><br/>
+            - Απόφοιτος Α.Τ.Ε.Ι Θεσσαλονίκης στο τμήμα Φυσικοθεραπείας, 2000<br/>
+            - Απόφοιτος Α.Τ.Ε.Ι Αθήνας στο τμήμα Τεχνολoγία Ιατρικών Εργαστηρίων, 1994<br/><br/>
+            <strong>Μεταπτυχιακή εκπαίδευση</strong><br/><br/>
+            - Certification of kinematic taping concept,  International Kinematic Taping Academy of Holland, 2014<br/>
+            - Certification of Mulligan’s concept – Mobilization with Movement, 2013<br/>
+            - Certification of Structural Osteopathy and Soft Chiropractic, Ackermann College Chiropractic of Sweden, 2012<br/>
+            - Certification of Myofascial and Trigger Point Therapy, Myotherapy College of Utah, 2005<br/>
+        </div>
+    </div>
+    <div class="row partnerCV">
+        <div class="collapse" id="partner2">
+            TBD
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row row-no-padding">
@@ -105,4 +112,5 @@
             <div class="aboutImageBigRight"></div>
         </div>
     </div>
+</div>
 </div>
