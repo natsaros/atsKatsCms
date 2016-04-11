@@ -1,7 +1,8 @@
 <?php
 $errors = '';
+$myEmail = 'pkasfiki@gmail.com';
+//    $myEmail = 'info@fitnesshousebypenny.gr';
 if (isset($_POST['submit'])) {
-    $myEmail = 'info@fitnesshousebypenny.gr';
 
     $name = $_POST['name'];
     $email_address = $_POST['email'];
@@ -32,14 +33,14 @@ if (isset($_POST['submit'])) {
         }
         $email_body .= "\tInterested in : \n \t" . $interested . "\n";
 
-        $headers = 'MIME-Version: 1.1';
-        $headers .= 'Content-type: text/plain; charset=utf-8';
-        $headers .= "From: $myEmail\n";
-        $headers .= "Reply-To: $email_address";
+        $headers = "MIME-Version: 1.1";
+        $headers .= "Content-type: text/plain; charset=utf-8";
+        $headers .= "From:" . $myEmail . "\n";
+        $headers .= "Reply-To:" . $email_address . "\n";
         $headers .= "X-Mailer: PHP/" . phpversion();
 
 
-        mail($to, '=?utf-8?B?'.base64_encode($email_subject).'?=', $email_body, $headers);
+        mail($to, '=?utf-8?B?' . base64_encode($email_subject) . '?=', $email_body, $headers);
 //        mail($to, $email_subject, $email_body, $headers);
 
 
@@ -126,7 +127,7 @@ if (isset($_POST['submit'])) {
 
                                 Χαριλάου Τρικούπη 17, 16675 Γλυφάδα, Ελλάδα<br>
                                 Τηλ: 6976582735<br>
-                                Email: info@fitnesshousebypenny.gr
+                                Email: <?php echo $myEmail?>
                             </p>
                         </div>
                     </div>
