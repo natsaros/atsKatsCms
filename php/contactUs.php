@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid belowHeader text-center">
     <div class="row row-no-padding">
         <div class="col-sm-12">
-            <div class="heroHeader grayish">
+            <div class="heroHeader contactHero">
                 <div class="headerTitle">
                     <p>ΒΑΛΤΕ ΤΗ ΓΥΜΝΑΣΤΙΚΗ ΣΤΗ ΖΩΗ ΣΑΣ!</p>
                     <div class="titlesBorder"></div>
