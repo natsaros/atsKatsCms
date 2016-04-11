@@ -33,12 +33,14 @@ if (isset($_POST['submit'])) {
         $email_body .= "\tInterested in : \n \t" . $interested . "\n";
 
         $headers = 'MIME-Version: 1.1';
-        $headers .= 'Content-type: text/html; charset=utf-8';
+        $headers .= 'Content-type: text/plain; charset=utf-8';
         $headers .= "From: $myEmail\n";
         $headers .= "Reply-To: $email_address";
         $headers .= "X-Mailer: PHP/" . phpversion();
 
-        mail($to, $email_subject, $email_body, $headers);
+
+        mail($to, '=?utf-8?B?'.base64_encode($email_subject).'?=', $email_body, $headers);
+//        mail($to, $email_subject, $email_body, $headers);
 
 
         header('Location:' . $REQUEST_URI . 'index.php?id=contact');

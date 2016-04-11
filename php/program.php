@@ -283,7 +283,7 @@
                     <div class="textHolderInside">
                         <div class="headerTitle">
                             <p>Σημείωση</p>
-                            <div class="titlesBorder"></div>
+                            <!-- <div class="titlesBorder"></div>-->
                         </div>
 
                         <div class="contactInfo">

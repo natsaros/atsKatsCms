@@ -9,13 +9,13 @@
           rel='stylesheet' type='text/css'>
 
 
-    <link rel="icon" type="image/png" href="<?php $REQUEST_URI ?>assets/img/favicon.png"/>
-    <link rel="stylesheet" href="<?php $REQUEST_URI ?>assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php $REQUEST_URI ?>assets/css/custom.css">
-    <script src="<?php $REQUEST_URI ?>assets/js/jquery.min.js"></script>
-    <script src="<?php $REQUEST_URI ?>assets/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" href="<?php echo $REQUEST_URI ?>assets/img/favicon.png"/>
+    <link rel="stylesheet" href="<?php echo $REQUEST_URI ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $REQUEST_URI ?>assets/css/custom.css">
+    <script src="<?php echo $REQUEST_URI ?>assets/js/jquery.min.js"></script>
+    <script src="<?php echo $REQUEST_URI ?>assets/js/bootstrap.min.js"></script>
     <?php if ($pageId == "contact") { ?>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
     <?php } ?>
-    <script src="<?php $REQUEST_URI ?>assets/js/custom.js"></script>
+    <script src="<?php echo $REQUEST_URI ?>assets/js/custom.js"></script>
 </head>
