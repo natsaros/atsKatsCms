@@ -15,8 +15,7 @@
     <div class="row row-no-padding">
         <div class="col-sm-6 text-center vcenter">
             <div class="aboutIntroduceMyselfImageContainer">
-                    <img src="<?php echo $REQUEST_URI?>/assets/img/penyBio.jpg" alt="Peny Kasfiki" class="img-responsive">
-<!--                <div class="aboutIntroduceMyselfImage"></div>-->
+                <img src="<?php echo $REQUEST_URI ?>assets/img/penyBio.jpg" alt="Peny Kasfiki" class="img-responsive">
             </div>
         </div><!--
     --><div class="col-sm-6 text-center vcenter">
@@ -28,9 +27,13 @@
                     </div>
                     <p>
                         Απόφοιτος ΤΕΦΑΑ Αθηνών με ειδικότητα "Άσκηση,ευρωστία και υγεία"<br/><br/>
-                        Πτυχιακή εργασία στην καρδιοαναπνευστική αποκατάσταση καρδιοπαθών και εξειδίκευση στην αποκατάσταση μυοσκελετικών δυσλειτουργιών και χρόνιων παθήσεων<br/><br/>
-                        Απόφοιτος ιδιωτικής σχολής εκπαιδευτών <strong>Pilates</strong> με επίσημη διεθνή πιστοποίηση στη διδασκαλία όλων των επιπέδων <strong>Pilates Mat</strong> και <strong>Pilates Equipment</strong>
-                        και ειδική κατάρτιση στη διδασκαλία σε άτομα με χρόνιες παθήσεις, μυοσκελετικούς τραυματισμούς και εγκύους
+                        Πτυχιακή εργασία στην καρδιοαναπνευστική αποκατάσταση καρδιοπαθών και εξειδίκευση στην
+                        αποκατάσταση μυοσκελετικών δυσλειτουργιών και χρόνιων παθήσεων<br/><br/>
+                        Απόφοιτος ιδιωτικής σχολής εκπαιδευτών <strong>Pilates</strong> με επίσημη διεθνή πιστοποίηση
+                        στη διδασκαλία όλων των επιπέδων <strong>Pilates Mat</strong> και <strong>Pilates
+                            Equipment</strong>
+                        και ειδική κατάρτιση στη διδασκαλία σε άτομα με χρόνιες παθήσεις, μυοσκελετικούς τραυματισμούς
+                        και εγκύους
                     </p>
                 </div>
             </div>
@@ -72,7 +75,8 @@
             με τις ομάδες μπάσκετ ΑΡΗΣ Γλυφάδας και Α.Ν.Ο.Γ Γλυφάδας,
             με τα σωματεία του στίβου της Γλυφάδας (και σε συνδιαμό με την
             συνεχής επιμόρφωση του συνιστά μια ολοκληρωμένη αποκατάσταση
-            των μυοσκελετικών προβλημάτων αλλά και των αθλητικών κακώσεων.)***DEN KATALABAINW TI THELEI NA PEI EDW***<br/><br/><br/>
+            των μυοσκελετικών προβλημάτων αλλά και των αθλητικών κακώσεων.)***DEN KATALABAINW TI THELEI NA PEI
+            EDW***<br/><br/><br/>
         </div>
     </div>
     <div class="row partnerCV">

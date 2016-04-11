@@ -1,16 +1,19 @@
 <head>
     <title>Fitness House</title>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="description" content="Fitness house">
+    <meta name="description" content="Fitness house by Penny,Fitness-House-by-Penny">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="keywords"
-          content="pilates,aerial,yoga,fitness house,fitness,elliniko,glyfada,peny,kasfiki,personal trainer">
+          content="pilates,aerial,yoga,fitness house,fitness,elliniko,glyfada,peny,kasfiki,personal trainer,Fitness-House-by-Penny,penny,Penny,Kasfiki,Fitness House">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
           rel='stylesheet' type='text/css'>
 
-
+    <link rel="shortcut icon" href="<?php echo $REQUEST_URI ?>assets/img/favicon.png"/>
+    <link rel="image_src" href="<?php echo $REQUEST_URI ?>assets/img/gallery3.jpg"/>
     <link rel="icon" type="image/png" href="<?php echo $REQUEST_URI ?>assets/img/favicon.png"/>
     <link rel="icon" sizes="192x192" href="<?php echo $REQUEST_URI ?>assets/img/favicon.png">
 
