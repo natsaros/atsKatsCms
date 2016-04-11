@@ -47,7 +47,11 @@ $(document).ready(function () {
             $(this).removeClass('partnerImageFade');
             $('.partnerCV .collapse').removeClass('in');
         }
-        $('.partner').not(this).addClass('partnerImageFade');
+        if ($('.partnerCV .collapse.in').length > 0){
+            $('.partner.partnerImageFade').removeClass('partnerImageFade');
+        } else {
+            $('.partner').not(this).addClass('partnerImageFade');
+        }
     });
 });
 
