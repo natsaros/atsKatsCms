@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid text-center">
+<div class="container text-center">
     <div class="training">
         <div class="row">
             <div class="col-sm-12">
@@ -65,32 +65,13 @@
         </div>
 
         <div class="row fundamentals">
-            <div class="col-sm-4">
-                <img src="<?php $REQUEST_URI ?>assets/img/breathing.png" alt="breathing">
-                <h4>BREATHING</h4>
-
-                <p>Nam alienum o
-                    porteat ut, corrumpit splendide scriptorem at duo, soleat altera cu vel. Elitr semper liberavisse
-                    vel
-                    id, tacimates prodesset has no.</p>
-            </div>
-            <div class="col-sm-4">
-                <img src="<?php $REQUEST_URI ?>assets/img/sequencing.png" alt="sequencing">
-                <h4>SEQUENCING</h4>
-
-                <p>Nam alienum o
-                    porteat ut, corrumpit splendide scriptorem at duo, soleat altera cu vel. Elitr semper liberavisse
-                    vel
-                    id, tacimates prodesset has no.</p>
-            </div>
-            <div class="col-sm-4">
-                <img src=<?php $REQUEST_URI ?>"assets/img/simplicity.png" alt="simplicity">
-                <h4>SIMPLICITY</h4>
-
-                <p>Nam alienum o
-                    porteat ut, corrumpit splendide scriptorem at duo, soleat altera cu vel. Elitr semper liberavisse
-                    vel
-                    id, tacimates prodesset has no.</p>
+            <div class="col-sm-12">
+                Στο <strong>Fitness House By Penny</strong> ασχολούμαστε προσωπικα μαζί σας και επιστρατεύουμε τις
+                γνώσεις και την εμπειρία μας για να εξασφαλίσουμε οτι οι ασκήσεις καλύπτουν τις δικές σας ανάγκες
+                επιτυγχάνοντας έτσι θεαματικά αποτελέσματα πολύ γρήγορα.<br/><br/>
+                Στόχος μας είναι να γυμνάζεστε πάντα με ασφάλεια, να αισθάνεστε κάθε μερα καλύτερα και να βελτιώνετε
+                συνέχεια το σώμα σας με εναν ευχάριστο και απολαυστικό τρόπο.<br/><br/>
+                Ελπίζουμε να έχουμε την ευκαρία να μοιραστούμε μαζί σας το πάθος μας για άσκηση!
             </div>
         </div>
     </div>

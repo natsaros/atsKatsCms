@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="<?php $REQUEST_URI ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php $REQUEST_URI ?>assets/css/custom.css">
     <script src="<?php $REQUEST_URI ?>assets/js/jquery.min.js"></script>
-    <script src="<?php $REQUEST_URI ?>assets/js/bootstrap.js"></script>
+    <script src="<?php $REQUEST_URI ?>assets/js/bootstrap.min.js"></script>
     <?php if ($pageId == "contact") { ?>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
     <?php } ?>
