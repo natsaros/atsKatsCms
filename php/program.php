@@ -108,7 +108,7 @@
     </div>
     <div class="row mobile">
         <div class="headerTitle">
-            <p>Timetable</p>
+            <p>Πρόγραμμα</p>
             <div class="titlesBorder"></div>
         </div>
         <div class="timeTable panel-group" id="accordion">
@@ -278,19 +278,16 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="generalTextContainer">
-                <div class="textHolder">
-                    <div class="textHolderInside">
-                        <div class="headerTitle">
-                            <p>Σημείωση</p>
-                            <!-- <div class="titlesBorder"></div>-->
-                        </div>
+            <div class="textHolder">
+                <div class="textHolderInside">
+                    <div class="noteTitle">
+                        <p> * Σημείωση</p>
+                    </div>
 
-                        <div class="contactInfo">
-                            <p>
-                                Τα μαθήματα του pilates equipment κλείνονται κατόπιν ραντεβου
-                            </p>
-                        </div>
+                    <div class="contactInfo">
+                        <p>
+                            Τα μαθήματα του pilates equipment κλείνονται κατόπιν ραντεβου
+                        </p>
                     </div>
                 </div>
             </div>

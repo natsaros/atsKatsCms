@@ -68,6 +68,7 @@ textarea { resize: vertical; }
 .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus { color: #fff; background-color: #c5930c; border-color: #c5930c; }
 
 .headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 34px; display: inline-block; margin: 10px 0 20px 0; }
+.noteTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 30px; display: inline-block; margin: 10px 0 20px 0;font-style: italic;}
 .titlesBorder { margin: 20px auto; border: 2px solid #FDC300; border-radius: 2px; width: 70%; }
 
 .belowHeader { margin-top: 50px; }
@@ -191,6 +192,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .quote h3 { font-size: 40px;text-shadow: 3px 0 1px #000;}
     .quote footer { font-size: 22px;text-shadow:none;}
     .headerTitle{font-size: 26px;}
+    .noteTitle{font-size: 24px;}
     .heroHeader .heroSubTitle{font-size: 20px;}
     .textHolderInside {font-size:18px;}
     .comment{font-size: 23px;}
@@ -218,6 +220,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .openQuote, .closeQuote {width: 12px; height: 12px; }
     .motoContainer{font-size:23px;}
     .headerTitle{font-size: 22px;}
+    .noteTitle{font-size: 18px;width:85%;}
     .textHolderInside {font-size:16px;}
     .heroHeader .heroSubTitle{font-size: 16px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
