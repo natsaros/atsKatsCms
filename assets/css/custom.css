@@ -138,9 +138,9 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 /*.aboutHero:before{ content: ""; height: 100%; display: inline-block; vertical-align: middle; }*/
 .aboutHeroTitle{ display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding:100px 0;}
 
-.aboutIntroduceMyselfImageContainer {min-height: 500px;height: 500px;text-align: right;padding: 70px 60px 0;}
+.aboutIntroduceMyselfImageContainer {min-height: 600px;height: 600px;padding: 15% 10%;}
 .aboutIntroduceMyselfImage { height: 100%; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
-.aboutIntroduceMyselfInfo { text-align: center; padding: 70px 50px 0 0; font-size: 18px; }
+.aboutIntroduceMyselfInfo { text-align: center;padding: 15% 5% 15% 0;font-size: 18px; }
 .aboutImageBigLeft { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutImageBigRight { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutImageSmallCenterUp { height: 250px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
@@ -197,7 +197,6 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .startPilatesDimensions { width: 245px; height: 245px; }
     .motoContainer{font-size:32px;}
     .aboutTimeTable td:first-child{padding: 8px 8px 8px 12px;}
-    .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;}
     .programHero { padding: 104px 0; }
     .aboutHero{padding: 104px 0;}
     .indexImageHeight { height: 500px; min-height: 500px; }
@@ -229,8 +228,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .panel-default > .panel-heading{background-color: #423427;color:#fff;border-color: #423427;}
     .panel-default>.panel-heading+.panel-collapse>.panel-body{border:0;}
     .panel-default {border-color: #423427;}
-    .aboutIntroduceMyselfImageContainer{padding: 70px 0 0 0;}
-    .aboutIntroduceMyselfInfo{padding: 50px 10% 25px;font-size: 16px;}
+    .aboutIntroduceMyselfImageContainer{padding: 10% 0 0 0;}
+    .aboutIntroduceMyselfInfo{padding: 10%;font-size: 16px;}
     .programHero { padding: 102px 0; }
     .aboutHero{padding: 102px 0;}
     .mapContainer{min-height:450px;width:100%;}
