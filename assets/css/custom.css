@@ -142,9 +142,9 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .aboutIntroduceMyselfImageContainer {min-height: 600px;height: 600px;padding: 15% 10%;}
 .aboutIntroduceMyselfImage { height: 100%; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutIntroduceMyselfInfo { text-align: center;padding: 15% 5% 15% 0;font-size: 18px; }
-.aboutImageBigLeft { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
-.aboutImageBigRight { height: 500px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
-.aboutImageSmallCenterUp { height: 250px; margin-top: 70px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
+.aboutImageBigLeft { height: 500px; margin-top: 30px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
+.aboutImageBigRight { height: 500px; margin-top: 30px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
+.aboutImageSmallCenterUp { height: 250px; margin-top: 30px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutImageSmallCenterDown { height: 250px; /*replace with appropriate image*/ background: url("../img/pil_home.png") no-repeat center 30% /cover; }
 .aboutTimeTable { border-collapse: separate; }
 .aboutTimeTable th { text-align: center; background-color: #423427; color: #fff; border-bottom: 0 !important; width: 15%; font-weight: normal; font-size: 18px; height: 60px; vertical-align: middle !important; }
