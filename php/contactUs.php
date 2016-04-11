@@ -53,10 +53,10 @@ if (isset($_POST['submit'])) {
         <div class="col-sm-12">
             <div class="heroHeader grayish">
                 <div class="headerTitle">
-                    <p>LET'S TALK ABOUT FITNESS</p>
+                    <p>ΒΑΛΤΕ ΤΗ ΓΥΜΝΑΣΤΙΚΗ ΣΤΗ ΖΩΗ ΣΑΣ!</p>
                     <div class="titlesBorder"></div>
                 </div>
-                <div class="heroSubTitle">Tell us about why you want to join us</div>
+                <div class="heroSubTitle">Μιλήστε μας για τους στόχους σας...</div>
             </div>
         </div>
     </div>
