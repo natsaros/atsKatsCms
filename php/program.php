@@ -286,7 +286,7 @@
 
                     <div class="contactInfo">
                         <p>
-                            Τα μαθήματα του pilates equipment κλείνονται κατόπιν ραντεβου
+                            Τα μαθήματα του <strong>Pilates Equipment</strong> κλείνονται κατόπιν ραντεβου
                         </p>
                     </div>
                 </div>
