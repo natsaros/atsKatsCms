@@ -1,5 +1,5 @@
 <footer class="container text-center">
-    <a class="toTop grayish" href="<?php $pageId ?>" title="To Top">
+    <a class="toTop grayish" href="<?php echo $pageId ?>" title="To Top">
         <span class="glyphicon glyphicon-chevron-up"></span>
     </a>
     <ul>

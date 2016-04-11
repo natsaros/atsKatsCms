@@ -5,12 +5,6 @@
 $REQUEST_URI = $_SERVER['REQUEST_URI'];
 $REQUEST_URI = preg_replace("/[^\/]+$/", "", $REQUEST_URI);
 
-//regex to remove everything before last slash
-//$pageId = preg_replace("/^.*\//s", "", $_SERVER['REQUEST_URI']);
-//regex to remove everything after dot(.)
-//so what remains is the page id (index,about,contact etc...)
-//$pageId = preg_replace("/\..+/", "", $pageId);
-//$pageId = ;
 if (!isset($_GET["id"])) {
     $pageId = "home";
 }else{

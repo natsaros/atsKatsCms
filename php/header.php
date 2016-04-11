@@ -10,6 +10,13 @@
 
 
     <link rel="icon" type="image/png" href="<?php echo $REQUEST_URI ?>assets/img/favicon.png"/>
+
+    <link rel="apple-touch-icon" href="<?php echo $REQUEST_URI ?>/assets/ios/Icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo $REQUEST_URI ?>/assets/ios/Icon-Small-50.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo $REQUEST_URI ?>/assets/ios/Icon-72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo $REQUEST_URI ?>/assets/ios/Icon@2x.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="<?php echo $REQUEST_URI ?>/assets/ios/Icon-72@2x.png" />
+
     <link rel="stylesheet" href="<?php echo $REQUEST_URI ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $REQUEST_URI ?>assets/css/custom.css">
     <script src="<?php echo $REQUEST_URI ?>assets/js/jquery.min.js"></script>

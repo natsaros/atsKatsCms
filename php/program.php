@@ -3,8 +3,8 @@
         <div class="col-sm-12">
             <div class="heroHeader programHero">
                 <div class="headerTitle">
-                    <p>BECAUSE WE LOVE WHAT WE DO</p>
-                    <div class="titlesBorder"></div>
+                    <p>&nbsp;</p>
+                    <div class="titlesBorder invisible"></div>
                 </div>
             </div>
         </div>
