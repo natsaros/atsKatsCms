@@ -6,6 +6,8 @@ a:focus, a:hover, :focus, :hover { outline: none; text-decoration: none; }
 input, textarea { font-family: Roboto, Arial, sans-serif; font-weight: 300; }
 textarea { resize: vertical; }
 
+.genColor{ color: #2d200c!important; }
+
 .slideanim { visibility: hidden; }
 .slide { animation: slide 1s; -webkit-animation: slide 1s; -o-animation: slide 1s; -moz-animation: slide 1s; visibility: visible; }
 /* Go from 0% to 100% opacity (see-through) and specify the percentage from when to slide in the element along the Y-axis */
