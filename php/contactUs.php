@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
 //        mail($to, $email_subject, $email_body, $headers);
 
 
-        header('Location:' . $REQUEST_URI . 'index.php?id=contact');
+        header('Location:' . $REQUEST_URI . 'contact');
     }
 }
 ?>
@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
 </div>
 
 <div class="container">
-    <form action="index.php?id=contact" method="post" accept-charset="utf-8">
+    <form method="post" accept-charset="utf-8">
         <div class="formContainer">
             <div class="row">
                 <div class="col-sm-12 text-center">
