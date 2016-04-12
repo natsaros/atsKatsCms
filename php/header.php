@@ -11,7 +11,10 @@
     <meta name="keywords"
           content="pilates,aerial,yoga,fitness house,fitness,elliniko,glyfada,peny,kasfiki,personal trainer,Fitness-House-by-Penny,penny,Penny,Kasfiki,Fitness House">
 
-    <meta property="og:title" content="Fitness House by Penny"/>
+    <meta property="og:url" content="http://fitnesshousebypenny.gr//">
+    <meta property="og:site_name" content="fitnesshousebypenny.gr">
+    <meta property="og:type" content="website">
+    <meta property="og:title" itemprop="name" content="Fitness House by Penny"/>
     <meta property="og:image" content="http://fitnesshousebypenny.gr/assets/img/gallery3.jpg"/>
     <link rel="image_src" href="http://fitnesshousebypenny.gr/assets/img/gallery3.jpg"/>
 
