@@ -11,12 +11,18 @@
     <meta name="keywords"
           content="pilates,aerial,yoga,fitness house,fitness,elliniko,glyfada,peny,kasfiki,personal trainer,Fitness-House-by-Penny,penny,Penny,Kasfiki,Fitness House">
 
-    <meta property="og:url" content="http://fitnesshousebypenny.gr//">
-    <meta property="og:site_name" content="fitnesshousebypenny.gr">
-    <meta property="og:type" content="website">
-    <meta property="og:title" itemprop="name" content="Fitness House by Penny"/>
-    <meta property="og:image" content="http://fitnesshousebypenny.gr/assets/img/gallery3.jpg"/>
-    <link rel="image_src" href="http://fitnesshousebypenny.gr/assets/img/gallery3.jpg"/>
+    <meta property="og:url" content="http://fitnesshousebypenny.gr" >
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" itemprop="name" content="Fitness House by Penny" >
+    <meta property="og:site_name" content="fitnesshousebypenny.gr" >
+    <meta property="og:description" content="Fitness house by Penny - a place to start your new life!" >
+    <meta property="og:image" content="http://fitnesshousebypenny.gr/assets/img/gallery3.jpg" >
+    <meta property="og:image:type" content="image/jpeg" >
+    <meta property="og:image:width" content="1444" >
+    <meta property="og:image:height" content="960" >
+
+
+    <link rel="image_src" href="http://fitnesshousebypenny.gr/assets/img/gallery3.jpg" />
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
           rel='stylesheet' type='text/css'>
