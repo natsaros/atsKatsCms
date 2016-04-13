@@ -150,7 +150,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .aboutImageBigLeft { height: 500px; margin-top: 70px;  background: url("../img/gallery2.jpg") no-repeat center 30% /cover; }
 .aboutImageBigRight { height: 500px; margin-top: 70px;  background: url("../img/gallery1.jpg") no-repeat center 30% /cover; }
 .aboutImageSmallCenterUp { height: 250px; margin-top: 70px;background: url("../img/programHero.jpg") no-repeat center 30% /cover; }
-.aboutImageSmallCenterDown { height: 250px; background: url("../img/gallery4.jpg") no-repeat center 30% /cover; }
+.aboutImageSmallCenterDown { height: 249px; background: url("../img/gallery4.jpg") no-repeat center 30% /cover; }
 .aboutTimeTable { border-collapse: separate; }
 .aboutTimeTable th { text-align: center; background-color: #423427; color: #fff; border-bottom: 0 !important; width: 15%; font-weight: normal; font-size: 18px; height: 60px; vertical-align: middle !important; }
 .aboutTimeTable th:first-child { border-top-left-radius: 4px; width: 10%; }
@@ -247,6 +247,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .partner .simple-caption {width: 80%;font-size:16px;}
     .partnerCV{font-size: 16px;}
     .parallaxImage {background: url("../img/paraPen.jpg") no-repeat fixed 42%/ cover;}
+    .aboutImageBigLeft{ height: 300px;background-size: 100%; margin-top:0;}
+    .aboutImageBigRight{ height: 300px;background-size: 100%;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {
