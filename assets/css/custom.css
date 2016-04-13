@@ -39,7 +39,7 @@ textarea { resize: vertical; }
 .brown { color: #665041; }
 .brown_background { background-color: #665041; }
 .grayish { background-color: #68625d; }
-.contactHero { background: url("../img/aerialRoom_m.jpg") no-repeat center 85% /cover;background-size: 120%; }
+.contactHero { background: url("../img/aerialRoom_m.jpg") no-repeat center 85% /cover;}
 .text_color { color: #2d200c; }
 /*Color Pallete End*/
 
