@@ -44,7 +44,7 @@ textarea { resize: vertical; }
 /*Color Pallete End*/
 
 /*TODO to be removed. No height allowed in responsive!!!*/
-.indexImageHeight{height: 545px; min-height: 545px;}
+.indexImageHeight{height: 508px; min-height: 508px;}
 .navbar { margin-bottom: 0; background-color: white; z-index: 9999; border: 0; font-size: 12px; letter-spacing: 4px; border-radius: 0;-webkit-transition: opacity .5s; -moz-transition: opacity .5s; -ms-transition: opacity .5s; -o-transition: opacity .5s; transition: opacity .5s;}
 .navbar:hover{opacity: 1; -moz-opacity: 1; -webkit-opacity: 1;}
 .navbar-nav { text-align: center;}
@@ -95,10 +95,13 @@ textarea { resize: vertical; }
 .quote .translatedQuote {font-size:20px;width:100%;text-shadow: 2px 1px 1px #000;}
 .generalTextContainer { position: relative; text-align: center; }
 .textHolder { display: inline-block; position: relative; margin:10% 0; }
+.textHolderPilates { display: inline-block; position: relative; margin:5% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
+.textHolderPilates:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
 .textHolderInside { display: inline-block; vertical-align: middle; width: 85%; color: white; font-size:20px;}
+.textHolderPilatesInside { display: inline-block; vertical-align: middle; width: 88%; color: white; font-size:20px;}
 #program .textHolderInside{ color: #2d200c;}
-.imageHolder { background: url("../img/exercise.jpg") no-repeat right /cover; }
+.imageHolder { background: url("../img/exercise.jpg") no-repeat right 33% /cover; }
 
 .parallaxImage { background: url("../img/paraPen.jpg") no-repeat fixed center / cover; display: inline-block; width: 100%; opacity: .6; -moz-opacity: .6; -webkit-opacity: .6; }
 
@@ -194,7 +197,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .headerTitle{font-size: 26px;}
     .noteTitle{font-size: 24px;}
     .heroHeader .heroSubTitle{font-size: 20px;}
-    .textHolderInside {font-size:18px;}
+    .textHolderInside, .textHolderPilatesInside {font-size:18px;}
     .comment{font-size: 23px;}
     .openQuote, .closeQuote {width: 23px; height: 23px; }
     .startPilatesDimensions { width: 245px; height: 245px; }
@@ -221,7 +224,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .motoContainer{font-size:23px;}
     .headerTitle{font-size: 22px;}
     .noteTitle{font-size: 18px;width:85%;}
-    .textHolderInside {font-size:16px;}
+    .textHolderInside, .textHolderPilatesInside {font-size:16px;}
     .heroHeader .heroSubTitle{font-size: 16px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
     .timeTable .table td{border-top: 1px solid #423427;font-size: 15px;}

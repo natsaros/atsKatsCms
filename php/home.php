@@ -55,15 +55,6 @@
 </div>
 <div class="container text-center">
     <div class="training">
-        <!--<div class="row">
-            <div class="col-sm-12">
-                <div class="headerTitle">
-                    <p>Training fundamentals</p>
-                    <div class="titlesBorder"></div>
-                </div>
-            </div>
-        </div>-->
-
         <div class="row fundamentals">
             <div class="col-sm-12">
                 <div class="textHolder">
@@ -84,8 +75,8 @@
     <div class="row row-no-padding brown_background">
         <div class="col-sm-6">
             <div class="generalTextContainer">
-                <div class="textHolder">
-                    <div class="textHolderInside">
+                <div class="textHolderPilates">
+                    <div class="textHolderPilatesInside">
                         <div class="headerTitle">
                             <p>Το Pilates καλύπτει τις ανάγκες σας</p>
                             <div class="titlesBorder"></div>
