@@ -70,7 +70,7 @@ textarea { resize: vertical; }
 .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus { color: #fff; background-color: #c5930c; border-color: #c5930c; }
 
 .headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 34px; display: inline-block; margin: 10px 0 20px 0; }
-.contactHero .headerTitle { text-shadow: 3px 1px 0px #000;}
+.contactHero .headerTitle { text-shadow: 1px 0 1px #000;}
 .noteTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 30px; display: inline-block; margin: 10px 0 20px 0;font-style: italic;}
 .titlesBorder { margin: 20px auto; border: 2px solid #FDC300; border-radius: 2px; width: 70%; }
 .titlesBorder.invisible{margin: 40px auto;border: 2px solid transparent;}
@@ -134,7 +134,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 /*Footer End*/
 
 .heroHeader { padding: 90px 0; color: white; }
-.heroHeader .heroSubTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 26px;text-shadow: 2px 1px 0px #000;}
+.heroHeader .heroSubTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 26px;text-shadow: 1px 0 1px #000;}
 .contactInfo { display: inline-block; width: 80%; }
 .formContainer { float: left; width: 100%; margin: 85px 0; }
 .timeTableContainer {width: 100%;margin: 85px 0 40px; }
