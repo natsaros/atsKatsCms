@@ -87,7 +87,7 @@
                 <tr>
                     <td>20:00 - 21:00</td>
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>Zumba</td>
                     <td>Pilates Power</td>
                     <td>&nbsp;</td>
                     <td>Pilates Power</td>
@@ -160,6 +160,10 @@
                             <tr>
                                 <td>19:00 - 20:00</td>
                                 <td>Pilates</td>
+                            </tr>
+                            <tr>
+                                <td>20:00 - 21:00</td>
+                                <td>Zumba</td>
                             </tr>
                             <tr>
                                 <td>21:00 - 22:00</td>
