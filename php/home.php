@@ -15,7 +15,7 @@
                             <div class="carousel-info">
                                 <div class="quote">
                                     <h3>
-                                        Physical fitness is the first requisite of hapiness
+                                        Physical fitness<br/>is the first requisite<br/>of hapiness
                                         <footer>Joseph Pilates</footer>
                                     </h3>
                                 </div>
@@ -28,7 +28,7 @@
                             <div class="carousel-info">
                                 <div class="quote">
                                     <h3>
-                                        In life you must learn how to F.L.Y.(First Love Yourself)
+                                        In life you must learn<br/>how to F.L.Y.<br/>(First Love Yourself)
                                         <footer>AFA</footer>
                                     </h3>
                                 </div>
@@ -41,7 +41,7 @@
                             <div class="carousel-info">
                                 <div class="quote">
                                     <h3>
-                                        Yoga is the golden key that unlocks the door to peace,tranquility and joy
+                                        Yoga is the golden key<br/>that unlocks the door to<br/>peace,tranquility and joy
                                         <footer>BKS Iyengar</footer>
                                     </h3>
                                 </div>
