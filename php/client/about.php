@@ -15,7 +15,7 @@
     <div class="row row-no-padding">
         <div class="col-sm-6 text-center vcenter">
             <div class="aboutIntroduceMyselfImageContainer">
-                <img src="<?php echo $REQUEST_URI ?>assets/img/penyBio.jpg" alt="Peny Kasfiki" class="img-responsive">
+                <img src="<?php echo $ASSETS_URI ?>img/penyBio.jpg" alt="Peny Kasfiki" class="img-responsive">
             </div>
         </div><!--
     --><div class="col-sm-6 text-center vcenter">
