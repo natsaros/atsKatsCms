@@ -3,9 +3,9 @@
 Options +FollowSymLinks
 RewriteEngine On
 
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_URI} admin[/]*(.*)$  [NC]
 RewriteRule ^([a-zA-Z0-9\/\=\?\&]+)$ index.php?page=%1
 #RewriteRule ^([a-zA-Z0-9/]+)[/]*$ index.php?page=$1
