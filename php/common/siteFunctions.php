@@ -18,6 +18,9 @@ function getRootUri()
 {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/[^\/]+$/", "", $uri);
+    if(isAdmin()){
+        $uri = preg_replace("/admin[\/]*$/", "", $uri);
+    }
     return $uri;
 }
 
@@ -30,7 +33,7 @@ function getRequestUri()
 
 function getAdminRequestUri()
 {
-    return preg_replace("/admin/", "php/admin", getRequestUri());
+    return getRootUri() . $GLOBALS['ADMIN_STR'] . "/";
 }
 
 function getActiveAdminPage()

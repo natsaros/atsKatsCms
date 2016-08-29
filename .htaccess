@@ -2,15 +2,20 @@
 
 Options +FollowSymLinks
 RewriteEngine On
-#RewriteBase /peny/
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_URI} admin[/]*(.*)$  [NC]
+RewriteRule ^([a-zA-Z0-9\/\=\?\&]+)$ index.php?page=%1
+#RewriteRule ^([a-zA-Z0-9/]+)[/]*$ index.php?page=$1
+#RewriteRule [^\/][a-zA-Z0-9/]+(?=\?) index.php?page=$1
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-#RewriteCond %{REQUEST_URI} !^/admin.* [NC]
-#RewriteRule ^(.*)$ index.php?id=$1
-
-
-RewriteRule ^([a-zA-Z0-9]+)$ index.php?id=$1
-RewriteRule ^([a-zA-Z0-9]+)/$ index.php?id=$1
+RewriteCond %{REQUEST_URI} !admin [NC]
+#RewriteRule ^([a-zA-Z0-9\/]+)$ index.php?id=$1
+RewriteRule ^([a-zA-Z0-9\/\=\?\&]+)$ index.php?id=$1
 
 </IfModule>
