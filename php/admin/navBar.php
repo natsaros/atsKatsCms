@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">SB Admin v2.0</a>
+        <a class="navbar-brand" href="index.php">Fitness House Admin</a>
     </div>
     <!-- /.navbar-header -->
 

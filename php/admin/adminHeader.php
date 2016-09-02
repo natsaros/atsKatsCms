@@ -7,28 +7,28 @@
     <meta name="author" content="">
     
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo $CSS_URI ?>bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="<?php echo $CSS_URI ?>metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="<?php echo $CSS_URI ?>datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="<?php echo $CSS_URI ?>datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?php echo $CSS_URI ?>sb-admin/sb-admin-2.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>sb-admin/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="<?php echo $CSS_URI ?>morrisjs/morris.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="<?php echo $ASSETS_URI ?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo ASSETS_URI ?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Social Buttons CSS -->
-    <link href="<?php echo $CSS_URI ?>bootstrap-social/bootstrap-social.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>bootstrap-social/bootstrap-social.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

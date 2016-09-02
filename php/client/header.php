@@ -27,22 +27,22 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
           rel='stylesheet' type='text/css'>
 
-    <link rel="shortcut icon" href="<?php echo $ASSETS_URI ?>img/favicon.png"/>
-    <link rel="icon" type="image/png" href="<?php echo $ASSETS_URI ?>img/favicon.png"/>
-    <link rel="icon" sizes="192x192" href="<?php echo $ASSETS_URI ?>img/favicon.png">
+    <link rel="shortcut icon" href="<?php echo ASSETS_URI ?>img/favicon.png"/>
+    <link rel="icon" type="image/png" href="<?php echo ASSETS_URI ?>img/favicon.png"/>
+    <link rel="icon" sizes="192x192" href="<?php echo ASSETS_URI ?>img/favicon.png">
 
-    <link rel="apple-touch-icon" href="<?php echo $ASSETS_URI ?>ios/Icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo $ASSETS_URI ?>ios/Icon-Small-50.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo $ASSETS_URI ?>ios/Icon-72.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo $ASSETS_URI ?>ios/Icon@2x.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="<?php echo $ASSETS_URI ?>ios/Icon-72@2x.png" />
+    <link rel="apple-touch-icon" href="<?php echo ASSETS_URI ?>ios/Icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="<?php echo ASSETS_URI ?>ios/Icon-Small-50.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo ASSETS_URI ?>ios/Icon-72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo ASSETS_URI ?>ios/Icon@2x.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="<?php echo ASSETS_URI ?>ios/Icon-72@2x.png" />
 
-    <link rel="stylesheet" href="<?php echo $ASSETS_URI ?>css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo $ASSETS_URI ?>css/custom.css">
-    <script src="<?php echo $ASSETS_URI ?>js/jquery.min.js"></script>
-    <script src="<?php echo $ASSETS_URI ?>js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/custom.css">
+    <script src="<?php echo ASSETS_URI ?>js/jquery.min.js"></script>
+    <script src="<?php echo ASSETS_URI ?>js/bootstrap.min.js"></script>
     <?php if ($pageId == "contact") { ?>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
     <?php } ?>
-    <script src="<?php echo $ASSETS_URI ?>js/custom.js"></script>
+    <script src="<?php echo ASSETS_URI ?>js/custom.js"></script>
 </head>

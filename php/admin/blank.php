@@ -225,7 +225,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="<?php echo $REQUEST_URI ?>login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="<?php echo REQUEST_URI ?>login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -331,7 +331,7 @@
                                 <a class="active" href="blank.html">Blank Page</a>
                             </li>
                             <li>
-                                <a href="<?php echo $REQUEST_URI ?>login.php">Login Page</a>
+                                <a href="<?php echo REQUEST_URI ?>login.php">Login Page</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

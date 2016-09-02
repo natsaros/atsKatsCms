@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
 //        mail($to, $email_subject, $email_body, $headers);
 
 
-        header('Location:' . $REQUEST_URI . 'contact');
+        header('Location:' . REQUEST_URI . 'contact');
     }
 }
 ?>
