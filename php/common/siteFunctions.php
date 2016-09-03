@@ -1,10 +1,10 @@
 <?php
 define('ADMIN_STR', 'admin');
-define('ADMIN_PAGE_ID', 'page');
 define('REQUEST_URI', getRootUri());
 
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT_PATH', dirname(__DIR__) . DS);
+define('ADMIN_ROOT_PATH', ROOT_PATH . ADMIN_STR . DS);
 
 define('ASSETS_URI', REQUEST_URI . 'assets' . DS);
 define('CSS_URI', ASSETS_URI . 'css' . DS);
@@ -17,7 +17,7 @@ function isAdmin() {
 function getRootUri() {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/[^\/]+$/", "", $uri);
-    if(isAdmin()) {
+    if (isAdmin()) {
         $uri = preg_replace("/admin[\/]*$/", "", $uri);
     }
     return $uri;
