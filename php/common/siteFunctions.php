@@ -49,12 +49,22 @@ function getActiveAdminPage() {
     return $page_id;
 }
 
-function loggedIn() {
-    $db = new Db();
+function initLoad() {
+    $db = DB::getInstance();
+    if(!$db->isInitialized()) {
+        $init_queries = $db->db_schema();
+        $result = $db->query($init_queries);
+        if($result === false) {
+            return;
+        }
+    }
+}
 
+function loggedIn() {
+    $db = DB::getInstance();
     $rows = $db->select("SELECT * FROM test_table");
     if($rows === false) {
-        $error = $db->error();
+//        $error = $db->error();
         // Handle error - inform administrator, log to file, show error page, etc.
     }
     return $rows;

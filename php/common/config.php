@@ -1,6 +1,6 @@
 <?php
 $config = parse_ini_file(getcwd() . DS . 'conf/config.ini');
-if ($config) {
+if($config) {
     // ** MySQL settings - You can get this info from your web host ** //
     /** The name of the database for WordPress */
     define('DB_NAME', $config['dbname']);
@@ -20,7 +20,7 @@ if ($config) {
     /** The Database Collate type. Don't change this if in doubt. */
     define('DB_COLLATE', '');
 
-    define('TABLE_PREFIX', '');
+    define('TABLE_PREFIX', $config['table_prefix']);
 } else {
     $die = sprintf(
             "There doesn't seem to be a %s file. I need this before we can get started.",

@@ -1,11 +1,11 @@
 <?php
 
-if (file_exists(COMMON_ROOT_PATH . 'config.php')) {
+if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
     require_once(COMMON_ROOT_PATH . 'config.php');
 }
 
 $page = $_GET["page"];
-if (!isset($page) || $page == null || $page == "") {
+if(!isset($page) || $page == null || $page == "") {
     define('ADMIN_PAGE_ID', 'dashboard');
 } else {
     define('ADMIN_PAGE_ID', $page);
@@ -13,7 +13,10 @@ if (!isset($page) || $page == null || $page == "") {
 ?>
 
 <?php
-if (!loggedIn()) {
+
+initLoad();
+
+if(!loggedIn()) {
     @include(ADMIN_ROOT_PATH . 'login.php');
 } else { ?>
     <!DOCTYPE html>
