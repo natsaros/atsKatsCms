@@ -6,13 +6,13 @@ class Db {
 
     private static $instance;
 
+    private $initialized;
+
     var $global_tables = array('settings', 'users', 'user_meta', 'pages', 'page_meta');
 
     var $blog_tables = array('posts', 'post_meta', 'comments', 'comment_meta');
 
     var $prefix;
-
-    var $initialized;
 
     public $settings;
     public $users;

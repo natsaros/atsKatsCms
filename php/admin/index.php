@@ -16,7 +16,7 @@ if(!isset($page) || $page == null || $page == "") {
 
 initLoad();
 
-if(!loggedIn()) {
+if(!isLoggedIn()) {
     @include(ADMIN_ROOT_PATH . 'login.php');
 } else { ?>
     <!DOCTYPE html>

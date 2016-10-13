@@ -20,6 +20,9 @@ define('JS_URI', ASSETS_URI . 'js' . DS);
 
 require_once(CLASSES_ROOT_PATH . 'DB.php');
 
+global $db;
+global $user;
+
 function isAdmin() {
     return strpos(getRequestUri(), ADMIN_STR) !== false;
 }
@@ -50,7 +53,9 @@ function getActiveAdminPage() {
 }
 
 function initLoad() {
-    $db = DB::getInstance();
+
+    $db = getDb();
+
     if(!$db->isInitialized()) {
         $init_queries = $db->db_schema();
         $result = $db->query($init_queries);
@@ -60,14 +65,14 @@ function initLoad() {
     }
 }
 
-function loggedIn() {
-    $db = DB::getInstance();
-    $rows = $db->select("SELECT * FROM test_table");
-    if($rows === false) {
+function isLoggedIn() {
+    return !is_null(getUser());
+//    $rows = getDb()->select("SELECT * FROM test_table");
+//    if($rows === false) {
 //        $error = $db->error();
-        // Handle error - inform administrator, log to file, show error page, etc.
-    }
-    return $rows;
+    // Handle error - inform administrator, log to file, show error page, etc.
+//}
+//    return $rows;
 }
 
 function Redirect($url, $permanent = false) {
@@ -76,6 +81,24 @@ function Redirect($url, $permanent = false) {
     }
 
     exit();
+}
+
+function getDb() {
+    global $db;
+    if(is_null($db)) {
+        $db = DB::getInstance();
+    }
+    return $db;
+}
+
+function getUser() {
+    global $user;
+    return $user;
+}
+
+function setUser($defineUser) {
+    global $user;
+    $user = $defineUser;
 }
 
 ?>
