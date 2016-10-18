@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
     require_once(COMMON_ROOT_PATH . 'config.php');

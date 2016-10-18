@@ -19,9 +19,7 @@ define('CSS_URI', ASSETS_URI . 'css' . DS);
 define('JS_URI', ASSETS_URI . 'js' . DS);
 
 require_once(CLASSES_ROOT_PATH . 'DB.php');
-
-global $db;
-global $user;
+require_once(CLASSES_ROOT_PATH . 'Globals.php');
 
 function isAdmin() {
     return strpos(getRequestUri(), ADMIN_STR) !== false;
@@ -66,39 +64,36 @@ function initLoad() {
 }
 
 function isLoggedIn() {
-    return !is_null(getUser());
-//    $rows = getDb()->select("SELECT * FROM test_table");
-//    if($rows === false) {
-//        $error = $db->error();
-    // Handle error - inform administrator, log to file, show error page, etc.
-//}
-//    return $rows;
+    return !is_null(getUserFromSession());
 }
 
-function Redirect($url, $permanent = false) {
+function Redirect($url, $refreshRate = null, $permanent = false) {
     if(headers_sent() === false) {
-        header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
+        if(is_null($refreshRate)) {
+            header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
+        } else {
+            header('Refresh : ' . $refreshRate . 'url: ' . $url, true, ($permanent === true) ? 301 : 302);
+        }
     }
 
     exit();
 }
 
 function getDb() {
-    global $db;
-    if(is_null($db)) {
-        $db = DB::getInstance();
+    if(is_null(Globals::get('DB'))) {
+        Globals::set('DB', DB::getInstance());
     }
-    return $db;
+    return Globals::get('DB');
 }
 
-function getUser() {
-    global $user;
-    return $user;
+function getUserFromSession() {
+    return $_SESSION['USER'];
 }
 
-function setUser($defineUser) {
-    global $user;
-    $user = $defineUser;
+function setUserToSession($user) {
+    $_SESSION['USER'] = $user;
+    $_SESSION['timeout'] = time();
+    $_SESSION['valid'] = true;
 }
 
 ?>

@@ -2,7 +2,7 @@
 <html lang="gr">
 
 <?php header("Content-type: text/html; charset=utf-8"); ?>
-<?php require("php/common/siteFunctions.php"); ?>
+<?php require_once("php/common/siteFunctions.php"); ?>
 
 <?php
 if (isAdmin()) {

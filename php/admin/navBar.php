@@ -215,7 +215,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="<?php echo getAdminRequestUri() ?>login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="<?php echo getAdminRequestUri() ?>logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
