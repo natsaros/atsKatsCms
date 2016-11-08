@@ -10,6 +10,7 @@ class User {
     private $activation_Date;
     private $modification_date;
     private $user_status;
+    private $is_admin;
     private $gender;
     private $link;
     private $phone;
@@ -26,12 +27,13 @@ class User {
      * @param $activation_Date
      * @param $modification_date
      * @param $user_status
+     * @param $is_admin
      * @param $gender
      * @param $link
      * @param $phone
      * @param $picture
      */
-    public function __construct($ID, $name, $password, $first_name, $last_name, $email, $activation_Date, $modification_date, $user_status, $gender, $link, $phone, $picture) {
+    public function __construct($ID, $name, $password, $first_name, $last_name, $email, $activation_Date, $modification_date, $user_status, $is_admin, $gender, $link, $phone, $picture) {
         $this->ID = $ID;
         $this->name = $name;
         $this->password = $password;
@@ -41,6 +43,7 @@ class User {
         $this->activation_Date = $activation_Date;
         $this->modification_date = $modification_date;
         $this->user_status = $user_status;
+        $this->is_admin = $is_admin;
         $this->gender = $gender;
         $this->link = $link;
         $this->phone = $phone;
@@ -230,6 +233,20 @@ class User {
      */
     public function setUserStatus($user_status) {
         $this->user_status = $user_status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsAdmin() {
+        return $this->is_admin;
+    }
+
+    /**
+     * @param mixed $is_admin
+     */
+    public function setIsAdmin($is_admin) {
+        $this->is_admin = $is_admin;
     }
 
 }

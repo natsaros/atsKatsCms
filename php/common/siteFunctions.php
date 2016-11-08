@@ -40,8 +40,12 @@ function getRequestUri() {
     return $uri . "/";
 }
 
+function getAdminRequestUriNoDelim() {
+    return getRootUri() . ADMIN_STR;
+}
+
 function getAdminRequestUri() {
-    return getRootUri() . ADMIN_STR . DS;
+    return getAdminRequestUriNoDelim() . DS;
 }
 
 function getActiveAdminPage() {
@@ -68,12 +72,19 @@ function isLoggedIn() {
 }
 
 function Redirect($url, $refreshRate = null, $permanent = false) {
-    if(headers_sent() === false) {
+    if(!headers_sent()) {
         if(is_null($refreshRate)) {
             header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
         } else {
             header('Refresh : ' . $refreshRate . 'url: ' . $url, true, ($permanent === true) ? 301 : 302);
         }
+    } else {
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="' . $url . '";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
+        echo '</noscript>';
     }
 
     exit();

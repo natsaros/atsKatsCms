@@ -145,6 +145,7 @@ PRIMARY KEY  (ID)
  gender VARCHAR(50) default '',
  picture VARCHAR(250) default '',
  user_status int(11) NOT NULL default '0',
+ is_admin int(11) NOT NULL default '0',
  activation_date DATETIME NOT NULL default '0000-00-00 00:00:00',
  modification_date DATETIME,
  PRIMARY KEY (ID)

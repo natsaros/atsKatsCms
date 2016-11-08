@@ -14,7 +14,7 @@ class UserFetcher {
         }
 
         foreach($rows as $row) {
-            $user = new User($row['ID'], $row['name'], $row['password'], $row['first_name'], $row['last_name'], $row['email'], $row['activation_date'], $row['modification_date'], $row['user_status'], $row['gender'], $row['link'], $row['phone'], $row['picture']);
+            $user = new User($row['ID'], $row['name'], $row['password'], $row['first_name'], $row['last_name'], $row['email'], $row['activation_date'], $row['modification_date'], $row['user_status'], $row['is_admin'], $row['gender'], $row['link'], $row['phone'], $row['picture']);
             if(password_verify($password, $user->getPassword())) {
                 $user->setPassword(null);
                 return $user;

@@ -10,7 +10,8 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?php echo JS_URI ?>raphael/raphael.min.js"></script>
 
-<?php if (strpos(ADMIN_PAGE_ID, 'morris') !== false || strpos(ADMIN_PAGE_ID, 'tables') !== false) {
+<?php if (strpos(ADMIN_PAGE_ID, 'morris') !== false) {
+//    || strpos(ADMIN_PAGE_ID, 'tables') !== false
     echo '<script src="' . JS_URI . 'morrisjs/morris.min.js"></script>';
     echo '<script src="' . JS_URI . 'morris-data.js"></script>';
 } ?>
