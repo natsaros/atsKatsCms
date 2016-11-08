@@ -3,8 +3,8 @@ require_once(CLASSES_ROOT_PATH . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'User.php');
 
 class UserFetcher {
-    public static function login($username, $password) {
-        $query = "SELECT * FROM %s WHERE name='%s'";
+    public static function adminLogin($username, $password) {
+        $query = "SELECT * FROM %s WHERE name='%s' AND is_admin=1";
         $query = sprintf($query, getDb()->users, $username);
         $db = Globals::get('DB');
         $rows = $db->select($query);

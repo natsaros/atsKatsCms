@@ -11,7 +11,7 @@ if(isset($_POST['submit'])) {
     if(is_null($error) || $error === '') {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $user = UserFetcher::login($username, $password);
+        $user = UserFetcher::adminLogin($username, $password);
         if($user === false) {
             $error = "Not valid user";
         } else {

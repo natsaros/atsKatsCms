@@ -264,6 +264,12 @@
                         echo 'class="active"';
                     } ?>><i class="fa fa-table fa-fw"></i> Tables</a>
                 </li>
+
+                <li>
+                    <a href="<?php echo getAdminRequestUri() . 'pages' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'pages') !== false) {
+                        echo 'class="active"';
+                    } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
+                </li>
                 <li>
                     <a href="<?php echo getAdminRequestUri() . 'forms' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'forms') !== false) {
                         echo 'class="active"';

@@ -28,7 +28,7 @@
 } ?>
 
 
-<?php if (strpos(ADMIN_PAGE_ID, 'tables') !== false) {
+<?php if (strpos(ADMIN_PAGE_ID, 'tables') !== false || strpos(ADMIN_PAGE_ID, 'pages') !== false) {
     echo '<!-- DataTables JavaScript -->';
     echo '<script src="' . JS_URI . 'datatables/jquery.dataTables.min.js"></script>';
     echo '<script src="' . JS_URI . 'datatables-plugins/dataTables.bootstrap.min.js"></script>';
