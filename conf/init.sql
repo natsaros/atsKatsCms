@@ -1,3 +1,17 @@
+CREATE TABLE `ak_settings` (
+  `ID`     BIGINT(20) UNSIGNED NOT NULL,
+  `skey`   VARCHAR(250)        NOT NULL DEFAULT '',
+  `sValue` LONGTEXT
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+ALTER TABLE `ak_settings`
+  ADD PRIMARY KEY (`ID`);
+
+ALTER TABLE `ak_settings`
+  MODIFY `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 CREATE TABLE `ak_users` (
   `ID`                BIGINT(20) UNSIGNED NOT NULL,
   `name`              VARCHAR(250)        NOT NULL DEFAULT '',
@@ -19,6 +33,27 @@ CREATE TABLE `ak_users` (
 
 ALTER TABLE `ak_users`
   ADD PRIMARY KEY (`ID`);
+
+
+CREATE TABLE `ak_user_meta` (
+  `ID`         BIGINT(20) UNSIGNED NOT NULL,
+  `user_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
+  `meta_key`   VARCHAR(255)                 DEFAULT NULL,
+  `meta_value` LONGTEXT
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+ALTER TABLE `ak_user_meta`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `user_ind` (`user_id`);
+
+ALTER TABLE `ak_user_meta`
+  MODIFY `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `ak_user_meta`
+  ADD CONSTRAINT `ak_user_meta_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `ak_users` (`ID`)
+  ON DELETE CASCADE;
 
 INSERT INTO `ak_users` (`ID`, `name`, `password`, `first_name`, `last_name`, `email`, `phone`, `link`, `gender`, `picture`, `user_status`, 'is_admin', `activation_date`, `modification_date`)
 VALUES
