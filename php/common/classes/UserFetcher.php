@@ -17,7 +17,7 @@ class UserFetcher {
     }
 
     static function adminLogin($username, $password) {
-        $query = "SELECT * FROM %s WHERE name='%s' AND is_admin=1";
+        $query = "SELECT * FROM %s WHERE name='%s' AND is_admin=1 AND user_status=1";
         $query = sprintf($query, getDb()->users, $username);
         $db = Globals::get('DB');
         $rows = $db->select($query);
@@ -28,6 +28,7 @@ class UserFetcher {
             return false;
         }
 
+        /* @var $user User */
         foreach($users as $user) {
             if(password_verify($password, $user->getPassword())) {
                 $user->setPassword(null);

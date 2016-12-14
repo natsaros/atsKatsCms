@@ -222,17 +222,17 @@ class User {
     }
 
     /**
-     * @return mixed
+     * @return boolean
      */
     public function getUserStatus() {
-        return $this->user_status;
+        return $this->user_status == 1;
     }
 
     /**
-     * @param mixed $user_status
+     * @param boolean $user_status
      */
     public function setUserStatus($user_status) {
-        $this->user_status = $user_status;
+        $this->user_status = $user_status ? 1 : 0;
     }
 
     /**

@@ -22,6 +22,7 @@
                     </thead>
                     <tbody>
                     <?php
+                    /* @var $user User */
                     foreach($users as $key => $user) {
                         $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                         ?>
@@ -31,7 +32,14 @@
                             <td><?php echo $user->getFirstName(); ?></td>
                             <td><?php echo $user->getLastName(); ?></td>
                             <td><?php echo $user->getEmail(); ?></td>
-                            <td><?php echo 'Disable' ?></td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-sm" title="Status">
+                                    <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
+                                    <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
+                                          aria-hidden="true"></span>
+                                </button>
+
+                            </td>
                         </tr>
                         <?php
                     }
