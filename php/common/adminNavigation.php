@@ -1,3 +1,3 @@
 <?php
-@include(ADMIN_ROOT_PATH . ADMIN_PAGE_ID . '.php');
+@include(ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX);
 ?>

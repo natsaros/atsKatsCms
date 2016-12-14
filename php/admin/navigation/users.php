@@ -33,17 +33,18 @@
                             <td><?php echo $user->getLastName(); ?></td>
                             <td><?php echo $user->getEmail(); ?></td>
                             <td>
-                                <button type="button" class="btn btn-default btn-sm" title="Status">
+                                <?php $statusText = $user->getUserStatus() ? 'enabled' : 'disabled' ?>
+                                <a type="button"
+                                   href="<?php echo sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $user->getID(), $statusText); ?>"
+                                   class="btn btn-default btn-sm" title="Status">
                                     <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
                                     <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
                                           aria-hidden="true"></span>
-                                </button>
+                                </a>
 
                             </td>
                         </tr>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>

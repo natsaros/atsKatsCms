@@ -5,7 +5,11 @@
 <?php require_once("php/common/siteFunctions.php"); ?>
 
 <?php
-if (isAdmin()) {
+if(isAdmin()) {
+    if(isAdminAction() && (!isset($_GET["action"]) || $_GET["action"] == null || $_GET["action"] == "")) {
+        @include("php/admin/404.php");
+        return;
+    }
     @include("php/admin/index.php");
 } else {
     @include("php/client/index.php");

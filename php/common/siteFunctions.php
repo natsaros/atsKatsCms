@@ -1,5 +1,8 @@
 <?php
+define('PHP_POSTFIX', '.php');
 define('ADMIN_STR', 'admin');
+define('NAV_STR', 'navigation');
+define('ACTION_STR', 'action');
 define('COMMON_STR', 'common');
 define('CLASSES_STR', 'classes');
 
@@ -11,6 +14,8 @@ if(!defined('ROOT_PATH'))
     define('ROOT_PATH', dirname(__DIR__) . DS);
 
 define('ADMIN_ROOT_PATH', ROOT_PATH . ADMIN_STR . DS);
+define('ADMIN_NAV_PATH', ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
+define('ADMIN_ACTION_PATH', ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
 define('COMMON_ROOT_PATH', ROOT_PATH . COMMON_STR . DS);
 define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 
@@ -26,10 +31,16 @@ function isAdmin() {
     return strpos(getRequestUri(), ADMIN_STR) !== false;
 }
 
+function isAdminAction() {
+    return strpos(getRequestUri(), ADMIN_STR . '/' . ACTION_STR) !== false;
+}
+
 function getRootUri() {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/[^\/]+$/", "", $uri);
-    if(isAdmin()) {
+    if(isAdminAction()) {
+        $uri = preg_replace("/admin[\/]action[\/]*$/", "", $uri);
+    } else if(isAdmin()) {
         $uri = preg_replace("/admin[\/]*$/", "", $uri);
     }
     return $uri;
@@ -47,6 +58,10 @@ function getAdminRequestUriNoDelim() {
 
 function getAdminRequestUri() {
     return getAdminRequestUriNoDelim() . DS;
+}
+
+function getAdminActionRequestUri() {
+    return getAdminRequestUriNoDelim() . DS . ACTION_STR . DS;
 }
 
 function getActiveAdminPage() {
