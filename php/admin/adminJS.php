@@ -27,14 +27,18 @@
     echo '<script src="' . JS_URI . 'flot-data.js"></script>';
 } ?>
 
-
-<?php if (strpos(ADMIN_PAGE_ID, 'tables') !== false || strpos(ADMIN_PAGE_ID, 'pages') !== false) {
-    echo '<!-- DataTables JavaScript -->';
-    echo '<script src="' . JS_URI . 'datatables/jquery.dataTables.min.js"></script>';
-    echo '<script src="' . JS_URI . 'datatables-plugins/dataTables.bootstrap.min.js"></script>';
-    echo '<script src="' . JS_URI . 'datatables-responsive/dataTables.responsive.js"></script>';
-}
-?>
+<!-- Morris Charts JavaScript -->
+<script src="<?php echo JS_URI ?>datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo JS_URI ?>datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo JS_URI ?>datatables-responsive/dataTables.responsive.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo JS_URI ?>sb-admin-2.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.ak-dataTable').DataTable({
+            responsive: true
+        });
+    });
+</script>

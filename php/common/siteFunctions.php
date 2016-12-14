@@ -20,6 +20,7 @@ define('JS_URI', ASSETS_URI . 'js' . DS);
 
 require_once(CLASSES_ROOT_PATH . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
+require_once(CLASSES_ROOT_PATH . 'UserFetcher.php');
 
 function isAdmin() {
     return strpos(getRequestUri(), ADMIN_STR) !== false;

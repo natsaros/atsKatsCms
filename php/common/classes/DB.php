@@ -134,7 +134,7 @@ PRIMARY KEY  (ID)
 
         $users_table_query = "CREATE TABLE $this->users(
  ID bigint(20) unsigned NOT NULL $auto_increment,
- name VARCHAR(250) not null default '',
+ name VARCHAR(250) not null default '', 
  first_name VARCHAR(250) not null default '',
  last_name VARCHAR(250) not null default '',
  email VARCHAR(100) default '',

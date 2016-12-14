@@ -244,6 +244,11 @@
                     } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
+                    <a href="<?php echo getAdminRequestUri() . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
+                        echo 'class="active"';
+                    } ?>><i class="fa fa-users fa-fw"></i> Users</a>
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -264,7 +269,6 @@
                         echo 'class="active"';
                     } ?>><i class="fa fa-table fa-fw"></i> Tables</a>
                 </li>
-
                 <li>
                     <a href="<?php echo getAdminRequestUri() . 'pages' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'pages') !== false) {
                         echo 'class="active"';

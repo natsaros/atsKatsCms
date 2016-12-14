@@ -84,6 +84,48 @@ class User {
     /**
      * @return mixed
      */
+    public function getUserName() {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setUserName($name) {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName() {
+        return $this->first_name;
+    }
+
+    /**
+     * @param mixed $first_name
+     */
+    public function setFirstName($first_name) {
+        $this->first_name = $first_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName() {
+        return $this->last_name;
+    }
+
+    /**
+     * @param mixed $last_name
+     */
+    public function setLastName($last_name) {
+        $this->last_name = $last_name;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getActivationDate() {
         return $this->activation_Date;
     }
@@ -112,20 +154,6 @@ class User {
     /**
      * @return mixed
      */
-    public function getFirstName() {
-        return $this->first_name;
-    }
-
-    /**
-     * @param mixed $first_name
-     */
-    public function setFirstName($first_name) {
-        $this->first_name = $first_name;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getGender() {
         return $this->gender;
     }
@@ -135,20 +163,6 @@ class User {
      */
     public function setGender($gender) {
         $this->gender = $gender;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastName() {
-        return $this->last_name;
-    }
-
-    /**
-     * @param mixed $last_name
-     */
-    public function setLastName($last_name) {
-        $this->last_name = $last_name;
     }
 
     /**
@@ -177,20 +191,6 @@ class User {
      */
     public function setModificationDate($modification_date) {
         $this->modification_date = $modification_date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUserName() {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setUserName($name) {
-        $this->name = $name;
     }
 
     /**

@@ -13,8 +13,7 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover"
-                       id="dataTables-example">
+                <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
                     <thead>
                     <tr>
                         <th>Rendering engine</th>
@@ -434,11 +433,3 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-<script>
-    $(document).ready(function () {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-    });
-</script>

@@ -1,9 +1,5 @@
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Tables</h1>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
+<?php require("pageHeader.php"); ?>
+
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
@@ -13,8 +9,7 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover"
-                       id="dataTables-example">
+                <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
                     <thead>
                     <tr>
                         <th>Rendering engine</th>
@@ -738,12 +733,3 @@
     <!-- /.col-lg-6 -->
 </div>
 <!-- /.row -->
-
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-<script>
-    $(document).ready(function () {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-    });
-</script>
