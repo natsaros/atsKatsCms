@@ -1,6 +1,6 @@
 <?php
-
 class Db {
+
     // The database connection
     protected static $connection;
 
@@ -35,7 +35,11 @@ class Db {
 
         // Try and connect to the database, if a connection has not been established yet
         if(!isset(self::$connection)) {
-            self::$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            try {
+                self::$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            } catch(SystemException $ex) {
+                self::$connection = false;
+            }
         }
 
         // If connection was not successful, handle the error

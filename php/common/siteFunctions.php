@@ -1,4 +1,15 @@
 <?php
+//Set custom Error Handler
+function exception_error_handler($severity, $message, $file, $line) {
+    //TODO : check this is not throwing correct error in DB->connect()
+    if(mysqli_connect_errno()) {
+        echo sprintf("Connect failed: %s\n", mysqli_connect_error());
+    }
+    throw new SystemException($message, 0, $severity, $file, $line);
+}
+
+set_error_handler("exception_error_handler", E_ALL & ~E_NOTICE);
+
 define('PHP_POSTFIX', '.php');
 define('ADMIN_STR', 'admin');
 define('NAV_STR', 'navigation');
@@ -23,6 +34,7 @@ define('ASSETS_URI', REQUEST_URI . 'assets' . DS);
 define('CSS_URI', ASSETS_URI . 'css' . DS);
 define('JS_URI', ASSETS_URI . 'js' . DS);
 
+require_once(CLASSES_ROOT_PATH . 'SystemException.php');
 require_once(CLASSES_ROOT_PATH . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
 require_once(CLASSES_ROOT_PATH . 'UserFetcher.php');
@@ -78,7 +90,7 @@ function initLoad() {
         $init_queries = $db->db_schema();
         $result = $db->query($init_queries);
         if($result === false) {
-            return;
+            throw new SystemException('Database has not been initialized');
         }
     }
 }
@@ -121,6 +133,22 @@ function setUserToSession($user) {
     $_SESSION['USER'] = $user;
     $_SESSION['timeout'] = time();
     $_SESSION['valid'] = true;
+}
+
+function require_safe($path) {
+    if(file_exists(($path))) {
+        require($path);
+    } else {
+        throw new SystemException($path . " doesn't exist");
+    }
+}
+
+function exists_safe($path) {
+    if(file_exists(($path))) {
+        return true;
+    } else {
+        throw new SystemException($path . " doesn't exist");
+    }
 }
 
 ?>
