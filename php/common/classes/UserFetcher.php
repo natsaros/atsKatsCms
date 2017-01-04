@@ -41,8 +41,18 @@ class UserFetcher {
     static function fetchUsers() {
         $query = "SELECT * FROM %s";
         $query = sprintf($query, getDb()->users);
-        $db = Globals::get('DB');
-        $rows = $db->select($query);
+        $rows = getDb()->select($query);
         return self::populateUsers($rows);
+    }
+
+    static function getUserById($id) {
+        if(isset($id) && $id != null && $id != "") {
+            $query = "SELECT * FROM %s WHERE %s = %s";
+            $query = sprintf($query, getDb()->users, getDb()->users->ID, $id);
+            $rows = getDb()->select($query);
+            return self::populateUsers($rows);
+        }
+        return null;
+
     }
 }
