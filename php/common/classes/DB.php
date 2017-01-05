@@ -1,5 +1,20 @@
 <?php
+
 class Db {
+
+    const SETTINGS = 'settings';
+    const USERS = 'users';
+    const USER_META = 'user_meta';
+    const PAGES = 'pages';
+    const PAGE_META = 'page_meta';
+    const POSTS = 'posts';
+    const POST_META = 'post_meta';
+    const COMMENTS = 'comments';
+    const COMMENT_META = 'comment_meta';
+
+    const DB_ALL = 'all';
+    const DB_GLOBAL = 'global';
+    const DB_BLOG = 'blog';
 
     // The database connection
     protected static $connection;
@@ -8,11 +23,11 @@ class Db {
 
     private $initialized;
 
-    var $global_tables = array('settings', 'users', 'user_meta', 'pages', 'page_meta');
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META);
 
-    var $blog_tables = array('posts', 'post_meta', 'comments', 'comment_meta');
+    private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
-    var $prefix;
+    private $prefix;
 
     public $settings;
     public $users;
@@ -24,6 +39,9 @@ class Db {
     public $comments;
     public $comment_meta;
 
+    /**
+     * @return Db
+     */
     public static function getInstance() {
         if(is_null(self::$instance)) {
             self::$instance = new self();
@@ -31,7 +49,10 @@ class Db {
         return self::$instance;
     }
 
-    public function connect() {
+    /**
+     * @return bool|mysqli|string
+     */
+    private static function connect() {
 
         // Try and connect to the database, if a connection has not been established yet
         if(!isset(self::$connection)) {
@@ -55,22 +76,45 @@ class Db {
         return self::$connection;
     }
 
-    public function query($query) {
+    /**
+     * @param $query
+     * @return bool|mysqli_result
+     * @throws SystemException
+     */
+    public static function query($query) {
         // Connect to the database
-        $connection = $this->connect();
+        $connection = self::connect();
         if($connection == mysqli_connect_error()) {
-            return $this->db_error();
+            throw new SystemException(self::db_error());
         }
         // Query the database
-        return $connection->query($query);
+        $mysqli_result = $connection->query($query);
+        if(!$mysqli_result) {
+            throw new SystemException($connection->error);
+        }
+        return $mysqli_result;
     }
 
-    function select($query) {
+    /**
+     * @param $query
+     * @return bool|mysqli_result
+     * @throws SystemException
+     */
+    public function update($query) {
+        return self::query($query);
+    }
+
+    /**
+     * @param $query
+     * @return array|bool
+     * @throws SystemException
+     */
+    static function select($query) {
         $rows = array();
-        $result = $this->query($query);
+        $result = self::query($query);
         // If query failed, return `false`
         if($result === false) {
-            return false;
+            throw new SystemException(self::db_error());
         }
 
         // If query was successful, retrieve all the rows into an array
@@ -80,40 +124,92 @@ class Db {
         return $rows;
     }
 
-    function db_quote($value) {
-        $connection = $this->connect();
+    /**
+     * @param $value
+     * @return string
+     */
+    static function db_quote($value) {
+        $connection = self::connect();
         return "'" . $connection->real_escape_string($value) . "'";
     }
 
-    function db_error() {
-        $connection = $this->connect();
+    /**
+     * @return string
+     */
+    static function db_error() {
+        $connection = self::connect();
         return $connection->error;
     }
 
-    function setPrefix($prefix, $set_table_names = true) {
+    /**
+     * @param $prefix
+     */
+    public function setPrefix($prefix) {
+        $this->prefix = $prefix;
+    }
+
+    /**
+     * @param $prefix
+     * @param bool $set_table_names
+     */
+    public function setCustomPrefix($prefix, $set_table_names = true) {
         if(preg_match('|[^a-z0-9_]|i', $prefix))
 //            return new AK_Error('invalid_db_prefix', 'Invalid database prefix');
             return;
 
-        $this->prefix = $prefix;
+        $this->setPrefix($prefix);
 
         if($set_table_names) {
-            foreach($this->tables('all') as $table => $prefixed_table) {
-                $this->$prefixed_table = $prefix . $prefixed_table;
+            $ALL_TABLES = self::tables(self::DB_ALL);
+            foreach($ALL_TABLES as $table => $table2prefix) {
+                $updatedTable = $prefix . $table2prefix;
+                switch($table2prefix) {
+                    case self::SETTINGS:
+                        $this->setSettings($updatedTable);
+                        break;
+                    case self::USERS:
+                        $this->setUsers($updatedTable);
+                        break;
+                    case self::USER_META:
+                        $this->setUserMeta($updatedTable);
+                        break;
+                    case self::PAGES:
+                        $this->setPages($updatedTable);
+                        break;
+                    case self::PAGE_META:
+                        $this->setPageMeta($updatedTable);
+                        break;
+                    case self::POSTS:
+                        $this->setPosts($updatedTable);
+                        break;
+                    case self::POST_META:
+                        $this->setPostMeta($updatedTable);
+                        break;
+                    case self::COMMENTS:
+                        $this->setComments($updatedTable);
+                        break;
+                    case self::COMMENT_META:
+                        $this->setCommentMeta($updatedTable);
+                        break;
+                }
             }
         }
     }
 
-    function tables($scope = 'all') {
+    /**
+     * @param string $scope
+     * @return array
+     */
+    static function tables($scope = self::DB_ALL) {
         switch($scope) {
-            case 'all':
-                $tables = array_merge($this->global_tables, $this->blog_tables);
+            case self::DB_ALL:
+                $tables = array_merge(self::$global_tables, self::$blog_tables);
                 break;
-            case 'global':
-                $tables = $this->global_tables;
+            case self::DB_GLOBAL:
+                $tables = self::$global_tables;
                 break;
-            case 'blog':
-                $tables = $this->blog_tables;
+            case self::DB_BLOG:
+                $tables = self::$global_tables;
                 break;
             default :
                 return array();
@@ -121,6 +217,9 @@ class Db {
         return $tables;
     }
 
+    /**
+     * @return string
+     */
     public function db_schema() {
 
         $auto_increment = 'auto_increment';
@@ -170,11 +269,16 @@ PRIMARY KEY  (ID)
         return $queries;
     }
 
-    public function isInitialized() {
-        if($this->initialized == null || !$this->initialized) {
-            $this->setPrefix(TABLE_PREFIX);
+    /**
+     * @param DB
+     * @return bool
+     * @throws SystemException
+     */
+    public static function isInitialized($db) {
+        if($db->getInitialized() == null || !$db->getInitialized()) {
+            $db->setCustomPrefix(TABLE_PREFIX);
 
-            $rows = $this->select("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = '" . DB_NAME . "'");
+            $rows = self::select("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = '" . DB_NAME . "'");
             if($rows === false) {
                 return false;
             }
@@ -183,9 +287,86 @@ PRIMARY KEY  (ID)
             foreach($rows as $row) {
                 $tableNames[] = $row['TABLE_NAME'];
             }
-            $this->initialized = in_array($this->settings, $tableNames);
+            $db->setInitialized(in_array($db->settings, $tableNames));
         }
+        return $db->getInitialized();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInitialized() {
         return $this->initialized;
+    }
+
+    /**
+     * @param mixed $initialized
+     */
+    public function setInitialized($initialized) {
+        $this->initialized = $initialized;
+    }
+
+    /**
+     * @param mixed $settings
+     */
+    public function setSettings($settings) {
+        $this->settings = $settings;
+    }
+
+    /**
+     * @param mixed $users
+     */
+    public function setUsers($users) {
+        $this->users = $users;
+    }
+
+    /**
+     * @param mixed $comment_meta
+     */
+    public function setCommentMeta($comment_meta) {
+        $this->comment_meta = $comment_meta;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments) {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @param mixed $posts
+     */
+    public function setPosts($posts) {
+        $this->posts = $posts;
+    }
+
+    /**
+     * @param mixed $post_meta
+     */
+    public function setPostMeta($post_meta) {
+        $this->post_meta = $post_meta;
+    }
+
+    /**
+     * @param mixed $pages
+     */
+    public function setPages($pages) {
+        $this->pages = $pages;
+    }
+
+    /**
+     * @param mixed $page_meta
+     */
+    public function setPageMeta($page_meta) {
+        $this->page_meta = $page_meta;
+    }
+
+    /**
+     * @param mixed $user_meta
+     */
+    public function setUserMeta($user_meta) {
+        $this->user_meta = $user_meta;
     }
 }
 

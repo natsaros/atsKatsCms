@@ -1,6 +1,6 @@
 <?php require("pageHeader.php"); ?>
 
-<?php $users = UserFetcher::fetchUsers(); ?>
+<?php $users = UserFetcher::fetchAllUsers(); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -34,9 +34,11 @@
                             <td><?php echo $user->getLastName(); ?></td>
                             <td><?php echo $user->getEmail(); ?></td>
                             <td>
-                                <?php $statusText = $user->getUserStatus() ? 'enabled' : 'disabled' ?>
+                                <?php
+                                //Opposite set to '$updatedStatus' so that this gets passed to the db
+                                $updatedStatus = $user->getUserStatus() ? 0 : 1 ?>
                                 <a type="button"
-                                   href="<?php echo sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $statusText); ?>"
+                                   href="<?php echo sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $updatedStatus); ?>"
                                    class="btn btn-default btn-sm" title="Status">
                                     <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
                                     <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"

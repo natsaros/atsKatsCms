@@ -39,14 +39,23 @@ require_once(CLASSES_ROOT_PATH . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
 require_once(CLASSES_ROOT_PATH . 'UserFetcher.php');
 
+/**
+ * @return bool
+ */
 function isAdmin() {
     return strpos(getRequestUri(), ADMIN_STR) !== false;
 }
 
+/**
+ * @return bool
+ */
 function isAdminAction() {
     return strpos(getRequestUri(), ADMIN_STR . '/' . ACTION_STR) !== false;
 }
 
+/**
+ * @return string
+ */
 function getRootUri() {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/[^\/]+$/", "", $uri);
@@ -58,47 +67,74 @@ function getRootUri() {
     return $uri;
 }
 
+/**
+ * @return string
+ */
 function getRequestUri() {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/\?[^\?]+$/", "", $uri);
     return $uri . "/";
 }
 
+/**
+ * @return string
+ */
 function getAdminRequestUriNoDelim() {
     return getRootUri() . ADMIN_STR;
 }
 
+/**
+ * @return string
+ */
 function getAdminRequestUri() {
     return getAdminRequestUriNoDelim() . DS;
 }
 
+/**
+ * @return string
+ */
 function getAdminActionRequestUri() {
     return getAdminRequestUriNoDelim() . DS . ACTION_STR . DS;
 }
 
+/**
+ * @return string
+ */
 function getActiveAdminPage() {
     $uri = $_SERVER['REQUEST_URI'];
     $page_id = preg_replace("/[^\/][\w]+(?=\?)/", "", $uri);
     return $page_id;
 }
 
+/**
+ * @throws SystemException
+ */
 function initLoad() {
 
     $db = getDb();
 
-    if(!$db->isInitialized()) {
+    if(!$db->isInitialized($db)) {
         $init_queries = $db->db_schema();
         $result = $db->query($init_queries);
         if($result === false) {
             throw new SystemException('Database has not been initialized');
         }
+        Globals::set('DB', $db);
     }
 }
 
+/**
+ * @return bool
+ */
 function isLoggedIn() {
     return !is_null(getUserFromSession());
 }
 
+/**
+ * @param $url
+ * @param null $refreshRate
+ * @param bool $permanent
+ */
 function Redirect($url, $refreshRate = null, $permanent = false) {
     if(!headers_sent()) {
         if(is_null($refreshRate)) {
@@ -118,6 +154,9 @@ function Redirect($url, $refreshRate = null, $permanent = false) {
     exit();
 }
 
+/**
+ * @return DB
+ */
 function getDb() {
     if(is_null(Globals::get('DB'))) {
         Globals::set('DB', DB::getInstance());
@@ -125,16 +164,26 @@ function getDb() {
     return Globals::get('DB');
 }
 
+/**
+ * @return User
+ */
 function getUserFromSession() {
     return $_SESSION['USER'];
 }
 
+/**
+ * @param $user
+ */
 function setUserToSession($user) {
     $_SESSION['USER'] = $user;
     $_SESSION['timeout'] = time();
     $_SESSION['valid'] = true;
 }
 
+/**
+ * @param $path
+ * @throws SystemException
+ */
 function require_safe($path) {
     if(file_exists(($path))) {
         require($path);
@@ -143,6 +192,11 @@ function require_safe($path) {
     }
 }
 
+/**
+ * @param $path
+ * @return bool
+ * @throws SystemException
+ */
 function exists_safe($path) {
     if(file_exists(($path))) {
         return true;

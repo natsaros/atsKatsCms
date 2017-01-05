@@ -3,7 +3,6 @@
 class Globals {
 
     static public function set($name, $value) {
-
         $GLOBALS[self::getPrefix() . $name] = $value;
     }
 

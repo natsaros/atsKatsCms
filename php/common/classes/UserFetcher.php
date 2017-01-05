@@ -3,6 +3,7 @@ require_once(CLASSES_ROOT_PATH . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'User.php');
 
 class UserFetcher {
+
     private static function populateUsers($rows) {
         if($rows === false) {
             return false;
@@ -16,16 +17,19 @@ class UserFetcher {
         return $users;
     }
 
+    /**
+     * @return User
+     * @param $username string
+     * @param $password string
+     */
     static function adminLogin($username, $password) {
-        $query = "SELECT * FROM %s WHERE name='%s' AND is_admin=1 AND user_status=1";
-        $query = sprintf($query, getDb()->users, $username);
-        $db = Globals::get('DB');
-        $rows = $db->select($query);
-
+        $query = "SELECT * FROM %s WHERE name='%s' AND %s=1 AND %s=1";
+        $query = sprintf($query, getDb()->users, $username, 'is_admin', 'user_status');
+        $rows = getDb()->select($query);
         $users = self::populateUsers($rows);
 
-        if(count($users) > 1) {
-            return false;
+        if(!$users || count($users) > 1) {
+            return null;
         }
 
         /* @var $user User */
@@ -35,24 +39,55 @@ class UserFetcher {
                 return $user;
             }
         }
-        return false;
+        return null;
     }
 
-    static function fetchUsers() {
+    /**
+     * @return array|bool
+     */
+    static function fetchAllUsers() {
         $query = "SELECT * FROM %s";
         $query = sprintf($query, getDb()->users);
         $rows = getDb()->select($query);
         return self::populateUsers($rows);
     }
 
+    /**
+     * @return array|bool
+     */
+    static function fetchActiveUsers() {
+        $query = "SELECT * FROM %s WHERE %s=1";
+        $query = sprintf($query, getDb()->users, 'user_status');
+        $rows = getDb()->select($query);
+        return self::populateUsers($rows);
+    }
+
+    /**
+     * @return User[]
+     * @param $id string
+     */
     static function getUserById($id) {
         if(isset($id) && $id != null && $id != "") {
             $query = "SELECT * FROM %s WHERE %s = %s";
-            $query = sprintf($query, getDb()->users, getDb()->users->ID, $id);
+            $query = sprintf($query, getDb()->users, 'ID', $id);
             $rows = getDb()->select($query);
             return self::populateUsers($rows);
         }
         return null;
 
+    }
+
+    /**
+     * @param $id
+     * @param $userStatus
+     * @return bool|mysqli_result|null
+     */
+    static function updateUserStatus($id, $userStatus) {
+        if(isset($id) && $id != null && $id != "") {
+            $query = "UPDATE %s SET %s = %s WHERE %s = %s";
+            $query = sprintf($query, getDb()->users, 'user_status', $userStatus, 'ID', $id);
+            return getDb()->update($query);
+        }
+        return null;
     }
 }
