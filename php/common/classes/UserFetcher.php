@@ -4,6 +4,10 @@ require_once(CLASSES_ROOT_PATH . 'User.php');
 
 class UserFetcher {
 
+    /**
+     * @param $rows
+     * @return User[]|bool
+     */
     private static function populateUsers($rows) {
         if($rows === false) {
             return false;
@@ -63,7 +67,7 @@ class UserFetcher {
     }
 
     /**
-     * @return User[]
+     * @return User
      * @param $id string
      */
     static function getUserById($id) {
@@ -71,7 +75,13 @@ class UserFetcher {
             $query = "SELECT * FROM %s WHERE %s = %s";
             $query = sprintf($query, getDb()->users, 'ID', $id);
             $rows = getDb()->select($query);
-            return self::populateUsers($rows);
+            $users = self::populateUsers($rows);
+
+            if($users != null || !$users){
+                return $users[0];
+            }else{
+                return null;
+            }
         }
         return null;
 

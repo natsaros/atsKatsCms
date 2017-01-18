@@ -15,7 +15,7 @@
                         <th>ID</th>
                         <th>Username</th>
                         <th>Name</th>
-                        <th>Surname</th>
+                        <th>Last name</th>
                         <th>E-mail</th>
                         <th>Actions</th>
                     </tr>
