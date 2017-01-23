@@ -58,11 +58,10 @@ function isAdminAction() {
  */
 function getRootUri() {
     $uri = $_SERVER['REQUEST_URI'];
-    $uri = preg_replace("/[^\/]+$/", "", $uri);
     if(isAdminAction()) {
-        $uri = preg_replace("/admin[\/]action[\/]*$/", "", $uri);
+        $uri = preg_replace("/admin[\/]action[\/].+/", "", $uri);
     } else if(isAdmin()) {
-        $uri = preg_replace("/admin[\/]*$/", "", $uri);
+        $uri = preg_replace("/admin[\/].+/", "", $uri);
     }
     return $uri;
 }

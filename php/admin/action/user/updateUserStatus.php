@@ -3,4 +3,4 @@
 $id = $_GET['id'];
 $status = $_GET['status'];
 UserFetcher::updateUserStatus($id, $status);
-Redirect(getAdminRequestUriNoDelim());
+Redirect(getAdminRequestUri() . 'users');
