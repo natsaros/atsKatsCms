@@ -22,9 +22,9 @@ class UserFetcher {
     }
 
     /**
-     * @return User
      * @param $username string
      * @param $password string
+     * @return User
      */
     static function adminLogin($username, $password) {
         $query = "SELECT * FROM %s WHERE name='%s' AND %s=1 AND %s=1";
@@ -67,8 +67,8 @@ class UserFetcher {
     }
 
     /**
-     * @return User
      * @param $id string
+     * @return User
      */
     static function getUserById($id) {
         if(isset($id) && $id != null && $id != "") {
@@ -77,9 +77,9 @@ class UserFetcher {
             $rows = getDb()->select($query);
             $users = self::populateUsers($rows);
 
-            if($users != null || !$users){
+            if($users != null || !$users) {
                 return $users[0];
-            }else{
+            } else {
                 return null;
             }
         }
@@ -97,6 +97,19 @@ class UserFetcher {
             $query = "UPDATE %s SET %s = %s WHERE %s = %s";
             $query = sprintf($query, getDb()->users, 'user_status', $userStatus, 'ID', $id);
             return getDb()->update($query);
+        }
+        return null;
+    }
+
+    /**
+     * @param $user User
+     * @return bool|mysqli_result|null
+     */
+    static function updateUser($user) {
+        if(isset($user) && $user != null && $user != "") {
+//            $query = "UPDATE %s SET %s = %s WHERE %s = %s";
+//            $query = sprintf($query, getDb()->users, 'user_status', $userStatus, 'ID', $id);
+//            return getDb()->update($query);
         }
         return null;
     }
