@@ -4,6 +4,21 @@ require_once(CLASSES_ROOT_PATH . 'User.php');
 
 class UserFetcher {
 
+    const ID = 'ID';
+    const USERNAME = 'name';
+    const PASSWORD = 'password';
+    const FIRST_NAME = 'first_name';
+    const LAST_NAME = 'last_name';
+    const EMAIL = 'email';
+    const ACTIVATION_DATE = 'activation_date';
+    const MODIFICATION_DATE = 'modification_date';
+    const USER_STATUS = 'user_status';
+    const IS_ADMIN = 'is_admin';
+    const GENDER = 'gender';
+    const LINK = 'link';
+    const PHONE = 'phone';
+    const PICTURE = 'picture';
+
     /**
      * @param $rows
      * @return User[]|bool
@@ -16,7 +31,7 @@ class UserFetcher {
         $users = [];
 
         foreach($rows as $row) {
-            $users[] = new User($row['ID'], $row['name'], $row['password'], $row['first_name'], $row['last_name'], $row['email'], $row['activation_date'], $row['modification_date'], $row['user_status'], $row['is_admin'], $row['gender'], $row['link'], $row['phone'], $row['picture']);
+            $users[] = new User($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::IS_ADMIN], $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE]);
         }
         return $users;
     }
@@ -27,8 +42,8 @@ class UserFetcher {
      * @return User
      */
     static function adminLogin($username, $password) {
-        $query = "SELECT * FROM %s WHERE name='%s' AND %s=1 AND %s=1";
-        $query = sprintf($query, getDb()->users, $username, 'is_admin', 'user_status');
+        $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USERNAME . " = '%s' AND " . self::IS_ADMIN . "=1 AND " . self::USER_STATUS . "=1";
+        $query = sprintf($query, $username);
         $rows = getDb()->select($query);
         $users = self::populateUsers($rows);
 
@@ -50,8 +65,7 @@ class UserFetcher {
      * @return array|bool
      */
     static function fetchAllUsers() {
-        $query = "SELECT * FROM %s";
-        $query = sprintf($query, getDb()->users);
+        $query = "SELECT * FROM " . getDb()->users;
         $rows = getDb()->select($query);
         return self::populateUsers($rows);
     }
@@ -60,8 +74,7 @@ class UserFetcher {
      * @return array|bool
      */
     static function fetchActiveUsers() {
-        $query = "SELECT * FROM %s WHERE %s=1";
-        $query = sprintf($query, getDb()->users, 'user_status');
+        $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USER_STATUS . " = 1";
         $rows = getDb()->select($query);
         return self::populateUsers($rows);
     }
@@ -72,8 +85,8 @@ class UserFetcher {
      */
     static function getUserById($id) {
         if(isset($id) && $id != null && $id != "") {
-            $query = "SELECT * FROM %s WHERE %s = %s";
-            $query = sprintf($query, getDb()->users, 'ID', $id);
+            $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::ID . " = '%s'";
+            $query = sprintf($query, $id);
             $rows = getDb()->select($query);
             $users = self::populateUsers($rows);
 
@@ -94,8 +107,8 @@ class UserFetcher {
      */
     static function updateUserStatus($id, $userStatus) {
         if(isset($id) && $id != null && $id != "") {
-            $query = "UPDATE %s SET %s = %s WHERE %s = %s";
-            $query = sprintf($query, getDb()->users, 'user_status', $userStatus, 'ID', $id);
+            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = %s WHERE " . self::ID . " = %s";
+            $query = sprintf($query, $userStatus, $id);
             return getDb()->update($query);
         }
         return null;
@@ -107,9 +120,22 @@ class UserFetcher {
      */
     static function updateUser($user) {
         if(isset($user) && $user != null && $user != "") {
-//            $query = "UPDATE %s SET %s = %s WHERE %s = %s";
-//            $query = sprintf($query, getDb()->users, 'user_status', $userStatus, 'ID', $id);
-//            return getDb()->update($query);
+            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = '%s', " . self::USERNAME . " = '%s', " . self::FIRST_NAME . " = '%s', " . self::LAST_NAME . " = '%s', " . self::EMAIL . " = '%s', " . self::LINK . " = '%s', " . self::GENDER . " = '%s', " . self::PHONE . " = '%s', " . self::IS_ADMIN . " = '%s', " . self::PICTURE . " = '%s', " . self::MODIFICATION_DATE . " = '%s' WHERE " . self::ID . " = '%s'";
+
+            $query = sprintf($query,
+                $user->getUserStatus(),
+                $user->getUserName(),
+                $user->getFirstName(),
+                $user->getLastName(),
+                $user->getEmail(),
+                $user->getLink(),
+                $user->getGender(),
+                $user->getPhone(),
+                $user->getIsAdmin(),
+                $user->getPicture(),
+                date('Y-m-d H:i:s'),
+                $user->getID());
+            return getDb()->update($query);
         }
         return null;
     }

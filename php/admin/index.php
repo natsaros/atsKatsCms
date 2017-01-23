@@ -9,6 +9,8 @@ try {
         $action = $_GET["action"];
     }
 
+    initLoad();
+
     if(!isset($action) || $action == null || $action == "") {
         //Default behavior: if no action is set to happen navigation occurs.
 
@@ -18,8 +20,6 @@ try {
         } else {
             define('ADMIN_PAGE_ID', $page);
         }
-
-        initLoad();
 
         if(!isLoggedIn()) {
             include(ADMIN_ROOT_PATH . 'login.php');
