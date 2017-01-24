@@ -31,7 +31,7 @@ class UserFetcher {
         $users = [];
 
         foreach($rows as $row) {
-            $users[] = new User($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::IS_ADMIN], $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE]);
+            $users[] = User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::IS_ADMIN] == 1, $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE]);
         }
         return $users;
     }
@@ -40,6 +40,7 @@ class UserFetcher {
      * @param $username string
      * @param $password string
      * @return User
+     * @throws SystemException
      */
     static function adminLogin($username, $password) {
         $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USERNAME . " = '%s' AND " . self::IS_ADMIN . "=1 AND " . self::USER_STATUS . "=1";
@@ -63,6 +64,7 @@ class UserFetcher {
 
     /**
      * @return array|bool
+     * @throws SystemException
      */
     static function fetchAllUsers() {
         $query = "SELECT * FROM " . getDb()->users;
@@ -72,6 +74,7 @@ class UserFetcher {
 
     /**
      * @return array|bool
+     * @throws SystemException
      */
     static function fetchActiveUsers() {
         $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USER_STATUS . " = 1";
@@ -82,9 +85,10 @@ class UserFetcher {
     /**
      * @param $id string
      * @return User
+     * @throws SystemException
      */
     static function getUserById($id) {
-        if(isset($id) && $id != null && $id != "") {
+        if(isNotEmpty($id)) {
             $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::ID . " = '%s'";
             $query = sprintf($query, $id);
             $rows = getDb()->select($query);
@@ -104,9 +108,10 @@ class UserFetcher {
      * @param $id
      * @param $userStatus
      * @return bool|mysqli_result|null
+     * @throws SystemException
      */
     static function updateUserStatus($id, $userStatus) {
-        if(isset($id) && $id != null && $id != "") {
+        if(isNotEmpty($id)) {
             $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = %s WHERE " . self::ID . " = %s";
             $query = sprintf($query, $userStatus, $id);
             return getDb()->update($query);
@@ -117,9 +122,10 @@ class UserFetcher {
     /**
      * @param $user User
      * @return bool|mysqli_result|null
+     * @throws SystemException
      */
     static function updateUser($user) {
-        if(isset($user) && $user != null && $user != "") {
+        if(isNotEmpty($user)) {
             $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = '%s', " . self::USERNAME . " = '%s', " . self::FIRST_NAME . " = '%s', " . self::LAST_NAME . " = '%s', " . self::EMAIL . " = '%s', " . self::LINK . " = '%s', " . self::GENDER . " = '%s', " . self::PHONE . " = '%s', " . self::IS_ADMIN . " = '%s', " . self::PICTURE . " = '%s', " . self::MODIFICATION_DATE . " = '%s' WHERE " . self::ID . " = '%s'";
 
             $query = sprintf($query,
@@ -135,6 +141,57 @@ class UserFetcher {
                 $user->getPicture(),
                 date('Y-m-d H:i:s'),
                 $user->getID());
+            return getDb()->update($query);
+        }
+        return null;
+    }
+
+    /**
+     * @param $user User
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    static function createUser($user) {
+        if(isNotEmpty($user)) {
+            $query = "INSERT INTO " . getDb()->users .
+                " (" . self::USER_STATUS .
+                "," . self::USERNAME .
+                "," . self::PASSWORD .
+                "," . self::FIRST_NAME .
+                "," . self::LAST_NAME .
+                "," . self::EMAIL .
+                "," . self::LINK .
+                "," . self::GENDER .
+                "," . self::PHONE .
+                "," . self::IS_ADMIN .
+                "," . self::PICTURE .
+                "," . self::MODIFICATION_DATE .
+                ") VALUES ('%s' 
+                , '%s' 
+                , '%s'
+                , '%s'
+                , '%s' 
+                , '%s' 
+                , '%s' 
+                , '%s' 
+                , '%s' 
+                , '%s' 
+                , '%s' 
+                , '%s')";
+
+            $query = sprintf($query,
+                $user->getUserStatus(),
+                $user->getUserName(),
+                $user->getPassword(),
+                $user->getFirstName(),
+                $user->getLastName(),
+                $user->getEmail(),
+                $user->getLink(),
+                $user->getGender(),
+                $user->getPhone(),
+                $user->getIsAdmin(),
+                $user->getPicture(),
+                date('Y-m-d H:i:s'));
             return getDb()->update($query);
         }
         return null;

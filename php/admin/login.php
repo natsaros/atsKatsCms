@@ -2,9 +2,9 @@
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
 require_once(CLASSES_ROOT_PATH . 'UserFetcher.php');
 
-if(isset($_POST['submit'])) {
+if(isNotEmpty($_POST['submit'])) {
     $error = '';
-    if(empty($_POST['username']) || empty($_POST['password'])) {
+    if(isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
         $error = "Username or Password is invalid";
     }
 
@@ -47,8 +47,7 @@ if(isset($_POST['submit'])) {
                                        value="">
                             </div>
                             <div class="checkbox">
-                                <label> <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
+                                <label> <input name="remember" type="checkbox" value="Remember Me">Remember Me </label>
                             </div>
                             <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Login"
                                    placeholder="Login">

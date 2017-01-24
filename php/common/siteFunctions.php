@@ -38,6 +38,7 @@ require_once(CLASSES_ROOT_PATH . 'SystemException.php');
 require_once(CLASSES_ROOT_PATH . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
 require_once(CLASSES_ROOT_PATH . 'UserFetcher.php');
+require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');
 
 /**
  * @return bool
@@ -58,10 +59,11 @@ function isAdminAction() {
  */
 function getRootUri() {
     $uri = $_SERVER['REQUEST_URI'];
+    $uri = preg_replace("/[^\/]+$/", "", $uri);
     if(isAdminAction()) {
-        $uri = preg_replace("/admin[\/]action[\/].+/", "", $uri);
+        $uri = preg_replace("/admin[\/]action[\/].*/", "", $uri);
     } else if(isAdmin()) {
-        $uri = preg_replace("/admin[\/].+/", "", $uri);
+        $uri = preg_replace("/admin[\/].*/", "", $uri);
     }
     return $uri;
 }
@@ -202,6 +204,108 @@ function exists_safe($path) {
     } else {
         throw new SystemException($path . " doesn't exist");
     }
+}
+
+/**
+ * @param $msg string
+ * @return int
+ */
+function addErrorMessage($msg) {
+    if(!isset($_SESSION[MessageTypes::ERROR_MESSAGES])) {
+        $_SESSION[MessageTypes::ERROR_MESSAGES] = [];
+    }
+    return array_push($_SESSION[MessageTypes::ERROR_MESSAGES], $msg);
+}
+
+/**
+ * @param $msg string
+ * @return int
+ */
+function addSuccessMessage($msg) {
+    if(!isset($_SESSION[MessageTypes::SUCCESS_MESSAGES])) {
+        $_SESSION[MessageTypes::SUCCESS_MESSAGES] = [];
+    }
+
+    return array_push($_SESSION[MessageTypes::SUCCESS_MESSAGES], $msg);
+}
+
+/**
+ * @param $msg string
+ * @return int
+ */
+function addInfoMessage($msg) {
+    if(!isset($_SESSION[MessageTypes::INFO_MESSAGES])) {
+        $_SESSION[MessageTypes::INFO_MESSAGES] = [];
+    }
+    return array_push($_SESSION[MessageTypes::INFO_MESSAGES], $msg);
+}
+
+/**
+ * @return array
+ */
+function consumeSuccessMessages() {
+    return consumeMessage(MessageTypes::SUCCESS_MESSAGES);
+}
+
+/**
+ * @return array
+ */
+function consumeErrorMessages() {
+    return consumeMessage(MessageTypes::ERROR_MESSAGES);
+}
+
+/**
+ * @return array
+ */
+function consumeInfoMessages() {
+    return consumeMessage(MessageTypes::INFO_MESSAGES);
+}
+
+/**
+ * @param $arrayName string
+ * @return array
+ */
+function consumeMessage($arrayName) {
+    $ret = $_SESSION[$arrayName];
+    unset($_SESSION[$arrayName]);
+    return $ret;
+}
+
+/**
+ * @param $val mixed
+ * @return bool
+ */
+function isEmpty($val) {
+    $check = !isset($val) || $val == null;
+    if(!$check) {
+        if(is_array($val)) {
+            $check = empty(array_filter($val));
+        } else {
+            $check = empty($val);
+        }
+    }
+    return $check;
+}
+
+/**
+ * @param $val mixed
+ * @return bool
+ */
+function isNotEmpty($val) {
+    return !isEmpty($val);
+}
+
+/**
+ * @param $data
+ * @return string
+ */
+function safe_input($data) {
+    if(isNotEmpty($data)) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+    }
+    return $data;
 }
 
 ?>

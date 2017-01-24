@@ -1,8 +1,20 @@
 <?php require("pageHeader.php"); ?>
 
-<?php $currentUser = UserFetcher::getUserById($_GET["id"]); ?>
+<?php require("messageSection.php"); ?>
 
-<!-- /.row -->
+<?php
+
+$userId = $_GET["id"];
+$isCreate = isEmpty($userId);
+
+if($isCreate) {
+    $currentUser = User::create();
+} else {
+    $currentUser = UserFetcher::getUserById($userId);
+}
+
+?>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -12,19 +24,33 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form role="form" action="<?php echo getAdminActionRequestUri() . "user" . DS . "update"; ?>"
+                        <?php
+                        $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getAdminActionRequestUri() . "user" . DS . "update";
+                        $requiredClass = $isCreate ? 'required' : '';
+                        ?>
+                        <form role="form" action="<?php echo $action; ?>" data-toggle="validator"
                               method="post">
-                            <input type="hidden" name="<?php echo UserFetcher::ID ?>" value="<?php echo $currentUser->getID() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::GENDER ?>" value="<?php echo $currentUser->getGender() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::IS_ADMIN ?>" value="<?php echo $currentUser->getIsAdmin() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::USER_STATUS ?>" value="<?php echo $currentUser->getUserStatus() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::LINK ?>" value="<?php echo $currentUser->getLink() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::PICTURE ?>" value="<?php echo $currentUser->getPicture() ?>">
+                            <input type="hidden" name="<?php echo UserFetcher::ID ?>"
+                                   value="<?php echo $currentUser->getID() ?>">
+                            <input type="hidden" name="<?php echo UserFetcher::GENDER ?>"
+                                   value="<?php echo $currentUser->getGender() ?>">
+                            <input type="hidden" name="<?php echo UserFetcher::USER_STATUS ?>"
+                                   value="<?php echo $currentUser->getUserStatus() ?>">
+                            <input type="hidden" name="<?php echo UserFetcher::LINK ?>"
+                                   value="<?php echo $currentUser->getLink() ?>">
+                            <input type="hidden" name="<?php echo UserFetcher::PICTURE ?>"
+                                   value="<?php echo $currentUser->getPicture() ?>">
                             <div class="form-group">
                                 <label class="control-label" for="username_input">User Name</label>
                                 <input class="form-control" placeholder="User Name"
                                        name="<?php echo UserFetcher::USERNAME ?>" id="username_input"
-                                       value="<?php echo $currentUser->getUserName() ?>">
+                                       value="<?php echo $currentUser->getUserName() ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="password_input">Password</label>
+                                <input class="form-control" type="password" placeholder="Password"
+                                       name="<?php echo UserFetcher::PASSWORD ?>"
+                                       id="password_input" <?php echo $requiredClass ?>>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="firstname_input">First Name</label>
@@ -44,7 +70,7 @@
                                 <input class="form-control" type="email" placeholder="E-mail"
                                        name="<?php echo UserFetcher::EMAIL ?>"
                                        id="mail_input"
-                                       value="<?php echo $currentUser->getEmail() ?>">
+                                       value="<?php echo $currentUser->getEmail() ?>" required>
                             </div>
 
                             <div class="form-group">
@@ -53,8 +79,21 @@
                                        name="<?php echo UserFetcher::PHONE ?>" id="phone_input"
                                        value="<?php echo $currentUser->getPhone() ?>">
                             </div>
+
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <?php $isChecked = $currentUser->isAdmin() ? 'checked' : ''; ?>
+                                        <input name="<?php echo UserFetcher::IS_ADMIN ?>"
+                                               type="checkbox" <?php echo $isChecked ?>>
+                                        Is admin
+                                    </label>
+                                </div>
+                            </div>
+
                             <div class="text-right form-group">
-                                <button type="button" class="btn btn-default">Back</button>
+                                <a type="button" href="<?php echo getAdminRequestUri() . 'users' ?>"
+                                   class="btn btn-default">Back</a>
                                 <input type="submit" name="submit" class="btn btn-primary" value="Save"
                                        placeholder="Save"/>
                             </div>

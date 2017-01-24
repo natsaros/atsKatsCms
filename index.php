@@ -6,7 +6,7 @@
 
 <?php
 if(isAdmin()) {
-    if(isAdminAction() && (!isset($_GET["action"]) || $_GET["action"] == null || $_GET["action"] == "")) {
+    if(isAdminAction() && isEmpty($_GET["action"])) {
         @include("php/admin/404.php");
         return;
     }

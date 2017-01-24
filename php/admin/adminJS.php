@@ -10,13 +10,13 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?php echo JS_URI ?>raphael/raphael.min.js"></script>
 
-<?php if (strpos(ADMIN_PAGE_ID, 'morris') !== false) {
+<?php if(strpos(ADMIN_PAGE_ID, 'morris') !== false) {
 //    || strpos(ADMIN_PAGE_ID, 'tables') !== false
     echo '<script src="' . JS_URI . 'morrisjs/morris.min.js"></script>';
     echo '<script src="' . JS_URI . 'morris-data.js"></script>';
 } ?>
 
-<?php if (strpos(ADMIN_PAGE_ID, 'flot') !== false) {
+<?php if(strpos(ADMIN_PAGE_ID, 'flot') !== false) {
     echo '<!-- Flot Charts JavaScript -->';
     echo '<script src="' . JS_URI . 'flot/excanvas.min.js"></script>';
     echo '<script src="' . JS_URI . 'flot/jquery.flot.js"></script>';
@@ -34,11 +34,4 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo JS_URI ?>sb-admin-2.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('.ak-dataTable').DataTable({
-            responsive: true
-        });
-    });
-</script>
+<script src="<?php echo JS_URI ?>adminCustom.js"></script>

@@ -11,11 +11,11 @@ try {
 
     initLoad();
 
-    if(!isset($action) || $action == null || $action == "") {
+    if(isEmpty($action)) {
         //Default behavior: if no action is set to happen navigation occurs.
 
         $page = $_GET["page"];
-        if(!isset($page) || $page == null || $page == "") {
+        if(isEmpty($page)) {
             define('ADMIN_PAGE_ID', 'dashboard');
         } else {
             define('ADMIN_PAGE_ID', $page);

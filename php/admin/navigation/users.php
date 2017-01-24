@@ -1,5 +1,7 @@
 <?php require("pageHeader.php"); ?>
 
+<?php require("messageSection.php"); ?>
+
 <?php $users = UserFetcher::fetchAllUsers(); ?>
 
 <div class="row">
@@ -56,5 +58,12 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <a href="<?php echo getAdminRequestUri() . "updateUser"; ?>" type="button" class="btn btn-outline btn-primary">
+            Add <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </a>
     </div>
 </div>

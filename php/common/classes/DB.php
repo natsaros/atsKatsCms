@@ -270,7 +270,7 @@ PRIMARY KEY  (ID)
     }
 
     /**
-     * @param DB
+     * @param $db DB
      * @return bool
      * @throws SystemException
      */
