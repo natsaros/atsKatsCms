@@ -19,7 +19,8 @@ define('CLASSES_STR', 'classes');
 
 define('REQUEST_URI', getRootUri());
 
-define('DS', DIRECTORY_SEPARATOR);
+//define('DS', DIRECTORY_SEPARATOR);
+define('DS', "/");
 
 if(!defined('ROOT_PATH'))
     define('ROOT_PATH', dirname(__DIR__) . DS);
@@ -71,10 +72,17 @@ function getRootUri() {
 /**
  * @return string
  */
-function getRequestUri() {
+function getRequestUriNoDelim() {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/\?[^\?]+$/", "", $uri);
-    return $uri . "/";
+    return $uri;
+}
+
+/**
+ * @return string
+ */
+function getRequestUri() {
+    return getRequestUriNoDelim() . "/";
 }
 
 /**

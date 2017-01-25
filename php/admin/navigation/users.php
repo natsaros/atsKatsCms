@@ -29,25 +29,25 @@
                         $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                         $userId = $user->getID();
                         ?>
-                        <tr class="<?php echo $oddEvenClass ?>">
-                            <td><?php echo $userId; ?></td>
-                            <td><?php echo $user->getUserName(); ?></td>
-                            <td><?php echo $user->getFirstName(); ?></td>
-                            <td><?php echo $user->getLastName(); ?></td>
-                            <td><?php echo $user->getEmail(); ?></td>
+                        <tr class="<?= $oddEvenClass ?>">
+                            <td><?= $userId; ?></td>
+                            <td><?= $user->getUserName(); ?></td>
+                            <td><?= $user->getFirstName(); ?></td>
+                            <td><?= $user->getLastName(); ?></td>
+                            <td><?= $user->getEmail(); ?></td>
                             <td>
                                 <?php
                                 //Opposite set to '$updatedStatus' so that this gets passed to the db
                                 $updatedStatus = $user->getUserStatus() ? 0 : 1 ?>
                                 <a type="button"
-                                   href="<?php echo sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $updatedStatus); ?>"
+                                   href="<?= sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $updatedStatus); ?>"
                                    class="btn btn-default btn-sm" title="Status">
                                     <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
-                                    <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
+                                    <span class="glyphicon glyphicon-user <?= $statusClass ?>"
                                           aria-hidden="true"></span>
                                 </a>
                                 <a type="button"
-                                   href="<?php echo sprintf(getAdminRequestUri() . "updateUser?id=%s", $userId); ?>"
+                                   href="<?= sprintf(getAdminRequestUri() . "updateUser?id=%s", $userId); ?>"
                                    class="btn btn-default btn-sm" title="Edit User">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </a>
@@ -62,7 +62,7 @@
 </div>
 <div class="row">
     <div class="col-lg-12 text-center">
-        <a href="<?php echo getAdminRequestUri() . "updateUser"; ?>" type="button" class="btn btn-outline btn-primary">
+        <a href="<?= getAdminRequestUri() . "updateUser"; ?>" type="button" class="btn btn-outline btn-primary">
             Add <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
         </a>
     </div>

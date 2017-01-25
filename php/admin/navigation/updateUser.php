@@ -6,7 +6,11 @@
 
 $userId = $_GET["id"];
 $isCreate = isEmpty($userId);
+//TODO server side validation
+/*include('validateUser.php');*/ ?>
 
+
+<?php
 if($isCreate) {
     $currentUser = User::create();
 } else {
@@ -28,71 +32,71 @@ if($isCreate) {
                         $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getAdminActionRequestUri() . "user" . DS . "update";
                         $requiredClass = $isCreate ? 'required' : '';
                         ?>
-                        <form role="form" action="<?php echo $action; ?>" data-toggle="validator"
-                              method="post">
-                            <input type="hidden" name="<?php echo UserFetcher::ID ?>"
-                                   value="<?php echo $currentUser->getID() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::GENDER ?>"
-                                   value="<?php echo $currentUser->getGender() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::USER_STATUS ?>"
-                                   value="<?php echo $currentUser->getUserStatus() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::LINK ?>"
-                                   value="<?php echo $currentUser->getLink() ?>">
-                            <input type="hidden" name="<?php echo UserFetcher::PICTURE ?>"
-                                   value="<?php echo $currentUser->getPicture() ?>">
+                        <!--<form name="updateUserForm" role="form" action="<? /*= htmlspecialchars(getRequestUriNoDelim()); */ ?>" data-toggle="validator"> method="post">-->
+                        <form name="updateUserForm" role="form" action="<?=$action;?>" data-toggle="validator" method="post">
+                            <input type="hidden" name="<?= UserFetcher::ID ?>"
+                                   value="<?= $currentUser->getID() ?>">
+                            <input type="hidden" name="<?= UserFetcher::GENDER ?>"
+                                   value="<?= $currentUser->getGender() ?>">
+                            <input type="hidden" name="<?= UserFetcher::USER_STATUS ?>"
+                                   value="<?= $currentUser->getUserStatus() ?>">
+                            <input type="hidden" name="<?= UserFetcher::LINK ?>"
+                                   value="<?= $currentUser->getLink() ?>">
+                            <input type="hidden" name="<?= UserFetcher::PICTURE ?>"
+                                   value="<?= $currentUser->getPicture() ?>">
                             <div class="form-group">
                                 <label class="control-label" for="username_input">User Name</label>
                                 <input class="form-control" placeholder="User Name"
-                                       name="<?php echo UserFetcher::USERNAME ?>" id="username_input"
-                                       value="<?php echo $currentUser->getUserName() ?>" required>
+                                       name="<?= UserFetcher::USERNAME ?>" id="username_input"
+                                       value="<?= $currentUser->getUserName() ?>" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="password_input">Password</label>
                                 <input class="form-control" type="password" placeholder="Password"
-                                       name="<?php echo UserFetcher::PASSWORD ?>"
-                                       id="password_input" <?php echo $requiredClass ?>>
+                                       name="<?= UserFetcher::PASSWORD ?>"
+                                       id="password_input" <?= $requiredClass ?>>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="firstname_input">First Name</label>
                                 <input class="form-control" placeholder="First Name"
-                                       name="<?php echo UserFetcher::FIRST_NAME ?>"
+                                       name="<?= UserFetcher::FIRST_NAME ?>"
                                        id="firstname_input"
-                                       value="<?php echo $currentUser->getFirstName() ?>">
+                                       value="<?= $currentUser->getFirstName() ?>">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="lastname_input">Last Name</label>
                                 <input class="form-control" placeholder="Last Name"
-                                       name="<?php echo UserFetcher::LAST_NAME ?>" id="lastname_input"
-                                       value="<?php echo $currentUser->getLastName() ?>">
+                                       name="<?= UserFetcher::LAST_NAME ?>" id="lastname_input"
+                                       value="<?= $currentUser->getLastName() ?>">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="mail_input">E-mail</label>
                                 <input class="form-control" type="email" placeholder="E-mail"
-                                       name="<?php echo UserFetcher::EMAIL ?>"
+                                       name="<?= UserFetcher::EMAIL ?>"
                                        id="mail_input"
-                                       value="<?php echo $currentUser->getEmail() ?>" required>
+                                       value="<?= $currentUser->getEmail() ?>" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label" for="mail_input">Phone</label>
                                 <input class="form-control" type="tel" placeholder="Phone"
-                                       name="<?php echo UserFetcher::PHONE ?>" id="phone_input"
-                                       value="<?php echo $currentUser->getPhone() ?>">
+                                       name="<?= UserFetcher::PHONE ?>" id="phone_input"
+                                       value="<?= $currentUser->getPhone() ?>">
                             </div>
 
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
                                         <?php $isChecked = $currentUser->isAdmin() ? 'checked' : ''; ?>
-                                        <input name="<?php echo UserFetcher::IS_ADMIN ?>"
-                                               type="checkbox" <?php echo $isChecked ?>>
+                                        <input name="<?= UserFetcher::IS_ADMIN ?>"
+                                               type="checkbox" <?= $isChecked ?>>
                                         Is admin
                                     </label>
                                 </div>
                             </div>
 
                             <div class="text-right form-group">
-                                <a type="button" href="<?php echo getAdminRequestUri() . 'users' ?>"
+                                <a type="button" href="<?= getAdminRequestUri() . 'users' ?>"
                                    class="btn btn-default">Back</a>
                                 <input type="submit" name="submit" class="btn btn-primary" value="Save"
                                        placeholder="Save"/>

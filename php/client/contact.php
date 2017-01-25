@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
 
                                 Χαριλάου Τρικούπη 17, 16675 Γλυφάδα, Ελλάδα<br>
                                 Τηλ: 6976582735<br>
-                                Email: <?php echo $myEmail?>
+                                Email: <?= $myEmail?>
                             </p>
                         </div>
                     </div>

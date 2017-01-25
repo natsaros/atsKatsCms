@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?php echo getAdminRequestUri() . 'dashboard' ?>">Fitness House Admin</a>
+        <a class="navbar-brand" href="<?= getAdminRequestUri() . 'dashboard' ?>">Fitness House Admin</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -215,7 +215,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="<?php echo getAdminActionRequestUri() ?>logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="<?= getAdminActionRequestUri() ?>logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -239,12 +239,12 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="<?php echo getAdminRequestUri() . 'dashboard' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'dashboard') !== false) {
+                    <a href="<?= getAdminRequestUri() . 'dashboard' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'dashboard') !== false) {
                         echo 'class="active"';
                     } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="<?php echo getAdminRequestUri() . 'users' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'users') !== false) {
+                    <a href="<?= getAdminRequestUri() . 'users' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'users') !== false) {
                         echo 'class="active"';
                     } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                 </li>
@@ -252,12 +252,12 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'flot' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'flot') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'flot' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'flot') !== false) {
                                 echo 'class="active"';
                             } ?>>Flot Charts</a>
                         </li>
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'morris' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'morris') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'morris' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'morris') !== false) {
                                 echo 'class="active"';
                             } ?>>Morris.js Charts</a>
                         </li>
@@ -265,17 +265,17 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="<?php echo getAdminRequestUri() . 'tables' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'tables') !== false) {
+                    <a href="<?= getAdminRequestUri() . 'tables' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'tables') !== false) {
                         echo 'class="active"';
                     } ?>><i class="fa fa-table fa-fw"></i> Tables</a>
                 </li>
                 <li>
-                    <a href="<?php echo getAdminRequestUri() . 'pages' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'pages') !== false) {
+                    <a href="<?= getAdminRequestUri() . 'pages' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'pages') !== false) {
                         echo 'class="active"';
                     } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                 </li>
                 <li>
-                    <a href="<?php echo getAdminRequestUri() . 'forms' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'forms') !== false) {
+                    <a href="<?= getAdminRequestUri() . 'forms' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'forms') !== false) {
                         echo 'class="active"';
                     } ?>><i class="fa fa-edit fa-fw"></i> Forms</a>
                 </li>
@@ -283,32 +283,32 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'panelsWells' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'panelsWells') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'panelsWells' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'panelsWells') !== false) {
                                 echo 'class="active"';
                             } ?>>Panels and Wells</a>
                         </li>
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'buttons' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'buttons') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'buttons' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'buttons') !== false) {
                                 echo 'class="active"';
                             } ?>>Buttons</a>
                         </li>
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'notifications' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'notifications') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'notifications' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'notifications') !== false) {
                                 echo 'class="active"';
                             } ?>>Notifications</a>
                         </li>
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'typography' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'typography') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'typography' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'typography') !== false) {
                                 echo 'class="active"';
                             } ?>>Typography</a>
                         </li>
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'icons' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'icons') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'icons' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'icons') !== false) {
                                 echo 'class="active"';
                             } ?>> Icons</a>
                         </li>
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'grid' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'grid') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'grid' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'grid') !== false) {
                                 echo 'class="active"';
                             } ?>>Grid</a>
                         </li>
@@ -350,12 +350,12 @@
                     <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'blank' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'blank') !== false) {
+                            <a href="<?= getAdminRequestUri() . 'blank' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'blank') !== false) {
                                 echo 'class="active"';
                             } ?>>Blank Page</a>
                         </li>
                         <li>
-                            <a href="<?php echo getAdminRequestUri() . 'login' ?>">Login Page</a>
+                            <a href="<?= getAdminRequestUri() . 'login' ?>">Login Page</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

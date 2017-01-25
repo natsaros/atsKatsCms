@@ -1,14 +1,14 @@
 <!-- jQuery -->
-<script src="<?php echo JS_URI ?>jquery.min.js"></script>
+<script src="<?= JS_URI ?>jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="<?php echo JS_URI ?>bootstrap.min.js"></script>
+<script src="<?= JS_URI ?>bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="<?php echo JS_URI ?>metisMenu/metisMenu.min.js"></script>
+<script src="<?= JS_URI ?>metisMenu/metisMenu.min.js"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="<?php echo JS_URI ?>raphael/raphael.min.js"></script>
+<script src="<?= JS_URI ?>raphael/raphael.min.js"></script>
 
 <?php if(strpos(ADMIN_PAGE_ID, 'morris') !== false) {
 //    || strpos(ADMIN_PAGE_ID, 'tables') !== false
@@ -28,10 +28,10 @@
 } ?>
 
 <!-- Morris Charts JavaScript -->
-<script src="<?php echo JS_URI ?>datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo JS_URI ?>datatables-plugins/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo JS_URI ?>datatables-responsive/dataTables.responsive.js"></script>
+<script src="<?= JS_URI ?>datatables/jquery.dataTables.min.js"></script>
+<script src="<?= JS_URI ?>datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="<?= JS_URI ?>datatables-responsive/dataTables.responsive.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="<?php echo JS_URI ?>sb-admin-2.js"></script>
-<script src="<?php echo JS_URI ?>adminCustom.js"></script>
+<script src="<?= JS_URI ?>sb-admin-2.js"></script>
+<script src="<?= JS_URI ?>adminCustom.js"></script>
