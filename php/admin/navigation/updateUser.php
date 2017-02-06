@@ -33,7 +33,8 @@ if($isCreate) {
                         $requiredClass = $isCreate ? 'required' : '';
                         ?>
                         <!--<form name="updateUserForm" role="form" action="<? /*= htmlspecialchars(getRequestUriNoDelim()); */ ?>" data-toggle="validator"> method="post">-->
-                        <form name="updateUserForm" role="form" action="<?=$action;?>" data-toggle="validator" method="post">
+                        <form name="updateUserForm" role="form" action="<?= $action; ?>" data-toggle="validator"
+                              method="post">
                             <input type="hidden" name="<?= UserFetcher::ID ?>"
                                    value="<?= $currentUser->getID() ?>">
                             <input type="hidden" name="<?= UserFetcher::GENDER ?>"
@@ -44,6 +45,16 @@ if($isCreate) {
                                    value="<?= $currentUser->getLink() ?>">
                             <input type="hidden" name="<?= UserFetcher::PICTURE ?>"
                                    value="<?= $currentUser->getPicture() ?>">
+
+                            <div class="form-group text-center">
+                                <!--TODO: add to custom css for admin-->
+                                <div class="imgCont" style="width: 20%;display:inline-block;">
+                                    <img class="img-thumbnail img-responsive"
+                                         src="<?= renderImage($currentUser->getPicture()) ?>"
+                                         alt="<?= $currentUser->getUserName() ?>">
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label" for="username_input">User Name</label>
                                 <input class="form-control" placeholder="User Name"

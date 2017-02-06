@@ -38,10 +38,12 @@
                             <td>
                                 <?php
                                 //Opposite set to '$updatedStatus' so that this gets passed to the db
-                                $updatedStatus = $user->getUserStatus() ? 0 : 1 ?>
+                                $updatedStatus = $user->getUserStatus() ? 0 : 1;
+                                $activDeactivText = $user->getUserStatus() ? 'Deactivate' : 'Activate';
+                                ?>
                                 <a type="button"
                                    href="<?= sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $updatedStatus); ?>"
-                                   class="btn btn-default btn-sm" title="Status">
+                                   class="btn btn-default btn-sm" title="<?= $activDeactivText ?> User">
                                     <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
                                     <span class="glyphicon glyphicon-user <?= $statusClass ?>"
                                           aria-hidden="true"></span>

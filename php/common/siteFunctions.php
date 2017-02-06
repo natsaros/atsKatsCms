@@ -22,18 +22,29 @@ define('REQUEST_URI', getRootUri());
 //define('DS', DIRECTORY_SEPARATOR);
 define('DS', "/");
 
-if(!defined('ROOT_PATH'))
-    define('ROOT_PATH', dirname(__DIR__) . DS);
+if(!defined('PHP_ROOT_PATH')) {
+    $str = dirname(__DIR__) . DS;
+    $str = preg_replace("/\\\\/", DS, $str);
+    define('PHP_ROOT_PATH', $str);
+}
 
-define('ADMIN_ROOT_PATH', ROOT_PATH . ADMIN_STR . DS);
-define('ADMIN_NAV_PATH', ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
-define('ADMIN_ACTION_PATH', ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
-define('COMMON_ROOT_PATH', ROOT_PATH . COMMON_STR . DS);
+function getRootPath() {
+    $uri = preg_replace(getRootUri(), "", PHP_ROOT_PATH);
+    $uri = preg_replace("/php/", "", $uri);
+    $uri = preg_replace("/\\/+/", "/", $uri);
+    return $uri;
+}
+
+define('ADMIN_ROOT_PATH', PHP_ROOT_PATH . ADMIN_STR . DS);
+define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
+define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
+define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
 define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 
 define('ASSETS_URI', REQUEST_URI . 'assets' . DS);
 define('CSS_URI', ASSETS_URI . 'css' . DS);
 define('JS_URI', ASSETS_URI . 'js' . DS);
+define('USER_PICS', ASSETS_URI . 'pics' . DS);
 
 require_once(CLASSES_ROOT_PATH . 'SystemException.php');
 require_once(CLASSES_ROOT_PATH . 'DB.php');
@@ -136,7 +147,7 @@ function initLoad() {
  * @return bool
  */
 function isLoggedIn() {
-    return !is_null(getUserFromSession());
+    return isNotEmpty(getUserFromSession());
 }
 
 /**
@@ -174,17 +185,29 @@ function getDb() {
 }
 
 /**
- * @return User
+ * @return string
  */
 function getUserFromSession() {
     return $_SESSION['USER'];
 }
 
 /**
- * @param $user
+ * @return User
+ */
+function getFullUserFromSession() {
+    $userStr = $_SESSION['FULL_USER'];
+    if(isNotEmpty($userStr)) {
+        return unserialize($userStr);
+    }
+    return null;
+}
+
+/**
+ * @param User $user
  */
 function setUserToSession($user) {
-    $_SESSION['USER'] = $user;
+    $_SESSION['USER'] = $user->getUserName();
+    $_SESSION['FULL_USER'] = serialize($user);
     $_SESSION['timeout'] = time();
     $_SESSION['valid'] = true;
 }
@@ -314,6 +337,36 @@ function safe_input($data) {
         $data = htmlspecialchars($data);
     }
     return $data;
+}
+
+function renderImage($name) {
+    $mimes = array
+    (
+        'jpg' => 'image/jpg',
+        'jpeg' => 'image/jpg',
+        'gif' => 'image/gif',
+        'png' => 'image/png'
+    );
+    $defaultUser = 'default.png';
+    if(isNotEmpty($name)) {
+        $tmp = explode('.', $name);
+        $ext = strtolower(end($tmp));
+    } else {
+        $tmp = explode('.', $defaultUser);
+        $ext = strtolower(end($tmp));
+    }
+
+    $file = getRootPath() . USER_PICS . $name;
+    if(!file_exists($file)) {
+        $file = getRootPath() . USER_PICS . $defaultUser;
+    }
+//header('content-type: ' . $mimes[$ext]);
+//header('content-disposition: inline; filename="' . $name . '";');
+//readfile(getRootPath() . $file);
+
+    $content = file_get_contents($file);
+    $base64 = base64_encode($content);
+    return 'data:' . $mimes[$ext] . ';base64,' . $base64;
 }
 
 ?>

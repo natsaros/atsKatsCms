@@ -15,7 +15,7 @@ if(isNotEmpty($_POST['submit'])) {
         if($user === false) {
             $error = "Not valid user";
         } else {
-            setUserToSession($user->getUserName());
+            setUserToSession($user);
             Redirect(getAdminRequestUri());
         }
     }
