@@ -264,6 +264,19 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         echo 'class="active"';
                     } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                 </li>
+
+                <li>
+                    <a href="<?= $adminRequestUri . 'pages' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'pages') !== false) {
+                        echo 'class="active"';
+                    } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
+                </li>
+
+                <li>
+                    <a href="<?= $adminRequestUri . 'tables' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'tables') !== false) {
+                        echo 'class="active"';
+                    } ?>><i class="fa fa-table fa-fw"></i> Tables</a>
+                </li>
+
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -279,16 +292,6 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="<?= $adminRequestUri . 'tables' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'tables') !== false) {
-                        echo 'class="active"';
-                    } ?>><i class="fa fa-table fa-fw"></i> Tables</a>
-                </li>
-                <li>
-                    <a href="<?= $adminRequestUri . 'pages' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'pages') !== false) {
-                        echo 'class="active"';
-                    } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                 </li>
                 <li>
                     <a href="<?= $adminRequestUri . 'forms' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'forms') !== false) {

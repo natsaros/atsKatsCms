@@ -1,4 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
-assets/pics/*
-!assets/pics/default.png
+gallery/pictures/*
+!gallery/pictures/default.png

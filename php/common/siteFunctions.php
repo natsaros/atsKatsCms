@@ -8,6 +8,7 @@ function exception_error_handler($severity, $message, $file, $line) {
     throw new SystemException($message, 0, $severity, $file, $line);
 }
 
+//set_error_handler("exception_error_handler");
 set_error_handler("exception_error_handler", E_ALL & ~E_NOTICE);
 
 define('PHP_POSTFIX', '.php');
@@ -29,8 +30,8 @@ if(!defined('PHP_ROOT_PATH')) {
 }
 
 function getRootPath() {
-    $uri = preg_replace(getRootUri(), "", PHP_ROOT_PATH);
-    $uri = preg_replace("/php/", "", $uri);
+//    $uri = preg_replace(getRootUri(), "", PHP_ROOT_PATH);
+    $uri = preg_replace("/php/", "", PHP_ROOT_PATH);
     $uri = preg_replace("/\\/+/", "/", $uri);
     return $uri;
 }
@@ -44,7 +45,12 @@ define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 define('ASSETS_URI', REQUEST_URI . 'assets' . DS);
 define('CSS_URI', ASSETS_URI . 'css' . DS);
 define('JS_URI', ASSETS_URI . 'js' . DS);
-define('USER_PICS', ASSETS_URI . 'pics' . DS);
+
+define('GALLERY_ROOT', getRootPath() . 'gallery' . DS);
+define('PICTURES_ROOT', GALLERY_ROOT . 'pictures' . DS);
+define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
+define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
+define('LOGS_ROOT', getRootPath() . 'logs' . DS);
 
 require_once(CLASSES_ROOT_PATH . 'SystemException.php');
 require_once(CLASSES_ROOT_PATH . 'DB.php');
@@ -141,6 +147,30 @@ function initLoad() {
         }
         Globals::set('DB', $db);
     }
+
+    initGallery();
+    initLogFile();
+}
+
+function initGallery() {
+    if(!file_exists(PICTURES_ROOT)) {
+        mkdir(PICTURES_ROOT, 0777, true);
+    }
+
+    if(!file_exists(VIDEOS_ROOT)) {
+        mkdir(VIDEOS_ROOT, 0777, true);
+    }
+
+    if(!file_exists(DOCUMENTS_ROOT)) {
+        mkdir(DOCUMENTS_ROOT, 0777, true);
+    }
+}
+
+function initLogFile() {
+    if(!file_exists(LOGS_ROOT)) {
+        mkdir(LOGS_ROOT, 0777, true);
+    }
+    define('LOG_FILE', LOGS_ROOT . CONF_LOG_FILE);
 }
 
 /**
@@ -176,6 +206,7 @@ function Redirect($url, $refreshRate = null, $permanent = false) {
 
 /**
  * @return DB
+ * @throws SystemException
  */
 function getDb() {
     if(is_null(Globals::get('DB'))) {
@@ -339,14 +370,22 @@ function safe_input($data) {
     return $data;
 }
 
+/**
+ * @param $name
+ * @return string
+ * @throws SystemException
+ */
 function renderImage($name) {
-    $mimes = array
-    (
-        'jpg' => 'image/jpg',
-        'jpeg' => 'image/jpg',
-        'gif' => 'image/gif',
-        'png' => 'image/png'
-    );
+    $allowedTypes = [];
+    if(isNotEmpty(ALLOWED_TYPES)) {
+        $allowedTypes = explode('|', ALLOWED_TYPES);
+    }
+
+    $mimes = [];
+    foreach($allowedTypes as $type) {
+        $mimes[$type] = 'image/' . $type;
+    }
+
     $defaultUser = 'default.png';
     if(isNotEmpty($name)) {
         $tmp = explode('.', $name);
@@ -356,9 +395,9 @@ function renderImage($name) {
         $ext = strtolower(end($tmp));
     }
 
-    $file = getRootPath() . USER_PICS . $name;
+    $file = PICTURES_ROOT . $name;
     if(is_dir($file) || !file_exists($file)) {
-        $file = getRootPath() . USER_PICS . $defaultUser;
+        $file = PICTURES_ROOT . $defaultUser;
     }
 //header('content-type: ' . $mimes[$ext]);
 //header('content-disposition: inline; filename="' . $name . '";');

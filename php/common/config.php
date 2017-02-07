@@ -21,6 +21,15 @@ if($config) {
     define('DB_COLLATE', '');
 
     define('TABLE_PREFIX', $config['table_prefix']);
+
+    define('ALLOWED_TYPES', $config['allowed_types']);
+
+    $log_file = $config['log_file'];
+    if(isEmpty($log_file)) {
+        $log_file = 'error_log';
+    }
+    define('CONF_LOG_FILE', $log_file . '.txt');
+
 } else {
     $die = sprintf(
             "There doesn't seem to be a %s file. I need this before we can get started.",

@@ -32,7 +32,10 @@ try {
     }
 } catch(SystemException $ex) {
     echo $ex->errorMessage();
+    error_log($ex->errorMessage(), $ex->getCode(), LOG_FILE);
     // you can exit or die here if you prefer - also you can log your error,
     // or any other steps you wish to take
+} finally {
+//    echo 'this always runs';
 }
 ?>
