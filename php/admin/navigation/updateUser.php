@@ -47,11 +47,13 @@ if($isCreate) {
                                    value="<?= $currentUser->getPicture() ?>">
 
                             <div class="form-group text-center">
-                                <!--TODO: add to custom css for admin-->
-                                <div class="imgCont" style="width: 20%;display:inline-block;">
+                                <div class="imgCont">
                                     <img class="img-thumbnail img-responsive"
                                          src="<?= renderImage($currentUser->getPicture()) ?>"
                                          alt="<?= $currentUser->getUserName() ?>">
+
+                                    <!--TODO : add here custom 'file' input -->
+                                    <button type="button" class="btn btn-outline btn-primary">Edit Picture</button>
                                 </div>
                             </div>
 

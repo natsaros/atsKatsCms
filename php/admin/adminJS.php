@@ -33,5 +33,5 @@
 <script src="<?= JS_URI ?>datatables-responsive/dataTables.responsive.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="<?= JS_URI ?>sb-admin-2.js"></script>
-<script src="<?= JS_URI ?>adminCustom.js"></script>
+<script src="<?= JS_URI ?>sb-admin-2.min.js"></script>
+<script src="<?= JS_URI ?>adminCustom.min.js"></script>

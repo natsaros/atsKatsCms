@@ -357,7 +357,7 @@ function renderImage($name) {
     }
 
     $file = getRootPath() . USER_PICS . $name;
-    if(!file_exists($file)) {
+    if(is_dir($file) || !file_exists($file)) {
         $file = getRootPath() . USER_PICS . $defaultUser;
     }
 //header('content-type: ' . $mimes[$ext]);

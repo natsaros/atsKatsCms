@@ -19,7 +19,7 @@
     <link href="<?= CSS_URI ?>datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?= CSS_URI ?>sb-admin/sb-admin-2.css" rel="stylesheet">
+    <link href="<?= CSS_URI ?>sb-admin/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="<?= CSS_URI ?>morrisjs/morris.css" rel="stylesheet">
