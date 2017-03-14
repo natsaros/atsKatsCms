@@ -32,111 +32,120 @@
                 <tbody>
                 <tr>
                     <td>09:00 - 10:00</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>                     <!--Δευτέρα-->
+                    <td>Pilates reformer</td>           <!--Τρίτη-->
+                    <td>Pilates reformer</td>           <!--Τετάρτη-->
+                    <td>Pilates reformer</td>           <!--Πέμπτη-->
+                    <td>&nbsp;</td>                     <!--Παρασκευή-->
+                    <td>&nbsp;</td>                     <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>10:30 - 11:30</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates mat</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates mat</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>Pilates reformer</td>          <!--Δευτέρα-->
+                    <td>Pilates mat</td>               <!--Τρίτη-->
+                    <td>Cross training</td>            <!--Τετάρτη-->
+                    <td>Pilates mat</td>               <!--Πέμπτη-->
+                    <td>Pilates reformer</td>          <!--Παρασκευή-->
+                    <td>&nbsp;</td>                    <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>11:30 - 12:30</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
+                    <td>Pilates reformer</td>           <!--Δευτέρα-->
+                    <td>Pilates reformer</td>           <!--Τρίτη-->
+                    <td>Pilates reformer</td>           <!--Τετάρτη-->
+                    <td>Pilates reformer</td>           <!--Πέμπτη-->
+                    <td>Pilates reformer</td>           <!--Παρασκευή-->
+                    <td>Pilates reformer</td>           <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>12:00 - 13:00</td>
-                    <td>Body Power</td>
-                    <td>&nbsp;</td>
-                    <td>Aerial Yoga</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
+                    <td>Pilates reformer</td>            <!--Δευτέρα-->
+                    <td>Pilates reformer</td>            <!--Τρίτη-->
+                    <td>Aerial Yoga</td>                 <!--Τετάρτη-->
+                    <td>&nbsp;</td>                      <!--Πέμπτη-->
+                    <td>Pilates reformer</td>            <!--Παρασκευή-->
+                    <td>Pilates reformer</td>            <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>13:00 - 14:00</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates mat</td>
-                </tr>
-                <tr>
-                    <td>14:00 - 15:00</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Cross training</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>                     <!--Δευτέρα-->
+                    <td>&nbsp;</td>                     <!--Τρίτη-->
+                    <td>&nbsp;</td>                     <!--Τετάρτη-->
+                    <td>&nbsp;</td>                     <!--Πέμπτη-->
+                    <td>&nbsp;</td>                     <!--Παρασκευή-->
+                    <td>Pilates mat/Aerial yoga</td>    <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>16:00 - 17:00</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
+                    <td>&nbsp;</td>                     <!--Δευτέρα-->
+                    <td>&nbsp;</td>                     <!--Τρίτη-->
+                    <td>Pilates reformer</td>           <!--Τετάρτη-->
+                    <td>&nbsp;</td>                     <!--Πέμπτη-->
+                    <td>Pilates reformer</td>           <!--Παρασκευή-->
+                    <td>Pilates reformer</td>           <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>17:00 - 18:00</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates mat</td>
-                    <td>Pilates reformer</td>
-                    <td>Body Power</td>
+                    <td>Pilates reformer</td>           <!--Δευτέρα-->
+                    <td>Pilates reformer</td>           <!--Τρίτη-->
+                    <td>&nbsp;</td>                     <!--Τετάρτη-->
+                    <td>&nbsp;</td>                     <!--Πέμπτη-->
+                    <td>Pilates reformer</td>           <!--Παρασκευή-->
+                    <td>&nbsp;</td>                     <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>18:00 - 19:00</td>
-                    <td>Pilates mat</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates mat</td>
-                    <td>Pilates reformer</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>Pilates mat</td>                <!--Δευτέρα-->
+                    <td>Pilates reformer</td>           <!--Τρίτη-->
+                    <td>Pilates mat</td>                <!--Τετάρτη-->
+                    <td>Pilates reformer</td>           <!--Πέμπτη-->
+                    <td>&nbsp;</td>                     <!--Παρασκευή-->
+                    <td>&nbsp;</td>                     <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>19:00 - 20:00</td>
-                    <td>Aerial Yoga</td>
-                    <td>Pilates mat</td>
-                    <td>Aerial Yoga</td>
-                    <td>Yoga & Pilates reformer</td>
-                    <td>Pilates reformer</td>
-                    <td>&nbsp;</td>
+                    <td>Aerial Yoga</td>                <!--Δευτέρα-->
+                    <td>Pilates mat</td>                <!--Τρίτη-->
+                    <td>Aerial Yoga</td>                <!--Τετάρτη-->
+                    <td>Yoga</td>                       <!--Πέμπτη-->
+                    <td>Pilates reformer</td>           <!--Παρασκευή-->
+                    <td>&nbsp;</td>                     <!--Σάββατο-->
+                </tr>
+                <tr>
+                    <td>19:30 - 20:30</td>
+                    <td>Pilates reformer</td>           <!--Δευτέρα-->
+                    <td>&nbsp;</td>                     <!--Τρίτη-->
+                    <td>&nbsp;</td>                     <!--Τετάρτη-->
+                    <td>&nbsp;</td>                     <!--Πέμπτη-->
+                    <td>Pilates mat</td>                <!--Παρασκευή-->
+                    <td>&nbsp;</td>                     <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>20:00 - 21:00</td>
-                    <td>Pilates reformer</td>
-                    <td>Pilates reformer</td>
-                    <td>Τραμπολίνο 90s</td>
-                    <td>Pilates reformer</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>Cross training</td>            <!--Δευτέρα-->
+                    <td>Pilates reformer</td>          <!--Τρίτη-->
+                    <td>Pilates reformer</td>          <!--Τετάρτη-->
+                    <td>Pilates reformer</td>          <!--Πέμπτη-->
+                    <td>Pilates reformer</td>          <!--Παρασκευή-->
+                    <td>&nbsp;</td>                    <!--Σάββατο-->
+                </tr>
+                <tr>
+                    <td>20:30 - 21:30</td>
+                    <td>&nbsp;</td>                    <!--Δευτέρα-->
+                    <td>Cross training</td>            <!--Τρίτη-->
+                    <td>Latin</td>                     <!--Τετάρτη-->
+                    <td>Pilates reformer</td>          <!--Πέμπτη-->
+                    <td>&nbsp;</td>                    <!--Παρασκευή-->
+                    <td>&nbsp;</td>                    <!--Σάββατο-->
                 </tr>
                 <tr>
                     <td>21:00 - 22:00</td>
-                    <td>&nbsp;</td>
-                    <td>Pilates reformer</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Body Power</td>
-                    <td>&nbsp;</td>
+                    <td>Pilates reformer</td>           <!--Δευτέρα-->
+                    <td>Pilates reformer</td>           <!--Τρίτη-->
+                    <td>&nbsp;</td>                     <!--Τετάρτη-->
+                    <td>Pilates reformer</td>           <!--Πέμπτη-->
+                    <td>&nbsp;</td>                     <!--Παρασκευή-->
+                    <td>&nbsp;</td>                     <!--Σάββατο-->
                 </tr>
                 </tbody>
             </table>
@@ -163,8 +172,12 @@
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
+                                <td>11:30 - 12:30</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
                                 <td>12:00 - 13:00</td>
-                                <td>Body power</td>
+                                <td>Pilates reformer</td>
                             </tr>
                             <tr>
                                 <td>17:00 - 18:00</td>
@@ -179,7 +192,15 @@
                                 <td>Aerial Yoga</td>
                             </tr>
                             <tr>
+                                <td>19:30 - 20:30</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
                                 <td>20:00 - 21:00</td>
+                                <td>Cross training</td>
+                            </tr>
+                            <tr>
+                                <td>21:00 - 22:00</td>
                                 <td>Pilates reformer</td>
                             </tr>
                             </tbody>
@@ -198,11 +219,19 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
+                                <td>09:00 - 10:00</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
                                 <td>10:30 - 11:30</td>
                                 <td>Pilates mat</td>
                             </tr>
                             <tr>
                                 <td>11:30 - 12:30</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
+                                <td>12:00 - 13:00</td>
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
@@ -220,6 +249,10 @@
                             <tr>
                                 <td>20:00 - 21:00</td>
                                 <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
+                                <td>20:30 - 21:30</td>
+                                <td>Cross training</td>
                             </tr>
                             <tr>
                                 <td>21:00 - 22:00</td>
@@ -245,12 +278,20 @@
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
+                                <td>10:30 - 11:30</td>
+                                <td>Cross training</td>
+                            </tr>
+                            <tr>
                                 <td>11:30 - 12:30</td>
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
                                 <td>12:00 - 13:00</td>
                                 <td>Aerial Yoga</td>
+                            </tr>
+                            <tr>
+                                <td>16:00 - 17:00</td>
+                                <td>Pilates reformer</td>
                             </tr>
                             <tr>
                                 <td>18:00 - 19:00</td>
@@ -262,7 +303,11 @@
                             </tr>
                             <tr>
                                 <td>20:00 - 21:00</td>
-                                <td>Τραμπολίνο 90s</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
+                                <td>20:30 - 21:30</td>
+                                <td>Latin</td>
                             </tr>
                             </tbody>
                         </table>
@@ -292,28 +337,24 @@
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
-                                <td>14:00 - 15:00</td>
-                                <td>Cross training</td>
-                            </tr>
-                            <tr>
-                                <td>17:00 - 18:00</td>
-                                <td>Pilates mat</td>
-                            </tr>
-                            <tr>
                                 <td>18:00 - 19:00</td>
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
                                 <td>19:00 - 20:00</td>
-                                <td>Yoga & Pilates reformer</td>
+                                <td>Yoga</td>
                             </tr>
                             <tr>
                                 <td>20:00 - 21:00</td>
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
+                                <td>20:30 - 21:30</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
                                 <td>21:00 - 22:00</td>
-                                <td>Body Power</td>
+                                <td>Pilates reformer</td>
                             </tr>
                             </tbody>
                         </table>
@@ -331,7 +372,11 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <td>11:30 - 12:00</td>
+                                <td>10:30 - 11:30</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
+                                <td>11:30 - 12:30</td>
                                 <td>Pilates reformer</td>
                             </tr>
                             <tr>
@@ -348,6 +393,14 @@
                             </tr>
                             <tr>
                                 <td>19:00 - 20:00</td>
+                                <td>Pilates reformer</td>
+                            </tr>
+                            <tr>
+                                <td>19:30 - 20:30</td>
+                                <td>Pilates mat</td>
+                            </tr>
+                            <tr>
+                                <td>20:00 - 21:00</td>
                                 <td>Pilates reformer</td>
                             </tr>
                             </tbody>
@@ -375,15 +428,11 @@
                             </tr>
                             <tr>
                                 <td>13:00 - 14:00</td>
-                                <td>Pilates mat</td>
+                                <td>Pilates mat/Aerial yoga</td>
                             </tr>
                             <tr>
                                 <td>16:00 - 17:00</td>
                                 <td>Pilates reformer</td>
-                            </tr>
-                            <tr>
-                                <td>17:00 - 18:00</td>
-                                <td>Body Power</td>
                             </tr>
                             </tbody>
                         </table>
