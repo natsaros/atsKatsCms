@@ -266,6 +266,12 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 </li>
 
                 <li>
+                    <a href="<?= $adminRequestUri . 'posts' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'posts') !== false) {
+                        echo 'class="active"';
+                    } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
+                </li>
+
+                <li>
                     <a href="<?= $adminRequestUri . 'pages' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'pages') !== false) {
                         echo 'class="active"';
                     } ?>><i class="fa fa-table fa-fw"></i> Pages</a>

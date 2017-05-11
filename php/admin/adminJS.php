@@ -10,6 +10,10 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?= JS_URI ?>raphael/raphael.min.js"></script>
 
+<?php if(strpos(ADMIN_PAGE_ID, 'updatePost') !== false) {
+    echo '<script src="' . JS_URI . 'tinymce/tinymce.min.js"></script>';
+} ?>
+
 <?php if(strpos(ADMIN_PAGE_ID, 'morris') !== false) {
 //    || strpos(ADMIN_PAGE_ID, 'tables') !== false
     echo '<script src="' . JS_URI . 'morrisjs/morris.min.js"></script>';

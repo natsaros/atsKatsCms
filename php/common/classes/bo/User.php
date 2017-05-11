@@ -7,7 +7,7 @@ class User {
     private $first_name;
     private $last_name;
     private $email;
-    private $activation_Date;
+    private $activation_date;
     private $modification_date;
     private $user_status;
     private $is_admin;
@@ -40,7 +40,7 @@ class User {
      * @param $first_name
      * @param $last_name
      * @param $email
-     * @param $activation_Date
+     * @param $activation_date
      * @param $modification_date
      * @param $user_status
      * @param $is_admin boolean
@@ -49,8 +49,9 @@ class User {
      * @param $phone
      * @param $picture
      * @return User
+     * @throws SystemException
      */
-    public static function createFullUser($ID, $name, $password, $first_name, $last_name, $email, $activation_Date,
+    public static function createFullUser($ID, $name, $password, $first_name, $last_name, $email, $activation_date,
                                           $modification_date, $user_status, $is_admin, $gender, $link, $phone, $picture) {
         return self::create()
             ->setID($ID)
@@ -59,7 +60,7 @@ class User {
             ->setFirstName($first_name)
             ->setLastName($last_name)
             ->setEmail($email)
-            ->setActivationDate($activation_Date)
+            ->setActivationDate($activation_date)
             ->setModificationDate($modification_date)
             ->setUserStatus($user_status)
             ->setIsAdmin($is_admin)
@@ -156,15 +157,15 @@ class User {
      * @return mixed
      */
     public function getActivationDate() {
-        return $this->activation_Date;
+        return $this->activation_date;
     }
 
     /**
-     * @param mixed $activation_Date
+     * @param mixed $activation_date
      * @return $this
      */
-    public function setActivationDate($activation_Date) {
-        $this->activation_Date = $activation_Date;
+    public function setActivationDate($activation_date) {
+        $this->activation_date = $activation_date;
         return $this;
     }
 

@@ -1,16 +1,15 @@
 <?php
 
 class Db {
-
-    const SETTINGS = 'settings';
-    const USERS = 'users';
-    const USER_META = 'user_meta';
-    const PAGES = 'pages';
-    const PAGE_META = 'page_meta';
-    const POSTS = 'posts';
-    const POST_META = 'post_meta';
-    const COMMENTS = 'comments';
-    const COMMENT_META = 'comment_meta';
+    const SETTINGS = 'SETTINGS';
+    const USERS = 'USERS';
+    const USER_META = 'USER_META';
+    const PAGES = 'PAGES';
+    const PAGE_META = 'PAGE_META';
+    const POSTS = 'POSTS';
+    const POST_META = 'POST_DETAILS';
+    const COMMENTS = 'COMMENTS';
+    const COMMENT_META = 'COMMENT_META';
 
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
@@ -100,6 +99,25 @@ class Db {
      * @return bool|mysqli_result
      * @throws SystemException
      */
+    public static function multi_query($query) {
+        // Connect to the database
+        $connection = self::connect();
+        if($connection == mysqli_connect_error()) {
+            throw new SystemException(self::db_error());
+        }
+        // Query the database
+        $mysqli_result = $connection->multi_query($query);
+        if(!$mysqli_result) {
+            throw new SystemException($connection->error);
+        }
+        return $mysqli_result;
+    }
+
+    /**
+     * @param $query
+     * @return bool|mysqli_result
+     * @throws SystemException
+     */
     public function update($query) {
         return self::query($query);
     }
@@ -153,9 +171,11 @@ class Db {
      * @param bool $set_table_names
      */
     public function setCustomPrefix($prefix, $set_table_names = true) {
-        if(preg_match('|[^a-z0-9_]|i', $prefix))
-//            return new AK_Error('invalid_db_prefix', 'Invalid database prefix');
+        if(preg_match('|[^a-z0-9_]|i', $prefix)){
+            //return new AK_Error('invalid_db_prefix', 'Invalid database prefix');
             return;
+        }
+        $prefix = strtoupper($prefix);
 
         $this->setPrefix($prefix);
 
@@ -218,7 +238,16 @@ class Db {
     }
 
     /**
+     * @return string|null
+     */
+    public function db_schema_from_file() {
+        $sql = file_get_contents(getcwd() . DS . 'conf/init.sql');
+        return $sql ? $sql : null;
+    }
+
+    /**
      * @return string
+     * @deprecated
      */
     public function db_schema() {
 
@@ -285,7 +314,7 @@ PRIMARY KEY  (ID)
 
             $tableNames = null;
             foreach($rows as $row) {
-                $tableNames[] = $row['TABLE_NAME'];
+                $tableNames[] = strtoupper($row['TABLE_NAME']);
             }
             $db->setInitialized(in_array($db->settings, $tableNames));
         }

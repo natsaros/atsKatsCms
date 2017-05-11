@@ -1,9 +1,7 @@
 <?php
-require_once(CLASSES_ROOT_PATH . 'Globals.php');
-require_once(CLASSES_ROOT_PATH . 'UserFetcher.php');
+$error = '';
 
 if(isNotEmpty($_POST['submit'])) {
-    $error = '';
     if(isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
         $error = "Username or Password is invalid";
     }
@@ -12,7 +10,7 @@ if(isNotEmpty($_POST['submit'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $user = UserFetcher::adminLogin($username, $password);
-        if($user === false) {
+        if($user === null || $user === false) {
             $error = "Not valid user";
         } else {
             setUserToSession($user);
@@ -23,11 +21,8 @@ if(isNotEmpty($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <?php require("adminHeader.php"); ?>
-
 <body>
-
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">

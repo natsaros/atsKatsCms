@@ -1,27 +1,27 @@
 <?php
-require_once(CLASSES_ROOT_PATH . 'DB.php');
-require_once(CLASSES_ROOT_PATH . 'User.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'User.php');
 
 class UserFetcher {
 
     const ID = 'ID';
-    const USERNAME = 'name';
-    const PASSWORD = 'password';
-    const FIRST_NAME = 'first_name';
-    const LAST_NAME = 'last_name';
-    const EMAIL = 'email';
-    const ACTIVATION_DATE = 'activation_date';
-    const MODIFICATION_DATE = 'modification_date';
-    const USER_STATUS = 'user_status';
-    const IS_ADMIN = 'is_admin';
-    const GENDER = 'gender';
-    const LINK = 'link';
-    const PHONE = 'phone';
-    const PICTURE = 'picture';
+    const USERNAME = 'NAME';
+    const PASSWORD = 'PASSWORD';
+    const FIRST_NAME = 'FIRST_NAME';
+    const LAST_NAME = 'LAST_NAME';
+    const EMAIL = 'EMAIL';
+    const ACTIVATION_DATE = 'ACTIVATION_DATE';
+    const MODIFICATION_DATE = 'MODIFICATION_DATE';
+    const USER_STATUS = 'USER_STATUS';
+    const IS_ADMIN = 'IS_ADMIN';
+    const GENDER = 'GENDER';
+    const LINK = 'LINK';
+    const PHONE = 'PHONE';
+    const PICTURE = 'PICTURE';
 
     /**
      * @param $rows
      * @return User[]|bool
+     * @throws SystemException
      */
     private static function populateUsers($rows) {
         if($rows === false) {

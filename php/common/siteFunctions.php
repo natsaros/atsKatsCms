@@ -52,10 +52,11 @@ define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
 define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
 define('LOGS_ROOT', getRootPath() . 'logs' . DS);
 
-require_once(CLASSES_ROOT_PATH . 'SystemException.php');
-require_once(CLASSES_ROOT_PATH . 'DB.php');
+require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'SystemException.php');
+require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
+require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserFetcher.php');
+require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostFetcher.php');
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
-require_once(CLASSES_ROOT_PATH . 'UserFetcher.php');
 require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');
 
 /**
@@ -140,8 +141,8 @@ function initLoad() {
     $db = getDb();
 
     if(!$db->isInitialized($db)) {
-        $init_queries = $db->db_schema();
-        $result = $db->query($init_queries);
+        $init_queries = $db->db_schema_from_file();
+        $result = $db->multi_query($init_queries);
         if($result === false) {
             throw new SystemException('Database has not been initialized');
         }
