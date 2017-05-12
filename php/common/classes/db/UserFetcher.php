@@ -1,5 +1,5 @@
 <?php
-require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'User.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'users' . DS . 'User.php');
 
 class UserFetcher {
 
@@ -45,7 +45,7 @@ class UserFetcher {
     static function adminLogin($username, $password) {
         $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USERNAME . " = '%s' AND " . self::IS_ADMIN . "=1 AND " . self::USER_STATUS . "=1";
         $query = sprintf($query, $username);
-        $rows = getDb()->select($query);
+        $rows = getDb()->selectMultiple($query);
         $users = self::populateUsers($rows);
 
         if(!$users || count($users) > 1) {
@@ -68,7 +68,7 @@ class UserFetcher {
      */
     static function fetchAllUsers() {
         $query = "SELECT * FROM " . getDb()->users;
-        $rows = getDb()->select($query);
+        $rows = getDb()->selectMultiple($query);
         return self::populateUsers($rows);
     }
 
@@ -78,7 +78,7 @@ class UserFetcher {
      */
     static function fetchActiveUsers() {
         $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USER_STATUS . " = 1";
-        $rows = getDb()->select($query);
+        $rows = getDb()->selectMultiple($query);
         return self::populateUsers($rows);
     }
 
@@ -126,7 +126,7 @@ class UserFetcher {
      */
     static function updateUser($user) {
         if(isNotEmpty($user)) {
-            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = '%s', " . self::USERNAME . " = '%s', " . self::FIRST_NAME . " = '%s', " . self::LAST_NAME . " = '%s', " . self::EMAIL . " = '%s', " . self::LINK . " = '%s', " . self::GENDER . " = '%s', " . self::PHONE . " = '%s', " . self::IS_ADMIN . " = '%s', " . self::PICTURE . " = '%s', " . self::MODIFICATION_DATE . " = '%s' WHERE " . self::ID . " = '%s'";
+            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = '%s', " . self::USERNAME . " = '%s', " . self::FIRST_NAME . " = '%s', " . self::LAST_NAME . " = '%s', " . self::EMAIL . " = '%s', " . self::LINK . " = '%s', " . self::GENDER . " = '%s', " . self::PHONE . " = '%s', " . self::IS_ADMIN . " = '%s', " . self::PICTURE . " = '%s' WHERE " . self::ID . " = '%s'";
 
             $query = sprintf($query,
                 $user->getUserStatus(),
@@ -139,7 +139,6 @@ class UserFetcher {
                 $user->getPhone(),
                 $user->getIsAdmin(),
                 $user->getPicture(),
-                date('Y-m-d H:i:s'),
                 $user->getID());
             return getDb()->update($query);
         }
@@ -165,7 +164,7 @@ class UserFetcher {
                 "," . self::PHONE .
                 "," . self::IS_ADMIN .
                 "," . self::PICTURE .
-                "," . self::MODIFICATION_DATE .
+                "," . self::ACTIVATION_DATE .
                 ") VALUES ('%s' 
                 , '%s' 
                 , '%s'

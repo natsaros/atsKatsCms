@@ -1,6 +1,7 @@
 <?php
-require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'Post.php');
-require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'PostDetails.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'posts' . DS . 'Post.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'posts' . DS . 'PostDetails.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'posts' . DS . 'PostStatus.php');
 
 class PostFetcher {
     const ID = 'ID';
@@ -22,7 +23,7 @@ class PostFetcher {
      */
     static function fetchAllPosts() {
         $query = "SELECT * FROM " . getDb()->posts;
-        $rows = getDb()->select($query);
+        $rows = getDb()->selectMultiple($query);
         return self::populatePosts($rows, false);
     }
 
@@ -32,7 +33,17 @@ class PostFetcher {
      */
     static function fetchAllPostsWithDetails() {
         $query = "SELECT * FROM " . getDb()->posts;
-        $rows = getDb()->select($query);
+        $rows = getDb()->selectMultiple($query);
+        return self::populatePosts($rows, true);
+    }
+
+    /**
+     * @return array|bool
+     * @throws SystemException
+     */
+    static function fetchAllActivePostsWithDetails() {
+        $query = "SELECT * FROM " . getDb()->posts . " WHERE " . self::STATE . " = " . PostStatus::PUBLISHED;
+        $rows = getDb()->selectMultiple($query);
         return self::populatePosts($rows, true);
     }
 
@@ -65,7 +76,7 @@ class PostFetcher {
      * @throws SystemException
      */
     static function getPostDetailsById($id) {
-        $detailQuery = "SELECT * FROM " . getDb()->post_meta . " WHERE " . self::ID . " = '%d'";
+        $detailQuery = "SELECT * FROM " . getDb()->post_meta . " WHERE " . self::POST_ID . " = '%d'";
         $detailQuery = sprintf($detailQuery, $id);
         $postDetailsRow = getDb()->select($detailQuery);
         return self::populatePostDetails($postDetailsRow);
@@ -138,6 +149,88 @@ class PostFetcher {
         return $postDetails;
     }
 
+    /**
+     * @param $post Post
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    static function createPost($post) {
+        if(isNotEmpty($post)) {
+            $query = "INSERT INTO " . getDb()->posts .
+                " (" . self::TITLE .
+                "," . self::STATE .
+                "," . self::USER_ID .
+                "," . self::ACTIVATION_DATE .
+                ") VALUES ('%s' , '%s' , '%s','%s')";
+            $query = sprintf($query,
+                $post->getTitle(),
+                PostStatus::PUBLISHED,
+                $post->getUserId(),
+                date('Y-m-d H:i:s'));
+            $created = getDb()->create($query);
+            if($created) {
+                $query = "INSERT INTO " . getDb()->post_meta .
+                    " (" . self::TEXT .
+                    "," . self::SEQUENCE .
+                    "," . self::IMAGE .
+                    "," . self::IMAGE_PATH .
+                    "," . self::POST_ID .
+                    ") VALUES ('%s' , '%s' , '%s' , '%s', '%s')";
+                $query = sprintf($query,
+                    $post->getText(),
+                    $post->getSequence(),
+                    $post->getImage(),
+                    $post->getImage(),
+                    $created);
+                $created = getDb()->create($query);
+            }
+            return $created;
+        }
+        return null;
+    }
+
+    /**
+     * @param $post Post
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function update($post) {
+        $query = "UPDATE " . getDb()->posts . " SET " . self::TITLE . " = '%s', " . self::STATE . " = '%s', " . self::USER_ID . " = '%s', " . self::ID . " = LAST_INSERT_ID(" . $post->getID() . ") WHERE " . self::ID . " = '%s';";
+        $query = sprintf($query,
+            $post->getTitle(),
+            $post->getState(),
+            $post->getUserId(),
+            $post->getID());
+        $updatedRes = getDb()->update($query);
+        if($updatedRes) {
+            $updatedId = getDb()->select("SELECT LAST_INSERT_ID() AS " . self::ID . "");
+            $updatedId = $updatedId["" . self::ID . ""];
+            $query = "UPDATE " . getDb()->post_meta . " SET " . self::TEXT . " = '%s', " . self::SEQUENCE . " = '%s', " . self::IMAGE_PATH . " = '%s', " . self::IMAGE . " = '%s' WHERE " . self::POST_ID . " = '%s'";
+            $query = sprintf($query,
+                $post->getText(),
+                $post->getSequence(),
+                $post->getImagePath(),
+                $post->getImage(),
+                $updatedId);
+            $updatedRes = getDb()->update($query);
+        }
+        return $updatedRes;
+    }
+
+    /**
+     * @param $id
+     * @param $status
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function updatePostStatus($id, $status) {
+        if(isNotEmpty($id)) {
+            $query = "UPDATE " . getDb()->posts . " SET " . self::STATE . " = %s WHERE " . self::ID . " = %s";
+            $query = sprintf($query, $status, $id);
+            return getDb()->update($query);
+        }
+        return null;
+    }
 }
 
 ?>

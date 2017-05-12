@@ -3,15 +3,15 @@
 $id = $_GET['id'];
 $status = $_GET['status'];
 try {
-    $updateUserStatusRes = UserFetcher::updateUserStatus($id, $status);
+    $updateUserStatusRes = PostFetcher::updatePostStatus($id, $status);
 
     if($updateUserStatusRes == null || !$updateUserStatusRes) {
-        addErrorMessage("User status failed to be changed");
+        addErrorMessage("Post status failed to be changed");
     } else {
-        addSuccessMessage("User status successfully changed");
+        addSuccessMessage("Post status successfully changed");
     }
 } catch(SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
-Redirect(getAdminRequestUri() . 'users');
+Redirect(getAdminRequestUri() . 'posts');

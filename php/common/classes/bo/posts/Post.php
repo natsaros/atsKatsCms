@@ -59,6 +59,34 @@ class Post {
     }
 
     /**
+     * @return mixed
+     */
+    public function getText() {
+        return isNotEmpty($this->getPostDetails()) ? $this->getPostDetails()->getText() : null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage() {
+        return isNotEmpty($this->getPostDetails()) ? $this->getPostDetails()->getImage() : null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImagePath() {
+        return isNotEmpty($this->getPostDetails()) ? $this->getPostDetails()->getImagePath() : null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSequence() {
+        return isNotEmpty($this->getPostDetails()) ? $this->getPostDetails()->getSequence() : null;
+    }
+
+    /**
      * @param mixed $ID
      * @return Post
      */
@@ -121,6 +149,12 @@ class Post {
         return $this;
     }
 
+    public function setText($text) {
+        if(isNotEmpty($this->getPostDetails())) {
+            $this->getPostDetails()->setText($text);
+        }
+    }
+
     /**
      * @return $this
      */
@@ -137,6 +171,15 @@ class Post {
             ->setModificationDate($modification_date)
             ->setState($state)
             ->setUserId($user_id);
+    }
+
+    public static function createSimplePost($ID, $title, $state, $user_id) {
+        return self::create()
+            ->setID($ID)
+            ->setTitle($title)
+            ->setState($state)
+            ->setUserId($user_id)
+            ->setPostDetails(PostDetails::create());
     }
 }
 

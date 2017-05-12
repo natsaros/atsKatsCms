@@ -1,41 +1,29 @@
 <?php
-try {
-    session_start();
+session_start();
 
-    if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
-        require_once(COMMON_ROOT_PATH . 'config.php');
-    }
-    if(isset($_GET["action"])) {
-        $action = $_GET["action"];
-    }
+if(isset($_GET["action"])) {
+    $action = $_GET["action"];
+}
 
-    initLoad();
+initLoad();
 
-    if(isEmpty($action)) {
-        //Default behavior: if no action is set to happen navigation occurs.
+if(isEmpty($action)) {
+    //Default behavior: if no action is set to happen navigation occurs.
 
-        $page = $_GET["page"];
-        if(isEmpty($page)) {
-            define('ADMIN_PAGE_ID', 'dashboard');
-        } else {
-            define('ADMIN_PAGE_ID', $page);
-        }
-
-        if(!isLoggedIn()) {
-            include(ADMIN_ROOT_PATH . 'login.php');
-        } else {
-            include(COMMON_ROOT_PATH . "adminNavigation.php");
-        }
+    $page = $_GET["page"];
+    if(isEmpty($page)) {
+        define('ADMIN_PAGE_ID', 'dashboard');
     } else {
-        //All action pass through here
-        require_safe(ADMIN_ACTION_PATH . $action . PHP_POSTFIX);
+        define('ADMIN_PAGE_ID', $page);
     }
-} catch(SystemException $ex) {
-    echo $ex->errorMessage();
-    error_log($ex->errorMessage(), $ex->getCode(), LOG_FILE);
-    // you can exit or die here if you prefer - also you can log your error,
-    // or any other steps you wish to take
-} finally {
-//    echo 'this always runs';
+
+    if(!isLoggedIn()) {
+        include(ADMIN_ROOT_PATH . 'login.php');
+    } else {
+        include(COMMON_ROOT_PATH . "adminNavigation.php");
+    }
+} else {
+    //All action pass through here
+    require_safe(ADMIN_ACTION_PATH . $action . PHP_POSTFIX);
 }
 ?>

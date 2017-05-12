@@ -2,7 +2,13 @@
 <html lang="gr">
 
 <?php header("Content-type: text/html; charset=utf-8"); ?>
-<?php require_once("php/common/siteFunctions.php"); ?>
+<?php
+require_once("php/common/siteFunctions.php");
+
+if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
+    require_once(COMMON_ROOT_PATH . 'config.php');
+}
+?>
 
 <?php
 if(isAdmin()) {

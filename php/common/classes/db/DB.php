@@ -77,21 +77,23 @@ class Db {
 
     /**
      * @param $query
+     * @param $selectOrUpdate
      * @return bool|mysqli_result
      * @throws SystemException
      */
-    public static function query($query) {
+    public static function query($query, $selectOrUpdate) {
         // Connect to the database
         $connection = self::connect();
         if($connection == mysqli_connect_error()) {
             throw new SystemException(self::db_error());
         }
+
         // Query the database
         $mysqli_result = $connection->query($query);
         if(!$mysqli_result) {
             throw new SystemException($connection->error);
         }
-        return $mysqli_result;
+        return $selectOrUpdate ? $mysqli_result : $connection->insert_id;
     }
 
     /**
@@ -118,8 +120,17 @@ class Db {
      * @return bool|mysqli_result
      * @throws SystemException
      */
+    public function create($query) {
+        return self::query($query, false);
+    }
+
+    /**
+     * @param $query
+     * @return bool|mysqli_result
+     * @throws SystemException
+     */
     public function update($query) {
-        return self::query($query);
+        return self::query($query, true);
     }
 
     /**
@@ -127,9 +138,9 @@ class Db {
      * @return array|bool
      * @throws SystemException
      */
-    static function select($query) {
+    static function selectMultiple($query) {
         $rows = array();
-        $result = self::query($query);
+        $result = self::query($query, true);
         // If query failed, return `false`
         if($result === false) {
             throw new SystemException(self::db_error());
@@ -140,6 +151,20 @@ class Db {
             $rows[] = $row;
         }
         return $rows;
+    }
+
+    /**
+     * @param $query
+     * @return mixed|null
+     * @throws SystemException
+     */
+    static function select($query) {
+        $rows = self::selectMultiple($query);
+
+        if($rows == null || !$rows || count($rows) > 1) {
+            return null;
+        }
+        return $rows[0];
     }
 
     /**
@@ -171,7 +196,7 @@ class Db {
      * @param bool $set_table_names
      */
     public function setCustomPrefix($prefix, $set_table_names = true) {
-        if(preg_match('|[^a-z0-9_]|i', $prefix)){
+        if(preg_match('|[^a-z0-9_]|i', $prefix)) {
             //return new AK_Error('invalid_db_prefix', 'Invalid database prefix');
             return;
         }
@@ -307,7 +332,7 @@ PRIMARY KEY  (ID)
         if($db->getInitialized() == null || !$db->getInitialized()) {
             $db->setCustomPrefix(TABLE_PREFIX);
 
-            $rows = self::select("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = '" . DB_NAME . "'");
+            $rows = self::selectMultiple("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = '" . DB_NAME . "'");
             if($rows === false) {
                 return false;
             }
@@ -316,7 +341,7 @@ PRIMARY KEY  (ID)
             foreach($rows as $row) {
                 $tableNames[] = strtoupper($row['TABLE_NAME']);
             }
-            $db->setInitialized(in_array($db->settings, $tableNames));
+            $db->setInitialized(isNotEmpty($tableNames) && in_array($db->settings, $tableNames));
         }
         return $db->getInitialized();
     }

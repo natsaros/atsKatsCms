@@ -16,12 +16,17 @@ $link = safe_input($_POST[UserFetcher::LINK]);
 $phone = safe_input($_POST[UserFetcher::PHONE]);
 $picture = safe_input($_POST[UserFetcher::PICTURE]);
 
-$user2Update = User::createFullUser($ID, $userName, null, $first_name, $last_name, $email, null, null, $user_status, $is_admin, $gender, $link, $phone, $picture);
-$updateUserRes = UserFetcher::updateUser($user2Update);
+try {
+    $user2Update = User::createFullUser($ID, $userName, null, $first_name, $last_name, $email, null, null, $user_status, $is_admin, $gender, $link, $phone, $picture);
+    $updateUserRes = UserFetcher::updateUser($user2Update);
 
-if($updateUserRes == null || !$updateUserRes) {
-    addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
-} else {
-    addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
+    if($updateUserRes == null || !$updateUserRes) {
+        addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
+    } else {
+        addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
+    }
+} catch(SystemException $ex) {
+    logError($ex);
+    addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 Redirect(sprintf(getAdminRequestUri() . "updateUser?id=%s", $user2Update->getID()));

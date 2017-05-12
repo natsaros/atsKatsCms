@@ -6,6 +6,7 @@
         <li><a href="<?= REQUEST_URI ?>home">Αρχική</a></li>
         <li><a href="<?= REQUEST_URI ?>about">Το Studio</a></li>
         <li><a href="<?= REQUEST_URI ?>program">Πρόγραμμα</a></li>
+        <li><a href="<?= REQUEST_URI ?>blog">Blog</a></li>
         <!--<li><a href="#blog">Blog</a></li>-->
         <li><a href="<?= REQUEST_URI ?>contact">Επικοινωνία</a></li>
         <!--<li><a href="#bookNow">Book Now</a></li>-->

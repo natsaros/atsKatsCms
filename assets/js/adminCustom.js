@@ -17,7 +17,7 @@ $(document).ready(function () {
     if(typeof tinymce !== 'undefined' && tinymce !== null){
         tinymce.init({
             selector: '.editor',
-            height: 500,
+            height: 350,
             menubar: false,
             theme: 'modern',
             plugins: [

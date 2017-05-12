@@ -4,6 +4,8 @@ if(!isset($_GET["id"])) {
 } else {
     $pageId = $_GET["id"];
 }
+
+initLoadDb();
 ?>
 
 <!--TODO : redirect to 404 if url is wrong!!-->

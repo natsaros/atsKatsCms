@@ -49,7 +49,6 @@ class User {
      * @param $phone
      * @param $picture
      * @return User
-     * @throws SystemException
      */
     public static function createFullUser($ID, $name, $password, $first_name, $last_name, $email, $activation_date,
                                           $modification_date, $user_status, $is_admin, $gender, $link, $phone, $picture) {

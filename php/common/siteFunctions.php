@@ -5,29 +5,14 @@ function exception_error_handler($severity, $message, $file, $line) {
     if(mysqli_connect_errno()) {
         echo sprintf("Connect failed: %s\n", mysqli_connect_error());
     }
-    throw new SystemException($message, 0, $severity, $file, $line);
+    throw new SystemException($message);
 }
 
 //set_error_handler("exception_error_handler");
 set_error_handler("exception_error_handler", E_ALL & ~E_NOTICE);
 
-define('PHP_POSTFIX', '.php');
-define('ADMIN_STR', 'admin');
-define('NAV_STR', 'navigation');
-define('ACTION_STR', 'action');
-define('COMMON_STR', 'common');
-define('CLASSES_STR', 'classes');
-
-define('REQUEST_URI', getRootUri());
-
-//define('DS', DIRECTORY_SEPARATOR);
-define('DS', "/");
-
-if(!defined('PHP_ROOT_PATH')) {
-    $str = dirname(__DIR__) . DS;
-    $str = preg_replace("/\\\\/", DS, $str);
-    define('PHP_ROOT_PATH', $str);
-}
+//define all system variables needed
+defineSystemVariables();
 
 function getRootPath() {
 //    $uri = preg_replace(getRootUri(), "", PHP_ROOT_PATH);
@@ -36,22 +21,7 @@ function getRootPath() {
     return $uri;
 }
 
-define('ADMIN_ROOT_PATH', PHP_ROOT_PATH . ADMIN_STR . DS);
-define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
-define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
-define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
-define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
-
-define('ASSETS_URI', REQUEST_URI . 'assets' . DS);
-define('CSS_URI', ASSETS_URI . 'css' . DS);
-define('JS_URI', ASSETS_URI . 'js' . DS);
-
-define('GALLERY_ROOT', getRootPath() . 'gallery' . DS);
-define('PICTURES_ROOT', GALLERY_ROOT . 'pictures' . DS);
-define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
-define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
-define('LOGS_ROOT', getRootPath() . 'logs' . DS);
-
+require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'ErrorMessages.php');
 require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'SystemException.php');
 require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserFetcher.php');
@@ -137,7 +107,12 @@ function getActiveAdminPage() {
  * @throws SystemException
  */
 function initLoad() {
+    initLoadDb();
+    initGallery();
+    initLogFile();
+}
 
+function initLoadDb() {
     $db = getDb();
 
     if(!$db->isInitialized($db)) {
@@ -148,10 +123,9 @@ function initLoad() {
         }
         Globals::set('DB', $db);
     }
-
-    initGallery();
-    initLogFile();
 }
+
+;
 
 function initGallery() {
     if(!file_exists(PICTURES_ROOT)) {
@@ -407,6 +381,53 @@ function renderImage($name) {
     $content = file_get_contents($file);
     $base64 = base64_encode($content);
     return 'data:' . $mimes[$ext] . ';base64,' . $base64;
+}
+
+/**
+ * Defines all system variables for the system to work
+ */
+function defineSystemVariables() {
+    defined('PHP_POSTFIX') or define('PHP_POSTFIX', '.php');
+    defined('ADMIN_STR') or define('ADMIN_STR', 'admin');
+    defined('NAV_STR') or define('NAV_STR', 'navigation');
+    defined('ACTION_STR') or define('ACTION_STR', 'action');
+    defined('COMMON_STR') or define('COMMON_STR', 'common');
+    defined('CLASSES_STR') or define('CLASSES_STR', 'classes');
+
+    defined('REQUEST_URI') or define('REQUEST_URI', getRootUri());
+
+//define('DS', DIRECTORY_SEPARATOR);
+    defined('DS') or define('DS', "/");
+
+    if(!defined('PHP_ROOT_PATH')) {
+        $str = dirname(__DIR__) . DS;
+        $str = preg_replace("/\\\\/", DS, $str);
+        define('PHP_ROOT_PATH', $str);
+    }
+
+    defined('ADMIN_ROOT_PATH') or define('ADMIN_ROOT_PATH', PHP_ROOT_PATH . ADMIN_STR . DS);
+    defined('ADMIN_NAV_PATH') or define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
+    defined('ADMIN_ACTION_PATH') or define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
+    defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
+    defined('CLASSES_ROOT_PATH') or define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
+
+    defined('ASSETS_URI') or define('ASSETS_URI', REQUEST_URI . 'assets' . DS);
+    defined('CSS_URI') or define('CSS_URI', ASSETS_URI . 'css' . DS);
+    defined('JS_URI') or define('JS_URI', ASSETS_URI . 'js' . DS);
+
+    defined('GALLERY_ROOT') or define('GALLERY_ROOT', getRootPath() . 'gallery' . DS);
+    defined('PICTURES_ROOT') or define('PICTURES_ROOT', GALLERY_ROOT . 'pictures' . DS);
+    defined('VIDEOS_ROOT') or define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
+    defined('DOCUMENTS_ROOT') or define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
+    defined('LOGS_ROOT') or define('LOGS_ROOT', getRootPath() . 'logs' . DS);
+}
+
+/**
+ * logs system exceptions to file
+ * @param SystemException $ex
+ */
+function logError($ex) {
+    error_log($ex->errorMessage() . " with code: " . $ex->getCode(), 3, LOG_FILE);
 }
 
 ?>

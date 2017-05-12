@@ -37,8 +37,8 @@ $posts = PostFetcher::fetchAllPosts();
                             ?>
 
                             <a type="button"
-                               href="<?= sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $postId, $updatedStatus); ?>"
-                               class="btn btn-default btn-sm" title="<?= $activDeactivText ?> User">
+                               href="<?= sprintf(getAdminActionRequestUri() . "post" . DS . "updatePostStatus?id=%s&status=%s", $postId, $updatedStatus); ?>"
+                               class="btn btn-default btn-sm" title="<?= $activDeactivText ?> Post">
                                 <?php $statusClass = $post->getState() ? 'text-success' : 'text-danger' ?>
                                 <span class="glyphicon glyphicon-user <?= $statusClass ?>"
                                       aria-hidden="true"></span>
@@ -46,7 +46,7 @@ $posts = PostFetcher::fetchAllPosts();
 
                             <a type="button"
                                href="<?= sprintf(getAdminRequestUri() . "updatePost?id=%s", $postId); ?>"
-                               class="btn btn-default btn-sm" title="Edit User">
+                               class="btn btn-default btn-sm" title="Edit Post">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
                         </td>
