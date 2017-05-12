@@ -21,7 +21,7 @@ $posts = PostFetcher::fetchAllPosts();
                 <tbody>
                 <?php
                 /* @var $post Post */
-                foreach($posts as $key => $post) {
+                foreach ($posts as $key => $post) {
                     $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                     $postId = $post->getID();
                     ?>
@@ -40,8 +40,14 @@ $posts = PostFetcher::fetchAllPosts();
                                href="<?= sprintf(getAdminActionRequestUri() . "post" . DS . "updatePostStatus?id=%s&status=%s", $postId, $updatedStatus); ?>"
                                class="btn btn-default btn-sm" title="<?= $activDeactivText ?> Post">
                                 <?php $statusClass = $post->getState() ? 'text-success' : 'text-danger' ?>
-                                <span class="glyphicon glyphicon-user <?= $statusClass ?>"
+                                <span class="glyphicon glyphicon-comment <?= $statusClass ?>"
                                       aria-hidden="true"></span>
+                            </a>
+
+                            <a type="button"
+                               href="<?= sprintf(getAdminActionRequestUri() . "post" . DS . "deletePost?id=%s", $postId); ?>"
+                               class="btn btn-default btn-sm" title="Delete Post">
+                                <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
                             </a>
 
                             <a type="button"

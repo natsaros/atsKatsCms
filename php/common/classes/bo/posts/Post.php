@@ -160,6 +160,7 @@ class Post {
      */
     public static function create() {
         $instance = new self();
+        $instance->setPostDetails(PostDetails::create());
         return $instance;
     }
 
