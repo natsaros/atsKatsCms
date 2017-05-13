@@ -89,6 +89,11 @@ class Db {
         }
 
         // Query the database
+
+//        $stmt = $connection->prepare($query);
+//        if($stmt->execute()){
+//            $mysqli_result = $stmt->get_result();
+//        }
         $mysqli_result = $connection->query($query);
         if(!$mysqli_result) {
             throw new SystemException($connection->error);

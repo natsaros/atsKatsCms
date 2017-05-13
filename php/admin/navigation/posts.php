@@ -3,7 +3,7 @@
 <?php require("messageSection.php"); ?>
 
 <?php
-$posts = PostFetcher::fetchAllPosts();
+$posts = PostHandler::fetchAllPosts();
 ?>
 
 <div class="row">

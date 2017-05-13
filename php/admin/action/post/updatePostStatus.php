@@ -9,7 +9,7 @@ if (isEmpty($id) || isEmpty($status)) {
 }
 
 try {
-    $updatePostRes = PostFetcher::updatePostStatus($id, $status);
+    $updatePostRes = PostHandler::updatePostStatus($id, $status);
 
     if ($updatePostRes == null || !$updatePostRes) {
         addErrorMessage("Post status failed to be changed");

@@ -1,10 +1,10 @@
 <?php
-$title = safe_input($_POST[PostFetcher::TITLE]);
-$text = $_POST[PostFetcher::TEXT];
+$title = safe_input($_POST[PostHandler::TITLE]);
+$text = $_POST[PostHandler::TEXT];
 
-$userID = safe_input($_POST[PostFetcher::USER_ID]);
+$userID = safe_input($_POST[PostHandler::USER_ID]);
 
-$target_file = basename($_FILES[PostFetcher::IMAGE]["name"]);
+$target_file = basename($_FILES[PostHandler::IMAGE]["name"]);
 
 
 if (isEmpty($title) || isEmpty($text)) {
@@ -16,7 +16,7 @@ try {
     $post2Create = Post::create();
     $post2Create->setTitle($title)->setUserId($userID)->setText($text);
 
-    $postRes = PostFetcher::createPost($post2Create);
+    $postRes = PostHandler::createPost($post2Create);
     if ($postRes == null || !$postRes) {
         addErrorMessage("Post '" . $post2Create->getTitle() . "' failed to be created");
     } else {

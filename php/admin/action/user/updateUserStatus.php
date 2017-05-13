@@ -3,7 +3,7 @@
 $id = $_GET['id'];
 $status = $_GET['status'];
 try {
-    $updateUserStatusRes = UserFetcher::updateUserStatus($id, $status);
+    $updateUserStatusRes = UserHandler::updateUserStatus($id, $status);
 
     if($updateUserStatusRes == null || !$updateUserStatusRes) {
         addErrorMessage("User status failed to be changed");

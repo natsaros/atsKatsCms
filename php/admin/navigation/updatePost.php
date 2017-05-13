@@ -11,10 +11,10 @@ $isCreate = isEmpty($postId);
 
 <?php
 $loggedInUser = getFullUserFromSession();
-if($isCreate) {
+if ($isCreate) {
     $currentPost = Post::create();
 } else {
-    $currentPost = PostFetcher::getPostByIDWithDetails($postId);
+    $currentPost = PostHandler::getPostByIDWithDetails($postId);
 }
 ?>
 
@@ -25,31 +25,36 @@ if($isCreate) {
         $postUrl = getAdminActionRequestUri() . "post";
         $action = $isCreate ? $postUrl . DS . "create" : $postUrl . DS . "update";
         ?>
-        <form name="updatePostForm" role="form" action="<?php echo $action ?>" data-toggle="validator" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="<?php echo PostFetcher::USER_ID ?>" value="<?php echo $loggedInUser->getID() ?>"/>
-            <input type="hidden" name="<?php echo PostFetcher::STATE ?>" value="<?php echo $currentPost->getState() ?>"/>
-            <input type="hidden" name="<?php echo PostFetcher::ID ?>" value="<?php echo $currentPost->getID() ?>"/>
+        <form name="updatePostForm" role="form" action="<?php echo $action ?>" data-toggle="validator" method="post"
+              enctype="multipart/form-data">
+            <input type="hidden" name="<?php echo PostHandler::USER_ID ?>"
+                   value="<?php echo $loggedInUser->getID() ?>"/>
+            <input type="hidden" name="<?php echo PostHandler::STATE ?>"
+                   value="<?php echo $currentPost->getState() ?>"/>
+            <input type="hidden" name="<?php echo PostHandler::ID ?>" value="<?php echo $currentPost->getID() ?>"/>
             <div class="form-group">
                 <label class="control-label" for="title_input">Title</label>
                 <input class="form-control" placeholder="Title"
-                       name="<?php echo PostFetcher::TITLE ?>" id="title_input" required
+                       name="<?php echo PostHandler::TITLE ?>" id="title_input" required
                        value="<?php echo $currentPost->getTitle() ?>"
                 >
             </div>
 
-            <div class="input-group">
+            <div class="form-group input-group">
                 <label class="input-group-btn">
                     <span class="btn btn-primary btn-file">
-                    Browse&hellip; <input type="file" style="display: none;" name="<?php echo PostFetcher::IMAGE ?>" multiple>
+                    Browse&hellip; <input type="file" style="display: none;" name="<?php echo PostHandler::IMAGE ?>"
+                                          multiple>
                     </span>
                 </label>
-                <input type="text" name="<?php echo PostFetcher::IMAGE_PATH ?>" class="form-control" readonly>
+                <input type="text" value="<?php echo $currentPost->getImagePath(); ?>"
+                       name="<?php echo PostHandler::IMAGE_PATH ?>" class="form-control" readonly>
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="content_input">Content</label>
-                <textarea class="editor" name="<?php echo PostFetcher::TEXT ?>" id="content_input" required>
-                    <?php echo $currentPost->getText() ?>
+                <textarea class="editor" name="<?php echo PostHandler::TEXT ?>" id="content_input" required>
+                    <?php echo $currentPost->getText(); ?>
                 </textarea>
             </div>
             <div class="text-right form-group">

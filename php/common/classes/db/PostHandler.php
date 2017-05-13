@@ -3,7 +3,7 @@ require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'posts' . DS . 'Post.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'posts' . DS . 'PostDetails.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'posts' . DS . 'PostStatus.php');
 
-class PostFetcher {
+class PostHandler {
     const ID = 'ID';
     const POST_ID = 'POST_ID';
     const TITLE = 'TITLE';

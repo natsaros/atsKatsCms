@@ -3,7 +3,7 @@
 <?php require("messageSection.php"); ?>
 
 <?php
-$users = UserFetcher::fetchAllUsers();
+$users = UserHandler::fetchAllUsers();
 $loggedInUser = getFullUserFromSession();
 ?>
 

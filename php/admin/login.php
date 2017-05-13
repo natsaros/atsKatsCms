@@ -9,7 +9,7 @@ if(isNotEmpty($_POST['submit'])) {
     if(is_null($error) || $error === '') {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $user = UserFetcher::adminLogin($username, $password);
+        $user = UserHandler::adminLogin($username, $password);
         if($user === null || $user === false) {
             $error = "Not valid user";
         } else {

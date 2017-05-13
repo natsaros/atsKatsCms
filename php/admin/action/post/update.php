@@ -1,26 +1,27 @@
 <?php
-$ID = safe_input($_POST[PostFetcher::ID]);
-$title = safe_input($_POST[PostFetcher::TITLE]);
-$text = $_POST[PostFetcher::TEXT];
+$ID = safe_input($_POST[PostHandler::ID]);
+$title = safe_input($_POST[PostHandler::TITLE]);
+$text = $_POST[PostHandler::TEXT];
 
-$state = safe_input($_POST[PostFetcher::STATE]);
-$userID = safe_input($_POST[PostFetcher::USER_ID]);
+$state = safe_input($_POST[PostHandler::STATE]);
+$userID = safe_input($_POST[PostHandler::USER_ID]);
 
-$target_file = basename($_FILES[PostFetcher::IMAGE]["name"]);
+$imagePath = safe_input($_POST[PostHandler::IMAGE_PATH]);
+$target_file = basename($_FILES[PostHandler::IMAGE]["name"]);
 
 if (isEmpty($title) || isEmpty($text)) {
     addInfoMessage("Please fill in required info");
     Redirect(getAdminRequestUri() . "posts");
 }
 try {
-    $post2Create = Post::createSimplePost($ID, $title, $state, $userID);
-    $post2Create->setText($text);
+    $post = Post::createSimplePost($ID, $title, $state, $userID);
+    $post->setText($text)->setImagePath($imagePath);
 
-    $postRes = PostFetcher::update($post2Create);
+    $postRes = PostHandler::update($post);
     if ($postRes == null || !$postRes) {
-        addErrorMessage("Post '" . $post2Create->getTitle() . "' failed to be updated");
+        addErrorMessage("Post '" . $post->getTitle() . "' failed to be updated");
     } else {
-        addSuccessMessage("Post '" . $post2Create->getTitle() . "' successfully updated");
+        addSuccessMessage("Post '" . $post->getTitle() . "' successfully updated");
     }
 
 } catch (SystemException $ex) {

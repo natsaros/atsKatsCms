@@ -1,7 +1,7 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'users' . DS . 'User.php');
 
-class UserFetcher {
+class UserHandler {
 
     const ID = 'ID';
     const USERNAME = 'NAME';

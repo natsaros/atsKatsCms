@@ -7,11 +7,11 @@ if (isEmpty($id)) {
 }
 
 try {
-    $post2delete = PostFetcher::getPostByID($id);
+    $post2delete = PostHandler::getPostByID($id);
     if ($post2delete->getState() == PostStatus::PUBLISHED) {
         addInfoMessage("Post '" . $post2delete->getTitle() . "' is published and cannot be deleted");
     } else {
-        $deletePostRes = PostFetcher::deletePost($id);
+        $deletePostRes = PostHandler::deletePost($id);
 
         if ($deletePostRes == null || !$deletePostRes) {
             addErrorMessage("Post failed to be deleted");

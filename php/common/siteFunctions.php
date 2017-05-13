@@ -24,8 +24,8 @@ function getRootPath() {
 require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'ErrorMessages.php');
 require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'SystemException.php');
 require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
-require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserFetcher.php');
-require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostFetcher.php');
+require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserHandler.php');
+require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
 require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');
 

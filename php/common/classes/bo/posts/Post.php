@@ -149,12 +149,49 @@ class Post {
         return $this;
     }
 
+    /**
+     * @param $text
+     * @return $this
+     */
     public function setText($text) {
         if(isNotEmpty($this->getPostDetails())) {
             $this->getPostDetails()->setText($text);
         }
+        return $this;
     }
 
+    /**
+     * @param $path
+     * @return $this
+     */
+    public function setImagePath($path) {
+        if(isNotEmpty($this->getPostDetails())) {
+            $this->getPostDetails()->setImagePath($path);
+        }
+        return $this;
+    }
+
+    /**
+     * @param $image
+     * @return $this
+     */
+    public function setImage($image) {
+        if(isNotEmpty($this->getPostDetails())) {
+            $this->getPostDetails()->setImage($image);
+        }
+        return $this;
+    }
+
+    /**
+     * @param $sequence
+     * @return $this
+     */
+    public function setSequence($sequence) {
+        if(isNotEmpty($this->getPostDetails())) {
+            $this->getPostDetails()->setSequence($sequence);
+        }
+        return $this;
+    }
     /**
      * @return $this
      */
