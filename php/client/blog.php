@@ -6,15 +6,12 @@ $posts = PostFetcher::fetchAllActivePostsWithDetails();
 
     <?php
     /* @var $post Post */
-    foreach($posts as $key => $post) { ?>
+    foreach ($posts as $key => $post) { ?>
         <div class="training">
             <div class="row fundamentals">
                 <div class="col-sm-12">
-                    <div class="textHolder">
-                        <div class="genColor textHolderInside">
-                            <?= $post->getText(); ?>
-                        </div>
-                    </div>
+                    <?php echo $post->getTitle(); ?>
+                    <?php echo $post->getText(); ?>
                 </div>
             </div>
         </div>

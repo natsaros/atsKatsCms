@@ -28,12 +28,12 @@ $loggedInUser = getFullUserFromSession();
                     $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                     $userId = $user->getID();
                     ?>
-                    <tr class="<?= $oddEvenClass ?>">
-                        <td><?= $userId; ?></td>
-                        <td><?= $user->getUserName(); ?></td>
-                        <td><?= $user->getFirstName(); ?></td>
-                        <td><?= $user->getLastName(); ?></td>
-                        <td><?= $user->getEmail(); ?></td>
+                    <tr class="<?php echo $oddEvenClass ?>">
+                        <td><?php echo $userId; ?></td>
+                        <td><?php echo $user->getUserName(); ?></td>
+                        <td><?php echo $user->getFirstName(); ?></td>
+                        <td><?php echo $user->getLastName(); ?></td>
+                        <td><?php echo $user->getEmail(); ?></td>
                         <td>
                             <?php
                             //Opposite set to '$updatedStatus' so that this gets passed to the db
@@ -42,15 +42,15 @@ $loggedInUser = getFullUserFromSession();
                             ?>
                             <?php if($loggedInUser->getID() != $user->getID()) { ?>
                                 <a type="button"
-                                   href="<?= sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $updatedStatus); ?>"
-                                   class="btn btn-default btn-sm" title="<?= $activDeactivText ?> User">
+                                   href="<?php echo sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $updatedStatus); ?>"
+                                   class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
                                     <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
-                                    <span class="glyphicon glyphicon-user <?= $statusClass ?>"
+                                    <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
                                           aria-hidden="true"></span>
                                 </a>
                             <?php } ?>
                             <a type="button"
-                               href="<?= sprintf(getAdminRequestUri() . "updateUser?id=%s", $userId); ?>"
+                               href="<?php echo sprintf(getAdminRequestUri() . "updateUser?id=%s", $userId); ?>"
                                class="btn btn-default btn-sm" title="Edit User">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>
@@ -64,7 +64,7 @@ $loggedInUser = getFullUserFromSession();
 </div>
 <div class="row">
     <div class="col-lg-12 text-center">
-        <a href="<?= getAdminRequestUri() . "updateUser"; ?>" type="button" class="btn btn-outline btn-primary">
+        <a href="<?php echo getAdminRequestUri() . "updateUser"; ?>" type="button" class="btn btn-outline btn-primary">
             Add <span class="fa fa-user fa-fw" aria-hidden="true"></span>
         </a>
     </div>

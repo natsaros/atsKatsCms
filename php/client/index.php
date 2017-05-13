@@ -10,7 +10,7 @@ initLoadDb();
 
 <!--TODO : redirect to 404 if url is wrong!!-->
 <?php require("header.php"); ?>
-<body id=<?= $pageId; ?>>
+<body id=<?php echo $pageId; ?>>
 <?php require("menu.php");
 require($pageId . ".php");
 require("footer.php"); ?>

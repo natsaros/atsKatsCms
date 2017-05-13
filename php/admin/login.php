@@ -31,7 +31,7 @@ if(isNotEmpty($_POST['submit'])) {
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="<?= getAdminRequestUri() . 'login' ?>" method="post">
+                    <form role="form" action="<?php echo getAdminRequestUri() . 'login' ?>" method="post">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Username" name="username" type="text"
@@ -47,7 +47,7 @@ if(isNotEmpty($_POST['submit'])) {
                             <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Login"
                                    placeholder="Login">
                             <div class="form-group">
-                                <span><?= $error ?></span>
+                                <span><?php echo $error ?></span>
                             </div>
                         </fieldset>
                     </form>

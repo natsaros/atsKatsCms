@@ -1,9 +1,12 @@
 <?php
 $ID = safe_input($_POST[PostFetcher::ID]);
 $title = safe_input($_POST[PostFetcher::TITLE]);
+$text = $_POST[PostFetcher::TEXT];
+
 $state = safe_input($_POST[PostFetcher::STATE]);
 $userID = safe_input($_POST[PostFetcher::USER_ID]);
-$text = $_POST[PostFetcher::TEXT];
+
+$target_file = basename($_FILES[PostFetcher::IMAGE]["name"]);
 
 if (isEmpty($title) || isEmpty($text)) {
     addInfoMessage("Please fill in required info");

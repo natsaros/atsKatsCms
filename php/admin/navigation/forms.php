@@ -28,6 +28,15 @@
                                 <label>Static Control</label>
                                 <p class="form-control-static">email@example.com</p>
                             </div>
+
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                <span class="btn btn-primary btn-file">
+                                Browse&hellip; <input type="file" style="display: none;" multiple>
+                                </span>
+                                </label>
+                                <input type="text" class="form-control" readonly>
+                            </div>
                             <div class="form-group">
                                 <label>File input</label>
                                 <input type="file">
@@ -76,13 +85,15 @@
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2"
+                                               value="option2">Radio
                                         2
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio
+                                        <input type="radio" name="optionsRadios" id="optionsRadios3"
+                                               value="option3">Radio
                                         3
                                     </label>
                                 </div>
@@ -187,9 +198,9 @@
                             </div>
                             <div class="form-group input-group">
                                 <input type="text" class="form-control">
-                                            <span class="input-group-btn">
+                                <span class="input-group-btn">
                                                 <button class="btn btn-default" type="button"><i
-                                                        class="fa fa-search"></i>
+                                                            class="fa fa-search"></i>
                                                 </button>
                                             </span>
                             </div>
