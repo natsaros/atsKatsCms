@@ -31,9 +31,21 @@ class UserHandler {
         $users = [];
 
         foreach($rows as $row) {
-            $users[] = User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::IS_ADMIN] == 1, $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE]);
+            $users[] = self::populateUser($row);
         }
         return $users;
+    }
+
+    /**
+     * @param $row
+     * @return User|bool
+     * @throws SystemException
+     */
+    private static function populateUser($row) {
+        if($row === false) {
+            return false;
+        }
+        return User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::IS_ADMIN] == 1, $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE]);
     }
 
     /**
@@ -45,19 +57,12 @@ class UserHandler {
     static function adminLogin($username, $password) {
         $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USERNAME . " = '%s' AND " . self::IS_ADMIN . "=1 AND " . self::USER_STATUS . "=1";
         $query = sprintf($query, $username);
-        $rows = getDb()->selectMultiple($query);
-        $users = self::populateUsers($rows);
+        $rows = getDb()->selectSingle($query);
+        $user = self::populateUser($rows);
 
-        if(!$users || count($users) > 1) {
-            return null;
-        }
-
-        /* @var $user User */
-        foreach($users as $user) {
-            if(password_verify($password, $user->getPassword())) {
-                $user->setPassword(null);
-                return $user;
-            }
+        if (password_verify($password, $user->getPassword())) {
+            $user->setPassword(null);
+            return $user;
         }
         return null;
     }
@@ -91,7 +96,7 @@ class UserHandler {
         if(isNotEmpty($id)) {
             $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::ID . " = '%s'";
             $query = sprintf($query, $id);
-            $rows = getDb()->select($query);
+            $rows = getDb()->selectSingle($query);
             $users = self::populateUsers($rows);
 
             if($users != null || !$users) {

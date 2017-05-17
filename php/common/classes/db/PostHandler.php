@@ -53,9 +53,8 @@ class PostHandler {
      * @throws SystemException
      */
     static function getPostByID($id) {
-        $query = "SELECT * FROM " . getDb()->posts . " WHERE " . self::ID . " = '%s'";
-        $query = sprintf($query, $id);
-        $row = getDb()->select($query);
+        $query = "SELECT * FROM " . getDb()->posts . " WHERE " . self::ID . " = ? AND " . self::STATE . "=?";
+        $row = getDb()->selectStmtSingle($query, array('i', 'i'), array($id, 1));
         return self::populatePost($row);
     }
 
@@ -78,7 +77,7 @@ class PostHandler {
     static function getPostDetailsById($id) {
         $detailQuery = "SELECT * FROM " . getDb()->post_meta . " WHERE " . self::POST_ID . " = '%d'";
         $detailQuery = sprintf($detailQuery, $id);
-        $postDetailsRow = getDb()->select($detailQuery);
+        $postDetailsRow = getDb()->selectSingle($detailQuery);
         return self::populatePostDetails($postDetailsRow);
     }
 
@@ -111,26 +110,28 @@ class PostHandler {
     /**
      * @param $row
      * @param PostDetails $postDetails
-     * @return bool|Post
+     * @return null|Post
      * @throws SystemException
      */
     private static function populatePostWithDetails($row, $postDetails) {
-        if ($row === false) {
-            return false;
+        if ($row === false || null === $row) {
+            return null;
         }
         $post = self::populatePost($row);
-        $post->setPostDetails($postDetails);
+        if ($post !== null) {
+            $post->setPostDetails($postDetails);
+        }
         return $post;
     }
 
     /**
      * @param $row
-     * @return bool|Post
+     * @return null|Post
      * @throws SystemException
      */
     private static function populatePost($row) {
-        if ($row === false) {
-            return false;
+        if ($row === false || null === $row) {
+            return null;
         }
         $post = Post::createPost($row[self::ID], $row[self::TITLE], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::STATE], $row[self::USER_ID]);
         return $post;
@@ -138,12 +139,12 @@ class PostHandler {
 
     /**
      * @param $row
-     * @return bool|PostDetails
+     * @return null|PostDetails
      * @throws SystemException
      */
     private static function populatePostDetails($row) {
-        if ($row === false) {
-            return false;
+        if ($row === false || null === $row) {
+            return null;
         }
         $postDetails = PostDetails::createPostDetails($row[self::ID], $row[self::POST_ID], $row[self::SEQUENCE], $row[self::TEXT], $row[self::IMAGE_PATH], $row[self::IMAGE]);
         return $postDetails;
@@ -203,7 +204,7 @@ class PostHandler {
             $post->getID());
         $updatedRes = getDb()->update($query);
         if ($updatedRes) {
-            $updatedId = getDb()->select("SELECT LAST_INSERT_ID() AS " . self::ID . "");
+            $updatedId = getDb()->selectSingle("SELECT LAST_INSERT_ID() AS " . self::ID . "");
             $updatedId = $updatedId["" . self::ID . ""];
             $query = "UPDATE " . getDb()->post_meta . " SET " . self::TEXT . " = '%s', " . self::SEQUENCE . " = '%s', " . self::IMAGE_PATH . " = '%s', " . self::IMAGE . " = '%s' WHERE " . self::POST_ID . " = '%s'";
             $query = sprintf($query,
