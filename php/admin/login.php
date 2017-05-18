@@ -1,16 +1,16 @@
 <?php
 $error = '';
 
-if(isNotEmpty($_POST['submit'])) {
-    if(isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
+if (isNotEmpty($_POST['submit'])) {
+    if (isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
         $error = "Username or Password is invalid";
     }
 
-    if(is_null($error) || $error === '') {
+    if (is_null($error) || $error === '') {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $user = UserHandler::adminLogin($username, $password);
-        if($user === null || $user === false) {
+        if ($user === null || $user === false) {
             $error = "Not valid user";
         } else {
             setUserToSession($user);

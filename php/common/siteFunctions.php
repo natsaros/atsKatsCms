@@ -135,20 +135,10 @@ function initLoadDb() {
     }
 }
 
-;
-
 function initGallery() {
-    if (!file_exists(PICTURES_ROOT)) {
-        mkdir(PICTURES_ROOT, 0777, true);
-    }
-
-    if (!file_exists(VIDEOS_ROOT)) {
-        mkdir(VIDEOS_ROOT, 0777, true);
-    }
-
-    if (!file_exists(DOCUMENTS_ROOT)) {
-        mkdir(DOCUMENTS_ROOT, 0777, true);
-    }
+    createFileIfNotExists(PICTURES_ROOT);
+    createFileIfNotExists(VIDEOS_ROOT);
+    createFileIfNotExists(DOCUMENTS_ROOT);
 }
 
 function initLogFile() {
@@ -158,11 +148,21 @@ function initLogFile() {
     define('LOG_FILE', LOGS_ROOT . CONF_LOG_FILE);
 }
 
+
+/**
+ * @param $path
+ */
+function createFileIfNotExists($path) {
+    if (!file_exists($path)) {
+        mkdir($path, 0777, true);
+    }
+}
+
 /**
  * @return bool
  */
 function isLoggedIn() {
-    return isNotEmpty(getUserFromSession());
+    return is_session_started() && isNotEmpty(getUserFromSession());
 }
 
 /**
@@ -408,8 +408,7 @@ function logError($ex) {
 /**
  * @return array
  */
-function greek_array()
-{
+function greek_array() {
     return array(
         'α' => 'a',
         'β' => 'b',
@@ -542,4 +541,19 @@ function postTextPreview($postText, $viewType) {
         return $postText;
     }
 }
+
+/**
+ * @return bool
+ */
+function is_session_started() {
+    if (php_sapi_name() !== 'cli') {
+        if (version_compare(phpversion(), '5.4.0', '>=')) {
+            return session_status() === PHP_SESSION_ACTIVE;
+        } else {
+            return session_id() !== '';
+        }
+    }
+    return false;
+}
+
 ?>

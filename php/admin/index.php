@@ -1,23 +1,25 @@
 <?php
-session_start();
+if (!is_session_started()) {
+    session_start();
+}
 
-if(isset($_GET["action"])) {
+if (isset($_GET["action"])) {
     $action = $_GET["action"];
 }
 
 initLoad();
 
-if(isEmpty($action)) {
+if (isEmpty($action)) {
     //Default behavior: if no action is set to happen navigation occurs.
 
     $page = $_GET["page"];
-    if(isEmpty($page)) {
+    if (isEmpty($page)) {
         define('ADMIN_PAGE_ID', 'dashboard');
     } else {
         define('ADMIN_PAGE_ID', $page);
     }
 
-    if(!isLoggedIn()) {
+    if (!isLoggedIn()) {
         include(ADMIN_ROOT_PATH . 'login.php');
     } else {
         include(COMMON_ROOT_PATH . "adminNavigation.php");

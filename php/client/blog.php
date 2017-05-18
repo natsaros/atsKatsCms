@@ -4,22 +4,26 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
 
 <div class="container-fluid text-center belowHeader blogContainer">
 
-<!--    DEN MPOROUSA NA APOFASISW KAI EBALA KAI TA DUO :P -->
-<!--    EDW THA MPOYN EIKONIDIA-->
+    <!--    DEN MPOROUSA NA APOFASISW KAI EBALA KAI TA DUO :P -->
+    <!--    EDW THA MPOYN EIKONIDIA-->
     <div style="text-align:center;margin-bottom: 50px;">
-        <a href="javascript:void(0);" id="postListLink" style="text-decoration:underline;" onclick="$('#postsList').fadeIn();$('#postsGrid').hide();$(this).css('text-decoration', 'underline');$('#postGridLink').css('text-decoration', 'none');">List</a>
-        <a href="javascript:void(0);" id="postGridLink" onclick="$('#postsGrid').fadeIn();$('#postsList').hide();$(this).css('text-decoration', 'underline');$('#postListLink').css('text-decoration', 'none');">Grid</a>
+        <a href="javascript:void(0);" id="postListLink" style="text-decoration:underline;"
+           onclick="$('#postsList').fadeIn();$('#postsGrid').hide();$(this).css('text-decoration', 'underline');$('#postGridLink').css('text-decoration', 'none');">List</a>
+        <a href="javascript:void(0);" id="postGridLink"
+           onclick="$('#postsGrid').fadeIn();$('#postsList').hide();$(this).css('text-decoration', 'underline');$('#postListLink').css('text-decoration', 'none');">Grid</a>
     </div>
 
 
     <div id="postsList">
         <?php
+        /* @var $post Post */
         foreach ($posts as $key => $post) { ?>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-3">
-                            <div class="blogImageList" style="background: url('<?php echo ImageUtil::renderBlogImage($post->getImagePath()); ?>') no-repeat center 60% /cover;"></div>
+                            <div class="blogImageList"
+                                 style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
                         </div>
                         <div class="col-sm-9">
                             <div class="row row-no-padding">
@@ -68,7 +72,8 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
             <div class="col-sm-4">
                 <div class="row row-no-padding row-no-margin">
                     <div class="col-sm-12">
-                        <div class="blogImageGrid" style="background: url('<?php echo ImageUtil::renderBlogImage($post->getImagePath()); ?>') no-repeat center 60% /cover;"></div>
+                        <div class="blogImageGrid"
+                             style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
                     </div>
                 </div>
                 <div class="row row-no-padding row-no-margin">

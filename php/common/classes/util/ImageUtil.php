@@ -5,13 +5,25 @@
  */
 class ImageUtil {
 
+    const TMP_NAME = 'tmp_name';
+    const NAME = 'name';
+
     /**
-     * @param $name
+     * @param Post $post
      * @return string
      * @throws SystemException
      */
-    static function renderBlogImage($name) {
-        return self::renderImageFromGallery($name, 'conceito-pilates.jpg');
+    static function renderBlogImage($post) {
+        $path2post = PICTURES_ROOT . $post->getID() . DS . $post->getImagePath();
+        if (!file_exists($path2post)) {
+            if (isNotEmpty($post->getImage())) {
+                return self::renderImageFromBlob($post);
+            } else {
+                return self::renderImageFromGallery($path2post, 'blog_default.png');
+            }
+        } else {
+            return self::renderImageFromGallery($path2post, 'blog_default.png');
+        }
     }
 
     /**
@@ -24,38 +36,45 @@ class ImageUtil {
     }
 
     /**
-     * @param $name
+     * @param Post $post
+     * @return string
+     * @throws SystemException
+     */
+    private static function renderImageFromBlob($post) {
+        $base64 = base64_encode($post->getImage());
+        return 'data:' . self::getMimeType($post->getImagePath()) . ';base64,' . $base64;
+    }
+
+    /**
+     * @param $path
      * @param $fallBack
      * @return string
      * @throws SystemException
      */
-    static function renderImageFromGallery($name, $fallBack) {
+    static function renderImageFromGallery($path, $fallBack) {
+        if (is_dir($path) || !file_exists($path)) {
+            $path = PICTURES_ROOT . $fallBack;
+        }
+        $content = file_get_contents($path);
+        $base64 = base64_encode($content);
+        return 'data:' . self::getMimeType($path) . ';base64,' . $base64;
+    }
+
+    private static function getMimeType($fileName) {
         $allowedTypes = [];
-        if(isNotEmpty(ALLOWED_TYPES)) {
+        if (isNotEmpty(ALLOWED_TYPES)) {
             $allowedTypes = explode('|', ALLOWED_TYPES);
         }
 
         $mimes = [];
-        foreach($allowedTypes as $type) {
+        foreach ($allowedTypes as $type) {
             $mimes[$type] = 'image/' . $type;
         }
 
-        if(isNotEmpty($name)) {
-            $tmp = explode('.', $name);
-            $ext = strtolower(end($tmp));
-        } else {
-            $tmp = explode('.', $fallBack);
-            $ext = strtolower(end($tmp));
-        }
+        $tmp = explode('.', $fileName);
+        $ext = strtolower(end($tmp));
 
-        $file = PICTURES_ROOT . $name;
-        if(is_dir($file) || !file_exists($file)) {
-            $file = PICTURES_ROOT . $fallBack;
-        }
-
-        $content = file_get_contents($file);
-        $base64 = base64_encode($content);
-        return 'data:' . $mimes[$ext] . ';base64,' . $base64;
+        return $mimes[$ext];
     }
 
     /**
@@ -65,12 +84,34 @@ class ImageUtil {
      */
     static function validateImageAllowed($image) {
         $allowedTypes = [];
-        if(isNotEmpty(ALLOWED_TYPES)) {
+        if (isNotEmpty(ALLOWED_TYPES)) {
             $allowedTypes = explode('|', ALLOWED_TYPES);
         }
         $fileType = explode('/', $image['type'])[1];
 
         return in_array($fileType, $allowedTypes);
+    }
+
+    /**
+     * @param $tmpFile
+     * @return bool|string
+     */
+    static function readImageContentFromFile($tmpFile) {
+        $tmpFileContent = $tmpFile[self::TMP_NAME];
+//        $fp = fopen($tmpFileContent, 'r');  // open a file handle of the temporary file
+//        $imgContent = fread($fp, filesize($tmpFileContent)); // read the temp file
+//        fclose($fp); // close the file handle
+
+        $imgContent = addslashes(file_get_contents($tmpFileContent));
+        return $imgContent;
+    }
+
+    static function saveImageToFileSystem($extraPath, $tmpFile) {
+        $pathToSave = PICTURES_ROOT;
+        $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
+        createFileIfNotExists($pathToSave);
+        $pathToSave .= $tmpFile[self::NAME];
+        move_uploaded_file($tmpFile[self::TMP_NAME], $pathToSave);
     }
 
 }

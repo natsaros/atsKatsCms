@@ -1,9 +1,10 @@
 <div id="fb-root"></div>
 <script>
-    (function(d, s, id) {
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
+        js = d.createElement(s);
+        js.id = id;
         js.src = "//connect.facebook.net/el_GR/sdk.js#xfbml=1&version=v2.9&appId=1861331620818807";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
@@ -20,7 +21,8 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="blogPostImage" style="background: url('<?php echo ImageUtil::renderBlogImage($post->getImagePath()); ?>') no-repeat center 60% /cover;"></div>
+            <div class="blogPostImage"
+                 style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
         </div>
     </div>
     <div class="row">
@@ -34,7 +36,9 @@
         <div class="col-sm-12">
             <div class="blogPostShareContainer">
                 Μοιράσου αυτό το άρθρο:
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode("http://fitnesshousebypenny.gr/blog/" . transliterateString($post->getTitle())); ?>" class="fa fa-facebook" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=545,width=560');return false;"></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode("http://fitnesshousebypenny.gr/blog/" . transliterateString($post->getTitle())); ?>"
+                   class="fa fa-facebook"
+                   onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=545,width=560');return false;"></a>
                 <a href="#" class="fa fa-twitter" target="_blank"></a>
             </div>
         </div>
