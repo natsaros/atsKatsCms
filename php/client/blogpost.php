@@ -1,7 +1,3 @@
-<?php
-$post = PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]);
-?>
-
 <div id="fb-root"></div>
 <script>
     (function(d, s, id) {
@@ -18,7 +14,7 @@ $post = PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]);
         <div class="col-sm-12">
             <div class="blogHeaderTitle">
                 <p><?php echo $post->getTitle(); ?></p>
-                <div class="blogTitlesBorder"></div>
+                <div class="blogPostTitlesBorder"></div>
             </div>
         </div>
     </div>

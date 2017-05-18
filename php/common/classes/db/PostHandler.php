@@ -7,6 +7,7 @@ class PostHandler {
     const ID = 'ID';
     const POST_ID = 'POST_ID';
     const TITLE = 'TITLE';
+    const FRIENDLY_TITLE = 'FRIENDLY_TITLE';
     const ACTIVATION_DATE = 'ACTIVATION_DATE';
     const MODIFICATION_DATE = 'MODIFICATION_DATE';
     const STATE = 'STATE';
@@ -59,6 +60,17 @@ class PostHandler {
     }
 
     /**
+     * @param $friendly_title
+     * @return Post
+     * @throws SystemException
+     */
+    static function getPostByFriendlyTitleWithDetails($friendly_title) {
+        $post = self::getPostByFriendlyTitle($friendly_title);
+        $post->setPostDetails(self::getPostDetailsById($post->getID()));
+        return $post;
+    }
+
+    /**
      * @param $id
      * @return Post
      * @throws SystemException
@@ -66,6 +78,17 @@ class PostHandler {
     static function getPostByID($id) {
         $query = "SELECT * FROM " . getDb()->posts . " WHERE " . self::ID . " = ?";
         $row = getDb()->selectStmtSingle($query, array('i'), array($id));
+        return self::populatePost($row);
+    }
+
+    /**
+     * @param $friendly_title
+     * @return Post
+     * @throws SystemException
+     */
+    static function getPostByFriendlyTitle($friendly_title) {
+        $query = "SELECT * FROM " . getDb()->posts . " WHERE " . self::FRIENDLY_TITLE . " = ?";
+        $row = getDb()->selectStmtSingle($query, array('s'), array($friendly_title));
         return self::populatePost($row);
     }
 
@@ -87,8 +110,8 @@ class PostHandler {
      */
     static function createPost($post) {
         if(isNotEmpty($post)) {
-            $query = "INSERT INTO " . getDb()->posts . " (" . self::TITLE . "," . self::STATE . "," . self::USER_ID . "," . self::ACTIVATION_DATE . ") VALUES (?, ?, ?, ?)";
-            $created = getDb()->createStmt($query, array('s', 'i', 's', 's'), array($post->getTitle(), PostStatus::PUBLISHED, $post->getUserId(), date('Y-m-d H:i:s')));
+            $query = "INSERT INTO " . getDb()->posts . " (" . self::TITLE . "," . self::FRIENDLY_TITLE . "," . self::STATE . "," . self::USER_ID . "," . self::ACTIVATION_DATE . ") VALUES (?, ?, ?, ?, ?)";
+            $created = getDb()->createStmt($query, array('s', 's', 'i', 's', 's'), array($post->getTitle(), $post->getFriendlyTitle(), PostStatus::PUBLISHED, $post->getUserId(), date('Y-m-d H:i:s')));
             if($created) {
                 $query = "INSERT INTO " . getDb()->post_meta .
                     " (" . self::TEXT .
@@ -119,10 +142,10 @@ class PostHandler {
      * @throws SystemException
      */
     public static function update($post) {
-        $query = "UPDATE " . getDb()->posts . " SET " . self::TITLE . " = ?, " . self::STATE . " = ?, " . self::USER_ID . " = ?, " . self::ID . " = LAST_INSERT_ID(" . $post->getID() . ") WHERE " . self::ID . " = ?;";
+        $query = "UPDATE " . getDb()->posts . " SET " . self::TITLE . " = ?, " . self::FRIENDLY_TITLE . " = ?, " . self::STATE . " = ?, " . self::USER_ID . " = ?, " . self::ID . " = LAST_INSERT_ID(" . $post->getID() . ") WHERE " . self::ID . " = ?;";
         $updatedRes = getDb()->updateStmt($query,
-            array('s', 's', 'i', 'i'),
-            array($post->getTitle(), $post->getState(), $post->getUserId(), $post->getID()));
+            array('s', 's', 's', 'i', 'i'),
+            array($post->getTitle(), $post->getFriendlyTitle(), $post->getState(), $post->getUserId(), $post->getID()));
         if($updatedRes) {
             $updatedId = getDb()->selectStmtSingleNoParams("SELECT LAST_INSERT_ID() AS " . self::ID . "");
             $updatedId = $updatedId["" . self::ID . ""];
@@ -221,7 +244,7 @@ class PostHandler {
         if($row === false || null === $row) {
             return null;
         }
-        $post = Post::createPost($row[self::ID], $row[self::TITLE], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::STATE], $row[self::USER_ID]);
+        $post = Post::createPost($row[self::ID], $row[self::TITLE], $row[self::FRIENDLY_TITLE], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::STATE], $row[self::USER_ID]);
         return $post;
     }
 

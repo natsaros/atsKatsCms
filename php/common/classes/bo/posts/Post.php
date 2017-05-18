@@ -117,7 +117,7 @@ class Post {
      * @return Post
      */
     public function setFriendlyTitle($friendly_title) {
-        $this->title = $friendly_title;
+        $this->friendly_title = $friendly_title;
         return $this;
     }
 
@@ -218,10 +218,11 @@ class Post {
         return $instance;
     }
 
-    public static function createPost($ID, $title, $activation_date, $modification_date, $state, $user_id) {
+    public static function createPost($ID, $title, $friendly_title, $activation_date, $modification_date, $state, $user_id) {
         return self::create()
             ->setID($ID)
             ->setTitle($title)
+            ->setFriendlyTitle($friendly_title)
             ->setActivationDate($activation_date)
             ->setModificationDate($modification_date)
             ->setState($state)
@@ -232,6 +233,7 @@ class Post {
         return self::create()
             ->setID($ID)
             ->setTitle($title)
+            ->setFriendlyTitle(transliterateString($title))
             ->setState($state)
             ->setUserId($user_id)
             ->setPostDetails(PostDetails::create());

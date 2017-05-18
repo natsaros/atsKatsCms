@@ -524,13 +524,19 @@ function transliterateString($txt) {
 
 /**
  * @param $postText
+ * @param $viewType
  * @return string
  *
  * Returns part of text of the post as a preview
  */
-function postTextPreview($postText) {
-    if (strlen($postText) > 250) {
-        return substr(strip_tags($postText),0,250) . "...";
+function postTextPreview($postText, $viewType) {
+    if ($viewType == "grid"){
+        $maxLength = 100;
+    } else if ($viewType == "list") {
+        $maxLength = 250;
+    }
+    if (strlen($postText) > $maxLength) {
+        return substr(strip_tags($postText),0,$maxLength) . "...";
     }
     else {
         return $postText;
