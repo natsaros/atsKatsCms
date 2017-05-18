@@ -6,11 +6,14 @@ $text = $_POST[PostHandler::TEXT];
 $state = safe_input($_POST[PostHandler::STATE]);
 $userID = safe_input($_POST[PostHandler::USER_ID]);
 
+$imageValid = true;
 $image2Upload = $_FILES[PostHandler::IMAGE];
-$imageValid = ImageUtil::validateImageAllowed($image2Upload);
+if($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
+    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
+}
 
 $imagePath = safe_input($_POST[PostHandler::IMAGE_PATH]);
-$target_file = basename($_FILES[PostHandler::IMAGE]["name"]);
+$target_file = basename($image2Upload["name"]);
 
 if(isEmpty($title) || isEmpty($text)) {
     addInfoMessage("Please fill in required info");

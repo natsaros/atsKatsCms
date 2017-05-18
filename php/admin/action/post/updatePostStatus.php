@@ -11,10 +11,10 @@ if (isEmpty($id) || isEmpty($status)) {
 try {
     $updatePostRes = PostHandler::updatePostStatus($id, $status);
 
-    if ($updatePostRes == null || !$updatePostRes) {
-        addErrorMessage("Post status failed to be changed");
-    } else {
+    if ($updatePostRes !== null || $updatePostRes) {
         addSuccessMessage("Post status successfully changed");
+    } else {
+        addErrorMessage("Post status failed to be changed");
     }
 } catch (SystemException $ex) {
     logError($ex);

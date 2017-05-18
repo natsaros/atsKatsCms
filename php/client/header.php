@@ -11,7 +11,7 @@
     <meta name="keywords"
           content="pilates,aerial,yoga,fitness house,fitness,elliniko,glyfada,peny,kasfiki,personal trainer,Fitness-House-by-Penny,penny,Penny,Kasfiki,Fitness House">
 
-    <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"]) && !is_null(PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]))) {
+    <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"])) {
             $post = PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]); ?>
         <meta property="og:url" content="http://fitnesshousebypenny.gr/blog/<?php echo $post->getID()?>" >
         <meta property="og:type" content="article"/>
@@ -46,7 +46,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="<?php echo ASSETS_URI ?>ios/Icon-72@2x.png" />
 
     <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/bootstrap.min.css">
-    <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"]) && !is_null(PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]))) { ?>
+    <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"])) { ?>
         <link rel="stylesheet" href="<?php echo ASSETS_URI ?>font-awesome/css/font-awesome.min.css">
     <?php } ?>
     <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/custom.css">

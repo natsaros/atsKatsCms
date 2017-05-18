@@ -24,7 +24,7 @@ $post = PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]);
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="blogPostImage" style="background: url('<?php echo renderImage($post->getImagePath()); ?>') no-repeat center 60% /cover;"></div>
+            <div class="blogPostImage" style="background: url('<?php echo ImageUtil::renderBlogImage($post->getImagePath()); ?>') no-repeat center 60% /cover;"></div>
         </div>
     </div>
     <div class="row">

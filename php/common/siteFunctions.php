@@ -358,44 +358,6 @@ function safe_input($data) {
 }
 
 /**
- * @param $name
- * @return string
- * @throws SystemException
- */
-function renderImage($name) {
-    $allowedTypes = [];
-    if (isNotEmpty(ALLOWED_TYPES)) {
-        $allowedTypes = explode('|', ALLOWED_TYPES);
-    }
-
-    $mimes = [];
-    foreach ($allowedTypes as $type) {
-        $mimes[$type] = 'image/' . $type;
-    }
-
-    $defaultUser = 'conceito-pilates.jpg';
-    if (isNotEmpty($name)) {
-        $tmp = explode('.', $name);
-        $ext = strtolower(end($tmp));
-    } else {
-        $tmp = explode('.', $defaultUser);
-        $ext = strtolower(end($tmp));
-    }
-
-    $file = PICTURES_ROOT . $name;
-    if (is_dir($file) || !file_exists($file)) {
-        $file = PICTURES_ROOT . $defaultUser;
-    }
-//header('content-type: ' . $mimes[$ext]);
-//header('content-disposition: inline; filename="' . $name . '";');
-//readfile(getRootPath() . $file);
-
-    $content = file_get_contents($file);
-    $base64 = base64_encode($content);
-    return 'data:' . $mimes[$ext] . ';base64,' . $base64;
-}
-
-/**
  * Defines all system variables for the system to work
  */
 function defineSystemVariables() {

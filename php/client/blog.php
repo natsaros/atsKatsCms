@@ -9,7 +9,7 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
     foreach ($posts as $key => $post) { ?>
         <div class="row">
             <div class="col-sm-3">
-                <div class="blogImage" style="background: url('<?php echo renderImage($post->getImagePath()); ?>') no-repeat center 60% /cover;"></div>
+                <div class="blogImage" style="background: url('<?php echo ImageUtil::renderBlogImage($post->getImagePath()); ?>') no-repeat center 60% /cover;"></div>
             </div>
             <div class="col-sm-9">
                 <div class="row row-no-padding">
