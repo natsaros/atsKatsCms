@@ -49,7 +49,7 @@ if($isCreate) {
                             <div class="form-group text-center">
                                 <div class="imgCont">
                                     <img class="img-thumbnail img-responsive"
-                                         src="<?php echo renderImage($currentUser->getPicture()) ?>"
+                                         src="<?php echo ImageUtil::renderImage($currentUser->getPicture()) ?>"
                                          alt="<?php echo $currentUser->getUserName() ?>">
 
                                     <!--TODO : add here custom 'file' input -->

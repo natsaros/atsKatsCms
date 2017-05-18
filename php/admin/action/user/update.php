@@ -20,10 +20,10 @@ try {
     $user2Update = User::createFullUser($ID, $userName, null, $first_name, $last_name, $email, null, null, $user_status, $is_admin, $gender, $link, $phone, $picture);
     $updateUserRes = UserHandler::updateUser($user2Update);
 
-    if($updateUserRes == null || !$updateUserRes) {
-        addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
-    } else {
+    if($updateUserRes !== null || $updateUserRes) {
         addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
+    } else {
+        addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
     }
 } catch(SystemException $ex) {
     logError($ex);

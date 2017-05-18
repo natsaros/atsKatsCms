@@ -42,7 +42,7 @@ class Db {
      * @return Db
      */
     public static function getInstance() {
-        if (is_null(self::$instance)) {
+        if(is_null(self::$instance)) {
             self::$instance = new self();
         }
         return self::$instance;
@@ -54,16 +54,16 @@ class Db {
     private static function connect() {
 
         // Try and connect to the database, if a connection has not been established yet
-        if (!isset(self::$connection)) {
+        if(!isset(self::$connection)) {
             try {
                 self::$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-            } catch (SystemException $ex) {
+            } catch(SystemException $ex) {
                 self::$connection = false;
             }
         }
 
         // If connection was not successful, handle the error
-        if (self::$connection === false) {
+        if(self::$connection === false) {
             /*$die = sprintf(
                     "There doesn't seem to be a connection to %s database. I need this before we can get started.",
                     DB_NAME
@@ -75,6 +75,40 @@ class Db {
         return self::$connection;
     }
 
+    /**
+     * @param $query
+     * @param array $param_types
+     * @param array $parameters
+     * @return mixed|null
+     * @throws SystemException
+     */
+    public static function updateStmt($query, array $param_types, array $parameters) {
+        return self::queryStmt($query, $param_types, $parameters, true);
+    }
+
+    /**
+     * @param $query
+     * @param array $param_types
+     * @param array $parameters
+     * @return mixed|null
+     * @throws SystemException
+     */
+    public static function createStmt($query, array $param_types, array $parameters) {
+        return self::queryStmt($query, $param_types, $parameters, true);
+    }
+
+    /**
+     * @param $query
+     * @return mixed|null
+     * @throws SystemException
+     */
+    public static function selectStmtSingleNoParams($query) {
+        $rows = self::selectStmt($query, array(), array());
+        if($rows == null || !$rows || count($rows) > 1) {
+            return null;
+        }
+        return $rows[0];
+    }
 
     /**
      * @param $query
@@ -85,10 +119,29 @@ class Db {
      */
     public static function selectStmtSingle($query, array $param_types, array $parameters) {
         $rows = self::selectStmt($query, $param_types, $parameters);
-        if ($rows == null || !$rows || count($rows) > 1) {
+        if($rows == null || !$rows || count($rows) > 1) {
             return null;
         }
         return $rows[0];
+    }
+
+    /**
+     * @param $query
+     * @return mixed|null
+     * @throws SystemException
+     */
+    public static function selectStmtNoParams($query) {
+        $rows = array();
+        $mysqli_result = self::queryStmt($query, array(), array(), false);
+        if($mysqli_result) {
+            // If query was successful, retrieve all the rows into an array
+            while($row = $mysqli_result->fetch_array(MYSQLI_ASSOC)) {
+                $rows[] = $row;
+            }
+        } else {
+            return null;
+        }
+        return $rows;
     }
 
     /**
@@ -100,93 +153,71 @@ class Db {
      */
     public static function selectStmt($query, array $param_types, array $parameters) {
         $rows = array();
-        $mysqli_result = self::queryStmt($query, $param_types, $parameters);
-        if ($mysqli_result) {
+        $mysqli_result = self::queryStmt($query, $param_types, $parameters, false);
+        if($mysqli_result) {
             // If query was successful, retrieve all the rows into an array
-            while ($row = $mysqli_result->fetch_array(MYSQLI_ASSOC)) {
+            while($row = $mysqli_result->fetch_array(MYSQLI_ASSOC)) {
                 $rows[] = $row;
             }
-        }else{
+        } else {
             return null;
         }
         return $rows;
     }
 
-
     /**
      * @param $query
      * @param array $param_types
      * @param array $parameters
+     * @param boolean $isCreate
      * @return bool|mysqli_result
      * @throws SystemException
      */
-    public static function queryStmt($query, array $param_types, array $parameters) {
+    public static function queryStmt($query, array $param_types, array $parameters, $isCreate) {
         /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
 
         // Connect to the database
         $connection = self::connect();
-        if ($connection == mysqli_connect_error()) {
+        if($connection == mysqli_connect_error()) {
             throw new SystemException(self::db_error());
         }
 
         $param_type = '';
+        $a_params = array();
         $n = count($param_types);
-        for ($i = 0; $i < $n; $i++) {
-            $param_type .= $param_types[$i];
-        }
+        if($n > 0) {
+            for($i = 0; $i < $n; $i++) {
+                $param_type .= $param_types[$i];
+            }
 
-        /* with call_user_func_array, array params must be passed by reference */
-        $a_params[] = &$param_type;
-
-        for ($i = 0; $i < $n; $i++) {
             /* with call_user_func_array, array params must be passed by reference */
-            $a_params[] = &$parameters[$i];
+            $a_params[] = &$param_type;
+
+            for($i = 0; $i < $n; $i++) {
+                /* with call_user_func_array, array params must be passed by reference */
+                $a_params[] = &$parameters[$i];
+            }
         }
 
         // Query the database
         $stmt = $connection->prepare($query);
-        if ($stmt === false) {
+        if($stmt === false) {
             trigger_error('Wrong SQL: ' . $query . ' Error: ' . $connection->errno . ' ' . $connection->error, E_USER_ERROR);
         }
-
-        /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
-        call_user_func_array(array($stmt, 'bind_param'), $a_params);
+        if($n > 0) {
+            /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
+            call_user_func_array(array($stmt, 'bind_param'), $a_params);
+        }
 
         $result = $stmt->execute();
 
-        if ($result) {
-            $mysqli_result = $stmt->get_result();
+        if($result) {
+            // if it is an insert statement return the last inserted id
+            $mysqli_result = $isCreate ? $stmt->insert_id : $stmt->get_result();
         } else {
             throw new SystemException($connection->error);
         }
         return $mysqli_result;
-    }
-
-
-    /**
-     * @param $query
-     * @param $selectOrUpdate
-     * @return bool|mysqli_result
-     * @throws SystemException
-     */
-    public static function query($query, $selectOrUpdate) {
-        // Connect to the database
-        $connection = self::connect();
-        if ($connection == mysqli_connect_error()) {
-            throw new SystemException(self::db_error());
-        }
-
-        // Query the database
-
-//        $stmt = $connection->prepare($query);
-//        if($stmt->execute()){
-//            $mysqli_result = $stmt->get_result();
-//        }
-        $mysqli_result = $connection->query($query);
-        if (!$mysqli_result) {
-            throw new SystemException($connection->error);
-        }
-        return $selectOrUpdate ? $mysqli_result : $connection->insert_id;
     }
 
     /**
@@ -197,74 +228,22 @@ class Db {
     public static function multi_query($query) {
         // Connect to the database
         $connection = self::connect();
-        if ($connection == mysqli_connect_error()) {
+        if($connection == mysqli_connect_error()) {
             throw new SystemException(self::db_error());
         }
         // Query the database
         $mysqli_result = $connection->multi_query($query);
-        if (!$mysqli_result) {
+        if(!$mysqli_result) {
             throw new SystemException($connection->error);
         }
         return $mysqli_result;
     }
 
     /**
-     * @param $query
-     * @return bool|mysqli_result
-     * @throws SystemException
-     */
-    public function create($query) {
-        return self::query($query, false);
-    }
-
-    /**
-     * @param $query
-     * @return bool|mysqli_result
-     * @throws SystemException
-     */
-    public function update($query) {
-        return self::query($query, true);
-    }
-
-    /**
-     * @param $query
-     * @return array|bool
-     * @throws SystemException
-     */
-    static function selectMultiple($query) {
-        $rows = array();
-        $result = self::query($query, true);
-        // If query failed, return `false`
-        if ($result === false) {
-            throw new SystemException(self::db_error());
-        }
-
-        // If query was successful, retrieve all the rows into an array
-        while ($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        return $rows;
-    }
-
-    /**
-     * @param $query
-     * @return mixed|null
-     * @throws SystemException
-     */
-    static function selectSingle($query) {
-        $rows = self::selectMultiple($query);
-
-        if ($rows == null || !$rows || count($rows) > 1) {
-            return null;
-        }
-        return $rows[0];
-    }
-
-    /**
      * @param $value
      * @return string
      */
-    static function db_quote($value) {
+    public static function db_quote($value) {
         $connection = self::connect();
         return "'" . $connection->real_escape_string($value) . "'";
     }
@@ -272,7 +251,7 @@ class Db {
     /**
      * @return string
      */
-    static function db_error() {
+    public static function db_error() {
         $connection = self::connect();
         return $connection->error;
     }
@@ -289,7 +268,7 @@ class Db {
      * @param bool $set_table_names
      */
     public function setCustomPrefix($prefix, $set_table_names = true) {
-        if (preg_match('|[^a-z0-9_]|i', $prefix)) {
+        if(preg_match('|[^a-z0-9_]|i', $prefix)) {
             //return new AK_Error('invalid_db_prefix', 'Invalid database prefix');
             return;
         }
@@ -297,11 +276,11 @@ class Db {
 
         $this->setPrefix($prefix);
 
-        if ($set_table_names) {
+        if($set_table_names) {
             $ALL_TABLES = self::tables(self::DB_ALL);
-            foreach ($ALL_TABLES as $table => $table2prefix) {
+            foreach($ALL_TABLES as $table => $table2prefix) {
                 $updatedTable = $prefix . $table2prefix;
-                switch ($table2prefix) {
+                switch($table2prefix) {
                     case self::SETTINGS:
                         $this->setSettings($updatedTable);
                         break;
@@ -338,8 +317,8 @@ class Db {
      * @param string $scope
      * @return array
      */
-    static function tables($scope = self::DB_ALL) {
-        switch ($scope) {
+    private static function tables($scope = self::DB_ALL) {
+        switch($scope) {
             case self::DB_ALL:
                 $tables = array_merge(self::$global_tables, self::$blog_tables);
                 break;
@@ -358,7 +337,7 @@ class Db {
     /**
      * @return string|null
      */
-    public function db_schema_from_file() {
+    public static function db_schema_from_file() {
         $sql = file_get_contents(getcwd() . DS . 'conf/init.sql');
         return $sql ? $sql : null;
     }
@@ -371,7 +350,7 @@ class Db {
 
         $auto_increment = 'auto_increment';
         $charset_collate = 'DEFAULT CHARACTER SET ' . DB_CHARSET;
-        if (DB_COLLATE != null && DB_COLLATE != '') {
+        if(DB_COLLATE != null && DB_COLLATE != '') {
             $charset_collate .= ' COLLATE ' . DB_COLLATE;
         }
 
@@ -422,16 +401,16 @@ PRIMARY KEY  (ID)
      * @throws SystemException
      */
     public static function isInitialized($db) {
-        if ($db->getInitialized() == null || !$db->getInitialized()) {
+        if($db->getInitialized() == null || !$db->getInitialized()) {
             $db->setCustomPrefix(TABLE_PREFIX);
 
-            $rows = self::selectMultiple("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = '" . DB_NAME . "'");
-            if ($rows === false) {
+            $rows = self::selectStmtNoParams("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = '" . DB_NAME . "'");
+            if($rows === false) {
                 return false;
             }
 
             $tableNames = null;
-            foreach ($rows as $row) {
+            foreach($rows as $row) {
                 $tableNames[] = strtoupper($row['TABLE_NAME']);
             }
             $db->setInitialized(isNotEmpty($tableNames) && in_array($db->settings, $tableNames));

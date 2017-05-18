@@ -12,7 +12,7 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
                 <div class="col-sm-12">
                     <?php echo $post->getTitle(); ?>
                     <img class="img-thumbnail img-responsive"
-                         src="<?php echo renderImage($post->getImagePath()); ?>"
+                         src="<?php echo ImageUtil::renderImage($post->getImagePath()); ?>"
                          alt="<?php echo $post->getTitle() ?>">
                     <?php echo $post->getText(); ?>
                 </div>

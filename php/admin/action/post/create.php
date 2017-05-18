@@ -1,14 +1,21 @@
 <?php
 $title = safe_input($_POST[PostHandler::TITLE]);
 $text = $_POST[PostHandler::TEXT];
-
 $userID = safe_input($_POST[PostHandler::USER_ID]);
 
-$target_file = basename($_FILES[PostHandler::IMAGE]["name"]);
+$image2Upload = $_FILES[PostHandler::IMAGE];
+$imageValid = ImageUtil::validateImageAllowed($image2Upload);
 
+$imagePath = safe_input($_POST[PostHandler::IMAGE_PATH]);
+$target_file = basename($image2Upload["name"]);
 
-if (isEmpty($title) || isEmpty($text)) {
+if(isEmpty($title) || isEmpty($text)) {
     addInfoMessage("Please fill in required info");
+    Redirect(sprintf(getAdminRequestUri() . "updatePost"));
+}
+
+if(!$imageValid) {
+    addInfoMessage("Please select a valid image file");
     Redirect(sprintf(getAdminRequestUri() . "updatePost"));
 }
 
@@ -17,13 +24,13 @@ try {
     $post2Create->setTitle($title)->setUserId($userID)->setText($text);
 
     $postRes = PostHandler::createPost($post2Create);
-    if ($postRes == null || !$postRes) {
-        addErrorMessage("Post '" . $post2Create->getTitle() . "' failed to be created");
-    } else {
+    if($postRes !== null || $postRes) {
         addSuccessMessage("Post '" . $post2Create->getTitle() . "' successfully created");
+    } else {
+        addErrorMessage("Post '" . $post2Create->getTitle() . "' failed to be created");
     }
 
-} catch (SystemException $ex) {
+} catch(SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
     // you can exit or die here if you prefer - also you can log your error,

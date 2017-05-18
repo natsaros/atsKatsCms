@@ -15,7 +15,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
         <a class="navbar-brand" href="<?php echo $adminRequestUri . 'dashboard' ?>">Fitness House Admin</a>
         <div class="navbar-brand" style="cursor: default;width: 50px;">
             <img class="img-rounded img-responsive"
-                 src="<?php echo renderImage($loggedInUser->getPicture()) ?>"
+                 src="<?php echo ImageUtil::renderImage($loggedInUser->getPicture()) ?>"
                  alt="<?php echo $loggedInUser->getUserName() ?>">
         </div>
         <div class="navbar-brand" style="cursor: default;">

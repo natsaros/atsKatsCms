@@ -26,6 +26,7 @@ require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'SystemException.php');
 require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
 require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserHandler.php');
 require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
+require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
 require_once(CLASSES_ROOT_PATH . 'Globals.php');
 require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');
 
@@ -345,44 +346,6 @@ function safe_input($data) {
         $data = htmlspecialchars($data);
     }
     return $data;
-}
-
-/**
- * @param $name
- * @return string
- * @throws SystemException
- */
-function renderImage($name) {
-    $allowedTypes = [];
-    if (isNotEmpty(ALLOWED_TYPES)) {
-        $allowedTypes = explode('|', ALLOWED_TYPES);
-    }
-
-    $mimes = [];
-    foreach ($allowedTypes as $type) {
-        $mimes[$type] = 'image/' . $type;
-    }
-
-    $defaultUser = 'default.png';
-    if (isNotEmpty($name)) {
-        $tmp = explode('.', $name);
-        $ext = strtolower(end($tmp));
-    } else {
-        $tmp = explode('.', $defaultUser);
-        $ext = strtolower(end($tmp));
-    }
-
-    $file = PICTURES_ROOT . $name;
-    if (is_dir($file) || !file_exists($file)) {
-        $file = PICTURES_ROOT . $defaultUser;
-    }
-//header('content-type: ' . $mimes[$ext]);
-//header('content-disposition: inline; filename="' . $name . '";');
-//readfile(getRootPath() . $file);
-
-    $content = file_get_contents($file);
-    $base64 = base64_encode($content);
-    return 'data:' . $mimes[$ext] . ';base64,' . $base64;
 }
 
 /**
