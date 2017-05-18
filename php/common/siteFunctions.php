@@ -45,6 +45,13 @@ function isAdminAction() {
 }
 
 /**
+ * @return bool
+ */
+function isUnderBlogPath() {
+    return strpos(getRequestUri(), BLOG_PATH) !== false;
+}
+
+/**
  * @return string
  */
 function getRootUri() {
@@ -54,6 +61,8 @@ function getRootUri() {
         $uri = preg_replace("/admin[\/]action[\/].*/", "", $uri);
     } else if (isAdmin()) {
         $uri = preg_replace("/admin[\/].*/", "", $uri);
+    } else if (isUnderBlogPath()) {
+        $uri = preg_replace("/blog[\/].*/", "", $uri);
     }
     return $uri;
 }
@@ -349,6 +358,44 @@ function safe_input($data) {
 }
 
 /**
+ * @param $name
+ * @return string
+ * @throws SystemException
+ */
+function renderImage($name) {
+    $allowedTypes = [];
+    if (isNotEmpty(ALLOWED_TYPES)) {
+        $allowedTypes = explode('|', ALLOWED_TYPES);
+    }
+
+    $mimes = [];
+    foreach ($allowedTypes as $type) {
+        $mimes[$type] = 'image/' . $type;
+    }
+
+    $defaultUser = 'conceito-pilates.jpg';
+    if (isNotEmpty($name)) {
+        $tmp = explode('.', $name);
+        $ext = strtolower(end($tmp));
+    } else {
+        $tmp = explode('.', $defaultUser);
+        $ext = strtolower(end($tmp));
+    }
+
+    $file = PICTURES_ROOT . $name;
+    if (is_dir($file) || !file_exists($file)) {
+        $file = PICTURES_ROOT . $defaultUser;
+    }
+//header('content-type: ' . $mimes[$ext]);
+//header('content-disposition: inline; filename="' . $name . '";');
+//readfile(getRootPath() . $file);
+
+    $content = file_get_contents($file);
+    $base64 = base64_encode($content);
+    return 'data:' . $mimes[$ext] . ';base64,' . $base64;
+}
+
+/**
  * Defines all system variables for the system to work
  */
 function defineSystemVariables() {
@@ -358,6 +405,7 @@ function defineSystemVariables() {
     defined('ACTION_STR') or define('ACTION_STR', 'action');
     defined('COMMON_STR') or define('COMMON_STR', 'common');
     defined('CLASSES_STR') or define('CLASSES_STR', 'classes');
+    defined('BLOG_PATH') or define('BLOG_PATH', '/blog/');
 
     defined('REQUEST_URI') or define('REQUEST_URI', getRootUri());
 
@@ -395,4 +443,135 @@ function logError($ex) {
     error_log($ex->errorMessage() . " with code: " . $ex->getCode(), 3, LOG_FILE);
 }
 
+/**
+ * @return array
+ */
+function greek_array()
+{
+    return array(
+        'α' => 'a',
+        'β' => 'b',
+        'γ' => 'g',
+        'δ' => 'd',
+        'ε' => 'e',
+        'ζ' => 'z',
+        'η' => 'i',
+        'θ' => 'th',
+        'ι' => 'i',
+        'κ' => 'k',
+        'λ' => 'l',
+        'μ' => 'm',
+        'ν' => 'n',
+        'ξ' => 'ks',
+        'ο' => 'o',
+        'π' => 'p',
+        'ρ' => 'r',
+        'ς' => 's',
+        'σ' => 's',
+        'τ' => 't',
+        'υ' => 'u',
+        'φ' => 'f',
+        'χ' => 'x',
+        'ψ' => 'ps',
+        'ω' => 'w',
+        'Α' => 'a',
+        'Β' => 'b',
+        'Γ' => 'g',
+        'Δ' => 'd',
+        'Ε' => 'e',
+        'Ζ' => 'z',
+        'Η' => 'i',
+        'Θ' => 'th',
+        'Ι' => 'i',
+        'Κ' => 'k',
+        'Λ' => 'l',
+        'Μ' => 'm',
+        'Ν' => 'n',
+        'Ξ' => 'ks',
+        'Ο' => 'o',
+        'Π' => 'p',
+        'Ρ' => 'r',
+        'Σ' => 's',
+        'Τ' => 't',
+        'Υ' => 'u',
+        'Φ' => 'f',
+        'Χ' => 'x',
+        'Ψ' => 'ps',
+        'Ω' => 'w',
+        'ά' => 'a',
+        'έ' => 'e',
+        'ή' => 'i',
+        'ί' => 'i',
+        'ό' => 'o',
+        'ύ' => 'u',
+        'ώ' => 'w',
+        'ϊ' => 'i',
+        'ΐ' => 'i',
+        'Ά' => 'a',
+        'Έ' => 'e',
+        'Ή' => 'i',
+        'Ί' => 'i',
+        'Ό' => 'o',
+        'Ύ' => 'u',
+        'Ώ' => 'w',
+        'Ϊ' => 'i',
+        ' ' => '-',
+        '.' => '',
+        ',' => '',
+        '_' => '-',
+        '=' => '-',
+        '+' => '-',
+        '/' => '-',
+        '\'' => '',
+        '"' => '',
+        '/' => '',
+        ']' => '',
+        '[' => '',
+        '{' => '',
+        '}' => '',
+        '\\' => '',
+        '|' => '',
+        ')' => '',
+        '(' => '',
+        ':' => '',
+        ';' => '',
+        '*' => '',
+        '&' => '',
+        '^' => '',
+        '%' => '',
+        '$' => '',
+        '#' => '',
+        '@' => '',
+        '!' => '',
+        '~' => '',
+        '<' => '',
+        '>' => ''
+    );
+}
+
+/**
+ * @param $txt
+ * @return string
+ *
+ * Returns friendly text in english
+ */
+function transliterateString($txt) {
+    $transliterationTable = greek_array();
+    return str_replace(array_keys($transliterationTable), array_values($transliterationTable), $txt);
+}
+
+/**
+ * @param $postText
+ * @return string
+ *
+ * Returns part of text of the post as a preview
+ */
+function postTextPreview($postText) {
+    if (strlen($postText) > 250) {
+        return substr(strip_tags($postText),0,250) . "...";
+    }
+    else {
+        return $postText;
+    }
+}
 ?>

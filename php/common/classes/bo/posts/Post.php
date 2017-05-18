@@ -3,6 +3,7 @@
 class Post {
     private $ID;
     private $title;
+    private $friendly_title;
     private $activation_date;
     private $modification_date;
     private $state;
@@ -21,6 +22,13 @@ class Post {
      */
     public function getTitle() {
         return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFriendlyTitle() {
+        return $this->friendly_title;
     }
 
     /**
@@ -101,6 +109,15 @@ class Post {
      */
     public function setTitle($title) {
         $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @param $friendly_title
+     * @return Post
+     */
+    public function setFriendlyTitle($friendly_title) {
+        $this->title = $friendly_title;
         return $this;
     }
 

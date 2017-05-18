@@ -21,7 +21,7 @@ if(!$imageValid) {
 
 try {
     $post2Create = Post::create();
-    $post2Create->setTitle($title)->setUserId($userID)->setText($text);
+    $post2Create->setTitle($title)->setFriendlyTitle(transliterateString($title))->setUserId($userID)->setText($text);
 
     $postRes = PostHandler::createPost($post2Create);
     if($postRes !== null || $postRes) {

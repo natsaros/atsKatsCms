@@ -11,12 +11,20 @@
     <meta name="keywords"
           content="pilates,aerial,yoga,fitness house,fitness,elliniko,glyfada,peny,kasfiki,personal trainer,Fitness-House-by-Penny,penny,Penny,Kasfiki,Fitness House">
 
-    <meta property="og:url" content="http://fitnesshousebypenny.gr" >
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" itemprop="name" content="Fitness House by Penny" >
+    <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"]) && !is_null(PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]))) {
+            $post = PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]); ?>
+        <meta property="og:url" content="http://fitnesshousebypenny.gr/blog/<?php echo $post->getID()?>" >
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" itemprop="name" content="<?php echo $post->getTitle()?>" >
+        <meta property="og:image" content="<?php echo $post->getImage()?>" >
+    <?php } else { ?>
+        <meta property="og:url" content="http://fitnesshousebypenny.gr" >
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" itemprop="name" content="Fitness House by Penny" >
+        <meta property="og:image" content="http://fitnesshousebypenny.gr/img/gallery3.jpg" >
+    <?php } ?>
     <meta property="og:site_name" content="fitnesshousebypenny.gr" >
     <meta property="og:description" content="Fitness house by Penny - a place to start your new life!" >
-    <meta property="og:image" content="http://fitnesshousebypenny.gr/img/gallery3.jpg" >
     <meta property="og:image:type" content="image/jpeg" >
     <meta property="og:image:width" content="1444" >
     <meta property="og:image:height" content="960" >
@@ -38,6 +46,9 @@
     <link rel="apple-touch-icon" sizes="144x144" href="<?php echo ASSETS_URI ?>ios/Icon-72@2x.png" />
 
     <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/bootstrap.min.css">
+    <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"]) && !is_null(PostHandler::getPostByIDWithDetails($_GET["post_friendly_url"]))) { ?>
+        <link rel="stylesheet" href="<?php echo ASSETS_URI ?>font-awesome/css/font-awesome.min.css">
+    <?php } ?>
     <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/custom.css">
     <script src="<?php echo ASSETS_URI ?>js/jquery.min.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/bootstrap.min.js"></script>
