@@ -1,5 +1,6 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'users' . DS . 'User.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'users' . DS . 'UserMeta.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'users' . DS . 'UserStatus.php');
 
 class UserHandler {

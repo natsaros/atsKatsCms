@@ -2,7 +2,7 @@
 //Set custom Error Handler
 function exception_error_handler($severity, $message, $file, $line) {
     //TODO : check this is not throwing correct error in DB->connect()
-    if (mysqli_connect_errno()) {
+    if(mysqli_connect_errno()) {
         echo sprintf("Connect failed: %s\n", mysqli_connect_error());
     }
     throw new SystemException($message);
@@ -57,11 +57,11 @@ function isUnderBlogPath() {
 function getRootUri() {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/[^\/]+$/", "", $uri);
-    if (isAdminAction()) {
+    if(isAdminAction()) {
         $uri = preg_replace("/admin[\/]action[\/].*/", "", $uri);
-    } else if (isAdmin()) {
+    } else if(isAdmin()) {
         $uri = preg_replace("/admin[\/].*/", "", $uri);
-    } else if (isUnderBlogPath()) {
+    } else if(isUnderBlogPath()) {
         $uri = preg_replace("/blog[\/].*/", "", $uri);
     }
     return $uri;
@@ -125,10 +125,10 @@ function initLoad() {
 function initLoadDb() {
     $db = getDb();
 
-    if (!$db->isInitialized($db)) {
+    if(!$db->isInitialized($db)) {
         $init_queries = $db->db_schema_from_file();
         $result = $db->multi_query($init_queries);
-        if ($result === false) {
+        if($result === false) {
             throw new SystemException('Database has not been initialized');
         }
         Globals::set('DB', $db);
@@ -142,18 +142,17 @@ function initGallery() {
 }
 
 function initLogFile() {
-    if (!file_exists(LOGS_ROOT)) {
+    if(!file_exists(LOGS_ROOT)) {
         mkdir(LOGS_ROOT, 0777, true);
     }
     define('LOG_FILE', LOGS_ROOT . CONF_LOG_FILE);
 }
 
-
 /**
  * @param $path
  */
 function createFileIfNotExists($path) {
-    if (!file_exists($path)) {
+    if(!file_exists($path)) {
         mkdir($path, 0777, true);
     }
 }
@@ -171,8 +170,8 @@ function isLoggedIn() {
  * @param bool $permanent
  */
 function Redirect($url, $refreshRate = null, $permanent = false) {
-    if (!headers_sent()) {
-        if (is_null($refreshRate)) {
+    if(!headers_sent()) {
+        if(is_null($refreshRate)) {
             header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
         } else {
             header('Refresh : ' . $refreshRate . 'url: ' . $url, true, ($permanent === true) ? 301 : 302);
@@ -194,7 +193,7 @@ function Redirect($url, $refreshRate = null, $permanent = false) {
  * @throws SystemException
  */
 function getDb() {
-    if (is_null(Globals::get('DB'))) {
+    if(is_null(Globals::get('DB'))) {
         Globals::set('DB', DB::getInstance());
     }
     return Globals::get('DB');
@@ -212,7 +211,7 @@ function getUserFromSession() {
  */
 function getFullUserFromSession() {
     $userStr = $_SESSION['FULL_USER'];
-    if (isNotEmpty($userStr)) {
+    if(isNotEmpty($userStr)) {
         return unserialize($userStr);
     }
     return null;
@@ -233,7 +232,7 @@ function setUserToSession($user) {
  * @throws SystemException
  */
 function require_safe($path) {
-    if (file_exists(($path))) {
+    if(file_exists(($path))) {
         require($path);
     } else {
         throw new SystemException($path . " doesn't exist");
@@ -246,7 +245,7 @@ function require_safe($path) {
  * @throws SystemException
  */
 function exists_safe($path) {
-    if (file_exists(($path))) {
+    if(file_exists(($path))) {
         return true;
     } else {
         throw new SystemException($path . " doesn't exist");
@@ -258,7 +257,7 @@ function exists_safe($path) {
  * @return int
  */
 function addErrorMessage($msg) {
-    if (!isset($_SESSION[MessageTypes::ERROR_MESSAGES])) {
+    if(!isset($_SESSION[MessageTypes::ERROR_MESSAGES])) {
         $_SESSION[MessageTypes::ERROR_MESSAGES] = [];
     }
     return array_push($_SESSION[MessageTypes::ERROR_MESSAGES], $msg);
@@ -269,7 +268,7 @@ function addErrorMessage($msg) {
  * @return int
  */
 function addSuccessMessage($msg) {
-    if (!isset($_SESSION[MessageTypes::SUCCESS_MESSAGES])) {
+    if(!isset($_SESSION[MessageTypes::SUCCESS_MESSAGES])) {
         $_SESSION[MessageTypes::SUCCESS_MESSAGES] = [];
     }
 
@@ -281,7 +280,7 @@ function addSuccessMessage($msg) {
  * @return int
  */
 function addInfoMessage($msg) {
-    if (!isset($_SESSION[MessageTypes::INFO_MESSAGES])) {
+    if(!isset($_SESSION[MessageTypes::INFO_MESSAGES])) {
         $_SESSION[MessageTypes::INFO_MESSAGES] = [];
     }
     return array_push($_SESSION[MessageTypes::INFO_MESSAGES], $msg);
@@ -324,10 +323,10 @@ function consumeMessage($arrayName) {
  */
 function isEmpty($val) {
     $check = !isset($val) || $val == null;
-    if (!$check) {
-        if (is_array($val)) {
+    if(!$check) {
+        if(is_array($val)) {
             $check = empty(array_filter($val));
-        } else if (is_numeric($val)) {
+        } else if(is_numeric($val)) {
             $check = is_null($val);
         } else {
             $check = empty($val);
@@ -349,7 +348,7 @@ function isNotEmpty($val) {
  * @return string
  */
 function safe_input($data) {
-    if (isNotEmpty($data)) {
+    if(isNotEmpty($data)) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
@@ -374,7 +373,7 @@ function defineSystemVariables() {
 //define('DS', DIRECTORY_SEPARATOR);
     defined('DS') or define('DS', "/");
 
-    if (!defined('PHP_ROOT_PATH')) {
+    if(!defined('PHP_ROOT_PATH')) {
         $str = dirname(__DIR__) . DS;
         $str = preg_replace("/\\\\/", DS, $str);
         define('PHP_ROOT_PATH', $str);
@@ -529,15 +528,14 @@ function transliterateString($txt) {
  * Returns part of text of the post as a preview
  */
 function postTextPreview($postText, $viewType) {
-    if ($viewType == "grid"){
+    if($viewType == "grid") {
         $maxLength = 100;
-    } else if ($viewType == "list") {
+    } else if($viewType == "list") {
         $maxLength = 250;
     }
-    if (strlen($postText) > $maxLength) {
-        return substr(strip_tags($postText),0,$maxLength) . "...";
-    }
-    else {
+    if(strlen($postText) > $maxLength) {
+        return substr(strip_tags($postText), 0, $maxLength) . "...";
+    } else {
         return $postText;
     }
 }
@@ -546,8 +544,8 @@ function postTextPreview($postText, $viewType) {
  * @return bool
  */
 function is_session_started() {
-    if (php_sapi_name() !== 'cli') {
-        if (version_compare(phpversion(), '5.4.0', '>=')) {
+    if(php_sapi_name() !== 'cli') {
+        if(version_compare(phpversion(), '5.4.0', '>=')) {
             return session_status() === PHP_SESSION_ACTIVE;
         } else {
             return session_id() !== '';

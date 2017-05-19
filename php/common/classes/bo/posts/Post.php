@@ -11,6 +11,14 @@ class Post {
     private $postDetails;
 
     /**
+     * Post constructor.
+     */
+    public function __construct() {
+        //default constructor
+        $this->setPostDetails(PostDetails::create());
+    }
+
+    /**
      * @return mixed
      */
     public function getID() {
@@ -214,7 +222,6 @@ class Post {
      */
     public static function create() {
         $instance = new self();
-        $instance->setPostDetails(PostDetails::create());
         return $instance;
     }
 

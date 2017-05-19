@@ -17,6 +17,11 @@ class User {
     private $picture;
 
     /**
+     * @var UserMeta[]
+     */
+    private $userMeta;
+
+    /**
      * User constructor.
      */
     public function __construct() {
@@ -300,6 +305,22 @@ class User {
      */
     public function setIsAdmin($is_admin) {
         $this->is_admin = $is_admin ? 1 : 0;
+        return $this;
+    }
+
+    /**
+     * @return UserMeta[]
+     */
+    public function getUserMeta() {
+        return $this->userMeta;
+    }
+
+    /**
+     * @param mixed $userMeta
+     * @return $this
+     */
+    public function setUserMeta($userMeta) {
+        $this->userMeta = $userMeta;
         return $this;
     }
 

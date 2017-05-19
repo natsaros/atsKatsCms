@@ -6,6 +6,14 @@ class Db {
     const USER_META = 'USER_META';
     const PAGES = 'PAGES';
     const PAGE_META = 'PAGE_META';
+
+    const USER_GROUPS = 'USER_GROUPS';
+    const USER_GROUPS_META = 'USER_GROUPS_META';
+    const UGR_ASSOC = 'UGR_ASSOC';
+    const ACCESS_RIGHTS = 'ACCESS_RIGHTS';
+    const ACCESS_RIGHTS_META = 'ACCESS_RIGHTS_META';
+    const ACR_ASSOC = 'ACR_ASSOC';
+
     const POSTS = 'POSTS';
     const POST_META = 'POST_DETAILS';
     const COMMENTS = 'COMMENTS';
@@ -22,7 +30,7 @@ class Db {
 
     private $initialized;
 
-    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META);
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC);
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
@@ -37,6 +45,13 @@ class Db {
     public $post_meta;
     public $comments;
     public $comment_meta;
+
+    public $user_groups;
+    public $user_groups_meta;
+    public $ugr_assoc;
+    public $access_rights;
+    public $access_rights_meta;
+    public $acr_assoc;
 
     /**
      * @return Db
@@ -266,11 +281,11 @@ class Db {
     /**
      * @param $prefix
      * @param bool $set_table_names
+     * @throws SystemException
      */
     public function setCustomPrefix($prefix, $set_table_names = true) {
         if(preg_match('|[^a-z0-9_]|i', $prefix)) {
-            //return new AK_Error('invalid_db_prefix', 'Invalid database prefix');
-            return;
+            throw new SystemException('Invalid database prefix');
         }
         $prefix = strtoupper($prefix);
 
@@ -308,6 +323,25 @@ class Db {
                     case self::COMMENT_META:
                         $this->setCommentMeta($updatedTable);
                         break;
+
+                    case self::USER_GROUPS:
+                        $this->setUserGroups($updatedTable);
+                        break;
+                    case self::USER_GROUPS_META:
+                        $this->setUserGroupsMeta($updatedTable);
+                        break;
+                    case self::UGR_ASSOC:
+                        $this->setUgrAssoc($updatedTable);
+                        break;
+                    case self::ACCESS_RIGHTS:
+                        $this->setAccessRights($updatedTable);
+                        break;
+                    case self::ACCESS_RIGHTS_META:
+                        $this->setAccessRightsMeta($updatedTable);
+                        break;
+                    case self::ACR_ASSOC:
+                        $this->setAcrAssoc($updatedTable);
+                        break;
                 }
             }
         }
@@ -340,59 +374,6 @@ class Db {
     public static function db_schema_from_file() {
         $sql = file_get_contents(getcwd() . DS . 'conf/init.sql');
         return $sql ? $sql : null;
-    }
-
-    /**
-     * @return string
-     * @deprecated
-     */
-    public function db_schema() {
-
-        $auto_increment = 'auto_increment';
-        $charset_collate = 'DEFAULT CHARACTER SET ' . DB_CHARSET;
-        if(DB_COLLATE != null && DB_COLLATE != '') {
-            $charset_collate .= ' COLLATE ' . DB_COLLATE;
-        }
-
-        $settings_table_query = "CREATE TABLE $this->settings(
-ID bigint(20) unsigned NOT NULL $auto_increment,
-skey VARCHAR(250) not null default '',
-sValue longtext,
-PRIMARY KEY  (ID)
-)$charset_collate;";
-
-        $users_table_query = "CREATE TABLE $this->users(
- ID bigint(20) unsigned NOT NULL $auto_increment,
- name VARCHAR(250) not null default '', 
- first_name VARCHAR(250) not null default '',
- last_name VARCHAR(250) not null default '',
- email VARCHAR(100) default '',
- phone VARCHAR(30) default '',
- link VARCHAR(250) default '',
- gender VARCHAR(50) default '',
- picture VARCHAR(250) default '',
- user_status int(11) NOT NULL default '0',
- is_admin int(11) NOT NULL default '0',
- activation_date DATETIME NOT NULL default '0000-00-00 00:00:00',
- modification_date DATETIME,
- PRIMARY KEY (ID)
-  )$charset_collate;";
-
-        $user_meta_table_query = "CREATE TABLE $this->user_meta (
-  ID bigint(20) unsigned NOT NULL auto_increment,
-  user_id bigint(20) unsigned NOT NULL default '0',
-  meta_key varchar(255) default NULL,
-  meta_value longtext,
-  PRIMARY KEY  (ID),
-  INDEX user_ind (user_id),
-  FOREIGN KEY (user_id)
-        REFERENCES $this->users(id)
-        ON DELETE CASCADE
-) $charset_collate;";
-
-        $global_tables_query = $settings_table_query . $users_table_query . $user_meta_table_query;
-        $queries = $global_tables_query;
-        return $queries;
     }
 
     /**
@@ -447,6 +428,13 @@ PRIMARY KEY  (ID)
     }
 
     /**
+     * @param mixed $user_meta
+     */
+    public function setUserMeta($user_meta) {
+        $this->user_meta = $user_meta;
+    }
+
+    /**
      * @param mixed $comment_meta
      */
     public function setCommentMeta($comment_meta) {
@@ -489,11 +477,47 @@ PRIMARY KEY  (ID)
     }
 
     /**
-     * @param mixed $user_meta
+     * @param mixed $user_groups
      */
-    public function setUserMeta($user_meta) {
-        $this->user_meta = $user_meta;
+    public function setUserGroups($user_groups) {
+        $this->user_groups = $user_groups;
     }
+
+    /**
+     * @param mixed $user_groups_meta
+     */
+    public function setUserGroupsMeta($user_groups_meta) {
+        $this->user_groups_meta = $user_groups_meta;
+    }
+
+    /**
+     * @param mixed $ugr_assoc
+     */
+    public function setUgrAssoc($ugr_assoc) {
+        $this->ugr_assoc = $ugr_assoc;
+    }
+
+    /**
+     * @param mixed $access_rights
+     */
+    public function setAccessRights($access_rights) {
+        $this->access_rights = $access_rights;
+    }
+
+    /**
+     * @param mixed $access_rights_meta
+     */
+    public function setAccessRightsMeta($access_rights_meta) {
+        $this->access_rights_meta = $access_rights_meta;
+    }
+
+    /**
+     * @param mixed $acr_assoc
+     */
+    public function setAcrAssoc($acr_assoc) {
+        $this->acr_assoc = $acr_assoc;
+    }
+
 }
 
 ?>
