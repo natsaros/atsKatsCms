@@ -15,7 +15,6 @@ if ($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
 }
 
 $imagePath = safe_input($_POST[PostHandler::IMAGE_PATH]);
-$target_file = basename($image2Upload["name"]);
 
 if (isEmpty($title) || isEmpty($text)) {
     addInfoMessage("Please fill in required info");

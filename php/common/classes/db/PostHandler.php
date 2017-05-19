@@ -109,10 +109,10 @@ class PostHandler {
      * @throws SystemException
      */
     static function createPost($post) {
-        if (isNotEmpty($post)) {
+        if(isNotEmpty($post)) {
             $query = "INSERT INTO " . getDb()->posts . " (" . self::TITLE . "," . self::FRIENDLY_TITLE . "," . self::STATE . "," . self::USER_ID . "," . self::ACTIVATION_DATE . ") VALUES (?, ?, ?, ?, ?)";
             $created = getDb()->createStmt($query, array('s', 's', 'i', 's', 's'), array($post->getTitle(), $post->getFriendlyTitle(), PostStatus::PUBLISHED, $post->getUserId(), date('Y-m-d H:i:s')));
-            if ($created) {
+            if($created) {
                 $query = "INSERT INTO " . getDb()->post_meta .
                     " (" . self::TEXT .
                     "," . self::SEQUENCE .
@@ -124,12 +124,12 @@ class PostHandler {
                 $query = sprintf($query,
                     $post->getText(),
                     $post->getSequence(),
-                    $post->getImage(),
                     $post->getImagePath(),
+                    $post->getImage(),
                     $created);
                 $created = getDb()->createStmt($query,
-                    array('s', 's', 'b', 's', 'i'),
-                    array($post->getText(), $post->getSequence(), $post->getImage(), $post->getImagePath(), $created));
+                    array('s', 's', 's', 's', 'i'),
+                    array($post->getText(), $post->getSequence(), $post->getImagePath(), $post->getImage(), $created));
             }
             return $created;
         }
@@ -146,12 +146,12 @@ class PostHandler {
         $updatedRes = getDb()->updateStmt($query,
             array('s', 's', 's', 'i', 'i'),
             array($post->getTitle(), $post->getFriendlyTitle(), $post->getState(), $post->getUserId(), $post->getID()));
-        if ($updatedRes) {
+        if($updatedRes) {
             $updatedId = getDb()->selectStmtSingleNoParams("SELECT LAST_INSERT_ID() AS " . self::ID . "");
             $updatedId = $updatedId["" . self::ID . ""];
             $query = "UPDATE " . getDb()->post_meta . " SET " . self::TEXT . " = ?, " . self::SEQUENCE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ? WHERE " . self::POST_ID . " = ?";
             $updatedRes = getDb()->updateStmt($query,
-                array('s', 's', 's', 'b', 'i'),
+                array('s', 's', 's', 's', 'i'),
                 array($post->getText(), $post->getSequence(), $post->getImagePath(), $post->getImage(), $updatedId));
         }
         return $updatedRes;
@@ -164,7 +164,7 @@ class PostHandler {
      * @throws SystemException
      */
     public static function updatePostStatus($id, $status) {
-        if (isNotEmpty($id)) {
+        if(isNotEmpty($id)) {
             $query = "UPDATE " . getDb()->posts . " SET " . self::STATE . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query, array('i', 'i'), array($status, $id));
         }
@@ -177,10 +177,10 @@ class PostHandler {
      * @throws SystemException
      */
     public static function deletePost($id) {
-        if (isNotEmpty($id)) {
+        if(isNotEmpty($id)) {
             $query = "DELETE FROM " . getDb()->post_meta . " WHERE " . self::POST_ID . " = ?";
             $res = getDb()->updateStmt($query, array('i'), array($id));
-            if ($res) {
+            if($res) {
                 $query = "DELETE FROM " . getDb()->posts . " WHERE " . self::ID . " = ?";
                 $res = getDb()->updateStmt($query, array('i'), array($id));
             }
@@ -199,14 +199,14 @@ class PostHandler {
      * @throws SystemException
      */
     private static function populatePosts($rows, $withDetails) {
-        if ($rows === false) {
+        if($rows === false) {
             return false;
         }
 
         $posts = [];
 
-        foreach ($rows as $row) {
-            if ($withDetails) {
+        foreach($rows as $row) {
+            if($withDetails) {
                 $ID = $row[self::ID];
                 $postDetails = self::getPostDetailsById($ID);
                 $posts[] = self::populatePostWithDetails($row, $postDetails);
@@ -225,11 +225,11 @@ class PostHandler {
      * @throws SystemException
      */
     private static function populatePostWithDetails($row, $postDetails) {
-        if ($row === false || null === $row) {
+        if($row === false || null === $row) {
             return null;
         }
         $post = self::populatePost($row);
-        if ($post !== null) {
+        if($post !== null) {
             $post->setPostDetails($postDetails);
         }
         return $post;
@@ -241,7 +241,7 @@ class PostHandler {
      * @throws SystemException
      */
     private static function populatePost($row) {
-        if ($row === false || null === $row) {
+        if($row === false || null === $row) {
             return null;
         }
         $post = Post::createPost($row[self::ID], $row[self::TITLE], $row[self::FRIENDLY_TITLE], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::STATE], $row[self::USER_ID]);
@@ -254,7 +254,7 @@ class PostHandler {
      * @throws SystemException
      */
     private static function populatePostDetails($row) {
-        if ($row === false || null === $row) {
+        if($row === false || null === $row) {
             return null;
         }
         $postDetails = PostDetails::createPostDetails($row[self::ID], $row[self::POST_ID], $row[self::SEQUENCE], $row[self::TEXT], $row[self::IMAGE_PATH], $row[self::IMAGE]);

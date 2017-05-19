@@ -53,11 +53,11 @@
     <?php if (!is_null($post)) { ?>
         <link rel="stylesheet" href="<?php echo ASSETS_URI ?>font-awesome/css/font-awesome.min.css">
     <?php } ?>
-    <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/custom.css">
+    <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/custom.min.css">
     <script src="<?php echo ASSETS_URI ?>js/jquery.min.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/bootstrap.min.js"></script>
     <?php if ($pageId == "contact") { ?>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
     <?php } ?>
-    <script src="<?php echo ASSETS_URI ?>js/custom.js"></script>
+    <script src="<?php echo ASSETS_URI ?>js/custom.min.js"></script>
 </head>

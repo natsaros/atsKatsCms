@@ -112,4 +112,5 @@ $(window).scroll(function () {
             $(this).addClass("slide");
         }
     });
+
 });

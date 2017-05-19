@@ -17,6 +17,9 @@ class ImageUtil {
         $path2post = PICTURES_ROOT . $post->getID() . DS . $post->getImagePath();
         if (!file_exists($path2post)) {
             if (isNotEmpty($post->getImage())) {
+
+                //save image to file system to serve it from there next time
+                self::saveImageContentToFile($path2post,$post->getImage());
                 return self::renderImageFromBlob($post);
             } else {
                 return self::renderImageFromGallery($path2post, 'blog_default.png');
@@ -102,8 +105,17 @@ class ImageUtil {
 //        $imgContent = fread($fp, filesize($tmpFileContent)); // read the temp file
 //        fclose($fp); // close the file handle
 
-        $imgContent = addslashes(file_get_contents($tmpFileContent));
+        $imgContent = file_get_contents($tmpFileContent);
         return $imgContent;
+    }
+
+    /**
+     * @param $path
+     * @param $data
+     * @return bool|string
+     */
+    static function saveImageContentToFile($path, $data) {
+        return file_put_contents($path, $data);
     }
 
     static function saveImageToFileSystem($extraPath, $tmpFile) {

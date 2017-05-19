@@ -545,6 +545,7 @@ table.dataTable thead .sorting:after {
     position: relative;
     overflow: hidden;
 }
+
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -559,4 +560,13 @@ table.dataTable thead .sorting:after {
     background: white;
     cursor: inherit;
     display: block;
+}
+
+.uploadPreview {
+    text-align: center;
+}
+
+.uploadPreview > img {
+    max-width: 25%;
+    height: auto;
 }

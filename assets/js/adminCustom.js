@@ -25,7 +25,8 @@ $(document).ready(function () {
                 'searchreplace visualblocks code fullscreen',
                 'insertdatetime media table contextmenu paste code'
             ],
-            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link',
+            // add this to the end of previous line if you want image uploading in the html editor : image
             // image_advtab: true,
             content_css: ['//fonts.googleapis.com/css?family=Lato:300,300i,400,400i', '//www.tinymce.com/css/codepen.min.css']
         });
@@ -35,10 +36,10 @@ $(document).ready(function () {
         var input = $(this).parents('.input-group').find(':text'),
             log = numFiles > 1 ? numFiles + ' files selected' : label;
 
-        if( input.length ) {
+        if (input.length) {
             input.val(log);
         } else {
-            if( log ) alert(log);
+            if (log) alert(log);
         }
     });
 });
@@ -54,6 +55,15 @@ function handlerImageOut() {
     btn.css('visibility', 'hidden').css('top', '0');
 }
 
+function previewImage(fileInput) {
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(fileInput.files[0]);
+    var $img = $(fileInput).closest('.form-group').next().find('img');
+    oFReader.onload = function (oFREvent) {
+        $img[0].src = oFREvent.target.result;
+    };
+}
+
 $(document).on('change', 'input[type=checkbox]', function () {
     if ($(this).is(':checked')) {
         $(this).val('true');
@@ -67,4 +77,5 @@ $(document).on('change', ':file', function () {
         numFiles = input.get(0).files ? input.get(0).files.length : 1,
         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect', [numFiles, label]);
+    previewImage(this);
 });

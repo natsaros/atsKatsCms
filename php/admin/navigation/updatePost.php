@@ -11,13 +11,12 @@ $isCreate = isEmpty($postId);
 
 <?php
 $loggedInUser = getFullUserFromSession();
-if ($isCreate) {
+if($isCreate) {
     $currentPost = Post::create();
 } else {
     $currentPost = PostHandler::getPostByIDWithDetails($postId);
 }
 ?>
-
 
 <div class="row">
     <div class="col-lg-12">
@@ -43,12 +42,17 @@ if ($isCreate) {
             <div class="form-group input-group">
                 <label class="input-group-btn">
                     <span class="btn btn-primary btn-file">
-                    Browse&hellip; <input type="file" style="display: none;" name="<?php echo PostHandler::IMAGE ?>"
-                                          multiple>
+                    Browse&hellip; <input type="file" style="display: none;" id="uploadImage"
+                                          name="<?php echo PostHandler::IMAGE ?>"
+                                          multiple">
                     </span>
                 </label>
                 <input type="text" value="<?php echo $currentPost->getImagePath(); ?>"
                        name="<?php echo PostHandler::IMAGE_PATH ?>" class="form-control" readonly>
+            </div>
+
+            <div class="form-group uploadPreview">
+                <img src="<?php echo ImageUtil::renderBlogImage($currentPost); ?>"/>
             </div>
 
             <div class="form-group">

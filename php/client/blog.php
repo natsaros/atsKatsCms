@@ -17,7 +17,7 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
     <div id="postsList">
         <?php
         /* @var $post Post */
-        foreach ($posts as $key => $post) { ?>
+        foreach($posts as $key => $post) { ?>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row">
@@ -61,12 +61,13 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
     <div id="postsGrid" style="display: none;">
         <?php
         $count = 0;
-        if ($count == 0) {
+        if($count == 0) {
         ?>
         <div class="row">
             <?php
             }
-            foreach ($posts as $key => $post) {
+            /* @var $post Post */
+            foreach($posts as $key => $post) {
             $count++;
             ?>
             <div class="col-sm-4">
@@ -101,7 +102,7 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
                     </div>
                 </div>
             </div>
-            <?php if ($count == 3 || $key == (sizeof($posts) - 1)) {
+            <?php if($count == 3 || $key == (sizeof($posts) - 1)) {
             $count = 0; ?>
         </div>
     <?php
