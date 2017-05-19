@@ -3,32 +3,33 @@ $config = parse_ini_file(getcwd() . DS . 'conf/config.ini');
 if($config) {
     // ** MySQL settings - You can get this info from your web host ** //
     /** The name of the database for WordPress */
-    define('DB_NAME', $config['dbname']);
+    defined('DB_NAME') or define('DB_NAME', $config['dbname']);
 
     /** MySQL database username */
-    define('DB_USER', $config['username']);
+    defined('DB_USER') or define('DB_USER', $config['username']);
 
     /** MySQL database password */
-    define('DB_PASSWORD', $config['password']);
+    defined('DB_PASSWORD') or define('DB_PASSWORD', $config['password']);
 
     /** MySQL hostname */
-    define('DB_HOST', $config['host']);
+    defined('DB_HOST') or define('DB_HOST', $config['host']);
 
     /** Database Charset to use in creating database tables. */
-    define('DB_CHARSET', 'utf8');
+    defined('DB_CHARSET') or define('DB_CHARSET', 'utf8');
 
     /** The Database Collate type. Don't change this if in doubt. */
-    define('DB_COLLATE', '');
+    defined('DB_COLLATE') or define('DB_COLLATE', '');
 
-    define('TABLE_PREFIX', $config['table_prefix']);
+    defined('TABLE_PREFIX') or define('TABLE_PREFIX', $config['table_prefix']);
 
-    define('ALLOWED_TYPES', $config['allowed_types']);
+    defined('ALLOWED_TYPES') or define('ALLOWED_TYPES', $config['allowed_types']);
 
     $log_file = $config['log_file'];
     if(isEmpty($log_file)) {
         $log_file = 'error_log';
     }
-    define('CONF_LOG_FILE', $log_file . '.txt');
+    defined('CONF_LOG_FILE') or define('CONF_LOG_FILE', $log_file . '.txt');
+    defined('DEV_MODE') or define('DEV_MODE', $config['dev_mode'] === 'true');
 
 } else {
     $die = sprintf(

@@ -36,10 +36,14 @@
         <div class="col-sm-12">
             <div class="blogPostShareContainer">
                 Μοιράσου αυτό το άρθρο:
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode("http://fitnesshousebypenny.gr/blog/" . transliterateString($post->getTitle())); ?>"
+                <?php
+                $append = urlencode("http://fitnesshousebypenny.gr/blog/" . $post->getFriendlyTitle());
+                $href = "https://www.facebook.com/sharer/sharer.php?u=" . $append;
+                ?>
+                <a href="<?php echo $href?>"
                    class="fa fa-facebook"
                    onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=545,width=560');return false;"></a>
-                <a href="#" class="fa fa-twitter" target="_blank"></a>
+<!--                <a href="#" class="fa fa-facebook" target="_blank"></a>-->
             </div>
         </div>
     </div>

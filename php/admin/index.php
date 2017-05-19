@@ -14,7 +14,11 @@ if (isEmpty($action)) {
 
     $page = $_GET["page"];
     if (isEmpty($page)) {
-        define('ADMIN_PAGE_ID', 'dashboard');
+        if(isNotEmpty(DEV_MODE) && DEV_MODE) {
+            define('ADMIN_PAGE_ID', 'dashboard');
+        } else {
+            define('ADMIN_PAGE_ID', 'users');
+        }
     } else {
         define('ADMIN_PAGE_ID', $page);
     }
