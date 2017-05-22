@@ -93,6 +93,7 @@ class UserHandler {
      * @throws SystemException
      */
     static function updateUser($user) {
+        //TODO add user meta query here
         if(isNotEmpty($user)) {
             $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::IS_ADMIN . " = ?, " . self::PICTURE . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query,
@@ -119,6 +120,7 @@ class UserHandler {
      * @throws SystemException
      */
     static function createUser($user) {
+        //TODO add user meta query here
         if(isNotEmpty($user)) {
             $query = "INSERT INTO " . getDb()->users .
                 " (" . self::USER_STATUS .

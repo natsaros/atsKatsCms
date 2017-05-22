@@ -121,12 +121,6 @@ class PostHandler {
                     "," . self::POST_ID .
                     ") VALUES (?, ?, ?, ?, ?)";
 
-                $query = sprintf($query,
-                    $post->getText(),
-                    $post->getSequence(),
-                    $post->getImagePath(),
-                    $post->getImage(),
-                    $created);
                 $created = getDb()->createStmt($query,
                     array('s', 's', 's', 's', 'i'),
                     array($post->getText(), $post->getSequence(), $post->getImagePath(), $post->getImage(), $created));

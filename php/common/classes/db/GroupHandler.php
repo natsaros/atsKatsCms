@@ -12,6 +12,9 @@ class GroupHandler {
     const ID = 'ID';
     const GROUP_NAME = 'NAME';
     const STATUS = 'STATUS';
+    const GROUP_ID = 'GROUP_ID';
+    const META_KEY = 'META_KEY';
+    const META_VALUE = 'META_VALUE';
 
     /**
      * @return Group[]|bool
@@ -54,6 +57,68 @@ class GroupHandler {
         if(isNotEmpty($id)) {
             $query = "UPDATE " . getDb()->user_groups . " SET " . self::STATUS . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query, array('i', 'i'), array($groupStatus, $id));
+        }
+        return null;
+    }
+
+    /**
+     * @param Group $group
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    static function create($group) {
+        if(isNotEmpty($group)) {
+            $query = "INSERT INTO " . getDb()->user_groups . " (" . self::GROUP_NAME . "," . self::STATUS . ") VALUES (?, ?)";
+            $created = getDb()->createStmt($query, array('s', 's'), array($group->getName(), GroupStatus::ACTIVE));
+            if($created) {
+                $groupMetas = $group->getGroupMeta();
+                if(isNotEmpty($groupMetas) && count($groupMetas) > 0) {
+                    /** @var GroupMeta $meta */
+                    foreach($group->getGroupMeta() as $meta) {
+                        $query = "INSERT INTO " . getDb()->user_groups_meta .
+                            " (" . self::META_KEY .
+                            "," . self::META_VALUE .
+                            "," . self::GROUP_ID .
+                            ") VALUES (?, ?, ?)";
+                        $createdMeta = getDb()->createStmt($query,
+                            array('s', 's', 'i'),
+                            array($meta->getMetaKey(), $meta->getMetaValue(), $created));
+                    }
+                }
+            }
+            return $created;
+        }
+        return null;
+    }
+
+    /**
+     * @param Group $group
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    static function update($group) {
+        if(isNotEmpty($group)) {
+            $query = "UPDATE " . getDb()->user_groups . " SET " . self::GROUP_NAME . " = ?, " . self::STATUS . " = ? ," . self::ID . " = LAST_INSERT_ID(" . $group->getID() . ") WHERE " . self::ID . " = ?;";
+            $updatedRes = getDb()->updateStmt($query,
+                array('s', 'i', 'i'),
+                array($group->getName(), $group->getStatus(), $group->getID()));
+            if($updatedRes) {
+                $updatedId = getDb()->selectStmtSingleNoParams("SELECT LAST_INSERT_ID() AS " . self::ID . "");
+                $updatedId = $updatedId["" . self::ID . ""];
+
+                $groupMetas = $group->getGroupMeta();
+                if(isNotEmpty($groupMetas) && count($groupMetas) > 0) {
+                    /** @var GroupMeta $meta */
+                    foreach($group->getGroupMeta() as $meta) {
+                        $query = "UPDATE " . getDb()->user_groups_meta . " SET " . self::META_KEY . " = ?, " . self::META_VALUE . " = ? WHERE " . self::GROUP_ID . " = ?";
+                        $updatedRes = getDb()->updateStmt($query,
+                            array('s', 's', 'i'),
+                            array($meta->getMetaKey(), $meta->getMetaValue(), $updatedId));
+                    }
+                }
+
+            }
+            return $updatedRes;
         }
         return null;
     }
