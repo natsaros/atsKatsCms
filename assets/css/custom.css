@@ -71,6 +71,7 @@ textarea { resize: vertical; }
 .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus { color: #fff; background-color: #c5930c; border-color: #c5930c; }
 
 .headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 34px; display: inline-block; margin: 10px 0 20px 0; }
+.commentsTitle { font-family: Roboto,Arial,sans-serif; font-weight: 300; font-size: 34px; margin: 10px 0 20px 0; text-align: left;}
 .contactHero .headerTitle { text-shadow: 1px 0 1px #000;}
 .noteTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 30px; display: inline-block; margin: 10px 0 20px 0;font-style: italic;}
 .titlesBorder { margin: 20px auto; border: 2px solid #FDC300; border-radius: 2px; width: 70%; }
@@ -198,8 +199,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .blogBorder {margin: 10px auto 25px;border: 1px solid #FDC300;border-radius: 2px;width: 100%;opacity: 0.6;}
 .blogImageList {height: 120px;}
 .blogImageGrid {height: 160px;}
-.blogPostPreviewTitleList {font-weight: 700;font-size: 18px;text-align: left;margin-bottom: 20px;}
-.blogPostPreviewTitleGrid {font-weight: 700;font-size: 18px;text-align: center;margin: 20px 0;display: inline-block;}
+.blogPostPreviewTitleList {font-weight: 700;font-size: 18px;text-align: left;margin-bottom: 10px;}
+.blogPostPreviewTitleGrid {font-weight: 700;font-size: 18px;text-align: center;margin: 10px 0 0;display: inline-block;}
 .blogPostPreviewTextList {font-size: 16px;text-align: left;max-height: 65px;overflow: hidden;}
 .blogPostPreviewTextGrid {font-size: 16px;text-align: center;max-height: 90px;min-height: 90px;overflow: hidden;margin-bottom: 30px;}
 .blogReadMore {text-align: right;font-size: 12px;font-weight: 700;font-style: italic;}
@@ -208,17 +209,26 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .blogPostImage {height: 400px;}
 .blogPostTextContainer {padding: 3% 0;font-size: 18px;text-align: left;}
 .blogPostShareContainer {font-size: 14px; text-align: right;}
-
+.blogPostsDateList {margin-bottom: 15px;text-align: left;font-size: 12px;}
+.blogPostsDateGrid {margin-bottom: 15px;font-size: 12px;}
+.blogPostDate {margin-bottom: 25px;text-align: left;font-size: 14px;}
+.blogPostsViewType img {width: 32px;height: 32px;padding: 4px;}
+.blogPostsViewType.active img {border: 1px solid #cecece;border-radius: 4px;background-color: #f5f5f5;}
+.blogPostsViewTypes {margin-bottom: 50px;}
 .fa {font-size: 14px;width: 24px;text-align: center;border-radius: 100%;height: 24px;line-height: 24px;margin: 0 5px;}
 .fa:first-child {margin-left: 10px;}
 .fa-facebook, .fa-facebook:hover, .fa-facebook:focus {background: #3B5998;color: white;}
 .fa-twitter, .fa-twitter:hover, .fa-twitter:focus {background: #55ACEE;color: white;}
+.facebook-login-button {background: #3b5998;color: white;font-size: 16px;padding:10px 20px;border-radius: 5px;margin: 20px 0;display: inline-block;}
+.facebook-login-button:hover, .facebook-login-button:active, .facebook-login-button:focus {color: white;}
+.facebook-login-button span{background: #fff;color: #3b5998;border-radius: 4px;font-size: 18px;line-height: 24px;margin: 0 5px;width: 24px;height: 24px;}
+.facebook-login-button span:before{content: "\f09a";}
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
     .carousel-info{max-height: 380px;}
     .quote h3 { font-size: 40px;text-shadow: 3px 0 1px #000;}
     .quote footer { font-size: 22px;text-shadow:none;}
-    .headerTitle{font-size: 26px;}
+    .headerTitle, .commentsTitle{font-size: 26px;}
     .noteTitle{font-size: 24px;}
     .heroHeader .heroSubTitle{font-size: 20px;}
     .textHolderInside, .textHolderPilatesInside {font-size:18px;}
@@ -252,7 +262,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .comment{font-size: 19px;}
     .openQuote, .closeQuote {width: 12px; height: 12px; }
     .motoContainer{font-size:23px;}
-    .headerTitle{font-size: 22px;}
+    .headerTitle, .commentsTitle{font-size: 22px;}
     .noteTitle{font-size: 18px;width:85%;}
     .textHolderInside, .textHolderPilatesInside {font-size:16px;}
     .heroHeader .heroSubTitle{font-size: 16px;}

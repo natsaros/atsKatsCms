@@ -1,14 +1,4 @@
-<div id="fb-root"></div>
-<script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/el_GR/sdk.js#xfbml=1&version=v2.9&appId=1861331620818807";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<script src="<?php echo ASSETS_URI ?>js/fb-login.min.js"></script>
 
 <div class="container-fluid text-center belowHeader blogContainer">
     <div class="row">
@@ -16,6 +6,13 @@
             <div class="blogHeaderTitle">
                 <p><?php echo $post->getTitle(); ?></p>
                 <div class="blogPostTitlesBorder"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="blogPostDate">
+                <?php echo date_format(date_create($post->getActivationDate()), 'd M Y'); ?>
             </div>
         </div>
     </div>
@@ -42,13 +39,56 @@
                 ?>
                 <a href="<?php echo $href?>"
                    class="fa fa-facebook"
-                   onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=545,width=560');return false;"></a>
-<!--                <a href="#" class="fa fa-facebook" target="_blank"></a>-->
+                   onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=545,width=560');return false;">
+
+                </a>
+                <a href="#" class="fa fa-twitter" target="_blank">
+
+                </a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="blogPostBorder"></div>
     </div>
-    <div class="fb-comments" data-href="http://fitnesshousebypenny.gr/home" data-width="100%" data-numposts="5"></div>
+
+    <div class="row" id="fbLoginSection">
+        <div class="col-sm-12">
+            <a class="facebook-login-button" href="javascript:void(0);" onclick="fbLogin();">
+                Συνδεθείτε στο Facebook για να σχολιάσετε το άρθρο
+                <span class="fa"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row" id="newCommentSection" style="display: none;">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="commentsTitle">
+                        Σχόλια
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Ονοματεπώνυμο *" type="text"
+                           required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email *" type="email" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <textarea class="form-control" id="comments" name="goal" placeholder="Γράψτε το σχόλιό σας *" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button class="btn btn-block btn-default" type="submit">Δημοσίευση</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

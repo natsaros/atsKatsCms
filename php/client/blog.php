@@ -3,18 +3,17 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
 ?>
 
 <div class="container-fluid text-center belowHeader blogContainer">
-
-    <!--    DEN MPOROUSA NA APOFASISW KAI EBALA KAI TA DUO :P -->
-    <!--    EDW THA MPOYN EIKONIDIA-->
-    <div style="text-align:center;margin-bottom: 50px;">
-        <a href="javascript:void(0);" id="postListLink" style="text-decoration:underline;"
-           onclick="$('#postsList').fadeIn();$('#postsGrid').hide();$(this).css('text-decoration', 'underline');$('#postGridLink').css('text-decoration', 'none');">List</a>
-        <a href="javascript:void(0);" id="postGridLink"
-           onclick="$('#postsGrid').fadeIn();$('#postsList').hide();$(this).css('text-decoration', 'underline');$('#postListLink').css('text-decoration', 'none');">Grid</a>
+    <div class="blogPostsViewTypes">
+        <a href="javascript:void(0);" class="blogPostsViewType active" data-viewType="postsViewTypeList">
+            <img src="<?php echo ASSETS_URI ?>img/list.png">
+        </a>
+        <a href="javascript:void(0);" class="blogPostsViewType" data-viewType="postsViewTypeGrid">
+            <img src="<?php echo ASSETS_URI ?>img/grid.png">
+        </a>
     </div>
 
 
-    <div id="postsList">
+    <div id="postsViewTypeList">
         <?php
         /* @var $post Post */
         foreach($posts as $key => $post) { ?>
@@ -35,6 +34,13 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
                             </div>
                             <div class="row row-no-padding">
                                 <div class="col-sm-12">
+                                    <div class="blogPostsDateList">
+                                        <?php echo date_format(date_create($post->getActivationDate()), 'd M Y'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-no-padding">
+                                <div class="col-sm-12">
                                     <div class="blogPostPreviewTextList">
                                         <?php echo postTextPreview($post->getText(), "list"); ?>
                                     </div>
@@ -46,7 +52,7 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
                         <div class="col-sm-12">
                             <div class="blogReadMore">
                                 <a href="<?php echo REQUEST_URI ?>blog/<?php echo transliterateString($post->getFriendlyTitle()); ?>">
-                                    Διαβάστε περισσότερα...
+                                    Διαβάστε Περισσότερα...
                                 </a>
                             </div>
                         </div>
@@ -58,7 +64,7 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
             </div>
         <?php } ?>
     </div>
-    <div id="postsGrid" style="display: none;">
+    <div id="postsViewTypeGrid" style="display: none;">
         <?php
         $count = 0;
         if($count == 0) {
@@ -85,6 +91,13 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
                         </div>
                     </div>
                 </div>
+                <div class="row row-no-padding">
+                    <div class="col-sm-12">
+                        <div class="blogPostsDateGrid">
+                            <?php echo date_format(date_create($post->getActivationDate()), 'd M Y'); ?>
+                        </div>
+                    </div>
+                </div>
                 <div class="row row-no-padding row-no-margin">
                     <div class="col-sm-12">
                         <div class="blogPostPreviewTextGrid">
@@ -96,7 +109,7 @@ $posts = PostHandler::fetchAllActivePostsWithDetails();
                     <div class="col-sm-12">
                         <div class="blogReadMore">
                             <a href="<?php echo REQUEST_URI ?>blog/<?php echo transliterateString($post->getFriendlyTitle()); ?>">
-                                Διαβάστε περισσότερα...
+                                Διαβάστε Περισσότερα...
                             </a>
                         </div>
                     </div>

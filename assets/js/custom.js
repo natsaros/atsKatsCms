@@ -53,6 +53,15 @@ $(document).ready(function () {
             $('.partner').not(this).addClass('partnerImageFade');
         }
     });
+
+    $('.blogPostsViewType').on('click', function(){
+        if (!$(this).hasClass('active')){
+            $('.blogPostsViewType').removeClass('active');
+            $('div[id^="postsViewType"]').hide();
+            $('#' + $(this).data('viewtype')).fadeIn();
+            $(this).addClass('active');
+        }
+    });
 });
 
 function initialize(myCenter) {
