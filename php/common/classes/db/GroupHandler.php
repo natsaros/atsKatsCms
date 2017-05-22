@@ -13,6 +13,7 @@ class GroupHandler {
     const GROUP_NAME = 'NAME';
     const STATUS = 'STATUS';
     const GROUP_ID = 'GROUP_ID';
+    const META_ID = 'ID';
     const META_KEY = 'META_KEY';
     const META_VALUE = 'META_VALUE';
 
@@ -44,7 +45,14 @@ class GroupHandler {
     static function getGroupById($ID) {
         $query = "SELECT * FROM " . getDb()->user_groups . " WHERE " . self::ID . " = ?";
         $row = getDb()->selectStmtSingle($query, array('i'), array($ID));
-        return self::populateGroup($row);
+        if($row) {
+            $group = self::populateGroup($row);
+            $query = "SELECT * FROM " . getDb()->user_groups_meta . " WHERE " . self::GROUP_ID . " = ?";
+            $rows = getDb()->selectStmt($query, array('i'), array($group->getID()));
+            $group->setGroupMeta(self::populateMetas($rows));
+            return $group;
+        }
+        return false;
     }
 
     /**
@@ -110,10 +118,9 @@ class GroupHandler {
                 if(isNotEmpty($groupMetas) && count($groupMetas) > 0) {
                     /** @var GroupMeta $meta */
                     foreach($group->getGroupMeta() as $meta) {
-                        $query = "UPDATE " . getDb()->user_groups_meta . " SET " . self::META_KEY . " = ?, " . self::META_VALUE . " = ? WHERE " . self::GROUP_ID . " = ?";
-                        $updatedRes = getDb()->updateStmt($query,
-                            array('s', 's', 'i'),
-                            array($meta->getMetaKey(), $meta->getMetaValue(), $updatedId));
+                        $query = "UPDATE " . getDb()->user_groups_meta . " SET " . self::META_KEY . " = ?, " . self::META_VALUE . " = ? WHERE " . self::GROUP_ID . " = ? AND " . self::META_ID . " = ?";
+                        $updatedRes = getDb()->updateStmt($query, array('s', 's', 'i', 'i'),
+                            array($meta->getMetaKey(), $meta->getMetaValue(), $updatedId, $meta->getID()));
                     }
                 }
 
@@ -154,4 +161,36 @@ class GroupHandler {
         }
         return Group::createGroup($row[self::ID], $row[self::GROUP_NAME], $row[self::STATUS]);
     }
+
+    /**
+     * @param $rows
+     * @return GroupMeta[]|bool
+     * @throws SystemException
+     */
+    private static function populateMetas($rows) {
+        if($rows === false) {
+            return false;
+        }
+
+        $metas = [];
+
+        foreach($rows as $row) {
+            $metas[] = self::populateMeta($row);
+        }
+
+        return $metas;
+    }
+
+    /**
+     * @param $row
+     * @return GroupMeta|bool
+     * @throws SystemException
+     */
+    private static function populateMeta($row) {
+        if($row === false) {
+            return false;
+        }
+        return GroupMeta::createMeta($row[self::ID], $row[self::GROUP_ID], $row[self::META_KEY], $row[self::META_VALUE]);
+    }
+
 }

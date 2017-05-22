@@ -19,6 +19,18 @@ class GroupMeta {
     }
 
     /**
+     * @return GroupMeta
+     */
+    public static function create() {
+        $instance = new self();
+        return $instance;
+    }
+
+    public static function createMeta($ID, $groupID, $key, $value) {
+        return self::create()->setID($ID)->setGroupId($groupID)->setMetaKey($key)->setMetaValue($value);
+    }
+
+    /**
      * @return mixed
      */
     public function getID() {

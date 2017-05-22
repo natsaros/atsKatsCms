@@ -244,6 +244,14 @@ function exists_safe($path) {
 }
 
 /**
+ * @return boolean
+ */
+function hasErrors() {
+    $errorMessages = $_SESSION[MessageTypes::ERROR_MESSAGES];
+    return isset($errorMessages) && isNotEmpty($errorMessages) && count($errorMessages) > 0;
+}
+
+/**
  * @param $msg string
  * @return int
  */
@@ -336,7 +344,7 @@ function isNotEmpty($val) {
 
 /**
  * @param $data
- * @return string
+ * @return mixed
  */
 function safe_input($data) {
     if(isNotEmpty($data)) {

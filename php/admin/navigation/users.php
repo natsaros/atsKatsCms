@@ -51,10 +51,11 @@ $activeTabClass = 'class="active"';
                                     //Opposite set to '$updatedStatus' so that this gets passed to the db
                                     $updatedStatus = $user->getUserStatus() ? UserStatus::INACTIVE : UserStatus::ACTIVE;
                                     $activDeactivText = $user->getUserStatus() ? 'Deactivate' : 'Activate';
+                                    $updateStatusUrl = getAdminActionRequestUri() . "group" . DS . "updateUserStatus" . addParamsToUrl(array('id', 'status'), array($userId, $updatedStatus));
                                     ?>
                                     <?php if($loggedInUser->getID() != $user->getID()) { ?>
                                         <a type="button"
-                                           href="<?php echo sprintf(getAdminActionRequestUri() . "user" . DS . "updateUserStatus?id=%s&status=%s", $userId, $updatedStatus); ?>"
+                                           href="<?php echo $updateStatusUrl; ?>"
                                            class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
                                             <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
                                             <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
@@ -62,7 +63,7 @@ $activeTabClass = 'class="active"';
                                         </a>
                                     <?php } ?>
                                     <a type="button"
-                                       href="<?php echo sprintf(getAdminRequestUri() . "updateUser?id=%s", $userId); ?>"
+                                       href="<?php echo getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($userId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit User">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </a>
@@ -111,10 +112,11 @@ $activeTabClass = 'class="active"';
                                     //Opposite set to '$updatedStatus' so that this gets passed to the db
                                     $updatedStatus = $group->getStatus() ? GroupStatus::INACTIVE : GroupStatus::ACTIVE;
                                     $activDeactivText = $group->getStatus() ? 'Deactivate' : 'Activate';
+                                    $updateStatusUrl = getAdminActionRequestUri() . "group" . DS . "updateGroupStatus" . addParamsToUrl(array('id', 'status'), array($groupId, $updatedStatus));
                                     ?>
 
                                     <a type="button"
-                                       href="<?php echo sprintf(getAdminActionRequestUri() . "group" . DS . "updateGroupStatus?id=%s&status=%s", $groupId, $updatedStatus); ?>"
+                                       href="<?php echo $updateStatusUrl; ?>"
                                        class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
                                         <?php $statusClass = $group->getStatus() ? 'text-success' : 'text-danger' ?>
                                         <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
@@ -122,7 +124,7 @@ $activeTabClass = 'class="active"';
                                     </a>
 
                                     <a type="button"
-                                       href="<?php echo sprintf(getAdminRequestUri() . "updateGroup?id=%s", $groupId); ?>"
+                                       href="<?php echo getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit User">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </a>

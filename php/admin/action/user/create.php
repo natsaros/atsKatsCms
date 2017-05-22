@@ -4,8 +4,8 @@ $userName = safe_input($_POST[UserHandler::USERNAME]);
 $email = safe_input($_POST[UserHandler::EMAIL]);
 
 if(isEmpty($password) || isEmpty($userName) || isEmpty($email)) {
-    //    TODO : add php side form validation message
-    //    addInfoMessage("Please fill in required info");
+    addInfoMessage("Please fill in required info");
+    Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
 }
 
 $first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
@@ -29,4 +29,8 @@ try {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
-Redirect(getAdminRequestUri() . "users");
+if(hasErrors()) {
+    Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
+} else {
+    Redirect(getAdminRequestUri() . "users");
+}
