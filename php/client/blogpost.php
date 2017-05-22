@@ -86,7 +86,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-3">
-                    <button class="btn btn-block btn-default" type="submit">Δημοσίευση</button>
+                    <button class="btn btn-block btn-default" onclick="checkLoginState();">Δημοσίευση</button>
                 </div>
             </div>
         </div>
