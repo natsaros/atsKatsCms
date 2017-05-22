@@ -38,7 +38,7 @@ class UserHandler {
     }
 
     /**
-     * @return array|bool
+     * @return User[]|bool
      * @throws SystemException
      */
     static function fetchAllUsers() {
@@ -48,7 +48,7 @@ class UserHandler {
     }
 
     /**
-     * @return array|bool
+     * @return User[]|bool
      * @throws SystemException
      */
     static function fetchActiveUsers() {

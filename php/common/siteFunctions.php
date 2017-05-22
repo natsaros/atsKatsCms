@@ -21,14 +21,7 @@ function getRootPath() {
     return $uri;
 }
 
-require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'ErrorMessages.php');
-require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'SystemException.php');
-require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
-require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserHandler.php');
-require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
-require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
-require_once(CLASSES_ROOT_PATH . 'Globals.php');
-require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');
+loadAppClasses();
 
 /**
  * @return bool
@@ -142,9 +135,7 @@ function initGallery() {
 }
 
 function initLogFile() {
-    if(!file_exists(LOGS_ROOT)) {
-        mkdir(LOGS_ROOT, 0777, true);
-    }
+    createFileIfNotExists(LOGS_ROOT);
     define('LOG_FILE', LOGS_ROOT . CONF_LOG_FILE);
 }
 
@@ -396,6 +387,18 @@ function defineSystemVariables() {
     defined('LOGS_ROOT') or define('LOGS_ROOT', getRootPath() . 'logs' . DS);
 }
 
+function loadAppClasses() {
+    require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'ErrorMessages.php');
+    require_once(CLASSES_ROOT_PATH . 'exception' . DS . 'SystemException.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'GroupHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
+    require_once(CLASSES_ROOT_PATH . 'Globals.php');
+    require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');
+}
+
 /**
  * logs system exceptions to file
  * @param SystemException $ex
@@ -528,6 +531,7 @@ function transliterateString($txt) {
  * Returns part of text of the post as a preview
  */
 function postTextPreview($postText, $viewType) {
+    $maxLength = 0;
     if($viewType == "grid") {
         $maxLength = 100;
     } else if($viewType == "list") {
@@ -552,6 +556,30 @@ function is_session_started() {
         }
     }
     return false;
+}
+
+/**
+ * @param array $params
+ * @param array $paramValues
+ * @return string
+ * @throws SystemException
+ */
+function addParamsToUrl($params, $paramValues) {
+    $urlParams = '';
+    if(isNotEmpty($params) && isNotEmpty($paramValues)) {
+        if(count($params) !== count($paramValues)) {
+            throw new SystemException('Parameter names and values don\'t match!');
+        }
+
+        foreach($params as $key => $param) {
+            if($key == 0) {
+                $urlParams .= '?' . $param . '=' . $paramValues[$key];
+            } else {
+                $urlParams .= '&' . $param . '=' . $paramValues[$key];
+            }
+        }
+    }
+    return $urlParams;
 }
 
 ?>

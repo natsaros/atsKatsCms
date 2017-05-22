@@ -19,7 +19,7 @@ class PostHandler {
     const IMAGE = 'IMAGE';
 
     /**
-     * @return array|bool
+     * @return Post[]|bool
      * @throws SystemException
      */
     static function fetchAllPosts() {
@@ -29,7 +29,7 @@ class PostHandler {
     }
 
     /**
-     * @return array|bool
+     * @return Post[]|bool
      * @throws SystemException
      */
     static function fetchAllPostsWithDetails() {
@@ -39,7 +39,7 @@ class PostHandler {
     }
 
     /**
-     * @return array|bool
+     * @return Post[]|bool
      * @throws SystemException
      */
     static function fetchAllActivePostsWithDetails() {

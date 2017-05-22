@@ -1,4 +1,5 @@
 <?php
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'users' . DS . 'UserStatus.php');
 
 class User {
     private $ID;
@@ -26,7 +27,7 @@ class User {
      */
     public function __construct() {
         //default constructor
-        $this->setUserStatus(true);
+        $this->setUserStatus(UserStatus::ACTIVE);
         $this->setIsAdmin(false);
     }
 
@@ -273,7 +274,7 @@ class User {
      * @return boolean
      */
     public function getUserStatus() {
-        return $this->user_status == 1;
+        return $this->user_status === 1;
     }
 
     /**
