@@ -123,7 +123,7 @@ class PostHandler {
 
                 $created = getDb()->createStmt($query,
                     array('s', 's', 's', 's', 'i'),
-                    array($post->getText(), $post->getSequence(), $post->getImagePath(), $post->getImage(), $created));
+                    array($post->getText(), $post->getSequence(), $post->getImagePath(), $post->getImagePath(), $created));
             }
             return $created;
         }
