@@ -13,9 +13,9 @@ class SystemException extends Exception {
         return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
     }
 
-
     public function errorMessage() {
-        $errorMsg = "\nError on line " . $this->getLine() . " in " . $this->getFile() . ": \r\n" . $this->getMessage();
+        $dateTime = new DateTime();
+        $errorMsg = $dateTime->format('y:m:d h:i:s') - " - Error on line " . $this->getLine() . " in " . $this->getFile() . ": \r\n" . $this->getMessage() . "\n";
         return $errorMsg;
     }
 }
