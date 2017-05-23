@@ -21,7 +21,7 @@ $posts = PostHandler::fetchAllPosts();
                 <tbody>
                 <?php
                 /* @var $post Post */
-                foreach ($posts as $key => $post) {
+                foreach($posts as $key => $post) {
                     $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                     $postId = $post->getID();
                     ?>
@@ -37,7 +37,7 @@ $posts = PostHandler::fetchAllPosts();
                             ?>
 
                             <a type="button"
-                               href="<?php echo sprintf(getAdminActionRequestUri() . "post" . DS . "updatePostStatus?id=%s&status=%s", $postId, $updatedStatus); ?>"
+                               href="<?php echo getAdminActionRequestUri() . "post" . DS . "updatePostStatus" . addParamsToUrl(array('id', 'status'), array($postId, $updatedStatus)); ?>"
                                class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> Post">
                                 <?php $statusClass = $post->getState() ? 'text-success' : 'text-danger' ?>
                                 <span class="glyphicon glyphicon-comment <?php echo $statusClass ?>"
@@ -45,13 +45,13 @@ $posts = PostHandler::fetchAllPosts();
                             </a>
 
                             <a type="button"
-                               href="<?php echo sprintf(getAdminActionRequestUri() . "post" . DS . "deletePost?id=%s", $postId); ?>"
+                               href="<?php echo getAdminActionRequestUri() . "post" . DS . "deletePost" . addParamsToUrl(array('id'), array($postId)); ?>"
                                class="btn btn-default btn-sm" title="Delete Post">
                                 <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
                             </a>
 
                             <a type="button"
-                               href="<?php echo sprintf(getAdminRequestUri() . "updatePost?id=%s", $postId); ?>"
+                               href="<?php echo getAdminRequestUri() . "updatePost" . addParamsToUrl(array('id'), array($postId)); ?>"
                                class="btn btn-default btn-sm" title="Edit Post">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </a>

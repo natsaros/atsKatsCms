@@ -570,3 +570,5 @@ table.dataTable thead .sorting:after {
     max-width: 25%;
     height: auto;
 }
+
+.vcenter{display: inline-block; vertical-align: middle; float: none;}

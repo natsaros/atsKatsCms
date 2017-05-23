@@ -7,7 +7,7 @@ $name = safe_input($_POST[GroupHandler::GROUP_NAME]);
 
 if(isEmpty($name)) {
     addInfoMessage("Please fill in required info");
-    Redirect(sprintf(getAdminRequestUri() . "updateGroup"));
+    Redirect(getAdminRequestUri() . "updateGroup");
 }
 
 try {

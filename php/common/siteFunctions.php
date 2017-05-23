@@ -348,9 +348,20 @@ function isNotEmpty($val) {
  */
 function safe_input($data) {
     if(isNotEmpty($data)) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
+        if(is_array($data)) {
+            $moded = array();
+            foreach($data as $value) {
+                $value = trim($value);
+                $value = stripslashes($value);
+                $value = htmlspecialchars($value);
+                $moded[] = $value;
+            }
+            $data = $moded;
+        } else {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+        }
     }
     return $data;
 }

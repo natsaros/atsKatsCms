@@ -42,29 +42,38 @@ if($isCreate) {
                 foreach($groupMetas as $key => $meta) {
                     $metaID = $meta->getID();
                     ?>
+                    <div class="row">
+                        <input type="hidden" name="meta_<?php echo GroupHandler::ID ?>[]"
+                               value="<?php echo $metaID; ?>"/>
+                        <input type="hidden" name="<?php echo GroupHandler::GROUP_ID ?>[]"
+                               value="<?php echo $meta->getGroupId(); ?>"/>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label"
+                                       for="<?php echo $metaID; ?>_key_input">Meta key</label>
+                                <input class="form-control" placeholder="Name"
+                                       name="<?php echo GroupHandler::META_KEY ?>[]"
+                                       id="<?php echo $metaID; ?>_key_input"
+                                       required
+                                       value="<?php echo $meta->getMetaKey() ?>"
+                                >
+                            </div>
+                        </div><!--
+                        --><div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="control-label"
+                                       for="<?php echo $metaID; ?>_value_input">Meta Value</label>
+                                <input class="form-control" placeholder="Name"
+                                       name="<?php echo GroupHandler::META_VALUE ?>[]"
+                                       id="<?php echo $metaID; ?>_value_input"
+                                       required
+                                       value="<?php echo $meta->getMetaValue() ?>"
+                                >
+                            </div>
+                        </div><!--
+                        -->
 
-                    <div class="form-group">
-                        <div class="col-lg-6">
-
-                            <label class="control-label"
-                                   for="<?php echo $metaID; ?>_key_input">Meta key</label>
-                            <input class="form-control" placeholder="Name"
-                                   name="<?php echo GroupHandler::META_KEY ?>[]" id="<?php echo $metaID; ?>_key_input"
-                                   required
-                                   value="<?php echo $meta->getMetaKey() ?>"
-                            >
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="control-label"
-                                   for="<?php echo $metaID; ?>_value_input">Meta Value</label>
-                            <input class="form-control" placeholder="Name"
-                                   name="<?php echo GroupHandler::META_VALUE ?>[]" id="<?php echo $metaID; ?>_value_input"
-                                   required
-                                   value="<?php echo $meta->getMetaValue() ?>"
-                            >
-                        </div>
+<!--                        TODO : add action buttons - remove and add metas-->
                     </div>
                 <?php }
             } ?>

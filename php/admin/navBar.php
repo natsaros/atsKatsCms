@@ -227,7 +227,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li>
-                    <a href="<?php echo sprintf($adminRequestUri . "updateUser?id=%s", $loggedInUser->getID()); ?>">
+                    <a href="<?php echo $adminRequestUri . "updateUser" . addParamsToUrl(array('id'), array($loggedInUser->getID())); ?>">
                         <i class="fa fa-user fa-fw"></i> User Profile</a>
                 </li>
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
