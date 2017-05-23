@@ -13,12 +13,12 @@ $imagePath = safe_input($_POST[PostHandler::IMAGE_PATH]);
 
 if(isEmpty($title) || isEmpty($text)) {
     addInfoMessage("Please fill in required info");
-    Redirect(sprintf(getAdminRequestUri() . "updatePost"));
+    Redirect(getAdminRequestUri() . "updatePost");
 }
 
 if(!$imageValid) {
     addInfoMessage("Please select a valid image file");
-    Redirect(sprintf(getAdminRequestUri() . "updatePost"));
+    Redirect(getAdminRequestUri() . "updatePost");
 }
 
 try {

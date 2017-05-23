@@ -193,4 +193,21 @@ class GroupHandler {
         return GroupMeta::createMeta($row[self::ID], $row[self::GROUP_ID], $row[self::META_KEY], $row[self::META_VALUE]);
     }
 
+    /**
+     * @param $id
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function deleteGroup($id) {
+        if(isNotEmpty($id)) {
+            $query = "DELETE FROM " . getDb()->user_groups_meta . " WHERE " . self::GROUP_ID . " = ?";
+            $res = getDb()->updateStmt($query, array('i'), array($id));
+            if($res) {
+                $query = "DELETE FROM " . getDb()->user_groups . " WHERE " . self::ID . " = ?";
+                $res = getDb()->updateStmt($query, array('i'), array($id));
+            }
+            return $res;
+        }
+        return null;
+    }
 }

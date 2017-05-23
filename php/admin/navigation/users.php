@@ -117,15 +117,20 @@ $activeTabClass = 'class="active"';
 
                                     <a type="button"
                                        href="<?php echo $updateStatusUrl; ?>"
-                                       class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
+                                       class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> Group">
                                         <?php $statusClass = $group->getStatus() ? 'text-success' : 'text-danger' ?>
                                         <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
                                               aria-hidden="true"></span>
                                     </a>
+                                    <a type="button"
+                                       href="<?php echo getAdminActionRequestUri() . "group" . DS . "deleteGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
+                                       class="btn btn-default btn-sm" title="Delete Post">
+                                        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                    </a>
 
                                     <a type="button"
                                        href="<?php echo getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
-                                       class="btn btn-default btn-sm" title="Edit User">
+                                       class="btn btn-default btn-sm" title="Edit Group">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </a>
                                 </td>

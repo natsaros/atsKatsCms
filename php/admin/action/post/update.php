@@ -22,7 +22,7 @@ if(isEmpty($title) || isEmpty($text)) {
 
 if(!$imageValid) {
     addInfoMessage("Please select a valid image file");
-    Redirect(sprintf(getAdminRequestUri() . "updatePost"));
+    Redirect(getAdminRequestUri() . "updatePost" . addParamsToUrl(array('id'), array($ID)));
 }
 
 try {
