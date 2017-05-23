@@ -36,6 +36,8 @@
 <script src="<?php echo JS_URI ?>datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo JS_URI ?>datatables-responsive/dataTables.responsive.js"></script>
 
+<script src="<?php echo JS_URI ?>bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo JS_URI ?>sb-admin-2.min.js"></script>
 <script src="<?php echo JS_URI ?>adminCustom.min.js"></script>

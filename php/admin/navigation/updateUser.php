@@ -6,18 +6,24 @@
 
 $userId = $_GET["id"];
 $isCreate = isEmpty($userId);
+$loggedInUser = getFullUserFromSession();
 //TODO server side validation
 /*include('validateUser.php');*/ ?>
 
 
 <?php
-if($isCreate) {
+if ($isCreate) {
     $currentUser = User::create();
 } else {
     $currentUser = UserHandler::getUserById($userId);
 }
 
+/**
+ * @var bool
+ */
+$isAdminUser = $loggedInUser->getID() === $currentUser->getID();
 ?>
+
 
 <div class="row">
     <div class="col-lg-12">
@@ -98,12 +104,13 @@ if($isCreate) {
                             </div>
 
                             <div class="form-group">
+                                <label class="control-label" for="mail_input">Is Admin</label>
                                 <div class="checkbox">
                                     <label>
                                         <?php $isChecked = $currentUser->isAdmin() ? 'checked' : ''; ?>
                                         <input name="<?php echo UserHandler::IS_ADMIN ?>"
-                                               type="checkbox" <?php echo $isChecked ?>>
-                                        Is admin
+                                               type="checkbox" <?php echo $isChecked ?>
+                                               data-toggle="toggle" data-on="true" data-off="false">
                                     </label>
                                 </div>
                             </div>
@@ -121,3 +128,11 @@ if($isCreate) {
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    var isAdminUser = <?php echo $isAdminUser ? 'true' : 'false' ?>;
+    if (isAdminUser) {
+        $('input[type="checkbox"][name="<?php echo UserHandler::IS_ADMIN ?>"]').bootstrapToggle('disable');
+    }
+</script>
