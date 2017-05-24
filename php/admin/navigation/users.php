@@ -124,7 +124,7 @@ $activeTabClass = 'class="active"';
                                     </a>
                                     <a type="button"
                                        href="<?php echo getAdminActionRequestUri() . "group" . DS . "deleteGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
-                                       class="btn btn-default btn-sm" title="Delete Post">
+                                       class="btn btn-default btn-sm" title="Delete Group">
                                         <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
                                     </a>
                                     <a type="button"

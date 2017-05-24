@@ -429,6 +429,7 @@ function loadAppClasses() {
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'GroupHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'AccessRightsHandler.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
     require_once(CLASSES_ROOT_PATH . 'Globals.php');
     require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');

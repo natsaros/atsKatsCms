@@ -22,6 +22,12 @@ class User {
      */
     private $userMeta;
 
+
+    /**
+     * @var AccessRight[]
+     */
+    private $accessRights;
+
     /**
      * User constructor.
      */
@@ -324,6 +330,23 @@ class User {
         $this->userMeta = $userMeta;
         return $this;
     }
+
+    /**
+     * @return AccessRight[]
+     */
+    public function getAccessRights() {
+        return $this->accessRights;
+    }
+
+    /**
+     * @param AccessRight[] $accessRights
+     * @return User
+     */
+    public function setAccessRights($accessRights) {
+        $this->accessRights = $accessRights;
+        return $this;
+    }
+
 
 }
 

@@ -12,6 +12,32 @@ class AccessRight {
      */
     private $accessMeta;
 
+
+    /**
+     * AccessRight constructor.
+     */
+    public function __construct() {
+        $this->setAccessMeta(AccessRightMeta::create());
+    }
+
+
+    /**
+     * @return AccessRight
+     */
+    public static function create() {
+        $instance = new self();
+        return $instance;
+    }
+
+    /**
+     * @param $ID
+     * @param $name
+     * @return $this
+     */
+    public static function createAccessRight($ID, $name) {
+        return self::create()->setID($ID)->setName($name);
+    }
+
     /**
      * @param mixed $accessMeta
      * @return AccessRight

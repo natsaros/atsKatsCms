@@ -30,8 +30,9 @@ class UserHandler {
         $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USERNAME . " = ? AND " . self::IS_ADMIN . "=1 AND " . self::USER_STATUS . " = " . UserStatus::ACTIVE;
         $row = getDb()->selectStmtSingle($query, array('s'), array($username));
         $user = self::populateUser($row);
-        if(password_verify($password, $user->getPassword())) {
+        if (password_verify($password, $user->getPassword())) {
             $user->setPassword(null);
+            $user->setAccessRights(AccessRightsHandler::getAccessRightByUserId($user->getID()));
             return $user;
         }
         return null;
@@ -63,11 +64,14 @@ class UserHandler {
      * @throws SystemException
      */
     static function getUserById($id) {
-        if(isNotEmpty($id)) {
+        if (isNotEmpty($id)) {
             $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::ID . " = ?";
             $row = getDb()->selectStmtSingle($query, array('i'), array($id));
-            $user = self::populateUser($row);
-            return $user;
+            if ($row) {
+                $user = self::populateUser($row);
+                return $user;
+            }
+            return null;
         }
         return null;
 
@@ -80,7 +84,7 @@ class UserHandler {
      * @throws SystemException
      */
     static function updateUserStatus($id, $userStatus) {
-        if(isNotEmpty($id)) {
+        if (isNotEmpty($id)) {
             $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query, array('i', 'i'), array($userStatus, $id));
         }
@@ -94,7 +98,7 @@ class UserHandler {
      */
     static function updateUser($user) {
         //TODO add user meta query here
-        if(isNotEmpty($user)) {
+        if (isNotEmpty($user)) {
             $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::IS_ADMIN . " = ?, " . self::PICTURE . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query,
                 array('i', 's', 's', 's', 's', 's', 's', 's', 'i', 'b', 'i'),
@@ -121,7 +125,7 @@ class UserHandler {
      */
     static function createUser($user) {
         //TODO add user meta query here
-        if(isNotEmpty($user)) {
+        if (isNotEmpty($user)) {
             $query = "INSERT INTO " . getDb()->users .
                 " (" . self::USER_STATUS .
                 "," . self::USERNAME .
@@ -176,13 +180,13 @@ class UserHandler {
      * @throws SystemException
      */
     private static function populateUsers($rows) {
-        if($rows === false) {
+        if ($rows === false) {
             return false;
         }
 
         $users = [];
 
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $users[] = self::populateUser($row);
         }
         return $users;
@@ -194,7 +198,7 @@ class UserHandler {
      * @throws SystemException
      */
     private static function populateUser($row) {
-        if($row === false) {
+        if ($row === false) {
             return false;
         }
         return User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::IS_ADMIN] == 1, $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE]);

@@ -16,6 +16,26 @@ class AccessRightMeta {
     }
 
     /**
+     * @return AccessRightMeta
+     */
+    public static function create() {
+        $instance = new self();
+        return $instance;
+    }
+
+
+    /**
+     * @param $ID
+     * @param $acc_id
+     * @param $key
+     * @param $value
+     * @return $this
+     */
+    public static function createMeta($ID, $acc_id, $key, $value) {
+        return self::create()->setID($ID)->setAccId($acc_id)->setMetaKey($key)->setMetaValue($value);
+    }
+
+    /**
      * @return mixed
      */
     public function getID() {

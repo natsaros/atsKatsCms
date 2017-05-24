@@ -26,6 +26,13 @@ class GroupMeta {
         return $instance;
     }
 
+    /**
+     * @param $ID
+     * @param $groupID
+     * @param $key
+     * @param $value
+     * @return $this
+     */
     public static function createMeta($ID, $groupID, $key, $value) {
         return self::create()->setID($ID)->setGroupId($groupID)->setMetaKey($key)->setMetaValue($value);
     }

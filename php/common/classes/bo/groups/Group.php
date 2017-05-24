@@ -29,6 +29,12 @@ class Group {
         return $instance;
     }
 
+    /**
+     * @param $ID
+     * @param $name
+     * @param $status
+     * @return $this
+     */
     public static function createGroup($ID, $name, $status) {
         return self::create()->setID($ID)->setName($name)->setStatus($status);
     }
