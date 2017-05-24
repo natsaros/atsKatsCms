@@ -280,6 +280,11 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                     </li>
                     <li>
+                        <a href="<?php echo $adminRequestUri . 'settings' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'settings') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-cog fa-fw"></i> Settings</a>
+                    </li>
+                    <li>
                         <a href="<?php echo $adminRequestUri . 'tables' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'tables') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-table fa-fw"></i> Tables</a>

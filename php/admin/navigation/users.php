@@ -58,7 +58,7 @@ $activeTabClass = 'class="active"';
                                            href="<?php echo $updateStatusUrl; ?>"
                                            class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
                                             <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
-                                            <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
+                                            <span class="fa fa-user <?php echo $statusClass ?>"
                                                   aria-hidden="true"></span>
                                         </a>
                                     <?php } ?>
@@ -119,7 +119,7 @@ $activeTabClass = 'class="active"';
                                        href="<?php echo $updateStatusUrl; ?>"
                                        class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> Group">
                                         <?php $statusClass = $group->getStatus() ? 'text-success' : 'text-danger' ?>
-                                        <span class="glyphicon glyphicon-user <?php echo $statusClass ?>"
+                                        <span class="fa fa-users <?php echo $statusClass ?>"
                                               aria-hidden="true"></span>
                                     </a>
                                     <a type="button"
@@ -127,12 +127,32 @@ $activeTabClass = 'class="active"';
                                        class="btn btn-default btn-sm" title="Delete Post">
                                         <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
                                     </a>
-
                                     <a type="button"
                                        href="<?php echo getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit Group">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </a>
+
+
+                                    <!-- Button trigger modal -->
+                                    <a type="button"
+                                       data-toggle="modal"
+                                       class="btn btn-default btn-sm" title="Edit Access"
+                                       href="<?php echo getAdminModalRequestUri() . "updateAccess" . addParamsToUrl(array('id'), array($groupId)); ?>"
+                                       data-target="#groupModal_<?php echo $groupId ?>"
+                                       data-remote="false">
+                                        <span class="fa fa-lock" aria-hidden="true"></span>
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="ak_modal modal fade" id="groupModal_<?php echo $groupId ?>" tabindex="-1"
+                                         role="dialog" aria-labelledby="myModalLabel_<?php echo $groupId ?>"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         <?php } ?>

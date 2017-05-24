@@ -6,6 +6,13 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_URI} admin[/]modal[/](.*)$  [NC]
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule admin[/]modal[/](.*)$ index.php?page=$1&%1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_URI} admin[/]action[/](.*)$  [NC]
 RewriteCond %{QUERY_STRING} ^(.*)$
 RewriteRule admin[/]action[/](.*)$ index.php?action=$1&%1

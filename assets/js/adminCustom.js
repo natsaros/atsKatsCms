@@ -42,6 +42,11 @@ $(document).ready(function () {
             if (log) alert(log);
         }
     });
+
+    $(".ak_modal").on("show.bs.modal", function(e) {
+        var link = $(e.relatedTarget);
+        $(this).find(".modal-content").load(link.attr("href"));
+    });
 });
 
 function handlerImageIn() {

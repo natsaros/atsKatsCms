@@ -1,5 +1,10 @@
 <?php
-$path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
+if(isAdminModal()) {
+    $path = ADMIN_MODAL_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
+} else {
+    $path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
+}
+
 if(exists_safe($path)) {
     if(isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
         // last request was more than 30 minutes ago
@@ -16,22 +21,32 @@ if(exists_safe($path)) {
         $_SESSION['CREATED'] = time();  // update creation time
     }
     ?>
+
+
     <!DOCTYPE html>
     <html lang="en">
-    <?php require_safe(ADMIN_ROOT_PATH . "adminHeader.php"); ?>
-    <?php require_safe(ADMIN_ROOT_PATH . "adminJs.php"); ?>
-    <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <?php require_safe(ADMIN_ROOT_PATH . "navBar.php"); ?>
-        <div id="page-wrapper">
-            <?php
-            //TODO : evolve navigation to be able to add folders under 'navigation' directory and redirect correctly
-            // now it only navigates to the php passed by name
-            @require_safe($path);
-            ?>
+    <?php if(isAdminModal()) { ?>
+        <body>
+        <div id="wrapper">
+            <?php @require_safe($path); ?>
         </div>
-    </div>
-    </body>
+        </body>
+    <?php } else { ?>
+        <?php require_safe(ADMIN_ROOT_PATH . "adminHeader.php"); ?>
+        <?php require_safe(ADMIN_ROOT_PATH . "adminJs.php"); ?>
+        <body>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <?php require_safe(ADMIN_ROOT_PATH . "navBar.php"); ?>
+            <div id="page-wrapper">
+                <?php
+                //TODO : evolve navigation to be able to add folders under 'navigation' directory and redirect correctly
+                // now it only navigates to the php passed by name
+                @require_safe($path);
+                ?>
+            </div>
+        </div>
+        </body>
+    <?php } ?>
     </html>
 <?php } ?>

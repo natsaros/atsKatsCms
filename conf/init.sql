@@ -203,6 +203,10 @@ INSERT INTO AK_USER_GROUPS (NAME) VALUES ('admin');
 INSERT INTO AK_USER_GROUPS_META (GROUP_ID, META_KEY, META_VALUE)
 VALUES (last_insert_id(), 'description', 'Admin users of system');
 
+INSERT INTO AK_USER_GROUPS (NAME) VALUES ('super-user');
+INSERT INTO AK_USER_GROUPS_META (GROUP_ID, META_KEY, META_VALUE)
+VALUES (last_insert_id(), 'description', 'Super users has advanced access to the system');
+
 INSERT INTO AK_USER_GROUPS (NAME) VALUES ('editor');
 INSERT INTO AK_USER_GROUPS_META (GROUP_ID, META_KEY, META_VALUE)
 VALUES (last_insert_id(), 'description', 'Editor can create and edit content');
@@ -229,6 +233,9 @@ VALUES (last_insert_id(), 'description', 'Access to posts section');
 INSERT INTO AK_ACCESS_RIGHTS (NAME) VALUES ('USER_SECTION');
 INSERT INTO AK_ACCESS_RIGHTS_META (ACCESS_ID, META_KEY, META_VALUE)
 VALUES (last_insert_id(), 'description', 'Access to user section');
+INSERT INTO AK_ACCESS_RIGHTS (NAME) VALUES ('SETTINGS_SECTION');
+INSERT INTO AK_ACCESS_RIGHTS_META (ACCESS_ID, META_KEY, META_VALUE)
+VALUES (last_insert_id(), 'description', 'Access to settings section');
 
 INSERT INTO AK_ACR_ASSOC (ACC_ID, USER_ID, GROUP_ID) VALUES ((SELECT ID
                                                               FROM AK_ACCESS_RIGHTS

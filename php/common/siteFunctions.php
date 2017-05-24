@@ -40,6 +40,13 @@ function isAdminAction() {
 /**
  * @return bool
  */
+function isAdminModal() {
+    return strpos(getRequestUri(), ADMIN_STR . '/' . MODAL_STR) !== false;
+}
+
+/**
+ * @return bool
+ */
 function isUnderBlogPath() {
     return strpos(getRequestUri(), BLOG_PATH) !== false;
 }
@@ -95,6 +102,13 @@ function getAdminRequestUri() {
  */
 function getAdminActionRequestUri() {
     return getAdminRequestUriNoDelim() . DS . ACTION_STR . DS;
+}
+
+/**
+ * @return string
+ */
+function getAdminModalRequestUri() {
+    return getAdminRequestUriNoDelim() . DS . MODAL_STR . DS;
 }
 
 /**
@@ -374,6 +388,7 @@ function defineSystemVariables() {
     defined('ADMIN_STR') or define('ADMIN_STR', 'admin');
     defined('NAV_STR') or define('NAV_STR', 'navigation');
     defined('ACTION_STR') or define('ACTION_STR', 'action');
+    defined('MODAL_STR') or define('MODAL_STR', 'modal');
     defined('COMMON_STR') or define('COMMON_STR', 'common');
     defined('CLASSES_STR') or define('CLASSES_STR', 'classes');
     defined('BLOG_PATH') or define('BLOG_PATH', '/blog/');
@@ -391,6 +406,7 @@ function defineSystemVariables() {
 
     defined('ADMIN_ROOT_PATH') or define('ADMIN_ROOT_PATH', PHP_ROOT_PATH . ADMIN_STR . DS);
     defined('ADMIN_NAV_PATH') or define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
+    defined('ADMIN_MODAL_NAV_PATH') or define('ADMIN_MODAL_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS . MODAL_STR . DS);
     defined('ADMIN_ACTION_PATH') or define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
     defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
     defined('CLASSES_ROOT_PATH') or define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
