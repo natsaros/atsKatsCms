@@ -97,14 +97,14 @@ $isAdminUser = $loggedInUser->getID() === $currentUser->getID();
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label" for="mail_input">Phone</label>
+                                <label class="control-label" for="phone_input">Phone</label>
                                 <input class="form-control" type="tel" placeholder="Phone"
                                        name="<?php echo UserHandler::PHONE ?>" id="phone_input"
                                        value="<?php echo $currentUser->getPhone() ?>">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label" for="mail_input">Is Admin</label>
+                                <label class="control-label" for="admin_input">Is Admin</label>
                                 <div class="checkbox">
                                     <label>
                                         <?php $isChecked = $currentUser->isAdmin() ? 'checked' : ''; ?>

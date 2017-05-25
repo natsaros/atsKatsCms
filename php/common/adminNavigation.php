@@ -26,6 +26,7 @@ if(exists_safe($path)) {
     <!DOCTYPE html>
     <html lang="en">
     <?php if(isAdminModal()) { ?>
+        <?php require_safe(ADMIN_ROOT_PATH . "adminModalHeader.php"); ?>
         <body>
         <div id="wrapper">
             <?php @require_safe($path); ?>

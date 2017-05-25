@@ -4,6 +4,9 @@
  * Signifies access rights of users and groups of the application
  */
 class AccessRight {
+
+    const DESCRIPTION = 'description';
+
     private $ID;
     private $name;
 
@@ -12,14 +15,12 @@ class AccessRight {
      */
     private $accessMeta;
 
-
     /**
      * AccessRight constructor.
      */
     public function __construct() {
         $this->setAccessMeta(AccessRightMeta::create());
     }
-
 
     /**
      * @return AccessRight
@@ -84,6 +85,18 @@ class AccessRight {
      */
     public function getAccessMeta() {
         return $this->accessMeta;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription() {
+        foreach(self::getAccessMeta() as $meta) {
+            if($meta->getMetaKey() === self::DESCRIPTION) {
+                return $meta->getMetaValue();
+            }
+        }
+        return null;
     }
 
 }

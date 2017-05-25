@@ -135,19 +135,21 @@ $activeTabClass = 'class="active"';
 
 
                                     <!-- Button trigger modal -->
+                                    <?php $urlParams = addParamsToUrl(array('id', 'modalTitle'), array($groupId, urlencode ("Access Management"))) ?>
                                     <a type="button"
                                        data-toggle="modal"
                                        class="btn btn-default btn-sm" title="Edit Access"
-                                       href="<?php echo getAdminModalRequestUri() . "updateAccess" . addParamsToUrl(array('id'), array($groupId)); ?>"
+                                       href="<?php echo getAdminModalRequestUri() . "updateAccess" . $urlParams; ?>"
                                        data-target="#groupModal_<?php echo $groupId ?>"
                                        data-remote="false">
                                         <span class="fa fa-lock" aria-hidden="true"></span>
                                     </a>
                                     <!-- Modal -->
-                                    <div class="ak_modal modal fade" id="groupModal_<?php echo $groupId ?>" tabindex="-1"
+                                    <div class="ak_modal modal fade" id="groupModal_<?php echo $groupId ?>"
+                                         tabindex="-1"
                                          role="dialog" aria-labelledby="myModalLabel_<?php echo $groupId ?>"
                                          aria-hidden="true">
-                                        <div class="modal-dialog">
+                                        <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
 
                                             </div>
