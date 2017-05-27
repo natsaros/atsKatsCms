@@ -7,14 +7,19 @@ if (isset($_GET["action"])) {
     $action = $_GET["action"];
 }
 
-initLoad();
+try {
+    initLoad();
+} catch (SystemException $e) {
+    require(COMMON_ROOT_PATH . 'noDb.php');
+    return;
+}
 
 if (isEmpty($action)) {
     //Default behavior: if no action is set to happen navigation occurs.
 
     $page = $_GET["page"];
     if (isEmpty($page)) {
-        if(isNotEmpty(DEV_MODE) && DEV_MODE) {
+        if (isNotEmpty(DEV_MODE) && DEV_MODE) {
             define('ADMIN_PAGE_ID', 'dashboard');
         } else {
             define('ADMIN_PAGE_ID', 'users');

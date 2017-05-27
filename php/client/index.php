@@ -1,17 +1,27 @@
 <?php
-if(!isset($_GET["id"])) {
+if (!isset($_GET["id"])) {
     $pageId = "home";
 } else {
     $pageId = $_GET["id"];
 }
 
-initLoadDb();
+try {
+    initLoad();
+} catch (SystemException $e) {
+    require(COMMON_ROOT_PATH . 'noDb.php');
+    return;
+}
 ?>
-
-<!--TODO : redirect to 404 if url is wrong!!-->
 <?php require("header.php"); ?>
 <body id=<?php echo $pageId; ?>>
-<?php require("menu.php");
-require($pageId . ".php");
-require("footer.php"); ?>
+<?php
+$path = dirname(__FILE__) . DS . $pageId . ".php";
+if (realpath($path)) {
+    require("menu.php");
+    require($path);
+    require("footer.php");
+} else {
+    require('404.php');
+}
+?>
 </body>

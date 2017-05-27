@@ -18,9 +18,6 @@ if(isNotEmpty($_POST['submit'])) {
         }
     }
 } ?>
-
-<!DOCTYPE html>
-<html lang="en">
 <?php require("adminHeader.php"); ?>
 <body>
 <div class="container">
@@ -58,4 +55,3 @@ if(isNotEmpty($_POST['submit'])) {
 </div>
 <?php require("adminJs.php"); ?>
 </body>
-</html>

@@ -2,8 +2,9 @@
 //Set custom Error Handler
 function exception_error_handler($severity, $message, $file, $line) {
     //TODO : check this is not throwing correct error in DB->connect()
-    if(mysqli_connect_errno()) {
-        echo sprintf("Connect failed: %s\n", mysqli_connect_error());
+    if (mysqli_connect_errno()) {
+        $message = mysqli_connect_error();
+//        echo sprintf("Connect failed: %s\n", mysqli_connect_error());
     }
     throw new SystemException($message);
 }
@@ -14,14 +15,14 @@ set_error_handler("exception_error_handler", E_ALL & ~E_NOTICE);
 //define all system variables needed
 defineSystemVariables();
 
+loadAppClasses();
+
 function getRootPath() {
 //    $uri = preg_replace(getRootUri(), "", PHP_ROOT_PATH);
     $uri = preg_replace("/php/", "", PHP_ROOT_PATH);
     $uri = preg_replace("/\\/+/", "/", $uri);
     return $uri;
 }
-
-loadAppClasses();
 
 /**
  * @return bool
@@ -57,11 +58,11 @@ function isUnderBlogPath() {
 function getRootUri() {
     $uri = $_SERVER['REQUEST_URI'];
     $uri = preg_replace("/[^\/]+$/", "", $uri);
-    if(isAdminAction()) {
+    if (isAdminAction()) {
         $uri = preg_replace("/admin[\/]action[\/].*/", "", $uri);
-    } else if(isAdmin()) {
+    } else if (isAdmin()) {
         $uri = preg_replace("/admin[\/].*/", "", $uri);
-    } else if(isUnderBlogPath()) {
+    } else if (isUnderBlogPath()) {
         $uri = preg_replace("/blog[\/].*/", "", $uri);
     }
     return $uri;
@@ -132,10 +133,10 @@ function initLoad() {
 function initLoadDb() {
     $db = getDb();
 
-    if(!$db->isInitialized($db)) {
+    if (!$db->isInitialized($db)) {
         $init_queries = $db->db_schema_from_file();
         $result = $db->multi_query($init_queries);
-        if($result === false) {
+        if ($result === false) {
             throw new SystemException('Database has not been initialized');
         }
         Globals::set('DB', $db);
@@ -157,7 +158,7 @@ function initLogFile() {
  * @param $path
  */
 function createFileIfNotExists($path) {
-    if(!file_exists($path)) {
+    if (!file_exists($path)) {
         mkdir($path, 0777, true);
     }
 }
@@ -175,8 +176,8 @@ function isLoggedIn() {
  * @param bool $permanent
  */
 function Redirect($url, $refreshRate = null, $permanent = false) {
-    if(!headers_sent()) {
-        if(is_null($refreshRate)) {
+    if (!headers_sent()) {
+        if (is_null($refreshRate)) {
             header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
         } else {
             header('Refresh : ' . $refreshRate . 'url: ' . $url, true, ($permanent === true) ? 301 : 302);
@@ -198,7 +199,7 @@ function Redirect($url, $refreshRate = null, $permanent = false) {
  * @throws SystemException
  */
 function getDb() {
-    if(is_null(Globals::get('DB'))) {
+    if (is_null(Globals::get('DB'))) {
         Globals::set('DB', DB::getInstance());
     }
     return Globals::get('DB');
@@ -216,7 +217,7 @@ function getUserFromSession() {
  */
 function getFullUserFromSession() {
     $userStr = $_SESSION['FULL_USER'];
-    if(isNotEmpty($userStr)) {
+    if (isNotEmpty($userStr)) {
         return unserialize($userStr);
     }
     return null;
@@ -237,7 +238,7 @@ function setUserToSession($user) {
  * @throws SystemException
  */
 function require_safe($path) {
-    if(file_exists(($path))) {
+    if (file_exists(($path))) {
         require($path);
     } else {
         throw new SystemException($path . " doesn't exist");
@@ -250,7 +251,7 @@ function require_safe($path) {
  * @throws SystemException
  */
 function exists_safe($path) {
-    if(file_exists(($path))) {
+    if (file_exists(($path))) {
         return true;
     } else {
         throw new SystemException($path . " doesn't exist");
@@ -270,7 +271,7 @@ function hasErrors() {
  * @return int
  */
 function addErrorMessage($msg) {
-    if(!isset($_SESSION[MessageTypes::ERROR_MESSAGES])) {
+    if (!isset($_SESSION[MessageTypes::ERROR_MESSAGES])) {
         $_SESSION[MessageTypes::ERROR_MESSAGES] = [];
     }
     return array_push($_SESSION[MessageTypes::ERROR_MESSAGES], $msg);
@@ -281,7 +282,7 @@ function addErrorMessage($msg) {
  * @return int
  */
 function addSuccessMessage($msg) {
-    if(!isset($_SESSION[MessageTypes::SUCCESS_MESSAGES])) {
+    if (!isset($_SESSION[MessageTypes::SUCCESS_MESSAGES])) {
         $_SESSION[MessageTypes::SUCCESS_MESSAGES] = [];
     }
 
@@ -293,7 +294,7 @@ function addSuccessMessage($msg) {
  * @return int
  */
 function addInfoMessage($msg) {
-    if(!isset($_SESSION[MessageTypes::INFO_MESSAGES])) {
+    if (!isset($_SESSION[MessageTypes::INFO_MESSAGES])) {
         $_SESSION[MessageTypes::INFO_MESSAGES] = [];
     }
     return array_push($_SESSION[MessageTypes::INFO_MESSAGES], $msg);
@@ -336,10 +337,10 @@ function consumeMessage($arrayName) {
  */
 function isEmpty($val) {
     $check = !isset($val) || $val == null;
-    if(!$check) {
-        if(is_array($val)) {
+    if (!$check) {
+        if (is_array($val)) {
             $check = empty(array_filter($val));
-        } else if(is_numeric($val)) {
+        } else if (is_numeric($val)) {
             $check = is_null($val);
         } else {
             $check = empty($val);
@@ -361,10 +362,10 @@ function isNotEmpty($val) {
  * @return mixed
  */
 function safe_input($data) {
-    if(isNotEmpty($data)) {
-        if(is_array($data)) {
+    if (isNotEmpty($data)) {
+        if (is_array($data)) {
             $moded = array();
-            foreach($data as $value) {
+            foreach ($data as $value) {
                 $value = trim($value);
                 $value = stripslashes($value);
                 $value = htmlspecialchars($value);
@@ -398,7 +399,7 @@ function defineSystemVariables() {
 //define('DS', DIRECTORY_SEPARATOR);
     defined('DS') or define('DS', "/");
 
-    if(!defined('PHP_ROOT_PATH')) {
+    if (!defined('PHP_ROOT_PATH')) {
         $str = dirname(__DIR__) . DS;
         $str = preg_replace("/\\\\/", DS, $str);
         define('PHP_ROOT_PATH', $str);
@@ -568,12 +569,12 @@ function transliterateString($txt) {
  */
 function postTextPreview($postText, $viewType) {
     $maxLength = 0;
-    if($viewType == "grid") {
+    if ($viewType == "grid") {
         $maxLength = 100;
-    } else if($viewType == "list") {
+    } else if ($viewType == "list") {
         $maxLength = 250;
     }
-    if(strlen($postText) > $maxLength) {
+    if (strlen($postText) > $maxLength) {
         return substr(strip_tags($postText), 0, $maxLength) . "...";
     } else {
         return $postText;
@@ -584,8 +585,8 @@ function postTextPreview($postText, $viewType) {
  * @return bool
  */
 function is_session_started() {
-    if(php_sapi_name() !== 'cli') {
-        if(version_compare(phpversion(), '5.4.0', '>=')) {
+    if (php_sapi_name() !== 'cli') {
+        if (version_compare(phpversion(), '5.4.0', '>=')) {
             return session_status() === PHP_SESSION_ACTIVE;
         } else {
             return session_id() !== '';
@@ -602,13 +603,13 @@ function is_session_started() {
  */
 function addParamsToUrl($params, $paramValues) {
     $urlParams = '';
-    if(isNotEmpty($params) && isNotEmpty($paramValues)) {
-        if(count($params) !== count($paramValues)) {
+    if (isNotEmpty($params) && isNotEmpty($paramValues)) {
+        if (count($params) !== count($paramValues)) {
             throw new SystemException('Parameter names and values don\'t match!');
         }
 
-        foreach($params as $key => $param) {
-            if($key == 0) {
+        foreach ($params as $key => $param) {
+            if ($key == 0) {
                 $urlParams .= '?' . $param . '=' . $paramValues[$key];
             } else {
                 $urlParams .= '&' . $param . '=' . $paramValues[$key];
