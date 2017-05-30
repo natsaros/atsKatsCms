@@ -8,6 +8,7 @@ if (!isset($_GET["id"])) {
 try {
     initLoad();
 } catch (SystemException $e) {
+    logError($e);
     require(COMMON_ROOT_PATH . 'noDb.php');
     return;
 }

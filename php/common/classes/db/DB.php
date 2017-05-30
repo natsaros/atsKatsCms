@@ -87,8 +87,19 @@ class Db {
      * @return mixed|null
      * @throws SystemException
      */
+    public static function deleteStmt($query, array $param_types, array $parameters) {
+        return self::queryStmt($query, $param_types, $parameters, false, true);
+    }
+
+    /**
+     * @param $query
+     * @param array $param_types
+     * @param array $parameters
+     * @return mixed|null
+     * @throws SystemException
+     */
     public static function updateStmt($query, array $param_types, array $parameters) {
-        return self::queryStmt($query, $param_types, $parameters, true);
+        return self::queryStmt($query, $param_types, $parameters, true, false);
     }
 
     /**
@@ -99,7 +110,7 @@ class Db {
      * @throws SystemException
      */
     public static function createStmt($query, array $param_types, array $parameters) {
-        return self::queryStmt($query, $param_types, $parameters, true);
+        return self::queryStmt($query, $param_types, $parameters, true, false);
     }
 
     /**
@@ -137,7 +148,7 @@ class Db {
      */
     public static function selectStmtNoParams($query) {
         $rows = array();
-        $mysqli_result = self::queryStmt($query, array(), array(), false);
+        $mysqli_result = self::queryStmt($query, array(), array(), false, false);
         if ($mysqli_result) {
             // If query was successful, retrieve all the rows into an array
             while ($row = $mysqli_result->fetch_array(MYSQLI_ASSOC)) {
@@ -158,7 +169,7 @@ class Db {
      */
     public static function selectStmt($query, array $param_types, array $parameters) {
         $rows = array();
-        $mysqli_result = self::queryStmt($query, $param_types, $parameters, false);
+        $mysqli_result = self::queryStmt($query, $param_types, $parameters, false, false);
         if ($mysqli_result) {
             // If query was successful, retrieve all the rows into an array
             while ($row = $mysqli_result->fetch_array(MYSQLI_ASSOC)) {
@@ -174,11 +185,12 @@ class Db {
      * @param $query
      * @param array $param_types
      * @param array $parameters
-     * @param boolean $isCreate
+     * @param boolean $isCreateUpdate
+     * @param boolean $isDelete
      * @return bool|mysqli_result
      * @throws SystemException
      */
-    public static function queryStmt($query, array $param_types, array $parameters, $isCreate) {
+    public static function queryStmt($query, array $param_types, array $parameters, $isCreateUpdate, $isDelete) {
         /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
 
         // Connect to the database
@@ -218,7 +230,7 @@ class Db {
 
         if ($result) {
             // if it is an insert statement return the last inserted id
-            $mysqli_result = $isCreate ? $stmt->insert_id : $stmt->get_result();
+            $mysqli_result = $isCreateUpdate ? $stmt->insert_id : $isDelete ? $result : $stmt->get_result();
         } else {
             throw new SystemException($connection->error);
         }

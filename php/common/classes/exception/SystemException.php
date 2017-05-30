@@ -15,7 +15,7 @@ class SystemException extends Exception {
 
     public function errorMessage() {
         $dateTime = new DateTime();
-        $errorMsg = $dateTime->format('y:m:d h:i:s') - " - Error on line " . $this->getLine() . " in " . $this->getFile() . ": \r\n" . $this->getMessage() . "\n";
+        $errorMsg = $dateTime->format('Y-m-d H:i:s') - " - Error on line " . $this->getLine() . " in " . $this->getFile() . ": \t" . $this->getMessage() . "\t";
         return $errorMsg;
     }
 }

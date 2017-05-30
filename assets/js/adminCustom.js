@@ -1,16 +1,17 @@
-$(document).ready(function () {
-    $('.ak-dataTable').DataTable({
-        responsive: true
-    });
-
-    $('input[type=checkbox]').each(function () {
+function initializeCheckBoxes() {
+    $('input[type=checkbox]:not(.ak_modal input[type=checkbox])').each(function () {
         if ($(this).is(':checked')) {
             $(this).val('true');
         } else {
             $(this).val('false');
         }
     });
+}
 
+$(document).ready(function () {
+    var dTables = $('.ak-dataTable').DataTable({responsive: true});
+
+    initializeCheckBoxes();
 
     $('.imgCont').hover(handlerImageIn, handlerImageOut);
 
@@ -43,9 +44,71 @@ $(document).ready(function () {
         }
     });
 
-    $(".ak_modal").on("show.bs.modal", function(e) {
+    var akModals = $(".ak_modal");
+    akModals.on("show.bs.modal", function (e) {
         var link = $(e.relatedTarget);
-        $(this).find(".modal-content").load(link.attr("href"));
+        var modal = $(this);
+        if (!modal.data('modal-href')) {
+            modal.data('modal-href', link.attr("href"));
+        }
+        if (modal.data('refresh')) {
+            modal.removeData('refresh');
+        }
+        modal.find(".modal-content").load(modal.data('modal-href'), function (response, status, xhr) {
+            if (status === "error") {
+                var msg = "Sorry but there was an error: ";
+                console.log(msg + xhr.status + " " + xhr.statusText);
+            } else {
+                // add initializations after load ajax
+                var $input = $('input[type="checkbox"]');
+                $input.bootstrapToggle();
+                initializeCheckBoxes();
+            }
+        });
+    });
+
+    akModals.on('hidden.bs.modal', function (e) {
+        var modal = $(this);
+        if (modal.data('refresh')) {
+            var target = $(e.target);
+            target.removeData('bs.modal')
+                .find(".modal-content").html('');
+            $(this).modal('show');
+        }
+    });
+
+
+    $(document).on('submit', '.ak_modal form', function (e) {
+        e.preventDefault();
+        var modal = $(this).closest('.ak_modal');
+        var data = $(this).serializeArray();
+        data.push({name: 'isAjax', value: true});
+        $.ajax({
+            url: $(this).attr('action'),
+            data: data,
+            method: 'POST'
+        }).success(function (data) {
+            // Do stuff after success
+        }).fail(function (xhr, textStatus, error) {
+            var msg = "Sorry but there was an error: ";
+            console.log(msg + xhr.status + " " + xhr.statusText + " " + error);
+        }).complete(function (data) {
+            modal.data('refresh', true);
+            modal.modal('toggle');
+        });
+    });
+
+    $(document).on('change', 'input[type=checkbox][data-toggle="toggle"]', function () {
+        var checkbox = $(this);
+        if (this.checked) {
+            if (checkbox.data('custom-on-val')) {
+                this.value = checkbox.data('custom-on-val');
+            }
+        } else {
+            if (checkbox.data('custom-off-val')) {
+                this.value = checkbox.data('custom-off-val');
+            }
+        }
     });
 });
 

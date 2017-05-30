@@ -441,7 +441,7 @@ function loadAppClasses() {
  * @param SystemException $ex
  */
 function logError($ex) {
-    error_log($ex->errorMessage() . " with code: " . $ex->getCode(), 3, LOG_FILE);
+    error_log($ex->errorMessage() . " with code: " . $ex->getCode() . "\r\n", 3, LOG_FILE);
 }
 
 /**
@@ -617,6 +617,16 @@ function addParamsToUrl($params, $paramValues) {
         }
     }
     return $urlParams;
+}
+
+/**
+ * @return bool
+ */
+function isAjax() {
+    $isAjaxPost = isset($_POST['isAjax']) ? $_POST['isAjax'] : false;
+    $isAjaxGet = isset($_GET['isAjax']) ? $_GET['isAjax'] : false;
+    $is_ajax = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') || $isAjaxPost || $isAjaxGet;
+    return $is_ajax;
 }
 
 ?>

@@ -5,7 +5,7 @@
 
 $name = safe_input($_POST[GroupHandler::GROUP_NAME]);
 
-if(isEmpty($name)) {
+if (isEmpty($name)) {
     addInfoMessage("Please fill in required info");
     Redirect(getAdminRequestUri() . "updateGroup");
 }
@@ -14,18 +14,18 @@ try {
     $group2Create = Group::createGroup(null, $name, GroupStatus::ACTIVE);
     $res = GroupHandler::create($group2Create);
 
-    if($res !== null || $res) {
+    if ($res !== null || $res) {
         addSuccessMessage("Group " . $group2Create->getName() . " successfully created");
     } else {
         addErrorMessage("Group " . $group2Create->getName() . " failed to be created");
     }
 
-} catch(SystemException $ex) {
+} catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-if(hasErrors()) {
+if (hasErrors()) {
     Redirect(getAdminRequestUri() . "updateGroup");
 } else {
     Redirect(getAdminRequestUri() . 'users' . addParamsToUrl(array('activeTab'), array('groups')));

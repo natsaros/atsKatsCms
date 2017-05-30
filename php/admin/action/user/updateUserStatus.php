@@ -5,12 +5,12 @@ $status = $_GET['status'];
 try {
     $updateUserStatusRes = UserHandler::updateUserStatus($id, $status);
 
-    if($updateUserStatusRes !== null || $updateUserStatusRes) {
+    if ($updateUserStatusRes !== null || $updateUserStatusRes) {
         addSuccessMessage("User status successfully changed");
     } else {
         addErrorMessage("User status failed to be changed");
     }
-} catch(SystemException $ex) {
+} catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }

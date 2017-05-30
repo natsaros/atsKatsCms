@@ -201,10 +201,10 @@ class GroupHandler {
     public static function deleteGroup($id) {
         if(isNotEmpty($id)) {
             $query = "DELETE FROM " . getDb()->user_groups_meta . " WHERE " . self::GROUP_ID . " = ?";
-            $res = getDb()->updateStmt($query, array('i'), array($id));
+            $res = getDb()->deleteStmt($query, array('i'), array($id));
             if($res) {
                 $query = "DELETE FROM " . getDb()->user_groups . " WHERE " . self::ID . " = ?";
-                $res = getDb()->updateStmt($query, array('i'), array($id));
+                $res = getDb()->deleteStmt($query, array('i'), array($id));
             }
             return $res;
         }

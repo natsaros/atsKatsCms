@@ -10,6 +10,7 @@ if (isset($_GET["action"])) {
 try {
     initLoad();
 } catch (SystemException $e) {
+    logError($e);
     require(COMMON_ROOT_PATH . 'noDb.php');
     return;
 }
@@ -34,7 +35,16 @@ if (isEmpty($action)) {
         include(COMMON_ROOT_PATH . "adminNavigation.php");
     }
 } else {
-    //All action pass through here
-    require_safe(ADMIN_ACTION_PATH . $action . PHP_POSTFIX);
+    try {
+        //All action pass through here
+        require_safe(ADMIN_ACTION_PATH . $action . PHP_POSTFIX);
+    } catch (SystemException $e) {
+        logError($e);
+        addErrorMessage(ErrorMessages::WENT_WRONG);
+        $statusCode = 500;
+        $status_string = $statusCode . ' ' . 'Internal Server Error';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
+        require(ADMIN_ROOT_PATH . '404.php');
+    }
 }
 ?>

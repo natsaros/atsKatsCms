@@ -6,6 +6,8 @@ if (isAdminModal()) {
 }
 try {
     if (exists_safe($path)) {
+        //TODO : evolve session mechanism to handle session time out.
+
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
             // last request was more than 30 minutes ago
             session_unset();     // unset $_SESSION variable for the run-time
@@ -26,7 +28,6 @@ try {
         <!DOCTYPE html>
         <html lang="en">
         <?php if (isAdminModal()) { ?>
-            <?php require_safe(ADMIN_ROOT_PATH . "adminModalHeader.php"); ?>
             <body>
             <div id="wrapper">
                 <?php @require_safe($path); ?>
@@ -52,5 +53,6 @@ try {
         </html>
     <?php }
 } catch (SystemException $e) {
+    logError($e);
     require_safe(ADMIN_ROOT_PATH . '404.php');
 } ?>

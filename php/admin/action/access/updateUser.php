@@ -1,0 +1,4 @@
+<?php
+/**
+ * Updates user access
+ */

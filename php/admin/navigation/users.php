@@ -11,13 +11,13 @@ $activeTabClass = 'class="active"';
 ?>
 
 <ul class="nav nav-tabs">
-    <li <?php if(isEmpty($activeTab) || $activeTab === 'users') {
+    <li <?php if (isEmpty($activeTab) || $activeTab === 'users') {
         echo $activeTabClass ?><?php } ?>><a href="#users" data-toggle="tab">Users</a></li>
-    <li <?php if(isNotEmpty($activeTab) && $activeTab === 'groups') {
+    <li <?php if (isNotEmpty($activeTab) && $activeTab === 'groups') {
         echo $activeTabClass ?><?php } ?>><a href="#groups" data-toggle="tab">Groups</a></li>
 </ul>
 <div class="tab-content">
-    <div class="tab-pane fade <?php if(isEmpty($activeTab) || $activeTab === 'users') { ?> in active<?php } ?>"
+    <div class="tab-pane fade <?php if (isEmpty($activeTab) || $activeTab === 'users') { ?> in active<?php } ?>"
          id="users">
         <div class="row">
             <div class="col-lg-12">
@@ -36,7 +36,7 @@ $activeTabClass = 'class="active"';
                         <tbody>
                         <?php
                         /* @var $user User */
-                        foreach($users as $key => $user) {
+                        foreach ($users as $key => $user) {
                             $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                             $userId = $user->getID();
                             ?>
@@ -53,7 +53,7 @@ $activeTabClass = 'class="active"';
                                     $activDeactivText = $user->getUserStatus() ? 'Deactivate' : 'Activate';
                                     $updateStatusUrl = getAdminActionRequestUri() . "group" . DS . "updateUserStatus" . addParamsToUrl(array('id', 'status'), array($userId, $updatedStatus));
                                     ?>
-                                    <?php if($loggedInUser->getID() != $user->getID()) { ?>
+                                    <?php if ($loggedInUser->getID() != $user->getID()) { ?>
                                         <a type="button"
                                            href="<?php echo $updateStatusUrl; ?>"
                                            class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
@@ -84,7 +84,7 @@ $activeTabClass = 'class="active"';
             </div>
         </div>
     </div>
-    <div class="tab-pane fade <?php if(isNotEmpty($activeTab) && $activeTab === 'groups') { ?> in active<?php } ?>"
+    <div class="tab-pane fade <?php if (isNotEmpty($activeTab) && $activeTab === 'groups') { ?> in active<?php } ?>"
          id="groups">
         <div class="row">
             <div class="col-lg-12">
@@ -100,7 +100,7 @@ $activeTabClass = 'class="active"';
                         <tbody>
                         <?php
                         /* @var $group Group */
-                        foreach($groups as $key => $group) {
+                        foreach ($groups as $key => $group) {
                             $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                             $groupId = $group->getID();
                             ?>
@@ -135,31 +135,40 @@ $activeTabClass = 'class="active"';
 
 
                                     <!-- Button trigger modal -->
-                                    <?php $urlParams = addParamsToUrl(array('id', 'modalTitle'), array($groupId, urlencode ("Access Management"))) ?>
+                                    <?php $urlParams = addParamsToUrl(array('id', 'modalTitle'), array($groupId, urlencode("Access Management"))) ?>
                                     <a type="button"
                                        data-toggle="modal"
                                        class="btn btn-default btn-sm" title="Edit Access"
-                                       href="<?php echo getAdminModalRequestUri() . "updateAccess" . $urlParams; ?>"
+                                       href="<?php echo getAdminModalRequestUri() . "updateGroupAccess" . $urlParams; ?>"
                                        data-target="#groupModal_<?php echo $groupId ?>"
                                        data-remote="false">
                                         <span class="fa fa-lock" aria-hidden="true"></span>
                                     </a>
-                                    <!-- Modal -->
-                                    <div class="ak_modal modal fade" id="groupModal_<?php echo $groupId ?>"
-                                         tabindex="-1"
-                                         role="dialog" aria-labelledby="myModalLabel_<?php echo $groupId ?>"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
                         <?php } ?>
                         </tbody>
                     </table>
+
+                    <?php
+                    /* @var $group Group */
+                    foreach ($groups as $key => $group) {
+                        $groupId = $group->getID(); ?>
+                        <!-- Modal -->
+                        <div class="ak_modal modal fade" id="groupModal_<?php echo $groupId ?>"
+                             tabindex="-1"
+                             role="dialog" aria-labelledby="myModalLabel_<?php echo $groupId ?>"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+
+
                 </div>
             </div>
         </div>

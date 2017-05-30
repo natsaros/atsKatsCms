@@ -571,4 +571,13 @@ table.dataTable thead .sorting:after {
     height: auto;
 }
 
-.vcenter{display: inline-block; vertical-align: middle; float: none;}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.modal-content .form-inline .form-group {
+    display: block;
+    margin-bottom: 15px;
+}

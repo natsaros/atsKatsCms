@@ -173,10 +173,10 @@ class PostHandler {
     public static function deletePost($id) {
         if(isNotEmpty($id)) {
             $query = "DELETE FROM " . getDb()->post_meta . " WHERE " . self::POST_ID . " = ?";
-            $res = getDb()->updateStmt($query, array('i'), array($id));
+            $res = getDb()->deleteStmt($query, array('i'), array($id));
             if($res) {
                 $query = "DELETE FROM " . getDb()->posts . " WHERE " . self::ID . " = ?";
-                $res = getDb()->updateStmt($query, array('i'), array($id));
+                $res = getDb()->deleteStmt($query, array('i'), array($id));
             }
             return $res;
         }
