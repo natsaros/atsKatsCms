@@ -5,22 +5,47 @@ $email = safe_input($_POST[UserHandler::EMAIL]);
 
 if (isEmpty($password) || isEmpty($userName) || isEmpty($email)) {
     addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . "updateUser");
 }
 
 $first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
 $last_name = safe_input($_POST[UserHandler::LAST_NAME]);
-$is_admin = safe_input($_POST[UserHandler::IS_ADMIN]);
 $gender = safe_input($_POST[UserHandler::GENDER]);
 $link = safe_input($_POST[UserHandler::LINK]);
 $phone = safe_input($_POST[UserHandler::PHONE]);
-$picture = safe_input($_POST[UserHandler::PICTURE]);
+
+$groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
+
+$picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
+
+$imageValid = true;
+$image2Upload = $_FILES[UserHandler::PICTURE];
+if ($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
+    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
+}
+
+if (!$imageValid) {
+    addInfoMessage("Please select a valid image file");
+    Redirect(getAdminRequestUri() . "updateUser");
+}
+
+
 try {
-    $user2Create = User::createFullUser(null, $userName, password_hash($password, PASSWORD_DEFAULT), $first_name, $last_name, $email, date('Y-m-d'), null, true, $is_admin, $gender, $link, $phone, $picture);
+    $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
+
+    $user2Create = User::createFullUser(null, $userName, password_hash($password, PASSWORD_DEFAULT), $first_name, $last_name, $email, date('Y-m-d'), null, true, $gender, $link, $phone, null, null);
+    if ($imgContent) {
+        //save image content also in blob on db for back up reasons if needed
+        $user2Create->setPicturePath($picturePath)->setPicture($imgContent);
+    }
     $createUserRes = UserHandler::createUser($user2Create);
 
+    if ($createUserRes && isNotEmpty($groupIds)) {
+        UserHandler::updateUserGroups($createUserRes, $groupIds);
+    }
     if ($createUserRes !== null || $createUserRes) {
         addSuccessMessage("User " . $user2Create->getUserName() . " successfully created");
+        ImageUtil::saveImageToFileSystem($user2Create->getUserName(), $image2Upload);
     } else {
         addErrorMessage("User " . $user2Create->getUserName() . " failed to be created");
     }

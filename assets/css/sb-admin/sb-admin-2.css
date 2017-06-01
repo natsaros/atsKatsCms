@@ -581,3 +581,11 @@ table.dataTable thead .sorting:after {
     display: block;
     margin-bottom: 15px;
 }
+
+form .tab-pane {
+    display: none;
+}
+
+form .tab-pane.active {
+    display: block;
+}

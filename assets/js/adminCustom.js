@@ -1,5 +1,5 @@
 function initializeCheckBoxes() {
-    $('input[type=checkbox]:not(.ak_modal input[type=checkbox])').each(function () {
+    $('input[type=checkbox]:not(.ak_modal input[type=checkbox]):not(input[type=checkbox][data-toggle])').each(function () {
         if ($(this).is(':checked')) {
             $(this).val('true');
         } else {
@@ -8,10 +8,16 @@ function initializeCheckBoxes() {
     });
 }
 
+function initBootstrapToggle() {
+    var $input = $('input[type="checkbox"]');
+    $input.bootstrapToggle();
+}
+
 $(document).ready(function () {
     var dTables = $('.ak-dataTable').DataTable({responsive: true});
 
     initializeCheckBoxes();
+    initBootstrapToggle();
 
     $('.imgCont').hover(handlerImageIn, handlerImageOut);
 
@@ -34,7 +40,7 @@ $(document).ready(function () {
     }
 
     $(':file').on('fileselect', function (event, numFiles, label) {
-        var input = $(this).parents('.input-group').find(':text'),
+        var input = $(this).parents('.form-group').find('.hiddenLabel'),
             log = numFiles > 1 ? numFiles + ' files selected' : label;
 
         if (input.length) {
@@ -60,9 +66,8 @@ $(document).ready(function () {
                 console.log(msg + xhr.status + " " + xhr.statusText);
             } else {
                 // add initializations after load ajax
-                var $input = $('input[type="checkbox"]');
-                $input.bootstrapToggle();
                 initializeCheckBoxes();
+                initBootstrapToggle();
             }
         });
     });
@@ -126,7 +131,7 @@ function handlerImageOut() {
 function previewImage(fileInput) {
     var oFReader = new FileReader();
     oFReader.readAsDataURL(fileInput.files[0]);
-    var $img = $(fileInput).closest('.form-group').next().find('img');
+    var $img = $(fileInput).closest('form').find('img[data-preview]');
     oFReader.onload = function (oFREvent) {
         $img[0].src = oFREvent.target.result;
     };

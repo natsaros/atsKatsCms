@@ -48,11 +48,11 @@ if($isCreate) {
                     </span>
                 </label>
                 <input type="text" value="<?php echo $currentPost->getImagePath(); ?>"
-                       name="<?php echo PostHandler::IMAGE_PATH ?>" class="form-control" readonly>
+                       name="<?php echo PostHandler::IMAGE_PATH ?>" class="form-control hiddenLabel" readonly>
             </div>
 
             <div class="form-group uploadPreview">
-                <img src="<?php echo ImageUtil::renderBlogImage($currentPost); ?>"/>
+                <img data-preview="true" src="<?php echo ImageUtil::renderBlogImage($currentPost); ?>"/>
             </div>
 
             <div class="form-group">

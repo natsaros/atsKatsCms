@@ -1,5 +1,7 @@
 <?php
 
+require_once(CLASSES_ROOT_PATH . 'util' . DS . 'PathHelper.php');
+
 /**
  * Used to facilitate image related functions
  */
@@ -14,13 +16,14 @@ class ImageUtil {
      * @throws SystemException
      */
     static function renderBlogImage($post) {
-        $path2post = PICTURES_ROOT . $post->getID() . DS . $post->getImagePath();
+        $imagePath = isNotEmpty($post->getImagePath()) ? $post->getImagePath() : $post->getID() . '.jpg';
+        $path2post = PICTURES_ROOT . $post->getID() . DS . $imagePath;
         if (!file_exists($path2post)) {
-            if (isNotEmpty($post->getImage())) {
-
+            $imageData = $post->getImage();
+            if (isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
-                self::saveImageContentToFile($path2post,$post->getImage());
-                return self::renderImageFromBlob($post);
+                self::saveImageContentToFile($path2post, $imageData);
+                return self::renderImageFromBlob($imageData, $imagePath);
             } else {
                 return self::renderImageFromGallery($path2post, 'blog_default.png');
             }
@@ -30,22 +33,36 @@ class ImageUtil {
     }
 
     /**
-     * @param $name
+     * @param User $user
      * @return string
      * @throws SystemException
      */
-    static function renderUserImage($name) {
-        return self::renderImageFromGallery($name, 'default.png');
+    static function renderUserImage($user) {
+        $imagePath = isNotEmpty($user->getPicturePath()) ? $user->getPicturePath() : $user->getUserName() . '.jpg';
+        $path = PICTURES_ROOT . $user->getUserName() . DS . $imagePath;
+        if (!file_exists($path)) {
+            $imageData = $user->getPicture();
+            if (isNotEmpty($imageData)) {
+                //save image to file system to serve it from there next time
+                self::saveImageContentToFile($path, $imageData);
+                return self::renderImageFromBlob($imageData, $imagePath);
+            } else {
+                return self::renderImageFromGallery($path, 'default.png');
+            }
+        } else {
+            return self::renderImageFromGallery($path, 'default.png');
+        }
     }
 
     /**
-     * @param Post $post
+     * @param $image
+     * @param $imagePath
      * @return string
      * @throws SystemException
      */
-    private static function renderImageFromBlob($post) {
-        $base64 = base64_encode($post->getImage());
-        return 'data:' . self::getMimeType($post->getImagePath()) . ';base64,' . $base64;
+    private static function renderImageFromBlob($image, $imagePath) {
+        $base64 = base64_encode($image);
+        return 'data:' . self::getMimeType($imagePath) . ';base64,' . $base64;
     }
 
     /**
@@ -115,13 +132,14 @@ class ImageUtil {
      * @return bool|string
      */
     static function saveImageContentToFile($path, $data) {
+        createDirIfNotExists(PathHelper::getParentPath($path));
         return file_put_contents($path, $data);
     }
 
     static function saveImageToFileSystem($extraPath, $tmpFile) {
         $pathToSave = PICTURES_ROOT;
         $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
-        createFileIfNotExists($pathToSave);
+        createDirIfNotExists($pathToSave);
         $pathToSave .= $tmpFile[self::NAME];
         move_uploaded_file($tmpFile[self::TMP_NAME], $pathToSave);
     }

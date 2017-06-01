@@ -16,6 +16,7 @@ class GroupHandler {
     const META_ID = 'ID';
     const META_KEY = 'META_KEY';
     const META_VALUE = 'META_VALUE';
+    const USER_ID = 'USER_ID';
 
     /**
      * @return Group[]|bool
@@ -39,18 +40,50 @@ class GroupHandler {
 
     /**
      * @param $ID
+     * @return Group[]|bool|null
+     * @throws SystemException
+     */
+    public static function fetchGroupsByUser($ID) {
+        $query = "SELECT " . self::GROUP_ID . " FROM " . getDb()->ugr_assoc . " WHERE " . self::USER_ID . " = ?";
+        $rows = getDb()->selectStmt($query, array('i'), array($ID));
+        if ($rows) {
+            $groups = array();
+            foreach ($rows as $row) {
+                $groups[] = self::getGroupById($row[self::GROUP_ID]);
+            }
+            return $groups;
+        }
+        return null;
+    }
+
+    /**
+     * @param $ID
      * @return Group|bool
      * @throws SystemException
      */
     static function getGroupById($ID) {
         $query = "SELECT * FROM " . getDb()->user_groups . " WHERE " . self::ID . " = ?";
         $row = getDb()->selectStmtSingle($query, array('i'), array($ID));
-        if($row) {
+        if ($row) {
             $group = self::populateGroup($row);
-            $query = "SELECT * FROM " . getDb()->user_groups_meta . " WHERE " . self::GROUP_ID . " = ?";
-            $rows = getDb()->selectStmt($query, array('i'), array($group->getID()));
-            $group->setGroupMeta(self::populateMetas($rows));
+            $group->setGroupMeta(self::getGroupMetasById($group->getID()));
             return $group;
+        }
+        return false;
+    }
+
+    /**
+     * @param $id
+     * @return GroupMeta[]|bool
+     * @throws SystemException
+     */
+    static function getGroupMetasById($id) {
+        if (isNotEmpty($id)) {
+            $query = "SELECT * FROM " . getDb()->user_groups_meta . " WHERE " . self::GROUP_ID . " = ?";
+            $rows = getDb()->selectStmt($query, array('i'), array($id));
+            if ($rows) {
+                return self::populateMetas($rows);
+            }
         }
         return false;
     }
@@ -62,7 +95,7 @@ class GroupHandler {
      * @throws SystemException
      */
     static function updateGroupStatus($id, $groupStatus) {
-        if(isNotEmpty($id)) {
+        if (isNotEmpty($id)) {
             $query = "UPDATE " . getDb()->user_groups . " SET " . self::STATUS . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query, array('i', 'i'), array($groupStatus, $id));
         }
@@ -75,14 +108,14 @@ class GroupHandler {
      * @throws SystemException
      */
     static function create($group) {
-        if(isNotEmpty($group)) {
+        if (isNotEmpty($group)) {
             $query = "INSERT INTO " . getDb()->user_groups . " (" . self::GROUP_NAME . "," . self::STATUS . ") VALUES (?, ?)";
             $created = getDb()->createStmt($query, array('s', 's'), array($group->getName(), GroupStatus::ACTIVE));
-            if($created) {
+            if ($created) {
                 $groupMetas = $group->getGroupMeta();
-                if(isNotEmpty($groupMetas) && count($groupMetas) > 0) {
+                if (isNotEmpty($groupMetas) && count($groupMetas) > 0) {
                     /** @var GroupMeta $meta */
-                    foreach($group->getGroupMeta() as $meta) {
+                    foreach ($group->getGroupMeta() as $meta) {
                         $query = "INSERT INTO " . getDb()->user_groups_meta .
                             " (" . self::META_KEY .
                             "," . self::META_VALUE .
@@ -105,19 +138,19 @@ class GroupHandler {
      * @throws SystemException
      */
     static function update($group) {
-        if(isNotEmpty($group)) {
+        if (isNotEmpty($group)) {
             $query = "UPDATE " . getDb()->user_groups . " SET " . self::GROUP_NAME . " = ?, " . self::STATUS . " = ? ," . self::ID . " = LAST_INSERT_ID(" . $group->getID() . ") WHERE " . self::ID . " = ?;";
             $updatedRes = getDb()->updateStmt($query,
                 array('s', 'i', 'i'),
                 array($group->getName(), $group->getStatus(), $group->getID()));
-            if($updatedRes) {
+            if ($updatedRes) {
                 $updatedId = getDb()->selectStmtSingleNoParams("SELECT LAST_INSERT_ID() AS " . self::ID . "");
                 $updatedId = $updatedId["" . self::ID . ""];
 
                 $groupMetas = $group->getGroupMeta();
-                if(isNotEmpty($groupMetas) && count($groupMetas) > 0) {
+                if (isNotEmpty($groupMetas) && count($groupMetas) > 0) {
                     /** @var GroupMeta $meta */
-                    foreach($group->getGroupMeta() as $meta) {
+                    foreach ($group->getGroupMeta() as $meta) {
                         $query = "UPDATE " . getDb()->user_groups_meta . " SET " . self::META_KEY . " = ?, " . self::META_VALUE . " = ? WHERE " . self::GROUP_ID . " = ? AND " . self::META_ID . " = ?";
                         $updatedRes = getDb()->updateStmt($query, array('s', 's', 'i', 'i'),
                             array($meta->getMetaKey(), $meta->getMetaValue(), $updatedId, $meta->getID()));
@@ -138,14 +171,16 @@ class GroupHandler {
      * @throws SystemException
      */
     private static function populateGroups($rows) {
-        if($rows === false) {
+        if ($rows === false) {
             return false;
         }
 
         $groups = [];
 
-        foreach($rows as $row) {
-            $groups[] = self::populateGroup($row);
+        foreach ($rows as $row) {
+            $group = self::populateGroup($row);
+            $group->setGroupMeta(self::getGroupMetasById($group->getID()));
+            $groups[] = $group;
         }
         return $groups;
     }
@@ -156,7 +191,7 @@ class GroupHandler {
      * @throws SystemException
      */
     private static function populateGroup($row) {
-        if($row === false) {
+        if ($row === false) {
             return false;
         }
         return Group::createGroup($row[self::ID], $row[self::GROUP_NAME], $row[self::STATUS]);
@@ -168,13 +203,13 @@ class GroupHandler {
      * @throws SystemException
      */
     private static function populateMetas($rows) {
-        if($rows === false) {
+        if ($rows === false) {
             return false;
         }
 
         $metas = [];
 
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $metas[] = self::populateMeta($row);
         }
 
@@ -187,7 +222,7 @@ class GroupHandler {
      * @throws SystemException
      */
     private static function populateMeta($row) {
-        if($row === false) {
+        if ($row === false) {
             return false;
         }
         return GroupMeta::createMeta($row[self::ID], $row[self::GROUP_ID], $row[self::META_KEY], $row[self::META_VALUE]);
@@ -199,10 +234,10 @@ class GroupHandler {
      * @throws SystemException
      */
     public static function deleteGroup($id) {
-        if(isNotEmpty($id)) {
+        if (isNotEmpty($id)) {
             $query = "DELETE FROM " . getDb()->user_groups_meta . " WHERE " . self::GROUP_ID . " = ?";
             $res = getDb()->deleteStmt($query, array('i'), array($id));
-            if($res) {
+            if ($res) {
                 $query = "DELETE FROM " . getDb()->user_groups . " WHERE " . self::ID . " = ?";
                 $res = getDb()->deleteStmt($query, array('i'), array($id));
             }
@@ -210,4 +245,5 @@ class GroupHandler {
         }
         return null;
     }
+
 }

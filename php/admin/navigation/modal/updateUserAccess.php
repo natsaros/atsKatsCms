@@ -12,13 +12,13 @@
     <div class="modal-body text-center">
         <?php
         $userAccessRights = AccessRightsHandler::getAccessRightByUserId($id);
-        $allAccessRights = AccessRightsHandler::fetchAllAccessRights();
+        $allGroups = AccessRightsHandler::fetchAllAccessRights();
         ?>
 
         <div class="col-lg-12">
             <?php
             /* @var $right AccessRight */
-            foreach($allAccessRights as $key => $right) {
+            foreach($allGroups as $key => $right) {
                 ?>
                 <div class="form-group">
                     <label class="control-label"
@@ -29,7 +29,8 @@
                             <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
                                    type="checkbox" <?php echo $isChecked ?>
                                    value="<?php echo $right->getID(); ?>"
-                                   data-toggle="toggle" data-on="true" data-off="false"
+                                   id="right_input_<?php echo $right->getID(); ?>"
+                                   data-toggle="toggle"
                                    data-custom-on-val="<?php echo $right->getID(); ?>"
                                    data-custom-off-val="">
                         </label>

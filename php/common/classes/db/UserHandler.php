@@ -19,6 +19,9 @@ class UserHandler {
     const LINK = 'LINK';
     const PHONE = 'PHONE';
     const PICTURE = 'PICTURE';
+    const PICTURE_PATH = 'PICTURE_PATH';
+    const USER_ID = 'USER_ID';
+    const GROUP_ID = 'GROUP_ID';
 
     /**
      * @param $username string
@@ -33,6 +36,7 @@ class UserHandler {
         if (password_verify($password, $user->getPassword())) {
             $user->setPassword(null);
             $user->setAccessRights(AccessRightsHandler::getAccessRightByUserId($user->getID()));
+//            $user->setGroups(GroupHandler::fetchGroupsByUser($user->getID()));
             return $user;
         }
         return null;
@@ -99,9 +103,9 @@ class UserHandler {
     static function updateUser($user) {
         //TODO add user meta query here
         if (isNotEmpty($user)) {
-            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::IS_ADMIN . " = ?, " . self::PICTURE . " = ? WHERE " . self::ID . " = ?";
+            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query,
-                array('i', 's', 's', 's', 's', 's', 's', 's', 'i', 'b', 'i'),
+                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i'),
                 array($user->getUserStatus(),
                     $user->getUserName(),
                     $user->getFirstName(),
@@ -110,8 +114,8 @@ class UserHandler {
                     $user->getLink(),
                     $user->getGender(),
                     $user->getPhone(),
-                    $user->getIsAdmin(),
                     $user->getPicture(),
+                    $user->getPicturePath(),
                     $user->getID()
                 ));
         }
@@ -136,8 +140,8 @@ class UserHandler {
                 "," . self::LINK .
                 "," . self::GENDER .
                 "," . self::PHONE .
-                "," . self::IS_ADMIN .
                 "," . self::PICTURE .
+                "," . self::PICTURE_PATH .
                 "," . self::ACTIVATION_DATE .
                 ") VALUES (?
                 , ?
@@ -153,7 +157,7 @@ class UserHandler {
                 , ?)";
 
             return getDb()->createStmt($query,
-                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 'b', 's'),
+                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's'),
                 array($user->getUserStatus(),
                     $user->getUserName(),
                     $user->getPassword(),
@@ -163,10 +167,38 @@ class UserHandler {
                     $user->getLink(),
                     $user->getGender(),
                     $user->getPhone(),
-                    $user->getIsAdmin(),
                     $user->getPicture(),
+                    $user->getPicturePath(),
                     date('Y-m-d H:i:s')
                 ));
+        }
+        return null;
+    }
+
+    /**
+     * @param $ID
+     * @param $groupIDs
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    static function updateUserGroups($ID, $groupIDs) {
+        if (isNotEmpty($ID)) {
+            $groupsFetched = GroupHandler::fetchGroupsByUser($ID);
+            $res = true;
+            if (isNotEmpty($groupsFetched)) {
+                $query = "DELETE FROM " . getDb()->ugr_assoc . " WHERE " . self::USER_ID . " = ?";
+                $res = getDb()->deleteStmt($query, array('i'), array($ID));
+            }
+
+            if ($res && isNotEmpty($groupIDs)) {
+                foreach ($groupIDs as $groupID) {
+                    $query = "INSERT INTO " . getDb()->ugr_assoc . " (" . self::GROUP_ID . "," . self::USER_ID . ") VALUES (?,?)";
+                    $res = getDb()->createStmt($query, array('i', 'i'), array($groupID, $ID));
+                }
+            } else {
+                return null;
+            }
+            return $res;
         }
         return null;
     }
@@ -201,6 +233,6 @@ class UserHandler {
         if ($row === false) {
             return false;
         }
-        return User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::IS_ADMIN] == 1, $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE]);
+        return User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE], $row[self::PICTURE_PATH]);
     }
 }

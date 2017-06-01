@@ -22,7 +22,8 @@ if (!$imageValid) {
 }
 
 try {
-    $imgContent = ImageUtil::readImageContentFromFile($image2Upload);
+    $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
+
     $post2Create = Post::create();
     $post2Create->setTitle($title)->setFriendlyTitle(transliterateString($title))->setUserId($userID)->setText($text);
 

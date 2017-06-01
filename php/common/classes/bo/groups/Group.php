@@ -5,6 +5,8 @@ require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'groups' . DS . 'GroupStatus.php');
  * Signifies user groups of the application
  */
 class Group {
+    const DESCRIPTION = 'description';
+
     private $ID;
     private $name;
     private $status;
@@ -102,5 +104,18 @@ class Group {
     public function getStatus() {
         return $this->status === 1;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription() {
+        foreach (self::getGroupMeta() as $meta) {
+            if ($meta->getMetaKey() === self::DESCRIPTION) {
+                return $meta->getMetaValue();
+            }
+        }
+        return null;
+    }
+
 
 }

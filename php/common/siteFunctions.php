@@ -144,20 +144,20 @@ function initLoadDb() {
 }
 
 function initGallery() {
-    createFileIfNotExists(PICTURES_ROOT);
-    createFileIfNotExists(VIDEOS_ROOT);
-    createFileIfNotExists(DOCUMENTS_ROOT);
+    createDirIfNotExists(PICTURES_ROOT);
+    createDirIfNotExists(VIDEOS_ROOT);
+    createDirIfNotExists(DOCUMENTS_ROOT);
 }
 
 function initLogFile() {
-    createFileIfNotExists(LOGS_ROOT);
+    createDirIfNotExists(LOGS_ROOT);
     define('LOG_FILE', LOGS_ROOT . CONF_LOG_FILE);
 }
 
 /**
  * @param $path
  */
-function createFileIfNotExists($path) {
+function createDirIfNotExists($path) {
     if(!file_exists($path)) {
         mkdir($path, 0777, true);
     }

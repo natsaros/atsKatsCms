@@ -29,7 +29,8 @@
                             <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
                                    type="checkbox" <?php echo $isChecked ?>
                                    value="<?php echo $right->getID(); ?>"
-                                   data-toggle="toggle" data-on="true" data-off="false"
+                                   id="right_input_<?php echo $right->getID(); ?>"
+                                   data-toggle="toggle"
                                    data-custom-on-val="<?php echo $right->getID(); ?>"
                                    data-custom-off-val="">
                         </label>
