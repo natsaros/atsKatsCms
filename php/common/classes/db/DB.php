@@ -231,7 +231,12 @@ class Db {
 
         if ($result) {
             // if it is an insert statement return the last inserted id
-            $mysqli_result = $isCreate ? $stmt->insert_id : $isUpdate || $isDelete ? $result : $stmt->get_result();
+            if ($isCreate) {
+                $mysqli_result = $stmt->insert_id;
+            } else {
+                $mysqli_result = $isUpdate || $isDelete ? $result : $stmt->get_result();
+            }
+
         } else {
             throw new SystemException($connection->error);
         }

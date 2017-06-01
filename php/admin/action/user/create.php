@@ -20,7 +20,8 @@ $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
 
 $imageValid = true;
 $image2Upload = $_FILES[UserHandler::PICTURE];
-if ($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
+$emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+if (!$emptyFile) {
     $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
 
@@ -45,7 +46,9 @@ try {
     }
     if ($createUserRes !== null || $createUserRes) {
         addSuccessMessage("User " . $user2Create->getUserName() . " successfully created");
-        ImageUtil::saveImageToFileSystem($user2Create->getUserName(), $image2Upload);
+        if(!$emptyFile){
+            ImageUtil::saveImageToFileSystem($user2Create->getUserName(), $image2Upload);
+        }
     } else {
         addErrorMessage("User " . $user2Create->getUserName() . " failed to be created");
     }

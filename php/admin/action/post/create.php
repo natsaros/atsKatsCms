@@ -36,7 +36,9 @@ try {
     if ($postRes !== null || $postRes) {
         addSuccessMessage("Post '" . $post2Create->getTitle() . "' successfully created");
         //save image under id of created post in file system
-        ImageUtil::saveImageToFileSystem($postRes, $image2Upload);
+        if(!$emptyFile){
+            ImageUtil::saveImageToFileSystem($postRes, $image2Upload);
+        }
     } else {
         addErrorMessage("Post '" . $post2Create->getTitle() . "' failed to be created");
     }

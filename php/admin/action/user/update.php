@@ -51,7 +51,9 @@ try {
         }
         if ($updateUserRes !== null || $updateUserRes) {
             addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
-            ImageUtil::saveImageToFileSystem($user2Update->getUserName(), $image2Upload);
+            if(!$emptyFile){
+                ImageUtil::saveImageToFileSystem($user2Update->getUserName(), $image2Upload);
+            }
         } else {
             addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
         }

@@ -40,7 +40,9 @@ try {
     if ($postRes !== null || $postRes) {
         addSuccessMessage("Post '" . $post->getTitle() . "' successfully updated");
         //save image under id of created post in file system
-        ImageUtil::saveImageToFileSystem($ID, $image2Upload);
+        if(!$emptyFile){
+            ImageUtil::saveImageToFileSystem($ID, $image2Upload);
+        }
     } else {
         addErrorMessage("Post '" . $post->getTitle() . "' failed to be updated");
     }
