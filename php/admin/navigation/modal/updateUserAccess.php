@@ -1,25 +1,14 @@
 <?php $id = $_GET['id'] ?>
 <?php $modalTitle = $_GET['modalTitle'];
-$errorMessages = consumeErrorMessages();
 ?>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel_<?php echo $id ?>"><?php echo $modalTitle ?></h4>
+    <h4 class="modal-title" id="myModalLabel_user_<?php echo $id ?>"><?php echo $modalTitle ?></h4>
 </div>
 <?php $action = getAdminActionRequestUri() . "access" . DS . "updateUser"; ?>
 <form name="updateAccessForm" role="form" action="<?php echo $action; ?>" data-toggle="validator" method="post">
     <input type="hidden" name="<?php echo AccessRightsHandler::USER_ID ?>" value="<?php echo $id ?>"/>
-    <?php if (isNotEmpty($errorMessages)) {
-        /* @var $msg string */
-        foreach ($errorMessages as $key => $msg) {
-            ?>
-            <div class="alert alert-danger alert-dismissable fade in">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <?php echo $msg ?>
-            </div>
-            <?php
-        }
-    } ?>
+    <?php require_safe(ADMIN_NAV_PATH . 'modalMessageSection' . PHP_POSTFIX) ?>
     <div class="modal-body text-center">
         <?php
         $userAccessRights = AccessRightsHandler::getAccessRightByUserId($id);
@@ -29,7 +18,7 @@ $errorMessages = consumeErrorMessages();
         <div class="col-lg-12">
             <?php
             /* @var $right AccessRight */
-            foreach ($allAccessRights as $key => $right) {
+            foreach($allAccessRights as $key => $right) {
                 ?>
                 <div class="form-group">
                     <label class="control-label"
@@ -40,7 +29,9 @@ $errorMessages = consumeErrorMessages();
                             <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
                                    type="checkbox" <?php echo $isChecked ?>
                                    value="<?php echo $right->getID(); ?>"
-                                   data-toggle="toggle" data-on="true" data-off="false">
+                                   data-toggle="toggle" data-on="true" data-off="false"
+                                   data-custom-on-val="<?php echo $right->getID(); ?>"
+                                   data-custom-off-val="">
                         </label>
                     </div>
                 </div>

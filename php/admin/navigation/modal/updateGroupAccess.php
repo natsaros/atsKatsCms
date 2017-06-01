@@ -3,7 +3,7 @@
 ?>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel_<?php echo $id ?>"><?php echo $modalTitle ?></h4>
+    <h4 class="modal-title" id="myModalLabel_group_<?php echo $id ?>"><?php echo $modalTitle ?></h4>
 </div>
 <?php $action = getAdminActionRequestUri() . "access" . DS . "updateGroup"; ?>
 <form name="updateAccessForm" role="form" action="<?php echo $action; ?>" data-toggle="validator" method="post">
@@ -18,7 +18,7 @@
         <div class="col-lg-12">
             <?php
             /* @var $right AccessRight */
-            foreach ($allAccessRights as $key => $right) {
+            foreach($allAccessRights as $key => $right) {
                 ?>
                 <div class="form-group">
                     <label class="control-label"

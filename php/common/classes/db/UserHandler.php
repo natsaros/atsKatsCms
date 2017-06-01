@@ -27,7 +27,7 @@ class UserHandler {
      * @throws SystemException
      */
     static function adminLogin($username, $password) {
-        $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USERNAME . " = ? AND " . self::IS_ADMIN . "=1 AND " . self::USER_STATUS . " = " . UserStatus::ACTIVE;
+        $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::USERNAME . " = ? AND " . self::USER_STATUS . " = " . UserStatus::ACTIVE;
         $row = getDb()->selectStmtSingle($query, array('s'), array($username));
         $user = self::populateUser($row);
         if (password_verify($password, $user->getPassword())) {

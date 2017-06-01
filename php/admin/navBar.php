@@ -263,27 +263,36 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                 <?php } ?>
-                <li>
-                    <a href="<?php echo $adminRequestUri . 'users' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'users') !== false) {
-                        echo 'class="active"';
-                    } ?>><i class="fa fa-users fa-fw"></i> Users</a>
-                </li>
-                <li>
-                    <a href="<?php echo $adminRequestUri . 'posts' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'posts') !== false) {
-                        echo 'class="active"';
-                    } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
-                </li>
-                <?php if(isNotEmpty(DEV_MODE) && DEV_MODE) { ?>
+                <?php if(hasAccess($loggedInUser, AccessRight::USER_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . 'users' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'users') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-users fa-fw"></i> Users</a>
+                    </li>
+                <?php } ?>
+                <?php if(hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . 'posts' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'posts') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
+                    </li>
+                <?php } ?>
+
+                <?php if(hasAccess($loggedInUser, AccessRight::PAGES_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'pages' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'pages') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                     </li>
+                <?php } ?>
+                <?php if(hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'settings' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'settings') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-cog fa-fw"></i> Settings</a>
                     </li>
+                <?php } ?>
+                <?php if(isNotEmpty(DEV_MODE) && DEV_MODE) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'tables' ?>" <?php if(strpos(ADMIN_PAGE_ID, 'tables') !== false) {
                             echo 'class="active"';

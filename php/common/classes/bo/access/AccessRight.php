@@ -7,6 +7,13 @@ class AccessRight {
 
     const DESCRIPTION = 'description';
 
+//    TODO : make access rights dynamic according to DB access rights
+    const ALL = 'ALL';
+    const PAGES_SECTION = 'PAGES_SECTION';
+    const POSTS_SECTION = 'POSTS_SECTION';
+    const USER_SECTION = 'USER_SECTION';
+    const SETTINGS_SECTION = 'SETTINGS_SECTION';
+
     private $ID;
     private $name;
 

@@ -22,7 +22,6 @@ class User {
      */
     private $userMeta;
 
-
     /**
      * @var AccessRight[]
      */
@@ -339,6 +338,21 @@ class User {
     }
 
     /**
+     * @return string[]
+     */
+    public function getAccessRightsStr() {
+        $accessRightsStr = array();
+        if(isNotEmpty($this->getAccessRights())) {
+
+            /** @var AccessRight $right */
+            foreach($this->getAccessRights() as $right) {
+                $accessRightsStr[] = $right->getName();
+            }
+        }
+        return $accessRightsStr;
+    }
+
+    /**
      * @param AccessRight[] $accessRights
      * @return User
      */
@@ -346,7 +360,6 @@ class User {
         $this->accessRights = $accessRights;
         return $this;
     }
-
 
 }
 
