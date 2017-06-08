@@ -3,6 +3,7 @@
 class Setting {
 
     const BLOG_ENABLED = 'blog.enabled';
+    const BLOG_STYLE = 'blog.style';
     const DEFAULT_LANG = 'default.language';
 
     private $ID;

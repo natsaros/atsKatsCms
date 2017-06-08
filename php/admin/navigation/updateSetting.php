@@ -43,7 +43,28 @@ if($isCreate) {
                             </label>
                         </div>
                     </div>
+                <?php } else if(($curSetting->getKey() === Setting::BLOG_STYLE)) { ?>
+                    <div class="form-group">
+                        <label class="control-label"
+                               for="setting_input_<?php echo $curSetting->getID(); ?>"><?php echo $curSetting->getKey(); ?></label>
+                        <div class="checkbox">
+                            <label>
+                                <?php $isChecked = $curSetting->getValue() === 'grid' ? 'checked' : '' ?>
+                                <input name="<?php echo SettingsHandler::SVALUE; ?>[]"
+                                       type="checkbox" <?php echo $isChecked ?>
+                                       value="<?php echo $curSetting->getValue(); ?>"
+                                       id="setting_input_<?php echo $curSetting->getID(); ?>"
+                                       data-toggle="toggle"
+                                       data-on="grid"
+                                       data-custom-on-val="grid"
+                                       data-off="list"
+                                       data-custom-off-val="list"
+                                >
+                            </label>
+                        </div>
+                    </div>
                 <?php } ?>
+
             <?php } else { ?>
                 <div class="form-group">
                     <label class="control-label" for="key_input">Key</label>

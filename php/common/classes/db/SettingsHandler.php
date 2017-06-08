@@ -23,7 +23,7 @@ class SettingsHandler {
      */
     static function getSettingByKey($key) {
         $query = "SELECT * FROM " . getDb()->settings . " WHERE " . self::SKEY . " = ?";
-        $row = getDb()->selectStmtSingle($query, array('i'), array($key));
+        $row = getDb()->selectStmtSingle($query, array('s'), array($key));
         return self::populateSetting($row);
     }
 

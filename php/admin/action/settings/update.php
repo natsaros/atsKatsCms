@@ -6,6 +6,11 @@ if($key === Setting::BLOG_ENABLED) {
     if(isEmpty($value)) {
         $value = 'off';
     }
+} else if($key === Setting::BLOG_STYLE) {
+    $value = $_POST[SettingsHandler::SVALUE][0];
+    if(isEmpty($value)) {
+        $value = 'list';
+    }
 } else {
     $value = $_POST[SettingsHandler::SVALUE];
 }
