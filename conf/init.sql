@@ -218,3 +218,14 @@ INSERT INTO AK_ACR_ASSOC (ACC_ID, GROUP_ID) VALUES ((SELECT ID
                                                                             WHERE
                                                                               NAME =
                                                                               'admin')));
+
+CREATE TABLE AK_VISITORS (
+  ID                BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+  FB_ID             VARCHAR(50)  NOT NULL,
+  FIRST_NAME        VARCHAR(250) NOT NULL    DEFAULT '',
+  LAST_NAME         VARCHAR(250) NOT NULL    DEFAULT '',
+  EMAIL             VARCHAR(100)             DEFAULT '',
+  USER_STATUS       INT(11)      NOT NULL    DEFAULT 1,
+  INSERTION_DATE 	  DATETIME,
+  LAST_LOGIN_DATE 	DATETIME
+)

@@ -19,6 +19,8 @@ class Db {
     const COMMENTS = 'COMMENTS';
     const COMMENT_META = 'COMMENT_META';
 
+    const VISITORS = 'VISITORS';
+
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
     const DB_BLOG = 'blog';
@@ -30,7 +32,7 @@ class Db {
 
     private $initialized;
 
-    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC);
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS);
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
@@ -52,6 +54,8 @@ class Db {
     public $access_rights;
     public $access_rights_meta;
     public $acr_assoc;
+
+    public $visitors;
 
     /**
      * @return Db
@@ -350,6 +354,10 @@ class Db {
                     case self::ACR_ASSOC:
                         $this->setAcrAssoc($updatedTable);
                         break;
+
+                    case self::VISITORS:
+                        $this->setVisitors($updatedTable);
+                        break;
                 }
             }
         }
@@ -524,6 +532,14 @@ class Db {
      */
     public function setAcrAssoc($acr_assoc) {
         $this->acr_assoc = $acr_assoc;
+    }
+
+    /**
+     * @param mixed $visitors
+     */
+    public function setVisitors($visitors)
+    {
+        $this->visitors = $visitors;
     }
 
 }

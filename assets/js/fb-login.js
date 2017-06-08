@@ -6,9 +6,9 @@
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function checkLoginState() {
+function checkLoginState(toPostComment) {
     FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
+        statusChangeCallback(response, toPostComment);
     }, true);
 }
 
@@ -19,50 +19,43 @@ window.fbAsyncInit = function() {
         version    : 'v2.9',
         status     : true
     });
-
-    checkLoginState();
 };
 
-function statusChangeCallback(response) {
+function statusChangeCallback(response, toPostComment) {
     if (response.status === 'connected') {
-        $('#newCommentSection').fadeIn();
-        $('#fbLoginSection').hide();
-        // backendFBLogin(response.authResponse.accessToken);
+        // The person is logged both into Facebook and into your app.
+        if (!toPostComment){
+            $('#loadingImg').fadeIn();
+            $('#fbLoginSection').hide();
+        }
+        backendFBLogin(response.authResponse.accessToken);
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
     } else {
-        $('#fbLoginSection').fadeIn();
-        $('#newCommentSection').hide();
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
+        $('#fbLoginSection').fadeIn();
+        $('#loadingImg').hide();
+        $('#newCommentSection').hide();
     }
 }
 
 function backendFBLogin(accessToken) {
     FB.api('/me', function(response) {
-        // get accessToken and get user profile
+        $.ajax({
+            type: "POST",
+            url: "/peny/registerFbUser",
+            data: {"fbAccessToken" : accessToken},
+            success: function() {
+                $('#newCommentSection').fadeIn();
+                $('#loadingImg').hide();
+            }
+        });
     });
-
 }
 
 function fbLogin(){
     FB.login(function(response) {
-        checkLoginState();
+        checkLoginState(false);
     }, {scope: 'email,public_profile'});
 }
-
-// function fbLogout(url) {
-//     FB.getLoginStatus(function(response) {
-//         if (response && response.status === 'connected') {
-//             FB.logout(function(response) {
-//                 var cookies = document.cookie.split(";");
-//                 for (var i = 0; i < cookies.length; i++)
-//                 {
-//                     if(cookies[i].split("=")[0].indexOf("fblo_") != -1)
-//                         document.cookie = $.trim(cookies[i].split("=")[0]) +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-//                 }
-//                 window.location.href = url;
-//             });
-//         }
-//     }, true);
-// }
