@@ -16,9 +16,9 @@ CREATE TABLE AK_USERS (
   PHONE             VARCHAR(30)              DEFAULT '',
   LINK              VARCHAR(250)             DEFAULT '',
   GENDER            VARCHAR(50)              DEFAULT '',
-  PICTURE           VARCHAR(250)             DEFAULT '',
+  PICTURE           LONGBLOB,
+  PICTURE_PATH      VARCHAR(255),
   USER_STATUS       INT(11)      NOT NULL    DEFAULT 0,
-  IS_ADMIN          INT(11)      NOT NULL    DEFAULT 0,
   ACTIVATION_DATE   DATETIME     NOT NULL,
   MODIFICATION_DATE DATETIME     NOT NULL    DEFAULT CURRENT_TIMESTAMP
 )
@@ -167,10 +167,10 @@ CREATE TABLE AK_ACR_ASSOC (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-INSERT INTO AK_USERS (NAME, PASSWORD, FIRST_NAME, LAST_NAME, EMAIL, PHONE, LINK, GENDER, PICTURE, USER_STATUS, IS_ADMIN, ACTIVATION_DATE)
+INSERT INTO AK_USERS (NAME, PASSWORD, FIRST_NAME, LAST_NAME, EMAIL, PHONE, LINK, GENDER, PICTURE, USER_STATUS, ACTIVATION_DATE)
 VALUES
   ('admin', '$2y$10$6g91rGCWuZ9zbiJV2YDzeOgmxlyCKauJejWUVJtWPJirKngbSeyVu', 'admin', 'admin', 'admin@admin.gr', '',
-            '', '', '', 1, 1, CURRENT_TIMESTAMP);
+            '', '', '', 1, CURRENT_TIMESTAMP);
 
 INSERT INTO AK_USER_GROUPS (NAME, STATUS) VALUES ('admin', 1);
 INSERT INTO AK_USER_GROUPS_META (GROUP_ID, META_KEY, META_VALUE)
@@ -219,13 +219,24 @@ INSERT INTO AK_ACR_ASSOC (ACC_ID, GROUP_ID) VALUES ((SELECT ID
                                                                               NAME =
                                                                               'admin')));
 
+INSERT INTO AK_ACR_ASSOC (ACC_ID, GROUP_ID) VALUES ((SELECT ID
+                                                     FROM AK_ACCESS_RIGHTS
+                                                     WHERE NAME = 'POSTS_SECTION'), ((SELECT ID
+                                                                                      FROM
+                                                                                        AK_USER_GROUPS
+                                                                                      WHERE
+                                                                                        NAME =
+                                                                                        'editor')));
+
 CREATE TABLE AK_VISITORS (
-  ID                BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
-  FB_ID             VARCHAR(50)  NOT NULL,
-  FIRST_NAME        VARCHAR(250) NOT NULL    DEFAULT '',
-  LAST_NAME         VARCHAR(250) NOT NULL    DEFAULT '',
-  EMAIL             VARCHAR(100)             DEFAULT '',
-  USER_STATUS       INT(11)      NOT NULL    DEFAULT 1,
-  INSERTION_DATE 	  DATETIME,
-  LAST_LOGIN_DATE 	DATETIME
-)
+  ID              BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+  FB_ID           VARCHAR(50)  NOT NULL,
+  FIRST_NAME      VARCHAR(250) NOT NULL    DEFAULT '',
+  LAST_NAME       VARCHAR(250) NOT NULL    DEFAULT '',
+  EMAIL           VARCHAR(100)             DEFAULT '',
+  USER_STATUS     INT(11)      NOT NULL    DEFAULT 1,
+  INSERTION_DATE  DATETIME,
+  LAST_LOGIN_DATE DATETIME
+);
+
+INSERT INTO AK_SETTINGS (SKEY, SVALUE) VALUES ('blog.enabled', 'off');

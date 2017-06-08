@@ -160,7 +160,6 @@ class User {
         return $this->link;
     }
 
-
     /**
      * @return mixed
      */
@@ -215,11 +214,13 @@ class User {
     public
     function getAccessRightsStr() {
         $accessRightsStr = array();
-        if (isNotEmpty($this->getAccessRights())) {
+        if(isNotEmpty($this->getAccessRights())) {
 
             /** @var AccessRight $right */
-            foreach ($this->getAccessRights() as $right) {
-                $accessRightsStr[] = $right->getName();
+            foreach($this->getAccessRights() as $right) {
+                if(!in_array($right, $accessRightsStr)) {
+                    $accessRightsStr[] = $right->getName();
+                }
             }
         }
         return $accessRightsStr;
