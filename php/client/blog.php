@@ -43,7 +43,9 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                         <div class="row row-no-padding row-no-margin">
                             <div class="col-sm-12">
                                 <div class="blogPostPreviewTitleGrid">
-                                    <?php echo $post->getTitle(); ?>
+                                    <a href="<?php echo getBlogUri() . $post->getFriendlyTitle();?>">
+                                        <?php echo $post->getTitle(); ?>
+                                    </a>
                                     <div class="blogTitlesBorderGrid"></div>
                                 </div>
                             </div>
@@ -58,15 +60,8 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                         <div class="row row-no-padding row-no-margin">
                             <div class="col-sm-12">
                                 <div class="blogPostPreviewTextGrid">
-                                    <?php echo postTextPreview($post->getText(), "grid"); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="blogReadMore">
-                                    <a href="<?php echo REQUEST_URI ?>blog/<?php echo transliterateString($post->getFriendlyTitle()); ?>">
-                                        Διαβάστε Περισσότερα...
+                                    <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                        <?php echo postTextPreview($post->getText(), "grid"); ?>
                                     </a>
                                 </div>
                             </div>
@@ -95,7 +90,9 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                                     <div class="row row-no-padding">
                                         <div class="col-sm-12">
                                             <div class="blogPostPreviewTitleList">
-                                                <?php echo $post->getTitle(); ?>
+                                                <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                                    <?php echo $post->getTitle(); ?>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -109,18 +106,11 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                                     <div class="row row-no-padding">
                                         <div class="col-sm-12">
                                             <div class="blogPostPreviewTextList">
-                                                <?php echo postTextPreview($post->getText(), "list"); ?>
+                                                <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                                    <?php echo postTextPreview($post->getText(), "list"); ?>
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="blogReadMore">
-                                        <a href="<?php echo REQUEST_URI ?>blog/<?php echo transliterateString($post->getFriendlyTitle()); ?>">
-                                            Διαβάστε Περισσότερα...
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +145,9 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                             <div class="row row-no-padding row-no-margin">
                                 <div class="col-sm-12">
                                     <div class="blogPostPreviewTitleGrid">
-                                        <?php echo $post->getTitle(); ?>
+                                        <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                            <?php echo $post->getTitle(); ?>
+                                        </a>
                                         <div class="blogTitlesBorderGrid"></div>
                                     </div>
                                 </div>
@@ -170,15 +162,8 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                             <div class="row row-no-padding row-no-margin">
                                 <div class="col-sm-12">
                                     <div class="blogPostPreviewTextGrid">
-                                        <?php echo postTextPreview($post->getText(), "grid"); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="blogReadMore">
-                                        <a href="<?php echo REQUEST_URI ?>blog/<?php echo transliterateString($post->getFriendlyTitle()); ?>">
-                                            Διαβάστε Περισσότερα...
+                                        <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                            <?php echo postTextPreview($post->getText(), "grid"); ?>
                                         </a>
                                     </div>
                                 </div>
@@ -208,7 +193,9 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                                         <div class="row row-no-padding">
                                             <div class="col-sm-12">
                                                 <div class="blogPostPreviewTitleList">
-                                                    <?php echo $post->getTitle(); ?>
+                                                    <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                                        <?php echo $post->getTitle(); ?>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,18 +209,11 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                                         <div class="row row-no-padding">
                                             <div class="col-sm-12">
                                                 <div class="blogPostPreviewTextList">
-                                                    <?php echo postTextPreview($post->getText(), "list"); ?>
+                                                    <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                                        <?php echo postTextPreview($post->getText(), "list"); ?>
+                                                    </a>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="blogReadMore">
-                                            <a href="<?php echo REQUEST_URI ?>blog/<?php echo transliterateString($post->getFriendlyTitle()); ?>">
-                                                Διαβάστε Περισσότερα...
-                                            </a>
                                         </div>
                                     </div>
                                 </div>

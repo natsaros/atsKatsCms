@@ -1,0 +1,1 @@
+2017245 in C:\xampp\htdocs\peny\php\common\classes\db\DB.php: 	Cannot add or update a child row: a foreign key constraint fails (`penystatic`.`ak_comments`, CONSTRAINT `AK_CU_FK` FOREIGN KEY (`USER_ID`) REFERENCES `ak_users` (`ID`) ON DELETE CASCADE)	 with code: 0

@@ -197,14 +197,14 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .blogPostTitlesBorder {margin: 20px auto;border: 2px solid #FDC300;border-radius: 2px;width: 75%;}
 .blogTitlesBorderGrid {margin: 10px auto;border: 1px solid #FDC300;border-radius: 2px;width: 75%;}
 .blogBorder {margin: 10px auto 25px;border: 1px solid #FDC300;border-radius: 2px;width: 100%;opacity: 0.6;}
-.blogImageList {height: 120px;}
-.blogImageGrid {height: 160px;}
+.blogImageList {height: 130px;}
+.blogImageGrid {height: 170px;}
 .blogPostPreviewTitleList {font-weight: 700;font-size: 18px;text-align: left;margin-bottom: 10px;}
 .blogPostPreviewTitleGrid {font-weight: 700;font-size: 18px;text-align: center;margin: 10px 0 0;display: inline-block;}
 .blogPostPreviewTextList {font-size: 16px;text-align: left;max-height: 65px;overflow: hidden;}
 .blogPostPreviewTextGrid {font-size: 16px;text-align: center;max-height: 90px;min-height: 90px;overflow: hidden;margin-bottom: 30px;}
-.blogReadMore {text-align: right;font-size: 12px;font-weight: 700;font-style: italic;}
-.blogReadMore a, .blogReadMore a:hover, .blogReadMore a:active{color: #000;}
+.blogPostPreviewTextGrid a, .blogPostPreviewTextGrid a:hover, .blogPostPreviewTextGrid a:active, .blogPostPreviewTextList a, .blogPostPreviewTextList a:hover, .blogPostPreviewTextList a:active{color: #000;}
+.blogPostPreviewTitleGrid a, .blogPostPreviewTitleGrid a:hover, .blogPostPreviewTitleGrid a:active, .blogPostPreviewTitleList a, .blogPostPreviewTitleList a:hover, .blogPostPreviewTitleList a:active{color: #000;}
 .blogPostBorder {margin: 20px auto;border: 1px solid #FDC300;border-radius: 2px;width: 100%;opacity: 0.6;}
 .blogPostImage {height: 400px;}
 .blogPostTextContainer {padding: 3% 0;font-size: 18px;text-align: left;}

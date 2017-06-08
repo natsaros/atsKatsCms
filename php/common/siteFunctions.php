@@ -115,6 +115,13 @@ function getAdminModalRequestUri() {
 /**
  * @return string
  */
+function getBlogUri() {
+    return getRootUri() . BLOG_PATH . DS;
+}
+
+/**
+ * @return string
+ */
 function getActiveAdminPage() {
     $uri = $_SERVER['REQUEST_URI'];
     $page_id = preg_replace("/[^\/][\w]+(?=\?)/", "", $uri);
@@ -392,7 +399,7 @@ function defineSystemVariables() {
     defined('MODAL_STR') or define('MODAL_STR', 'modal');
     defined('COMMON_STR') or define('COMMON_STR', 'common');
     defined('CLASSES_STR') or define('CLASSES_STR', 'classes');
-    defined('BLOG_PATH') or define('BLOG_PATH', '/blog/');
+    defined('BLOG_PATH') or define('BLOG_PATH', 'blog');
 
     defined('REQUEST_URI') or define('REQUEST_URI', getRootUri());
 
@@ -429,6 +436,7 @@ function loadAppClasses() {
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'CommentHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'GroupHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'AccessRightsHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'SettingsHandler.php');
