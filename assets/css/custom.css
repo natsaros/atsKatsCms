@@ -197,8 +197,16 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .blogPostTitlesBorder {margin: 20px auto;border: 2px solid #FDC300;border-radius: 2px;width: 75%;}
 .blogTitlesBorderGrid {margin: 10px auto;border: 1px solid #FDC300;border-radius: 2px;width: 75%;}
 .blogBorder {margin: 10px auto 25px;border: 1px solid #FDC300;border-radius: 2px;width: 100%;opacity: 0.6;}
-.blogImageList {height: 130px;}
-.blogImageGrid {height: 170px;}
+/*.blogImageList {height: 130px;}*/
+.blogImageList { max-width:100%;}
+.blogImageList img{ height:auto;width: auto;max-width:100%;max-height: 130px;}
+/*.blogImageGrid {height: 170px;}*/
+.blogImageGrid { max-width:100%;}
+.blogImageGrid img{ height:auto;width: auto;max-width:100%;max-height: 170px;}
+
+/*.blogPostImage {height: 400px;}*/
+.blogPostImage {max-width:100%;}
+.blogPostImage img{ height:auto;width: auto;max-width:100%;max-height: 400px;}
 .blogPostPreviewTitleList {font-weight: 700;font-size: 18px;text-align: left;margin-bottom: 10px;}
 .blogPostPreviewTitleGrid {font-weight: 700;font-size: 18px;text-align: center;margin: 10px 0 0;display: inline-block;}
 .blogPostPreviewTextList {font-size: 16px;text-align: left;max-height: 65px;overflow: hidden;}
@@ -206,7 +214,6 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .blogPostPreviewTextGrid a, .blogPostPreviewTextGrid a:hover, .blogPostPreviewTextGrid a:active, .blogPostPreviewTextList a, .blogPostPreviewTextList a:hover, .blogPostPreviewTextList a:active{color: #000;}
 .blogPostPreviewTitleGrid a, .blogPostPreviewTitleGrid a:hover, .blogPostPreviewTitleGrid a:active, .blogPostPreviewTitleList a, .blogPostPreviewTitleList a:hover, .blogPostPreviewTitleList a:active{color: #000;}
 .blogPostBorder {margin: 20px auto;border: 1px solid #FDC300;border-radius: 2px;width: 100%;opacity: 0.6;}
-.blogPostImage {height: 400px;}
 .blogPostTextContainer {padding: 3% 0;font-size: 18px;text-align: left;}
 .blogPostShareContainer {font-size: 14px; text-align: right;}
 .blogPostsDateList {margin-bottom: 15px;text-align: left;font-size: 12px;}
@@ -247,7 +254,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .blogContainer {width:90%;}
     .blogPostTextContainer {font-size: 15px;}
     .blogPostShareContainer {font-size: 12px;}
-    .blogPostImage {height: 300px;}
+    /*.blogPostImage {height: 300px;}*/
+    .blogPostImage img { max-height: 300px; }
     .fa {font-size: 14px;width: 22px;height: 22px;line-height: 22px;}
 }
 
@@ -293,7 +301,8 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .blogContainer {width:90%;}
     .blogPostTextContainer {font-size: 14px;}
     .blogPostShareContainer {font-size: 11px;}
-    .blogPostImage {height: 200px;}
+    /*.blogPostImage {height: 200px;}*/
+    .blogPostImage img { max-height: 200px; }
     .fa {font-size: 12px;width: 20px;height: 20px;line-height: 20px;}
     .facebook-login-button {font-size: 12px;padding:8px 10px;margin: 10px 0;}
     .facebook-login-button span{font-size: 12px;line-height: 20px;margin: 0 5px;width: 20px;height: 20px;}

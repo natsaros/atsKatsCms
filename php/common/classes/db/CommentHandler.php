@@ -42,7 +42,7 @@ class CommentHandler {
             return getDb()->createStmt($query,
                 array('i', 's', 's', 'i', 'i'),
                 array($comment->getID(),
-                    date('Y-m-d H:i:s'),
+                    date(DEFAULT_DATE_FORMAT),
                     $comment->getComment(),
                     $comment->getUserId(),
                     $comment->getPostId()

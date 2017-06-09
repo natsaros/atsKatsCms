@@ -43,7 +43,7 @@ class VisitorHandler {
                 array($visitor->getFirstName(),
                     $visitor->getLastName(),
                     $visitor->getEmail(),
-                    date('Y-m-d H:i:s'),
+                    date(DEFAULT_DATE_FORMAT),
                     $visitor->getFBID()
                 ));
         }
@@ -80,8 +80,8 @@ class VisitorHandler {
                     $visitor->getFirstName(),
                     $visitor->getLastName(),
                     $visitor->getEmail(),
-                    date('Y-m-d H:i:s'),
-                    date('Y-m-d H:i:s')
+                    date(DEFAULT_DATE_FORMAT),
+                    date(DEFAULT_DATE_FORMAT)
                 ));
         }
         return null;

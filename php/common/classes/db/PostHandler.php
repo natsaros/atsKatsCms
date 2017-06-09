@@ -111,7 +111,7 @@ class PostHandler {
     static function createPost($post) {
         if(isNotEmpty($post)) {
             $query = "INSERT INTO " . getDb()->posts . " (" . self::TITLE . "," . self::FRIENDLY_TITLE . "," . self::STATE . "," . self::USER_ID . "," . self::ACTIVATION_DATE . ") VALUES (?, ?, ?, ?, ?)";
-            $created = getDb()->createStmt($query, array('s', 's', 'i', 's', 's'), array($post->getTitle(), $post->getFriendlyTitle(), PostStatus::PUBLISHED, $post->getUserId(), date('Y-m-d H:i:s')));
+            $created = getDb()->createStmt($query, array('s', 's', 'i', 's', 's'), array($post->getTitle(), $post->getFriendlyTitle(), PostStatus::PUBLISHED, $post->getUserId(), date(DEFAULT_DATE_FORMAT)));
             if($created) {
                 $query = "INSERT INTO " . getDb()->post_meta .
                     " (" . self::TEXT .

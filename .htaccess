@@ -35,6 +35,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_URI} !admin [NC]
 #RewriteRule ^([a-zA-Z0-9\/]+)$ index.php?id=$1
+RewriteRule ^action/([a-zA-Z0-9-]+)/?$ index.php?action=$1
 RewriteRule ^blog/([a-zA-Z0-9-]+)/?$ index.php?id=blogpost&post_friendly_url=$1
 RewriteRule ^([a-zA-Z0-9\/\=\?\&]+)$ index.php?id=$1
 </IfModule>

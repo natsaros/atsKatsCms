@@ -11,7 +11,7 @@ $isCreate = isEmpty($postId);
 
 <?php
 $loggedInUser = getFullUserFromSession();
-if($isCreate) {
+if ($isCreate) {
     $currentPost = Post::create();
 } else {
     $currentPost = PostHandler::getPostByIDWithDetails($postId);

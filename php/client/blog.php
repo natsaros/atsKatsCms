@@ -36,8 +36,12 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                     <div class="col-sm-4">
                         <div class="row row-no-padding row-no-margin">
                             <div class="col-sm-12">
-                                <div class="blogImageGrid"
-                                     style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
+<!--                                <div class="blogImageGrid"-->
+<!--                                     style="background: url('--><?php //echo ImageUtil::renderBlogImage($post); ?>/*') no-repeat center 60% /cover;"></div>*/
+
+                                <div class="blogImageGrid">
+                                    <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                                </div>
                             </div>
                         </div>
                         <div class="row row-no-padding row-no-margin">
@@ -85,6 +89,10 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                                 <div class="col-sm-3">
                                     <div class="blogImageList"
                                          style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
+
+                                    <div class="blogImageList">
+                                        <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                                    </div>
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="row row-no-padding">
@@ -138,8 +146,9 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                         <div class="col-sm-4">
                             <div class="row row-no-padding row-no-margin">
                                 <div class="col-sm-12">
-                                    <div class="blogImageGrid"
-                                         style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
+                                    <div class="blogImageGrid">
+                                        <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row row-no-padding row-no-margin">
@@ -186,8 +195,9 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                             <div class="col-sm-12">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <div class="blogImageList"
-                                             style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
+                                        <div class="blogImageList">
+                                            <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                                        </div>
                                     </div>
                                     <div class="col-sm-9">
                                         <div class="row row-no-padding">

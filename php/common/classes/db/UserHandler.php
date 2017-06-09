@@ -169,7 +169,7 @@ class UserHandler {
                     $user->getPhone(),
                     $user->getPicture(),
                     $user->getPicturePath(),
-                    date('Y-m-d H:i:s')
+                    date(DEFAULT_DATE_FORMAT)
                 ));
         }
         return null;

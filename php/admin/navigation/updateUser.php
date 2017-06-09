@@ -45,10 +45,7 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <?php
-                                $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getAdminActionRequestUri() . "user" . DS . "update";
-                                $requiredClass = $isCreate ? 'required' : '';
-                                ?>
+                                <?php $requiredClass = $isCreate ? 'required' : ''; ?>
 
                                 <input type="hidden" name="<?php echo UserHandler::ID ?>"
                                        value="<?php echo $currentUser->getID() ?>">

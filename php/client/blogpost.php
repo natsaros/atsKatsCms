@@ -19,8 +19,9 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="blogPostImage"
-                     style="background: url('<?php echo ImageUtil::renderBlogImage($post); ?>') no-repeat center 60% /cover;"></div>
+                 <div class="blogPostImage">
+                    <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                </div>
             </div>
         </div>
         <div class="row">

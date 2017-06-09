@@ -29,8 +29,12 @@ class Email {
      * @param $headers
      * @return Email
      */
-    public static function createFull($from, $to, $subject, $body, $headers) {
-        return self::create()->setTo($to)->setFrom($from)->setSubject($subject)->setBody($body)->setHeaders($headers);
+    public static function createFull($from, $to, $subject, $body, $headers = null) {
+        $email = self::create()->setTo($to)->setFrom($from)->setSubject($subject)->setBody($body);
+        if(isNotEmpty($headers)){
+            $email->setHeaders($headers);
+        }
+        return $email;
     }
 
     /**
