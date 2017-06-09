@@ -537,8 +537,7 @@ class Db {
     /**
      * @param mixed $visitors
      */
-    public function setVisitors($visitors)
-    {
+    public function setVisitors($visitors) {
         $this->visitors = $visitors;
     }
 

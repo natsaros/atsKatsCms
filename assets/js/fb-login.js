@@ -44,7 +44,7 @@ function backendFBLogin(accessToken) {
     FB.api('/me', function(response) {
         $.ajax({
             type: "POST",
-            url: "/peny/registerFbUser",
+            url: "/registerFbUser",
             data: {"fbAccessToken" : accessToken},
             success: function() {
                 $('#newCommentSection').fadeIn();

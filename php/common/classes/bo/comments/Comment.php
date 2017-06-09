@@ -8,7 +8,7 @@ class Comment {
     private $date;
 
     /**
-     * Conment constructor.
+     * Comment constructor.
      */
     public function __construct() {
         //default constructor

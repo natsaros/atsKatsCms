@@ -394,6 +394,7 @@ function safe_input($data) {
 function defineSystemVariables() {
     defined('PHP_POSTFIX') or define('PHP_POSTFIX', '.php');
     defined('ADMIN_STR') or define('ADMIN_STR', 'admin');
+    defined('CLIENT_STR') or define('CLIENT_STR', 'client');
     defined('NAV_STR') or define('NAV_STR', 'navigation');
     defined('ACTION_STR') or define('ACTION_STR', 'action');
     defined('MODAL_STR') or define('MODAL_STR', 'modal');
@@ -416,6 +417,7 @@ function defineSystemVariables() {
     defined('ADMIN_NAV_PATH') or define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
     defined('ADMIN_MODAL_NAV_PATH') or define('ADMIN_MODAL_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS . MODAL_STR . DS);
     defined('ADMIN_ACTION_PATH') or define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
+    defined('CLIENT_ACTION_PATH') or define('CLIENT_ACTION_PATH', PHP_ROOT_PATH . CLIENT_STR . DS . ACTION_STR . DS);
     defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
     defined('CLASSES_ROOT_PATH') or define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 
@@ -441,6 +443,7 @@ function loadAppClasses() {
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'AccessRightsHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'SettingsHandler.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
+    require_once(CLASSES_ROOT_PATH . 'util' . DS . 'EmailHandler.php');
     require_once(CLASSES_ROOT_PATH . 'security' . DS . 'PageSections.php');
     require_once(CLASSES_ROOT_PATH . 'Globals.php');
     require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');

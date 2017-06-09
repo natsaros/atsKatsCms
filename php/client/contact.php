@@ -7,6 +7,7 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email_address = $_POST['email'];
     $interested = $_POST['interested'];
+    $goal = $_POST['goal'];
 
     if (empty($name)
         || empty($email_address)
@@ -15,7 +16,7 @@ if (isset($_POST['submit'])) {
         $errors .= "\n Error: all fields are required";
     }
 
-    $goal = $_POST['goal'];
+
 
     if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i", $email_address)) {
         $errors .= "\n Error: Invalid email address";
@@ -32,13 +33,13 @@ if (isset($_POST['submit'])) {
             $email_body .= "\tGoals: \n \t " . $goal . "\n\n";
         }
         $email_body .= "\tInterested in : \n \t" . $interested . "\n";
+        $email_body = wordwrap($email_body, 70);
 
         $headers = "MIME-Version: 1.1";
         $headers .= "Content-type: text/plain; charset=utf-8";
         $headers .= "From:" . $myEmail . "\n";
         $headers .= "Reply-To:" . $email_address . "\n";
         $headers .= "X-Mailer: PHP/" . phpversion();
-
 
         mail($to, '=?utf-8?B?' . base64_encode($email_subject) . '?=', $email_body, $headers);
 //        mail($to, $email_subject, $email_body, $headers);
@@ -127,7 +128,7 @@ if (isset($_POST['submit'])) {
 
                                 Χαριλάου Τρικούπη 17, 16675 Γλυφάδα, Ελλάδα<br>
                                 Τηλ: 6976582735<br>
-                                Email: <?php echo $myEmail?>
+                                Email: <?php echo $myEmail ?>
                             </p>
                         </div>
                     </div>

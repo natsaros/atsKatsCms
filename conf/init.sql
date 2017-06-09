@@ -241,3 +241,5 @@ CREATE TABLE AK_VISITORS (
 
 INSERT INTO AK_SETTINGS (SKEY, SVALUE) VALUES ('blog.enabled', 'off');
 INSERT INTO AK_SETTINGS (SKEY, SVALUE) VALUES ('blog.style', 'grid');
+INSERT INTO AK_SETTINGS (SKEY, SVALUE)
+VALUES ('email.addresses', 'pkasfiki@gmail.com;info@fitnesshousebypenny.gr;natsaros@hotmial.com');
