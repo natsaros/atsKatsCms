@@ -14,6 +14,9 @@ if($config) {
     /** MySQL hostname */
     defined('DB_HOST') or define('DB_HOST', $config['host']);
 
+    /** MySQL hostname */
+    defined('DB_PORT') or define('DB_PORT', $config['port']);
+
     /** Database Charset to use in creating database tables. */
     defined('DB_CHARSET') or define('DB_CHARSET', 'utf8');
 

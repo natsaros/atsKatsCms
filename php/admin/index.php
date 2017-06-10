@@ -15,7 +15,7 @@ try {
     return;
 }
 
-if(isEmpty($action)) {
+if(!isset($action) || isEmpty($action)) {
     //Default behavior: if no action is set to happen navigation occurs.
 
     if(!isLoggedIn()) {

@@ -53,5 +53,5 @@ if(isNotEmpty($_POST['submit'])) {
         </div>
     </div>
 </div>
-<?php require("adminJs.php"); ?>
+<?php require("adminJS.php"); ?>
 </body>

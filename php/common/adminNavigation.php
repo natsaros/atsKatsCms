@@ -5,6 +5,7 @@ if (isAdminModal()) {
     $path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
 }
 try {
+
     if (exists_safe($path)) {
         //TODO : evolve session mechanism to handle session time out.
 
@@ -35,7 +36,7 @@ try {
             </body>
         <?php } else { ?>
             <?php require_safe(ADMIN_ROOT_PATH . "adminHeader.php"); ?>
-            <?php require_safe(ADMIN_ROOT_PATH . "adminJs.php"); ?>
+            <?php require_safe(ADMIN_ROOT_PATH . "adminJS.php"); ?>
             <body>
             <div id="wrapper">
                 <!-- Navigation -->

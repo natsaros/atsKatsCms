@@ -80,7 +80,8 @@
                         </div>
                     </div>
                 </div>
-                <form method="post" accept-charset="utf-8" id="blogPostCommentsForm" action="/peny/createPostComment">
+                <?php $action = getClientActionRequestUri() . "createPostComment"; ?>
+                <form method="post" accept-charset="utf-8" id="blogPostCommentsForm" action="<?php echo $action;?>">
                     <div class="row">
                         <div class="col-sm-12 form-group">
                             <textarea class="form-control" id="comments" name="<?php echo CommentHandler::COMMENT ?>" placeholder="Γράψτε το σχόλιό σας *" rows="5" required></textarea>

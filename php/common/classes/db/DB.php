@@ -74,7 +74,7 @@ class Db {
     private static function connect() {
         // Try and connect to the database, if a connection has not been established yet
         if (!isset(self::$connection)) {
-            self::$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            self::$connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         }
 
         // If connection was not successful, handle the error

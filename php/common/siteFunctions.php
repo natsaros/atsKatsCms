@@ -367,7 +367,7 @@ function isEmpty($val) {
     $check = !isset($val) || $val == null;
     if (!$check) {
         if (is_array($val)) {
-            $check = empty(array_filter($val));
+            $check = sizeof(array_filter($val)) == 0;
         } else if (is_numeric($val)) {
             $check = is_null($val);
         } else {
