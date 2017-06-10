@@ -13,5 +13,5 @@
         <li><a href="<?php echo REQUEST_URI ?>contact">Επικοινωνία</a></li>
         <!--<li><a href="#bookNow">Book Now</a></li>-->
     </ul>
-    <div class="extraInfo">&copy; 2016 Copyright</div>
+    <div class="extraInfo">&copy; 2017 Copyright</div>
 </footer>
