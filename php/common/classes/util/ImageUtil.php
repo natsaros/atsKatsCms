@@ -136,12 +136,33 @@ class ImageUtil {
         return file_put_contents($path, $data);
     }
 
+    /**
+     * @param $extraPath
+     * @param $tmpFile
+     */
     static function saveImageToFileSystem($extraPath, $tmpFile) {
         $pathToSave = PICTURES_ROOT;
         $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
         createDirIfNotExists($pathToSave);
         $pathToSave .= $tmpFile[self::NAME];
         move_uploaded_file($tmpFile[self::TMP_NAME], $pathToSave);
+    }
+
+    static function removeImageFromFileSystem($path) {
+        $pathToDel = PICTURES_ROOT;
+        $pathToDel .= $path . '/';
+        self::rrmdir($pathToDel);
+    }
+
+    static function rrmdir($dir) {
+        foreach (glob($dir . '/*') as $file) {
+            if (is_dir($file)) {
+                self::rrmdir($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($dir);
     }
 
 }

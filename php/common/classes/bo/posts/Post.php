@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Removed image store to db due to performance reasons.
+ * Maybe will be added in the future but zipped
+ */
+
 class Post {
     private $ID;
     private $title;
@@ -179,7 +184,7 @@ class Post {
      * @return $this
      */
     public function setText($text) {
-        if(isNotEmpty($this->getPostDetails())) {
+        if (isNotEmpty($this->getPostDetails())) {
             $this->getPostDetails()->setText($text);
         }
         return $this;
@@ -190,7 +195,7 @@ class Post {
      * @return $this
      */
     public function setImagePath($path) {
-        if(isNotEmpty($this->getPostDetails())) {
+        if (isNotEmpty($this->getPostDetails())) {
             $this->getPostDetails()->setImagePath($path);
         }
         return $this;
@@ -201,7 +206,7 @@ class Post {
      * @return $this
      */
     public function setImage($image) {
-        if(isNotEmpty($this->getPostDetails())) {
+        if (isNotEmpty($this->getPostDetails())) {
             $this->getPostDetails()->setImage($image);
         }
         return $this;
@@ -212,11 +217,12 @@ class Post {
      * @return $this
      */
     public function setSequence($sequence) {
-        if(isNotEmpty($this->getPostDetails())) {
+        if (isNotEmpty($this->getPostDetails())) {
             $this->getPostDetails()->setSequence($sequence);
         }
         return $this;
     }
+
     /**
      * @return $this
      */

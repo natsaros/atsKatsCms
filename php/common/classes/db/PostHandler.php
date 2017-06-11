@@ -111,8 +111,8 @@ class PostHandler {
     static function createPost($post) {
         if(isNotEmpty($post)) {
             $query = "INSERT INTO " . getDb()->posts . " (" . self::TITLE . "," . self::FRIENDLY_TITLE . "," . self::STATE . "," . self::USER_ID . "," . self::ACTIVATION_DATE . ") VALUES (?, ?, ?, ?, ?)";
-            $created = getDb()->createStmt($query, array('s', 's', 'i', 's', 's'), array($post->getTitle(), $post->getFriendlyTitle(), PostStatus::PUBLISHED, $post->getUserId(), date(DEFAULT_DATE_FORMAT)));
-            if($created) {
+            $createdPost = getDb()->createStmt($query, array('s', 's', 'i', 's', 's'), array($post->getTitle(), $post->getFriendlyTitle(), PostStatus::PUBLISHED, $post->getUserId(), date(DEFAULT_DATE_FORMAT)));
+            if($createdPost) {
                 $query = "INSERT INTO " . getDb()->post_meta .
                     " (" . self::TEXT .
                     "," . self::SEQUENCE .
@@ -121,11 +121,11 @@ class PostHandler {
                     "," . self::POST_ID .
                     ") VALUES (?, ?, ?, ?, ?)";
 
-                $created = getDb()->createStmt($query,
+                $createdPostDetails = getDb()->createStmt($query,
                     array('s', 's', 's', 's', 'i'),
-                    array($post->getText(), $post->getSequence(), $post->getImage(), $post->getImagePath(), $created));
+                    array($post->getText(), $post->getSequence(), '', $post->getImagePath(), $createdPost));
             }
-            return $created;
+            return $createdPost;
         }
         return null;
     }
@@ -146,7 +146,7 @@ class PostHandler {
             $query = "UPDATE " . getDb()->post_meta . " SET " . self::TEXT . " = ?, " . self::SEQUENCE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ? WHERE " . self::POST_ID . " = ?";
             $updatedRes = getDb()->updateStmt($query,
                 array('s', 's', 's', 's', 'i'),
-                array($post->getText(), $post->getSequence(), $post->getImagePath(), $post->getImage(), $updatedId));
+                array($post->getText(), $post->getSequence(), $post->getImagePath(), '', $updatedId));
         }
         return $updatedRes;
     }

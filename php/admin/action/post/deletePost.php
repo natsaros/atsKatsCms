@@ -16,6 +16,7 @@ try {
             if ($deletePostRes == null || !$deletePostRes) {
                 addErrorMessage("Post failed to be deleted");
             } else {
+                ImageUtil::removeImageFromFileSystem($id);
                 addSuccessMessage("Post successfully deleted");
             }
         }
