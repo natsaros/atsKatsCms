@@ -1,33 +1,34 @@
 <?php
-if(!is_session_started()) {
+if (!is_session_started()) {
     session_start();
 }
 
-if(isset($_GET["action"])) {
+if (isset($_GET["action"])) {
     $action = $_GET["action"];
 }
 
 try {
     initLoad();
-} catch(SystemException $e) {
+} catch (SystemException $e) {
     logError($e);
     require(COMMON_ROOT_PATH . 'noDb.php');
     return;
 }
 
-if(!isset($action) || isEmpty($action)) {
+if (!isset($action) || isEmpty($action)) {
     //Default behavior: if no action is set to happen navigation occurs.
 
-    if(!isLoggedIn()) {
+    if (!isLoggedIn()) {
         include(ADMIN_ROOT_PATH . 'login.php');
     } else {
         $page = $_GET["page"];
-        if(isEmpty($page)) {
-            if(isNotEmpty(DEV_MODE) && DEV_MODE) {
+        if (isEmpty($page)) {
+            if (isNotEmpty(DEV_MODE) && DEV_MODE) {
                 define('ADMIN_PAGE_ID', 'dashboard');
             } else {
                 $pagesAllowed = PageSections::getPagesByAccessRights(getFullUserFromSession()->getAccessRightsStr());
-                define('ADMIN_PAGE_ID', $pagesAllowed[0]);
+                $startPage = $pagesAllowed[0];
+                define('ADMIN_PAGE_ID', $startPage);
             }
         } else {
             define('ADMIN_PAGE_ID', $page);
@@ -39,7 +40,7 @@ if(!isset($action) || isEmpty($action)) {
     try {
         //All action pass through here
         require_safe(ADMIN_ACTION_PATH . $action . PHP_POSTFIX);
-    } catch(SystemException $e) {
+    } catch (SystemException $e) {
         logError($e);
         addErrorMessage(ErrorMessages::WENT_WRONG);
         $statusCode = 500;
