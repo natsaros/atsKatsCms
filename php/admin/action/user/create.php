@@ -36,8 +36,11 @@ try {
 
     $user2Create = User::createFullUser(null, $userName, password_hash($password, PASSWORD_DEFAULT), $first_name, $last_name, $email, date('Y-m-d'), null, true, $gender, $link, $phone, null, null);
     if ($imgContent) {
+        //only saving in filesystem for performance reasons
+        $user2Create->setPicturePath($picturePath);
+
         //save image content also in blob on db for back up reasons if needed
-        $user2Create->setPicturePath($picturePath)->setPicture($imgContent);
+//        $user2Create->setPicturePath($picturePath)->setPicture($imgContent);
     }
     $createUserRes = UserHandler::createUser($user2Create);
 
@@ -47,7 +50,8 @@ try {
     if ($createUserRes !== null || $createUserRes) {
         addSuccessMessage("User " . $user2Create->getUserName() . " successfully created");
         if(!$emptyFile){
-            ImageUtil::saveImageToFileSystem($user2Create->getUserName(), $image2Upload);
+            $fileName = basename($image2Upload[ImageUtil::NAME]);
+            ImageUtil::saveImageToFileSystem($user2Create->getUserName(), $fileName, $imgContent);
         }
     } else {
         addErrorMessage("User " . $user2Create->getUserName() . " failed to be created");

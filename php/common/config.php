@@ -26,6 +26,8 @@ if($config) {
     defined('TABLE_PREFIX') or define('TABLE_PREFIX', $config['table_prefix']);
 
     defined('ALLOWED_TYPES') or define('ALLOWED_TYPES', $config['allowed_types']);
+    defined('MAX_IMAGE_WIDTH') or define('MAX_IMAGE_WIDTH', $config['max_image_width']);
+    defined('MAX_IMAGE_HEIGHT') or define('MAX_IMAGE_HEIGHT', $config['max_image_height']);
 
     $log_file = $config['log_file'];
     if(isEmpty($log_file)) {

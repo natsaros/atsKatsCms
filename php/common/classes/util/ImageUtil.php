@@ -1,6 +1,7 @@
 <?php
 
 require_once(CLASSES_ROOT_PATH . 'util' . DS . 'PathHelper.php');
+require_once(CLASSES_ROOT_PATH . 'util' . DS . 'SimpleImage.php');
 
 /**
  * Used to facilitate image related functions
@@ -18,9 +19,9 @@ class ImageUtil {
     static function renderBlogImage($post) {
         $imagePath = isNotEmpty($post->getImagePath()) ? $post->getImagePath() : $post->getID() . '.jpg';
         $path2post = PICTURES_ROOT . $post->getID() . DS . $imagePath;
-        if (!file_exists($path2post)) {
+        if(!file_exists($path2post)) {
             $imageData = $post->getImage();
-            if (isNotEmpty($imageData)) {
+            if(isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
                 self::saveImageContentToFile($path2post, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
@@ -40,9 +41,9 @@ class ImageUtil {
     static function renderUserImage($user) {
         $imagePath = isNotEmpty($user->getPicturePath()) ? $user->getPicturePath() : $user->getUserName() . '.jpg';
         $path = PICTURES_ROOT . $user->getUserName() . DS . $imagePath;
-        if (!file_exists($path)) {
+        if(!file_exists($path)) {
             $imageData = $user->getPicture();
-            if (isNotEmpty($imageData)) {
+            if(isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
                 self::saveImageContentToFile($path, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
@@ -72,7 +73,7 @@ class ImageUtil {
      * @throws SystemException
      */
     static function renderImageFromGallery($path, $fallBack) {
-        if (is_dir($path) || !file_exists($path)) {
+        if(is_dir($path) || !file_exists($path)) {
             $path = PICTURES_ROOT . $fallBack;
         }
         $content = file_get_contents($path);
@@ -82,12 +83,12 @@ class ImageUtil {
 
     private static function getMimeType($fileName) {
         $allowedTypes = [];
-        if (isNotEmpty(ALLOWED_TYPES)) {
+        if(isNotEmpty(ALLOWED_TYPES)) {
             $allowedTypes = explode('|', ALLOWED_TYPES);
         }
 
         $mimes = [];
-        foreach ($allowedTypes as $type) {
+        foreach($allowedTypes as $type) {
             $mimes[$type] = 'image/' . $type;
         }
 
@@ -104,7 +105,7 @@ class ImageUtil {
      */
     static function validateImageAllowed($image) {
         $allowedTypes = [];
-        if (isNotEmpty(ALLOWED_TYPES)) {
+        if(isNotEmpty(ALLOWED_TYPES)) {
             $allowedTypes = explode('|', ALLOWED_TYPES);
         }
         $fileType = explode('/', $image['type'])[1];
@@ -114,16 +115,17 @@ class ImageUtil {
 
     /**
      * @param $tmpFile
-     * @return bool|string
+     * @return bool|SimpleImage
      */
     static function readImageContentFromFile($tmpFile) {
         $tmpFileContent = $tmpFile[self::TMP_NAME];
-//        $fp = fopen($tmpFileContent, 'r');  // open a file handle of the temporary file
-//        $imgContent = fread($fp, filesize($tmpFileContent)); // read the temp file
-//        fclose($fp); // close the file handle
 
-        $imgContent = file_get_contents($tmpFileContent);
-        return $imgContent;
+        $image = new SimpleImage();
+        $image->load($tmpFileContent);
+        $image->resize(MAX_IMAGE_WIDTH, MAX_IMAGE_HEIGHT);
+
+//        $imgContent = file_get_contents($tmpFileContent);
+        return $image;
     }
 
     /**
@@ -137,15 +139,19 @@ class ImageUtil {
     }
 
     /**
-     * @param $extraPath
-     * @param $tmpFile
+     * @param $extraPath string
+     * @param $fileName string
+     * @param $tmpFile SimpleImage
+     * @return bool
      */
-    static function saveImageToFileSystem($extraPath, $tmpFile) {
+    static function saveImageToFileSystem($extraPath, $fileName, $tmpFile) {
         $pathToSave = PICTURES_ROOT;
         $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
         createDirIfNotExists($pathToSave);
-        $pathToSave .= $tmpFile[self::NAME];
-        move_uploaded_file($tmpFile[self::TMP_NAME], $pathToSave);
+        $pathToSave .= $fileName;
+//        move_uploaded_file($tmpFile[self::TMP_NAME], $pathToSave);
+
+        return $tmpFile->save($pathToSave);
     }
 
     static function removeImageFromFileSystem($path) {
@@ -155,8 +161,8 @@ class ImageUtil {
     }
 
     static function rrmdir($dir) {
-        foreach (glob($dir . '/*') as $file) {
-            if (is_dir($file)) {
+        foreach(glob($dir . '/*') as $file) {
+            if(is_dir($file)) {
                 self::rrmdir($file);
             } else {
                 unlink($file);
@@ -164,5 +170,4 @@ class ImageUtil {
         }
         rmdir($dir);
     }
-
 }

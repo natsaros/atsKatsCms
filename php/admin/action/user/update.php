@@ -2,7 +2,7 @@
 $userName = safe_input($_POST[UserHandler::USERNAME]);
 $email = safe_input($_POST[UserHandler::EMAIL]);
 
-if (isEmpty($userName) || isEmpty($email)) {
+if(isEmpty($userName) || isEmpty($email)) {
     addInfoMessage("Please fill in required info");
     Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
 }
@@ -21,11 +21,11 @@ $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
 $imageValid = true;
 $image2Upload = $_FILES[UserHandler::PICTURE];
 $emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
-if (!$emptyFile) {
+if(!$emptyFile) {
     $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
 
-if (!$imageValid) {
+if(!$imageValid) {
     addInfoMessage("Please select a valid image file");
     Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
 }
@@ -34,25 +34,28 @@ try {
     $user2Update = UserHandler::getUserById($ID);
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
-    if (isNotEmpty($user2Update)) {
+    if(isNotEmpty($user2Update)) {
         $user2Update->setUserName($userName)->setFirstName($first_name)->setLastName($last_name)
             ->setEmail($email)->setUserStatus($user_status)->setGender($gender)
             ->setLink($link)->setPhone($phone);
 
+        if($imgContent) {
+            //only saving in filesystem for performance reasons
+            $user2Update->setPicturePath($picturePath);
 
-        if ($imgContent) {
             //save image content also in blob on db for back up reasons if needed
-            $user2Update->setPicturePath($picturePath)->setPicture($imgContent);
+//            $user2Update->setPicturePath($picturePath)->setPicture($imgContent);
         }
 
         $updateUserRes = UserHandler::updateUser($user2Update);
-        if ($updateUserRes && isNotEmpty($groupIds)) {
+        if($updateUserRes && isNotEmpty($groupIds)) {
             UserHandler::updateUserGroups($user2Update->getID(), $groupIds);
         }
-        if ($updateUserRes !== null || $updateUserRes) {
+        if($updateUserRes !== null || $updateUserRes) {
             addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
-            if(!$emptyFile){
-                ImageUtil::saveImageToFileSystem($user2Update->getUserName(), $image2Upload);
+            if(!$emptyFile) {
+                $fileName = basename($image2Upload[ImageUtil::NAME]);
+                ImageUtil::saveImageToFileSystem($user2Update->getUserName(), $fileName, $imgContent);
             }
         } else {
             addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
@@ -60,12 +63,12 @@ try {
     } else {
         addErrorMessage(ErrorMessages::GENERIC_ERROR);
     }
-} catch (SystemException $ex) {
+} catch(SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-if (hasErrors()) {
+if(hasErrors()) {
     Redirect(getAdminRequestUri() . "updateUser");
 } else {
     Redirect(getAdminRequestUri() . "users");
