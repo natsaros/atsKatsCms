@@ -459,6 +459,7 @@ function defineSystemVariables() {
     defined('VIDEOS_ROOT') or define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
     defined('DOCUMENTS_ROOT') or define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
     defined('LOGS_ROOT') or define('LOGS_ROOT', getRootPath() . 'logs' . DS);
+    defined('PICTURES_URI') or define('PICTURES_URI', getRootUri() . 'gallery' . DS. 'pictures' . DS);
 }
 
 function loadAppClasses() {

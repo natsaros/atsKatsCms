@@ -29,7 +29,7 @@ class ImageUtil {
                 return self::renderImageFromGallery($path2post, 'blog_default.png');
             }
         } else {
-            return self::renderImageFromGallery($path2post, 'blog_default.png');
+            return PICTURES_URI . $post->getID() . DS . $imagePath;
         }
     }
 
