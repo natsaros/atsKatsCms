@@ -7,14 +7,16 @@ class ProductHandler {
     const ID = 'ID';
     const PRODUCT_ID = 'PRODUCT_ID';
     const TITLE = 'TITLE';
+    const TITLE_EN = 'TITLE_EN';
+    const CODE = 'CODE';
     const FRIENDLY_TITLE = 'FRIENDLY_TITLE';
     const ACTIVATION_DATE = 'ACTIVATION_DATE';
     const MODIFICATION_DATE = 'MODIFICATION_DATE';
     const STATE = 'STATE';
     const USER_ID = 'USER_ID';
     const USER_STATUS = 'USER_STATUS';
-    const SEQUENCE = 'SEQUENCE';
     const DESCRIPTION = 'DESCRIPTION';
+    const DESCRIPTION_EN = 'DESCRIPTION_EN';
     const PRICE = 'PRICE';
     const OFFER_PRICE = 'OFFER_PRICE';
     const IMAGE_PATH = 'IMAGE_PATH';
@@ -131,16 +133,17 @@ class ProductHandler {
      */
     static function createProduct($product) {
         if(isNotEmpty($product)) {
-            $query = "INSERT INTO " . getDb()->products . " (" . self::TITLE . "," . self::FRIENDLY_TITLE . "," . self::STATE . "," . self::USER_ID . "," . self::ACTIVATION_DATE . ") VALUES (?, ?, ?, ?, ?)";
-            $createdProduct = getDb()->createStmt($query, array('s', 's', 'i', 's', 's'), array($product->getTitle(), $product->getFriendlyTitle(), ProductStatus::ACTIVE, $product->getUserId(), date(DEFAULT_DATE_FORMAT)));
+            $query = "INSERT INTO " . getDb()->products . " (" . self::TITLE . "," . self::TITLE_EN . "," . self::FRIENDLY_TITLE . "," . self::STATE . "," . self::USER_ID . "," . self::ACTIVATION_DATE . ") VALUES (?, ?, ?, ?, ?)";
+            $createdProduct = getDb()->createStmt($query, array('s', 's', 's', 'i', 's', 's'), array($product->getTitle(), $product->getTitleEn(), $product->getFriendlyTitle(), ProductStatus::ACTIVE, $product->getUserId(), date(DEFAULT_DATE_FORMAT)));
             if($createdProduct) {
                 $query = "INSERT INTO " . getDb()->product_details .
+                    " (" . self::CODE .
                     " (" . self::DESCRIPTION .
+                    " (" . self::DESCRIPTION_EN .
                     "," . self::PRODUCT_CATEGORY_ID .
                     "," . self::SECONDARY_PRODUCT_CATEGORY_ID .
                     "," . self::PRICE .
                     "," . self::OFFER_PRICE .
-                    "," . self::SEQUENCE .
                     "," . self::IMAGE .
                     "," . self::IMAGE_PATH .
                     "," . self::PRODUCT_ID .
@@ -149,11 +152,11 @@ class ProductHandler {
                     "," . self::PROMOTED_FROM .
                     "," . self::PROMOTED_TO .
                     "," . self::PROMOTION_ACTIVATION .
-                    ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $createdProductDetails = getDb()->createStmt($query,
-                    array('s', 'i', 'i', 'd', 'd', 's', 's', 's', 'i', 'i', 's', 's', 's', 's'),
-                    array($product->getDescription(), $product->getProductCategoryId(), $product->getSecondaryProductCategoryId(), $product->getPrice(), $product->getOfferPrice(), $product->getSequence(), '', $product->getImagePath(), $createdProduct, $product->getPromoted(), $product->getPromotionText(), $product->getPromotedFrom(), $product->getPromotedTo(), $product->getPromotionActivation()));
+                    array('s', 's', 's', 'i', 'i', 'd', 'd', 's', 's', 'i', 'i', 's', 's', 's', 's'),
+                    array($product->getCode(), $product->getDescription(), $product->getDescriptionEn(), $product->getProductCategoryId(), $product->getSecondaryProductCategoryId(), $product->getPrice(), $product->getOfferPrice(), '', $product->getImagePath(), $createdProduct, $product->getPromoted(), $product->getPromotionText(), $product->getPromotedFrom(), $product->getPromotedTo(), $product->getPromotionActivation()));
             }
             return $createdProduct;
         }
@@ -166,17 +169,17 @@ class ProductHandler {
      * @throws SystemException
      */
     public static function update($product) {
-        $query = "UPDATE " . getDb()->products . " SET " . self::TITLE . " = ?, " . self::FRIENDLY_TITLE . " = ?, " . self::STATE . " = ?, " . self::USER_ID . " = ?, " . self::ID . " = LAST_INSERT_ID(" . $product->getID() . ") WHERE " . self::ID . " = ?;";
+        $query = "UPDATE " . getDb()->products . " SET " . self::TITLE . " = ?, " . self::TITLE_EN . " = ?, " . self::FRIENDLY_TITLE . " = ?, " . self::STATE . " = ?, " . self::USER_ID . " = ?, " . self::ID . " = LAST_INSERT_ID(" . $product->getID() . ") WHERE " . self::ID . " = ?;";
         $updatedRes = getDb()->updateStmt($query,
-            array('s', 's', 's', 'i', 'i'),
-            array($product->getTitle(), $product->getFriendlyTitle(), $product->getState(), $product->getUserId(), $product->getID()));
+            array('s', 's', 's', 's', 'i', 'i'),
+            array($product->getTitle(), $product->getTitleEn(), $product->getFriendlyTitle(), $product->getState(), $product->getUserId(), $product->getID()));
         if($updatedRes) {
             $updatedId = getDb()->selectStmtSingleNoParams("SELECT LAST_INSERT_ID() AS " . self::ID . "");
             $updatedId = $updatedId["" . self::ID . ""];
-            $query = "UPDATE " . getDb()->product_details . " SET " . self::DESCRIPTION . " = ?, " .self::PRODUCT_CATEGORY_ID . " = ?, " .self::SECONDARY_PRODUCT_CATEGORY_ID . " = ?, " . self::PRICE . " = ?, " .self::OFFER_PRICE . " = ?, " . self::SEQUENCE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ?, " . self::PROMOTED . " = ?, " . self::PROMOTED_FROM . " = ?, " . self::PROMOTED_TO . " = ?, " . self::PROMOTION_ACTIVATION . " = ?, " . self::PROMOTION_TEXT . " = ? WHERE " . self::PRODUCT_ID . " = ?";
+            $query = "UPDATE " . getDb()->product_details . " SET " . self::CODE . " = ?, " . self::DESCRIPTION . " = ?, " . self::DESCRIPTION_EN . " = ?, " .self::PRODUCT_CATEGORY_ID . " = ?, " .self::SECONDARY_PRODUCT_CATEGORY_ID . " = ?, " . self::PRICE . " = ?, " .self::OFFER_PRICE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ?, " . self::PROMOTED . " = ?, " . self::PROMOTED_FROM . " = ?, " . self::PROMOTED_TO . " = ?, " . self::PROMOTION_ACTIVATION . " = ?, " . self::PROMOTION_TEXT . " = ? WHERE " . self::PRODUCT_ID . " = ?";
             $updatedRes = getDb()->updateStmt($query,
-                array('s', 'i', 'i', 'd', 'd', 's', 's', 's', 'i', 's', 's', 's', 's', 'i'),
-                array($product->getDescription(), $product->getProductCategoryId(), $product->getSecondaryProductCategoryId(), $product->getPrice(), $product->getOfferPrice(), $product->getSequence(), $product->getImagePath(), '', $product->getPromoted(), $product->getPromotedFrom(), $product->getPromotedTo(), $product->getPromotionActivation(), $product->getPromotionText(), $updatedId));
+                array('s', 's', 's', 'i', 'i', 'd', 'd', 's', 's', 'i', 's', 's', 's', 's', 'i'),
+                array($product->getCode(), $product->getDescription(), $product->getDescriptionEn(), $product->getProductCategoryId(), $product->getSecondaryProductCategoryId(), $product->getPrice(), $product->getOfferPrice(), $product->getImagePath(), '', $product->getPromoted(), $product->getPromotedFrom(), $product->getPromotedTo(), $product->getPromotionActivation(), $product->getPromotionText(), $updatedId));
         }
         return $updatedRes;
     }
@@ -268,7 +271,7 @@ class ProductHandler {
         if($row === false || null === $row) {
             return null;
         }
-        $product = Product::createProduct($row[self::ID], $row[self::TITLE], $row[self::FRIENDLY_TITLE], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::STATE], $row[self::USER_ID]);
+        $product = Product::createProduct($row[self::ID], $row[self::TITLE], $row[self::TITLE_EN], $row[self::FRIENDLY_TITLE], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::STATE], $row[self::USER_ID]);
         return $product;
     }
 
@@ -281,7 +284,7 @@ class ProductHandler {
         if($row === false || null === $row) {
             return null;
         }
-        $productDetails = ProductDetails::createProductDetails($row[self::ID], $row[self::PRODUCT_ID], $row[self::SEQUENCE], $row[self::DESCRIPTION], $row[self::PRODUCT_CATEGORY_ID], $row[self::SECONDARY_PRODUCT_CATEGORY_ID], $row[self::PRICE], $row[self::OFFER_PRICE], $row[self::IMAGE_PATH], $row[self::IMAGE], $row[self::PROMOTED], $row[self::PROMOTED_FROM], $row[self::PROMOTED_TO], $row[self::PROMOTION_TEXT], $row[self::PROMOTION_ACTIVATION]);
+        $productDetails = ProductDetails::createProductDetails($row[self::ID], $row[self::PRODUCT_ID], $row[self::CODE], $row[self::DESCRIPTION], $row[self::DESCRIPTION_EN], $row[self::PRODUCT_CATEGORY_ID], $row[self::SECONDARY_PRODUCT_CATEGORY_ID], $row[self::PRICE], $row[self::OFFER_PRICE], $row[self::IMAGE_PATH], $row[self::IMAGE], $row[self::PROMOTED], $row[self::PROMOTED_FROM], $row[self::PROMOTED_TO], $row[self::PROMOTION_TEXT], $row[self::PROMOTION_ACTIVATION]);
         return $productDetails;
     }
 

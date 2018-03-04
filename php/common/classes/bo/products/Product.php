@@ -8,6 +8,7 @@
 class Product {
     private $ID;
     private $title;
+    private $title_en;
     private $friendly_title;
     private $activation_date;
     private $modification_date;
@@ -35,6 +36,13 @@ class Product {
      */
     public function getTitle() {
         return $this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitleEn() {
+        return $this->title_en;
     }
 
     /**
@@ -82,8 +90,22 @@ class Product {
     /**
      * @return mixed
      */
+    public function getCode() {
+        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getCode() : null;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getDescription() {
         return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getDescription() : null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionEn() {
+        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getDescriptionEn() : null;
     }
 
     /**
@@ -189,6 +211,15 @@ class Product {
     }
 
     /**
+     * @param mixed $title_en
+     * @return Product
+     */
+    public function setTitleEn($title_en) {
+        $this->title_en = $title_en;
+        return $this;
+    }
+
+    /**
      * @param $friendly_title
      * @return Product
      */
@@ -246,9 +277,31 @@ class Product {
      * @param $text
      * @return $this
      */
+    public function setCode($text) {
+        if (isNotEmpty($this->getProductDetails())) {
+            $this->getProductDetails()->setCode($text);
+        }
+        return $this;
+    }
+
+    /**
+     * @param $text
+     * @return $this
+     */
     public function setDescription($text) {
         if (isNotEmpty($this->getProductDetails())) {
             $this->getProductDetails()->setDescription($text);
+        }
+        return $this;
+    }
+
+    /**
+     * @param $text
+     * @return $this
+     */
+    public function setDescriptionEn($text) {
+        if (isNotEmpty($this->getProductDetails())) {
+            $this->getProductDetails()->setDescriptionEn($text);
         }
         return $this;
     }
@@ -393,10 +446,11 @@ class Product {
         return $instance;
     }
 
-    public static function createProduct($ID, $title, $friendly_title, $activation_date, $modification_date, $state, $user_id) {
+    public static function createProduct($ID, $title, $title_en, $friendly_title, $activation_date, $modification_date, $state, $user_id) {
         return self::create()
             ->setID($ID)
             ->setTitle($title)
+            ->setTitleEn($title_en)
             ->setFriendlyTitle($friendly_title)
             ->setActivationDate($activation_date)
             ->setModificationDate($modification_date)

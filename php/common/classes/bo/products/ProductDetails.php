@@ -2,9 +2,10 @@
 
 class ProductDetails {
     private $ID;
+    private $code;
     private $product_id;
-    private $sequence;
     private $description;
+    private $description_en;
     private $product_category_id;
     private $secondary_product_category_id;
     private $price;
@@ -41,8 +42,8 @@ class ProductDetails {
     /**
      * @return mixed
      */
-    public function getSequence() {
-        return $this->sequence;
+    public function getCode() {
+        return $this->code;
     }
 
     /**
@@ -50,6 +51,13 @@ class ProductDetails {
      */
     public function getDescription() {
         return $this->description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionEn() {
+        return $this->description_en;
     }
 
     /**
@@ -148,11 +156,11 @@ class ProductDetails {
     }
 
     /**
-     * @param mixed $sequence
+     * @param mixed $code
      * @return ProductDetails
      */
-    public function setSequence($sequence) {
-        $this->sequence = $sequence;
+    public function setCode($code) {
+        $this->code = $code;
         return $this;
     }
 
@@ -162,6 +170,15 @@ class ProductDetails {
      */
     public function setDescription($description) {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @param mixed $description_en
+     * @return ProductDetails
+     */
+    public function setDescriptionEn($description_en) {
+        $this->description_en = $description_en;
         return $this;
     }
 
@@ -272,12 +289,13 @@ class ProductDetails {
         return $instance;
     }
 
-    public static function createProductDetails($ID, $product_id, $sequence, $description, $product_category_id, $secondary_product_category_id, $price, $offer_price, $image_path, $image, $promoted, $promoted_from, $promoted_to, $promotion_text, $promotion_activation) {
+    public static function createProductDetails($ID, $product_id, $code, $description, $description_en, $product_category_id, $secondary_product_category_id, $price, $offer_price, $image_path, $image, $promoted, $promoted_from, $promoted_to, $promotion_text, $promotion_activation) {
         return self::create()
             ->setID($ID)
             ->setProductId($product_id)
-            ->setSequence($sequence)
+            ->setCode($code)
             ->setDescription($description)
+            ->setDescriptionEn($description_en)
             ->setProductCategoryId($product_category_id)
             ->setSecondaryProductCategoryId($secondary_product_category_id)
             ->setPrice($price)

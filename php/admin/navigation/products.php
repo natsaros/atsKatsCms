@@ -13,6 +13,7 @@ $products = ProductHandler::fetchAllProductsWithDetails();
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Code</th>
                     <th>Title</th>
                     <th>Is Promoted</th>
                     <th>Actions</th>
@@ -27,6 +28,7 @@ $products = ProductHandler::fetchAllProductsWithDetails();
                         ?>
                         <tr class="<?php echo $oddEvenClass ?>">
                             <td><?php echo $productId; ?></td>
+                            <td><?php echo $product->getCode(); ?></td>
                             <td><?php echo $product->getTitle(); ?></td>
                             <td><?php if ($product->getPromoted() === 1) echo '<i class="fa fa-check"></i>'; ?></td>
                             <td>

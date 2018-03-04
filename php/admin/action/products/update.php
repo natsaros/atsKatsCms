@@ -1,7 +1,10 @@
 <?php
 $ID = safe_input($_POST[ProductHandler::ID]);
+$code = safe_input($_POST[ProductHandler::CODE]);
 $title = safe_input($_POST[ProductHandler::TITLE]);
+$title_en = safe_input($_POST[ProductHandler::TITLE_EN]);
 $description = $_POST[ProductHandler::DESCRIPTION];
+$description_en = $_POST[ProductHandler::DESCRIPTION_EN];
 $productCategoryId = $_POST[ProductHandler::PRODUCT_CATEGORY_ID];
 $secondaryProductCategoryId = $_POST[ProductHandler::SECONDARY_PRODUCT_CATEGORY_ID];
 $price = $_POST[ProductHandler::PRICE];
@@ -19,7 +22,7 @@ if(!$emptyFile) {
 
 $imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
 
-if(isEmpty($title) || isEmpty($description) || isEmpty($productCategoryId) || isEmpty($price)) {
+if(isEmpty($title) || isEmpty($description) || isEmpty($title_en) || isEmpty($description_en) || isEmpty($code) || isEmpty($productCategoryId) || isEmpty($price)) {
     addErrorMessage("Please fill in required info");
 }
 
@@ -55,7 +58,8 @@ try {
     if (isEmpty($secondaryProductCategoryId)){
         $secondaryProductCategoryId = null;
     }
-    $product->setTitle($title)->setFriendlyTitle(transliterateString($title))->setState($state)->setUserId($userID)->setDescription($description)->setSecondaryProductCategoryId($secondaryProductCategoryId)->setProductCategoryId($productCategoryId)->setPrice($price)->setOfferPrice($offerPrice);
+    $product->setCode($code)->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title))->setState($state)->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)->setSecondaryProductCategoryId($secondaryProductCategoryId)->setProductCategoryId($productCategoryId)->setPrice($price)->setOfferPrice($offerPrice);
+
     if($imgContent) {
         //only saving in filesystem for performance reasons
         $product->setImagePath($imagePath);

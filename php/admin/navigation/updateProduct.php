@@ -57,11 +57,28 @@ if($afterFormSubmission) {
             <input type="hidden" name="<?php echo ProductHandler::STATE ?>"
                    value="<?php echo $currentProduct->getState() ?>"/>
             <input type="hidden" name="<?php echo ProductHandler::ID ?>" value="<?php echo $currentProduct->getID() ?>"/>
+
+            <div class="form-group">
+                <label class="control-label" for="code_input">Code *</label>
+                <input class="form-control" placeholder="Code"
+                       name="<?php echo ProductHandler::CODE ?>" id="code_input" required
+                       value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::CODE]?><?php } else { echo $currentProduct->getCode(); } ?>"
+                >
+            </div>
+
             <div class="form-group">
                 <label class="control-label" for="title_input">Title *</label>
                 <input class="form-control" placeholder="Title"
                        name="<?php echo ProductHandler::TITLE ?>" id="title_input" required
                        value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::TITLE]?><?php } else { echo $currentProduct->getTitle(); } ?>"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="titleEn_input">Title in English *</label>
+                <input class="form-control" placeholder="Title"
+                       name="<?php echo ProductHandler::TITLE_EN ?>" id="titleEn_input" required
+                       value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::TITLE_EN]?><?php } else { echo $currentProduct->getTitleEn(); } ?>"
                 >
             </div>
 
@@ -88,6 +105,13 @@ if($afterFormSubmission) {
                 <label class="control-label" for="description_input">Description *</label>
                 <textarea class="editor" name="<?php echo ProductHandler::DESCRIPTION ?>" id="description_input" required>
                     <?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::DESCRIPTION]?><?php } else { echo $currentProduct->getDescription(); } ?>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="descriptionEn_input">Description in English *</label>
+                <textarea class="editor" name="<?php echo ProductHandler::DESCRIPTION_EN ?>" id="descriptionEn_input" required>
+                    <?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::DESCRIPTION_EN]?><?php } else { echo $currentProduct->getDescriptionEn(); } ?>
                 </textarea>
             </div>
 

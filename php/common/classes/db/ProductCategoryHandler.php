@@ -43,7 +43,7 @@ class ProductCategoryHandler {
      * @throws SystemException
      */
     static function fetchAllActiveProductCategoriesForAdmin() {
-        $query = "SELECT * FROM " . getDb()->product_categories . " WHERE " . self::STATE . " = " . ProductCategoryStatus::ACTIVE . " AND ". self::PARENT_CATEGORY . " != 1";
+        $query = "SELECT * FROM " . getDb()->product_categories . " WHERE " . self::STATE . " = " . ProductCategoryStatus::ACTIVE;
         $rows = getDb()->selectStmtNoParams($query);
         return self::populateProductCategories($rows);
     }
