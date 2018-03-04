@@ -1,7 +1,3 @@
-<?php require("pageHeader.php"); ?>
-
-<?php require("messageSection.php"); ?>
-
 <?php
 
 $userId = $_GET["id"];
@@ -24,7 +20,18 @@ if ($isCreate) {
     $currentUser = UserHandler::getUserById($userId);
     $currentUser->setGroups(GroupHandler::fetchGroupsByUser($userId));
 }
+$pageTitle = $isCreate ? "Create User" : "Update User";
 ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            <?php echo $pageTitle; ?>
+        </h1>
+    </div>
+</div>
+
+<?php require("messageSection.php"); ?>
 
 <ul class="nav nav-tabs">
     <li <?php if (isEmpty($activeTab) || $activeTab === 'general') {

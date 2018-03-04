@@ -6,23 +6,19 @@ class EmailHandler {
     /**
      * @param $name
      * @param $email
-     * @param $interested
-     * @param $goal
+     * @param $text
      * @param $phone
      * @throws SystemException
      */
-    static function sendFitnessHouse($name, $email, $interested, $goal, $phone) {
+    static function sendEmailToSellinofos($name, $email, $text, $phone) {
         $systemEmailAdrs = SettingsHandler::getSettingValueByKey(Setting::EMAILS);
         $basicAdr = explode(';', $systemEmailAdrs)[0];
 
-        $email_subject = "Fitness House Contact from: " . $name;
+        $email_subject = "Sellinofos Contact from: " . $name;
         $email_body = "Name: " . $name . "\n";
         $email_body .= "Email: " . $email . "\n\n";
         $email_body .= "Phone: " . $phone . "\n\n";
-        if (!empty($goal)) {
-            $email_body .= "\tGoals: \n \t " . $goal . "\n\n";
-        }
-        $email_body .= "\tInterested in : \n \t" . $interested . "\n";
+        $email_body .= "Text: \n \t " . $text . "\n\n";
         $headers = "MIME-Version: 1.1\r\n";
         $headers .= "Content-type: text/plain; charset=utf-8\r\n";
         $headers .= "From:" . $basicAdr . "\r\n";

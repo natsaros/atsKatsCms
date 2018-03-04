@@ -59,7 +59,7 @@
         <div class="row" id="fbLoginSection">
             <div class="col-sm-12">
                 <a class="facebook-login-button" href="javascript:void(0);" onclick="fbLogin();">
-                    Συνδεθείτε στο Facebook για να σχολιάσετε το άρθρο
+                    Συνδεθείτε για να σχολιάσετε το άρθρο
                     <span class="fa"></span>
                 </a>
             </div>
@@ -100,6 +100,6 @@
             </div>
         </div>
     </div>
-<?php } else { ?>
-    <!--todo: 404-->
-<?php } ?>
+<?php } else {
+    require('404.php');
+} ?>

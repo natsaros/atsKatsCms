@@ -13,7 +13,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
             <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="<?php echo $adminRequestUri . $startPage ?>">Fitness House Admin</a>
+        <a class="navbar-brand" href="<?php echo $adminRequestUri . $startPage ?>">Sellinofos Admin</a>
         <div class="navbar-brand" style="cursor: default;width: 50px;">
             <img class="img-rounded img-responsive"
                  src="<?php echo ImageUtil::renderUserImage($loggedInUser) ?>"
@@ -275,21 +275,41 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
+                <!--<?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'posts' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'posts') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
                     </li>
+                <?php } ?>-->
+                <?php if (hasAccess($loggedInUser, AccessRight::PRODUCTS_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . 'products' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'products') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-shopping-cart fa-fw"></i> Products</a>
+                    </li>
                 <?php } ?>
-
-                <?php if (hasAccess($loggedInUser, AccessRight::PAGES_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::PRODUCT_CATEGORIES_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . 'productCategories' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'productCategories') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-list  fa-fw"></i> Product Categories</a>
+                    </li>
+                <?php } ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . 'newsletterEmails' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'newsletterEmails') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-envelope"></i> Newsletter Emails</a>
+                    </li>
+                <?php } ?>
+                <!--<?php if (hasAccess($loggedInUser, AccessRight::PAGES_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'pages' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'pages') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                     </li>
-                <?php } ?>
+                <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {

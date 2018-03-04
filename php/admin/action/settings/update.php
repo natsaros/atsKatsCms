@@ -1,7 +1,12 @@
 <?php
 $ID = safe_input($_POST[SettingsHandler::ID]);
 $key = safe_input($_POST[SettingsHandler::SKEY]);
-if($key === Setting::BLOG_ENABLED) {
+if($key === Setting::MAINTENANCE) {
+    $value = $_POST[SettingsHandler::SVALUE][0];
+    if(isEmpty($value)) {
+        $value = 'off';
+    }
+} else if($key === Setting::BLOG_ENABLED) {
     $value = $_POST[SettingsHandler::SVALUE][0];
     if(isEmpty($value)) {
         $value = 'off';

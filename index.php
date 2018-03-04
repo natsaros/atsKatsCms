@@ -4,6 +4,7 @@
 <?php header("Content-type: text/html; charset=utf-8"); ?>
 <?php
 require_once("php/common/siteFunctions.php");
+require_once("php/i18n/i18n.php");
 
 if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
     require_once(COMMON_ROOT_PATH . 'config.php');

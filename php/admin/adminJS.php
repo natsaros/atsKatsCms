@@ -10,7 +10,7 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?php echo JS_URI ?>raphael/raphael.min.js"></script>
 
-<?php if(strpos(ADMIN_PAGE_ID, 'updatePost') !== false) {
+<?php if(strpos(ADMIN_PAGE_ID, 'updatePost') !== false || strpos(ADMIN_PAGE_ID, 'updateProduct') !== false) {
     echo '<script src="' . JS_URI . 'tinymce/tinymce.min.js"></script>';
 } ?>
 
@@ -41,3 +41,5 @@
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo JS_URI ?>sb-admin-2.min.js"></script>
 <script src="<?php echo JS_URI ?>adminCustom.js"></script>
+<script src="<?php echo JS_URI ?>bootstrap-datetimepicker/moment.min.js"></script>
+<script src="<?php echo JS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>

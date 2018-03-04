@@ -55,7 +55,7 @@ try {
             addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
             if(!$emptyFile) {
                 $fileName = basename($image2Upload[ImageUtil::NAME]);
-                ImageUtil::saveImageToFileSystem($user2Update->getUserName(), $fileName, $imgContent);
+                ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Update->getUserName(), $fileName, $imgContent);
             }
         } else {
             addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");

@@ -2,11 +2,10 @@
 preserveFormData();
 $name = $_POST['name'];
 $email_address = $_POST['email'];
-$interested = $_POST['interested'];
 $phone = $_POST['phone'];
-$goal = $_POST['goal'];
+$text = $_POST['text'];
 
-if (isEmpty($name) || isEmpty($email_address) || isEmpty($interested)) {
+if (isEmpty($name) || isEmpty($email_address) || isEmpty($text)) {
     addInfoMessage("Παρακαλώ συμπληρώστε όλες τις απαιτούμενες πληροφορίες");
 }
 
@@ -20,7 +19,7 @@ if (!is_numeric($phone)) {
 }
 
 try {
-    EmailHandler::sendFitnessHouse($name, $email_address, $interested, $goal, $phone);
+    EmailHandler::sendEmailToSellinofos($name, $email_address, $text, $phone);
 } catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR_GR);
@@ -28,6 +27,6 @@ try {
 
 if (!hasErrors()) {
     consumeFormData();
-    addInfoMessage('Λαβαμε το email σας και θα επικοινωνησουμε αμεσα μαζι σας! Ευχαριστουμε');
+    addInfoMessage('Λάβαμε το email σας και θα επικοινωνήσουμε άμεσα μαζί σας! Ευχαριστούμε!');
 }
 Redirect(getRootUri() . "contact");

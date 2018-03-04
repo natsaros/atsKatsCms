@@ -57,7 +57,7 @@ $activeTabClass = 'class="active"';
                                         <a type="button"
                                            href="<?php echo $updateStatusUrl; ?>"
                                            class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
-                                            <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
+                                            <?php $statusClass = $user->getUserStatus() ? 'active-item' : 'inactive-item' ?>
                                             <span class="fa fa-user <?php echo $statusClass ?>"
                                                   aria-hidden="true"></span>
                                         </a>
@@ -65,7 +65,7 @@ $activeTabClass = 'class="active"';
                                     <a type="button"
                                        href="<?php echo getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($userId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit User">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
 
                                     <!-- Button trigger modal -->
@@ -146,19 +146,19 @@ $activeTabClass = 'class="active"';
                                     <a type="button"
                                        href="<?php echo $updateStatusUrl; ?>"
                                        class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> Group">
-                                        <?php $statusClass = $group->getStatus() ? 'text-success' : 'text-danger' ?>
+                                        <?php $statusClass = $group->getStatus() ? 'active-item' : 'inactive-item' ?>
                                         <span class="fa fa-users <?php echo $statusClass ?>"
                                               aria-hidden="true"></span>
                                     </a>
                                     <a type="button"
                                        href="<?php echo getAdminActionRequestUri() . "group" . DS . "deleteGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
                                        class="btn btn-default btn-sm" title="Delete Group">
-                                        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </a>
                                     <a type="button"
                                        href="<?php echo getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit Group">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
 
 

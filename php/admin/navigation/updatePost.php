@@ -1,7 +1,3 @@
-<?php require("pageHeader.php"); ?>
-
-<?php require("messageSection.php"); ?>
-
 <?php
 
 $postId = $_GET["id"];
@@ -16,7 +12,18 @@ if ($isCreate) {
 } else {
     $currentPost = PostHandler::getPostByIDWithDetails($postId);
 }
+$pageTitle = $isCreate ? "Create Post" : "Update Post";
 ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            <?php echo $pageTitle; ?>
+        </h1>
+    </div>
+</div>
+
+<?php require("messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">

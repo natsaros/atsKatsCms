@@ -39,7 +39,7 @@ $posts = PostHandler::fetchAllPosts();
                             <a type="button"
                                href="<?php echo getAdminActionRequestUri() . "post" . DS . "updatePostStatus" . addParamsToUrl(array('id', 'status'), array($postId, $updatedStatus)); ?>"
                                class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> Post">
-                                <?php $statusClass = $post->getState() ? 'text-success' : 'text-danger' ?>
+                                <?php $statusClass = $post->getState() ? 'active-item' : 'inactive-item' ?>
                                 <span class="glyphicon glyphicon-comment <?php echo $statusClass ?>"
                                       aria-hidden="true"></span>
                             </a>
@@ -47,13 +47,13 @@ $posts = PostHandler::fetchAllPosts();
                             <a type="button"
                                href="<?php echo getAdminActionRequestUri() . "post" . DS . "deletePost" . addParamsToUrl(array('id'), array($postId)); ?>"
                                class="btn btn-default btn-sm" title="Delete Post">
-                                <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </a>
 
                             <a type="button"
-                               href="<?php echo getAdminRequestUri() . "updatePost" . addParamsToUrl(array('id'), array($postId)); ?>"
+                               href="<?php echo getAdminRequestUri()  . "updatePost" . addParamsToUrl(array('id'), array($postId)); ?>"
                                class="btn btn-default btn-sm" title="Edit Post">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
                         </td>
                     </tr>

@@ -14,31 +14,27 @@
         $userAccessRights = AccessRightsHandler::getAccessRightByUserId($id);
         $allGroups = AccessRightsHandler::fetchAllAccessRights();
         ?>
-
-        <div class="col-lg-12">
-            <?php
-            /* @var $right AccessRight */
-            foreach($allGroups as $key => $right) {
-                ?>
-                <div class="form-group">
-                    <label class="control-label"
-                           for="right_input_<?php echo $right->getID(); ?>"><?php echo $right->getDescription(); ?></label>
-                    <div class="checkbox">
-                        <label>
-                            <?php $isChecked = isNotEmpty($userAccessRights) ? in_array($right, $userAccessRights) ? 'checked' : '' : '' ?>
-                            <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
-                                   type="checkbox" <?php echo $isChecked ?>
-                                   value="<?php echo $right->getID(); ?>"
-                                   id="right_input_<?php echo $right->getID(); ?>"
-                                   data-toggle="toggle"
-                                   data-custom-on-val="<?php echo $right->getID(); ?>"
-                                   data-custom-off-val="">
-                        </label>
-                    </div>
+        <?php
+        /* @var $right AccessRight */
+        foreach($allGroups as $key => $right) {
+            ?>
+            <div class="form-group">
+                <label class="control-label"
+                       for="right_input_<?php echo $right->getID(); ?>"><?php echo $right->getDescription(); ?></label>
+                <div class="checkbox">
+                    <label>
+                        <?php $isChecked = isNotEmpty($userAccessRights) ? in_array($right, $userAccessRights) ? 'checked' : '' : '' ?>
+                        <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
+                               type="checkbox" <?php echo $isChecked ?>
+                               value="<?php echo $right->getID(); ?>"
+                               id="right_input_<?php echo $right->getID(); ?>"
+                               data-toggle="toggle"
+                               data-custom-on-val="<?php echo $right->getID(); ?>"
+                               data-custom-off-val="">
+                    </label>
                 </div>
-            <?php } ?>
-
-        </div>
+            </div>
+        <?php } ?>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

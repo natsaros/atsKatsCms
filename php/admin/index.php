@@ -7,6 +7,10 @@ if (isset($_GET["action"])) {
     $action = $_GET["action"];
 }
 
+if (isset($_GET["ajaxAction"])) {
+    $ajaxAction = $_GET["ajaxAction"];
+}
+
 try {
     initLoad();
 } catch (SystemException $e) {
@@ -15,7 +19,18 @@ try {
     return;
 }
 
-if (!isset($action) || isEmpty($action)) {
+if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
+    try {
+        require_safe(ADMIN_AJAX_ACTION_PATH . $ajaxAction . PHP_POSTFIX);
+    } catch (SystemException $e) {
+        logError($e);
+        addErrorMessage(ErrorMessages::WENT_WRONG);
+        $statusCode = 500;
+        $status_string = $statusCode . ' ' . 'Internal Server Error';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
+        require(ADMIN_ROOT_PATH . '404.php');
+    }
+} else if (!isset($action) || isEmpty($action)) {
     //Default behavior: if no action is set to happen navigation occurs.
 
     if (!isLoggedIn()) {

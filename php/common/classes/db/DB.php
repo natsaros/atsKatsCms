@@ -18,12 +18,18 @@ class Db {
     const POST_META = 'POST_DETAILS';
     const COMMENTS = 'COMMENTS';
     const COMMENT_META = 'COMMENT_META';
+    const PRODUCTS = 'PRODUCTS';
+    const PRODUCT_DETAILS = 'PRODUCT_DETAILS';
+    const PRODUCT_CATEGORIES = 'PRODUCT_CATEGORIES';
 
     const VISITORS = 'VISITORS';
+
+    const NEWSLETTER_EMAILS = 'NEWSLETTER_EMAILS';
 
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
     const DB_BLOG = 'blog';
+    const DB_PRODUCT_CATALOGUE = 'product_catalogue';
 
     // The database connection
     protected static $connection;
@@ -32,9 +38,11 @@ class Db {
 
     private $initialized;
 
-    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS);
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS, self::NEWSLETTER_EMAILS);
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
+
+    private static $product_tables = array(self::PRODUCTS, self::PRODUCT_DETAILS, self::PRODUCT_CATEGORIES);
 
     private $prefix;
 
@@ -47,6 +55,9 @@ class Db {
     public $post_meta;
     public $comments;
     public $comment_meta;
+    public $products;
+    public $product_details;
+    public $product_categories;
 
     public $user_groups;
     public $user_groups_meta;
@@ -56,6 +67,8 @@ class Db {
     public $acr_assoc;
 
     public $visitors;
+
+    public $newsletter_emails;
 
     /**
      * @return Db
@@ -201,7 +214,7 @@ class Db {
         // Connect to the database
         $connection = self::connect();
         if ($connection == mysqli_connect_error()) {
-            throw new SystemException($connection);
+            throw new Exception($connection);
         }
 
         $param_type = '';
@@ -242,7 +255,7 @@ class Db {
             }
 
         } else {
-            throw new SystemException($connection->error);
+            throw new Exception($connection->error);
         }
         return $mysqli_result;
     }
@@ -256,12 +269,12 @@ class Db {
         // Connect to the database
         $connection = self::connect();
         if ($connection == mysqli_connect_error()) {
-            throw new SystemException(self::db_error());
+            throw new Exception(self::db_error());
         }
         // Query the database
         $mysqli_result = $connection->multi_query($query);
         if (!$mysqli_result) {
-            throw new SystemException($connection->error);
+            throw new Exception($connection->error);
         }
         return $mysqli_result;
     }
@@ -297,7 +310,7 @@ class Db {
      */
     public function setCustomPrefix($prefix, $set_table_names = true) {
         if (preg_match('|[^a-z0-9_]|i', $prefix)) {
-            throw new SystemException('Invalid database prefix');
+            throw new Exception('Invalid database prefix');
         }
         $prefix = strtoupper($prefix);
 
@@ -335,7 +348,15 @@ class Db {
                     case self::COMMENT_META:
                         $this->setCommentMeta($updatedTable);
                         break;
-
+                    case self::PRODUCTS:
+                        $this->setProducts($updatedTable);
+                        break;
+                    case self::PRODUCT_DETAILS:
+                        $this->setProductDetails($updatedTable);
+                        break;
+                    case self::PRODUCT_CATEGORIES:
+                        $this->setProductCategories($updatedTable);
+                        break;
                     case self::USER_GROUPS:
                         $this->setUserGroups($updatedTable);
                         break;
@@ -354,9 +375,11 @@ class Db {
                     case self::ACR_ASSOC:
                         $this->setAcrAssoc($updatedTable);
                         break;
-
                     case self::VISITORS:
                         $this->setVisitors($updatedTable);
+                        break;
+                    case self::NEWSLETTER_EMAILS:
+                        $this->setNewsletterEmails($updatedTable);
                         break;
                 }
             }
@@ -370,13 +393,16 @@ class Db {
     private static function tables($scope = self::DB_ALL) {
         switch ($scope) {
             case self::DB_ALL:
-                $tables = array_merge(self::$global_tables, self::$blog_tables);
+                $tables = array_merge(self::$global_tables, self::$blog_tables, self::$product_tables);
                 break;
             case self::DB_GLOBAL:
                 $tables = self::$global_tables;
                 break;
             case self::DB_BLOG:
-                $tables = self::$global_tables;
+                $tables = self::$blog_tables;
+                break;
+            case self::DB_PRODUCT_CATALOGUE:
+                $tables = self::$product_tables;
                 break;
             default :
                 return array();
@@ -479,6 +505,27 @@ class Db {
     }
 
     /**
+     * @param mixed $products
+     */
+    public function setProducts($products) {
+        $this->products = $products;
+    }
+
+    /**
+     * @param mixed $product_details
+     */
+    public function setProductDetails($product_details) {
+        $this->product_details = $product_details;
+    }
+
+    /**
+     * @param mixed $product_categories
+     */
+    public function setProductCategories($product_categories) {
+        $this->product_categories = $product_categories;
+    }
+
+    /**
      * @param mixed $pages
      */
     public function setPages($pages) {
@@ -539,6 +586,13 @@ class Db {
      */
     public function setVisitors($visitors) {
         $this->visitors = $visitors;
+    }
+
+    /**
+     * @param mixed $newsletter_emails
+     */
+    public function setNewsletterEmails($newsletter_emails) {
+        $this->newsletter_emails = $newsletter_emails;
     }
 
 }

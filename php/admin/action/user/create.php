@@ -51,7 +51,7 @@ try {
         addSuccessMessage("User " . $user2Create->getUserName() . " successfully created");
         if(!$emptyFile){
             $fileName = basename($image2Upload[ImageUtil::NAME]);
-            ImageUtil::saveImageToFileSystem($user2Create->getUserName(), $fileName, $imgContent);
+            ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Create->getUserName(), $fileName, $imgContent);
         }
     } else {
         addErrorMessage("User " . $user2Create->getUserName() . " failed to be created");
