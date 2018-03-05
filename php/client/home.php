@@ -80,7 +80,7 @@
 <script type="text/javascript">
 
     $.getJSON('https://api.instagram.com/v1/users/3155843580/?access_token=3155843580.d3d78ae.1885ed7fc5054c9ab1f886fd6843f092', function(data) {
-        if (data != null && data != ''){
+        if (data != null && data !== ''){
             $('.instagram-avatar').attr('src', data.data.profile_picture);
             $('.instagram-fullname').html(data.data.full_name);
             $('.instagram-username').html('@' + data.data.username);
