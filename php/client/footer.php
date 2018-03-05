@@ -18,10 +18,10 @@
     <div class="row footer-columns-row">
         <div class="col-sm-4 footer-column">
             <div class="footer-column-link footer-column-header desktop"><a href="<?php echo REQUEST_URI ?>home" class="footer-column-header">Sellinofos</a></div>
-            <div class="footer-column-link"><a href="<?php echo REQUEST_URI ?>home">Αρχική</a></div>
+            <div class="footer-column-link"><a href="<?php echo REQUEST_URI ?>home"><?php if($_SESSION['locale'] == 'el_GR') { ?>Αρχική<?php } else { ?>Home<?php } ?></a></div>
             <div class="footer-column-link"><a href="<?php echo REQUEST_URI ?>collections">Collections</a></div>
-            <div class="footer-column-link"><a href="<?php echo REQUEST_URI ?>sales">Εκπτώσεις</a></div>
-            <div class="footer-column-link"><a href="<?php echo REQUEST_URI ?>contact">Επικοινωνία</a></div>
+            <div class="footer-column-link"><a href="<?php echo REQUEST_URI ?>sales"><?php if($_SESSION['locale'] == 'el_GR') { ?>Εκπτώσεις<?php } else { ?>Sales<?php } ?></a></div>
+            <div class="footer-column-link"><a href="<?php echo REQUEST_URI ?>contact"><?php if($_SESSION['locale'] == 'el_GR') { ?>Επικοινωνία<?php } else { ?>Contact<?php } ?></a></div>
         </div>
         <div class="col-sm-4 desktop footer-column">
             <?php

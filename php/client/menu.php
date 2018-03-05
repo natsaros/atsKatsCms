@@ -45,7 +45,7 @@ if (isset($_GET["category_friendly_url"])) {
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="<?php if($pageId == "home") { ?>active<?php } ?>"><a href="<?php echo REQUEST_URI ?>home">Αρχική</a>
+                <li class="<?php if($pageId == "home") { ?>active<?php } ?>"><a href="<?php echo REQUEST_URI ?>home"><?php if($_SESSION['locale'] == 'el_GR') { ?>Αρχική<?php } else { ?>Home<?php } ?></a>
                 </li>
                 <li class="<?php if($pageId == "collections" || isUnderProductCategoriesPath()) { ?>active <?php } ?>sub-category-menu-trigger">
                     <a href="<?php echo REQUEST_URI ?>collections">Collections</a>
@@ -82,9 +82,9 @@ if (isset($_GET["category_friendly_url"])) {
                     }
                     ?>
                 </li>
-                <li class="<?php if (!is_null($productCategory) && $productCategory->getFriendlyTitle() == 'Sales') {?> active<?php } ?>"><a href="<?php echo REQUEST_URI ?>sales">Εκπτώσεις</a>
+                <li class="<?php if (!is_null($productCategory) && $productCategory->getFriendlyTitle() == 'Sales') {?> active<?php } ?>"><a href="<?php echo REQUEST_URI ?>sales"><?php if($_SESSION['locale'] == 'el_GR') { ?>Εκπτώσεις<?php } else { ?>Sales<?php } ?></a>
                 </li>
-                <li class="<?php if($pageId == "contact") { ?>active<?php } ?>"><a href="<?php echo REQUEST_URI ?>contact">Επικοινωνία</a>
+                <li class="<?php if($pageId == "contact") { ?>active<?php } ?>"><a href="<?php echo REQUEST_URI ?>contact"><?php if($_SESSION['locale'] == 'el_GR') { ?>Επικοινωνία<?php } else { ?>Contact<?php } ?></a>
                 </li>
             </ul>
             <?php
