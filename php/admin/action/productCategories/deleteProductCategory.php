@@ -12,12 +12,17 @@ try {
         if ($productCategory2delete->getState() == ProductCategoryStatus::ACTIVE) {
             addInfoMessage("Product category '" . $productCategory2delete->getTitle() . "' is active and cannot be deleted");
         } else {
-            $deleteProductCategoryRes = ProductCategoryHandler::deleteProductCategory($id);
-            if ($deleteProductCategoryRes == null || !$deleteProductCategoryRes) {
-                addErrorMessage("Post failed to be deleted");
+            $productCategoryAssignedToProduct = ProductHandler::isProductCategoryAssignedToProducts($id);
+            if (!$productCategoryAssignedToProduct){
+                $deleteProductCategoryRes = ProductCategoryHandler::deleteProductCategory($id);
+                if ($deleteProductCategoryRes == null || !$deleteProductCategoryRes) {
+                    addErrorMessage("Product Category failed to be deleted");
+                } else {
+                    ImageUtil::removeImageFromFileSystem(PRODUCT_CATEGORIES_PICTURES_ROOT, $id);
+                    addSuccessMessage("Product Category successfully deleted");
+                }
             } else {
-                ImageUtil::removeImageFromFileSystem(PRODUCT_CATEGORIES_PICTURES_ROOT, $id);
-                addSuccessMessage("Post successfully deleted");
+                addErrorMessage("Product Category is assigned to product and cannot be deleted");
             }
         }
     } else {

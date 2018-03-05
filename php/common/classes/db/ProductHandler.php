@@ -49,6 +49,17 @@ class ProductHandler {
 
     /**
      * @param $productCategoryId
+     * @return bool
+     * @throws SystemException
+     */
+    static function isProductCategoryAssignedToProducts($productCategoryId) {
+        $query = "SELECT * FROM " . getDb()->product_details . " WHERE " . self::PRODUCT_CATEGORY_ID . " = ? OR " . self::SECONDARY_PRODUCT_CATEGORY_ID . " = ?";
+        $rows = getDb()->selectStmt($query, array('i', 'i'), array($productCategoryId, $productCategoryId));
+        return !is_null($rows) && count($rows) > 0;
+    }
+
+    /**
+     * @param $productCategoryId
      * @return double|bool
      * @throws SystemException
      */

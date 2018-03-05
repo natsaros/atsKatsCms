@@ -1,6 +1,6 @@
 <?php
 $currentProductCategoryId = $_POST["currentProductCategoryId"];
-$productCategories = ProductCategoryHandler::fetchAllActiveProductCategoriesForAdmin();
+$productCategories = ProductCategoryHandler::fetchAllProductCategoriesForAdmin();
 
 $result = '<option value="">Please Select</option>';
 

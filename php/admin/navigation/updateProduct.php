@@ -23,7 +23,7 @@ if (isset($_SESSION['updateProductForm']) && !empty($_SESSION['updateProductForm
     unset($_SESSION['updateProductForm']);
 }
 
-$productCategories = ProductCategoryHandler::fetchAllActiveProductCategoriesForAdmin();
+$productCategories = ProductCategoryHandler::fetchAllProductCategoriesForAdmin();
 
 $selectedProductCategoryId = null;
 if($afterFormSubmission) {
