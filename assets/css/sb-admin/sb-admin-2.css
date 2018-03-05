@@ -589,3 +589,11 @@ form .tab-pane {
 form .tab-pane.active {
     display: block;
 }
+
+.active-item{
+    color: #008000;
+}
+
+.inactive-item{
+    color: #cecece;
+}

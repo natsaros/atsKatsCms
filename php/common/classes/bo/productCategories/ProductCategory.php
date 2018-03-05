@@ -8,8 +8,10 @@
 class ProductCategory {
     private $ID;
     private $title;
+    private $title_en;
     private $friendly_title;
     private $description;
+    private $description_en;
     private $image_path;
     private $image;
     private $parent_category;
@@ -44,6 +46,14 @@ class ProductCategory {
     /**
      * @return mixed
      */
+    public function getTitleEn() {
+        return $this->title_en;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getFriendlyTitle() {
         return $this->friendly_title;
     }
@@ -53,6 +63,13 @@ class ProductCategory {
      */
     public function getDescription() {
         return $this->description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionEn() {
+        return $this->description_en;
     }
 
     /**
@@ -137,6 +154,22 @@ class ProductCategory {
     }
 
     /**
+     * @param mixed $title_en
+     * @return ProductCategory
+     */
+    public function setTitleEn($title_en) {
+        $this->title_en = $title_en;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocalizedTitle() {
+        return (!isset($_SESSION['locale']) || $_SESSION['locale'] === 'el_GR') ? $this->title : $this->title_en;
+    }
+
+    /**
      * @param $friendly_title
      * @return ProductCategory
      */
@@ -152,6 +185,22 @@ class ProductCategory {
     public function setDescription($description) {
         $this->description = $description;
         return $this;
+    }
+
+    /**
+     * @param mixed $description_en
+     * @return ProductCategory
+     */
+    public function setDescriptionEn($description_en) {
+        $this->description_en = $description_en;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocalizedDescription() {
+        return (!isset($_SESSION['locale']) || $_SESSION['locale'] === 'el_GR') ? $this->description : $this->description_en;
     }
 
     /**
@@ -243,12 +292,14 @@ class ProductCategory {
         return $instance;
     }
 
-    public static function createProductCategory($ID, $title, $friendly_title, $description, $image_path, $image, $parent_category, $parent_category_id, $activation_date, $modification_date, $state, $user_id) {
+    public static function createProductCategory($ID, $title, $title_en, $friendly_title, $description, $description_en, $image_path, $image, $parent_category, $parent_category_id, $activation_date, $modification_date, $state, $user_id) {
         return self::create()
             ->setID($ID)
             ->setTitle($title)
+            ->setTitleEn($title_en)
             ->setFriendlyTitle($friendly_title)
             ->setDescription($description)
+            ->setDescriptionEn($description_en)
             ->setImagePath($image_path)
             ->setImage($image)
             ->setParentCategory($parent_category)

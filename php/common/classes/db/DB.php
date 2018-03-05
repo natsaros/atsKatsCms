@@ -21,6 +21,7 @@ class Db {
     const PRODUCTS = 'PRODUCTS';
     const PRODUCT_DETAILS = 'PRODUCT_DETAILS';
     const PRODUCT_CATEGORIES = 'PRODUCT_CATEGORIES';
+    const PROMOTION = 'PROMOTION';
 
     const VISITORS = 'VISITORS';
 
@@ -42,7 +43,7 @@ class Db {
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
-    private static $product_tables = array(self::PRODUCTS, self::PRODUCT_DETAILS, self::PRODUCT_CATEGORIES);
+    private static $product_tables = array(self::PRODUCTS, self::PRODUCT_DETAILS, self::PRODUCT_CATEGORIES, self::PROMOTION);
 
     private $prefix;
 
@@ -58,6 +59,7 @@ class Db {
     public $products;
     public $product_details;
     public $product_categories;
+    public $promotion;
 
     public $user_groups;
     public $user_groups_meta;
@@ -357,6 +359,9 @@ class Db {
                     case self::PRODUCT_CATEGORIES:
                         $this->setProductCategories($updatedTable);
                         break;
+                    case self::PROMOTION:
+                        $this->setPromotion($updatedTable);
+                        break;
                     case self::USER_GROUPS:
                         $this->setUserGroups($updatedTable);
                         break;
@@ -523,6 +528,13 @@ class Db {
      */
     public function setProductCategories($product_categories) {
         $this->product_categories = $product_categories;
+    }
+
+    /**
+     * @param mixed $promotion
+     */
+    public function setPromotion($promotion) {
+        $this->promotion = $promotion;
     }
 
     /**

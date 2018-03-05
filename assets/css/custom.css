@@ -228,7 +228,8 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .no-results-found {font-size: 24px;margin: 150px 0 200px;text-align: center;}
 .product-details-image {overflow: hidden;position: relative;box-shadow: 0 0 7px 0 rgba(153, 153, 153, 0.4);width: 500px;float: right;height: 500px;}
 .product-details-info {padding: 30px;}
-.product-details-title {text-align:left;display: inline-block; margin-bottom: 20px; border-bottom: 1px solid #1c1b17;font-weight: 700; font-size: 28px;}
+.product-details-title {text-align:left;display: inline-block; margin-bottom: 15px; border-bottom: 1px solid #1c1b17;font-weight: 700; font-size: 28px;}
+.product-details-code { margin-bottom: 10px;font-size: 14px;}
 .product-details-category {text-align:left;width:100%;font-size: 18px;margin-bottom: 50px;}
 .product-details-description {text-align:left;width:100%;font-size: 22px;margin-bottom: 40px;}
 .product-details-initial-price {font-size: 16px;display:inline-block;text-decoration: line-through;color: #808080;text-align: left; padding-right: 10px;}
@@ -565,6 +566,7 @@ input:-webkit-autofill {
     .sub-category-menu-link-inner-mobile span {text-decoration: none;font-weight: 400;}
     .maintenance-page-message {padding: 20vh 0 30vh;font-size: 25px;}
     .maintenance-page-image {width: 30vh;height: 32vh;margin: 0 auto 10vh;}
+    .product-details-code {font-size: 12px;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {

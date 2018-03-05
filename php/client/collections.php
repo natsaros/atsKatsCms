@@ -21,7 +21,7 @@ $productCategories = ProductCategoryHandler::fetchAllActiveParentProductCategori
                     </div>
                     <div class="productCategoryTitle">
                         <a href="<?php echo getProductCategoriesUri() . $pc->getFriendlyTitle();?>">
-                            <?php echo $pc->getTitle(); ?>
+                            <?php echo $pc->getLocalizedTitle(); ?>
                         </a>
                     </div>
                 </div>

@@ -12,11 +12,6 @@ class ProductDetails {
     private $offer_price;
     private $image_path;
     private $image;
-    private $promoted;
-    private $promoted_from;
-    private $promoted_to;
-    private $promotion_text;
-    private $promotion_activation;
 
     /**
      * ProductDetails constructor.
@@ -100,41 +95,6 @@ class ProductDetails {
      */
     public function getImage() {
         return $this->image;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromoted() {
-        return $this->promoted;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotedFrom() {
-        return $this->promoted_from;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotedTo() {
-        return $this->promoted_to;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotionText() {
-        return $this->promotion_text;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotionActivation() {
-        return $this->promotion_activation;
     }
 
     /**
@@ -237,51 +197,6 @@ class ProductDetails {
     }
 
     /**
-     * @param mixed $promoted
-     * @return ProductDetails
-     */
-    public function setPromoted($promoted) {
-        $this->promoted = $promoted;
-        return $this;
-    }
-
-    /**
-     * @param mixed $promoted_from
-     * @return ProductDetails
-     */
-    public function setPromotedFrom($promoted_from) {
-        $this->promoted_from = $promoted_from;
-        return $this;
-    }
-
-    /**
-     * @param mixed $promoted_to
-     * @return ProductDetails
-     */
-    public function setPromotedTo($promoted_to) {
-        $this->promoted_to = $promoted_to;
-        return $this;
-    }
-
-    /**
-     * @param mixed $promotion_text
-     * @return ProductDetails
-     */
-    public function setPromotionText($promotion_text) {
-        $this->promotion_text = $promotion_text;
-        return $this;
-    }
-
-    /**
-     * @param mixed $promotion_activation
-     * @return ProductDetails
-     */
-    public function setPromotionActivation($promotion_activation) {
-        $this->promotion_activation = $promotion_activation;
-        return $this;
-    }
-
-    /**
      * @return $this
      */
     public static function create() {
@@ -289,7 +204,7 @@ class ProductDetails {
         return $instance;
     }
 
-    public static function createProductDetails($ID, $product_id, $code, $description, $description_en, $product_category_id, $secondary_product_category_id, $price, $offer_price, $image_path, $image, $promoted, $promoted_from, $promoted_to, $promotion_text, $promotion_activation) {
+    public static function createProductDetails($ID, $product_id, $code, $description, $description_en, $product_category_id, $secondary_product_category_id, $price, $offer_price, $image_path, $image) {
         return self::create()
             ->setID($ID)
             ->setProductId($product_id)
@@ -301,13 +216,6 @@ class ProductDetails {
             ->setPrice($price)
             ->setOfferPrice($offer_price)
             ->setImagePath($image_path)
-            ->setImage($image)
-            ->setPromoted($promoted)
-            ->setPromotedFrom($promoted_from != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_from)) : null)
-            ->setPromotedTo($promoted_to != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_to)) : null)
-            ->setPromotionText($promotion_text)
-            ->setPromotionActivation($promotion_activation);
+            ->setImage($image);
     }
 }
-
-?>

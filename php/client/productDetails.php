@@ -14,28 +14,31 @@
                 </div>
                 <div class="col-sm-6 product-details-info">
                     <div class="product-details-title">
-                        <?php echo $product->getTitle(); ?>
+                        <?php echo $product->getLocalizedTitle(); ?>
+                    </div>
+                    <div class="product-details-code">
+                        <?php echo getLocalizedText("product_code");?><?php echo $product->getCode(); ?>
                     </div>
                     <div class="product-details-category">
-                        <?php echo $productCategory->getTitle(); ?>
+                        <?php echo $productCategory->getLocalizedTitle(); ?>
                     </div>
                     <div class="product-details-description">
-                    <?php echo $product->getDescription(); ?>
+                        <?php echo $product->getLocalizedDescription();?>
+                    </div>
+                    <?php if (!isEmpty($product->getOfferPrice()) && $product->getOfferPrice() > 0) { ?>
+                        <div class="product-details-initial-price">
+                            <?php echo "&euro;" . $product->getPrice(); ?>
+                        </div>
+                        <div class="product-details-price">
+                            <?php echo "&euro;" . $product->getOfferPrice(); ?>
+                        </div>
+                    <?php } else if (!isEmpty($product->getPrice()) && $product->getPrice() > 0){ ?>
+                        <div class="product-details-price">
+                            <?php echo "&euro;" . $product->getPrice(); ?>
+                        </div>
+                    <?php }?>
                 </div>
-                <?php if (!isEmpty($product->getOfferPrice()) && $product->getOfferPrice() > 0) { ?>
-                    <div class="product-details-initial-price">
-                        <?php echo "&euro;" . $product->getPrice(); ?>
-                    </div>
-                    <div class="product-details-price">
-                        <?php echo "&euro;" . $product->getOfferPrice(); ?>
-                    </div>
-                <?php } else if (!isEmpty($product->getPrice()) && $product->getPrice() > 0){ ?>
-                    <div class="product-details-price">
-                        <?php echo "&euro;" . $product->getPrice(); ?>
-                    </div>
-                <?php }?>
             </div>
-        </div>
 
         </div>
     <?php } else {

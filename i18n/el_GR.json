@@ -9,5 +9,12 @@
   "copyright_sign": "&copy;&nbsp;",
   "copyright_text": "&nbsp;Copyright",
   "cookies_consent_text": "Ο ιστότοπος χρησιμοποιεί cookies για καλύτερη εμπειρία",
-  "cookies_consent_button": "OK"
+  "cookies_consent_button": "OK",
+  "product_code": "Κωδικός προιόντος:&nbsp;",
+  "contact_header": "Επικοινωνήστε μαζί μας",
+  "contact_name": "Ονοματεπώνυμο *",
+  "contact_email": "Email *",
+  "contact_phone_number": "Τηλέφωνο",
+  "contact_info": "Τι πληροφορίες χρειάζεστε; *",
+  "contact_btn": "Αποστολή"
 }

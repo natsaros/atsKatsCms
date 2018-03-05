@@ -32,12 +32,6 @@ $settings = SettingsHandler::fetchAllSettings();
                         <td>
 
                             <a type="button"
-                               href="<?php echo getAdminActionRequestUri() . "settings" . DS . "delete" . addParamsToUrl(array('id'), array($settingID)); ?>"
-                               class="btn btn-default btn-sm" title="Delete Setting">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>
-
-                            <a type="button"
                                href="<?php echo getAdminRequestUri() . "updateSetting" . addParamsToUrl(array('id'), array($settingID)); ?>"
                                class="btn btn-default btn-sm" title="Edit Setting">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

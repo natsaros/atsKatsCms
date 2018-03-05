@@ -32,7 +32,7 @@
             <?php
                 foreach($productCategories as $key => $pc) {
                     ?>
-                    <div class="footer-column-link"><a href="<?php echo getProductCategoriesUri() . $pc->getFriendlyTitle();?>"><?php echo $pc->getTitle();?></a></div>
+                    <div class="footer-column-link"><a href="<?php echo getProductCategoriesUri() . $pc->getFriendlyTitle();?>"><?php echo $pc->getLocalizedTitle();?></a></div>
                     <?php
                 }
             }

@@ -39,11 +39,20 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
             <input type="hidden" name="<?php echo ProductCategoryHandler::STATE ?>"
                    value="<?php echo $currentProductCategory->getState() ?>"/>
             <input type="hidden" name="<?php echo ProductCategoryHandler::ID ?>" value="<?php echo $currentProductCategory->getID() ?>"/>
+
             <div class="form-group">
                 <label class="control-label" for="title_input">Title *</label>
                 <input class="form-control" placeholder="Title"
                        name="<?php echo ProductCategoryHandler::TITLE ?>" id="title_input" required
                        value="<?php echo $currentProductCategory->getTitle() ?>"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="titleEn_input">Title in English *</label>
+                <input class="form-control" placeholder="Title in English"
+                       name="<?php echo ProductCategoryHandler::TITLE_EN ?>" id="titleEn_input" required
+                       value="<?php echo $currentProductCategory->getTitleEn() ?>"
                 >
             </div>
 
@@ -71,6 +80,14 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
                 <input class="form-control" placeholder="Description"
                        name="<?php echo ProductCategoryHandler::DESCRIPTION ?>" id="description_input" required
                        value="<?php echo $currentProductCategory->getDescription() ?>"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="descriptionEn_input">Description in English *</label>
+                <input class="form-control" placeholder="Description in English"
+                       name="<?php echo ProductCategoryHandler::DESCRIPTION_EN ?>" id="descriptionEn_input" required
+                       value="<?php echo $currentProductCategory->getDescriptionEn() ?>"
                 >
             </div>
 

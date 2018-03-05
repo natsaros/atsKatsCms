@@ -1,6 +1,8 @@
 <?php
 $title = safe_input($_POST[ProductCategoryHandler::TITLE]);
+$title_en = safe_input($_POST[ProductCategoryHandler::TITLE_EN]);
 $description = $_POST[ProductCategoryHandler::DESCRIPTION];
+$description_en = $_POST[ProductCategoryHandler::DESCRIPTION_EN];
 $userID = safe_input($_POST[ProductCategoryHandler::USER_ID]);
 
 $imageValid = true;
@@ -13,7 +15,7 @@ $imagePath = safe_input($_POST[ProductCategoryHandler::IMAGE_PATH]);
 $parentCategory = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY]);
 $parentCategoryId = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY_ID]);
 
-if(isEmpty($title) || isEmpty($description)) {
+if(isEmpty($title) || isEmpty($description) || isEmpty($title_en) || isEmpty($description_en)) {
     addInfoMessage("Please fill in required info");
     Redirect(getAdminRequestUri() . "updateProductCategory");
 }
@@ -30,7 +32,7 @@ try {
     if (is_null($parentCategory)){
         $parentCategory = 0;
     }
-    $productCategory2Create->setTitle($title)->setFriendlyTitle(transliterateString($title))->setDescription($description)->setUserId($userID)->setParentCategory($parentCategory)->setParentCategoryId($parentCategoryId);
+    $productCategory2Create->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title))->setDescription($description)->setDescriptionEn($description_en)->setUserId($userID)->setParentCategory($parentCategory)->setParentCategoryId($parentCategoryId);
 
     if($imgContent) {
         //only saving in filesystem for performance reasons

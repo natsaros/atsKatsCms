@@ -76,7 +76,7 @@ if($afterFormSubmission) {
 
             <div class="form-group">
                 <label class="control-label" for="titleEn_input">Title in English *</label>
-                <input class="form-control" placeholder="Title"
+                <input class="form-control" placeholder="Title in English"
                        name="<?php echo ProductHandler::TITLE_EN ?>" id="titleEn_input" required
                        value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::TITLE_EN]?><?php } else { echo $currentProduct->getTitleEn(); } ?>"
                 >
@@ -163,45 +163,6 @@ if($afterFormSubmission) {
                 <input class="form-control numeric" placeholder="Offer Price"
                        name="<?php echo ProductHandler::OFFER_PRICE ?>" id="offerPrice_input"
                        value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::OFFER_PRICE]?><?php } else { echo $currentProduct->getOfferPrice(); } ?>">
-            </div>
-
-            <div class="form-group">
-                <label class="control-label" for="is_promoted">Is Promoted</label>
-                <div class="checkbox">
-                    <label>
-                        <?php $isChecked = $currentProduct->getPromoted() === 1 ? 'checked' : ''?>
-                        <input name="<?php echo ProductHandler::PROMOTED; ?>"
-                               type="checkbox" <?php echo $isChecked ?>
-                               value="<?php echo $currentProduct->getPromoted(); ?>"
-                               data-toggle="toggle"
-                               id="is_promoted"
-                               data-custom-on-val="1"
-                               data-custom-off-val="0">
-                    </label>
-                </div>
-            </div>
-
-            <div id="promotedInterval"<?php if($currentProduct->getPromoted() !== 1) { ?> style="display: none;"<?php } ?>>
-                <div class="form-group">
-                    <label class="control-label" for="promotedFrom_input">Promoted From *</label>
-                    <input class="form-control date-field" placeholder="Promoted From"
-                           name="<?php echo ProductHandler::PROMOTED_FROM ?>" id="promotedFrom_input" readonly style="width:auto;"
-                           value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::PROMOTED_FROM]?><?php } else { echo $currentProduct->getPromotedFrom(); } ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="promotedTo_input">Promoted To *</label>
-                    <input class="form-control date-field" placeholder="Promoted To"
-                           name="<?php echo ProductHandler::PROMOTED_TO ?>" id="promotedTo_input" readonly style="width:auto;"
-                           value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::PROMOTED_TO]?><?php } else { echo $currentProduct->getPromotedTo(); } ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="promotionText_input">Promotion Text *</label>
-                    <input class="form-control" placeholder="Promotion Text"
-                           name="<?php echo ProductHandler::PROMOTION_TEXT ?>" id="promotionText_input"
-                           value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::PROMOTION_TEXT]?><?php } else { echo $currentProduct->getPromotionText(); } ?>">
-                </div>
             </div>
 
             <div class="text-right form-group">

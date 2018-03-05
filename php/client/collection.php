@@ -94,7 +94,7 @@ if (!is_null($productCategory)) {
                         foreach ($childrenProductCategories as $key => $childrenProductCategory){
                             ?>
                             <option value="<?php echo $childrenProductCategory->getID()?>">
-                                <?php echo $childrenProductCategory->getTitle()?></option>
+                                <?php echo $childrenProductCategory->getLocalizedTitle()?></option>
                             <?php
                         }
                         ?>
@@ -135,7 +135,7 @@ if (!is_null($productCategory)) {
                                 foreach ($childrenProductCategories as $key => $childrenProductCategory){
                                     ?>
                                     <option value="<?php echo $childrenProductCategory->getID()?>">
-                                        <?php echo $childrenProductCategory->getTitle()?></option>
+                                        <?php echo $childrenProductCategory->getLocalizedTitle()?></option>
                                     <?php
                                 }
                                 ?>
@@ -184,7 +184,7 @@ if (!is_null($productCategory)) {
         <?php } ?>
         <div class="row row-no-margin">
             <div class="headerTitle">
-                <p><?php echo $productCategory->getTitle(); ?></p>
+                <p><?php echo $productCategory->getLocalizedTitle(); ?></p>
             </div>
         </div>
         <div class="row row-no-margin">
@@ -201,7 +201,7 @@ if (!is_null($productCategory)) {
                         </a>
                         <div class="product-title">
                             <a href="<?php echo getProductCategoriesUri() . $productCategory->getFriendlyTitle() . DS . $product->getFriendlyTitle();?>">
-                                <?php echo $product->getTitle(); ?>
+                                <?php echo $product->getLocalizedTitle(); ?>
                             </a>
                         </div>
                         <?php if (!isEmpty($product->getOfferPrice()) && $product->getOfferPrice() > 0) { ?>
@@ -228,7 +228,3 @@ if (!is_null($productCategory)) {
 <?php } else {
     require('404.php');
 } ?>
-
-<?php
-require('promotedProduct.php');
-?>

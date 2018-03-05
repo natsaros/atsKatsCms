@@ -9,5 +9,12 @@
   "copyright_sign": "&copy;&nbsp;",
   "copyright_text": "&nbsp;Copyright",
   "cookies_consent_text": "The site uses cookies for better experience",
-  "cookies_consent_button": "OK"
+  "cookies_consent_button": "OK",
+  "product_code": "Product code:&nbsp;",
+  "contact_header": "Contact us",
+  "contact_name": "Name *",
+  "contact_email": "Email *",
+  "contact_phone_number": "Phone number",
+  "contact_info": "What information do you need? *",
+  "contact_btn": "Send"
 }

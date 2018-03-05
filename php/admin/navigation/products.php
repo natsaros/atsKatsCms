@@ -15,7 +15,6 @@ $products = ProductHandler::fetchAllProductsWithDetails();
                     <th>ID</th>
                     <th>Code</th>
                     <th>Title</th>
-                    <th>Is Promoted</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -30,7 +29,6 @@ $products = ProductHandler::fetchAllProductsWithDetails();
                             <td><?php echo $productId; ?></td>
                             <td><?php echo $product->getCode(); ?></td>
                             <td><?php echo $product->getTitle(); ?></td>
-                            <td><?php if ($product->getPromoted() === 1) echo '<i class="fa fa-check"></i>'; ?></td>
                             <td>
                                 <?php
                                 //Opposite set to '$updatedStatus' so that this gets passed to the db

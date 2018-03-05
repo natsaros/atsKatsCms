@@ -6,7 +6,7 @@ class NewsletterEmail {
     private $date;
 
     /**
-     * Comment constructor.
+     * NewsletterEmail constructor.
      */
     public function __construct() {
         //default constructor
@@ -81,5 +81,3 @@ class NewsletterEmail {
             ->setDate(date(ADMIN_DATE_FORMAT, strtotime($date)));
     }
 }
-
-?>

@@ -58,7 +58,7 @@ if (isset($_GET["category_friendly_url"])) {
                                 ?>
                                 <div submenu="sub-menu-trigger-<?php echo $pc->getFriendlyTitle();?>" class="sub-menu-item mobile">
                                     <a class="sub-category-menu-link-inner-mobile<?php if (!is_null($productCategory) && $productCategory->getID() == $pc->getID()) { ?> active<?php } ?>" href="<?php echo getProductCategoriesUri() . $pc->getFriendlyTitle();?>">
-                                        <span><?php echo $pc->getTitle();?></span>
+                                        <span><?php echo $pc->getLocalizedTitle();?></span>
                                     </a>
 <!--                                    <div class="sub-menu" submenuid="sub-menu---><?php //echo $pc->getFriendlyTitle();?><!--" style="display: none;">-->
 <!---->
@@ -97,7 +97,7 @@ if (isset($_GET["category_friendly_url"])) {
                         ?>
                         <li submenu="sub-menu-trigger-<?php echo $pc->getFriendlyTitle();?>">
                             <a  class="sub-category-menu-link-inner<?php if (!is_null($productCategory) && $productCategory->getID() == $pc->getID()) { ?> active<?php } ?>" href="<?php echo getProductCategoriesUri() . $pc->getFriendlyTitle();?>">
-                                <span><?php echo $pc->getTitle();?></span>
+                                <span><?php echo $pc->getLocalizedTitle();?></span>
                             </a>
                             <div class="sub-menu" submenuid="sub-menu-<?php echo $pc->getFriendlyTitle();?>" style="display: none;">
 
@@ -106,7 +106,7 @@ if (isset($_GET["category_friendly_url"])) {
                                     ?>
                                     <div>
                                         <a href="<?php echo getProductCategoriesUri() . $childProductCategory->getFriendlyTitle();?>" class="sub-menu-link-inner<?php if (!is_null($productCategory) && $productCategory->getID() == $childProductCategory->getID()) { ?> active<?php } ?>">
-                                            <span><?php echo $childProductCategory->getTitle();?></span>
+                                            <span><?php echo $childProductCategory->getLocalizedTitle();?></span>
                                         </a>
                                     </div>
                                     <?php

@@ -1,5 +1,6 @@
 <?php
 function getLocalizedText($key){
-    $string_properties = $_SESSION['string.properties'];
+    $locale = $_SESSION['locale'];
+    $string_properties = json_decode(file_get_contents("./i18N/" . $locale . ".json"), true);
     echo $string_properties[$key];
 }

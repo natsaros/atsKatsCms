@@ -20,7 +20,6 @@ if (!$maintenancePageEnabled){
 
     if (!isset($_SESSION['locale'])){
         $_SESSION['locale'] = 'el_GR';
-        $_SESSION['string.properties'] = json_decode(file_get_contents("./i18N/el_GR.json"), true);
     }
 
     $cookie_name = "SellinofosCookiesConsent";
@@ -82,7 +81,7 @@ if (!$maintenancePageEnabled){
             require("menu.php");
             require($path);
             require("footer.php");
-            require('promotedProduct.php');
+//            require('promotedProduct.php');
         } else {
             require("menu.php");
             require('404.php');

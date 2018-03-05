@@ -13,7 +13,6 @@ $state = safe_input($_POST[ProductHandler::STATE]);
 $userID = safe_input($_POST[ProductHandler::USER_ID]);
 $imageValid = true;
 $image2Upload = $_FILES[PostHandler::IMAGE];
-$promoted = safe_input($_POST[ProductHandler::PROMOTED]);
 
 $emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
 if(!$emptyFile) {
@@ -32,12 +31,6 @@ if(isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
 
 if(!$imageValid) {
     addErrorMessage("Please select a valid image file");
-}
-
-if ($promoted == 1){
-    if (isEmpty($_POST[ProductHandler::PROMOTED_FROM]) || isEmpty($_POST[ProductHandler::PROMOTED_FROM]) || isEmpty($_POST[ProductHandler::PROMOTION_TEXT])){
-        addErrorMessage("Please fill in required promotion info");
-    }
 }
 
 if(hasErrors()) {
@@ -66,15 +59,6 @@ try {
 
         //save image content also in blob on db for back up reasons if needed
 //        $product->setImagePath($imagePath)->setImage($imgContent);
-    }
-
-    if ($promoted == 1){
-        $promoted_from = date(DEFAULT_DATE_FORMAT, strtotime(str_replace('/', '-', safe_input($_POST[ProductHandler::PROMOTED_FROM]))));
-        $promoted_to = date(DEFAULT_DATE_FORMAT, strtotime(str_replace('/', '-', safe_input($_POST[ProductHandler::PROMOTED_TO]))));
-        $promotion_text = safe_input($_POST[ProductHandler::PROMOTION_TEXT]);
-        $product->setPromoted($promoted)->setPromotedFrom($promoted_from)->setPromotedTo($promoted_to)->setPromotionText($promotion_text)->setPromotionActivation(date(DEFAULT_DATE_FORMAT));
-    } else {
-        $product->setPromoted(0)->setPromotedFrom(null)->setPromotedTo(null)->setPromotionText(null)->setPromotionActivation(null);
     }
 
     $productRes = ProductHandler::update($product);

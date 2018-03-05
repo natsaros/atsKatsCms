@@ -48,6 +48,13 @@ class Product {
     /**
      * @return mixed
      */
+    public function getLocalizedTitle() {
+        return (!isset($_SESSION['locale']) || $_SESSION['locale'] === 'el_GR') ? $this->title : $this->title_en;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFriendlyTitle() {
         return $this->friendly_title;
     }
@@ -104,6 +111,13 @@ class Product {
     /**
      * @return mixed
      */
+    public function getLocalizedDescription() {
+        return isNotEmpty($this->getProductDetails()) ? ((!isset($_SESSION['locale']) || $_SESSION['locale'] === 'el_GR') ? $this->getProductDetails()->getDescription() :  $this->getProductDetails()->getDescriptionEn()) : null;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getDescriptionEn() {
         return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getDescriptionEn() : null;
     }
@@ -148,48 +162,6 @@ class Product {
      */
     public function getImagePath() {
         return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getImagePath() : null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromoted() {
-        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getPromoted() : null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotedFrom() {
-        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getPromotedFrom() : null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotedTo() {
-        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getPromotedTo() : null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotionText() {
-        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getPromotionText() : null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPromotionActivation() {
-        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getPromotionActivation() : null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSequence() {
-        return isNotEmpty($this->getProductDetails()) ? $this->getProductDetails()->getSequence() : null;
     }
 
     /**
@@ -368,72 +340,6 @@ class Product {
     public function setImage($image) {
         if (isNotEmpty($this->getProductDetails())) {
             $this->getProductDetails()->setImage($image);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $promoted
-     * @return $this
-     */
-    public function setPromoted($promoted) {
-        if (isNotEmpty($this->getProductDetails())) {
-            $this->getProductDetails()->setPromoted($promoted);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $promoted_from
-     * @return $this
-     */
-    public function setPromotedFrom($promoted_from) {
-        if (isNotEmpty($this->getProductDetails())) {
-            $this->getProductDetails()->setPromotedFrom($promoted_from);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $promoted_to
-     * @return $this
-     */
-    public function setPromotedTo($promoted_to) {
-        if (isNotEmpty($this->getProductDetails())) {
-            $this->getProductDetails()->setPromotedTo($promoted_to);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $promotion_text
-     * @return $this
-     */
-    public function setPromotionText($promotion_text) {
-        if (isNotEmpty($this->getProductDetails())) {
-            $this->getProductDetails()->setPromotionText($promotion_text);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $promotion_activation
-     * @return $this
-     */
-    public function setPromotionActivation($promotion_activation) {
-        if (isNotEmpty($this->getProductDetails())) {
-            $this->getProductDetails()->setPromotionActivation($promotion_activation);
-        }
-        return $this;
-    }
-
-    /**
-     * @param $sequence
-     * @return $this
-     */
-    public function setSequence($sequence) {
-        if (isNotEmpty($this->getProductDetails())) {
-            $this->getProductDetails()->setSequence($sequence);
         }
         return $this;
     }
