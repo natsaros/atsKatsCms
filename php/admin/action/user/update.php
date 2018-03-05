@@ -9,6 +9,7 @@ if(isEmpty($userName) || isEmpty($email)) {
 $ID = safe_input($_POST[UserHandler::ID]);
 $first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
 $last_name = safe_input($_POST[UserHandler::LAST_NAME]);
+$password = safe_input($_POST[UserHandler::PASSWORD]);
 $user_status = safe_input($_POST[UserHandler::USER_STATUS]);
 $gender = safe_input($_POST[UserHandler::GENDER]);
 $link = safe_input($_POST[UserHandler::LINK]);
@@ -37,7 +38,7 @@ try {
     if(isNotEmpty($user2Update)) {
         $user2Update->setUserName($userName)->setFirstName($first_name)->setLastName($last_name)
             ->setEmail($email)->setUserStatus($user_status)->setGender($gender)
-            ->setLink($link)->setPhone($phone);
+            ->setLink($link)->setPhone($phone)->setPassword(password_hash($password, PASSWORD_DEFAULT));
 
         if($imgContent) {
             //only saving in filesystem for performance reasons

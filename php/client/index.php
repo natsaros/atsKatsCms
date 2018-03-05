@@ -1,8 +1,4 @@
 <?php
-if(!is_session_started()) {
-    session_start();
-}
-
 try {
     initLoad();
 } catch (SystemException $e) {

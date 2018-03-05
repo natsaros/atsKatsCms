@@ -1,8 +1,4 @@
 <?php
-if (!is_session_started()) {
-    session_start();
-}
-
 if (isset($_GET["action"])) {
     $action = $_GET["action"];
 }

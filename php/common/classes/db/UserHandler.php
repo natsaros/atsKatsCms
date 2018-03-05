@@ -103,11 +103,12 @@ class UserHandler {
     static function updateUser($user) {
         //TODO add user meta query here
         if (isNotEmpty($user)) {
-            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ? WHERE " . self::ID . " = ?";
+            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, "  . self::PASSWORD . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query,
-                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i'),
+                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i'),
                 array($user->getUserStatus(),
                     $user->getUserName(),
+                    $user->getPassword(),
                     $user->getFirstName(),
                     $user->getLastName(),
                     $user->getEmail(),
