@@ -13,6 +13,7 @@ class AccessRight {
     const POSTS_SECTION = 'POSTS_SECTION';
     const USER_SECTION = 'USER_SECTION';
     const SETTINGS_SECTION = 'SETTINGS_SECTION';
+    const PROGRAM_SECTION = 'PROGRAM_SECTION';
 
     private $ID;
     private $name;

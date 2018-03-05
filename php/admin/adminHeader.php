@@ -33,6 +33,9 @@
     <!-- Bootstrap Toggle CSS -->
     <link href="<?php echo CSS_URI ?>bootstrap-toggle/bootstrap-toggle.min.css" rel="stylesheet">
 
+    <link href="<?php echo CSS_URI ?>daypilot/layout.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>daypilot/calendar_white.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

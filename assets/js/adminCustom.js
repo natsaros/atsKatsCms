@@ -14,7 +14,22 @@ function initBootstrapToggle() {
 }
 
 $(document).ready(function () {
-    var dTables = $('.ak-dataTable').DataTable({responsive: true});
+    $('.ak-dataTable').DataTable({responsive: true});
+
+    // $('.calendar-dataTable').DataTable({
+    //     responsive: true,
+    //     searching: false,
+    //     ordering: false,
+    //     "paging": false,
+    //     "info": false,
+    //     // select : {
+    //     //     selector: 'td:not(:first-child)',
+    //     //     blurable: true,
+    //     //     style: 'os',
+    //     //     items: 'cell'
+    //     // }
+    //
+    // });
 
     initializeCheckBoxes();
     initBootstrapToggle();

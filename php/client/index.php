@@ -35,6 +35,8 @@ if (!isset($_SESSION['locale'])){
         $pageId = $_GET["id"];
     }
     //Default behavior: if no action is set to happen navigation occurs.
+    try {
+
     ?>
     <?php require("header.php"); ?>
     <body id=<?php echo $pageId; ?>>
@@ -46,6 +48,13 @@ if (!isset($_SESSION['locale'])){
         require("footer.php");
     } else {
         require('404.php');
+    }
+    } catch (Exception $e) {
+        logGeneralError($e);
+        $statusCode = 500;
+        $status_string = $statusCode . ' ' . 'Internal Server Error';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
+        require(CLIENT_ROOT_PATH . '404.php');
     }
     ?>
     </body>

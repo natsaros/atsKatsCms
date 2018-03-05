@@ -8,6 +8,7 @@ class PageSections {
     const POSTS = 'posts';
     const USER = 'users';
     const SETTINGS = 'settings';
+    const PROGRAM = 'program';
 
     /**
      * @param array $accessRights
@@ -45,6 +46,7 @@ class PageSections {
             AccessRight::PAGES_SECTION => self::PAGES,
             AccessRight::POSTS_SECTION => self::POSTS,
             AccessRight::USER_SECTION => self::USER,
+            AccessRight::PROGRAM_SECTION => self::PROGRAM,
         );
         return $sections;
     }

@@ -3,6 +3,13 @@ const FORM_PREFIX = 'form_';
 const DEFAULT_DATE_FORMAT = 'Y-m-d H:i:s';
 
 //Set custom Error Handler
+/**
+ * @param $severity
+ * @param $message
+ * @param $file
+ * @param $line
+ * @throws SystemException
+ */
 function exception_error_handler($severity, $message, $file, $line) {
     //TODO : check this is not throwing correct error in DB->connect()
     if (mysqli_connect_errno()) {
@@ -158,6 +165,9 @@ function initLoad() {
     initLogFile();
 }
 
+/**
+ * @throws SystemException
+ */
 function initLoadDb() {
     $db = getDb();
 
@@ -446,7 +456,9 @@ function defineSystemVariables() {
     defined('ADMIN_NAV_PATH') or define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
     defined('ADMIN_MODAL_NAV_PATH') or define('ADMIN_MODAL_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS . MODAL_STR . DS);
     defined('ADMIN_ACTION_PATH') or define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
-    defined('CLIENT_ACTION_PATH') or define('CLIENT_ACTION_PATH', PHP_ROOT_PATH . CLIENT_STR . DS . ACTION_STR . DS);
+
+    defined('CLIENT_ROOT_PATH') or define('CLIENT_ROOT_PATH', PHP_ROOT_PATH . CLIENT_STR . DS);
+    defined('CLIENT_ACTION_PATH') or define('CLIENT_ACTION_PATH', CLIENT_ROOT_PATH . ACTION_STR . DS);
     defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
     defined('CLASSES_ROOT_PATH') or define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 
@@ -459,7 +471,7 @@ function defineSystemVariables() {
     defined('VIDEOS_ROOT') or define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
     defined('DOCUMENTS_ROOT') or define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
     defined('LOGS_ROOT') or define('LOGS_ROOT', getRootPath() . 'logs' . DS);
-    defined('PICTURES_URI') or define('PICTURES_URI', getRootUri() . 'gallery' . DS. 'pictures' . DS);
+    defined('PICTURES_URI') or define('PICTURES_URI', getRootUri() . 'gallery' . DS . 'pictures' . DS);
 }
 
 function loadAppClasses() {
@@ -485,6 +497,16 @@ function loadAppClasses() {
  */
 function logError($ex) {
     error_log($ex->errorMessage() . " with code: " . $ex->getCode() . "\r\n", 3, LOG_FILE);
+    error_log($ex->getTraceAsString(), 3, LOG_FILE);
+}
+
+/**
+ * logs system exceptions to file
+ * @param Exception $ex
+ */
+function logGeneralError($ex) {
+    error_log($ex->getMessage() . " with code: " . $ex->getCode() . "\r\n", 3, LOG_FILE);
+    error_log($ex->getTraceAsString(), 3, LOG_FILE);
 }
 
 /**

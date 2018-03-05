@@ -20,7 +20,7 @@ if (!isset($action) || isEmpty($action)) {
         $page = $_GET["page"];
         if (isEmpty($page)) {
             if (isNotEmpty(DEV_MODE) && DEV_MODE) {
-                define('ADMIN_PAGE_ID', 'dashboard');
+                define('ADMIN_PAGE_ID', PageSections::DASHBOARD);
             } else {
                 $pagesAllowed = PageSections::getPagesByAccessRights(getFullUserFromSession()->getAccessRightsStr());
                 $startPage = $pagesAllowed[0];
