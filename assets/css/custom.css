@@ -108,16 +108,17 @@ textarea { resize: vertical; }
 .quote {width: 90%; display: inline-block; font-family: Roboto, sans-serif; font-weight: 300; font-style: italic;text-align: center;}
 .quote h3{font-size: 65px; line-height: 1.375em; margin: 120px 0 70px 0; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;}
 .quote footer { color: #fdc300; font-size: 26px; text-align: right;text-shadow:none;}
-.textHolder { display: inline-block; position: relative; margin:10% 0; }
+.textHolder { display: inline-block; position: relative; margin:5% 0; }
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
-.textHolderInside { display: inline-block; vertical-align: middle; width: 85%; color: white; font-size:20px;}
+.textHolderInside { display: inline-block; vertical-align: middle; width: 100%; color: white; font-size:20px;}
 
 .parallaxImage { background: url("../img/sellinofos/sellinofos_creation.jpg") no-repeat fixed center / cover; display: inline-block; width: 100%; opacity: .7; -moz-opacity: .7; -webkit-opacity: .7; }
+.parallax-quote-author {font-style: italic;font-size: 20px;}
 
 .parallaxImage:before { content: ''; display: inline-block; vertical-align: middle; height: 100%; }
 .motoCreation { box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); -webkit-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); -moz-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3); background-color: #5a5a5a;opacity: 0.95; vertical-align: middle; display: inline-block; margin:10% 0;height: 380px; width: 380px;}
 .motoCreation:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
-.motoContainer { color: white; display: inline-block; vertical-align: middle; width: 90%; font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 40px; }
+.motoContainer { color: white; display: inline-block; vertical-align: middle; width: 75%; font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 30px; }
 .comment-container { width: 50%; margin: 10% 0; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; color: white; position: relative; display: inline-block; cursor: default; }
 .comment {font-size: 35px; display: inline-block; width: 80%; }
 .openQuote, .closeQuote { display: inline-block; width: 44px; height: 40px; }
@@ -383,7 +384,8 @@ input:-webkit-autofill {
     .comment{font-size: 23px;}
     .openQuote, .closeQuote {width: 23px; height: 23px; }
     .motoCreation { width: 245px; height: 245px; }
-    .motoContainer{font-size:26px;}
+    .motoContainer{font-size:20px;}
+    .parallax-quote-author{font-size:14px;}
     .aboutHero{padding: 104px 0;}
     .indexImageHeight { height: 500px; min-height: 500px; }
     .partner{height: 286px;}
@@ -462,10 +464,11 @@ input:-webkit-autofill {
     .quote footer { font-size: 15px;text-shadow:none;}
     .comment{font-size: 19px;}
     .openQuote, .closeQuote {width: 12px; height: 12px; }
-    .motoContainer{font-size:24px;}
+    .motoContainer{font-size:18px;}
+    .parallax-quote-author{font-size:14px;}
     .headerTitle, .commentsTitle{font-size: 22px;}
     .noteTitle{font-size: 18px;width:85%;}
-    .textHolderInside, .textHolderPilatesInside {font-size:16px;}
+    .textHolderInside, .textHolderPilatesInside {font-size:16px;width: 70%;}
     .heroHeader .heroSubTitle{font-size: 16px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
     .timeTable .table td{border-top: 1px solid #423427;font-size: 15px;}
@@ -579,7 +582,8 @@ input:-webkit-autofill {
 
 @media screen and (max-width: 512px) {
     .motoCreation { width: 190px; height: 190px; }
-    .motoContainer{font-size:18px;}
+    .motoContainer{font-size:14px;}
+    .parallax-quote-author {font-size:10px;}
     .partner{height: 236px;}
     .partnerImage{height: 206px;width: 90%;}
     .partner .simple-caption {width: 90%;font-size:13px;}
