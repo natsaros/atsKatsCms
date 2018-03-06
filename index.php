@@ -9,7 +9,6 @@ if(!is_session_started()) {
 <html lang="gr">
 
 <?php
-require_once("php/i18n/i18n.php");
 
 if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
     require_once(COMMON_ROOT_PATH . 'config.php');

@@ -7,6 +7,12 @@ try {
     return;
 }
 
+if (!isset($_SESSION['locale'])){
+    $_SESSION['locale'] = 'el_GR';
+}
+
+require_once("php/i18n/i18n.php");
+
 $maintenancePageEnabled = SettingsHandler::getSettingValueByKey(Setting::MAINTENANCE) === 'on';
 
 if (!$maintenancePageEnabled){
@@ -16,10 +22,6 @@ if (!$maintenancePageEnabled){
 
     if (isset($_GET["ajaxAction"])) {
         $ajaxAction = $_GET["ajaxAction"];
-    }
-
-    if (!isset($_SESSION['locale'])){
-        $_SESSION['locale'] = 'el_GR';
     }
 
     $cookie_name = "SellinofosCookiesConsent";
