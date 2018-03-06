@@ -2,6 +2,7 @@
 .row-no-padding > [class*="col-"] { padding-left: 0 !important; padding-right: 0 !important; }
 .row-no-margin {margin: 0;}
 
+html, body {height: 100%;}
 body { font-family: Roboto, Arial, sans-serif; font-weight: 300; color: #2d200c; }
 a:focus, a:hover, :focus, :hover { outline: none; text-decoration: none; }
 input, textarea { font-family: Roboto, Arial, sans-serif; font-weight: 300; }
@@ -364,7 +365,7 @@ input:-webkit-autofill {
     -webkit-text-fill-color: #fff !important;
 }
 
-.maintenance-page-message {text-align: center;padding: 15vh 0 25vh;font-size: 35px;background-color: #1c1b17;color: #fff;}
+.maintenance-page-message {text-align: center;padding: 15vh 0 25vh;font-size: 35px;background-color: #1c1b17;color: #fff;height: 100%;}
 .maintenance-page-image {width: 230px;height: 238px;background: url(../img/sellinofos/sellinofos_logo.png);background-size: cover;margin: 0 auto 7vh;position: relative;padding: 0;}
 
 @media screen and (min-width: 768px){
