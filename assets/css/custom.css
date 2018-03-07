@@ -228,7 +228,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .product-price-no-offer {text-align: center;}
 .product-category-description {margin: 10px 0 40px;font-size: 20px;font-style: italic;width: 50%;display: inline-block;}
 .no-results-found {font-size: 24px;margin: 150px 0 200px;text-align: center;}
-.product-details-image {overflow: hidden;position: relative;box-shadow: 0 0 7px 0 rgba(153, 153, 153, 0.4);width: 500px;float: right;height: 500px;}
+.product-details-image {position: relative;width: auto;float: none; margin: 0 auto;height: auto;}
 .product-details-info {padding: 30px;}
 .product-details-title {text-align:left;display: inline-block; margin-bottom: 15px; border-bottom: 1px solid #1c1b17;font-weight: 700; font-size: 28px;}
 .product-details-code { margin-bottom: 10px;font-size: 14px;}
@@ -380,7 +380,7 @@ input:-webkit-autofill {
     .headerTitle, .commentsTitle{font-size: 26px;}
     .noteTitle{font-size: 24px;}
     .heroHeader .heroSubTitle{font-size: 20px;}
-    .textHolderInside, .textHolderPilatesInside {font-size:18px;}
+    .textHolderInside {font-size:18px;}
     .comment{font-size: 23px;}
     .openQuote, .closeQuote {width: 23px; height: 23px; }
     .motoCreation { width: 245px; height: 245px; }
@@ -399,12 +399,12 @@ input:-webkit-autofill {
 }
 
 @media screen and (max-width: 1352px) {
-    .product-details-image {width: 440px;height: 450px;}
+    .product-details-image {width: 440px;}
 }
 
 @media screen and (max-width: 1200px) {
     .product-categories-row, .products-row{max-width: 820px;}
-    .product-details-image {width: 360px;height: 370px;}
+    .product-details-image {width: 360px;}
     .product-details-price {font-size: 20px;}
     .product-details-description {font-size: 18px;}
     .product-details-category {font-size: 16px;}
@@ -416,7 +416,7 @@ input:-webkit-autofill {
 @media screen and (max-width: 991px) {
     .carousel-container {min-height: 400px;}
     .productContainer {width:95%;margin: 80px auto;}
-    .product-details-image {width: 320px;height: 330px;}
+    .product-details-image {width: 320px;}
     .product-details-price {font-size: 18px;}
     .product-details-description {font-size: 16px;}
     .product-details-category {font-size: 16px;}
@@ -468,7 +468,7 @@ input:-webkit-autofill {
     .parallax-quote-author{font-size:14px;}
     .headerTitle, .commentsTitle{font-size: 22px;}
     .noteTitle{font-size: 18px;width:85%;}
-    .textHolderInside, .textHolderPilatesInside {font-size:16px;width: 70%;}
+    .textHolderInside {font-size:14px;width: 70%;}
     .heroHeader .heroSubTitle{font-size: 16px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
     .timeTable .table td{border-top: 1px solid #423427;font-size: 15px;}
@@ -534,12 +534,12 @@ input:-webkit-autofill {
     .footer-column-social-media-links {margin-top: 40px;}
     footer .extraInfo {margin: 40px 0 0;}
     .footer-column-social-media-links .fa {width: 32px;font-size: 20px;height: 32px;line-height: 32px;margin: 0 10px;}
-    .product-details-image {width: 250px;height: 250px;margin: 0 auto;float: none;}
+    .product-details-image {width: 250px;margin: 0 auto;float: none;}
     .product-details-category {text-align: center; margin-bottom: 40px;}
     .product-details-info {text-align: center;padding: 30px 0;}
     .product-details-price {text-align: center;font-size: 20px;}
     .product-details-initial-price {padding:0;font-size: 16px;}
-    .product-details-description {text-align: center;margin-bottom: 30px;}
+    .product-details-description {text-align: center;margin-bottom: 30px;padding: 0 15%;}
     .productContainer {width: 100%;margin: 80px auto 60px;}
     .footer-column-link {margin: 3px 0;}
     .ui-slider-horizontal .ui-slider-range {height: 6px;}
@@ -571,6 +571,8 @@ input:-webkit-autofill {
     .maintenance-page-message {padding: 20vh 0 30vh;font-size: 25px;}
     .maintenance-page-image {width: 30vh;height: 32vh;margin: 0 auto 10vh;}
     .product-details-code {font-size: 12px;}
+    .cookies-message-text {font-size: 12px;}
+    .cookies-message-button {padding: 2px;font-size: 12px;width: 70%;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {

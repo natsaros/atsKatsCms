@@ -60,4 +60,3 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
         require(ADMIN_ROOT_PATH . '404.php');
     }
 }
-?>

@@ -10,16 +10,16 @@ $secondaryProductCategoryId = safe_input($_POST[ProductHandler::SECONDARY_PRODUC
 $price = $_POST[ProductHandler::PRICE];
 $offerPrice = $_POST[ProductHandler::OFFER_PRICE];
 $imageValid = true;
-$image2Upload = $_FILES[ProductHandler::IMAGE];
-
-if($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
-    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
-}
 
 $imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
 
-if(isEmpty($title) || isEmpty($description) || isEmpty($title_en) || isEmpty($description_en) || isEmpty($code) || isEmpty($productCategoryId) || isEmpty($price)) {
+if(isEmpty($description) || isEmpty($description_en) || isEmpty($code) || isEmpty($productCategoryId) || isEmpty($price) || isEmpty($imagePath)) {
     addErrorMessage("Please fill in required info");
+}
+
+$image2Upload = $_FILES[ProductHandler::IMAGE];
+if($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
+    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
 
 if(isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
@@ -47,7 +47,7 @@ try {
     if (isEmpty($secondaryProductCategoryId)){
         $secondaryProductCategoryId = null;
     }
-    $product2Create->setCode($code)->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title))->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)->setProductCategoryId($productCategoryId)->setSecondaryProductCategoryId($secondaryProductCategoryId)->setPrice($price)->setOfferPrice($offerPrice);
+    $product2Create->setCode($code)->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString(isNotEmpty($title) ? $title : $code))->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)->setProductCategoryId($productCategoryId)->setSecondaryProductCategoryId($secondaryProductCategoryId)->setPrice($price)->setOfferPrice($offerPrice);
 
     if($imgContent) {
         //only saving in filesystem for performance reasons
@@ -58,14 +58,14 @@ try {
 
     $productRes = ProductHandler::createProduct($product2Create);
     if($productRes !== null || $productRes) {
-        addSuccessMessage("Product '" . $product2Create->getTitle() . "' successfully created");
+        addSuccessMessage("Product '" . (isNotEmpty($product2Create->getTitle()) ? $product2Create->getTitle() : $product2Create->getCode()) . "' successfully created");
         //save image under id of created product in file system
         if(!$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(PRODUCTS_PICTURES_ROOT, $productRes, $fileName, $imgContent);
         }
     } else {
-        addErrorMessage("Product '" . $product2Create->getTitle() . "' failed to be created");
+        addErrorMessage("Product '" . (isNotEmpty($product2Create->getTitle()) ? $product2Create->getTitle() : $product2Create->getCode()) . "' failed to be created");
         Redirect(getAdminRequestUri() . "updateProduct");
     }
 
@@ -75,4 +75,4 @@ try {
     Redirect(getAdminRequestUri() . "updateProduct");
 }
 
-    Redirect(getAdminRequestUri() . "products");
+Redirect(getAdminRequestUri() . "products");

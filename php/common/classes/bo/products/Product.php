@@ -49,7 +49,7 @@ class Product {
      * @return mixed
      */
     public function getLocalizedTitle() {
-        return (!isset($_SESSION['locale']) || $_SESSION['locale'] === 'el_GR') ? $this->title : $this->title_en;
+        return (!isset($_SESSION['locale']) || $_SESSION['locale'] === 'el_GR') ? (isNotEmpty($this->title) ? $this->title : $this->getCode()) : (isNotEmpty($this->title_en) ? $this->title_en : $this->getCode());
     }
 
     /**

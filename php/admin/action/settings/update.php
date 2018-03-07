@@ -30,9 +30,9 @@ try {
 
     $result = SettingsHandler::update($setting);
     if($result !== null || $result) {
-        addSuccessMessage("Post '" . $setting->getKey() . "' successfully updated");
+        addSuccessMessage("Setting '" . $setting->getKey() . "' successfully updated");
     } else {
-        addErrorMessage("Post '" . $setting->getKey() . "' failed to be updated");
+        addErrorMessage("Setting '" . $setting->getKey() . "' failed to be updated");
     }
 } catch(SystemException $ex) {
     logError($ex);

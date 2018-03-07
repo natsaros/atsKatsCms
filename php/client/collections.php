@@ -16,7 +16,7 @@ $productCategories = ProductCategoryHandler::fetchAllActiveParentProductCategori
                 <div class="product-category-container">
                     <div class="productCategoryImage">
                         <a href="<?php echo getProductCategoriesUri() . $pc->getFriendlyTitle();?>">
-                            <div class="product-category-image" style="background: url('<?php echo ImageUtil::renderProductCategoryImage($pc); ?>') no-repeat center 100% /cover;"></div>
+                            <div class="product-category-image" style="background: url('<?php echo ImageUtil::renderProductCategoryImage($pc); ?>') no-repeat center 50% /cover;"></div>
                         </a>
                     </div>
                     <div class="productCategoryTitle">

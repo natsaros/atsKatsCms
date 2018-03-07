@@ -45,5 +45,3 @@ if($config) {
     echo $die;
     die();
 }
-
-?>

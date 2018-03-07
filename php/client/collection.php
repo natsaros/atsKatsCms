@@ -197,7 +197,7 @@ if (!is_null($productCategory)) {
                 <?php foreach($products as $key => $product) {?>
                     <div class="product-container">
                         <a href="<?php echo getProductCategoriesUri() . $productCategory->getFriendlyTitle() . DS . $product->getFriendlyTitle();?>">
-                            <div class="product-image" style="background: url('<?php echo ImageUtil::renderProductImage($product); ?>') no-repeat center 100% /cover;"></div>
+                            <div class="product-image" style="background: url('<?php echo ImageUtil::renderProductImage($product); ?>') no-repeat center 50% /cover;"></div>
                         </a>
                         <div class="product-title">
                             <a href="<?php echo getProductCategoriesUri() . $productCategory->getFriendlyTitle() . DS . $product->getFriendlyTitle();?>">
