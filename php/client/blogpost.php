@@ -101,5 +101,5 @@
         </div>
     </div>
 <?php } else {
-    require('404.php');
+    require('./php/client/404.php');
 } ?>

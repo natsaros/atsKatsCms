@@ -86,7 +86,7 @@ if (!$maintenancePageEnabled){
 //            require('promotedProduct.php');
         } else {
             require("menu.php");
-            require('404.php');
+            require('./php/client/404.php');
             require("footer.php");
         }
         ?>
