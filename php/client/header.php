@@ -39,9 +39,9 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
           rel='stylesheet' type='text/css'>
 
-    <link rel="shortcut icon" href="<?php echo ASSETS_URI ?>img/favicon.png"/>
-    <link rel="icon" type="image/png" href="<?php echo ASSETS_URI ?>img/favicon.png"/>
-    <link rel="icon" sizes="192x192" href="<?php echo ASSETS_URI ?>img/favicon.png">
+    <link rel="shortcut icon" href="<?php echo ASSETS_URI ?>img/favico.png"/>
+    <link rel="icon" type="image/png" href="<?php echo ASSETS_URI ?>img/favico.png"/>
+    <link rel="icon" sizes="192x192" href="<?php echo ASSETS_URI ?>img/favico.png">
 
     <link rel="apple-touch-icon" href="<?php echo ASSETS_URI ?>ios/Icon.png" />
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo ASSETS_URI ?>ios/Icon-Small-50.png" />
