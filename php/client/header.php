@@ -9,7 +9,7 @@
     <meta name="description" content="Sellinofos">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="keywords"
-          content="sellinofos,Sellinofos,elli,Elli,koimtsidi,Koimtsidi,Elli Koimtsidi,jewellery,kosmimata,handmade,Handmade creations by EK">
+          content="Σelliνόφως,sellinofos,Sellinofos,elli,Elli,koimtsidi,Koimtsidi,Elli Koimtsidi,jewellery,kosmimata,handmade,Handmade creations by EK">
 
 <!--    --><?php //if ($pageId == "blogpost" && isset($_GET["post_friendly_url"])) {
 //        $post = PostHandler::getPostByFriendlyTitleWithDetails($_GET["post_friendly_url"]);

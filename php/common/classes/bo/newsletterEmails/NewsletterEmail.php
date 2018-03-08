@@ -4,6 +4,7 @@ class NewsletterEmail {
     private $ID;
     private $email;
     private $date;
+    private $unsubscription_token;
 
     /**
      * NewsletterEmail constructor.
@@ -63,6 +64,24 @@ class NewsletterEmail {
     public function setDate($date)
     {
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnsubscriptionToken()
+    {
+        return $this->unsubscription_token;
+    }
+
+    /**
+     * @param mixed $unsubscription_token
+     * @return NewsletterEmail
+     */
+    public function setUnsubscriptionToken($unsubscription_token)
+    {
+        $this->unsubscription_token = $unsubscription_token;
         return $this;
     }
 

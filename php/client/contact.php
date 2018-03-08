@@ -32,7 +32,7 @@ $basicAdr = explode(';', $systemEmailAdrs)[0];
                 </div>
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                <textarea class="form-control" id="comments" name="goal"
+                <textarea class="form-control" id="comments" name="text"
                           placeholder="<?php echo getLocalizedText("contact_info");?>"
                           rows="5"><?php echo formValueFromSession('text') ?></textarea>
                     </div>

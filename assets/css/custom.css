@@ -95,8 +95,12 @@ textarea { resize: vertical; }
 .carousel-container:before { content: ""; height: 100%; display: inline-block; vertical-align: middle; }
 
 .carousel-container#first{background: url("../img/sellinofos/sellinofos_carousel_item_1.jpg") no-repeat center 30% /cover; }
-.carousel-container#second{background: url("../img/sellinofos/sellinofos_carousel_item_2.jpg") no-repeat center 75% /cover; }
-.carousel-container#third{background: url("../img/sellinofos/sellinofos_carousel_item_3.jpg") no-repeat center 85% /cover; }
+.carousel-container#second{background: url("../img/sellinofos/sellinofos_carousel_item_2.jpg") no-repeat center 50% /cover; }
+.carousel-container#third{background: url("../img/sellinofos/sellinofos_carousel_item_3.jpg") no-repeat center 10% /cover; }
+.carousel-container#fourth{background: url("../img/sellinofos/sellinofos_carousel_item_4.jpg") no-repeat center 40% /cover; }
+.carousel-container#fifth{background: url("../img/sellinofos/sellinofos_carousel_item_5.jpg") no-repeat center 0% /cover; }
+.carousel-container#sixth{background: url("../img/sellinofos/sellinofos_carousel_item_6.jpg") no-repeat center 50% /cover; }
+.carousel-container#seventh{background: url("../img/sellinofos/sellinofos_carousel_item_7.jpg") no-repeat center 40% /cover; }
 
 .carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 2; text-align: center;max-height: 427px;;min-height: 380px;}
 .carousel-info > p { width: 60%; display: inline-block; }
@@ -358,13 +362,10 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .instagram-feed-load-more {width: 120px;margin: 1% auto;}
 .instagram-image-container{width: 10%;float: left;}
 
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #1c1b17 inset;
-}
-
-input:-webkit-autofill {
-    -webkit-text-fill-color: #fff !important;
-}
+input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px #fff inset;}
+input:-webkit-autofill {-webkit-text-fill-color: #2d200c !important;}
+input#newsletterEmail:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px #1c1b17 inset;}
+input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important;}
 
 .maintenance-page-message {text-align: center;padding: 15vh 0 25vh;font-size: 35px;background-color: #1c1b17;color: #fff;height: 100%;}
 .maintenance-page-image {width: 230px;height: 238px;background: url(../img/sellinofos/sellinofos_logo.png);background-size: cover;margin: 0 auto 7vh;position: relative;padding: 0;}
@@ -526,9 +527,9 @@ input:-webkit-autofill {
     .productsContainer{padding-top: 0;}
     .productCategoriesContainer{margin: 50px 0 50px;}
     .productCategoryImage {height: 200px;}
-    .page-not-found-message {font-size: 18px;margin: 50px 0 100px;}
+    .page-not-found-message {font-size: 14px;margin: 10px auto 100px;width:70%;}
     .no-results-found {font-size: 18px;margin: 50px 0 100px;}
-    .page-not-found {font-size: 80px;}
+    .page-not-found {font-size: 18px;}
     .productsContainer {margin: 50px 0 50px;}
     .footer-column {text-align: center;}
     .footer-column-social-media-links {margin-top: 40px;}
@@ -573,6 +574,7 @@ input:-webkit-autofill {
     .product-details-code {font-size: 12px;}
     .cookies-message-text {font-size: 12px;}
     .cookies-message-button {padding: 2px;font-size: 12px;width: 70%;}
+    .page-not-found-404 {font-size: 40px;margin-top: 100px;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {

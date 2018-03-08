@@ -6,6 +6,7 @@ class NewsletterHandler {
     const ID = 'ID';
     const EMAIL = 'EMAIL';
     const DATE = 'DATE';
+    const UNSUBSCRIPTION_TOKEN = 'UNSUBSCRIPTION_TOKEN';
 
     /**
      * @return NewsletterEmail
@@ -29,6 +30,15 @@ class NewsletterHandler {
     }
 
     /**
+     * @param $token
+     * @throws SystemException
+     */
+    static function unsubscribeFromNewsletter($token) {
+        $query = "DELETE FROM " . getDb()->newsletter_emails . " WHERE " . self::UNSUBSCRIPTION_TOKEN . " = ?";
+        getDb()->selectStmtSingle($query, array('s'), array(mysqli_real_escape_string($token)));
+    }
+
+    /**
      * @param $email
      * @return bool|mysqli_result|null
      * @throws SystemException
@@ -36,17 +46,18 @@ class NewsletterHandler {
     static function insertNewsletterEmail($email) {
         if (isNotEmpty($email)) {
             $newsletterEmail = NewsletterEmail::create();
-            $newsletterEmail->setEmail($email);
+            $newsletterEmail->setEmail($email)->setUnsubscriptionToken(bin2hex(openssl_random_pseudo_bytes(16)));
             $query = "INSERT INTO " . getDb()->newsletter_emails .
                 " (". self::DATE .
                 "," . self::EMAIL .
-                ") VALUES (?
-                , ?)";
+                "," . self::UNSUBSCRIPTION_TOKEN .
+                ") VALUES (?, ?, ?)";
 
             return getDb()->createStmt($query,
-                array('s', 's'),
+                array('s', 's', 's'),
                 array(date(DEFAULT_DATE_FORMAT),
-                    $newsletterEmail->getEmail()
+                    $newsletterEmail->getEmail(),
+                    $newsletterEmail->getUnsubscriptionToken(),
                 ));
         }
         return null;
