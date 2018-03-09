@@ -8,9 +8,9 @@
         ?>
         <div class="container-fluid text-center productContainer">
             <div class="row row-no-margin">
-                <div class="col-sm-6 product-details-image-container">
+                <div class="col-sm-6">
                     <div class="product-details-image">
-                        <img src="<?php echo ImageUtil::renderProductImage($product); ?>" style="margin: 0 auto;display: block;width: 80%;box-shadow: 0 0 7px 0 rgba(153, 153, 153, 0.4);"/>
+                        <img src="<?php echo ImageUtil::renderProductImage($product); ?>" style="box-shadow: 0 0 7px 0 rgba(153, 153, 153, 0.4);"/>
                     </div>
                 </div>
                 <div class="col-sm-6 product-details-info">
