@@ -86,10 +86,10 @@ if (!is_null($productCategory)) {
             </div>
             <?php $childrenProductCategories = $productCategory->getChildrenCategories();
             if(!is_null($childrenProductCategories) && count($childrenProductCategories) > 0) { ?>
-                <div class="filter-name-mobile">Είδος</div>
+                <div class="filter-name-mobile"><?php getLocalizedText('filter_category');?></div>
                 <div class="form-group" style="margin-bottom: 0;">
                     <select class="form-control filter-select filter-select-mobile" style="font-size: 13px;width: 78%;margin: 10px auto 27px;border-radius: 0;height: 40px;">
-                        <option value="">Επιλέξτε Είδος</option>
+                        <option value=""><?php getLocalizedText('filter_select');?></option>
                         <?php
                         foreach ($childrenProductCategories as $key => $childrenProductCategory){
                             ?>
@@ -101,7 +101,7 @@ if (!is_null($productCategory)) {
                     </select>
                 </div>
             <?php } ?>
-            <div class="filter-name-mobile">Τιμή</div>
+            <div class="filter-name-mobile"><?php getLocalizedText('filter_price');?></div>
             <div id="sliderRangeMobile" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default min-handler" style="left: 0%;"></span>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default max-handler" style="left: 100%;"></span>
@@ -119,7 +119,7 @@ if (!is_null($productCategory)) {
                 <div class="filter-container">
                     <div class="filter-header">
                         <div class="filter-name">
-                            Έιδος
+                            <?php getLocalizedText('filter_category');?>
                             <span class="filter-selected-values">
                             <?php echo $selectedCategory?>
                         </span>
@@ -128,9 +128,8 @@ if (!is_null($productCategory)) {
                     </div>
                     <div class="filter-body" style="display: none;">
                         <div class="form-group">
-                            <label class="control-label" for="productCategoryId_input">Product Category *</label>
                             <select class="form-control filter-select filter-select-desktop">
-                                <option value="">Επιλέξτε Είδος</option>
+                                <option value=""><?php getLocalizedText('filter_select');?></option>
                                 <?php
                                 foreach ($childrenProductCategories as $key => $childrenProductCategory){
                                     ?>
@@ -148,7 +147,7 @@ if (!is_null($productCategory)) {
             <div class="filter-container">
                 <div class="filter-header">
                     <div class="filter-name">
-                        Τιμή
+                        <?php getLocalizedText('filter_price');?>
                         <span class="filter-selected-values">
                             <?php echo $minSelectedPrice . '&euro;'?> - <?php echo $maxSelectedPrice . '&euro;'?>
                         </span>
@@ -189,7 +188,7 @@ if (!is_null($productCategory)) {
         </div>
         <div class="row row-no-margin">
             <div class="product-category-description">
-                <p><?php echo $productCategory->getDescription(); ?></p>
+                <p><?php echo $productCategory->getLocalizedDescription(); ?></p>
             </div>
         </div>
         <?php if (!is_null($products) && count($products) > 0) {?>

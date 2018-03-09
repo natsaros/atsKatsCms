@@ -97,10 +97,7 @@ textarea { resize: vertical; }
 .carousel-container#first{background: url("../img/sellinofos/sellinofos_carousel_item_1.jpg") no-repeat center 30% /cover; }
 .carousel-container#second{background: url("../img/sellinofos/sellinofos_carousel_item_2.jpg") no-repeat center 50% /cover; }
 .carousel-container#third{background: url("../img/sellinofos/sellinofos_carousel_item_3.jpg") no-repeat center 10% /cover; }
-.carousel-container#fourth{background: url("../img/sellinofos/sellinofos_carousel_item_4.jpg") no-repeat center 40% /cover; }
-.carousel-container#fifth{background: url("../img/sellinofos/sellinofos_carousel_item_5.jpg") no-repeat center 0% /cover; }
-.carousel-container#sixth{background: url("../img/sellinofos/sellinofos_carousel_item_6.jpg") no-repeat center 50% /cover; }
-.carousel-container#seventh{background: url("../img/sellinofos/sellinofos_carousel_item_7.jpg") no-repeat center 40% /cover; }
+.carousel-container#fourth{background: url("../img/sellinofos/sellinofos_carousel_item_4.jpg") no-repeat center 25% /cover; }
 
 .carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 2; text-align: center;max-height: 427px;;min-height: 380px;}
 .carousel-info > p { width: 60%; display: inline-block; }
@@ -333,7 +330,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 }
 
 .newsletter-text{font-size: 22px;font-weight: 700;color: #fff;margin-top: 20px;margin-bottom: 10px;}
-.newsletter-email-input-container {margin-bottom: 70px;}
+.newsletter-email-input-container {margin-bottom: 70px;height: 45px;}
 .newsletter-email-input {color: #fff;background-color: transparent;border: 2px solid #fff;width: 35%;padding: 10px 20px;font-size: 16px;border-radius: 0;height: auto;}
 .newsletter-btn {background-color: #fff;border: 2px solid #fff;color:#1c1b17;font-size: 16px;font-weight: bold;padding: 10px 0;width: 10%;margin-left: -6px;position: relative;-webkit-transition: all ease 0.3s;-moz-transition: all ease 0.3s;transition: all ease 0.4s;display: inline-block;cursor: pointer;}
 .newsletter-btn:hover {background-color: #d29f09;border: 2px solid #d29f09;}
@@ -341,7 +338,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .newsletter-email-input::-moz-placeholder {color: #fff;font-style: italic;}
 .newsletter-email-input:-ms-input-placeholder {color: #fff;font-style: italic;}
 .newsletter-email-input:-moz-placeholder {color: #fff;font-style: italic;}
-.newsletter-subscription-result{height: 40px;font-size: 15px;line-height: 40px;font-style: italic;visibility: hidden;}
+.newsletter-subscription-result{height: 40px;font-size: 15px;line-height: 40px;font-style: italic;display: none;}
 .newsletter-error{color: #ff2500;}
 .newsletter-success{color: #d29f09;}
 
@@ -459,7 +456,7 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .mobile { display: block; } .desktop { display: none; }
     .motoCreation { width: 250px; height: 250px; }
     .carousel-info{max-height: 250px;min-height: 190px;}
-    .carousel-indicators li{width: 8px; height: 8px;}
+    .carousel-indicators li{width: 8px; height: 8px;margin: 0 10px;}
     .carousel-indicators .active{width: 9px; height: 9px;}
     .quote h3 { font-size: 25px;margin: 50px 0 70px 0;}
     .quote footer { font-size: 15px;text-shadow:none;}
@@ -469,7 +466,7 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .parallax-quote-author{font-size:14px;}
     .headerTitle, .commentsTitle{font-size: 22px;}
     .noteTitle{font-size: 18px;width:85%;}
-    .textHolderInside {font-size:14px;width: 70%;}
+    .textHolderInside {font-size:14px;width: 80%;}
     .heroHeader .heroSubTitle{font-size: 16px;}
     .timeTable .table{margin-bottom: 0;border-top: 1px solid #423427;}
     .timeTable .table td{border-top: 1px solid #423427;font-size: 15px;}
@@ -545,7 +542,7 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .footer-column-link {margin: 3px 0;}
     .ui-slider-horizontal .ui-slider-range {height: 6px;}
     .newsletter-text {width: 70%;margin: 10px auto 20px;font-size: 16px;}
-    .newsletter-email-input-container {margin-bottom: 0;}
+    .newsletter-email-input-container {margin-bottom: 0;height: 80px;}
     .newsletter-email-input{width: 65%;padding: 10px 10px;font-size: 12px;}
     .newsletter-btn{width: 20%;font-size: 12px;}
     .instagram-feed{width:100%;}

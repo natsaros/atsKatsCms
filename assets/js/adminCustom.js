@@ -139,13 +139,11 @@ $(document).ready(function () {
     });
 
     $('#promotedFrom_input').datetimepicker({
-        // minDate: new Date(),
         format: 'DD/MM/YYYY HH:mm',
         ignoreReadonly: true
     });
 
     $('#promotedTo_input').datetimepicker({
-        // minDate: new Date(),
         format: 'DD/MM/YYYY HH:mm',
         ignoreReadonly: true
     });

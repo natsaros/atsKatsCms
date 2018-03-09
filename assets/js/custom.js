@@ -161,7 +161,7 @@ $(document).ready(function () {
     $('.newsletter-btn').on('click', function(){
         var emailToSubscribe = $('#newsletterEmail').val();
         if (!isValidEmail(emailToSubscribe)){
-            $('.newsletter-subscription-result').addClass('newsletter-error').html('Μη έγκυρη διεύθυνση email').css({'visibility':'visible'});
+            $('.newsletter-subscription-result.newsletter-error').show();
             return false;
         }
         $.ajax({
@@ -170,7 +170,7 @@ $(document).ready(function () {
             data: ({emailToSubscribe:emailToSubscribe}),
             success: function() {
                 $('#newsletterEmail').val('');
-                $('.newsletter-subscription-result').addClass('newsletter-success').html('Έχετε εγγραφεί επιτυχώς στο Newsletter μας').css({'visibility':'visible'});
+                $('.newsletter-subscription-result.newsletter-success').show();
             },
             error: function(){
             }
@@ -178,7 +178,7 @@ $(document).ready(function () {
     });
 
     $('#newsletterEmail').on('focus', function () {
-        $('.newsletter-subscription-result').css('visibility', 'hidden').removeClass('newsletter-success').removeClass('newsletter-error');
+        $('.newsletter-subscription-result').hide();
     });
 
     $(document).click(function(e) {

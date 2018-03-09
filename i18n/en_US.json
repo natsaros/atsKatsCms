@@ -1,5 +1,5 @@
 {
-  "site_info":"Κάποτε μου είπε κάποιος...<br/>\"Φτιάξε κάτι για μένα! Μη μου αγοράσεις κάτι...<br/>Θέλω να είναι διαφορετικό, φτιαγμένο από σένα!\"<br/><br/>Το φαντάστηκα, το σχεδίασα, το ξεκίνησα, το χάλασα, το διόρθωσα, το άλλαξα<br/>αλλά στο τέλος το πέτυχα!<br/><br/>Έτσι ξεκίνησε το <b>Σelliνόφως</b>!<br/><br/>Με διάθεση και μεράκι για δημιουργία!<br/>Γιατί η δημιουργία είναι ο καλύτερος τρόπος να απολαμβάνεις τη ζωή!",
+  "site_info":"Once someone told me...<br/>\"Make something for me!<br/>Don't just buy a thing...<br/>I want it to be unique,<br/>made by you!\"<br/><br/>I thought of it, I sketched it, I prepared it,<br/>I broke it, I made it again, I changed it<br/>and in the end I made it!<br/><br/> This is how <b>Sellinofos</b> got started!<br/><br/>With passion and willingness to create!<br/>Because creation is the best way to enjoy life!",
   "parallax_quote": "\"Our truest life is when we are in dreams awake\"<br/><span class='parallax-quote-author'>Henry David Thoreau</span>",
   "creation_moto": "Creation:<br/>The best way<br/>to enjoy life!",
   "instagram_more": "More",
@@ -19,5 +19,10 @@
   "contact_phone_number": "Phone number",
   "contact_info": "What information do you need? *",
   "contact_btn": "Send",
-  "maintenance_text": "Stay tuned.<br>We are launching soon!"
+  "maintenance_text": "Stay tuned.<br>We are launching soon!",
+  "filter_price": "Price",
+  "filter_category": "Category",
+  "filter_select": "Select",
+  "newsletter_invalid_email": "Invalid email address",
+  "newsletter_successful_subscription": "Successful subscription to our Newsletter"
 }

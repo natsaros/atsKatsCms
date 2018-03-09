@@ -15,6 +15,9 @@ $basicAdr = explode(';', $systemEmailAdrs)[0];
                     </div>
                 </div>
                 <div class="row">
+                    <?php require("messageSection.php"); ?>
+                </div>
+                <div class="row">
                     <div class="col-sm-4 form-group">
                         <input class="form-control" id="name" name="name" placeholder="<?php echo getLocalizedText("contact_name");?>" type="text"
                                required
@@ -42,10 +45,6 @@ $basicAdr = explode(';', $systemEmailAdrs)[0];
                     <div class="col-sm-3">
                         <button class="btn btn-block btn-default" type="submit"><?php echo getLocalizedText("contact_btn");?></button>
                     </div>
-                </div>
-
-                <div class="row">
-                    <?php require("messageSection.php"); ?>
                 </div>
             </div>
         </form>

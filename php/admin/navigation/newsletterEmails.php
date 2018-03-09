@@ -54,5 +54,12 @@ $activeTabClass = 'class="active"';
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="<?php echo getAdminRequestUri() . "sendNewsletterEmail"; ?>" type="button" class="btn btn-outline btn-primary">
+                    Send <span class="fa fa-comment fa-fw" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
     </div>
 </div>

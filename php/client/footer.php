@@ -11,7 +11,12 @@
             <div class="newsletter-btn">
                 <?php echo getLocalizedText("newsletter_button_text");?>
             </div>
-            <div class="newsletter-subscription-result"></div>
+            <div class="newsletter-subscription-result newsletter-error">
+                <?php getLocalizedText('newsletter_invalid_email');?>
+            </div>
+            <div class="newsletter-subscription-result newsletter-success">
+                <?php getLocalizedText('newsletter_successful_subscription');?>
+            </div>
         </div>
     </div>
 

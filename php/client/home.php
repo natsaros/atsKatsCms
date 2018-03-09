@@ -7,10 +7,6 @@
                     <li data-target="#myCarousel" data-slide-to="1">&nbsp;</li>
                     <li data-target="#myCarousel" data-slide-to="2">&nbsp;</li>
                     <li data-target="#myCarousel" data-slide-to="3">&nbsp;</li>
-                    <li data-target="#myCarousel" data-slide-to="4">&nbsp;</li>
-                    <li data-target="#myCarousel" data-slide-to="5">&nbsp;</li>
-                    <li data-target="#myCarousel" data-slide-to="6">&nbsp;</li>
-                    <li data-target="#myCarousel" data-slide-to="7">&nbsp;</li>
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
@@ -30,21 +26,6 @@
 
                     <div class="item">
                         <div class="carousel-container" id="fourth">
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="carousel-container" id="fifth">
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="carousel-container" id="sixth">
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="carousel-container" id="seventh">
                         </div>
                     </div>
                 </div>

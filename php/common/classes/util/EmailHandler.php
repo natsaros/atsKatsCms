@@ -15,10 +15,10 @@ class EmailHandler {
         $basicAdr = explode(';', $systemEmailAdrs)[0];
 
         $email_subject = "Sellinofos Contact from: " . $name;
-        $email_body = "Name: " . $name . "\n";
-        $email_body .= "Email: " . $email . "\n\n";
-        $email_body .= "Phone: " . $phone . "\n\n";
-        $email_body .= "Text: \n \t " . $text . "\n\n";
+        $email_body = "Name:\n" . $name . "\n\n";
+        $email_body .= "Email:\n" . $email . "\n\n";
+        $email_body .= "Phone:\n" . $phone . "\n\n";
+        $email_body .= "Text:\n" . $text . "\n\n";
         $headers = "MIME-Version: 1.1\r\n";
         $headers .= "Content-type: text/plain; charset=utf-8\r\n";
         $headers .= "From:" . $basicAdr . "\r\n";

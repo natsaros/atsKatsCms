@@ -56,6 +56,7 @@
     <script src="<?php echo ASSETS_URI ?>js/jquery.min.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/bootstrap.min.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/jquery-ui.min.js"></script>
+    <script src="<?php echo ASSETS_URI ?>js/jquery.ui.touch-punch.min.js"></script>
     <?php if ($pageId == "contact") { ?>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
     <?php } ?>
