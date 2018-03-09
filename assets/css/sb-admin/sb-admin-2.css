@@ -597,3 +597,8 @@ form .tab-pane.active {
 .inactive-item{
     color: #cecece;
 }
+
+.form-control.date-field[readonly]{
+    background-color: #fff;
+    opacity: 1;
+}

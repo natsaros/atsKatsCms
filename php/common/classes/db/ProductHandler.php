@@ -59,6 +59,17 @@ class ProductHandler {
     }
 
     /**
+     * @param $title
+     * @return bool
+     * @throws SystemException
+     */
+    static function existProductWithTitle($title) {
+        $query = "SELECT * FROM " . getDb()->products . " WHERE " . self::TITLE . " = ?";
+        $rows = getDb()->selectStmt($query, array('s'), array($title));
+        return !is_null($rows) && count($rows) > 0;
+    }
+
+    /**
      * @param $productCategoryId
      * @return double|bool
      * @throws SystemException

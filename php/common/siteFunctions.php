@@ -507,6 +507,7 @@ function loadAppClasses() {
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'ProductCategoryHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'ProductHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PromotionHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'CommentHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'GroupHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'AccessRightsHandler.php');

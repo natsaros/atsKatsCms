@@ -296,6 +296,13 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         } ?>><i class="fa fa-list  fa-fw"></i> Product Categories</a>
                     </li>
                 <?php } ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::PROMOTIONS_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . 'promotions' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'promotions') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-rocket fa-fw"></i> Promotions</a>
+                    </li>
+                <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'newsletterEmails' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'newsletterEmails') !== false) {

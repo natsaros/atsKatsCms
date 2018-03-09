@@ -67,17 +67,17 @@ if($afterFormSubmission) {
             </div>
 
             <div class="form-group">
-                <label class="control-label" for="title_input">Title</label>
+                <label class="control-label" for="title_input">Title *</label>
                 <input class="form-control" placeholder="Title"
-                       name="<?php echo ProductHandler::TITLE ?>" id="title_input"
+                       name="<?php echo ProductHandler::TITLE ?>" id="title_input" required
                        value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::TITLE]?><?php } else { echo $currentProduct->getTitle(); } ?>"
                 >
             </div>
 
             <div class="form-group">
-                <label class="control-label" for="titleEn_input">Title in English</label>
+                <label class="control-label" for="titleEn_input">Title in English *</label>
                 <input class="form-control" placeholder="Title in English"
-                       name="<?php echo ProductHandler::TITLE_EN ?>" id="titleEn_input"
+                       name="<?php echo ProductHandler::TITLE_EN ?>" id="titleEn_input" required
                        value="<?php if($afterFormSubmission) {?><?=$form_data[ProductHandler::TITLE_EN]?><?php } else { echo $currentProduct->getTitleEn(); } ?>"
                 >
             </div>

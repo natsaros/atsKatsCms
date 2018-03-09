@@ -8,6 +8,9 @@ class Promotion {
     private $promoted_to;
     private $promotion_text;
     private $promotion_activation;
+    private $times_seen;
+    private $user_id;
+    private $promoted_instance;
 
     /**
      * Promotion constructor.
@@ -143,6 +146,60 @@ class Promotion {
     }
 
     /**
+     * @return mixed
+     */
+    public function getPromotedInstance()
+    {
+        return $this->promoted_instance;
+    }
+
+    /**
+     * @param mixed $promoted_instance
+     * @return Promotion
+     */
+    public function setPromotedInstance($promoted_instance)
+    {
+        $this->promoted_instance = $promoted_instance;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTimesSeen()
+    {
+        return $this->times_seen;
+    }
+
+    /**
+     * @param mixed $times_seen
+     * @return Promotion
+     */
+    public function setTimesSeen($times_seen)
+    {
+        $this->times_seen = $times_seen;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     * @return Promotion
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+        return $this;
+    }
+
+    /**
      * @return $this
      */
     public static function create() {
@@ -150,7 +207,7 @@ class Promotion {
         return $instance;
     }
 
-    public static function createPromotion($ID, $instance_type, $instance_id, $promoted_from, $promoted_to, $promotion_text, $promotion_activation) {
+    public static function createPromotion($ID, $instance_type, $instance_id, $promoted_from, $promoted_to, $promotion_text, $promotion_activation, $times_seen) {
         return self::create()
             ->setID($ID)
             ->setPromotedInstanceType($instance_type)
@@ -158,6 +215,7 @@ class Promotion {
             ->setPromotedFrom($promoted_from != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_from)) : null)
             ->setPromotedTo($promoted_to != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_to)) : null)
             ->setPromotiontext($promotion_text)
-            ->setPromotionActivation($promotion_activation);
+            ->setPromotionActivation($promotion_activation)
+            ->setTimesSeen($times_seen);
     }
 }

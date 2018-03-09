@@ -8,7 +8,7 @@
         ?>
         <div class="container-fluid text-center productContainer">
             <div class="row row-no-margin">
-                <div class="col-sm-6">
+                <div class="col-sm-6" style="text-align: center;">
                     <div class="product-details-image">
                         <img src="<?php echo ImageUtil::renderProductImage($product); ?>" style="box-shadow: 0 0 7px 0 rgba(153, 153, 153, 0.4);"/>
                     </div>

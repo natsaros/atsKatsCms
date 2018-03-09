@@ -127,17 +127,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#is_promoted').on('change', function(){
-        if ($(this).val() != "1"){
-            $('#promotedInterval').show();
-        } else {
-            $('#promotedFrom_input').val('');
-            $('#promotedTo_input').val('');
-            $('#promotionText_input').val('');
-            $('#promotedInterval').hide();
-        }
-    });
-
     $('#promotedFrom_input').datetimepicker({
         format: 'DD/MM/YYYY HH:mm',
         ignoreReadonly: true

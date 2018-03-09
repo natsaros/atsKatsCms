@@ -13,8 +13,12 @@ $imageValid = true;
 
 $imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
 
-if(isEmpty($description) || isEmpty($description_en) || isEmpty($code) || isEmpty($productCategoryId) || isEmpty($price) || isEmpty($imagePath)) {
+if(isEmpty($title) || isEmpty($description) || isEmpty($title_en) || isEmpty($description_en) || isEmpty($code) || isEmpty($productCategoryId) || isEmpty($price)) {
     addErrorMessage("Please fill in required info");
+}
+
+if(isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
+    addErrorMessage("Offer price cannot be higher than price");
 }
 
 $image2Upload = $_FILES[ProductHandler::IMAGE];
@@ -22,12 +26,15 @@ if($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
     $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
 
-if(isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
-    addErrorMessage("Offer price cannot be higher than price");
-}
-
 if(!$imageValid) {
     addErrorMessage("Please select a valid image file");
+}
+
+if (isNotEmpty($title)){
+    $productWithSameName = ProductHandler::existProductWithTitle($title);
+    if($productWithSameName) {
+        addErrorMessage("There is a product with the same title");
+    }
 }
 
 if(hasErrors()) {
@@ -47,7 +54,7 @@ try {
     if (isEmpty($secondaryProductCategoryId)){
         $secondaryProductCategoryId = null;
     }
-    $product2Create->setCode($code)->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString(isNotEmpty($title) ? $title : $code))->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)->setProductCategoryId($productCategoryId)->setSecondaryProductCategoryId($secondaryProductCategoryId)->setPrice($price)->setOfferPrice($offerPrice);
+    $product2Create->setCode($code)->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title))->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)->setProductCategoryId($productCategoryId)->setSecondaryProductCategoryId($secondaryProductCategoryId)->setPrice($price)->setOfferPrice($offerPrice);
 
     if($imgContent) {
         //only saving in filesystem for performance reasons
@@ -58,14 +65,14 @@ try {
 
     $productRes = ProductHandler::createProduct($product2Create);
     if($productRes !== null || $productRes) {
-        addSuccessMessage("Product '" . (isNotEmpty($product2Create->getTitle()) ? $product2Create->getTitle() : $product2Create->getCode()) . "' successfully created");
+        addSuccessMessage("Product '" . $product2Create->getTitle() . "' successfully created");
         //save image under id of created product in file system
         if(!$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(PRODUCTS_PICTURES_ROOT, $productRes, $fileName, $imgContent);
         }
     } else {
-        addErrorMessage("Product '" . (isNotEmpty($product2Create->getTitle()) ? $product2Create->getTitle() : $product2Create->getCode()) . "' failed to be created");
+        addErrorMessage("Product '" . $product2Create->getTitle() . "' failed to be created");
         Redirect(getAdminRequestUri() . "updateProduct");
     }
 

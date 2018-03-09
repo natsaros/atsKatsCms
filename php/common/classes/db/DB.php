@@ -59,7 +59,7 @@ class Db {
     public $products;
     public $product_details;
     public $product_categories;
-    public $promotion;
+    public $promotions;
 
     public $user_groups;
     public $user_groups_meta;
@@ -360,7 +360,7 @@ class Db {
                         $this->setProductCategories($updatedTable);
                         break;
                     case self::PROMOTION:
-                        $this->setPromotion($updatedTable);
+                        $this->setPromotions($updatedTable);
                         break;
                     case self::USER_GROUPS:
                         $this->setUserGroups($updatedTable);
@@ -531,10 +531,10 @@ class Db {
     }
 
     /**
-     * @param mixed $promotion
+     * @param mixed $promotions
      */
-    public function setPromotion($promotion) {
-        $this->promotion = $promotion;
+    public function setPromotions($promotions) {
+        $this->promotions = $promotions;
     }
 
     /**
