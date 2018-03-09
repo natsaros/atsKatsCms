@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     $('.sub-category-menu').mouseleave(function (e) {
         if (!isMobileVersion()){
-            var target = e.toElement;
+            var target = e.toElement || e.relatedTarget || e.target;
             if (!$(target).parents().is('li.sub-category-menu-trigger')) {
                 $('ul.sub-category-menu').fadeOut(150);
                 $('div[class*="sub-menu-"]').hide();
@@ -67,7 +67,7 @@ $(document).ready(function () {
 
     $('li.sub-category-menu-trigger').mouseleave(function (e) {
         if (!isMobileVersion()) {
-            var target = e.toElement;
+            var target = e.toElement || e.relatedTarget || e.target;
             if (!$(target).is('ul.sub-category-menu') && !$(target).is('ul.sub-category-menu li')) {
                 $('ul.sub-category-menu').fadeOut(150);
                 $('div[class*="sub-menu-"]').hide();
@@ -85,7 +85,7 @@ $(document).ready(function () {
     $('.sub-menu').mouseleave(function (e) {
         if (!isMobileVersion()){
             var subMenuId = $(this).attr('submenuid').split('sub-menu')[1];
-            var target = e.toElement;
+            var target = e.toElement || e.relatedTarget || e.target;
             if (!$(target).is('li[submenu="sub-menu-trigger' + subMenuId + '"]')) {
                 $('div[submenuid="sub-menu' + subMenuId +'"]').fadeOut(150);
             }
@@ -95,7 +95,7 @@ $(document).ready(function () {
     $('li[submenu^="sub-menu-trigger"]').mouseleave(function (e) {
         if (!isMobileVersion()) {
             var subMenu = $(this).attr('submenu').split('sub-menu-trigger')[1];
-            var target = e.toElement;
+            var target = e.toElement || e.relatedTarget || e.target;
             $('div[submenuid="sub-menu' + subMenu +'"]').fadeOut(150);
         }
     });

@@ -109,7 +109,7 @@ textarea { resize: vertical; }
 .quote {width: 90%; display: inline-block; font-family: Roboto, sans-serif; font-weight: 300; font-style: italic;text-align: center;}
 .quote h3{font-size: 65px; line-height: 1.375em; margin: 120px 0 70px 0; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;}
 .quote footer { color: #fdc300; font-size: 26px; text-align: right;text-shadow:none;}
-.textHolder { display: inline-block; position: relative; margin:5% 0; }
+.textHolder { display: inline-block; position: relative;}
 .textHolder:before { content: ''; display: inline-block; height: 100%; vertical-align: middle; }
 .textHolderInside { display: inline-block; vertical-align: middle; width: 100%; color: white; font-size:20px;}
 
@@ -229,7 +229,9 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .product-price-no-offer {text-align: center;}
 .product-category-description {margin: 10px 0 40px;font-size: 20px;font-style: italic;width: 50%;display: inline-block;}
 .no-results-found {font-size: 24px;margin: 150px 0 200px;text-align: center;}
-.product-details-image {position: relative;width: auto;float: none; margin: 0 auto;height: auto;}
+.product-details-image-container {display: inline-block;position: relative;height: 360px;min-height: 360px;font-size: 0;}
+.product-details-image-container:before {content: '';display: inline-block;height: 100%;vertical-align: middle;}
+.product-details-image {position: relative;width: auto;float: none; margin: 0 auto;height: auto;display: inline-block; vertical-align: middle;}
 .product-details-info {padding: 30px;}
 .product-details-title {text-align:left;display: inline-block; margin-bottom: 15px; border-bottom: 1px solid #1c1b17;font-weight: 700; font-size: 28px;}
 .product-details-code { margin-bottom: 10px;font-size: 14px;}
