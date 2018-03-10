@@ -219,6 +219,7 @@ function updatePromotionViews(id) {
                 element.className = element.className.replace("show", "");
             }
         },
+
         error: function (jqXHR, textStatus, errorThrown) {
         }
     });
