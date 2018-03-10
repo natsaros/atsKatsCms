@@ -28,6 +28,16 @@ class ProductHandler {
      * @return Product[]|bool
      * @throws SystemException
      */
+    static function fetchAllProducts() {
+        $query = "SELECT * FROM " . getDb()->products;
+        $rows = getDb()->selectStmtNoParams($query);
+        return self::populateProducts($rows, false);
+    }
+
+    /**
+     * @return Product[]|bool
+     * @throws SystemException
+     */
     static function fetchAllProductsWithDetails() {
         $query = "SELECT * FROM " . getDb()->products;
         $rows = getDb()->selectStmtNoParams($query);
@@ -227,7 +237,6 @@ class ProductHandler {
         }
         return null;
     }
-
 
     /*Populate Functions*/
 

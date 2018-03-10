@@ -28,7 +28,7 @@ $promotions = PromotionHandler::getAllPromotions();
                         $promotionId = $promotion->getID();
                         ?>
                         <tr class="<?php echo $oddEvenClass ?>">
-                            <td><?php echo $promotion->getPromotedInstance(); ?></td>
+                            <td><?php echo $promotion->getPromotedInstance()->getTitle(); ?></td>
                             <td><?php echo $promotion->getPromotedFrom(); ?></td>
                             <td><?php echo $promotion->getPromotedTo(); ?></td>
                             <td><?php echo $promotion->getPromotionText(); ?></td>
@@ -36,8 +36,8 @@ $promotions = PromotionHandler::getAllPromotions();
                             <td>
 
                                 <a type="button"
-                                   href="<?php echo getAdminActionRequestUri() . "products" . DS . "deletePromotion" . addParamsToUrl(array('id'), array($promotionId)); ?>"
-                                   class="btn btn-default btn-sm" title="Delete Product">
+                                   href="<?php echo getAdminActionRequestUri() . "promotions" . DS . "deletePromotion" . addParamsToUrl(array('id'), array($promotionId)); ?>"
+                                   class="btn btn-default btn-sm" title="Delete Promotion">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
 
@@ -58,10 +58,10 @@ $promotions = PromotionHandler::getAllPromotions();
     </div>
 </div>
 
-<!--<div class="row">-->
-<!--    <div class="col-lg-12 text-center">-->
-<!--        <a href="--><?php //echo getAdminRequestUri() . "updatePromotion"; ?><!--" type="button" class="btn btn-outline btn-primary">-->
-<!--            Add <span class="fa fa-plus fa-fw" aria-hidden="true"></span>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <a href="<?php echo getAdminRequestUri() . "updatePromotion"; ?>" type="button" class="btn btn-outline btn-primary">
+            Add <span class="fa fa-plus fa-fw" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>

@@ -201,22 +201,21 @@ function closeFilters(){
     $('#filtersSideNav').removeAttr('style');
 }
 
-function showPromotedProduct(){
-    var x = document.getElementById("promotedProduct");
-    var productId = document.getElementById("promotedProductId").value;
+function showPromotion(){
+    var x = document.getElementById("promotionInstance");
     x.className = "show";
 }
 
-function updatePromotedProductCookie(productId, url) {
+function updatePromotionCookie(promotionId, url) {
     $.ajax({
         type: 'POST',
         url: getContextPath() + '/ajaxAction/updateCookie/',
-        data: ({cookieName: "SellinofosPromotedProduct", cookieValue: productId}),
+        data: ({cookieName: "SellinofosPromotion", cookieValue: promotionId}),
         success: function (data) {
             if (url != null && url != ''){
                 window.location.href=url;
             } else {
-                var element = document.getElementById("promotedProduct");
+                var element = document.getElementById("promotionInstance");
                 element.className = element.className.replace("show", "");
             }
         },

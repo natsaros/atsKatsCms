@@ -41,7 +41,7 @@ class PromotionHandler {
      */
     static function getPromotedInstance() {
         $query = "SELECT * FROM " . getDb()->promotions . " WHERE " . self::PROMOTED_FROM . " <= now() AND " . self::PROMOTED_TO . " >= now() ORDER BY " . self::PROMOTION_ACTIVATION . " DESC LIMIT 1";
-        $row = getDb()->selectStmtNoParams($query);
+        $row = getDb()->selectStmtSingleNoParams($query);
         return self::populatePromotion($row);
     }
 
@@ -53,7 +53,7 @@ class PromotionHandler {
     static function insertPromotion($promotion) {
         if(isNotEmpty($promotion)) {
             $query = "INSERT INTO " . getDb()->promotions . " (" . self::PROMOTED_INSTANCE_TYPE . "," . self::PROMOTED_INSTANCE_ID . "," . self::PROMOTED_FROM . "," . self::PROMOTED_TO . "," . self::PROMOTION_TEXT . "," . self::PROMOTION_ACTIVATION .  "," . self::USER_ID . ") VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $createdPromotion = getDb()->createStmt($query, array('s', 's', 's', 's', 's', 's', 's'), array($promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), $promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), date(DEFAULT_DATE_FORMAT)), $promotion->getUserId());
+            $createdPromotion = getDb()->createStmt($query, array('i', 'i', 's', 's', 's', 's', 's'), array($promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), $promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), date(DEFAULT_DATE_FORMAT)), $promotion->getUserId());
             return $createdPromotion;
         }
         return null;
@@ -73,6 +73,20 @@ class PromotionHandler {
     }
 
     /**
+     * @param $id
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function deletePromotion($id) {
+        if(isNotEmpty($id)) {
+            $query = "DELETE FROM " . getDb()->promotions . " WHERE " . self::ID . " = ?";
+            $res = getDb()->deleteStmt($query, array('i'), array($id));
+            return $res;
+        }
+        return null;
+    }
+
+    /**
      * @param $row
      * @return null|Promotion
      * @throws SystemException
@@ -83,8 +97,8 @@ class PromotionHandler {
         }
         $promotion = Promotion::createPromotion($row[self::ID], $row[self::PROMOTED_INSTANCE_TYPE], $row[self::PROMOTED_INSTANCE_ID], $row[self::PROMOTED_FROM], $row[self::PROMOTED_TO], $row[self::PROMOTION_TEXT], $row[self::PROMOTION_ACTIVATION], $row[self::TIMES_SEEN]);
         if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT){
-            $promotionInstance = ProductHandler::getProductByID($promotion->getPromotedInstanceId());
-        } else {
+            $promotionInstance = ProductHandler::getProductByIDWithDetails($promotion->getPromotedInstanceId());
+        } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY){
             $promotionInstance = ProductCategoryHandler::getProductCategoryByID($promotion->getPromotedInstanceId());
         }
         $promotion->setPromotedInstance($promotionInstance);

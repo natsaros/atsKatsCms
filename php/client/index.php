@@ -83,7 +83,7 @@ if (!$maintenancePageEnabled){
             require("menu.php");
             require($path);
             require("footer.php");
-//            require('promotedProduct.php');
+            require('promotedInstance.php');
         } else {
             require("menu.php");
             require('./php/client/404.php');
