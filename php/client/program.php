@@ -14,6 +14,7 @@ const SATURDAY = 'saturday';
 
 const TIME_FRAME = 'timeframe';
 const LESSON = 'lesson';
+const DAY = 'day';
 
 $weekDaysGr = array(MONDAY => 'Δευτέρα', TUESDAY => 'Τρίτη', WEDNESDAY => 'Τετάρτη', THURSDAY => 'Πέμπτη', FRIDAY => 'Παρασκευή', SATURDAY => 'Σάββατο');
 $weekDays = array(MONDAY => MONDAY, TUESDAY => TUESDAY, WEDNESDAY => WEDNESDAY, THURSDAY => THURSDAY, FRIDAY => FRIDAY, SATURDAY => SATURDAY);
@@ -103,6 +104,23 @@ $program = array(
     )
 );
 
+
+$desktopProgram = array(
+    array(
+        '08:30-09:30' => array(
+            array('day' => $weekDays[MONDAY], LESSON => PILATES_MAT),
+            array('day' => $weekDays[TUESDAY], LESSON => PILATES_EQUIP),
+            array('day' => $weekDays[FRIDAY], LESSON => YOGA)
+        ),
+        '09:30-10:30' => array(
+            array('day' => $weekDays[MONDAY], LESSON => FAT_BURN),
+            array('day' => $weekDays[WEDNESDAY], LESSON => PILATES_MAT),
+            array('day' => $weekDays[FRIDAY], LESSON => PILATES_EQUIP)
+        )
+
+    )
+);
+
 /**
  * @param $program array
  * @param $weekDaysGr
@@ -138,6 +156,27 @@ function renderMobileProgram($program, $weekDaysGr) {
     echo '</div>';
 }
 
+/**
+ * @param $program
+ * @param $weekDaysGr
+ */
+function renderDesktopProgram($program, $weekDaysGr) {
+    echo $program;
+//    $desktopProgram = array();
+//    foreach ($program as $weekDays) {
+//        foreach ($weekDays as $day => $timeFrames) {
+//            foreach ($timeFrames as $timeFrame) {
+//                if (!in_array($timeFrame[TIME_FRAME], $desktopProgram)) {
+//                    $desktopProgram[] = $timeFrame[TIME_FRAME];
+//                }
+//            }
+//        }
+//    }
+//
+//    $desktopProgram = sort($desktopProgram);
+//    echo $desktopProgram;
+}
+
 ?>
 <div class="container-fluid belowHeader text-center">
     <div class="row row-no-padding">
@@ -158,6 +197,9 @@ function renderMobileProgram($program, $weekDaysGr) {
             <div class="titlesBorder"></div>
         </div>
         <div class="col-sm-12">
+            <?php
+            renderDesktopProgram($desktopProgram, $weekDaysGr)
+            ?>
             <table class="aboutTimeTable table table-responsive">
                 <thead>
                 <tr>

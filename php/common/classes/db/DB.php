@@ -269,6 +269,7 @@ class Db {
     /**
      * @param $value
      * @return string
+     * @throws SystemException
      */
     public static function db_quote($value) {
         $connection = self::connect();
@@ -277,6 +278,7 @@ class Db {
 
     /**
      * @return string
+     * @throws SystemException
      */
     public static function db_error() {
         $connection = self::connect();
