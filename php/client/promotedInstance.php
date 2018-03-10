@@ -1,6 +1,12 @@
 <?php
 $promotion = PromotionHandler::getPromotedInstance();
-if (!is_null($promotion)){
+if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT){
+    $isPromotedInstanceActive = ($promotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
+} else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY){
+    $isPromotedInstanceActive = ($promotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
+}
+
+if (!is_null($promotion) && $isPromotedInstanceActive){
     if(!isset($_COOKIE["SellinofosPromotion"])) {
         ?>
         <script type="text/javascript">
@@ -24,7 +30,7 @@ if (!is_null($promotion)){
     }
 }
 
-if (!is_null($promotion)){
+if (!is_null($promotion) && $isPromotedInstanceActive){
     $promotionId = '' . $promotion->getPromotedInstanceType() . '_' . $promotion->getPromotedInstanceId();
     if ($promotion->getPromotedInstanceType() === PromotionInstanceType::PRODUCT){
         $promotionImageUrl = ImageUtil::renderProductImage($promotion->getPromotedInstance());

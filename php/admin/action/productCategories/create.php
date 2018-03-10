@@ -32,7 +32,7 @@ try {
     if (is_null($parentCategory)){
         $parentCategory = 0;
     }
-    $productCategory2Create->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title))->setDescription($description)->setDescriptionEn($description_en)->setUserId($userID)->setParentCategory($parentCategory)->setParentCategoryId($parentCategoryId);
+    $productCategory2Create->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title_en))->setDescription($description)->setDescriptionEn($description_en)->setUserId($userID)->setParentCategory($parentCategory)->setParentCategoryId($parentCategoryId);
 
     if($imgContent) {
         //only saving in filesystem for performance reasons

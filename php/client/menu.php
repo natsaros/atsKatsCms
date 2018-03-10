@@ -47,7 +47,7 @@ if (isset($_GET["category_friendly_url"])) {
             <ul class="nav navbar-nav">
                 <li class="<?php if($pageId == "home") { ?>active<?php } ?>"><a href="<?php echo REQUEST_URI ?>home"><?php if($_SESSION['locale'] == 'el_GR') { ?>Αρχική<?php } else { ?>Home<?php } ?></a>
                 </li>
-                <li class="<?php if($pageId == "collections" || isUnderProductCategoriesPath()) { ?>active <?php } ?>sub-category-menu-trigger">
+                <li class="<?php if($pageId == "collections" || (isUnderProductCategoriesPath() && !isUnderProductCategorySalesPath())) { ?>active <?php } ?>sub-category-menu-trigger">
                     <a href="<?php echo REQUEST_URI ?>collections">Collections</a>
                     <?php
                     $productCategories = ProductCategoryHandler::fetchAllActiveParentProductCategoriesForMenu();

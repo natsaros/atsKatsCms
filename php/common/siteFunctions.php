@@ -78,6 +78,13 @@ function isUnderProductCategoriesPath() {
 }
 
 /**
+ * @return bool
+ */
+function isUnderProductCategorySalesPath() {
+    return strpos(getRequestUri(), PRODUCT_CATEGORY_SALES_PATH) !== false;
+}
+
+/**
  * @return string
  */
 function getRootUri() {
@@ -460,6 +467,7 @@ function defineSystemVariables() {
     defined('CLASSES_STR') or define('CLASSES_STR', 'classes');
     defined('BLOG_PATH') or define('BLOG_PATH', 'blog');
     defined('PRODUCT_CATEGORIES_PATH') or define('PRODUCT_CATEGORIES_PATH', 'collections');
+    defined('PRODUCT_CATEGORY_SALES_PATH') or define('PRODUCT_CATEGORY_SALES_PATH', 'collections/Sales');
 
     defined('REQUEST_URI') or define('REQUEST_URI', getRootUri());
 
