@@ -13,6 +13,7 @@ $promotions = PromotionHandler::getAllPromotions();
                 <thead>
                 <tr>
                     <th>Instance</th>
+                    <th>Activation Date</th>
                     <th>From</th>
                     <th>To</th>
                     <th>Promotion Text</th>
@@ -28,7 +29,8 @@ $promotions = PromotionHandler::getAllPromotions();
                         $promotionId = $promotion->getID();
                         ?>
                         <tr class="<?php echo $oddEvenClass ?>">
-                            <td><?php echo $promotion->getPromotedInstance()->getTitle(); ?></td>
+                            <td><?php if ($promotion->getPromotedInstanceType() != PromotionInstanceType::PLAIN_TEXT) { echo $promotion->getPromotedInstance()->getTitle(); } else { echo '&nbsp;';} ?></td>
+                            <td><?php echo $promotion->getPromotionActivation(); ?></td>
                             <td><?php echo $promotion->getPromotedFrom(); ?></td>
                             <td><?php echo $promotion->getPromotedTo(); ?></td>
                             <td><?php echo $promotion->getPromotionText(); ?></td>

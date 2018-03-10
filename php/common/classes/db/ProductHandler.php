@@ -69,13 +69,19 @@ class ProductHandler {
     }
 
     /**
+     * @param $id
      * @param $title
      * @return bool
      * @throws SystemException
      */
-    static function existProductWithTitle($title) {
-        $query = "SELECT * FROM " . getDb()->products . " WHERE " . self::TITLE . " = ?";
-        $rows = getDb()->selectStmt($query, array('s'), array($title));
+    static function existProductWithTitle($id, $title) {
+        if (isNotEmpty($id)){
+            $query = "SELECT * FROM " . getDb()->products . " WHERE " . self::TITLE . " = ? AND " . self::ID . " != ?";
+            $rows = getDb()->selectStmt($query, array('s', 'i'), array($title, $id));
+        } else {
+            $query = "SELECT * FROM " . getDb()->products . " WHERE " . self::TITLE . " = ?";
+            $rows = getDb()->selectStmt($query, array('s'), array($title));
+        }
         return !is_null($rows) && count($rows) > 0;
     }
 

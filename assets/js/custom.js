@@ -153,7 +153,7 @@ $(document).ready(function () {
             success: function() {
                 $('.cookies-message').slideToggle();
             },
-            error: function(data){
+            error: function(jqXHR, textStatus, errorThrown){
             }
         });
     });
@@ -172,7 +172,7 @@ $(document).ready(function () {
                 $('#newsletterEmail').val('');
                 $('.newsletter-subscription-result.newsletter-success').show();
             },
-            error: function(){
+            error: function(jqXHR, textStatus, errorThrown){
             }
         });
     });
@@ -206,6 +206,24 @@ function showPromotion(){
     x.className = "show";
 }
 
+function updatePromotionViews(id) {
+    $.ajax({
+        type: 'POST',
+        url: getContextPath() + '/ajaxAction/updatePromotionViews/',
+        data: ({id: id}),
+        success: function (data) {
+            if (url != null && url != ''){
+                window.location.href=url;
+            } else {
+                var element = document.getElementById("promotionInstance");
+                element.className = element.className.replace("show", "");
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        }
+    });
+}
+
 function updatePromotionCookie(promotionId, url) {
     $.ajax({
         type: 'POST',
@@ -219,7 +237,7 @@ function updatePromotionCookie(promotionId, url) {
                 element.className = element.className.replace("show", "");
             }
         },
-        error: function (data) {
+        error: function (jqXHR, textStatus, errorThrown) {
         }
     });
 }
