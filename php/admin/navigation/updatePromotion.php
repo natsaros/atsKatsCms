@@ -25,33 +25,39 @@ if (isset($_SESSION['updatePromotionForm']) && !empty($_SESSION['updatePromotion
 
 $productCategories = ProductCategoryHandler::fetchAllProductCategoriesForAdmin();
 $products = ProductHandler::fetchAllProducts();
-
-//$selectedProductCategoryId = null;
-//if($afterFormSubmission) {
-//    $selectedProductCategoryId = $form_data[ProductHandler::PRODUCT_CATEGORY_ID];
-//} else {
-//    $selectedProductCategoryId = $currentProduct->getProductCategoryId();
-//}
-
 ?>
 
 <script type="text/javascript">
     $(document).ready(function(){
         $('#promotedInstanceType_input').on('change', function(){
             if ($(this).val() == '<?php echo PromotionInstanceType::PLAIN_TEXT?>'){
+                $('#promotionInstanceId_input').val('');
                 $('#productId_input_container').hide();
+                $('#productId_input').val('');
                 $('#productCategoryId_input_container').hide();
+                $('#productCategoryId_input').val('');
+                $('#promotionLink_input_container').show();
             } else if ($(this).val() == '<?php echo PromotionInstanceType::PRODUCT?>'){
                 $('#promotionInstanceId_input').val('');
                 $('#productId_input_container').show();
                 $('#productCategoryId_input_container').hide();
+                $('#productCategoryId_input').val('');
+                $('#promotionLink_input_container').hide();
+                $('#promotionLink_input').val('');
             } else if ($(this).val() == '<?php echo PromotionInstanceType::PRODUCT_CATEGORY?>'){
                 $('#promotionInstanceId_input').val('');
                 $('#productId_input_container').hide();
+                $('#productId_input').val('');
                 $('#productCategoryId_input_container').show();
+                $('#promotionLink_input_container').hide();
+                $('#promotionLink_input').val('');
             } else {
                 $('#productId_input_container').hide();
+                $('#productId_input').val('');
                 $('#productCategoryId_input_container').hide();
+                $('#productCategoryId_input').val('');
+                $('#promotionLink_input_container').hide();
+                $('#promotionLink_input').val('');
             }
         });
 
@@ -118,7 +124,7 @@ $products = ProductHandler::fetchAllProducts();
                 </select>
             </div>
 
-            <div class="form-group" id="productCategoryId_input_container" style="display: none;">
+            <div class="form-group" id="productCategoryId_input_container"<?php if ($currentPromotion->getPromotedInstanceType() != PromotionInstanceType::PRODUCT_CATEGORY) {?> style="display: none;"<?php } ?>>
                 <label class="control-label" for="productCategoryId_input">Product Category *</label>
                 <select class="form-control" id="productCategoryId_input"
                         value="<?php echo $selectedProductCategoryId;?>">
@@ -127,8 +133,7 @@ $products = ProductHandler::fetchAllProducts();
                     if(!is_null($productCategories) && count($productCategories) > 0) {
                         foreach ($productCategories as $key => $productCategory){
                             ?>
-                            <option value="<?php echo $productCategory->getID()?>">
-<!--                                --><?php //if((!$afterFormSubmission && $currentPromotion->getProductCategoryId() == $productCategory->getID()) || ($afterFormSubmission && $form_data[ProductHandler::PRODUCT_CATEGORY_ID] == $productCategory->getID())) { ?><!-- selected--><?php //} ?>
+                            <option value="<?php echo $productCategory->getID()?>"<?php if((!$afterFormSubmission && $currentPromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY && $currentPromotion->getPromotedInstanceId() == $productCategory->getID()) || ($afterFormSubmission && $currentPromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY && $form_data[PromotionHandler::PROMOTED_INSTANCE_ID] == $productCategory->getID())) { ?> selected<?php } ?>>
                                 <?php echo $productCategory->getTitle()?>
                             </option>
                             <?php
@@ -138,7 +143,7 @@ $products = ProductHandler::fetchAllProducts();
                 </select>
             </div>
 
-            <div class="form-group" id="productId_input_container" style="display: none;">
+            <div class="form-group" id="productId_input_container"<?php if ($currentPromotion->getPromotedInstanceType() != PromotionInstanceType::PRODUCT) {?> style="display: none;"<?php } ?>>
                 <label class="control-label" for="productId_input">Product *</label>
                 <select class="form-control" id="productId_input">
                     <option value="">Please Select</option>
@@ -146,8 +151,7 @@ $products = ProductHandler::fetchAllProducts();
                     if(!is_null($products) && count($products) > 0) {
                         foreach ($products as $key => $product){
                             ?>
-                            <option value="<?php echo $product->getID()?>">
-<!--                                --><?php //if((!$afterFormSubmission && $currentPromotion->getProductCategoryId() == $productCategory->getID()) || ($afterFormSubmission && $form_data[ProductHandler::PRODUCT_CATEGORY_ID] == $productCategory->getID())) { ?><!-- selected--><?php //} ?>
+                            <option value="<?php echo $product->getID()?>"<?php if((!$afterFormSubmission && $currentPromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT && $currentPromotion->getPromotedInstanceId() == $product->getID()) || ($afterFormSubmission && $currentPromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT && $form_data[PromotionHandler::PROMOTED_INSTANCE_ID] == $product->getID())) { ?> selected<?php } ?>>
                                 <?php echo $product->getTitle()?>
                             </option>
                             <?php
@@ -155,6 +159,13 @@ $products = ProductHandler::fetchAllProducts();
                     }
                     ?>
                 </select>
+            </div>
+
+            <div class="form-group" id="promotionLink_input_container"<?php if ($currentPromotion->getPromotedInstanceType() != PromotionInstanceType::PLAIN_TEXT) {?> style="display: none;"<?php } ?>>
+                <label class="control-label" for="promotionLink_input">Promotion Link *</label>
+                <input class="form-control" placeholder="Promotion Link"
+                       name="<?php echo PromotionHandler::PROMOTION_LINK ?>" id="promotionLink_input"
+                       value="<?php if($afterFormSubmission) {?><?=$form_data[PromotionHandler::PROMOTION_LINK]?><?php } else { echo $currentPromotion->getPromotionLink(); } ?>">
             </div>
 
             <input type="hidden" id="promotionInstanceId_input" name="<?php echo PromotionHandler::PROMOTED_INSTANCE_ID?>"/>

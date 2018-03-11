@@ -31,7 +31,7 @@ if(!$imageValid) {
 }
 
 if (isNotEmpty($title)){
-    $productWithSameName = ProductHandler::existProductWithTitle(null, $title);
+    $productWithSameName = ProductHandler::existProductWithTitle(null, $title_en);
     if($productWithSameName) {
         addErrorMessage("There is a product with the same title");
     }

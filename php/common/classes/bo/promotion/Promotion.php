@@ -7,6 +7,7 @@ class Promotion {
     private $promoted_from;
     private $promoted_to;
     private $promotion_text;
+    private $promotion_link;
     private $promotion_activation;
     private $times_seen;
     private $user_id;
@@ -200,6 +201,24 @@ class Promotion {
     }
 
     /**
+     * @return mixed
+     */
+    public function getPromotionLink()
+    {
+        return $this->promotion_link;
+    }
+
+    /**
+     * @param mixed $promotion_link
+     * @return Promotion
+     */
+    public function setPromotionLink($promotion_link)
+    {
+        $this->promotion_link = $promotion_link;
+        return $this;
+    }
+
+    /**
      * @return $this
      */
     public static function create() {
@@ -207,14 +226,15 @@ class Promotion {
         return $instance;
     }
 
-    public static function createPromotion($ID, $instance_type, $instance_id, $promoted_from, $promoted_to, $promotion_text, $promotion_activation, $times_seen) {
+    public static function createPromotion($ID, $instance_type, $instance_id, $promoted_from, $promoted_to, $promotion_text, $promotion_activation, $times_seen, $promotion_link) {
         return self::create()
             ->setID($ID)
             ->setPromotedInstanceType($instance_type)
             ->setPromotedInstanceId($instance_id)
             ->setPromotedFrom($promoted_from != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_from)) : null)
             ->setPromotedTo($promoted_to != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_to)) : null)
-            ->setPromotiontext($promotion_text)
+            ->setPromotionText($promotion_text)
+            ->setPromotionLink($promotion_link)
             ->setPromotionActivation($promotion_activation)
             ->setTimesSeen($times_seen);
     }

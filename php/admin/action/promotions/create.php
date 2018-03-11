@@ -6,7 +6,7 @@ $promotion_instance_type = safe_input($_POST[PromotionHandler::PROMOTED_INSTANCE
 $promotion_instance_id = safe_input($_POST[PromotionHandler::PROMOTED_INSTANCE_ID]);
 $userID = safe_input($_POST[ProductHandler::USER_ID]);
 
-if (isEmpty($promoted_from) || isEmpty($promoted_to) || isEmpty($promotion_text) || isEmpty($promotion_instance_type) || (isNotEmpty($promotion_instance_type) && $promotion_instance_type != PromotionInstanceType::PLAIN_TEXT && isEmpty($promotion_instance_id))){
+if (isEmpty($promoted_from) || isEmpty($promoted_to) || isEmpty($promotion_text) || isEmpty($promotion_instance_type) || (isNotEmpty($promotion_instance_type) && $promotion_instance_type != PromotionInstanceType::PLAIN_TEXT && isEmpty($promotion_instance_id)) || (isNotEmpty($promotion_instance_type) && $promotion_instance_type == PromotionInstanceType::PLAIN_TEXT && isEmpty($promotion_link))){
     addErrorMessage("Please fill in required info");
 }
 
@@ -25,7 +25,7 @@ try {
     if (isEmpty($promotion_instance_id)){
         $promotion_instance_id = null;
     }
-    $promotion2Create->setPromotedFrom($promoted_from)->setPromotedTo($promoted_to)->setPromotionText($promotion_text)->setPromotionActivation(date(DEFAULT_DATE_FORMAT))->setPromotedInstanceType($promotion_instance_type)->setPromotedInstanceId($promotion_instance_id)->setUserId($userID);
+    $promotion2Create->setPromotedFrom($promoted_from)->setPromotedTo($promoted_to)->setPromotionText($promotion_text)->setPromotionActivation(date(DEFAULT_DATE_FORMAT))->setPromotedInstanceType($promotion_instance_type)->setPromotedInstanceId($promotion_instance_id)->setPromotionLink($promotion_link)->setUserId($userID);
     $promotionRes = PromotionHandler::insertPromotion($promotion2Create);
     if($promotionRes !== null || $promotionRes) {
         addSuccessMessage("Promotion successfully created");

@@ -50,7 +50,7 @@ if (!is_null($promotion) && $isPromotedInstanceActive){
         $promotionRedirectUrl = PRODUCT_CATEGORIES_URI . $promotion->getPromotedInstance()->getFriendlyTitle();
     } else if ($promotion->getPromotedInstanceType() === PromotionInstanceType::PLAIN_TEXT){
         $promotionId = '' . $promotion->getPromotedInstanceType() . '_0';
-        $promotionRedirectUrl = PRODUCT_CATEGORIES_URI . 'sales';// REPLACE WITH LINK
+        $promotionRedirectUrl = $promotion->getPromotionLink();
     }
     ?>
 
@@ -63,14 +63,14 @@ if (!is_null($promotion) && $isPromotedInstanceActive){
 
     <div id="promotionInstance">
         <div class="promotion-hide-btn-container">
-            <a href="javascript:void(0)" class="promotion-hide-btn" onclick="promotionSeen('<?php echo $promotion->getID()?>', '<?php echo $promotionId?>', null);">×</a>
+            <a href="javascript:void(0)" class="promotion-hide-btn" onclick="updatePromotionCookie('<?php echo $promotion->getID()?>', '<?php echo $promotionId?>', null);">×</a>
         </div>
-        <a href="javascript:void(0);" onclick="updatePromotionCookie('<?php echo $promotionId?>', '<?php echo $promotionRedirectUrl?>');">
+        <a href="javascript:void(0);" onclick="promotionSeen('<?php echo $promotion->getID()?>', '<?php echo $promotionId?>', '<?php echo $promotionRedirectUrl?>');">
             <?php if ($promotion->getPromotedInstanceType() !== PromotionInstanceType::PLAIN_TEXT){ ?>
                 <div class="promotion-image" style="background: url('<?php echo $promotionImageUrl; ?>') no-repeat center 50% /cover;">
                 </div>
             <?php } ?>
-            <div class="promotion-text-container"<?php if ($promotion->getPromotedInstanceType() === PromotionInstanceType::PLAIN_TEXT) { ?> style="width: 100%;"<?php } ?>>
+            <div class="promotion-text-container<?php if ($promotion->getPromotedInstanceType() === PromotionInstanceType::PLAIN_TEXT) { ?> promotion-text-full-width<?php } ?>">
                 <div class="promotion-text">
                     <?php if ($promotion->getPromotedInstanceType() !== PromotionInstanceType::PLAIN_TEXT){ ?>
                         <div class="promotion-text-title">

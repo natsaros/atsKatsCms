@@ -98,13 +98,14 @@ textarea { resize: vertical; }
 .carousel-container#second{background: url("../img/sellinofos/sellinofos_carousel_item_2.jpg") no-repeat center 50% /cover; }
 .carousel-container#third{background: url("../img/sellinofos/sellinofos_carousel_item_3.jpg") no-repeat center 10% /cover; }
 .carousel-container#fourth{background: url("../img/sellinofos/sellinofos_carousel_item_4.jpg") no-repeat center 25% /cover; }
+.carousel-container#fifth{background: url("../img/sellinofos/sellinofos_carousel_item_5.jpg") no-repeat center 65% /cover; }
 
 .carousel-info { vertical-align: middle; display: inline-block; margin: 5% 0; width: 85%; color: white; position: relative; z-index: 2; text-align: center;max-height: 427px;;min-height: 380px;}
 .carousel-info > p { width: 60%; display: inline-block; }
 .carousel-container > img { width: 100%; top: 0; position: absolute; }
 .carousel-indicators {z-index: 3;}
-.carousel-indicators li { background-color: white; border: none; margin: 0 15px; }
-.carousel-indicators li.active { background-color: #d29f09; margin: 0 10px; }
+.carousel-indicators li { background-color: white; border: none; margin: 0 10px; }
+.carousel-indicators li.active { background-color: #d29f09; margin: 0 11px; }
 
 .quote {width: 90%; display: inline-block; font-family: Roboto, sans-serif; font-weight: 300; font-style: italic;text-align: center;}
 .quote h3{font-size: 65px; line-height: 1.375em; margin: 120px 0 70px 0; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;}
@@ -307,9 +308,10 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .promotion-text-container:before {content: '';display: inline-block;height: 100%;vertical-align: middle;}
 .promotion-text {display: inline-block;vertical-align: middle;}
 .promotion-text-title {font-weight: 700;font-size: 16px;margin-bottom: 10px;}
-.promotion-text-description {font-size: 14px;}
+.promotion-text-description {font-size: 13px;}
 .promotion-hide-btn-container{position: absolute;right: 10px;top: 0;}
 .promotion-hide-btn {font-size: 28px;color: #222;line-height: 1;display: inline-block;}
+.promotion-text-full-width{width:100%}
 
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;}
@@ -466,7 +468,8 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .mobile { display: block; } .desktop { display: none; }
     .motoCreation { width: 250px; height: 250px; }
     .carousel-info{max-height: 250px;min-height: 190px;}
-    .carousel-indicators li{width: 8px; height: 8px;margin: 0 10px;}
+    .carousel-indicators li{width: 8px; height: 8px;margin: 0 8px;}
+    .carousel-indicators li.active {margin: 0 9px;}
     .carousel-indicators .active{width: 9px; height: 9px;}
     .quote h3 { font-size: 25px;margin: 50px 0 70px 0;}
     .quote footer { font-size: 15px;text-shadow:none;}
@@ -569,7 +572,7 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .promotion-image {width: 80px;}
     .promotion-text-container {width: 130px;padding: 0 10px;}
     .promotion-text-title {font-size: 14px;margin-bottom: 4px;}
-    .promotion-text-description {font-size: 12px;}
+    .promotion-text-description {font-size: 9px;}
     .promotion-hide-btn-container {right: 3px;top: -2px;}
     @-webkit-keyframes fadein {from {bottom: 0; opacity: 0;}to {bottom: 0; opacity: 1;}}
     @keyframes fadein {from {bottom: 0; opacity: 0;} to {bottom: 0; opacity: 1;}}

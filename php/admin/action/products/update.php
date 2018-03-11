@@ -25,7 +25,7 @@ if(isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
 }
 
 if (isNotEmpty($title)){
-    $productWithSameName = ProductHandler::existProductWithTitle($ID, $title);
+    $productWithSameName = ProductHandler::existProductWithTitle($ID, $title_en);
     if($productWithSameName) {
         addErrorMessage("There is a product with the same title");
     }

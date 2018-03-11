@@ -212,14 +212,8 @@ function updatePromotionViews(id) {
         url: getContextPath() + '/ajaxAction/updatePromotionViews/',
         data: ({id: id}),
         success: function (data) {
-            if (url != null && url != ''){
-                window.location.href=url;
-            } else {
-                var element = document.getElementById("promotionInstance");
-                element.className = element.className.replace("show", "");
-            }
+            return "kati";
         },
-
         error: function (jqXHR, textStatus, errorThrown) {
         }
     });
