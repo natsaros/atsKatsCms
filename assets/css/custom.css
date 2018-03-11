@@ -2,8 +2,8 @@
 .row-no-padding > [class*="col-"] { padding-left: 0 !important; padding-right: 0 !important; }
 .row-no-margin {margin: 0;}
 
-html, body {height: 100%;}
-body { font-family: Roboto, Arial, sans-serif; font-weight: 300; color: #2d200c; }
+html, body {height: 100%;overflow-x:hidden;}
+body { font-family: Roboto, Arial, sans-serif; font-weight: 300; color: #2d200c;}
 a:focus, a:hover, :focus, :hover { outline: none; text-decoration: none; }
 input, textarea { font-family: Roboto, Arial, sans-serif; font-weight: 300; }
 textarea { resize: vertical; }
@@ -586,6 +586,7 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .cookies-message-button {padding: 2px;font-size: 12px;width: 70%;}
     .page-not-found-404 {font-size: 40px;margin-top: 100px;}
     .site-info-container {margin: 10% 0;}
+    .zoomWindowContainer{width:auto!important;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {

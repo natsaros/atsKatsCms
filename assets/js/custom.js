@@ -192,6 +192,13 @@ $(document).ready(function () {
         }
     });
 
+    var lensSize;
+    if (isMobileVersion()){
+        lensSize = 150;
+    } else {
+        lensSize = 250;
+    }
+
     $('#productDetailsImage').elevateZoom({
         responsive: true,
         zoomWindowFadeIn: 250,
@@ -201,8 +208,9 @@ $(document).ready(function () {
         scrollZoom: true,
         zoomType: "lens",
         lensShape: "round",
-        lensSize: 250
+        lensSize: lensSize
     });
+
 });
 
 function openFilters() {
