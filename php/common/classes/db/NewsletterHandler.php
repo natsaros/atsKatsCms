@@ -7,9 +7,13 @@ class NewsletterHandler {
     const EMAIL = 'EMAIL';
     const DATE = 'DATE';
     const UNSUBSCRIPTION_TOKEN = 'UNSUBSCRIPTION_TOKEN';
+    const CURRENT_TAB = 'CURRENT_TAB';
+    const MESSAGE = 'MESSAGE';
+    const LINK = 'LINK';
+    const BUTTON_TEXT = 'BUTTON_TEXT';
 
     /**
-     * @return NewsletterEmail
+     * @return NewsletterEmail[]
      * @throws SystemException
      */
     static function getAllNewsletterEmails() {

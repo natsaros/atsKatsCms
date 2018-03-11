@@ -7,6 +7,14 @@ $newsletterEmails = NewsletterHandler::getAllNewsletterEmails();
 //$activeTab = $_GET['activeTab'];
 $activeTab = 'newsletterEmails';
 $activeTabClass = 'class="active"';
+
+$afterFormSubmission = false;
+
+if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterForm'])) {
+    $afterFormSubmission = true;
+    $form_data = $_SESSION['sendNewsletterForm'];
+    unset($_SESSION['sendNewsletterForm']);
+}
 ?>
 
 <ul class="nav nav-tabs">
@@ -15,6 +23,7 @@ $activeTabClass = 'class="active"';
     <li <?php if(isNotEmpty($activeTab) && $activeTab === 'newsletterEmailForm') {
         echo $activeTabClass ?><?php } ?>><a href="#newsletterEmailForm" data-toggle="tab">Newsletter Email Form</a></li>
 </ul>
+
 <div class="tab-content">
     <div class="tab-pane fade <?php if(isEmpty($activeTab) || $activeTab === 'newsletterEmails') { ?> in active<?php } ?>" id="newsletterEmails">
         <div class="row">
@@ -51,15 +60,39 @@ $activeTabClass = 'class="active"';
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">
+                    <?php
+                    $action = getAdminActionRequestUri() . "newsletter" . DS . "sendNewsletterEmail";
+                    ?>
+                    <form name="sendNewsletterForm" role="form" action="<?php echo $action?>" data-toggle="validator" method="post">
+                        <input type="hidden" name="<?php echo NewsletterHandler::CURRENT_TAB ?>"  value="newsletterEmailForm"/>
 
+                        <div class="form-group">
+                            <label class="control-label" for="message_input">Message *</label>
+                            <textarea class="editor" name="<?php echo NewsletterHandler::MESSAGE ?>" id="message_input" required>
+                            <?php if($afterFormSubmission) {?><?=$form_data[NewsletterHandler::MESSAGE]?><?php } ?>
+                            </textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="link_input">Link</label>
+                            <input class="form-control" placeholder="Link"
+                                   name="<?php echo NewsletterHandler::LINK ?>" id="link_input"
+                                   value="<?php if($afterFormSubmission) {?><?=$form_data[NewsletterHandler::LINK]?><?php } ?>"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="buttonText_input">Button Text</label>
+                            <input class="form-control" placeholder="Button Text"
+                                   name="<?php echo NewsletterHandler::BUTTON_TEXT ?>" id="buttonText_input"
+                                   value="<?php if($afterFormSubmission) {?><?=$form_data[NewsletterHandler::BUTTON_TEXT]?><?php } ?>"
+                            >
+                        </div>
+<!--                        <div class="text-center form-group">-->
+<!--                            <button type="submit" name="submit" class="btn btn-outline btn-primary">Send <span class="fa fa-envelope fa-fw" aria-hidden="true"></span></button>-->
+<!--                        </div>-->
+                    </form>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <a href="<?php echo getAdminRequestUri() . "sendNewsletterEmail"; ?>" type="button" class="btn btn-outline btn-primary">
-                    Send <span class="fa fa-envelope fa-fw" aria-hidden="true"></span>
-                </a>
             </div>
         </div>
     </div>

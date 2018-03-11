@@ -62,6 +62,7 @@
     <?php } ?>
     <script src="<?php echo ASSETS_URI ?>js/custom.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/instafeed/instafeed.min.js"></script>
+    <script src="<?php echo ASSETS_URI ?>js/elevatezoom/jquery.elevateZoom-3.0.8.min.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115469860-1"></script>

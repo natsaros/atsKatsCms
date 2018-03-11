@@ -304,7 +304,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 #promotionInstance a{color: #1c1b17;}
 #promotionInstance.show {visibility: visible;-webkit-animation: fadein 0.5s;animation: fadein 0.5s;}
 .promotion-image {width: 130px;float: left;height: 100%;}
-.promotion-text-container {width: 200px;text-align: center;float: left;padding: 0 20px;height: 100%;display: inline-block;position: relative;font-size: 0;}
+.promotion-text-container {width: 200px;text-align: center;float: left;padding: 0 15px;height: 100%;display: inline-block;position: relative;font-size: 0;}
 .promotion-text-container:before {content: '';display: inline-block;height: 100%;vertical-align: middle;}
 .promotion-text {display: inline-block;vertical-align: middle;}
 .promotion-text-title {font-weight: 700;font-size: 16px;margin-bottom: 10px;}

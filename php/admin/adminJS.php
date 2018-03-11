@@ -10,7 +10,7 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?php echo JS_URI ?>raphael/raphael.min.js"></script>
 
-<?php if(strpos(ADMIN_PAGE_ID, 'updatePost') !== false || strpos(ADMIN_PAGE_ID, 'updateProduct') !== false) {
+<?php if(strpos(ADMIN_PAGE_ID, 'updatePost') !== false || strpos(ADMIN_PAGE_ID, 'updateProduct') !== false || strpos(ADMIN_PAGE_ID, 'newsletterEmails') !== false) {
     echo '<script src="' . JS_URI . 'tinymce/tinymce.min.js"></script>';
 } ?>
 

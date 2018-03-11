@@ -191,6 +191,18 @@ $(document).ready(function () {
             }
         }
     });
+
+    $('#productDetailsImage').elevateZoom({
+        responsive: true,
+        zoomWindowFadeIn: 250,
+        zoomWindowFadeOut: 250,
+        lensFadeIn: 250,
+        lensFadeOut: 250,
+        scrollZoom: true,
+        zoomType: "lens",
+        lensShape: "round",
+        lensSize: 250
+    });
 });
 
 function openFilters() {
