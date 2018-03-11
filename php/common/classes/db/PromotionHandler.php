@@ -8,6 +8,7 @@ class PromotionHandler {
     const PROMOTED_INSTANCE_TYPE = 'PROMOTED_INSTANCE_TYPE';
     const PROMOTED_INSTANCE_ID = 'PROMOTED_INSTANCE_ID';
     const PROMOTION_TEXT = 'PROMOTION_TEXT';
+    const PROMOTION_TEXT_EN = 'PROMOTION_TEXT_EN';
     const PROMOTION_LINK = 'PROMOTION_LINK';
     const PROMOTED_FROM = 'PROMOTED_FROM';
     const PROMOTED_TO = 'PROMOTED_TO';
@@ -53,8 +54,8 @@ class PromotionHandler {
      */
     static function insertPromotion($promotion) {
         if(isNotEmpty($promotion)) {
-            $query = "INSERT INTO " . getDb()->promotions . " (" . self::PROMOTED_INSTANCE_TYPE . "," . self::PROMOTED_INSTANCE_ID . "," . self::PROMOTED_FROM . "," . self::PROMOTED_TO . "," . self::PROMOTION_TEXT . "," . self::PROMOTION_ACTIVATION .  "," . self::USER_ID . "," . self::PROMOTION_LINK . ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $createdPromotion = getDb()->createStmt($query, array('i', 'i', 's', 's', 's', 's', 's'), array($promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), $promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), date(DEFAULT_DATE_FORMAT)), $promotion->getUserId(), $promotion->getPromotionLink());
+            $query = "INSERT INTO " . getDb()->promotions . " (" . self::PROMOTED_INSTANCE_TYPE . "," . self::PROMOTED_INSTANCE_ID . "," . self::PROMOTED_FROM . "," . self::PROMOTED_TO . "," . self::PROMOTION_TEXT . "," . self::PROMOTION_TEXT_EN . "," . self::PROMOTION_ACTIVATION .  "," . self::USER_ID . "," . self::PROMOTION_LINK . ") VALUES (?, ?, ?, ?,  ?, ?, ?, ?, ?)";
+            $createdPromotion = getDb()->createStmt($query, array('i', 'i', 's', 's', 's', 's', 's', 's'), array($promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), $promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), $promotion->getPromotionTextEn(), date(DEFAULT_DATE_FORMAT)), $promotion->getUserId(), $promotion->getPromotionLink());
             return $createdPromotion;
         }
         return null;
@@ -66,10 +67,10 @@ class PromotionHandler {
      * @throws SystemException
      */
     public static function update($promotion) {
-        $query = "UPDATE " . getDb()->promotions . " SET " . self::PROMOTED_FROM . " = ?, " . self::PROMOTED_TO . " = ?, " . self::PROMOTION_TEXT . " = ?, " . self::PROMOTED_INSTANCE_TYPE . " = ?, " . self::PROMOTED_INSTANCE_ID . " = ?, " . self::PROMOTION_ACTIVATION . " = ?, " . self::PROMOTION_LINK . " = ?, " . self::USER_ID . " = ? WHERE " . self::ID . " = ?";
+        $query = "UPDATE " . getDb()->promotions . " SET " . self::PROMOTED_FROM . " = ?, " . self::PROMOTED_TO . " = ?, " . self::PROMOTION_TEXT . " = ?, " . self::PROMOTION_TEXT_EN . " = ?, " . self::PROMOTED_INSTANCE_TYPE . " = ?, " . self::PROMOTED_INSTANCE_ID . " = ?, " . self::PROMOTION_ACTIVATION . " = ?, " . self::PROMOTION_LINK . " = ?, " . self::USER_ID . " = ? WHERE " . self::ID . " = ?";
         $updatedRes = getDb()->updateStmt($query,
-            array('s', 's', 's', 'i', 'i', 's', 's', 's', 'i'),
-            array($promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), $promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), date(DEFAULT_DATE_FORMAT), $promotion->getPromotionLink(), $promotion->getUserId(), $promotion->getID()));
+            array('s', 's', 's', 's', 'i', 'i', 's', 's', 's', 'i'),
+            array($promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), $promotion->getPromotionTextEn(), $promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), date(DEFAULT_DATE_FORMAT), $promotion->getPromotionLink(), $promotion->getUserId(), $promotion->getID()));
         return $updatedRes;
     }
 
@@ -96,7 +97,7 @@ class PromotionHandler {
         if($row === false || null === $row) {
             return null;
         }
-        $promotion = Promotion::createPromotion($row[self::ID], $row[self::PROMOTED_INSTANCE_TYPE], $row[self::PROMOTED_INSTANCE_ID], $row[self::PROMOTED_FROM], $row[self::PROMOTED_TO], $row[self::PROMOTION_TEXT], $row[self::PROMOTION_ACTIVATION], $row[self::TIMES_SEEN], $row[self::PROMOTION_LINK]);
+        $promotion = Promotion::createPromotion($row[self::ID], $row[self::PROMOTED_INSTANCE_TYPE], $row[self::PROMOTED_INSTANCE_ID], $row[self::PROMOTED_FROM], $row[self::PROMOTED_TO], $row[self::PROMOTION_TEXT], $row[self::PROMOTION_TEXT_EN], $row[self::PROMOTION_ACTIVATION], $row[self::TIMES_SEEN], $row[self::PROMOTION_LINK]);
         if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT){
             $promotionInstance = ProductHandler::getProductByIDWithDetails($promotion->getPromotedInstanceId());
         } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY){

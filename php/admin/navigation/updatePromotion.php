@@ -29,6 +29,13 @@ $products = ProductHandler::fetchAllProducts();
 
 <script type="text/javascript">
     $(document).ready(function(){
+
+        if ($('#promotedInstanceType_input').val() == '<?php echo PromotionInstanceType::PRODUCT?>'){
+            $('#promotionInstanceId_input').val($('#productId_input').val());
+        } else if ($('#promotedInstanceType_input').val() == '<?php echo PromotionInstanceType::PRODUCT_CATEGORY?>'){
+            $('#promotionInstanceId_input').val($('#productCategoryId_input').val());
+        }
+
         $('#promotedInstanceType_input').on('change', function(){
             if ($(this).val() == '<?php echo PromotionInstanceType::PLAIN_TEXT?>'){
                 $('#promotionInstanceId_input').val('');
@@ -111,6 +118,13 @@ $products = ProductHandler::fetchAllProducts();
                 <input class="form-control" placeholder="Promotion Text"
                        name="<?php echo PromotionHandler::PROMOTION_TEXT ?>" id="promotionText_input" required
                        value="<?php if($afterFormSubmission) {?><?=$form_data[PromotionHandler::PROMOTION_TEXT]?><?php } else { echo $currentPromotion->getPromotionText(); } ?>">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="promotionTextEn_input">Promotion Text in English *</label>
+                <input class="form-control" placeholder="Promotion Text in English"
+                       name="<?php echo PromotionHandler::PROMOTION_TEXT_EN ?>" id="promotionTextEn_input" required
+                       value="<?php if($afterFormSubmission) {?><?=$form_data[PromotionHandler::PROMOTION_TEXT_EN]?><?php } else { echo $currentPromotion->getPromotionTextEn(); } ?>">
             </div>
 
             <div class="form-group">

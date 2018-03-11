@@ -78,7 +78,7 @@ if (!is_null($promotion) && $isPromotedInstanceActive){
                         </div>
                     <?php } ?>
                     <div class="promotion-text-description">
-                        <?php echo $promotion->getPromotionText()?>
+                        <?php echo $promotion->getLocalizedPromotionText()?>
                     </div>
                 </div>
             </div>

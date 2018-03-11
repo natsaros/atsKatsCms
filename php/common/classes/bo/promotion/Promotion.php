@@ -7,6 +7,7 @@ class Promotion {
     private $promoted_from;
     private $promoted_to;
     private $promotion_text;
+    private $promotion_text_en;
     private $promotion_link;
     private $promotion_activation;
     private $times_seen;
@@ -131,6 +132,24 @@ class Promotion {
     /**
      * @return mixed
      */
+    public function getPromotionTextEn()
+    {
+        return $this->promotion_text_en;
+    }
+
+    /**
+     * @param mixed $promotion_text_en
+     * @return Promotion
+     */
+    public function setPromotionTextEn($promotion_text_en)
+    {
+        $this->promotion_text_en = $promotion_text_en;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getPromotionActivation()
     {
         return $this->promotion_activation;
@@ -219,6 +238,13 @@ class Promotion {
     }
 
     /**
+     * @return mixed
+     */
+    public function getLocalizedPromotionText() {
+        return (!isset($_SESSION['locale']) || $_SESSION['locale'] === 'el_GR') ? $this->promotion_text : $this->promotion_text_en;
+    }
+
+    /**
      * @return $this
      */
     public static function create() {
@@ -226,7 +252,7 @@ class Promotion {
         return $instance;
     }
 
-    public static function createPromotion($ID, $instance_type, $instance_id, $promoted_from, $promoted_to, $promotion_text, $promotion_activation, $times_seen, $promotion_link) {
+    public static function createPromotion($ID, $instance_type, $instance_id, $promoted_from, $promoted_to, $promotion_text, $promotion_text_en, $promotion_activation, $times_seen, $promotion_link) {
         return self::create()
             ->setID($ID)
             ->setPromotedInstanceType($instance_type)
@@ -234,6 +260,7 @@ class Promotion {
             ->setPromotedFrom($promoted_from != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_from)) : null)
             ->setPromotedTo($promoted_to != null ? date(ADMIN_DATE_FORMAT, strtotime($promoted_to)) : null)
             ->setPromotionText($promotion_text)
+            ->setPromotionTextEn($promotion_text_en)
             ->setPromotionLink($promotion_link)
             ->setPromotionActivation($promotion_activation)
             ->setTimesSeen($times_seen);
