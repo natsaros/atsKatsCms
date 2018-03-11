@@ -9,7 +9,7 @@ $promotions = PromotionHandler::getAllPromotions();
 <div class="row">
     <div class="col-lg-12">
         <div class="panel-body">
-            <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+            <table width="100%" class="table table-striped table-bordered table-hover promotions-dataTable">
                 <thead>
                 <tr>
                     <th>Instance</th>
@@ -29,7 +29,7 @@ $promotions = PromotionHandler::getAllPromotions();
                         $promotionId = $promotion->getID();
                         ?>
                         <tr class="<?php echo $oddEvenClass ?>">
-                            <td><?php if ($promotion->getPromotedInstanceType() != PromotionInstanceType::PLAIN_TEXT) { echo $promotion->getPromotedInstance()->getTitle(); } else { echo '&nbsp;';} ?></td>
+                            <td><?php if ($promotion->getPromotedInstanceType() != PromotionInstanceType::PLAIN_TEXT && !is_null($promotion->getPromotedInstance())) { echo $promotion->getPromotedInstance()->getTitle(); } else { echo '&nbsp;';} ?></td>
                             <td><?php echo $promotion->getPromotionActivation(); ?></td>
                             <td><?php echo $promotion->getPromotedFrom(); ?></td>
                             <td><?php echo $promotion->getPromotedTo(); ?></td>
@@ -63,7 +63,7 @@ $promotions = PromotionHandler::getAllPromotions();
 <div class="row">
     <div class="col-lg-12 text-center">
         <a href="<?php echo getAdminRequestUri() . "updatePromotion"; ?>" type="button" class="btn btn-outline btn-primary">
-            Add <span class="fa fa-plus fa-fw" aria-hidden="true"></span>
+            Add <span class="fa fa-rocket fa-fw" aria-hidden="true"></span>
         </a>
     </div>
 </div>

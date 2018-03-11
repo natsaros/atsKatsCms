@@ -15,7 +15,7 @@ $imagePath = safe_input($_POST[ProductCategoryHandler::IMAGE_PATH]);
 $parentCategory = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY]);
 $parentCategoryId = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY_ID]);
 
-if(isEmpty($title) || isEmpty($description) || isEmpty($title_en) || isEmpty($description_en)) {
+if(isEmpty($title) || isEmpty($title_en)) {
     addInfoMessage("Please fill in required info");
     Redirect(getAdminRequestUri() . "updateProductCategory");
 }

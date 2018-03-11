@@ -1,9 +1,9 @@
 <?php
 $promotion = PromotionHandler::getPromotedInstance();
 if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT){
-    $isPromotedInstanceActive = ($promotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
+    $isPromotedInstanceActive = (!is_null($promotion->getPromotedInstance()) && $promotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
 } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY){
-    $isPromotedInstanceActive = ($promotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
+    $isPromotedInstanceActive = (!is_null($promotion->getPromotedInstance()) && $promotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
 } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PLAIN_TEXT){
     $isPromotedInstanceActive = true;
 }
@@ -63,7 +63,7 @@ if (!is_null($promotion) && $isPromotedInstanceActive){
 
     <div id="promotionInstance">
         <div class="promotion-hide-btn-container">
-            <a href="javascript:void(0)" class="promotion-hide-btn" onclick="updatePromotionCookie('<?php echo $promotion->getID()?>', '<?php echo $promotionId?>', null);">×</a>
+            <a href="javascript:void(0)" class="promotion-hide-btn" onclick="updatePromotionCookie('<?php echo $promotionId?>', null);">×</a>
         </div>
         <a href="javascript:void(0);" onclick="promotionSeen('<?php echo $promotion->getID()?>', '<?php echo $promotionId?>', '<?php echo $promotionRedirectUrl?>');">
             <?php if ($promotion->getPromotedInstanceType() !== PromotionInstanceType::PLAIN_TEXT){ ?>

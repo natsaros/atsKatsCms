@@ -9,7 +9,7 @@ $productCategories = ProductCategoryHandler::fetchAllProductCategories();
 <div class="row">
     <div class="col-lg-12">
         <div class="panel-body">
-            <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+            <table width="100%" class="table table-striped table-bordered table-hover product-categories-dataTable">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -71,7 +71,7 @@ $productCategories = ProductCategoryHandler::fetchAllProductCategories();
 <div class="row">
     <div class="col-lg-12 text-center">
         <a href="<?php echo getAdminRequestUri() . "updateProductCategory"; ?>" type="button" class="btn btn-outline btn-primary">
-            Add <span class="fa fa-comment fa-fw" aria-hidden="true"></span>
+            Add <span class="fa fa-list fa-fw" aria-hidden="true"></span>
         </a>
     </div>
 </div>

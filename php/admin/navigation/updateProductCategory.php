@@ -76,17 +76,17 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
             </div>
 
             <div class="form-group">
-                <label class="control-label" for="description_input">Description *</label>
+                <label class="control-label" for="description_input">Description</label>
                 <input class="form-control" placeholder="Description"
-                       name="<?php echo ProductCategoryHandler::DESCRIPTION ?>" id="description_input" required
+                       name="<?php echo ProductCategoryHandler::DESCRIPTION ?>" id="description_input"
                        value="<?php echo $currentProductCategory->getDescription() ?>"
                 >
             </div>
 
             <div class="form-group">
-                <label class="control-label" for="descriptionEn_input">Description in English *</label>
+                <label class="control-label" for="descriptionEn_input">Description in English</label>
                 <input class="form-control" placeholder="Description in English"
-                       name="<?php echo ProductCategoryHandler::DESCRIPTION_EN ?>" id="descriptionEn_input" required
+                       name="<?php echo ProductCategoryHandler::DESCRIPTION_EN ?>" id="descriptionEn_input"
                        value="<?php echo $currentProductCategory->getDescriptionEn() ?>"
                 >
             </div>

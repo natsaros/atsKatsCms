@@ -4,7 +4,8 @@
 
 <?php
 $newsletterEmails = NewsletterHandler::getAllNewsletterEmails();
-$activeTab = $_GET['activeTab'];
+//$activeTab = $_GET['activeTab'];
+$activeTab = 'newsletterEmails';
 $activeTabClass = 'class="active"';
 ?>
 
@@ -19,7 +20,7 @@ $activeTabClass = 'class="active"';
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">
-                    <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+                    <table width="100%" class="table table-striped table-bordered table-hover newsletter-dataTable">
                         <thead>
                         <tr>
                             <th>Email</th>
@@ -57,7 +58,7 @@ $activeTabClass = 'class="active"';
         <div class="row">
             <div class="col-lg-12 text-center">
                 <a href="<?php echo getAdminRequestUri() . "sendNewsletterEmail"; ?>" type="button" class="btn btn-outline btn-primary">
-                    Send <span class="fa fa-comment fa-fw" aria-hidden="true"></span>
+                    Send <span class="fa fa-envelope fa-fw" aria-hidden="true"></span>
                 </a>
             </div>
         </div>

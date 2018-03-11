@@ -9,7 +9,7 @@ $settings = SettingsHandler::fetchAllSettings();
 <div class="row">
     <div class="col-lg-12">
         <div class="panel-body">
-            <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+            <table width="100%" class="table table-striped table-bordered table-hover settings-dataTable">
                 <thead>
                 <tr>
                     <th>ID</th>

@@ -186,11 +186,13 @@ if (!is_null($productCategory)) {
                 <p><?php echo $productCategory->getLocalizedTitle(); ?></p>
             </div>
         </div>
-        <div class="row row-no-margin">
-            <div class="product-category-description">
-                <p><?php echo $productCategory->getLocalizedDescription(); ?></p>
+        <?php if (isNotEmpty($productCategory->getLocalizedDescription())) { ?>
+            <div class="row row-no-margin">
+                <div class="product-category-description">
+                    <p><?php echo $productCategory->getLocalizedDescription(); ?></p>
+                </div>
             </div>
-        </div>
+        <?php } ?>
         <?php if (!is_null($products) && count($products) > 0) {?>
             <div class="row products-row">
                 <?php foreach($products as $key => $product) {?>

@@ -20,7 +20,7 @@ if(!$emptyFile) {
 
 $imagePath = safe_input($_POST[ProductCategoryHandler::IMAGE_PATH]);
 
-if(isEmpty($title) || isEmpty($description) || isEmpty($title_en) || isEmpty($description_en)) {
+if(isEmpty($title) || isEmpty($title_en)) {
     addInfoMessage("Please fill in required info");
     Redirect(getAdminRequestUri() . "productCategories");
 }

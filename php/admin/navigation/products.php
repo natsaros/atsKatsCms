@@ -9,12 +9,13 @@ $products = ProductHandler::fetchAllProductsWithDetails();
 <div class="row">
     <div class="col-lg-12">
         <div class="panel-body">
-            <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+            <table width="100%" class="table table-striped table-bordered table-hover products-dataTable">
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>Code</th>
                     <th>Title</th>
+                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -29,6 +30,7 @@ $products = ProductHandler::fetchAllProductsWithDetails();
                             <td><?php echo $productId; ?></td>
                             <td><?php echo $product->getCode(); ?></td>
                             <td><?php echo $product->getTitle(); ?></td>
+                            <td><?php echo $product->getDescription(); ?></td>
                             <td>
                                 <?php
                                 //Opposite set to '$updatedStatus' so that this gets passed to the db
@@ -70,7 +72,7 @@ $products = ProductHandler::fetchAllProductsWithDetails();
 <div class="row">
     <div class="col-lg-12 text-center">
         <a href="<?php echo getAdminRequestUri() . "updateProduct"; ?>" type="button" class="btn btn-outline btn-primary">
-            Add <span class="fa fa-comment fa-fw" aria-hidden="true"></span>
+            Add <span class="fa fa-shopping-cart fa-fw" aria-hidden="true"></span>
         </a>
     </div>
 </div>

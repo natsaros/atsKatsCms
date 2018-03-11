@@ -14,7 +14,44 @@ function initBootstrapToggle() {
 }
 
 $(document).ready(function () {
-    var dTables = $('.ak-dataTable').DataTable({responsive: true});
+    $('.ak-dataTable').DataTable({responsive: true});
+
+    $('.posts-dataTable').DataTable({responsive: true});
+
+    $('.product-categories-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "10%"}, {"width": "20%"}, {"width": "50%"}, {"width": "20%", "orderable": false}]
+    });
+
+    $('.settings-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "10%"}, {"width": "35%"}, {"width": "35%"}, {"width": "20%", "orderable": false}]
+    });
+
+    $('.promotions-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "20%"}, {"width": "10%"}, {"width": "10%"}, {"width": "10%"}, {"width": "30%"}, {"width": "10%"}, {"width": "10%", "orderable": false}]
+    });
+
+    $('.users-group-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "40%", "orderable": false}]
+    });
+
+    $('.users-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "10%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%"}, {"width": "10%", "orderable": false}]
+    });
+
+    $('.products-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "10%"}, {"width": "15%"}, {"width": "25%"}, {"width": "20%"}, {"width": "30%", "orderable": false}]
+    });
+
+    $('.newsletter-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "50%"}, {"width": "50%", "orderable": false}]
+    });
 
     initializeCheckBoxes();
     initBootstrapToggle();
