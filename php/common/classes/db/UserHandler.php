@@ -202,8 +202,7 @@ class UserHandler {
         }
         return null;
     }
-
-
+    
     /*Populate Functions*/
 
     /**
