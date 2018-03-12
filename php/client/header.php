@@ -53,7 +53,8 @@
     <?php if (!is_null($post)) { ?>
         <link rel="stylesheet" href="<?php echo ASSETS_URI ?>font-awesome/css/font-awesome.min.css">
     <?php } ?>
-    <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/custom.min.css">
+    <link rel="stylesheet" href="<?php echo ASSETS_URI ?>css/custom_v1.min.css">
+
     <script src="<?php echo ASSETS_URI ?>js/jquery.min.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/bootstrap.min.js"></script>
     <?php if ($pageId == "contact") { ?>
