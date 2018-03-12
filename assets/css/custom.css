@@ -246,7 +246,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .filter-header {height: 44px;line-height: 45px;font-size: 0;display: inline-block;width: 100%;}
 .filter-name {width: 90%;display: inline-block;font-size: 17px;}
 .filter-body {height: 100px;box-shadow: 2px 4px 5px -2px rgba(0,0,0,.8);width: 400px;position: absolute;box-sizing: border-box;background-color: #eee;top: 53px;padding: 0;z-index: 2;left: 0;border: 1px solid #ddd;}
-.filters {width: 100%;background-color: #e6e6e6;position: absolute;z-index: 2;padding: 8px 10%;text-align: center;height: 62px;}
+.filters {width: 100%;background-color: #e6e6e6;position: relative;z-index: 2;padding: 8px 10%;text-align: center;height: 62px;}
 .filter-container.open-filter{background-color:#f9f9f9;border: 1px solid #ddd;border-bottom: none;padding:0 9px;height: 54px;}
 .open-filter .filter-body{left: -1px;background-color: #f9f9f9;border-top: none;}
 .filter-arrow{display: inline-block;width: 10%;text-align: center;top: -5px;position: relative;}
@@ -286,7 +286,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .close-btn-container {width: 100%;position: relative;text-align: right;}
 .close-btn {font-size: 36px;color: #222;margin-right: 15px;line-height: 1;}
 #sliderRangeMobile {width: 70%;margin: 20px auto 50px;height: 8px;}
-.filters-icon-container {position: absolute;left: 15px;margin-top: -25px;}
+.filters-icon-container {position: relative;margin-top: -25px;padding-left: 15px;}
 .filters-icon {background-image: url('../img/sellinofos/filters_icon.png');width: 22px;height: 22px;display: block;cursor: pointer;background-size: contain;}
 .filter-name-mobile {width: 78%; margin: 0 auto;}
 .filter-select {width: 80%;margin: 27px auto;border-radius: 0;height: 40px;}
