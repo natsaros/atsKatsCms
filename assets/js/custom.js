@@ -194,7 +194,7 @@ $(document).ready(function () {
 
     var lensSize;
     if (isMobileVersion()){
-        lensSize = 150;
+        lensSize = 100;
     } else {
         lensSize = 250;
     }

@@ -371,6 +371,8 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
 .maintenance-page-message {text-align: center;padding: 15vh 0 25vh;font-size: 35px;background-color: #1c1b17;color: #fff;height: 100%;}
 .maintenance-page-image {width: 230px;height: 238px;background: url(../img/sellinofos/sellinofos_logo.png);background-size: cover;margin: 0 auto 7vh;position: relative;padding: 0;}
 
+.zoomContainer {overflow: hidden;}
+
 @media screen and (min-width: 768px){
     .navbar-collapse li { text-align: center;width: 25%; }
     .sub-category-menu li{list-style: none;text-align: center;width: 16.24%;color: #fff;display: inline-block;position: relative;height: 62px;line-height: 62px;}
@@ -586,7 +588,6 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .cookies-message-button {padding: 2px;font-size: 12px;width: 70%;}
     .page-not-found-404 {font-size: 40px;margin-top: 100px;}
     .site-info-container {margin: 10% 0;}
-    .zoomWindowContainer{width:auto!important;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {
