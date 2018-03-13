@@ -54,8 +54,8 @@ class PromotionHandler {
      */
     static function insertPromotion($promotion) {
         if(isNotEmpty($promotion)) {
-            $query = "INSERT INTO " . getDb()->promotions . " (" . self::PROMOTED_INSTANCE_TYPE . "," . self::PROMOTED_INSTANCE_ID . "," . self::PROMOTED_FROM . "," . self::PROMOTED_TO . "," . self::PROMOTION_TEXT . "," . self::PROMOTION_TEXT_EN . "," . self::PROMOTION_ACTIVATION .  "," . self::USER_ID . "," . self::PROMOTION_LINK . ") VALUES (?, ?, ?, ?,  ?, ?, ?, ?, ?)";
-            $createdPromotion = getDb()->createStmt($query, array('i', 'i', 's', 's', 's', 's', 's', 's'), array($promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), $promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), $promotion->getPromotionTextEn(), date(DEFAULT_DATE_FORMAT)), $promotion->getUserId(), $promotion->getPromotionLink());
+            $query = "INSERT INTO " . getDb()->promotions . " (" . self::PROMOTED_INSTANCE_TYPE . "," . self::PROMOTED_INSTANCE_ID . "," . self::PROMOTED_FROM . "," . self::PROMOTED_TO . "," . self::PROMOTION_TEXT . "," . self::PROMOTION_TEXT_EN . "," . self::PROMOTION_ACTIVATION .  "," . self::USER_ID . "," . self::PROMOTION_LINK . ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $createdPromotion = getDb()->createStmt($query, array('i', 'i', 's', 's', 's', 's', 's', 's', 's'), array($promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), $promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), $promotion->getPromotionTextEn(), date(DEFAULT_DATE_FORMAT)), $promotion->getUserId(), $promotion->getPromotionLink());
             return $createdPromotion;
         }
         return null;

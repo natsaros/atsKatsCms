@@ -775,5 +775,3 @@ function consumeFormData() {
 function formValueFromSession($key) {
     return $_SESSION[FORM_PREFIX . $key];
 }
-
-?>

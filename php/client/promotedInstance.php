@@ -1,11 +1,13 @@
 <?php
 $promotion = PromotionHandler::getPromotedInstance();
-if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT){
-    $isPromotedInstanceActive = (!is_null($promotion->getPromotedInstance()) && $promotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
-} else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY){
-    $isPromotedInstanceActive = (!is_null($promotion->getPromotedInstance()) && $promotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
-} else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PLAIN_TEXT){
-    $isPromotedInstanceActive = true;
+if (!is_null($promotion)){
+    if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT){
+        $isPromotedInstanceActive = (!is_null($promotion->getPromotedInstance()) && $promotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
+    } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY){
+        $isPromotedInstanceActive = (!is_null($promotion->getPromotedInstance()) && $promotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
+    } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PLAIN_TEXT){
+        $isPromotedInstanceActive = true;
+    }
 }
 
 if (!is_null($promotion) && $isPromotedInstanceActive){

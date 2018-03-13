@@ -14,9 +14,9 @@
   "cookies_consent_button": "OK",
   "product_code": "Product code:&nbsp;",
   "contact_header": "Contact us",
-  "contact_name": "Name *",
-  "contact_email": "Email *",
-  "contact_phone_number": "Phone number",
+  "contact_name": "Your name *",
+  "contact_email": "Your email *",
+  "contact_phone_number": "Your phone number",
   "contact_info": "Contact us for orders and information *",
   "contact_btn": "Send",
   "maintenance_text": "Stay tuned.<br>We are launching soon!",
@@ -24,5 +24,9 @@
   "filter_category": "Category",
   "filter_select": "Select",
   "newsletter_invalid_email": "Invalid email address",
-  "newsletter_successful_subscription": "Successful subscription to our Newsletter"
+  "newsletter_successful_subscription": "Successful subscription to our Newsletter",
+  "email_sent": "We have received your email and we will contact you as soon as possible! Thank you!",
+  "mandatory_fields": "Please fill in all mandatory fields",
+  "invalid_email": "Invalid email address",
+  "invalid_phone_number": "Invalid phone number"
 }

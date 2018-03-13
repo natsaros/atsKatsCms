@@ -13,9 +13,9 @@
   "cookies_consent_button": "OK",
   "product_code": "Κωδικός προιόντος:&nbsp;",
   "contact_header": "Επικοινωνήστε μαζί μας",
-  "contact_name": "Ονοματεπώνυμο *",
-  "contact_email": "Email *",
-  "contact_phone_number": "Τηλέφωνο",
+  "contact_name": "Το ονοματεπώνυμο σας *",
+  "contact_email": "Το email σας *",
+  "contact_phone_number": "Το τηλέφωνο σας",
   "contact_info": "Επικοινωνήστε μαζί μας για παραγγελίες και πληροφορίες *",
   "contact_btn": "Αποστολή",
   "maintenance_text": "Stay tuned.<br>We are launching soon!",
@@ -23,5 +23,9 @@
   "filter_category": "Είδος",
   "filter_select": "Επιλέξτε",
   "newsletter_invalid_email": "Μη έγκυρη διεύθυνση email",
-  "newsletter_successful_subscription": "Έχετε εγγραφεί επιτυχώς στο Newsletter μας"
+  "newsletter_successful_subscription": "Έχετε εγγραφεί επιτυχώς στο Newsletter μας",
+  "email_sent": "Λάβαμε το email σας και θα επικοινωνήσουμε άμεσα μαζί σας! Ευχαριστούμε!",
+  "mandatory_fields": "Παρακαλώ συμπληρώστε όλα τα υποχρεωτικά πεδία",
+  "invalid_email": "Μη έγκυρη διεύθυνση email",
+  "invalid_phone_number": "Μη έγκυρος αριθμός τηλεφώνου"
 }

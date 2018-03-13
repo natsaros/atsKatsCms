@@ -49,6 +49,7 @@ body {
 
 .navbar-top-links .dropdown-menu li:last-child {
     margin-right: 0;
+    float: none;
 }
 
 .navbar-top-links .dropdown-menu li a {
@@ -601,4 +602,20 @@ form .tab-pane.active {
 .form-control.date-field[readonly]{
     background-color: #fff;
     opacity: 1;
+}
+
+.navbar-top-links li:last-child {
+    margin-right: 15px;
+    float: right;
+}
+
+.active-promotion-header{
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+    display: inline-block;
+}
+
+.dashboard-active-promotion{
+    font-size: 18px;
 }

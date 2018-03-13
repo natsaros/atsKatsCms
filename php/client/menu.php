@@ -25,8 +25,8 @@ if (isset($_GET["category_friendly_url"])) {
                 </form>
             </div>
             <div class="col-xs-6 social-icons-container">
-                <a href="https://www.facebook.com/Sellinofos/" target="_blank" title="Sellinofos @ Facebook"><i class="fa fa-header-social-icon fa-facebook"></i></a>
-                <a href="https://www.instagram.com/sellinofos/" target="_blank" title="Sellinofos @ Instagram"><i class="fa fa-header-social-icon fa-instagram"></i></a>
+                <a href="https://www.facebook.com/Sellinofos/" target="_blank" title="Sellinofos @ Facebook"><div class="fa fa-header-social-icon fa-facebook"></div></a>
+                <a href="https://www.instagram.com/sellinofos/" target="_blank" title="Sellinofos @ Instagram"><div class="fa fa-header-social-icon fa-instagram"></div></a>
             </div>
         </div>
     </div>
@@ -60,20 +60,6 @@ if (isset($_GET["category_friendly_url"])) {
                                     <a class="sub-category-menu-link-inner-mobile<?php if (!is_null($productCategory) && $productCategory->getID() == $pc->getID()) { ?> active<?php } ?>" href="<?php echo getProductCategoriesUri() . $pc->getFriendlyTitle();?>">
                                         <span><?php echo $pc->getLocalizedTitle();?></span>
                                     </a>
-<!--                                    <div class="sub-menu" submenuid="sub-menu---><?php //echo $pc->getFriendlyTitle();?><!--" style="display: none;">-->
-<!---->
-<!--                                        --><?php
-//                                        foreach($pc->getChildrenCategories() as $key => $childProductCategory) {
-//                                            ?>
-<!--                                            <div>-->
-<!--                                                <a href="--><?php //echo getProductCategoriesUri() . $childProductCategory->getFriendlyTitle();?><!--" class="sub-menu-link-inner-mobile--><?php //if (!is_null($productCategory) && $productCategory->getID() == $childProductCategory->getID()) { ?><!-- active--><?php //} ?><!--">-->
-<!--                                                    <span>--><?php //echo $childProductCategory->getTitle();?><!--</span>-->
-<!--                                                </a>-->
-<!--                                            </div>-->
-<!--                                            --><?php
-//                                        }
-//                                        ?>
-<!--                                    </div>-->
                                 </div>
                                 <?php
                             }

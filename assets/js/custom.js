@@ -193,24 +193,19 @@ $(document).ready(function () {
     });
 
     var lensSize;
-    if (isMobileVersion()){
-        lensSize = 100;
-    } else {
-        lensSize = 250;
+    if (!isMobileVersion()){
+        $('#productDetailsImage').elevateZoom({
+            responsive: true,
+            zoomWindowFadeIn: 250,
+            zoomWindowFadeOut: 250,
+            lensFadeIn: 250,
+            lensFadeOut: 250,
+            scrollZoom: true,
+            zoomType: "lens",
+            lensShape: "round",
+            lensSize: 250
+        });
     }
-
-    $('#productDetailsImage').elevateZoom({
-        responsive: true,
-        zoomWindowFadeIn: 250,
-        zoomWindowFadeOut: 250,
-        lensFadeIn: 250,
-        lensFadeOut: 250,
-        scrollZoom: true,
-        zoomType: "lens",
-        lensShape: "round",
-        lensSize: lensSize
-    });
-
 });
 
 function openFilters() {

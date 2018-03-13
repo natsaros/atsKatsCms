@@ -51,8 +51,8 @@
                 <?php echo getLocalizedText("social_media_info_text");?>
             </div>
             <div class="footer-column-social-media-links">
-                <a href="https://www.facebook.com/Sellinofos/" target="_blank" title="Sellinofos @ Facebook"><i class="fa fa-facebook"></i></a>
-                <a href="https://www.instagram.com/sellinofos/" target="_blank" title="Sellinofos @ Instagram"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.facebook.com/Sellinofos/" target="_blank" title="Sellinofos @ Facebook"><div class="fa fa-facebook"></div></a>
+                <a href="https://www.instagram.com/sellinofos/" target="_blank" title="Sellinofos @ Instagram"><div class="fa fa-instagram"></div></a>
             </div>
         </div>
     </div>
