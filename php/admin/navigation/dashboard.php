@@ -10,7 +10,7 @@
     </div>
 </div>
 <?php $activePromotion = PromotionHandler::getPromotedInstance();
-if (!is_null($promotion)) {
+if (!is_null($activePromotion)) {
     if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) {
         $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
     } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) {
@@ -24,7 +24,7 @@ if (!is_null($activePromotion) && $isPromotedInstanceActive) { ?>
         <div class="col-sm-12">
             <?php echo 'The promotion';?>
             <?php if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) { echo ' for category '; } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) { echo ' for product '; } ?>
-            <?php if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY || $activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) { echo ' <b>' . $activePromotion->getPromotedInstance()->getTitle() . '</b> '; }?>
+            <?php if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY || $activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) { echo '\' <b>' . $activePromotion->getPromotedInstance()->getTitle() . '</b>\''; }?>
             <?php echo ' with promotion text \'' . $activePromotion->getPromotionText() . '\'';?>
             <?php echo ' is active until ' . $activePromotion->getPromotedTo() . '.<br/>';?>
             <?php echo 'So far it has been seen <b>' . $activePromotion->getTimesSeen() . '</b> times.';?>
