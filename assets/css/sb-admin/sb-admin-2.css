@@ -609,13 +609,13 @@ form .tab-pane.active {
     float: right;
 }
 
-.active-promotion-header{
+.information-header{
     padding-bottom: 9px;
     margin: 40px 0 20px;
     border-bottom: 1px solid #eee;
     display: inline-block;
 }
 
-.dashboard-active-promotion{
+.dashboard-information{
     font-size: 16px;
 }

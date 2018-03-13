@@ -13,6 +13,16 @@ class NewsletterHandler {
     const BUTTON_TEXT = 'BUTTON_TEXT';
 
     /**
+     * @return int
+     * @throws SystemException
+     */
+    static function getLatestNewsletterSubscriptions() {
+        $query = "SELECT COUNT(*) AS NUM_OF_EMAILS FROM " . getDb()->newsletter_emails . " WHERE DATE > DATE_ADD(CURDATE(), INTERVAL -3 DAY)";
+        $row = getDb()->selectStmtSingleNoParams($query);
+        return $row['NUM_OF_EMAILS'];
+    }
+
+    /**
      * @return NewsletterEmail[]
      * @throws SystemException
      */
