@@ -27,6 +27,25 @@ class Event {
     }
 
     /**
+     * @param $ID
+     * @param $name
+     * @param $status
+     * @param $day
+     * @param $start
+     * @param $end
+     * @return $this
+     */
+    public static function createEvent($ID, $name, $status, $day, $start, $end) {
+        return self::create()
+            ->setID($ID)
+            ->setName($name)
+            ->setStatus($status)
+            ->setDay($day)
+            ->setStart($start)
+            ->setEnd($end);
+    }
+
+    /**
      * @return mixed
      */
     public function getID() {
@@ -121,8 +140,4 @@ class Event {
         $this->day = $day;
         return $this;
     }
-
-
-
-
 }

@@ -3,7 +3,7 @@
 /**
  * Defines days of week
  */
-    class DaysOfWeek {
+class DaysOfWeek {
     const MONDAY = 'monday';
     const TUESDAY = 'tuesday';
     const WEDNESDAY = 'wednesday';

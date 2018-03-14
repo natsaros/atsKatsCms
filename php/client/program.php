@@ -5,130 +5,34 @@ const PILATES_MAT = 'Pilates mat';
 const FAT_BURN = 'Fat burn';
 const AERIAL_YOGA = 'Aerial yoga';
 
-const MONDAY = 'monday';
-const TUESDAY = 'tuesday';
-const WEDNESDAY = 'wednesday';
-const THURSDAY = 'thursday';
-const FRIDAY = 'friday';
-const SATURDAY = 'saturday';
+const MONDAY = DaysOfWeek::MONDAY;
+const TUESDAY = DaysOfWeek::TUESDAY;
+const WEDNESDAY = DaysOfWeek::WEDNESDAY;
+const THURSDAY = DaysOfWeek::THURSDAY;
+const FRIDAY = DaysOfWeek::FRIDAY;
+const SATURDAY = DaysOfWeek::SATURDAY;
 
 const TIME_FRAME = 'timeframe';
 const LESSON = 'lesson';
 const DAY = 'day';
 
+$events = ProgramHandler::fetchEvents();
+
+$mobileProgram = ProgramHandler::mobileProgram($events);
+$lessons = ProgramHandler::desktopProgram($events);
+$timeFrames = ProgramHandler::getTimeFrames($events);
+
 $weekDaysGr = array(MONDAY => 'Δευτέρα', TUESDAY => 'Τρίτη', WEDNESDAY => 'Τετάρτη', THURSDAY => 'Πέμπτη', FRIDAY => 'Παρασκευή', SATURDAY => 'Σάββατο');
 $weekDays = array(MONDAY => MONDAY, TUESDAY => TUESDAY, WEDNESDAY => WEDNESDAY, THURSDAY => THURSDAY, FRIDAY => FRIDAY, SATURDAY => SATURDAY);
 
-
-/**
- * @param $start
- * @param $end
- * @param $lesson
- * @param string $secondLesson
- * @return array
- */
-function addLesson($start, $end, $lesson, $secondLesson = '') {
-    $lessonStr = $lesson;
-    if ($secondLesson !== '') {
-        $lessonStr .= ' / ' . $secondLesson;
-    }
-    return array(TIME_FRAME => $start . '-' . $end, LESSON => $lessonStr);
-}
-
-$program = array(
-    array(
-        $weekDays[MONDAY] =>
-            array(
-                addLesson('08:30', '09:30', PILATES_EQUIP),
-                addLesson('09:30', '10:30', PILATES_EQUIP),
-                addLesson('10:30', '11:30', PILATES_EQUIP),
-                addLesson('11:30', '12:30', PILATES_EQUIP),
-                addLesson('13:00', '14:00', PILATES_EQUIP),
-                addLesson('16:00', '17:00', PILATES_EQUIP),
-                addLesson('17:00', '18:00', PILATES_EQUIP),
-                addLesson('18:00', '19:00', PILATES_MAT),
-                addLesson('19:00', '20:00', FAT_BURN),
-                addLesson('20:00', '21:00', YOGA),
-                addLesson('21:00', '22:00', PILATES_EQUIP)),
-        $weekDays[TUESDAY] =>
-            array(
-                addLesson('08:30', '09:30', PILATES_EQUIP),
-                addLesson('09:00', '10:00', YOGA),
-                addLesson('09:30', '10:30', PILATES_EQUIP),
-                addLesson('10:30', '11:30', PILATES_MAT),
-                addLesson('11:30', '12:30', PILATES_EQUIP),
-                addLesson('16:00', '17:00', PILATES_EQUIP),
-                addLesson('17:00', '18:00', PILATES_EQUIP),
-                addLesson('18:00', '19:00', PILATES_EQUIP),
-                addLesson('19:00', '20:00', PILATES_MAT),
-                addLesson('20:00', '21:00', PILATES_EQUIP),
-                addLesson('21:00', '22:00', PILATES_EQUIP)),
-        $weekDays[WEDNESDAY] =>
-            array(
-                addLesson('08:30', '09:30', PILATES_EQUIP),
-                addLesson('09:30', '10:30', PILATES_EQUIP),
-                addLesson('10:00', '11:00', FAT_BURN),
-                addLesson('10:30', '11:30', PILATES_EQUIP),
-                addLesson('13:00', '14:00', PILATES_EQUIP),
-                addLesson('16:00', '17:00', PILATES_EQUIP),
-                addLesson('17:00', '18:00', PILATES_EQUIP),
-                addLesson('18:00', '19:00', PILATES_MAT),
-                addLesson('19:00', '20:00', FAT_BURN),
-                addLesson('20:00', '21:00', PILATES_MAT, AERIAL_YOGA),
-                addLesson('21:00', '22:00', PILATES_EQUIP)),
-        $weekDays[THURSDAY] =>
-            array(
-                addLesson('08:30', '09:30', PILATES_EQUIP),
-                addLesson('09:30', '10:30', PILATES_EQUIP),
-                addLesson('10:30', '11:30', PILATES_MAT),
-                addLesson('17:00', '18:00', PILATES_EQUIP),
-                addLesson('18:00', '19:00', PILATES_EQUIP),
-                addLesson('19:00', '20:00', YOGA),
-                addLesson('20:00', '21:00', PILATES_EQUIP),
-                addLesson('21:00', '22:00', PILATES_EQUIP)),
-        $weekDays[FRIDAY] =>
-            array(
-                addLesson('08:30', '09:30', PILATES_EQUIP),
-                addLesson('09:30', '10:30', PILATES_EQUIP),
-                addLesson('10:30', '11:30', PILATES_EQUIP),
-                addLesson('11:30', '12:30', PILATES_EQUIP),
-                addLesson('16:00', '17:00', PILATES_EQUIP),
-                addLesson('17:00', '18:00', PILATES_EQUIP),
-                addLesson('19:00', '20:00', PILATES_MAT),
-                addLesson('20:00', '21:00', PILATES_EQUIP)),
-        $weekDays[SATURDAY] =>
-            array(
-                addLesson('10:30', '11:30', PILATES_EQUIP),
-                addLesson('11:30', '12:30', PILATES_EQUIP),
-                addLesson('13:00', '14:00', PILATES_MAT, AERIAL_YOGA))
-    )
-);
-
-
-$desktopProgram = array(
-    array(
-        '08:30-09:30' => array(
-            array('day' => $weekDays[MONDAY], LESSON => PILATES_MAT),
-            array('day' => $weekDays[TUESDAY], LESSON => PILATES_EQUIP),
-            array('day' => $weekDays[FRIDAY], LESSON => YOGA)
-        ),
-        '09:30-10:30' => array(
-            array('day' => $weekDays[MONDAY], LESSON => FAT_BURN),
-            array('day' => $weekDays[WEDNESDAY], LESSON => PILATES_MAT),
-            array('day' => $weekDays[FRIDAY], LESSON => PILATES_EQUIP)
-        )
-
-    )
-);
-
 /**
  * @param $program array
- * @param $weekDaysGr
+ * @param $weekDaysGr array
  */
 function renderMobileProgram($program, $weekDaysGr) {
-    echo '<div class="timeTable panel-group" id="accordion">';
-    foreach ($program as $weekDays) {
-        foreach ($weekDays as $day => $timeFrames) {
+    if (isNotEmpty($program)) {
+        echo '<div class="timeTable panel-group" id="accordion">';
+        foreach ($program as $day => $weekDay) {
             $collapseClass = MONDAY === $day ? ' in' : '';
             echo '<div class="panel panel-default">';
             echo '<div class="panel-heading">
@@ -140,7 +44,7 @@ function renderMobileProgram($program, $weekDaysGr) {
                     <div class="panel-body">';
             echo '<table class="table table-hover">';
             echo '<tbody>';
-            foreach ($timeFrames as $timeFrame) {
+            foreach ($weekDay as $timeFrame) {
                 echo '<tr>';
                 echo '<td>' . $timeFrame[TIME_FRAME] . '</td>';
                 echo '<td>' . $timeFrame[LESSON] . '</td>';
@@ -152,29 +56,45 @@ function renderMobileProgram($program, $weekDaysGr) {
             echo '</div>';
             echo '</div>';
         }
+        echo '</div>';
     }
-    echo '</div>';
 }
 
 /**
- * @param $program
- * @param $weekDaysGr
+ * @param $lessons array
+ * @param $timeFrames array
+ * @param $weekDaysGr array
  */
-function renderDesktopProgram($program, $weekDaysGr) {
-    echo $program;
-//    $desktopProgram = array();
-//    foreach ($program as $weekDays) {
-//        foreach ($weekDays as $day => $timeFrames) {
-//            foreach ($timeFrames as $timeFrame) {
-//                if (!in_array($timeFrame[TIME_FRAME], $desktopProgram)) {
-//                    $desktopProgram[] = $timeFrame[TIME_FRAME];
-//                }
-//            }
-//        }
-//    }
-//
-//    $desktopProgram = sort($desktopProgram);
-//    echo $desktopProgram;
+function renderDesktopProgram($lessons, $timeFrames, $weekDaysGr) {
+    echo '<table class="aboutTimeTable table table-responsive">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>' . $weekDaysGr[DaysOfWeek::MONDAY] . '</th>
+                    <th>' . $weekDaysGr[DaysOfWeek::TUESDAY] . '</th>
+                    <th>' . $weekDaysGr[DaysOfWeek::WEDNESDAY] . '</th>
+                    <th>' . $weekDaysGr[DaysOfWeek::THURSDAY] . '</th>
+                    <th>' . $weekDaysGr[DaysOfWeek::FRIDAY] . '</th>
+                    <th>' . $weekDaysGr[DaysOfWeek::SATURDAY] . '</th>
+                </tr>
+                </thead>
+                <tbody>';
+    foreach ($timeFrames as $timeFrame) {
+        echo '<tr>';
+        echo '<td>' . $timeFrame . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::MONDAY . '_' . $timeFrame) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::TUESDAY . '_' . $timeFrame) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::WEDNESDAY . '_' . $timeFrame) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::THURSDAY . '_' . $timeFrame) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::FRIDAY . '_' . $timeFrame) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::SATURDAY . '_' . $timeFrame) . '</td>';
+        echo '</tr>';
+    }
+    echo '</tbody></table>';
+}
+
+function getDesktopLesson($lessons, $key) {
+    return isNotEmpty($lessons[$key]) ? $lessons[$key] : '&nbsp;';
 }
 
 ?>
@@ -198,140 +118,8 @@ function renderDesktopProgram($program, $weekDaysGr) {
         </div>
         <div class="col-sm-12">
             <?php
-            renderDesktopProgram($desktopProgram, $weekDaysGr)
+            renderDesktopProgram($lessons, $timeFrames, $weekDaysGr);
             ?>
-            <table class="aboutTimeTable table table-responsive">
-                <thead>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>Δευτέρα</th>
-                    <th>Τρίτη</th>
-                    <th>Τετάρτη</th>
-                    <th>Πέμπτη</th>
-                    <th>Παρασκευή</th>
-                    <th>Σάββατο</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>08:30 - 09:30</td>
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τρίτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τετάρτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Πέμπτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>09:00 - 10:00</td>
-                    <td>&nbsp;</td>                     <!--Δευτέρα-->
-                    <td><?php echo YOGA ?></td>           <!--Τρίτη-->
-                    <td>&nbsp;</td>           <!--Τετάρτη-->
-                    <td>&nbsp;</td>           <!--Πέμπτη-->
-                    <td>&nbsp;</td>                     <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>09:30 - 10:30</td>
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τρίτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τετάρτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Πέμπτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>10:00 - 11:00</td>
-                    <td>&nbsp;</td>                     <!--Δευτέρα-->
-                    <td>&nbsp;</td>           <!--Τρίτη-->
-                    <td><?php echo FAT_BURN ?></td>           <!--Τετάρτη-->
-                    <td>&nbsp;</td>           <!--Πέμπτη-->
-                    <td>&nbsp;</td>                     <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>10:30 - 11:30</td>
-                    <td><?php echo PILATES_EQUIP ?></td>          <!--Δευτέρα-->
-                    <td><?php echo PILATES_MAT ?></td>               <!--Τρίτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>            <!--Τετάρτη-->
-                    <td><?php echo PILATES_MAT ?></td>               <!--Πέμπτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>          <!--Παρασκευή-->
-                    <td><?php echo PILATES_EQUIP ?></td>                    <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>11:30 - 12:30</td>
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τρίτη-->
-                    <td>&nbsp;</td>                                <!--Τετάρτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Πέμπτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Παρασκευή-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>13:00 - 14:00</td>
-                    <td><?php echo PILATES_EQUIP ?></td>                     <!--Δευτέρα-->
-                    <td>&nbsp;</td>                     <!--Τρίτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>                     <!--Τετάρτη-->
-                    <td>&nbsp;</td>                     <!--Πέμπτη-->
-                    <td>&nbsp;</td>                     <!--Παρασκευή-->
-                    <td><?php echo PILATES_MAT ?>/<?php echo AERIAL_YOGA ?></td>    <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>16:00 - 17:00</td>
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τρίτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>                                <!--Τετάρτη-->
-                    <td>&nbsp;</td>           <!--Πέμπτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Παρασκευή-->
-                    <td>&nbsp;</td>           <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>17:00 - 18:00</td>
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τρίτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>                     <!--Τετάρτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>                     <!--Πέμπτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>18:00 - 19:00</td>
-                    <td><?php echo PILATES_MAT ?></td>                <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τρίτη-->
-                    <td><?php echo PILATES_MAT ?></td>                <!--Τετάρτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Πέμπτη-->
-                    <td>&nbsp;</td>                     <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>19:00 - 20:00</td>
-                    <td><?php echo FAT_BURN ?></td>                <!--Δευτέρα-->
-                    <td><?php echo PILATES_MAT ?></td>                <!--Τρίτη-->
-                    <td><?php echo FAT_BURN ?></td>                <!--Τετάρτη-->
-                    <td><?php echo YOGA ?></td>                       <!--Πέμπτη-->
-                    <td><?php echo PILATES_MAT ?></td>           <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>20:00 - 21:00</td>
-                    <td><?php echo YOGA ?></td>            <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>          <!--Τρίτη-->
-                    <td><?php echo PILATES_MAT ?>/<?php echo AERIAL_YOGA ?></td>          <!--Τετάρτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>          <!--Πέμπτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>          <!--Παρασκευή-->
-                    <td>&nbsp;</td>                    <!--Σάββατο-->
-                </tr>
-                <tr>
-                    <td>21:00 - 22:00</td>
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Δευτέρα-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Τρίτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>                     <!--Τετάρτη-->
-                    <td><?php echo PILATES_EQUIP ?></td>           <!--Πέμπτη-->
-                    <td>&nbsp;</td>                     <!--Παρασκευή-->
-                    <td>&nbsp;</td>                     <!--Σάββατο-->
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
     <div class="row mobile">
@@ -339,7 +127,7 @@ function renderDesktopProgram($program, $weekDaysGr) {
             <p>Πρόγραμμα</p>
             <div class="titlesBorder"></div>
         </div>
-        <?php renderMobileProgram($program, $weekDaysGr); ?>
+        <?php renderMobileProgram($mobileProgram, $weekDaysGr); ?>
     </div>
     <div class="row">
         <div class="col-sm-12">
