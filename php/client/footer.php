@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 newsletter-email-input-container">
+        <div class="col-sm-12 newsletter-email-input-container" id="newsletter">
             <input type="email" name="email" value="" id="newsletterEmail" class="newsletter-email-input" placeholder="<?php echo getLocalizedText("newsletter_email_placeholder");?>">
             <div class="newsletter-btn">
                 <?php echo getLocalizedText("newsletter_button_text");?>

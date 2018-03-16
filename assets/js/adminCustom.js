@@ -48,9 +48,14 @@ $(document).ready(function () {
         "columns": [{"width": "10%"}, {"width": "15%"}, {"width": "25%"}, {"width": "20%"}, {"width": "30%", "orderable": false}]
     });
 
-    $('.newsletter-dataTable').DataTable({
+    $('.newsletterEmails-dataTable').DataTable({
         responsive: true,
         "columns": [{"width": "50%"}, {"width": "50%", "orderable": false}]
+    });
+
+    $('.newsletterCampaigns-dataTable').DataTable({
+        responsive: true,
+        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "30%"}, {"width": "5%", "orderable": false}]
     });
 
     initializeCheckBoxes();

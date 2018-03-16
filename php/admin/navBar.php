@@ -305,9 +305,9 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'newsletterEmails' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'newsletterEmails') !== false) {
+                        <a href="<?php echo $adminRequestUri . 'newsletter' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'newsletter') !== false) {
                             echo 'class="active"';
-                        } ?>><i class="fa fa-envelope"></i> Newsletter Emails</a>
+                        } ?>><i class="fa fa-envelope"></i> Newsletter</a>
                     </li>
                 <?php } ?>
                 <!--<?php if (hasAccess($loggedInUser, AccessRight::PAGES_SECTION)) { ?>

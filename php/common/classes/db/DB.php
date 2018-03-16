@@ -26,11 +26,13 @@ class Db {
     const VISITORS = 'VISITORS';
 
     const NEWSLETTER_EMAILS = 'NEWSLETTER_EMAILS';
+    const NEWSLETTER_CAMPAIGNS = 'NEWSLETTER_CAMPAIGNS';
 
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
     const DB_BLOG = 'blog';
     const DB_PRODUCT_CATALOGUE = 'product_catalogue';
+    const DB_NEWSLETTER = 'newsletter';
 
     // The database connection
     protected static $connection;
@@ -39,11 +41,13 @@ class Db {
 
     private $initialized;
 
-    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS, self::NEWSLETTER_EMAILS);
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS);
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
     private static $product_tables = array(self::PRODUCTS, self::PRODUCT_DETAILS, self::PRODUCT_CATEGORIES, self::PROMOTION);
+
+    private static $newsletter_tables = array(self::NEWSLETTER_EMAILS, self::NEWSLETTER_CAMPAIGNS);
 
     private $prefix;
 
@@ -71,6 +75,7 @@ class Db {
     public $visitors;
 
     public $newsletter_emails;
+    public $newsletter_campaigns;
 
     /**
      * @return Db
@@ -386,6 +391,9 @@ class Db {
                     case self::NEWSLETTER_EMAILS:
                         $this->setNewsletterEmails($updatedTable);
                         break;
+                    case self::NEWSLETTER_CAMPAIGNS:
+                        $this->setNewsletterCampaigns($updatedTable);
+                        break;
                 }
             }
         }
@@ -398,7 +406,7 @@ class Db {
     private static function tables($scope = self::DB_ALL) {
         switch ($scope) {
             case self::DB_ALL:
-                $tables = array_merge(self::$global_tables, self::$blog_tables, self::$product_tables);
+                $tables = array_merge(self::$global_tables, self::$blog_tables, self::$product_tables, self::$newsletter_tables);
                 break;
             case self::DB_GLOBAL:
                 $tables = self::$global_tables;
@@ -408,6 +416,9 @@ class Db {
                 break;
             case self::DB_PRODUCT_CATALOGUE:
                 $tables = self::$product_tables;
+                break;
+            case self::DB_NEWSLETTER:
+                $tables = self::$newsletter_tables;
                 break;
             default :
                 return array();
@@ -607,6 +618,11 @@ class Db {
         $this->newsletter_emails = $newsletter_emails;
     }
 
-}
+    /**
+     * @param mixed $newsletter_campaigns
+     */
+    public function setNewsletterCampaigns($newsletter_campaigns) {
+        $this->newsletter_campaigns = $newsletter_campaigns;
+    }
 
-?>
+}
