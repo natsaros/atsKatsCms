@@ -1,3 +1,5 @@
+<script src="<?php echo JS_URI ?>fullcalendar/moment.min.js"></script>
+
 <!-- jQuery -->
 <script src="<?php echo JS_URI ?>jquery.min.js"></script>
 
@@ -10,17 +12,17 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?php echo JS_URI ?>raphael/raphael.min.js"></script>
 
-<?php if(strpos(ADMIN_PAGE_ID, 'updatePost') !== false) {
+<?php if (strpos(ADMIN_PAGE_ID, 'updatePost') !== false) {
     echo '<script src="' . JS_URI . 'tinymce/tinymce.min.js"></script>';
 } ?>
 
-<?php if(strpos(ADMIN_PAGE_ID, 'morris') !== false) {
+<?php if (strpos(ADMIN_PAGE_ID, 'morris') !== false) {
 //    || strpos(ADMIN_PAGE_ID, 'tables') !== false
     echo '<script src="' . JS_URI . 'morrisjs/morris.min.js"></script>';
     echo '<script src="' . JS_URI . 'morris-data.js"></script>';
 } ?>
 
-<?php if(strpos(ADMIN_PAGE_ID, 'flot') !== false) {
+<?php if (strpos(ADMIN_PAGE_ID, 'flot') !== false) {
     echo '<!-- Flot Charts JavaScript -->';
     echo '<script src="' . JS_URI . 'flot/excanvas.min.js"></script>';
     echo '<script src="' . JS_URI . 'flot/jquery.flot.js"></script>';
@@ -38,8 +40,10 @@
 <script src="<?php echo JS_URI ?>datatables-responsive/dataTables.responsive.js"></script>
 
 <script src="<?php echo JS_URI ?>bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="<?php echo JS_URI ?>daypilot/daypilot-all.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo JS_URI ?>sb-admin-2.min.js"></script>
 <script src="<?php echo JS_URI ?>adminCustom.js"></script>
+
+<script src="<?php echo JS_URI ?>fullcalendar/fullcalendar.min.js"></script>
+<script src="<?php echo JS_URI ?>fullcalendar/scheduler.min.js"></script>

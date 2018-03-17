@@ -2,91 +2,39 @@
 
 <?php require("messageSection.php"); ?>
 
+<style>
+    #calendar {
+        /*max-width: 1000px;*/
+        /*max-height: 500px;*/
+        /*margin: 0 auto;*/
+    }
+</style>
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel-body">
-            <div id="dp"></div>
-        </div>
-    </div>
+    <!--    <div class="col-lg-12">-->
+    <!--        <div class="panel-body">-->
+    <div id="calendar"></div>
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
 
-<script type="text/javascript">
-    var dp = new DayPilot.Calendar("dp");
-    dp.viewType = "Week";
-    dp.onEventMoved = function (args) {
-        console.log("Moved.");
-        // $.post("backend_move.php",
-        //     {
-        //         id: args.e.id(),
-        //         newStart: args.newStart.toString(),
-        //         newEnd: args.newEnd.toString()
-        //     },
-        //     function () {
-        //         console.log("Moved.");
-        //     });
-    };
-
-    dp.onEventResized = function (args) {
-        console.log("Resized.");
-        // $.post("backend_resize.php",
-        //     {
-        //         id: args.e.id(),
-        //         newStart: args.newStart.toString(),
-        //         newEnd: args.newEnd.toString()
-        //     },
-        //     function () {
-        //         console.log("Resized.");
-        //     });
-    };
-
-    // event creating
-    dp.onTimeRangeSelected = function (args) {
-        console.log("Created.");
-        // var name = prompt("New event name:", "Event");
-        // dp.clearSelection();
-        // if (!name) return;
-        // var e = new DayPilot.Event({
-        //     start: args.start,
-        //     end: args.end,
-        //     id: DayPilot.guid(),
-        //     resource: args.resource,
-        //     text: name
-        // });
-        // dp.events.add(e);
-        //
-        // $.post("backend_create.php",
-        //     {
-        //         start: args.start.toString(),
-        //         end: args.end.toString(),
-        //         name: name
-        //     },
-        //     function () {
-        //         console.log("Created.");
-        //     });
-
-    };
-
-    dp.onEventClick = function (args) {
-        alert("clicked: " + args.e.id());
-    };
-
-    dp.init();
-
-    loadEvents();
-
-    function loadEvents() {
-        var start = dp.visibleStart();
-        var end = dp.visibleEnd();
-        console.log('load events')
-        // $.post("backend_events.php",
-        //     {
-        //         start: start.toString(),
-        //         end: end.toString()
-        //     },
-        //     function (data) {
-        //         //console.log(data);
-        //         dp.events.list = data;
-        //         dp.update();
-        //     });
-    }
+<script type="application/javascript">
+    $('#calendar').fullCalendar({
+        schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+        defaultView: 'agendaWeek',
+        header: false,
+        allDayDefault: false,
+        // aspectRatio: 1.5,
+        allDaySlot: false,
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        hiddenDays: [0],
+        slotMinutes: 60,
+        minTime: "08:00:00",
+        // maxTime: "23:00:00",
+        slotLabelFormat: "HH:mm",
+        columnFormat: 'dddd',
+        dragOpacity: {
+            agenda: .5
+        }
+    });
 </script>
