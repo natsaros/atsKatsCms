@@ -27,7 +27,15 @@ try {
     if (isEmpty($promotion_instance_id)){
         $promotion_instance_id = null;
     }
-    $promotion2Create->setPromotedFrom($promoted_from)->setPromotedTo($promoted_to)->setPromotionText($promotion_text)->setPromotionTextEn($promotion_text_en)->setPromotionActivation(date(DEFAULT_DATE_FORMAT))->setPromotedInstanceType($promotion_instance_type)->setPromotedInstanceId($promotion_instance_id)->setPromotionLink($promotion_link)->setUserId($userID);
+    $promotion2Create->setPromotedFrom($promoted_from)->
+    setPromotedTo($promoted_to)->
+    setPromotionText($promotion_text)->
+    setPromotionTextEn($promotion_text_en)->
+    setPromotionActivation(date(DEFAULT_DATE_FORMAT))->
+    setPromotedInstanceType($promotion_instance_type)->
+    setPromotedInstanceId($promotion_instance_id)->
+    setPromotionLink($promotion_link)->setUserId($userID);
+
     $promotionRes = PromotionHandler::insertPromotion($promotion2Create);
     if($promotionRes !== null || $promotionRes) {
         addSuccessMessage("Promotion successfully created");

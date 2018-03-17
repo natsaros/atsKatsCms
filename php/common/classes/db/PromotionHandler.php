@@ -53,9 +53,19 @@ class PromotionHandler {
      * @throws SystemException
      */
     static function insertPromotion($promotion) {
-        if(isNotEmpty($promotion)) {
-            $query = "INSERT INTO " . getDb()->promotions . " (" . self::PROMOTED_INSTANCE_TYPE . "," . self::PROMOTED_INSTANCE_ID . "," . self::PROMOTED_FROM . "," . self::PROMOTED_TO . "," . self::PROMOTION_TEXT . "," . self::PROMOTION_TEXT_EN . "," . self::PROMOTION_ACTIVATION .  "," . self::USER_ID . "," . self::PROMOTION_LINK . ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $createdPromotion = getDb()->createStmt($query, array('i', 'i', 's', 's', 's', 's', 's', 's', 's'), array($promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), $promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), $promotion->getPromotionTextEn(), date(DEFAULT_DATE_FORMAT)), $promotion->getUserId(), $promotion->getPromotionLink());
+        if (isNotEmpty($promotion)) {
+            $query = "INSERT INTO " . getDb()->promotions . " (" . self::PROMOTED_INSTANCE_TYPE . "," . self::PROMOTED_INSTANCE_ID . "," . self::PROMOTED_FROM . "," . self::PROMOTED_TO . "," . self::PROMOTION_TEXT . "," . self::PROMOTION_TEXT_EN . "," . self::PROMOTION_ACTIVATION . "," . self::USER_ID . "," . self::PROMOTION_LINK . ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $createdPromotion = getDb()->createStmt($query,
+                array('i', 'i', 's', 's', 's', 's', 's', 's', 's'),
+                array($promotion->getPromotedInstanceType(),
+                    $promotion->getPromotedInstanceId(),
+                    $promotion->getPromotedFrom(),
+                    $promotion->getPromotedTo(),
+                    $promotion->getPromotionText(),
+                    $promotion->getPromotionTextEn(),
+                    date(DEFAULT_DATE_FORMAT),
+                    $promotion->getUserId(),
+                    $promotion->getPromotionLink()));
             return $createdPromotion;
         }
         return null;
@@ -80,7 +90,7 @@ class PromotionHandler {
      * @throws SystemException
      */
     public static function deletePromotion($id) {
-        if(isNotEmpty($id)) {
+        if (isNotEmpty($id)) {
             $query = "DELETE FROM " . getDb()->promotions . " WHERE " . self::ID . " = ?";
             $res = getDb()->deleteStmt($query, array('i'), array($id));
             return $res;
@@ -94,13 +104,13 @@ class PromotionHandler {
      * @throws SystemException
      */
     private static function populatePromotion($row) {
-        if($row === false || null === $row) {
+        if ($row === false || null === $row) {
             return null;
         }
         $promotion = Promotion::createPromotion($row[self::ID], $row[self::PROMOTED_INSTANCE_TYPE], $row[self::PROMOTED_INSTANCE_ID], $row[self::PROMOTED_FROM], $row[self::PROMOTED_TO], $row[self::PROMOTION_TEXT], $row[self::PROMOTION_TEXT_EN], $row[self::PROMOTION_ACTIVATION], $row[self::TIMES_SEEN], $row[self::PROMOTION_LINK]);
-        if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT){
+        if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) {
             $promotionInstance = ProductHandler::getProductByIDWithDetails($promotion->getPromotedInstanceId());
-        } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY){
+        } else if ($promotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) {
             $promotionInstance = ProductCategoryHandler::getProductCategoryByID($promotion->getPromotedInstanceId());
         }
         $promotion->setPromotedInstance($promotionInstance);
@@ -113,13 +123,13 @@ class PromotionHandler {
      * @throws SystemException
      */
     private static function populatePromotions($rows) {
-        if($rows === false) {
+        if ($rows === false) {
             return false;
         }
 
         $promotions = [];
 
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $promotions[] = self::populatePromotion($row);
         }
 
