@@ -10,11 +10,11 @@
     }
 </style>
 <div class="row">
-    <!--    <div class="col-lg-12">-->
-    <!--        <div class="panel-body">-->
-    <div id="calendar"></div>
-    <!--        </div>-->
-    <!--    </div>-->
+    <div class="col-lg-12">
+        <div class="panel-body">
+            <div id="calendar"></div>
+        </div>
+    </div>
 </div>
 
 <script type="application/javascript">
