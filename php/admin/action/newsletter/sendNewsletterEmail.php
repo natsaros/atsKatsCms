@@ -30,7 +30,7 @@ try {
 
     $email = Email::createFull('info@sellinofos.gr', 'n__katsia@hotmail.com', $title, $file_contents, $headers);
 
-//    EmailHandler::sendEmail($email);
+    EmailHandler::sendEmail($email);
 
     $newsLetterCampaign = NewsletterCampaign::create();
     $newsLetterCampaign->setTitle($title)->setMessage($file_contents)->setButtonText($button_text)->setLink($link)->setUserId($loggedInUser->getID());

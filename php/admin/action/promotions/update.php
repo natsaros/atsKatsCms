@@ -7,7 +7,7 @@ $promotion_text_en = safe_input($_POST[PromotionHandler::PROMOTION_TEXT_EN]);
 $promotion_instance_type = safe_input($_POST[PromotionHandler::PROMOTED_INSTANCE_TYPE]);
 $promotion_instance_id = safe_input($_POST[PromotionHandler::PROMOTED_INSTANCE_ID]);
 $promotion_link = safe_input($_POST[PromotionHandler::PROMOTION_LINK]);
-$userID = safe_input($_POST[ProductHandler::USER_ID]);
+$userID = safe_input($_POST[PromotionHandler::USER_ID]);
 
 if (isEmpty($promoted_from) || isEmpty($promoted_to) || isEmpty($promotion_text) || isEmpty($promotion_text_en) || isEmpty($promotion_instance_type) || (isNotEmpty($promotion_instance_type) && $promotion_instance_type != PromotionInstanceType::PLAIN_TEXT && isEmpty($promotion_instance_id)) || (isNotEmpty($promotion_instance_type) && $promotion_instance_type == PromotionInstanceType::PLAIN_TEXT && isEmpty($promotion_link))){
     addErrorMessage("Please fill in required info");
