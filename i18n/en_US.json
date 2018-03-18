@@ -28,5 +28,6 @@
   "email_sent": "We have received your email and we will contact you as soon as possible! Thank you!",
   "mandatory_fields": "Please fill in all mandatory fields",
   "invalid_email": "Invalid email address",
-  "invalid_phone_number": "Invalid phone number"
+  "invalid_phone_number": "Invalid phone number",
+  "unsubscription_success": "You have unsubscribed from our Newsletter"
 }

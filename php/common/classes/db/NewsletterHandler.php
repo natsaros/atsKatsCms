@@ -74,7 +74,7 @@ class NewsletterHandler {
      */
     static function unsubscribeFromNewsletter($token) {
         $query = "DELETE FROM " . getDb()->newsletter_emails . " WHERE " . self::UNSUBSCRIPTION_TOKEN . " = ?";
-        getDb()->selectStmtSingle($query, array('s'), array(mysqli_real_escape_string($token)));
+        getDb()->selectStmtSingle($query, array('s'), array($token));
     }
 
     /**
@@ -140,7 +140,7 @@ class NewsletterHandler {
         if($row === false || null === $row) {
             return null;
         }
-        $newsletterEmail = NewsletterEmail::createNewsletterEmail($row[self::ID], $row[self::EMAIL], $row[self::DATE]);
+        $newsletterEmail = NewsletterEmail::createNewsletterEmail($row[self::ID], $row[self::EMAIL], $row[self::UNSUBSCRIPTION_TOKEN], $row[self::DATE]);
         return $newsletterEmail;
     }
 

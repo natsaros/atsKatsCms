@@ -27,5 +27,6 @@
   "email_sent": "Λάβαμε το email σας και θα επικοινωνήσουμε άμεσα μαζί σας! Ευχαριστούμε!",
   "mandatory_fields": "Παρακαλώ συμπληρώστε όλα τα υποχρεωτικά πεδία",
   "invalid_email": "Μη έγκυρη διεύθυνση email",
-  "invalid_phone_number": "Μη έγκυρος αριθμός τηλεφώνου"
+  "invalid_phone_number": "Μη έγκυρος αριθμός τηλεφώνου",
+  "unsubscription_success": "Έχετε διαγραφεί από το Newsletter μας"
 }

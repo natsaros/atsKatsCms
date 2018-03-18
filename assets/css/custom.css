@@ -377,6 +377,8 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
 
 .zoomContainer {overflow: hidden;}
 
+.unsubscription-success{font-size: 20px;margin: 10% 0;text-align: center;}
+
 @media screen and (min-width: 768px){
     .navbar-collapse li { text-align: center;width: 25%; }
     .sub-category-menu li{list-style: none;text-align: center;width: 16.24%;color: #fff;display: inline-block;position: relative;height: 62px;line-height: 62px;}

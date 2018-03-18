@@ -35,7 +35,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_URI} !admin [NC]
 RewriteRule ^sales$ index.php?id=collection&category_friendly_url=Sales [QSA]
-RewriteRule ^action/([a-zA-Z0-9-]+)/?$ index.php?action=$1
+RewriteRule ^action/([a-zA-Z0-9-]+)/?$ index.php?action=$1  [QSA]
 RewriteRule ^ajaxAction/([a-zA-Z0-9-]+)/?$ index.php?ajaxAction=$1
 #RewriteRule ^blog/([a-zA-Z0-9-]+)/?$ index.php?id=blogpost&post_friendly_url=$1
 RewriteRule ^collections/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ index.php?id=productDetails&category_friendly_url=$1&product_friendly_url=$2

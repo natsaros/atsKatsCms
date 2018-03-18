@@ -93,10 +93,11 @@ class NewsletterEmail {
         return $instance;
     }
 
-    public static function createNewsletterEmail($ID, $email, $date) {
+    public static function createNewsletterEmail($ID, $email, $unsubscription_token, $date) {
         return self::create()
             ->setID($ID)
             ->setEmail($email)
+            ->setUnsubscriptionToken($unsubscription_token)
             ->setDate(date(ADMIN_DATE_FORMAT, strtotime($date)));
     }
 }

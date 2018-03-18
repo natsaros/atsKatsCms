@@ -77,10 +77,30 @@ class PromotionHandler {
      * @throws SystemException
      */
     public static function update($promotion) {
-        $query = "UPDATE " . getDb()->promotions . " SET " . self::PROMOTED_FROM . " = ?, " . self::PROMOTED_TO . " = ?, " . self::PROMOTION_TEXT . " = ?, " . self::PROMOTION_TEXT_EN . " = ?, " . self::PROMOTED_INSTANCE_TYPE . " = ?, " . self::PROMOTED_INSTANCE_ID . " = ?, " . self::PROMOTION_ACTIVATION . " = ?, " . self::PROMOTION_LINK . " = ?, " . self::USER_ID . " = ? WHERE " . self::ID . " = ?";
+        $query = "UPDATE " . getDb()->promotions
+            . " SET "
+            . self::PROMOTED_FROM . " = ?, "
+            . self::PROMOTED_TO . " = ?, "
+            . self::PROMOTION_TEXT . " = ?, "
+            . self::PROMOTION_TEXT_EN . " = ?, "
+            . self::PROMOTED_INSTANCE_TYPE . " = ?, "
+            . self::PROMOTED_INSTANCE_ID . " = ?, "
+            . self::PROMOTION_ACTIVATION . " = ?, "
+            . self::PROMOTION_LINK . " = ?, "
+            . self::USER_ID
+            . " = ? WHERE " . self::ID . " = ?";
         $updatedRes = getDb()->updateStmt($query,
             array('s', 's', 's', 's', 'i', 'i', 's', 's', 's', 'i'),
-            array($promotion->getPromotedFrom(), $promotion->getPromotedTo(), $promotion->getPromotionText(), $promotion->getPromotionTextEn(), $promotion->getPromotedInstanceType(), $promotion->getPromotedInstanceId(), date(DEFAULT_DATE_FORMAT), $promotion->getPromotionLink(), $promotion->getUserId(), $promotion->getID()));
+            array($promotion->getPromotedFrom(),
+                $promotion->getPromotedTo(),
+                $promotion->getPromotionText(),
+                $promotion->getPromotionTextEn(),
+                $promotion->getPromotedInstanceType(),
+                $promotion->getPromotedInstanceId(),
+                date(DEFAULT_DATE_FORMAT),
+                $promotion->getPromotionLink(),
+                $promotion->getUserId(),
+                $promotion->getID()));
         return $updatedRes;
     }
 
