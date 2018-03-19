@@ -21,7 +21,7 @@ $posts = PostHandler::fetchAllPosts();
                 <tbody>
                 <?php
                 /* @var $post Post */
-                foreach($posts as $key => $post) {
+                foreach ($posts as $key => $post) {
                     $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                     $postId = $post->getID();
                     ?>

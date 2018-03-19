@@ -16,20 +16,20 @@ function initBootstrapToggle() {
 $(document).ready(function () {
     $('.ak-dataTable').DataTable({responsive: true});
 
-    // $('.calendar-dataTable').DataTable({
-    //     responsive: true,
-    //     searching: false,
-    //     ordering: false,
-    //     "paging": false,
-    //     "info": false,
-    //     // select : {
-    //     //     selector: 'td:not(:first-child)',
-    //     //     blurable: true,
-    //     //     style: 'os',
-    //     //     items: 'cell'
-    //     // }
-    //
-    // });
+    $('.calendar-dataTable').DataTable({
+        responsive: true,
+        searching: false,
+        ordering: false,
+        "paging": false,
+        "info": false,
+        // select : {
+        //     selector: 'td:not(:first-child)',
+        //     blurable: true,
+        //     style: 'os',
+        //     items: 'cell'
+        // }
+
+    });
 
     initializeCheckBoxes();
     initBootstrapToggle();

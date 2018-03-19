@@ -2,6 +2,7 @@
 
 <!-- jQuery -->
 <script src="<?php echo JS_URI ?>jquery.min.js"></script>
+<script src="<?php echo JS_URI ?>jquery-ui.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="<?php echo JS_URI ?>bootstrap.min.js"></script>
