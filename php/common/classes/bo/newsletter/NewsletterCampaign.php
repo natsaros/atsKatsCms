@@ -153,6 +153,6 @@ class NewsletterCampaign
             ->setMessage($message)
             ->setLink($link)
             ->setButtonText($button_text)
-            ->setSendingDate(date(ADMIN_DATE_FORMAT, strtotime($sending_date)));
+            ->setSendingDate($sending_date);
     }
 }

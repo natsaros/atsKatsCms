@@ -1,5 +1,5 @@
 <head>
-    <title>Sellinofos</title>
+    <title><?php echo SITE_TITLE;?></title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,7 @@
     <meta name="description" content="Sellinofos">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="keywords"
-          content="Σelliνόφως,sellinofos,Sellinofos,elli,Elli,koimtsidi,Koimtsidi,Elli Koimtsidi,jewellery,kosmimata,handmade,Handmade creations by EK">
+          content="selinofos,sellinofos,Sellinofos,elli,Elli,koimtsidi,Koimtsidi,Elli Koimtsidi,Σelliνόφως,jewellery,kosmimata,handmade,Handmade creations by EK">
 
     <!--    --><?php //if ($pageId == "blogpost" && isset($_GET["post_friendly_url"])) {
     //        $post = PostHandler::getPostByFriendlyTitleWithDetails($_GET["post_friendly_url"]);
@@ -64,12 +64,14 @@
     <script src="<?php echo ASSETS_URI ?>js/instafeed/instafeed.min.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/elevatezoom/jquery.elevateZoom-3.0.8.min.js"></script>
 
+    <?php if (isNotEmpty(GA_ID)) { ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115469860-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo GA_ID;?>"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-115469860-1');
+        gtag('config', '<?php echo GA_ID;?>');
     </script>
+    <?php } ?>
 </head>

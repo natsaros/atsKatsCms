@@ -9,7 +9,6 @@ if (isEmpty(trim($name)) || isEmpty(trim($email_address)) || isEmpty(trim($text)
     addErrorMessage("Παρακαλώ συμπληρώστε όλες τις απαιτούμενες πληροφορίες");
 }
 
-
 if (isNotEmpty(trim($email_address)) && !isValidMail($email_address)) {
     addErrorMessage('Μη έγκυρη διεύθυνση email');
 }

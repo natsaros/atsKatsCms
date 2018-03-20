@@ -30,7 +30,8 @@ $(document).ready(function () {
 
     $('.promotions-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "20%"}, {"width": "10%"}, {"width": "10%"}, {"width": "10%"}, {"width": "30%"}, {"width": "10%"}, {"width": "10%", "orderable": false}]
+        "columns": [{"width": "20%"}, {"width": "10%"}, {"width": "10%"}, {"width": "10%"}, {"width": "30%"}, {"width": "10%"}, {"width": "10%", "orderable": false}],
+        "order": [[ 1, "desc" ]]
     });
 
     $('.users-group-dataTable').DataTable({
@@ -50,12 +51,14 @@ $(document).ready(function () {
 
     $('.newsletterEmails-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "50%"}, {"width": "50%", "orderable": false}]
+        "columns": [{"width": "50%"}, {"width": "50%"}],
+        "order": [[ 1, "desc" ]]
     });
 
     $('.newsletterCampaigns-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "30%"}, {"width": "5%", "orderable": false}]
+        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "30%"}, {"width": "5%"}],
+        "order": [[ 2, "desc" ]]
     });
 
     initializeCheckBoxes();

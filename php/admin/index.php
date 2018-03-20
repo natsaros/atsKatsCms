@@ -29,8 +29,10 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
 } else if (!isset($action) || isEmpty($action)) {
     //Default behavior: if no action is set to happen navigation occurs.
 
-    if (!isLoggedIn()) {
+    if (!isLoggedIn() && (!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] !== 'remindPassword'))) {
         include(ADMIN_ROOT_PATH . 'login.php');
+    } else if (!isLoggedIn() && (isset($_GET["page"]) && $_GET["page"] === 'remindPassword')){
+        include(ADMIN_ROOT_PATH . 'remindPassword.php');
     } else {
         $page = $_GET["page"];
         if (isEmpty($page)) {

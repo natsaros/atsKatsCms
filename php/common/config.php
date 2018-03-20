@@ -36,6 +36,9 @@ if($config) {
     defined('CONF_LOG_FILE') or define('CONF_LOG_FILE', $log_file . '.txt');
     defined('DEV_MODE') or define('DEV_MODE', $config['dev_mode'] === 'true');
 
+    defined('SITE_TITLE') or define('SITE_TITLE', $config['site_title']);
+
+    defined('GA_ID') or define('GA_ID', $config['google_analytics_id']);
 } else {
     $die = sprintf(
             "There doesn't seem to be a %s file. I need this before we can get started.",

@@ -43,6 +43,23 @@ class UserHandler {
     }
 
     /**
+     * @param $email string
+     * @return int
+     * @throws SystemException
+     */
+    static function resetPassword($email) {
+        $generated_password = bin2hex(openssl_random_pseudo_bytes(3));
+        $password = password_hash($generated_password, PASSWORD_DEFAULT);
+//        $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ? WHERE " . self::EMAIL . " = ?";
+//        $result = getDb()->updateStmt($query, array('s', 's'), array($password, $email));
+        $result = 1;
+        if ($result === 1){
+            EmailHandler::sendResetPasswordToAdmin($email, $generated_password);
+        }
+        return $result;
+    }
+
+    /**
      * @return User[]|bool
      * @throws SystemException
      */

@@ -31,6 +31,27 @@ class EmailHandler {
     }
 
     /**
+     * @param $email
+     * @param $password
+     * @throws SystemException
+     */
+    static function sendResetPasswordToAdmin($email, $password) {
+        $email_subject = "Sellinofos - Password Reset";
+        $email_body = "Your password has been reset.\n\n";
+        $email_body .= "You should use the following password in order to sign in to Sellinofos Admin console:\n\n";
+        $email_body .= $password . "\n\n";
+        $headers = "MIME-Version: 1.1\r\n";
+        $headers .= "Content-type: text/plain; charset=utf-8\r\n";
+        $headers .= "From:admin@sellinofos.gr\r\n";
+        $headers .= "Reply-To:noreply@sellinofos.gr\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+        $headers .= "Date: " . date(DEFAULT_DATE_FORMAT);
+
+        $email = Email::createFull("admin@sellinofos.gr", $email, $email_subject, $email_body, $headers);
+        self::sendEmail($email);
+    }
+
+    /**
      * @param $from
      * @param $to
      * @param $subject

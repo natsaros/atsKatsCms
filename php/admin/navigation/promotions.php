@@ -30,9 +30,9 @@ $promotions = PromotionHandler::getAllPromotions();
                         ?>
                         <tr class="<?php echo $oddEvenClass ?>">
                             <td><?php if ($promotion->getPromotedInstanceType() != PromotionInstanceType::PLAIN_TEXT && !is_null($promotion->getPromotedInstance())) { echo $promotion->getPromotedInstance()->getTitle(); } else { echo '&nbsp;';} ?></td>
-                            <td><?php echo $promotion->getPromotionActivation(); ?></td>
-                            <td><?php echo $promotion->getPromotedFrom(); ?></td>
-                            <td><?php echo $promotion->getPromotedTo(); ?></td>
+                            <td data-sort="<?php echo $promotion->getPromotionActivation(); ?>"><?php echo date(ADMIN_DATE_FORMAT, strtotime($promotion->getPromotionActivation())); ?></td>
+                            <td data-sort="<?php echo $promotion->getPromotedFrom(); ?>"><?php echo date(ADMIN_DATE_FORMAT, strtotime($promotion->getPromotedFrom())); ?></td>
+                            <td data-sort="<?php echo $promotion->getPromotedTo(); ?>"><?php echo date(ADMIN_DATE_FORMAT, strtotime($promotion->getPromotedTo())); ?></td>
                             <td><?php echo $promotion->getPromotionText(); ?></td>
                             <td><?php echo $promotion->getTimesSeen(); ?></td>
                             <td>

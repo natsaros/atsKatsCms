@@ -46,7 +46,7 @@ if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterFo
                                 ?>
                                 <tr class="<?php echo $oddEvenClass ?>">
                                     <td><?php echo $newsletterEmail->getEmail(); ?></td>
-                                    <td><?php echo $newsletterEmail->getDate(); ?></td>
+                                    <td data-sort="<?php echo $newsletterEmail->getDate(); ?>"><?php echo date(ADMIN_DATE_FORMAT, strtotime($newsletterEmail->getDate())); ?></td>
                                 </tr>
                                 <?php
                             }
@@ -128,7 +128,7 @@ if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterFo
                                 <tr class="<?php echo $oddEvenClass ?>">
                                     <td><?php echo $newsletterCampaign->getTitle(); ?></td>
                                     <td><?php echo $newsletterCampaign->getLink(); ?></td>
-                                    <td><?php echo $newsletterCampaign->getSendingDate(); ?></td>
+                                    <td data-sort="<?php echo $newsletterCampaign->getSendingDate(); ?>"><?php echo date(ADMIN_DATE_FORMAT, strtotime($newsletterCampaign->getSendingDate())); ?></td>
                                     <td>
                                         <a type="button"
                                            href="<?php echo getAdminRequestUri() . "viewNewsletterCampaign" . addParamsToUrl(array('id'), array($newsletterCampaign->getID())); ?>"

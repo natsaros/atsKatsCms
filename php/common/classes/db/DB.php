@@ -258,7 +258,7 @@ class Db {
             if ($isCreate) {
                 $mysqli_result = $stmt->insert_id;
             } else {
-                $mysqli_result = $isUpdate || $isDelete ? $result : $stmt->get_result();
+                $mysqli_result = $isUpdate || $isDelete ? $stmt->affected_rows : $stmt->get_result();
             }
 
         } else {

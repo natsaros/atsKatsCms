@@ -98,6 +98,6 @@ class NewsletterEmail {
             ->setID($ID)
             ->setEmail($email)
             ->setUnsubscriptionToken($unsubscription_token)
-            ->setDate(date(ADMIN_DATE_FORMAT, strtotime($date)));
+            ->setDate($date);
     }
 }
