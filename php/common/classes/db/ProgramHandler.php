@@ -1,16 +1,29 @@
 <?php
-require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Event.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'EventStatus.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'DaysOfWeek.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Event.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Lesson.php');
 
 class ProgramHandler {
     const ID = 'ID';
     const NAME = 'NAME';
     const STATUS = 'STATUS';
-
     const DAY = 'DAY';
+
     const START = 'START';
     const END = 'END';
+
+    const LESSON = 'LESSON';
+
+    /**
+     * @return bool|Lesson[]
+     * @throws SystemException
+     */
+    static function fetchLessons() {
+        $query = "SELECT * FROM " . getDb()->lessons;
+        $rows = getDb()->selectStmtNoParams($query);
+        return self::populateLessons($rows);
+    }
 
     /**
      * @param $events Event[]
@@ -184,6 +197,28 @@ class ProgramHandler {
         return $rows;
     }
 
+    /**
+     * @param $lesson
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function addDBLesson($lesson) {
+        $query = "INSERT INTO " . getDb()->lessons . " (" . self::LESSON . ") VALUES (?)";
+        $createdLesson = getDb()->createStmt($query, array('s'), array($lesson));
+        return $createdLesson;
+    }
+
+    /**
+     * @param $lesson
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function deleteLesson($lesson) {
+        $query = "DELETE FROM " . getDb()->lessons . " WHERE " . self::LESSON . " = ?";
+        $createdLesson = getDb()->createStmt($query, array('s'), array($lesson));
+        return $createdLesson;
+    }
+
     /*Populate Functions*/
     /**
      * @param $rows
@@ -194,13 +229,14 @@ class ProgramHandler {
             return false;
         }
 
-        $groups = [];
+        $days = [];
 
         foreach ($rows as $row) {
-            $group = self::populateDays($row);
-            $groups[] = $group;
+            $day
+                = self::populateDays($row);
+            $days[] = $day;
         }
-        return $groups;
+        return $days;
     }
 
     /**
@@ -212,5 +248,35 @@ class ProgramHandler {
             return false;
         }
         return Event::createEvent($row[self::ID], $row[self::NAME], $row[self::STATUS], $row[self::DAY], $row[self::START], $row[self::END]);
+    }
+
+
+    /**
+     * @param $rows
+     * @return Lesson[]|bool
+     */
+    private static function populateLessons($rows) {
+        if ($rows === false) {
+            return false;
+        }
+
+        $lessons = [];
+
+        foreach ($rows as $row) {
+            $lesson = self::populateLesson($row);
+            $lessons[] = $lesson;
+        }
+        return $lessons;
+    }
+
+    /**
+     * @param $row
+     * @return Lesson|bool
+     */
+    private static function populateLesson($row) {
+        if ($row === false) {
+            return false;
+        }
+        return Lesson::createLesson($row[self::ID], $row[self::LESSON], $row[self::STATUS]);
     }
 }

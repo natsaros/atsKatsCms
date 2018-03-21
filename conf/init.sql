@@ -189,10 +189,10 @@ INSERT INTO CMS_USER_GROUPS_META (GROUP_ID, META_KEY, META_VALUE)
 VALUES (last_insert_id(), 'description', 'Viewer is just visiting the site');
 
 INSERT INTO CMS_UGR_ASSOC (USER_ID, GROUP_ID) VALUES ((SELECT ID
-                                                      FROM CMS_USERS
-                                                      WHERE NAME = 'admin'), ((SELECT ID
-                                                                               FROM CMS_USER_GROUPS
-                                                                               WHERE NAME = 'admin')));
+                                                       FROM CMS_USERS
+                                                       WHERE NAME = 'admin'), ((SELECT ID
+                                                                                FROM CMS_USER_GROUPS
+                                                                                WHERE NAME = 'admin')));
 
 INSERT INTO CMS_ACCESS_RIGHTS (NAME) VALUES ('ALL');
 INSERT INTO CMS_ACCESS_RIGHTS_META (ACCESS_ID, META_KEY, META_VALUE)
@@ -209,24 +209,27 @@ VALUES (last_insert_id(), 'description', 'Access to user section');
 INSERT INTO CMS_ACCESS_RIGHTS (NAME) VALUES ('SETTINGS_SECTION');
 INSERT INTO CMS_ACCESS_RIGHTS_META (ACCESS_ID, META_KEY, META_VALUE)
 VALUES (last_insert_id(), 'description', 'Access to settings section');
+INSERT INTO CMS_ACCESS_RIGHTS (NAME) VALUES ('PROGRAM_SECTION');
+INSERT INTO CMS_ACCESS_RIGHTS_META (ACCESS_ID, META_KEY, META_VALUE)
+VALUES (last_insert_id(), 'description', 'Access to program section');
 
 INSERT INTO CMS_ACR_ASSOC (ACC_ID, GROUP_ID) VALUES ((SELECT ID
-                                                     FROM CMS_ACCESS_RIGHTS
-                                                     WHERE NAME = 'ALL'), ((SELECT ID
-                                                                            FROM
-                                                                              CMS_USER_GROUPS
-                                                                            WHERE
-                                                                              NAME =
-                                                                              'admin')));
+                                                      FROM CMS_ACCESS_RIGHTS
+                                                      WHERE NAME = 'ALL'), ((SELECT ID
+                                                                             FROM
+                                                                               CMS_USER_GROUPS
+                                                                             WHERE
+                                                                               NAME =
+                                                                               'admin')));
 
 INSERT INTO CMS_ACR_ASSOC (ACC_ID, GROUP_ID) VALUES ((SELECT ID
-                                                     FROM CMS_ACCESS_RIGHTS
-                                                     WHERE NAME = 'POSTS_SECTION'), ((SELECT ID
-                                                                                      FROM
-                                                                                        CMS_USER_GROUPS
-                                                                                      WHERE
-                                                                                        NAME =
-                                                                                        'editor')));
+                                                      FROM CMS_ACCESS_RIGHTS
+                                                      WHERE NAME = 'POSTS_SECTION'), ((SELECT ID
+                                                                                       FROM
+                                                                                         CMS_USER_GROUPS
+                                                                                       WHERE
+                                                                                         NAME =
+                                                                                         'editor')));
 
 CREATE TABLE CMS_VISITORS (
   ID              BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
@@ -238,6 +241,18 @@ CREATE TABLE CMS_VISITORS (
   INSERTION_DATE  DATETIME,
   LAST_LOGIN_DATE DATETIME
 );
+
+CREATE TABLE CMS_LESSONS (
+  ID     BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+  LESSON VARCHAR(250) NOT NULL    DEFAULT '',
+  STATUS INT(11)      NOT NULL    DEFAULT 1
+);
+
+INSERT INTO CMS_LESSONS (LESSON) VALUES ('Pilates equipment');
+INSERT INTO CMS_LESSONS (LESSON) VALUES ('Pilates mat');
+INSERT INTO CMS_LESSONS (LESSON) VALUES ('Yoga');
+INSERT INTO CMS_LESSONS (LESSON) VALUES ('Aerial yoga');
+INSERT INTO CMS_LESSONS (LESSON) VALUES ('Fat burn');
 
 INSERT INTO CMS_SETTINGS (SKEY, SVALUE) VALUES ('blog.enabled', 'off');
 INSERT INTO CMS_SETTINGS (SKEY, SVALUE) VALUES ('blog.style', 'grid');

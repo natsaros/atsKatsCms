@@ -20,6 +20,7 @@ class Db {
     const COMMENT_META = 'COMMENT_META';
 
     const VISITORS = 'VISITORS';
+    const LESSONS = 'LESSONS';
 
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
@@ -32,7 +33,7 @@ class Db {
 
     private $initialized;
 
-    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS);
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS, self::LESSONS);
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
@@ -56,6 +57,7 @@ class Db {
     public $acr_assoc;
 
     public $visitors;
+    public $lessons;
 
     /**
      * @return Db
@@ -69,7 +71,7 @@ class Db {
 
     /**
      * @return bool|mysqli|string
-     * @throws SystemException
+     * @throws SystemException | Exception
      */
     private static function connect() {
         // Try and connect to the database, if a connection has not been established yet
@@ -356,9 +358,11 @@ class Db {
                     case self::ACR_ASSOC:
                         $this->setAcrAssoc($updatedTable);
                         break;
-
                     case self::VISITORS:
                         $this->setVisitors($updatedTable);
+                        break;
+                    case self::LESSONS:
+                        $this->setLessons($updatedTable);
                         break;
                 }
             }
@@ -541,6 +545,13 @@ class Db {
      */
     public function setVisitors($visitors) {
         $this->visitors = $visitors;
+    }
+
+    /**
+     * @param mixed $lessons
+     */
+    public function setLessons($lessons) {
+        $this->lessons = $lessons;
     }
 
 }
