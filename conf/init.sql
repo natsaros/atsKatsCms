@@ -7,20 +7,21 @@ CREATE TABLE CMS_SETTINGS (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE CMS_USERS (
-  ID                BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
-  NAME              VARCHAR(250) NOT NULL    DEFAULT '',
-  PASSWORD          VARCHAR(255) NOT NULL,
-  FIRST_NAME        VARCHAR(250) NOT NULL    DEFAULT '',
-  LAST_NAME         VARCHAR(250) NOT NULL    DEFAULT '',
-  EMAIL             VARCHAR(100)             DEFAULT '',
-  PHONE             VARCHAR(30)              DEFAULT '',
-  LINK              VARCHAR(250)             DEFAULT '',
-  GENDER            VARCHAR(50)              DEFAULT '',
-  PICTURE           LONGBLOB,
-  PICTURE_PATH      VARCHAR(255),
-  USER_STATUS       INT(11)      NOT NULL    DEFAULT 0,
-  ACTIVATION_DATE   DATETIME     NOT NULL,
-  MODIFICATION_DATE TIMESTAMP    NOT NULL    DEFAULT CURRENT_TIMESTAMP
+  ID                          BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+  NAME                        VARCHAR(250) NOT NULL    DEFAULT '',
+  PASSWORD                    VARCHAR(255) NOT NULL,
+  FIRST_NAME                  VARCHAR(250) NOT NULL    DEFAULT '',
+  LAST_NAME                   VARCHAR(250) NOT NULL    DEFAULT '',
+  EMAIL                       VARCHAR(100)             DEFAULT '',
+  PHONE                       VARCHAR(30)              DEFAULT '',
+  LINK                        VARCHAR(250)             DEFAULT '',
+  GENDER                      VARCHAR(50)              DEFAULT '',
+  PICTURE                     LONGBLOB,
+  PICTURE_PATH                VARCHAR(255),
+  USER_STATUS                 INT(11)      NOT NULL    DEFAULT 0,
+  FORCE_CHANGE_PASSWORD       INT(11)      NOT NULL    DEFAULT 0,
+  ACTIVATION_DATE   DATETIME  NOT NULL,
+  MODIFICATION_DATE TIMESTAMP NOT NULL    DEFAULT CURRENT_TIMESTAMP
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

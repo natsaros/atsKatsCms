@@ -36,9 +36,17 @@ try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     if(isNotEmpty($user2Update)) {
-        $user2Update->setUserName($userName)->setFirstName($first_name)->setLastName($last_name)
-            ->setEmail($email)->setUserStatus($user_status)->setGender($gender)
-            ->setLink($link)->setPhone($phone)->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $user2Update->
+        setUserName($userName)->
+        setFirstName($first_name)->
+        setLastName($last_name)->
+        setEmail($email)->
+        setUserStatus($user_status)->
+        setGender($gender)->
+        setLink($link)->
+        setPhone($phone)->
+        setPassword(password_hash($password, PASSWORD_DEFAULT))->
+        setForceChangePassword(0);
 
         if($imgContent) {
             //only saving in filesystem for performance reasons

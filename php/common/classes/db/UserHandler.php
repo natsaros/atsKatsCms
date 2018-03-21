@@ -8,6 +8,7 @@ class UserHandler {
     const ID = 'ID';
     const USERNAME = 'NAME';
     const PASSWORD = 'PASSWORD';
+    const PASSWORD_CONFIRMATION = 'PASSWORD_CONFIRMATION';
     const FIRST_NAME = 'FIRST_NAME';
     const LAST_NAME = 'LAST_NAME';
     const EMAIL = 'EMAIL';
@@ -20,6 +21,7 @@ class UserHandler {
     const PHONE = 'PHONE';
     const PICTURE = 'PICTURE';
     const PICTURE_PATH = 'PICTURE_PATH';
+    const FORCE_CHANGE_PASSWORD = 'FORCE_CHANGE_PASSWORD';
     const USER_ID = 'USER_ID';
     const GROUP_ID = 'GROUP_ID';
 
@@ -50,12 +52,24 @@ class UserHandler {
     static function resetPassword($email) {
         $generated_password = bin2hex(openssl_random_pseudo_bytes(3));
         $password = password_hash($generated_password, PASSWORD_DEFAULT);
-//        $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ? WHERE " . self::EMAIL . " = ?";
-//        $result = getDb()->updateStmt($query, array('s', 's'), array($password, $email));
-        $result = 1;
+        $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = 1 WHERE " . self::EMAIL . " = ?";
+        $result = getDb()->updateStmt($query, array('s', 's'), array($password, $email));
         if ($result === 1){
             EmailHandler::sendResetPasswordToAdmin($email, $generated_password);
         }
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @param $newPassword
+     * @return int
+     * @throws SystemException
+     */
+    static function changePassword($id, $newPassword) {
+        $password = password_hash($newPassword, PASSWORD_DEFAULT);
+        $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = 0 WHERE " . self::ID . " = ?";
+        $result = getDb()->updateStmt($query, array('s', 'i'), array($password, $id));
         return $result;
     }
 
@@ -120,9 +134,9 @@ class UserHandler {
     static function updateUser($user) {
         //TODO add user meta query here
         if (isNotEmpty($user)) {
-            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, "  . self::PASSWORD . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ? WHERE " . self::ID . " = ?";
+            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, "  . self::PASSWORD . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = ? WHERE " . self::ID . " = ?";
             return getDb()->updateStmt($query,
-                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i'),
+                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 'i'),
                 array($user->getUserStatus(),
                     $user->getUserName(),
                     $user->getPassword(),
@@ -134,6 +148,7 @@ class UserHandler {
                     $user->getPhone(),
                     $user->getPicture(),
                     $user->getPicturePath(),
+                    $user->getForceChangePassword(),
                     $user->getID()
                 ));
         }
@@ -160,6 +175,7 @@ class UserHandler {
                 "," . self::PHONE .
                 "," . self::PICTURE .
                 "," . self::PICTURE_PATH .
+                "," . self::FORCE_CHANGE_PASSWORD .
                 "," . self::ACTIVATION_DATE .
                 ") VALUES (?
                 , ?
@@ -172,10 +188,11 @@ class UserHandler {
                 , ? 
                 , ? 
                 , ? 
+                , ? 
                 , ?)";
 
             return getDb()->createStmt($query,
-                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's'),
+                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 's'),
                 array($user->getUserStatus(),
                     $user->getUserName(),
                     $user->getPassword(),
@@ -187,6 +204,7 @@ class UserHandler {
                     $user->getPhone(),
                     $user->getPicture(),
                     $user->getPicturePath(),
+                    $user->getForceChangePassword(),
                     date(DEFAULT_DATE_FORMAT)
                 ));
         }
@@ -251,6 +269,6 @@ class UserHandler {
         if ($row === false) {
             return false;
         }
-        return User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE], $row[self::PICTURE_PATH]);
+        return User::createFullUser($row[self::ID], $row[self::USERNAME], $row[self::PASSWORD], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::ACTIVATION_DATE], $row[self::MODIFICATION_DATE], $row[self::USER_STATUS], $row[self::GENDER], $row[self::LINK], $row[self::PHONE], $row[self::PICTURE], $row[self::PICTURE_PATH], $row[self::FORCE_CHANGE_PASSWORD]);
     }
 }

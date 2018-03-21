@@ -34,7 +34,7 @@ if (!$imageValid) {
 try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
-    $user2Create = User::createFullUser(null, $userName, password_hash($password, PASSWORD_DEFAULT), $first_name, $last_name, $email, date('Y-m-d'), null, true, $gender, $link, $phone, null, null);
+    $user2Create = User::createFullUser(null, $userName, password_hash($password, PASSWORD_DEFAULT), $first_name, $last_name, $email, date('Y-m-d'), null, true, $gender, $link, $phone, null, null, 0);
     if ($imgContent) {
         //only saving in filesystem for performance reasons
         $user2Create->setPicturePath($picturePath);

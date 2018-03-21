@@ -234,6 +234,14 @@ function isLoggedIn() {
 }
 
 /**
+ * @return bool
+ */
+function forceUserChangePassword() {
+    $loggedInUser = getFullUserFromSession();
+    return is_session_started() && isNotEmpty($loggedInUser) && $loggedInUser->getForceChangePassword() === 1;
+}
+
+/**
  * @param $url
  * @param null $refreshRate
  * @param bool $permanent

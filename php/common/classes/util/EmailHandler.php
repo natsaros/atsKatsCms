@@ -39,7 +39,7 @@ class EmailHandler {
         $email_subject = "Sellinofos - Password Reset";
         $email_body = "Your password has been reset.\n\n";
         $email_body .= "You should use the following password in order to sign in to Sellinofos Admin console:\n\n";
-        $email_body .= $password . "\n\n";
+        $email_body .= "<b>" . $password . "</b>\n\n";
         $headers = "MIME-Version: 1.1\r\n";
         $headers .= "Content-type: text/plain; charset=utf-8\r\n";
         $headers .= "From:admin@sellinofos.gr\r\n";

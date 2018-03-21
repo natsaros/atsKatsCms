@@ -1,17 +1,18 @@
 <?php
 $error = '';
-$email = $_POST['email'];
+$successResult = '';
+$email = $_POST[UserHandler::EMAIL];
 if(isNotEmpty($_POST['submit'])) {
     if(isEmpty($email) || !isValidMail($email)) {
-        $result = "Email is invalid";
+        $error = "Invalid email address";
     }
 
-    if(is_null($result) || $result === '') {
+    if(is_null($error) || $error === '') {
         $passwordReset = UserHandler::resetPassword($email);
         if($passwordReset !== 1) {
-            $result = ErrorMessages::GENERIC_ERROR;
+            $error = "Invalid email address";
         } else {
-            $result = "Your password has been reset and sent to email address you typed. Click <a href=\"" . getAdminRequestUri() . 'login' . "\">here</a> to log in.";
+            $successResult = "Your password has been reset and sent to email address you typed. Click <a href=\"" . getAdminRequestUri() . 'login' . "\">here</a> to log in.";
         }
     }
 } ?>
@@ -27,15 +28,19 @@ if(isNotEmpty($_POST['submit'])) {
                 <div class="panel-body">
                     <form role="form" action="<?php echo getAdminRequestUri() . 'remindPassword' ?>" method="post">
                         <fieldset>
-                            <div class="form-group">
+                            <div class="form-group" style="text-align: center;">
                                 Type your email address to receive the new password
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Email" name="email" type="email" autofocus>
+                                <label>Email</label>
+                                <input class="form-control" placeholder="Email" name="<?php echo UserHandler::EMAIL ?>" type="email" autofocus>
                             </div>
-                            <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Reset" placeholder="Reset">
-                            <div class="form-group" style="margin-top: 15px;margin-bottom: 5px;">
-                                <?php echo $result ?>
+                            <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Reset">
+                            <div class="form-group" style="text-align: center;margin: 20px 0;">
+                                <a href="<?php echo getAdminRequestUri() . "login";?>" style="color:#333;text-decoration: underline;">Back to Sign In Page</a>
+                            </div>
+                            <div class="form-group" style="margin-top: 15px;margin-bottom: 5px;text-align: center;<?php if(!is_null($error) && $error !== '') { ?>color: #ff0000;<?php } ?>">
+                                <?php if(is_null($error) || $error === '') { echo $successResult; } else { echo $error; } ?>
                             </div>
                         </fieldset>
                     </form>

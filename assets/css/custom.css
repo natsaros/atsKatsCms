@@ -222,7 +222,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .product-categories-row, .products-row{max-width: 1095px;width: 100%;margin: 0 auto;clear: both;font-size: 0;text-align: center;}
 .product-category-container{opacity: .8;transition: opacity .5s ease-out;-moz-transition: opacity .5s ease-out;-webkit-transition: opacity .5s ease-out;-o-transition: opacity .5s ease-out;display:inline-block;position: relative;width: 345px;;margin: 0 10px;background: #fff;margin-bottom: 50px;}
 .product-category-container:hover {opacity: 1;}
-.product-title {font-size: 18px;text-align: center;margin: 20px 0 10px;display: inline-block;width: 100%;}
+.product-title {font-size: 18px;text-align: center;margin: 20px 0 10px;display: inline-block;width: 100%;min-height: 50px;overflow-y: hidden;max-height: 50px;}
 .product-title a{color: #222;}
 .product-title a:hover{color: #000;}
 .product-container{float: left;position: relative;width: 253px;margin: 0 10px;background: #fff;margin-bottom: 50px;min-height: 350px;}
@@ -533,7 +533,7 @@ input#newsletterEmail:-webkit-autofill {-webkit-text-fill-color: #fff !important
     .navbar-default .navbar-collapse {padding: 0;}
     .fa.fa-caret-down, .fa.fa-caret-up{width: 10px; margin: 0;}
     .productCategoryTitle {font-size: 20px;margin: 15px 0 10px;}
-    .product-title {font-size: 18px;margin: 15px 0 10px;}
+    .product-title {font-size: 16px;margin: 15px 0 5px;}
     .product-initial-price {font-size: 14px;}
     .product-price {font-size: 16px;}
     .product-container{margin: 0 auto 40px;width: 220px;float: none;}

@@ -33,7 +33,15 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
         include(ADMIN_ROOT_PATH . 'login.php');
     } else if (!isLoggedIn() && (isset($_GET["page"]) && $_GET["page"] === 'remindPassword')){
         include(ADMIN_ROOT_PATH . 'remindPassword.php');
-    } else {
+    } else if (isLoggedIn() && (isset($_GET["page"]) && $_GET["page"] === 'remindPassword')){
+        Redirect(getAdminRequestUriNoDelim());
+    } else if (isLoggedIn() && !forceUserChangePassword() && (isset($_GET["page"]) && $_GET["page"] === 'changePassword')){
+        Redirect(getAdminRequestUriNoDelim());
+    } else if (isLoggedIn() && forceUserChangePassword() && (isset($_GET["page"]) && $_GET["page"] === 'changePassword')){
+        include(ADMIN_ROOT_PATH . 'changePassword.php');
+    } else if (isLoggedIn() && forceUserChangePassword() && (!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] !== 'changePassword'))){
+        Redirect(getAdminActionRequestUri() . "logout");
+    } else if (!forceUserChangePassword()){
         $page = $_GET["page"];
         if (isEmpty($page)) {
             if (isNotEmpty(DEV_MODE) && DEV_MODE) {
