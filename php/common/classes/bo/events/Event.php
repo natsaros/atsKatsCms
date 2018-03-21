@@ -1,7 +1,7 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'EventStatus.php');
 
-class Event {
+class Event implements JsonSerializable {
 
     private $ID;
     private $name;
@@ -139,5 +139,15 @@ class Event {
     public function setDay($day) {
         $this->day = $day;
         return $this;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'title' => $this->getName(),
+            'day' => $this->getDay(),
+            'start' => $this->getEnd(),
+            'end' => $this->getEnd(),
+            'status' => $this->getStatus()
+        ];
     }
 }

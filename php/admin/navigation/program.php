@@ -11,6 +11,7 @@
 
 <?php
 $lessons = ProgramHandler::fetchLessons();
+$events = json_encode(ProgramHandler::fetchEvents());
 ?>
 <div class="row">
     <div class="col-lg-2 text-center">
@@ -83,6 +84,16 @@ $lessons = ProgramHandler::fetchLessons();
         return check;
     };
 
+    var now = moment();
+    console.log(now.startOf('day').hour(7).minute(0));
+
+    var $jsEvents = [{
+        title: "pilates",
+        id: 1,
+        start: now.startOf('day').hour(7).minute(0),
+        end: now.startOf('day').hour(9).minute(0)
+    }];
+
     $('#calendar').fullCalendar({
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         // defaultView: 'agendaDay',
@@ -112,6 +123,7 @@ $lessons = ProgramHandler::fetchLessons();
         dragOpacity: {
             agenda: .5
         },
+        events: $jsEvents,
         drop: function (date) {
             // var event = $(this).data('event');
             // var startTime = moment(date);
