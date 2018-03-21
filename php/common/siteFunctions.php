@@ -160,9 +160,9 @@ function getActiveAdminPage() {
  * @throws SystemException
  */
 function initLoad() {
+    initLogFile();
     initLoadDb();
     initGallery();
-    initLogFile();
 }
 
 /**
@@ -669,7 +669,8 @@ function is_session_started() {
  */
 function addParamsToUrl($params, $paramValues) {
     $urlParams = '';
-    if (isNotEmpty($params) && isNotEmpty($paramValues)) {
+    if (isNotEmpty($params)
+        && isNotEmpty($paramValues)) {
         if (count($params) !== count($paramValues)) {
             throw new SystemException('Parameter names and values don\'t match!');
         }

@@ -10,7 +10,7 @@
 </style>
 
 <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-2 text-center">
         <div id='external-events'>
             <div id='external-events-listing'>
                 <h4>Lessons</h4>
@@ -18,6 +18,26 @@
                 <div class='fc-event'>Pilates mat</div>
                 <div class='fc-event'>Yoga</div>
                 <div class='fc-event'>Fat burn</div>
+            </div>
+
+            <!--            <!-- Button trigger modal -->
+            <?php $urlParams = addParamsToUrl(array('modalTitle'), array(urlencode("Lesson Management"))) ?>
+            <a type="button"
+               data-toggle="modal"
+               class="btn btn-default btn-sm" title="Add Lesson"
+               href="<?php echo getAdminModalRequestUri() . "eventManagement" . $urlParams; ?>"
+               data-target="#eventModal_"
+               data-remote="false">
+                <span class="fa fa-lock" aria-hidden="true"></span>
+            </a>
+            <!-- Modal-->
+            <div class="ak_modal modal fade" id="eventModal_"
+                 tabindex="-1"
+                 role="dialog" aria-labelledby="myModalLabel_event_"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content"></div>
+                </div>
             </div>
         </div>
     </div>

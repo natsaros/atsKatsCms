@@ -1,11 +1,11 @@
-ALTER TABLE ak_users
+ALTER TABLE CMS_users
   DROP COLUMN IS_ADMIN;
-ALTER TABLE ak_users
+ALTER TABLE CMS_users
   ADD PICTURE_PATH VARCHAR(255);
-ALTER TABLE ak_users
+ALTER TABLE CMS_users
   MODIFY PICTURE LONGBLOB;
 
-CREATE TABLE AK_VISITORS (
+CREATE TABLE CMS_VISITORS (
   ID              BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
   FB_ID           VARCHAR(50)  NOT NULL,
   FIRST_NAME      VARCHAR(250) NOT NULL    DEFAULT '',
@@ -16,7 +16,7 @@ CREATE TABLE AK_VISITORS (
   LAST_LOGIN_DATE DATETIME
 );
 
-INSERT INTO AK_SETTINGS (SKEY, SVALUE) VALUES ('blog.enabled', 'off');
-INSERT INTO AK_SETTINGS (SKEY, SVALUE) VALUES ('blog.style', 'grid');
-INSERT INTO AK_SETTINGS (SKEY, SVALUE)
-VALUES ('email.addresses', 'pkasfiki@gmail.com;info@fitnesshousebypenny.gr;natsaros@hotmial.com');
+INSERT INTO CMS_SETTINGS (SKEY, SVALUE) VALUES ('blog.enabled', 'off');
+INSERT INTO CMS_SETTINGS (SKEY, SVALUE) VALUES ('blog.style', 'grid');
+INSERT INTO CMS_SETTINGS (SKEY, SVALUE)
+VALUES ('email.addresses', 'pkasfiki@gmail.com;info@fitnesshousebypenny.gr;natsaros@hotmail.com');
