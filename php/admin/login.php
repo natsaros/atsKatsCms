@@ -3,7 +3,7 @@ $error = '';
 
 if(isNotEmpty($_POST['submit'])) {
     if(isEmpty($_POST[UserHandler::USERNAME]) || isEmpty($_POST[UserHandler::PASSWORD])) {
-        $error = "Username or Password is invalid";
+        $error = "Invalid user";
     }
 
     if(is_null($error) || $error === '') {
@@ -11,7 +11,7 @@ if(isNotEmpty($_POST['submit'])) {
         $password = $_POST[UserHandler::PASSWORD];
         $user = UserHandler::adminLogin($username, $password);
         if($user === null || $user === false) {
-            $error = "Not valid user";
+            $error = "Invalid user";
         } else {
             setUserToSession($user);
             if (forceUserChangePassword()){
@@ -43,11 +43,11 @@ if(isNotEmpty($_POST['submit'])) {
                                 <input class="form-control" placeholder="Password" name="<?php echo UserHandler::PASSWORD ?>" type="password" value="">
                             </div>
                             <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Login" placeholder="Login">
-                            <div class="form-group" style="margin-top: 15px;margin-bottom: 5px;text-align: center;color: #ff0000;">
-                                <?php echo $error ?>
+                            <div class="form-group remind-password-link-container">
+                                <a href="<?php echo getAdminRequestUri() . "remindPassword";?>"> Forgot Password </a>
                             </div>
-                            <div class="form-group" style="text-align: center;margin: 20px 0;">
-                                <a href="<?php echo getAdminRequestUri() . "remindPassword";?>" style="color:#333;text-decoration: underline;"> Forgot Password </a>
+                            <div class="form-group login-message-container">
+                                <?php echo $error ?>
                             </div>
                         </fieldset>
                     </form>

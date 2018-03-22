@@ -229,7 +229,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li>
-                    <a href="<?php echo $adminRequestUri . "updateUser" . addParamsToUrl(array('id'), array($loggedInUser->getID())); ?>">
+                    <a href="<?php echo $adminRequestUri . "updateMyProfile"; ?>">
                         <i class="fa fa-user fa-fw"></i> User Profile</a>
                 </li>
                 <li class="divider"></li>
@@ -246,24 +246,11 @@ $adminActionRequestUri = getAdminActionRequestUri();
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <?php if (isNotEmpty(DEV_MODE) && DEV_MODE) { ?>
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
-                    <li>
-                        <a href="<?php echo $adminRequestUri . 'dashboard' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'dashboard') !== false) {
-                            echo 'class="active"';
-                        } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                <?php } ?>
+                <li>
+                    <a href="<?php echo $adminRequestUri . 'dashboard' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'dashboard') !== false) {
+                        echo 'class="active"';
+                    } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
                 <?php if (hasAccess($loggedInUser, AccessRight::USER_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
@@ -274,8 +261,8 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <!--<?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'posts' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'posts') !== false) {
-                            echo 'class="active"';
-                        } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
+                    echo 'class="active"';
+                } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
                     </li>
                 <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::PRODUCTS_SECTION)) { ?>
@@ -309,8 +296,8 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <!--<?php if (hasAccess($loggedInUser, AccessRight::PAGES_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'pages' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'pages') !== false) {
-                            echo 'class="active"';
-                        } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
+                    echo 'class="active"';
+                } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                     </li>
                 <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>

@@ -98,7 +98,7 @@ if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterFo
                                    value="<?php if($afterFormSubmission) {?><?=$form_data[NewsletterHandler::BUTTON_TEXT]?><?php } ?>"
                             >
                         </div>
-                        <div class="text-center form-group">
+                        <div class="text-right form-group">
                             <button type="submit" name="submit" class="btn btn-outline btn-primary">Send <span class="fa fa-envelope fa-fw" aria-hidden="true"></span></button>
                         </div>
                     </form>

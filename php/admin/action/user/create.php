@@ -1,22 +1,25 @@
 <?php
-$password = safe_input($_POST[UserHandler::PASSWORD]);
 $userName = safe_input($_POST[UserHandler::USERNAME]);
 $email = safe_input($_POST[UserHandler::EMAIL]);
-
-if (isEmpty($password) || isEmpty($userName) || isEmpty($email)) {
-    addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . "updateUser");
-}
-
-$first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
-$last_name = safe_input($_POST[UserHandler::LAST_NAME]);
-$gender = safe_input($_POST[UserHandler::GENDER]);
-$link = safe_input($_POST[UserHandler::LINK]);
 $phone = safe_input($_POST[UserHandler::PHONE]);
 
-$groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
+if (isEmpty($userName) || isEmpty($email)) {
+    addErrorMessage("Please fill in required info");
+}
 
-$picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
+if (!isValidMail($email)) {
+    addErrorMessage("Please fill in a valid email address");
+}
+
+$userEmailExists = UserHandler::userEmailExists($email);
+
+if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
+    addErrorMessage('Please fill in a valid phone number');
+}
+
+if ($userEmailExists == 1) {
+    addErrorMessage("There is already a user with this email");
+}
 
 $imageValid = true;
 $image2Upload = $_FILES[UserHandler::PICTURE];
@@ -26,15 +29,32 @@ if (!$emptyFile) {
 }
 
 if (!$imageValid) {
-    addInfoMessage("Please select a valid image file");
+    addErrorMessage("Please select a valid image file");
+}
+
+if(hasErrors()) {
+    if (!empty($_POST)) {
+        foreach($_POST as $key => $value) {
+            $_SESSION['updateUserForm'][$key] = $value;
+        }
+        $_SESSION['updateUserForm'][$key] = $value;
+    }
     Redirect(getAdminRequestUri() . "updateUser");
 }
 
+$first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
+$last_name = safe_input($_POST[UserHandler::LAST_NAME]);
+$gender = safe_input($_POST[UserHandler::GENDER]);
+$link = safe_input($_POST[UserHandler::LINK]);
+
+$groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
+
+$picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
 
 try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
-    $user2Create = User::createFullUser(null, $userName, password_hash($password, PASSWORD_DEFAULT), $first_name, $last_name, $email, date('Y-m-d'), null, true, $gender, $link, $phone, null, null, 0);
+    $user2Create = User::createFullUser(null, $userName, null, $first_name, $last_name, $email, null, null, true, $gender, $link, $phone, null, null, 0);
     if ($imgContent) {
         //only saving in filesystem for performance reasons
         $user2Create->setPicturePath($picturePath);
@@ -60,9 +80,7 @@ try {
 } catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
+    Redirect(getAdminRequestUri() . "updateUser");
 }
-if (hasErrors()) {
-    Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
-} else {
-    Redirect(getAdminRequestUri() . "users");
-}
+
+Redirect(getAdminRequestUri() . "users");

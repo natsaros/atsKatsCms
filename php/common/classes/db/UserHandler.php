@@ -113,6 +113,23 @@ class UserHandler {
     }
 
     /**
+     * @param $email string
+     * @return bool
+     * @throws SystemException
+     */
+    static function userEmailExists($email) {
+        if (isNotEmpty($email)) {
+            $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::EMAIL . " = ?";
+            $row = getDb()->selectStmtSingle($query, array('s'), array($email));
+            if ($row) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
      * @param $id
      * @param $userStatus
      * @return bool|mysqli_result|null
@@ -163,6 +180,9 @@ class UserHandler {
     static function createUser($user) {
         //TODO add user meta query here
         if (isNotEmpty($user)) {
+            $generated_password = bin2hex(openssl_random_pseudo_bytes(3));
+            $password = password_hash($generated_password, PASSWORD_DEFAULT);
+
             $query = "INSERT INTO " . getDb()->users .
                 " (" . self::USER_STATUS .
                 "," . self::USERNAME .
@@ -191,11 +211,11 @@ class UserHandler {
                 , ? 
                 , ?)";
 
-            return getDb()->createStmt($query,
+            $result = getDb()->createStmt($query,
                 array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 's'),
                 array($user->getUserStatus(),
                     $user->getUserName(),
-                    $user->getPassword(),
+                    $password,
                     $user->getFirstName(),
                     $user->getLastName(),
                     $user->getEmail(),
@@ -207,6 +227,9 @@ class UserHandler {
                     $user->getForceChangePassword(),
                     date(DEFAULT_DATE_FORMAT)
                 ));
+
+            EmailHandler::sendResetPasswordToAdmin($user->getEmail(), $generated_password);
+            return $result;
         }
         return null;
     }

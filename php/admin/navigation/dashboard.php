@@ -4,6 +4,8 @@
     </div>
 </div>
 
+<?php require("messageSection.php"); ?>
+
 <div class="row">
     <div class="col-sm-12">
         <h3 class="information-header">Active Promotion</h3>

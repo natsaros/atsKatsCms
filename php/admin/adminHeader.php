@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="<?php echo ASSETS_URI ?>img/favico.png"/>
     <link rel="icon" type="image/png" href="<?php echo ASSETS_URI ?>img/favico.png"/>
     <link rel="icon" sizes="192x192" href="<?php echo ASSETS_URI ?>img/favico.png">
-    
+
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo CSS_URI ?>bootstrap.min.css" rel="stylesheet">
 
@@ -23,7 +23,7 @@
     <link href="<?php echo CSS_URI ?>datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?php echo CSS_URI ?>sb-admin/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet/less" type="text/css" href="<?php echo CSS_URI ?>adminCustom.less"/>
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo CSS_URI ?>morrisjs/morris.css" rel="stylesheet">

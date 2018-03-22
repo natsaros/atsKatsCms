@@ -36,10 +36,10 @@ if(isNotEmpty($_POST['submit'])) {
                                 <input class="form-control" placeholder="Email" name="<?php echo UserHandler::EMAIL ?>" type="email" autofocus>
                             </div>
                             <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Reset">
-                            <div class="form-group" style="text-align: center;margin: 20px 0;">
-                                <a href="<?php echo getAdminRequestUri() . "login";?>" style="color:#333;text-decoration: underline;">Back to Sign In Page</a>
+                            <div class="form-group back-to-login-link-container">
+                                <a href="<?php echo getAdminRequestUri() . "login";?>">Back to Sign In Page</a>
                             </div>
-                            <div class="form-group" style="margin-top: 15px;margin-bottom: 5px;text-align: center;<?php if(!is_null($error) && $error !== '') { ?>color: #ff0000;<?php } ?>">
+                            <div class="form-group remind-password-message-container"<?php if(!is_null($error) && $error !== '') { ?> style="color: #ff0000;"<?php } ?>>
                                 <?php if(is_null($error) || $error === '') { echo $successResult; } else { echo $error; } ?>
                             </div>
                         </fieldset>
