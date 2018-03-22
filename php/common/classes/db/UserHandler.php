@@ -55,7 +55,7 @@ class UserHandler {
         $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = 1 WHERE " . self::EMAIL . " = ?";
         $result = getDb()->updateStmt($query, array('s', 's'), array($password, $email));
         if ($result === 1){
-            EmailHandler::sendResetPasswordToAdmin($email, $generated_password);
+            EmailHandler::sendResetPasswordToAdminUser($email, $generated_password);
         }
         return $result;
     }
@@ -229,7 +229,7 @@ class UserHandler {
                     date(DEFAULT_DATE_FORMAT)
                 ));
 
-            EmailHandler::sendResetPasswordToAdmin($user->getEmail(), $generated_password);
+            EmailHandler::sendPasswordToCreatedAdminUser($user->getEmail(), $user->getUserName(), $generated_password);
             return $result;
         }
         return null;

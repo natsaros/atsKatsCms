@@ -55,20 +55,20 @@ try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     $user2Create = User::createFullUser(null,
-        $userName,
-        null,
-        $first_name,
-        $last_name,
-        $email,
-        null,
-        null,
-        true,
-        $gender,
-        $link,
-        $phone,
-        null,
-        null,
-        0);
+                                        $userName,
+                                        null,
+                                        $first_name,
+                                        $last_name,
+                                        $email,
+                                        null,
+                                        null,
+                                        true,
+                                        $gender,
+                                        $link,
+                                        $phone,
+                                        null,
+                                        null,
+                                        1);
 
     if ($imgContent) {
         //only saving in filesystem for performance reasons

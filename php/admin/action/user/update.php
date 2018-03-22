@@ -12,7 +12,7 @@ if(isEmpty($userName) || isEmpty($email)) {
     addErrorMessage("Please fill in required info");
 }
 
-if(isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation) {
+if((isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
     addErrorMessage("Please fill in a valid password");
 }
 
