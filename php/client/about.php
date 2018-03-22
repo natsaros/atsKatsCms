@@ -13,12 +13,13 @@
 
 <div class="container-fluid">
     <div class="row row-no-padding">
-        <div class="col-sm-6 text-center vcenter">
+        <div class="col-sm-6 text-center">
             <div class="aboutIntroduceMyselfImageContainer">
-                <img src="<?php echo ASSETS_URI ?>img/recent/cadilac_black_white.jpeg" alt="Peny Kasfiki" class="img-responsive">
+                <img src="<?php echo ASSETS_URI ?>img/recent/ALM_8594.jpg" alt="Peny Kasfiki" class="img-responsive">
             </div>
         </div><!--
-    --><div class="col-sm-6 text-center vcenter">
+    -->
+        <div class="col-sm-6 text-center">
             <div class="aboutIntroduceMyselfInfo">
                 <div>
                     <div class="headerTitle">
@@ -41,73 +42,68 @@
     </div>
 </div>
 
-<div class="container-fluid" style="display: none;">
-    <div class="row row-no-padding">
-        <div class="col-sm-12">
-            <div class="meetOurTeamContainer">
-                <div class="headerTitle">
-                    <p>Γνωρίστε την ομάδα μας</p>
-                    <div class="titlesBorder"></div>
-                </div>
-                <div class="container partnersContainer">
-                    <div class="col-sm-6 partner" data-toggle="collapse" data-target="#partnerAP">
-                        <div class="partnerImage partnerAP"></div>
-                        <span class="simple-caption">
-                        <p>Αναστάσιος Πουλόπουλος</p>
-                        </span>
-                    </div>
-                    <div class="col-sm-6 partner" data-toggle="collapse" data-target="#partner2">
-                        <div class="partnerImage partnerAP"></div>
-                        <span class="simple-caption">
-                        <p>Partner 2</p>
-                    </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row partnerCV">
-        <div class="collapse" id="partnerAP">
-            Ο Πουλόπουλος Αναστάσιος διατηρεί εδώ και 15 χρόνια ένα πρότυπο
-            κέντρο αποκατάστασης μυοσκελετικών παθήσεων στην περιοχή της
-            Γλυφάδας.<br/><br/>
-            Η εμπειρία του στον αθλητικό χώρο από την συνεργασία του
-            με τις ομάδες μπάσκετ ΑΡΗΣ Γλυφάδας και Α.Ν.Ο.Γ Γλυφάδας,
-            με τα σωματεία του στίβου της Γλυφάδας (και σε συνδιαμό με την
-            συνεχής επιμόρφωση του συνιστά μια ολοκληρωμένη αποκατάσταση
-            των μυοσκελετικών προβλημάτων αλλά και των αθλητικών κακώσεων.)***DEN KATALABAINW TI THELEI NA PEI
-            EDW***<br/><br/><br/>
-        </div>
-    </div>
-    <div class="row partnerCV">
-        <div class="collapse" id="partner2">
-            TBD
-        </div>
-    </div>
-</div>
+<!--<div class="container-fluid" style="display: none;">-->
+<!--    <div class="row row-no-padding">-->
+<!--        <div class="col-sm-12">-->
+<!--            <div class="meetOurTeamContainer">-->
+<!--                <div class="headerTitle">-->
+<!--                    <p>Γνωρίστε την ομάδα μας</p>-->
+<!--                    <div class="titlesBorder"></div>-->
+<!--                </div>-->
+<!--                <div class="container partnersContainer">-->
+<!--                    <div class="col-sm-6 partner" data-toggle="collapse" data-target="#partnerAP">-->
+<!--                        <div class="partnerImage partnerAP"></div>-->
+<!--                        <span class="simple-caption">-->
+<!--                        <p>Αναστάσιος Πουλόπουλος</p>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-6 partner" data-toggle="collapse" data-target="#partner2">-->
+<!--                        <div class="partnerImage partnerAP"></div>-->
+<!--                        <span class="simple-caption">-->
+<!--                        <p>Partner 2</p>-->
+<!--                    </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row partnerCV">-->
+<!--        <div class="collapse" id="partnerAP">-->
+<!--            Ο Πουλόπουλος Αναστάσιος διατηρεί εδώ και 15 χρόνια ένα πρότυπο-->
+<!--            κέντρο αποκατάστασης μυοσκελετικών παθήσεων στην περιοχή της-->
+<!--            Γλυφάδας.<br/><br/>-->
+<!--            Η εμπειρία του στον αθλητικό χώρο από την συνεργασία του-->
+<!--            με τις ομάδες μπάσκετ ΑΡΗΣ Γλυφάδας και Α.Ν.Ο.Γ Γλυφάδας,-->
+<!--            με τα σωματεία του στίβου της Γλυφάδας (και σε συνδιαμό με την-->
+<!--            συνεχής επιμόρφωση του συνιστά μια ολοκληρωμένη αποκατάσταση-->
+<!--            των μυοσκελετικών προβλημάτων αλλά και των αθλητικών κακώσεων.)***DEN KATALABAINW TI THELEI NA PEI-->
+<!--            EDW***<br/><br/><br/>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row partnerCV">-->
+<!--        <div class="collapse" id="partner2">-->
+<!--            TBD-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="container-fluid">
-    <div class="row row-no-padding">
-        <div class="col-sm-4">
+    <div class="row">
+        <div class="col-sm-12">
             <div class="aboutImageBigLeft"></div>
         </div>
-        <div class="col-sm-4">
-            <div class="container-fluid">
-                <div class="row row-no-padding">
-                    <div class="col-sm-12">
-                        <div class="aboutImageSmallCenterUp"></div>
-                    </div>
-                </div>
-                <div class="row row-no-padding">
-                    <div class="col-sm-12">
-                        <div class="aboutImageSmallCenterDown"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
+    </div>
+<!--    <div class="row row-no-padding">-->
+<!--        <div class="col-sm-6">-->
+<!--            <div class="aboutImageSmallCenterUp"></div>-->
+<!--        </div>-->
+<!--        <div class="col-sm-6">-->
+<!--            <div class="aboutImageSmallCenterDown"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="row">
+        <div class="col-sm-12">
             <div class="aboutImageBigRight"></div>
         </div>
     </div>
-</div>
 </div>
