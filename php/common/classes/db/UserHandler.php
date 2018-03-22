@@ -114,14 +114,15 @@ class UserHandler {
 
     /**
      * @param $email string
+     * @param $id string
      * @return bool
      * @throws SystemException
      */
-    static function userEmailExists($email) {
+    static function userEmailExists($email, $id) {
         if (isNotEmpty($email)) {
             $query = "SELECT * FROM " . getDb()->users . " WHERE " . self::EMAIL . " = ?";
             $row = getDb()->selectStmtSingle($query, array('s'), array($email));
-            if ($row) {
+            if ($row && (isEmpty($id) || (isNotEmpty($id) && $row[self::ID] != $id))) {
                 return true;
             } else {
                 return false;

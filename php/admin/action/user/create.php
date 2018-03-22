@@ -11,14 +11,14 @@ if (!isValidMail($email)) {
     addErrorMessage("Please fill in a valid email address");
 }
 
-$userEmailExists = UserHandler::userEmailExists($email);
-
-if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
-    addErrorMessage('Please fill in a valid phone number');
-}
+$userEmailExists = UserHandler::userEmailExists($email, null);
 
 if ($userEmailExists == 1) {
     addErrorMessage("There is already a user with this email");
+}
+
+if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
+    addErrorMessage('Please fill in a valid phone number');
 }
 
 $imageValid = true;
@@ -54,7 +54,22 @@ $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
 try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
-    $user2Create = User::createFullUser(null, $userName, null, $first_name, $last_name, $email, null, null, true, $gender, $link, $phone, null, null, 0);
+    $user2Create = User::createFullUser(null,
+        $userName,
+        null,
+        $first_name,
+        $last_name,
+        $email,
+        null,
+        null,
+        true,
+        $gender,
+        $link,
+        $phone,
+        null,
+        null,
+        0);
+
     if ($imgContent) {
         //only saving in filesystem for performance reasons
         $user2Create->setPicturePath($picturePath);
@@ -62,6 +77,7 @@ try {
         //save image content also in blob on db for back up reasons if needed
 //        $user2Create->setPicturePath($picturePath)->setPicture($imgContent);
     }
+
     $createUserRes = UserHandler::createUser($user2Create);
 
     if ($createUserRes && isNotEmpty($groupIds)) {
@@ -83,4 +99,8 @@ try {
     Redirect(getAdminRequestUri() . "updateUser");
 }
 
-Redirect(getAdminRequestUri() . "users");
+if(hasErrors()) {
+    Redirect(getAdminRequestUri() . "updateUser");
+} else {
+    Redirect(getAdminRequestUri() . "users");
+}
