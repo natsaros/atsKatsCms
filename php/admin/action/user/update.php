@@ -86,8 +86,11 @@ try {
         setGender($gender)->
         setLink($link)->
         setPhone($phone)->
-        setPassword(password_hash($password, PASSWORD_DEFAULT))->
         setForceChangePassword(0);
+
+        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
+            $user2Update->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        }
 
         if($imgContent) {
             //only saving in filesystem for performance reasons

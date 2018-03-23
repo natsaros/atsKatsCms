@@ -152,12 +152,11 @@ class UserHandler {
     static function updateUser($user) {
         //TODO add user meta query here
         if (isNotEmpty($user)) {
-            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, "  . self::PASSWORD . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = ? WHERE " . self::ID . " = ?";
-            return getDb()->updateStmt($query,
-                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 'i'),
+            $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = ? WHERE " . self::ID . " = ?";
+            $result = getDb()->updateStmt($query,
+                array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 'i'),
                 array($user->getUserStatus(),
                     $user->getUserName(),
-                    $user->getPassword(),
                     $user->getFirstName(),
                     $user->getLastName(),
                     $user->getEmail(),
@@ -169,6 +168,14 @@ class UserHandler {
                     $user->getForceChangePassword(),
                     $user->getID()
                 ));
+
+            if (isNotEmpty($user->getPassword())){
+                $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ? WHERE " . self::ID . " = ?";
+                $result = getDb()->updateStmt($query,
+                    array('s', 'i'),
+                    array($user->getPassword(), $user->getID()));
+            }
+            return $result;
         }
         return null;
     }

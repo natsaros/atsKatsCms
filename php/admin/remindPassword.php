@@ -12,7 +12,7 @@ if(isNotEmpty($_POST['submit'])) {
         if($passwordReset !== 1) {
             $error = "Invalid email address";
         } else {
-            $successResult = "Your password has been reset and sent to email address you typed. Click <a href=\"" . getAdminRequestUri() . 'login' . "\">here</a> to log in.";
+            $successResult = "Your password has been reset and sent to the email address you typed. Click <a style=\"text-decoration: underline;\" href=\"" . getAdminRequestUri() . 'login' . "\">here</a> to log in.";
         }
     }
 } ?>
