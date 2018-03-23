@@ -81,7 +81,7 @@ $(document).ready(function () {
 
     $('.users-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "10%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%"}, {"width": "10%", "orderable": false}]
+        "columns": [{"width": "5%"}, {"width": "15%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%", "orderable": false}]
     });
 
     $('.products-dataTable').DataTable({
@@ -97,9 +97,12 @@ $(document).ready(function () {
 
     $('.newsletterCampaigns-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "30%"}, {"width": "5%"}],
+        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "30%"}, {"width": "10%"}],
         "order": [[ 2, "desc" ]]
     });
+
+    // hide tabs after datatable initialization
+    $('.tab-content div.fade').addClass('tab-pane');
 
     initializeCheckBoxes();
     initBootstrapToggle();

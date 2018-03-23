@@ -23,7 +23,7 @@
     <link href="<?php echo CSS_URI ?>datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet/less" type="text/css" href="<?php echo CSS_URI ?>adminCustom.less"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS_URI ?>adminCustom.css"/>
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo CSS_URI ?>morrisjs/morris.css" rel="stylesheet">

@@ -27,7 +27,7 @@ if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterFo
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade <?php if(isEmpty($activeTab) || $activeTab === 'newsletterEmails') { ?> in active<?php } ?>" id="newsletterEmails">
+    <div class="fade<?php if(isEmpty($activeTab) || $activeTab === 'newsletterEmails') { ?> in active<?php } ?>" id="newsletterEmails">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">
@@ -58,7 +58,7 @@ if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterFo
             </div>
         </div>
     </div>
-    <div class="tab-pane fade <?php if ($activeTab === 'newsletterEmailForm') { ?> in active<?php } ?>" id="newsletterEmailForm">
+    <div class="fade<?php if ($activeTab === 'newsletterEmailForm') { ?> in active<?php } ?>" id="newsletterEmailForm">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">
@@ -106,7 +106,7 @@ if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterFo
             </div>
         </div>
     </div>
-    <div class="tab-pane fade <?php if ($activeTab === 'newsletterCampaigns') { ?> in active<?php } ?>" id="newsletterCampaigns">
+    <div class="fade<?php if ($activeTab === 'newsletterCampaigns') { ?> in active<?php } ?>" id="newsletterCampaigns">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">

@@ -217,6 +217,10 @@ function initLogFile() {
     define('LOG_FILE', LOGS_ROOT . CONF_LOG_FILE);
 }
 
+function initAdminCustomCss() {
+    require_once(COMMON_ROOT_PATH . "compileLess.php");
+}
+
 /**
  * @param $path
  */

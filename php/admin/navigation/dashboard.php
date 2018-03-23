@@ -28,7 +28,7 @@ if (!is_null($activePromotion) && $isPromotedInstanceActive) { ?>
             <?php if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) { echo ' for category '; } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) { echo ' for product '; } ?>
             <?php if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY || $activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) { echo '\' <b>' . $activePromotion->getPromotedInstance()->getTitle() . '</b>\''; }?>
             <?php echo ' with promotion text \'' . $activePromotion->getPromotionText() . '\'';?>
-            <?php echo ' is active until ' . $activePromotion->getPromotedTo() . '.<br/>';?>
+            <?php echo ' is active until ' . date(ADMIN_DATE_FORMAT, strtotime($activePromotion->getPromotedTo())) . '.<br/>';?>
             <?php echo 'So far it has been seen <b>' . $activePromotion->getTimesSeen() . '</b> times.';?>
         </div>
     </div>

@@ -42,4 +42,3 @@
 <script src="<?php echo JS_URI ?>adminCustom.js"></script>
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/moment.min.js"></script>
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-<script src="<?php echo JS_URI ?>less/less.min.js"></script>

@@ -17,7 +17,7 @@ $activeTabClass = 'class="active"';
         echo $activeTabClass ?><?php } ?>><a href="#groups" data-toggle="tab">Groups</a></li>
 </ul>
 <div class="tab-content">
-    <div class="tab-pane fade <?php if(isEmpty($activeTab) || $activeTab === 'users') { ?> in active<?php } ?>"
+    <div class="fade<?php if(isEmpty($activeTab) || $activeTab === 'users') { ?> in active<?php } ?>"
          id="users">
         <div class="row">
             <div class="col-lg-12">
@@ -112,7 +112,7 @@ $activeTabClass = 'class="active"';
             </div>
         </div>
     </div>
-    <div class="tab-pane fade <?php if(isNotEmpty($activeTab) && $activeTab === 'groups') { ?> in active<?php } ?>"
+    <div class="fade<?php if(isNotEmpty($activeTab) && $activeTab === 'groups') { ?> in active<?php } ?>"
          id="groups">
         <div class="row">
             <div class="col-lg-12">
