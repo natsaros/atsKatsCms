@@ -11,7 +11,8 @@
 
 <?php
 $lessons = ProgramHandler::fetchLessons();
-$events = json_encode(ProgramHandler::fetchEvents());
+$rawEvents = ProgramHandler::fetchEvents();
+$events = json_encode($rawEvents);
 ?>
 <div class="row">
     <div class="col-lg-2 text-center">
@@ -84,19 +85,23 @@ $events = json_encode(ProgramHandler::fetchEvents());
         return check;
     };
 
-    var now = moment();
-    console.log(now.startOf('day').hour(7).minute(0));
-
-    var $jsEvents = [{
-        title: "pilates",
-        id: 1,
-        start: now.startOf('day').hour(7).minute(0),
-        end: now.startOf('day').hour(9).minute(0)
-    }];
+    function getDayofWeek($day) {
+        var dayToFind = moment().day($day).weekday();
+        var searchDate = moment();
+        if (dayToFind < searchDate.weekday()) {
+            while (searchDate.weekday() !== dayToFind) {
+                searchDate.subtract(1, 'day');
+            }
+        } else {
+            while (searchDate.weekday() !== dayToFind) {
+                searchDate.add(1, 'day');
+            }
+        }
+        return searchDate;
+    }
 
     $('#calendar').fullCalendar({
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
-        // defaultView: 'agendaDay',
         defaultView: window.mobilecheck() ? 'agendaDay' : 'agendaWeek',
         header: window.mobilecheck() ? {
             left: '',
@@ -123,8 +128,9 @@ $events = json_encode(ProgramHandler::fetchEvents());
         dragOpacity: {
             agenda: .5
         },
-        events: $jsEvents,
+        events: <?php echo $events;?>,
         drop: function (date) {
+            console.log('drop events');
             // var event = $(this).data('event');
             // var startTime = moment(date);
             // var endTime = moment(date).add(1);
@@ -140,6 +146,7 @@ $events = json_encode(ProgramHandler::fetchEvents());
             // console.log('dropped this : ' + event.title);
         },
         eventDrop: function (event, delta, revertFunc) {
+            console.log('eventDrop events');
             //inner column movement drop so get start and call the ajax function......
             // console.log(event.start.format());
             // console.log(event.id);
@@ -149,6 +156,9 @@ $events = json_encode(ProgramHandler::fetchEvents());
 
             //alert(event.title + " was dropped on " + event.start.format());
 
+        },
+        eventRender: function (event, element, view) {
+            console.log('rendering events');
         }
     });
 </script>

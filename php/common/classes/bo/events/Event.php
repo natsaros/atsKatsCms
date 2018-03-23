@@ -1,7 +1,8 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'EventStatus.php');
 
-class Event implements JsonSerializable {
+class Event implements JsonSerializable
+{
 
     private $ID;
     private $name;
@@ -141,12 +142,30 @@ class Event implements JsonSerializable {
         return $this;
     }
 
+    /**
+     * @param $day
+     * @param $time
+     * @return false|string
+     */
+    private function getTimeAndMinutes($day, $time) {
+        $date = new DateTime(date('Y-m-d', strtotime("{$day} this week midnight")));
+        $explodeTime = explode(':', $time);
+        $hoursToAdd = $explodeTime[0];
+        $date->modify("+{$hoursToAdd} hours");
+
+        $minutesToAdd = $explodeTime[1];
+        $date->modify("+{$minutesToAdd} minutes");
+        return $date->format('Y-m-d H:i:s');
+    }
+
     public function jsonSerialize() {
+        $start = self::getTimeAndMinutes($this->getDay(), $this->getStart());
+        $end = self::getTimeAndMinutes($this->getDay(), $this->getEnd());
         return [
             'title' => $this->getName(),
             'day' => $this->getDay(),
-            'start' => $this->getEnd(),
-            'end' => $this->getEnd(),
+            'start' => $start,
+            'end' => $end,
             'status' => $this->getStatus()
         ];
     }
