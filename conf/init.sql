@@ -248,11 +248,135 @@ CREATE TABLE CMS_LESSONS (
   STATUS INT(11)      NOT NULL    DEFAULT 1
 );
 
+
+CREATE TABLE CMS_EVENTS (
+  ID          BIGINT(20)   NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+  NAME        VARCHAR(250) NOT NULL    DEFAULT '',
+  DESCRIPTION LONGTEXT,
+  DAY         VARCHAR(250),
+  START_TIME  VARCHAR(10),
+  END_TIME    VARCHAR(10),
+  STATUS      INT(11)      NOT NULL    DEFAULT 0
+);
+
+# init lessons
+
 INSERT INTO CMS_LESSONS (LESSON) VALUES ('Pilates equipment');
 INSERT INTO CMS_LESSONS (LESSON) VALUES ('Pilates mat');
 INSERT INTO CMS_LESSONS (LESSON) VALUES ('Yoga');
 INSERT INTO CMS_LESSONS (LESSON) VALUES ('Aerial yoga');
 INSERT INTO CMS_LESSONS (LESSON) VALUES ('Fat burn');
+
+# init program
+
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '08:30', '09:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '09:30', '10:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '10:30', '11:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '11:30', '12:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '13:00', '14:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '16:00', '17:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '17:00', '18:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'monday', '18:00', '19:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Fat burn', NULL, 'monday', '19:00', '20:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Yoga', NULL, 'monday', '20:00', '21:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'monday', '21:00', '22:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '08:30', '09:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Yoga', NULL, 'tuesday', '09:00', '10:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '09:30', '10:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'tuesday', '10:30', '11:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '11:30', '12:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '16:00', '17:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '17:00', '18:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '18:00', '19:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'tuesday', '19:00', '20:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '20:00', '21:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'tuesday', '21:00', '22:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'wednesday', '08:30', '09:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'wednesday', '09:30', '10:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Fat burn', NULL, 'wednesday', '10:00', '11:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'wednesday', '10:30', '11:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'wednesday', '13:00', '14:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'wednesday', '16:00', '17:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'wednesday', '17:00', '18:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'wednesday', '18:00', '19:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Fat burn', NULL, 'wednesday', '19:00', '20:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'wednesday', '20:00', '21:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Aerial yoga', NULL, 'wednesday', '20:00', '21:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'wednesday', '21:00', '22:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'thursday', '08:30', '09:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'thursday', '09:30', '10:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'thursday', '10:30', '11:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'thursday', '17:00', '18:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'thursday', '18:00', '19:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Yoga', NULL, 'thursday', '19:00', '20:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'thursday', '20:00', '21:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'thursday', '21:00', '22:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'friday', '08:30', '09:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'friday', '09:30', '10:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'friday', '10:30', '11:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'friday', '11:30', '12:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'friday', '16:00', '17:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'friday', '17:00', '18:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'friday', '19:00', '20:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'friday', '20:00', '21:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'saturday', '10:30', '11:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates equipment', NULL, 'saturday', '11:30', '12:30', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Pilates mat', NULL, 'saturday', '13:00', '14:00', 1);
+INSERT INTO fitnesshouse.cms_events (NAME, DESCRIPTION, DAY, START_TIME, END_TIME, STATUS)
+VALUES ('Aerial yoga', NULL, 'saturday', '13:00', '14:00', 1);
 
 INSERT INTO CMS_SETTINGS (SKEY, SVALUE) VALUES ('blog.enabled', 'off');
 INSERT INTO CMS_SETTINGS (SKEY, SVALUE) VALUES ('blog.style', 'grid');

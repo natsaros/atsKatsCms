@@ -6,6 +6,7 @@ class Event implements JsonSerializable
 
     private $ID;
     private $name;
+    private $description;
     private $status;
 
     private $day;
@@ -16,7 +17,7 @@ class Event implements JsonSerializable
      * Event constructor.
      */
     public function __construct() {
-        $this->setStatus(EventStatus::ACTIVE);
+        $this->setStatus(EventStatus::INACTIVE);
     }
 
     /**
@@ -30,16 +31,18 @@ class Event implements JsonSerializable
     /**
      * @param $ID
      * @param $name
+     * @param $description
      * @param $status
      * @param $day
      * @param $start
      * @param $end
      * @return $this
      */
-    public static function createEvent($ID, $name, $status, $day, $start, $end) {
+    public static function createEvent($ID, $name, $description, $status, $day, $start, $end) {
         return self::create()
             ->setID($ID)
             ->setName($name)
+            ->setDescription($description)
             ->setStatus($status)
             ->setDay($day)
             ->setStart($start)
@@ -75,6 +78,22 @@ class Event implements JsonSerializable
      */
     public function setName($name) {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription() {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Event
+     */
+    public function setDescription($description) {
+        $this->description = $description;
         return $this;
     }
 
@@ -162,7 +181,9 @@ class Event implements JsonSerializable
         $start = self::getTimeAndMinutes($this->getDay(), $this->getStart());
         $end = self::getTimeAndMinutes($this->getDay(), $this->getEnd());
         return [
+            'id' => $this->getID(),
             'title' => $this->getName(),
+            'description' => $this->getDescription(),
             'day' => $this->getDay(),
             'start' => $start,
             'end' => $end,

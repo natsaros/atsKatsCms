@@ -18,6 +18,7 @@
 <?php
 $lessons = ProgramHandler::fetchLessons();
 $rawEvents = ProgramHandler::fetchEvents();
+
 $events = json_encode($rawEvents);
 ?>
 <div class="row">
@@ -59,6 +60,31 @@ $events = json_encode($rawEvents);
             <div id="calendar"></div>
         </div>
     </div>
+    <!-- Modal-->
+    <div id="eventContent" class="ak_modal modal fade"
+         tabindex="-1"
+         role="dialog" aria-labelledby="eventContent_title"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="eventContent_title">Lesson Details</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="col-lg-12">
+                        Start: <span id="startTime"></span><br>
+                        End: <span id="endTime"></span><br><br>
+                        <p id="eventInfo"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="application/javascript">
@@ -91,9 +117,10 @@ $events = json_encode($rawEvents);
         return check;
     };
 
-    $eventId = 1;
+    var draftColor = '#3a87ad';
+    var $calendar = $('#calendar');
 
-    $('#calendar').fullCalendar({
+    $calendar.fullCalendar({
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         defaultView: window.mobilecheck() ? 'agendaDay' : 'agendaWeek',
         header: window.mobilecheck() ? {
@@ -119,41 +146,27 @@ $events = json_encode($rawEvents);
         columnFormat: 'dddd',
         height: 'auto',
         nowIndicator: true,
-        dragOpacity: {
-            agenda: .5
-        },
         events: <?php echo $events;?>,
-        drop: function (date) {
+        drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop events');
-            // var event = $(this).data('event');
-            // var startTime = moment(date);
-            // var endTime = moment(date).add(1);
-            // var defaultDuration = moment.duration($('#calendar').fullCalendar('option', 'defaultTimedEventDuration')); // get the default and convert it to proper type
-            // $(this).data('event', {
-            //     title: event.title,
-            //     start: startTime.format('HH:mm'),
-            //     end: endTime.format('HH:mm'),
-            //     allDay: false,
-            //     stick: true
-            // });
-            // console.log('dropped on : ' + date.format());
-            // console.log('dropped this : ' + event.title);
         },
-        eventDrop: function (event, delta, revertFunc) {
-            console.log('eventDrop events');
-            //inner column movement drop so get start and call the ajax function......
-            // console.log(event.start.format());
-            // console.log(event.id);
-            // var defaultDuration = moment.duration($('#calendar').fullCalendar('option', 'defaultTimedEventDuration')); // get the default and convert it to proper type
-            // var end = event.end || event.start.clone().add(defaultDuration).format('HH:mm'); // If there is no end, compute it
-            // console.log('end is ' + end.format());
-
-            //alert(event.title + " was dropped on " + event.start.format());
-
+        eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
+            console.log('eventDrop event : ' + event.id);
+            event.color = draftColor;
+            $calendar.fullCalendar('updateEvent', event);
+        },
+        eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
+            event.color = draftColor;
+            $calendar.fullCalendar('updateEvent', event);
+        },
+        eventClick: function (event, jsEvent, view) {
+            console.log('event clicked' + event.id);
+            $("#startTime").html(moment(event.start).format('MMM Do H:mm A'));
+            $("#endTime").html(moment(event.end).format('MMM Do H:mm A'));
+            $("#eventInfo").html(event.title);
+            $("#eventContent").modal('show');
         },
         eventRender: function (event, element, view) {
-            event.id = $eventId++;
-            element.find('.fc-title').append('<div data-id="' + event.id + '" class="removeEvent glyphicon glyphicon-trash pull-right" id="delete_event_' + event.id + '"></div>');
             if (event.status === 1) {
                 element.addClass('published');
             }

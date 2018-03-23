@@ -1,6 +1,7 @@
 <?php
 
-class Db {
+class Db
+{
     const SETTINGS = 'SETTINGS';
     const USERS = 'USERS';
     const USER_META = 'USER_META';
@@ -21,6 +22,7 @@ class Db {
 
     const VISITORS = 'VISITORS';
     const LESSONS = 'LESSONS';
+    const EVENTS = 'EVENTS';
 
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
@@ -33,7 +35,11 @@ class Db {
 
     private $initialized;
 
-    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS, self::LESSONS);
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META,
+        self::PAGES, self::PAGE_META,
+        self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC,
+        self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC,
+        self::VISITORS, self::LESSONS, self::EVENTS);
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
@@ -58,6 +64,7 @@ class Db {
 
     public $visitors;
     public $lessons;
+    public $events;
 
     /**
      * @return Db
@@ -321,12 +328,14 @@ class Db {
                     case self::USER_META:
                         $this->setUserMeta($updatedTable);
                         break;
+
                     case self::PAGES:
                         $this->setPages($updatedTable);
                         break;
                     case self::PAGE_META:
                         $this->setPageMeta($updatedTable);
                         break;
+
                     case self::POSTS:
                         $this->setPosts($updatedTable);
                         break;
@@ -349,6 +358,7 @@ class Db {
                     case self::UGR_ASSOC:
                         $this->setUgrAssoc($updatedTable);
                         break;
+
                     case self::ACCESS_RIGHTS:
                         $this->setAccessRights($updatedTable);
                         break;
@@ -358,11 +368,15 @@ class Db {
                     case self::ACR_ASSOC:
                         $this->setAcrAssoc($updatedTable);
                         break;
+
                     case self::VISITORS:
                         $this->setVisitors($updatedTable);
                         break;
                     case self::LESSONS:
                         $this->setLessons($updatedTable);
+                        break;
+                    case self::EVENTS:
+                        $this->setEvents($updatedTable);
                         break;
                 }
             }
@@ -554,6 +568,10 @@ class Db {
         $this->lessons = $lessons;
     }
 
+    /**
+     * @param mixed $events
+     */
+    public function setEvents($events) {
+        $this->events = $events;
+    }
 }
-
-?>
