@@ -1,6 +1,3 @@
-<?php require("pageHeader.php"); ?>
-
-<?php require("messageSection.php"); ?>
 <?php
 
 $groupID = $_GET["id"];
@@ -14,7 +11,18 @@ if($isCreate) {
 } else {
     $currentGroup = GroupHandler::getGroupById($groupID);
 }
+$pageTitle = $isCreate ? "Create Group" : "Update Group";
 ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            <?php echo $pageTitle; ?>
+        </h1>
+    </div>
+</div>
+
+<?php require("messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">

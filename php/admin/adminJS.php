@@ -43,7 +43,6 @@
 <script src="<?php echo JS_URI ?>bootstrap-toggle/bootstrap-toggle.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="<?php echo JS_URI ?>sb-admin-2.min.js"></script>
 <script src="<?php echo JS_URI ?>adminCustom.js"></script>
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/moment.min.js"></script>
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>

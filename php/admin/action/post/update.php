@@ -45,7 +45,7 @@ try {
         //save image under id of created post in file system
         if(!$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
-            ImageUtil::saveImageToFileSystem($ID, $fileName, $imgContent);
+            ImageUtil::saveImageToFileSystem(POSTS_PICTURES_ROOT, $ID, $fileName, $imgContent);
         }
     } else {
         addErrorMessage("Post '" . $post->getTitle() . "' failed to be updated");

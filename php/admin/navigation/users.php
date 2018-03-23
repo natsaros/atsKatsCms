@@ -17,12 +17,12 @@ $activeTabClass = 'class="active"';
         echo $activeTabClass ?><?php } ?>><a href="#groups" data-toggle="tab">Groups</a></li>
 </ul>
 <div class="tab-content">
-    <div class="tab-pane fade <?php if(isEmpty($activeTab) || $activeTab === 'users') { ?> in active<?php } ?>"
+    <div class="fade<?php if(isEmpty($activeTab) || $activeTab === 'users') { ?> in active<?php } ?>"
          id="users">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">
-                    <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+                    <table width="100%" class="table table-striped table-bordered table-hover users-dataTable">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -57,7 +57,7 @@ $activeTabClass = 'class="active"';
                                         <a type="button"
                                            href="<?php echo $updateStatusUrl; ?>"
                                            class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
-                                            <?php $statusClass = $user->getUserStatus() ? 'text-success' : 'text-danger' ?>
+                                            <?php $statusClass = $user->getUserStatus() ? 'active-item' : 'inactive-item' ?>
                                             <span class="fa fa-user <?php echo $statusClass ?>"
                                                   aria-hidden="true"></span>
                                         </a>
@@ -65,7 +65,7 @@ $activeTabClass = 'class="active"';
                                     <a type="button"
                                        href="<?php echo getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($userId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit User">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
 
                                     <!-- Button trigger modal -->
@@ -112,12 +112,12 @@ $activeTabClass = 'class="active"';
             </div>
         </div>
     </div>
-    <div class="tab-pane fade <?php if(isNotEmpty($activeTab) && $activeTab === 'groups') { ?> in active<?php } ?>"
+    <div class="fade<?php if(isNotEmpty($activeTab) && $activeTab === 'groups') { ?> in active<?php } ?>"
          id="groups">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-body">
-                    <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+                    <table width="100%" class="table table-striped table-bordered table-hover users-group-dataTable">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -146,19 +146,19 @@ $activeTabClass = 'class="active"';
                                     <a type="button"
                                        href="<?php echo $updateStatusUrl; ?>"
                                        class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> Group">
-                                        <?php $statusClass = $group->getStatus() ? 'text-success' : 'text-danger' ?>
+                                        <?php $statusClass = $group->getStatus() ? 'active-item' : 'inactive-item' ?>
                                         <span class="fa fa-users <?php echo $statusClass ?>"
                                               aria-hidden="true"></span>
                                     </a>
                                     <a type="button"
                                        href="<?php echo getAdminActionRequestUri() . "group" . DS . "deleteGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
                                        class="btn btn-default btn-sm" title="Delete Group">
-                                        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </a>
                                     <a type="button"
                                        href="<?php echo getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit Group">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
 
 

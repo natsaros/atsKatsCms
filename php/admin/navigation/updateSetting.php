@@ -1,7 +1,3 @@
-<?php require("pageHeader.php"); ?>
-
-<?php require("messageSection.php"); ?>
-
 <?php
 
 $settingID = $_GET["id"];
@@ -12,7 +8,18 @@ if ($isCreate) {
 } else {
     $curSetting = SettingsHandler::getSettingByID($settingID);
 }
+$pageTitle = $isCreate ? "Create Setting" : "Update Setting";
 ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            <?php echo $pageTitle; ?>
+        </h1>
+    </div>
+</div>
+
+<?php require("messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -26,7 +33,24 @@ if ($isCreate) {
                 <input type="hidden" name="<?php echo SettingsHandler::SKEY ?>"
                        value="<?php echo $curSetting->getKey(); ?>"/>
             <?php } ?>
-            <?php if ($curSetting->getKey() === Setting::BLOG_ENABLED) { ?>
+            <?php if ($curSetting->getKey() === Setting::MAINTENANCE) { ?>
+                <div class="form-group">
+                    <label class="control-label"
+                           for="setting_input_<?php echo $curSetting->getID(); ?>"><?php echo $curSetting->getKey(); ?></label>
+                    <div class="checkbox">
+                        <label>
+                            <?php $isChecked = $curSetting->getValue() === 'on' ? 'checked' : '' ?>
+                            <input name="<?php echo SettingsHandler::SVALUE; ?>[]"
+                                   type="checkbox" <?php echo $isChecked ?>
+                                   value="<?php echo $curSetting->getValue(); ?>"
+                                   id="setting_input_<?php echo $curSetting->getID(); ?>"
+                                   data-toggle="toggle"
+                                   data-custom-on-val="on"
+                                   data-custom-off-val="off">
+                        </label>
+                    </div>
+                </div>
+            <?php } else if ($curSetting->getKey() === Setting::BLOG_ENABLED) { ?>
                 <div class="form-group">
                     <label class="control-label"
                            for="setting_input_<?php echo $curSetting->getID(); ?>"><?php echo $curSetting->getKey(); ?></label>

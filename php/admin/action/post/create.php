@@ -40,7 +40,7 @@ try {
         //save image under id of created post in file system
         if(!$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
-            ImageUtil::saveImageToFileSystem($postRes, $fileName, $imgContent);
+            ImageUtil::saveImageToFileSystem(POSTS_PICTURES_ROOT, $postRes, $fileName, $imgContent);
         }
     } else {
         addErrorMessage("Post '" . $post2Create->getTitle() . "' failed to be created");

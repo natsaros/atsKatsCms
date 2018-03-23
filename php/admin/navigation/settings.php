@@ -9,7 +9,7 @@ $settings = SettingsHandler::fetchAllSettings();
 <div class="row">
     <div class="col-lg-12">
         <div class="panel-body">
-            <table width="100%" class="table table-striped table-bordered table-hover ak-dataTable">
+            <table width="100%" class="table table-striped table-bordered table-hover settings-dataTable">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -32,15 +32,9 @@ $settings = SettingsHandler::fetchAllSettings();
                         <td>
 
                             <a type="button"
-                               href="<?php echo getAdminActionRequestUri() . "settings" . DS . "delete" . addParamsToUrl(array('id'), array($settingID)); ?>"
-                               class="btn btn-default btn-sm" title="Delete Setting">
-                                <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
-                            </a>
-
-                            <a type="button"
                                href="<?php echo getAdminRequestUri() . "updateSetting" . addParamsToUrl(array('id'), array($settingID)); ?>"
                                class="btn btn-default btn-sm" title="Edit Setting">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
                         </td>
                     </tr>

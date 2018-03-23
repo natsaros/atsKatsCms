@@ -1,7 +1,12 @@
 <?php
 $ID = safe_input($_POST[SettingsHandler::ID]);
 $key = safe_input($_POST[SettingsHandler::SKEY]);
-if($key === Setting::BLOG_ENABLED) {
+if($key === Setting::MAINTENANCE) {
+    $value = $_POST[SettingsHandler::SVALUE][0];
+    if(isEmpty($value)) {
+        $value = 'off';
+    }
+} else if($key === Setting::BLOG_ENABLED) {
     $value = $_POST[SettingsHandler::SVALUE][0];
     if(isEmpty($value)) {
         $value = 'off';
@@ -25,9 +30,9 @@ try {
 
     $result = SettingsHandler::update($setting);
     if($result !== null || $result) {
-        addSuccessMessage("Post '" . $setting->getKey() . "' successfully updated");
+        addSuccessMessage("Setting '" . $setting->getKey() . "' successfully updated");
     } else {
-        addErrorMessage("Post '" . $setting->getKey() . "' failed to be updated");
+        addErrorMessage("Setting '" . $setting->getKey() . "' failed to be updated");
     }
 } catch(SystemException $ex) {
     logError($ex);

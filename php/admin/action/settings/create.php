@@ -11,9 +11,9 @@ try {
 
     $result = SettingsHandler::create($setting);
     if($result !== null || $result) {
-        addSuccessMessage("Post '" . $setting->getKey() . "' successfully created");
+        addSuccessMessage("Setting '" . $setting->getKey() . "' successfully created");
     } else {
-        addErrorMessage("Post '" . $setting->getKey() . "' failed to be created");
+        addErrorMessage("Setting '" . $setting->getKey() . "' failed to be created");
     }
 } catch(SystemException $ex) {
     logError($ex);
