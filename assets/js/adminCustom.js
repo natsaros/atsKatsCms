@@ -60,45 +60,53 @@ $(document).ready(function () {
 
     $('.product-categories-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "10%"}, {"width": "20%"}, {"width": "50%"}, {"width": "20%", "orderable": false}]
+        "columns": [{"width": "10%"}, {"width": "20%"}, {"width": "50%"}, {"width": "20%", "orderable": false}],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     $('.settings-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "10%"}, {"width": "35%"}, {"width": "35%"}, {"width": "20%", "orderable": false}]
+        "columns": [{"width": "10%"}, {"width": "35%"}, {"width": "35%"}, {"width": "20%", "orderable": false}],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     $('.promotions-dataTable').DataTable({
         responsive: true,
         "columns": [{"width": "20%"}, {"width": "10%"}, {"width": "10%"}, {"width": "10%"}, {"width": "30%"}, {"width": "10%"}, {"width": "10%", "orderable": false}],
-        "order": [[ 1, "desc" ]]
+        "order": [[ 1, "desc" ]],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     $('.users-group-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "40%", "orderable": false}]
+        "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "40%", "orderable": false}],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     $('.users-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "5%"}, {"width": "15%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%", "orderable": false}]
+        "columns": [{"width": "5%"}, {"width": "15%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%"}, {"width": "20%", "orderable": false}],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     $('.products-dataTable').DataTable({
         responsive: true,
-        "columns": [{"width": "10%"}, {"width": "15%"}, {"width": "25%"}, {"width": "20%"}, {"width": "30%", "orderable": false}]
+        "columns": [{"width": "10%"}, {"width": "15%"}, {"width": "25%"}, {"width": "20%"}, {"width": "30%", "orderable": false}],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     $('.newsletterEmails-dataTable').DataTable({
         responsive: true,
         "columns": [{"width": "50%"}, {"width": "50%"}],
-        "order": [[ 1, "desc" ]]
+        "order": [[ 1, "desc" ]],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     $('.newsletterCampaigns-dataTable').DataTable({
         responsive: true,
         "columns": [{"width": "30%"}, {"width": "30%"}, {"width": "30%"}, {"width": "10%"}],
-        "order": [[ 2, "desc" ]]
+        "order": [[ 2, "desc" ]],
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
     // hide tabs after datatable initialization
