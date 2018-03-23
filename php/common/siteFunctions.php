@@ -1,6 +1,7 @@
 <?php
 const FORM_PREFIX = 'form_';
 const DEFAULT_DATE_FORMAT = 'Y-m-d H:i:s';
+const ADMIN_DATE_FORMAT = 'd/m/Y H:i:s';
 
 //Set custom Error Handler
 /**
@@ -70,6 +71,20 @@ function isUnderBlogPath() {
 }
 
 /**
+ * @return bool
+ */
+function isUnderProductCategoriesPath() {
+    return strpos(getRequestUri(), PRODUCT_CATEGORIES_PATH) !== false;
+}
+
+/**
+ * @return bool
+ */
+function isUnderProductCategorySalesPath() {
+    return strpos(getRequestUri(), PRODUCT_CATEGORY_SALES_PATH) !== false;
+}
+
+/**
  * @return string
  */
 function getRootUri() {
@@ -82,6 +97,8 @@ function getRootUri() {
         $uri = preg_replace("/admin[\/].*/", "", $uri);
     } else if (isUnderBlogPath()) {
         $uri = preg_replace("/blog[\/].*/", "", $uri);
+    } else if (isUnderProductCategoriesPath()) {
+        $uri = preg_replace("/collections[\/].*/", "", $uri);
     } else if (isClientAction()) {
         $uri = preg_replace("/action[\/].*/", "", $uri);
     }
@@ -150,6 +167,13 @@ function getBlogUri() {
 /**
  * @return string
  */
+function getProductCategoriesUri() {
+    return getRootUri() . PRODUCT_CATEGORIES_PATH. DS;
+}
+
+/**
+ * @return string
+ */
 function getActiveAdminPage() {
     $uri = $_SERVER['REQUEST_URI'];
     $page_id = preg_replace("/[^\/][\w]+(?=\?)/", "", $uri);
@@ -165,9 +189,6 @@ function initLoad() {
     initGallery();
 }
 
-/**
- * @throws SystemException
- */
 function initLoadDb() {
     $db = getDb();
 
@@ -183,6 +204,10 @@ function initLoadDb() {
 
 function initGallery() {
     createDirIfNotExists(PICTURES_ROOT);
+    createDirIfNotExists(PICTURES_ROOT . PRODUCT_CATEGORIES_PICTURES_ROOT);
+    createDirIfNotExists(PICTURES_ROOT . PRODUCTS_PICTURES_ROOT);
+    createDirIfNotExists(PICTURES_ROOT . USERS_PICTURES_ROOT);
+    createDirIfNotExists(PICTURES_ROOT . POSTS_PICTURES_ROOT);
     createDirIfNotExists(VIDEOS_ROOT);
     createDirIfNotExists(DOCUMENTS_ROOT);
 }
@@ -190,6 +215,10 @@ function initGallery() {
 function initLogFile() {
     createDirIfNotExists(LOGS_ROOT);
     define('LOG_FILE', LOGS_ROOT . CONF_LOG_FILE);
+}
+
+function initAdminCustomCss() {
+    require_once(COMMON_ROOT_PATH . "compileLess.php");
 }
 
 /**
@@ -206,6 +235,14 @@ function createDirIfNotExists($path) {
  */
 function isLoggedIn() {
     return is_session_started() && isNotEmpty(getUserFromSession());
+}
+
+/**
+ * @return bool
+ */
+function forceUserChangePassword() {
+    $loggedInUser = getFullUserFromSession();
+    return is_session_started() && isNotEmpty($loggedInUser) && $loggedInUser->getForceChangePassword() === 1;
 }
 
 /**
@@ -436,10 +473,13 @@ function defineSystemVariables() {
     defined('CLIENT_STR') or define('CLIENT_STR', 'client');
     defined('NAV_STR') or define('NAV_STR', 'navigation');
     defined('ACTION_STR') or define('ACTION_STR', 'action');
+    defined('AJAX_ACTION_STR') or define('AJAX_ACTION_STR', 'ajaxAction');
     defined('MODAL_STR') or define('MODAL_STR', 'modal');
     defined('COMMON_STR') or define('COMMON_STR', 'common');
     defined('CLASSES_STR') or define('CLASSES_STR', 'classes');
     defined('BLOG_PATH') or define('BLOG_PATH', 'blog');
+    defined('PRODUCT_CATEGORIES_PATH') or define('PRODUCT_CATEGORIES_PATH', 'collections');
+    defined('PRODUCT_CATEGORY_SALES_PATH') or define('PRODUCT_CATEGORY_SALES_PATH', 'collections/Sales');
 
     defined('REQUEST_URI') or define('REQUEST_URI', getRootUri());
 
@@ -459,12 +499,15 @@ function defineSystemVariables() {
 
     defined('CLIENT_ROOT_PATH') or define('CLIENT_ROOT_PATH', PHP_ROOT_PATH . CLIENT_STR . DS);
     defined('CLIENT_ACTION_PATH') or define('CLIENT_ACTION_PATH', CLIENT_ROOT_PATH . ACTION_STR . DS);
+    defined('CLIENT_AJAX_ACTION_PATH') or define('CLIENT_AJAX_ACTION_PATH', PHP_ROOT_PATH . CLIENT_STR . DS . AJAX_ACTION_STR . DS);
+    defined('ADMIN_AJAX_ACTION_PATH') or define('ADMIN_AJAX_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . AJAX_ACTION_STR . DS);
     defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
     defined('CLASSES_ROOT_PATH') or define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 
     defined('ASSETS_URI') or define('ASSETS_URI', REQUEST_URI . 'assets' . DS);
     defined('CSS_URI') or define('CSS_URI', ASSETS_URI . 'css' . DS);
     defined('JS_URI') or define('JS_URI', ASSETS_URI . 'js' . DS);
+    defined('PRODUCT_CATEGORIES_URI') or define('PRODUCT_CATEGORIES_URI', REQUEST_URI . PRODUCT_CATEGORIES_PATH . DS);
 
     defined('GALLERY_ROOT') or define('GALLERY_ROOT', getRootPath() . 'gallery' . DS);
     defined('PICTURES_ROOT') or define('PICTURES_ROOT', GALLERY_ROOT . 'pictures' . DS);
@@ -472,6 +515,10 @@ function defineSystemVariables() {
     defined('DOCUMENTS_ROOT') or define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
     defined('LOGS_ROOT') or define('LOGS_ROOT', getRootPath() . 'logs' . DS);
     defined('PICTURES_URI') or define('PICTURES_URI', getRootUri() . 'gallery' . DS . 'pictures' . DS);
+    defined('PRODUCT_CATEGORIES_PICTURES_ROOT') or define('PRODUCT_CATEGORIES_PICTURES_ROOT', 'productCategories' . DS);
+    defined('PRODUCTS_PICTURES_ROOT') or define('PRODUCTS_PICTURES_ROOT', 'products' . DS);
+    defined('USERS_PICTURES_ROOT') or define('USERS_PICTURES_ROOT', 'users');
+    defined('POSTS_PICTURES_ROOT') or define('POSTS_PICTURES_ROOT', 'posts');
 }
 
 function loadAppClasses() {
@@ -480,10 +527,14 @@ function loadAppClasses() {
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'DB.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'UserHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PostHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'ProductCategoryHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'ProductHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'PromotionHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'CommentHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'GroupHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'AccessRightsHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'SettingsHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'NewsletterHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'ProgramHandler.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'EmailHandler.php');
@@ -750,5 +801,3 @@ function consumeFormData() {
 function formValueFromSession($key) {
     return $_SESSION[FORM_PREFIX . $key];
 }
-
-?>

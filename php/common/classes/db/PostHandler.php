@@ -66,7 +66,9 @@ class PostHandler {
      */
     static function getPostByFriendlyTitleWithDetails($friendly_title) {
         $post = self::getPostByFriendlyTitle($friendly_title);
-        $post->setPostDetails(self::getPostDetailsById($post->getID()));
+        if (!is_null($post)){
+            $post->setPostDetails(self::getPostDetailsById($post->getID()));
+        }
         return $post;
     }
 

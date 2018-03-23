@@ -6,6 +6,7 @@ class Setting {
     const BLOG_STYLE = 'blog.style';
     const DEFAULT_LANG = 'default.language';
     const EMAILS = 'email.addresses';
+    const MAINTENANCE = 'maintenance';
 
     private $ID;
     private $key;

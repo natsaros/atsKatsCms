@@ -16,6 +16,7 @@ class User {
     private $phone;
     private $picture;
     private $picturePath;
+    private $force_change_password;
 
     /**
      * @var UserMeta[]
@@ -63,11 +64,12 @@ class User {
      * @param $phone
      * @param $picture
      * @param $picturePath
+     * @param $force_change_password
      * @return User
      * @internal param bool $is_admin
      */
     public static function createFullUser($ID, $name, $password, $first_name, $last_name, $email, $activation_date,
-                                          $modification_date, $user_status, $gender, $link, $phone, $picture, $picturePath) {
+                                          $modification_date, $user_status, $gender, $link, $phone, $picture, $picturePath, $force_change_password) {
         return self::create()
             ->setID($ID)
             ->setUserName($name)
@@ -82,7 +84,8 @@ class User {
             ->setLink($link)
             ->setPhone($phone)
             ->setPicture($picture)
-            ->setPicturePath($picturePath);
+            ->setPicturePath($picturePath)
+            ->setForceChangePassword($force_change_password);
     }
 
 
@@ -241,6 +244,13 @@ class User {
         return $this->groups;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getForceChangePassword()
+    {
+        return $this->force_change_password;
+    }
 
 //    SETTERS
 
@@ -410,6 +420,16 @@ class User {
      */
     public function setGroups($groups) {
         $this->groups = $groups;
+        return $this;
+    }
+
+    /**
+     * @param mixed $force_change_password
+     * @return User
+     */
+    public function setForceChangePassword($force_change_password)
+    {
+        $this->force_change_password = $force_change_password;
         return $this;
     }
 }

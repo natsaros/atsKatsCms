@@ -2,19 +2,23 @@
 $error = '';
 
 if(isNotEmpty($_POST['submit'])) {
-    if(isEmpty($_POST['username']) || isEmpty($_POST['password'])) {
-        $error = "Username or Password is invalid";
+    if(isEmpty($_POST[UserHandler::USERNAME]) || isEmpty($_POST[UserHandler::PASSWORD])) {
+        $error = "Invalid user";
     }
 
     if(is_null($error) || $error === '') {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = $_POST[UserHandler::USERNAME];
+        $password = $_POST[UserHandler::PASSWORD];
         $user = UserHandler::adminLogin($username, $password);
         if($user === null || $user === false) {
-            $error = "Not valid user";
+            $error = "Invalid user";
         } else {
             setUserToSession($user);
-            Redirect(getAdminRequestUri());
+            if (forceUserChangePassword()){
+                Redirect(getAdminRequestUri() . "changePassword");
+            } else {
+                Redirect(getAdminRequestUri());
+            }
         }
     }
 } ?>
@@ -25,26 +29,25 @@ if(isNotEmpty($_POST['submit'])) {
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
+                    <h3 class="panel-title">Sign In</h3>
                 </div>
                 <div class="panel-body">
                     <form role="form" action="<?php echo getAdminRequestUri() . 'login' ?>" method="post">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Username" name="username" type="text"
-                                       autofocus>
+                                <label>Username</label>
+                                <input class="form-control" placeholder="Username" name="<?php echo UserHandler::USERNAME ?>" type="text" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password"
-                                       value="">
+                                <label>Password</label>
+                                <input class="form-control" placeholder="Password" name="<?php echo UserHandler::PASSWORD ?>" type="password" value="">
                             </div>
-                            <div class="checkbox">
-                                <label> <input name="remember" type="checkbox" value="Remember Me">Remember Me </label>
+                            <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Login" placeholder="Login">
+                            <div class="form-group remind-password-link-container">
+                                <a href="<?php echo getAdminRequestUri() . "remindPassword";?>"> Forgot Password </a>
                             </div>
-                            <input type="submit" name="submit" class="btn btn-lg btn-success btn-block" value="Login"
-                                   placeholder="Login">
-                            <div class="form-group">
-                                <span><?php echo $error ?></span>
+                            <div class="form-group login-message-container">
+                                <?php echo $error ?>
                             </div>
                         </fieldset>
                     </form>

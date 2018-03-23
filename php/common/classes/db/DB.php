@@ -1,12 +1,12 @@
 <?php
 
-class Db
-{
+class Db {
     const SETTINGS = 'SETTINGS';
     const USERS = 'USERS';
     const USER_META = 'USER_META';
     const PAGES = 'PAGES';
     const PAGE_META = 'PAGE_META';
+    const VISITORS = 'VISITORS';
 
     const USER_GROUPS = 'USER_GROUPS';
     const USER_GROUPS_META = 'USER_GROUPS_META';
@@ -19,14 +19,22 @@ class Db
     const POST_META = 'POST_DETAILS';
     const COMMENTS = 'COMMENTS';
     const COMMENT_META = 'COMMENT_META';
+    const PRODUCTS = 'PRODUCTS';
+    const PRODUCT_DETAILS = 'PRODUCT_DETAILS';
+    const PRODUCT_CATEGORIES = 'PRODUCT_CATEGORIES';
+    const PROMOTION = 'PROMOTION';
 
-    const VISITORS = 'VISITORS';
     const LESSONS = 'LESSONS';
     const EVENTS = 'EVENTS';
+
+    const NEWSLETTER_EMAILS = 'NEWSLETTER_EMAILS';
+    const NEWSLETTER_CAMPAIGNS = 'NEWSLETTER_CAMPAIGNS';
 
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
     const DB_BLOG = 'blog';
+    const DB_PRODUCT_CATALOGUE = 'product_catalogue';
+    const DB_NEWSLETTER = 'newsletter';
 
     // The database connection
     protected static $connection;
@@ -43,10 +51,15 @@ class Db
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
+    private static $product_tables = array(self::PRODUCTS, self::PRODUCT_DETAILS, self::PRODUCT_CATEGORIES, self::PROMOTION);
+
+    private static $newsletter_tables = array(self::NEWSLETTER_EMAILS, self::NEWSLETTER_CAMPAIGNS);
+
     private $prefix;
 
     public $settings;
     public $users;
+    public $visitors;
     public $user_meta;
     public $pages;
     public $page_meta;
@@ -54,6 +67,10 @@ class Db
     public $post_meta;
     public $comments;
     public $comment_meta;
+    public $products;
+    public $product_details;
+    public $product_categories;
+    public $promotions;
 
     public $user_groups;
     public $user_groups_meta;
@@ -62,9 +79,11 @@ class Db
     public $access_rights_meta;
     public $acr_assoc;
 
-    public $visitors;
     public $lessons;
     public $events;
+
+    public $newsletter_emails;
+    public $newsletter_campaigns;
 
     /**
      * @return Db
@@ -247,7 +266,7 @@ class Db
             if ($isCreate) {
                 $mysqli_result = $stmt->insert_id;
             } else {
-                $mysqli_result = $isUpdate || $isDelete ? $result : $stmt->get_result();
+                $mysqli_result = $isUpdate || $isDelete ? $stmt->affected_rows : $stmt->get_result();
             }
 
         } else {
@@ -328,14 +347,12 @@ class Db
                     case self::USER_META:
                         $this->setUserMeta($updatedTable);
                         break;
-
                     case self::PAGES:
                         $this->setPages($updatedTable);
                         break;
                     case self::PAGE_META:
                         $this->setPageMeta($updatedTable);
                         break;
-
                     case self::POSTS:
                         $this->setPosts($updatedTable);
                         break;
@@ -348,7 +365,18 @@ class Db
                     case self::COMMENT_META:
                         $this->setCommentMeta($updatedTable);
                         break;
-
+                    case self::PRODUCTS:
+                        $this->setProducts($updatedTable);
+                        break;
+                    case self::PRODUCT_DETAILS:
+                        $this->setProductDetails($updatedTable);
+                        break;
+                    case self::PRODUCT_CATEGORIES:
+                        $this->setProductCategories($updatedTable);
+                        break;
+                    case self::PROMOTION:
+                        $this->setPromotions($updatedTable);
+                        break;
                     case self::USER_GROUPS:
                         $this->setUserGroups($updatedTable);
                         break;
@@ -358,7 +386,6 @@ class Db
                     case self::UGR_ASSOC:
                         $this->setUgrAssoc($updatedTable);
                         break;
-
                     case self::ACCESS_RIGHTS:
                         $this->setAccessRights($updatedTable);
                         break;
@@ -368,7 +395,6 @@ class Db
                     case self::ACR_ASSOC:
                         $this->setAcrAssoc($updatedTable);
                         break;
-
                     case self::VISITORS:
                         $this->setVisitors($updatedTable);
                         break;
@@ -377,6 +403,12 @@ class Db
                         break;
                     case self::EVENTS:
                         $this->setEvents($updatedTable);
+                        break;
+                    case self::NEWSLETTER_EMAILS:
+                        $this->setNewsletterEmails($updatedTable);
+                        break;
+                    case self::NEWSLETTER_CAMPAIGNS:
+                        $this->setNewsletterCampaigns($updatedTable);
                         break;
                 }
             }
@@ -390,13 +422,19 @@ class Db
     private static function tables($scope = self::DB_ALL) {
         switch ($scope) {
             case self::DB_ALL:
-                $tables = array_merge(self::$global_tables, self::$blog_tables);
+                $tables = array_merge(self::$global_tables, self::$blog_tables, self::$product_tables, self::$newsletter_tables);
                 break;
             case self::DB_GLOBAL:
                 $tables = self::$global_tables;
                 break;
             case self::DB_BLOG:
-                $tables = self::$global_tables;
+                $tables = self::$blog_tables;
+                break;
+            case self::DB_PRODUCT_CATALOGUE:
+                $tables = self::$product_tables;
+                break;
+            case self::DB_NEWSLETTER:
+                $tables = self::$newsletter_tables;
                 break;
             default :
                 return array();
@@ -499,6 +537,34 @@ class Db
     }
 
     /**
+     * @param mixed $products
+     */
+    public function setProducts($products) {
+        $this->products = $products;
+    }
+
+    /**
+     * @param mixed $product_details
+     */
+    public function setProductDetails($product_details) {
+        $this->product_details = $product_details;
+    }
+
+    /**
+     * @param mixed $product_categories
+     */
+    public function setProductCategories($product_categories) {
+        $this->product_categories = $product_categories;
+    }
+
+    /**
+     * @param mixed $promotions
+     */
+    public function setPromotions($promotions) {
+        $this->promotions = $promotions;
+    }
+
+    /**
      * @param mixed $pages
      */
     public function setPages($pages) {
@@ -574,4 +640,19 @@ class Db
     public function setEvents($events) {
         $this->events = $events;
     }
+
+    /**
+     * @param mixed $newsletter_emails
+     */
+    public function setNewsletterEmails($newsletter_emails) {
+        $this->newsletter_emails = $newsletter_emails;
+    }
+
+    /**
+     * @param mixed $newsletter_campaigns
+     */
+    public function setNewsletterCampaigns($newsletter_campaigns) {
+        $this->newsletter_campaigns = $newsletter_campaigns;
+    }
+
 }

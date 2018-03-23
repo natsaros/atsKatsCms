@@ -12,6 +12,50 @@ class ImageUtil {
     const NAME = 'name';
 
     /**
+     * @param ProductCategory $productCategory
+     * @return string
+     * @throws SystemException
+     */
+    static function renderProductCategoryImage($productCategory) {
+        $imagePath = isNotEmpty($productCategory->getImagePath()) ? $productCategory->getImagePath() : $productCategory->getID() . '.jpg';
+        $path2productCategory = PICTURES_ROOT . PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
+        if(!file_exists($path2productCategory)) {
+            $imageData = $productCategory->getImage();
+            if(isNotEmpty($imageData)) {
+                //save image to file system to serve it from there next time
+                self::saveImageContentToFile($path2productCategory, $imageData);
+                return self::renderImageFromBlob($imageData, $imagePath);
+            } else {
+                return self::renderImageFromGallery($path2productCategory, 'blog_default.png');
+            }
+        } else {
+            return PICTURES_URI . PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
+        }
+    }
+
+    /**
+     * @param Product $product
+     * @return string
+     * @throws SystemException
+     */
+    static function renderProductImage($product) {
+        $imagePath = isNotEmpty($product->getImagePath()) ? $product->getImagePath() : $product->getID() . '.jpg';
+        $path2product = PICTURES_ROOT . PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
+        if(!file_exists($path2product)) {
+            $imageData = $product->getImage();
+            if(isNotEmpty($imageData)) {
+                //save image to file system to serve it from there next time
+                self::saveImageContentToFile($path2product, $imageData);
+                return self::renderImageFromBlob($imageData, $imagePath);
+            } else {
+                return self::renderImageFromGallery($path2product, 'blog_default.png');
+            }
+        } else {
+            return PICTURES_URI . PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
+        }
+    }
+
+    /**
      * @param Post $post
      * @return string
      * @throws SystemException
@@ -139,13 +183,15 @@ class ImageUtil {
     }
 
     /**
+     * @param $entity string
      * @param $extraPath string
      * @param $fileName string
      * @param $tmpFile SimpleImage
      * @return bool
      */
-    static function saveImageToFileSystem($extraPath, $fileName, $tmpFile) {
+    static function saveImageToFileSystem($entity, $extraPath, $fileName, $tmpFile) {
         $pathToSave = PICTURES_ROOT;
+        $pathToSave .= isNotEmpty($entity) ? $entity : '';
         $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
         createDirIfNotExists($pathToSave);
         $pathToSave .= $fileName;
@@ -154,8 +200,9 @@ class ImageUtil {
         return $tmpFile->save($pathToSave);
     }
 
-    static function removeImageFromFileSystem($path) {
+    static function removeImageFromFileSystem($entity, $path) {
         $pathToDel = PICTURES_ROOT;
+        $pathToDel .= isNotEmpty($entity) ? $entity : '';
         $pathToDel .= $path . '/';
         self::rrmdir($pathToDel);
     }

@@ -1,11 +1,15 @@
 <head>
-    <title>Fitness House Admin - <?php echo ucfirst(ADMIN_PAGE_ID)?></title>
+    <title><?php echo SITE_TITLE;?></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     
+    <link rel="shortcut icon" href="<?php echo ASSETS_URI ?>img/favico.png"/>
+    <link rel="icon" type="image/png" href="<?php echo ASSETS_URI ?>img/favico.png"/>
+    <link rel="icon" sizes="192x192" href="<?php echo ASSETS_URI ?>img/favico.png">
+
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo CSS_URI ?>bootstrap.min.css" rel="stylesheet">
 
@@ -32,6 +36,9 @@
 
     <!-- Bootstrap Toggle CSS -->
     <link href="<?php echo CSS_URI ?>bootstrap-toggle/bootstrap-toggle.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Datetimepicker CSS -->
+    <link href="<?php echo CSS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!-- Full Calendar CSS -->
     <link href="<?php echo CSS_URI ?>fullCalendar/fullcalendar.min.css" rel="stylesheet">
