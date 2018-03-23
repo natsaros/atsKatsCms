@@ -31,8 +31,7 @@ $events = json_encode($rawEvents);
 ?>
 <div class="row">
     <div class="col-lg-2 text-center">
-        <div class="alert text-center alert-info alert-dismissable fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <div class="alert text-center alert-info fade in">
             Drag classes on calendar to add new lesson
         </div>
         <div id='external-events'>
