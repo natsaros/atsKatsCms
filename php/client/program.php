@@ -1,10 +1,4 @@
 <?php
-const PILATES_EQUIP = 'Pilates equipment';
-const YOGA = 'Yoga';
-const PILATES_MAT = 'Pilates mat';
-const FAT_BURN = 'Fat burn';
-const AERIAL_YOGA = 'Aerial yoga';
-
 const MONDAY = DaysOfWeek::MONDAY;
 const TUESDAY = DaysOfWeek::TUESDAY;
 const WEDNESDAY = DaysOfWeek::WEDNESDAY;
@@ -139,7 +133,8 @@ function getDesktopLesson($lessons, $key) {
 
                     <div class="contactInfo">
                         <p>
-                            Τα μαθήματα του <strong><?php echo PILATES_EQUIP ?></strong> κλείνονται κατόπιν ραντεβου
+                            Τα μαθήματα του <strong><?php echo ProgramHandler::PILATES_EQUIP ?></strong> κλείνονται
+                            κατόπιν ραντεβου
                         </p>
                     </div>
                 </div>

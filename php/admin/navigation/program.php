@@ -5,7 +5,13 @@
 <style>
     #external-events .fc-event {
         margin: 10px 0;
+        padding: 10px;
         cursor: pointer;
+    }
+
+    .published {
+        background-color: #20BB2A;
+        border: 1px solid #20BB2A;
     }
 </style>
 
@@ -35,7 +41,7 @@ $events = json_encode($rawEvents);
                href="<?php echo getAdminModalRequestUri() . "eventManagement" . $urlParams; ?>"
                data-target="#eventModal_"
                data-remote="false">
-                <span class="fa fa-calendar" aria-hidden="true"></span>
+                <span class="fa fa-plus" aria-hidden="true"></span>
             </a>
             <!-- Modal-->
             <div class="ak_modal modal fade" id="eventModal_"
@@ -85,20 +91,7 @@ $events = json_encode($rawEvents);
         return check;
     };
 
-    function getDayofWeek($day) {
-        var dayToFind = moment().day($day).weekday();
-        var searchDate = moment();
-        if (dayToFind < searchDate.weekday()) {
-            while (searchDate.weekday() !== dayToFind) {
-                searchDate.subtract(1, 'day');
-            }
-        } else {
-            while (searchDate.weekday() !== dayToFind) {
-                searchDate.add(1, 'day');
-            }
-        }
-        return searchDate;
-    }
+    $eventId = 1;
 
     $('#calendar').fullCalendar({
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
@@ -122,6 +115,7 @@ $events = json_encode($rawEvents);
         slotMinutes: 60,
         minTime: "08:00:00",
         slotLabelFormat: "HH:mm",
+        timeFormat: "HH:mm",
         columnFormat: 'dddd',
         height: 'auto',
         nowIndicator: true,
@@ -158,7 +152,11 @@ $events = json_encode($rawEvents);
 
         },
         eventRender: function (event, element, view) {
-            console.log('rendering events');
+            event.id = $eventId++;
+            element.find('.fc-title').append('<div data-id="' + event.id + '" class="removeEvent glyphicon glyphicon-trash pull-right" id="delete_event_' + event.id + '"></div>');
+            if (event.status === 1) {
+                element.addClass('published');
+            }
         }
     });
 </script>

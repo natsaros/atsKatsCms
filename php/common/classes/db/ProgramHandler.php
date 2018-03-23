@@ -4,7 +4,14 @@ require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'DaysOfWeek.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Event.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Lesson.php');
 
-class ProgramHandler {
+class ProgramHandler
+{
+    const PILATES_EQUIP = 'Pilates equipment';
+    const YOGA = 'Yoga';
+    const PILATES_MAT = 'Pilates mat';
+    const FAT_BURN = 'Fat burn';
+    const AERIAL_YOGA = 'Aerial yoga';
+
     const ID = 'ID';
     const NAME = 'NAME';
     const STATUS = 'STATUS';
@@ -14,6 +21,7 @@ class ProgramHandler {
     const END = 'END';
 
     const LESSON = 'LESSON';
+
 
     /**
      * @return bool|Lesson[]
@@ -135,63 +143,63 @@ class ProgramHandler {
      */
     static function fetchEvents() {
         $rows = array();
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '08:30', '09:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '09:30', '10:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '10:30', '11:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '11:30', '12:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '13:00', '14:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '16:00', '17:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '17:00', '18:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '18:00', '19:00', PILATES_MAT);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '19:00', '20:00', FAT_BURN);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '20:00', '21:00', YOGA);
-        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '21:00', '22:00', PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '08:30', '09:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '09:30', '10:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '10:30', '11:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '11:30', '12:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '13:00', '14:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '16:00', '17:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '17:00', '18:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '18:00', '19:00', self::PILATES_MAT);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '19:00', '20:00', self::FAT_BURN);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '20:00', '21:00', self::YOGA);
+        $rows[] = self::addLesson(DaysOfWeek::MONDAY, '21:00', '22:00', self::PILATES_EQUIP);
 
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '08:30', '09:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '09:00', '10:00', YOGA);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '09:30', '10:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '10:30', '11:30', PILATES_MAT);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '11:30', '12:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '16:00', '17:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '17:00', '18:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '18:00', '19:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '19:00', '20:00', PILATES_MAT);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '20:00', '21:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '21:00', '22:00', PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '08:30', '09:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '09:00', '10:00', self::YOGA);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '09:30', '10:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '10:30', '11:30', self::PILATES_MAT);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '11:30', '12:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '16:00', '17:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '17:00', '18:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '18:00', '19:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '19:00', '20:00', self::PILATES_MAT);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '20:00', '21:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::TUESDAY, '21:00', '22:00', self::PILATES_EQUIP);
 
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '08:30', '09:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '09:30', '10:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '10:00', '11:00', FAT_BURN);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '10:30', '11:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '13:00', '14:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '16:00', '17:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '17:00', '18:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '18:00', '19:00', PILATES_MAT);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '19:00', '20:00', FAT_BURN);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '20:00', '21:00', PILATES_MAT, AERIAL_YOGA);
-        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '21:00', '22:00', PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '08:30', '09:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '09:30', '10:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '10:00', '11:00', self::FAT_BURN);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '10:30', '11:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '13:00', '14:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '16:00', '17:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '17:00', '18:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '18:00', '19:00', self::PILATES_MAT);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '19:00', '20:00', self::FAT_BURN);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '20:00', '21:00', self::PILATES_MAT, self::AERIAL_YOGA);
+        $rows[] = self::addLesson(DaysOfWeek::WEDNESDAY, '21:00', '22:00', self::PILATES_EQUIP);
 
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '08:30', '09:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '09:30', '10:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '10:30', '11:30', PILATES_MAT);
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '17:00', '18:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '18:00', '19:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '19:00', '20:00', YOGA);
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '20:00', '21:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '21:00', '22:00', PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '08:30', '09:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '09:30', '10:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '10:30', '11:30', self::PILATES_MAT);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '17:00', '18:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '18:00', '19:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '19:00', '20:00', self::YOGA);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '20:00', '21:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::THURSDAY, '21:00', '22:00', self::PILATES_EQUIP);
 
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '08:30', '09:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '09:30', '10:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '10:30', '11:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '11:30', '12:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '16:00', '17:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '17:00', '18:00', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '19:00', '20:00', PILATES_MAT);
-        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '20:00', '21:00', PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '08:30', '09:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '09:30', '10:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '10:30', '11:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '11:30', '12:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '16:00', '17:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '17:00', '18:00', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '19:00', '20:00', self::PILATES_MAT);
+        $rows[] = self::addLesson(DaysOfWeek::FRIDAY, '20:00', '21:00', self::PILATES_EQUIP);
 
-        $rows[] = self::addLesson(DaysOfWeek::SATURDAY, '10:30', '11:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::SATURDAY, '11:30', '12:30', PILATES_EQUIP);
-        $rows[] = self::addLesson(DaysOfWeek::SATURDAY, '13:00', '14:00', PILATES_MAT, AERIAL_YOGA);
+        $rows[] = self::addLesson(DaysOfWeek::SATURDAY, '10:30', '11:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::SATURDAY, '11:30', '12:30', self::PILATES_EQUIP);
+        $rows[] = self::addLesson(DaysOfWeek::SATURDAY, '13:00', '14:00', self::PILATES_MAT, self::AERIAL_YOGA);
 
 //        return self::populateProgram($rows);
         return $rows;
