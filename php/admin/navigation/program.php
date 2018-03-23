@@ -3,6 +3,10 @@
 <?php require("messageSection.php"); ?>
 
 <style>
+    #external-events {
+        margin-bottom: 20px;
+    }
+
     #external-events .fc-event {
         margin: 10px 0;
         padding: 6px 10px;
@@ -20,6 +24,12 @@
 
     .fc-lesson {
         width: 70%;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 960px) {
+        .fc-lesson {
+            width: 60%;
+        }
     }
 </style>
 
@@ -126,8 +136,20 @@ $events = json_encode($rawEvents);
         </div>
     </div>
     <div class="col-lg-10">
+        <div class="alert text-center alert-info alert-dismissable fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Click on lesson to view details and actions.
+            Move or resize lessons on calendar to change time.
+            <strong>Remember!</strong> You need to always save your changes to take effect on front end side
+        </div>
         <div class="panel-body">
             <div id="calendar"></div>
+        </div>
+        <div class="text-right form-group">
+            <a type="button" href="<?php echo getAdminRequestUri() . 'users' ?>"
+               class="btn btn-default">Back</a>
+            <input type="submit" name="submit" class="btn btn-primary" value="Save"
+                   placeholder="Save"/>
         </div>
     </div>
     <!-- Modal-->
