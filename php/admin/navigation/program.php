@@ -5,13 +5,21 @@
 <style>
     #external-events .fc-event {
         margin: 10px 0;
-        padding: 10px;
+        padding: 6px 10px;
         cursor: pointer;
     }
 
     .published {
         background-color: #20BB2A;
         border: 1px solid #20BB2A;
+    }
+
+    .fc-event-container > * {
+        display: inline-block;
+    }
+
+    .fc-lesson {
+        width: 70%;
     }
 </style>
 
@@ -23,27 +31,90 @@ $events = json_encode($rawEvents);
 ?>
 <div class="row">
     <div class="col-lg-2 text-center">
+        <div class="alert text-center alert-info alert-dismissable fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Drag classes on calendar to add new lesson
+        </div>
         <div id='external-events'>
             <div id='external-events-listing'>
-                <h4>Lessons</h4>
+                <h4>Classes</h4>
 
                 <?php
+                $hiddenName = ProgramHandler::ID;
                 /* @var $lesson Lesson */
                 foreach ($lessons as $lesson) { ?>
-                    <div class='fc-event'><?php echo $lesson->getName() ?></div>
+                    <div class="fc-event-container">
+                        <div class="fc-event fc-lesson"><?php echo $lesson->getName() ?></div>
+                        <?php $ID = $lesson->getID(); ?>
+                        <?php
+                        $modalTitle = "Edit Class";
+                        $urlParams = addParamsToUrl(
+                            array('modalTitle', 'id', 'hiddenName'),
+                            array(urlencode($modalTitle), $ID, $hiddenName)); ?>
+                        <a type="button"
+                           data-toggle="modal"
+                           class="btn btn-default btn-sm" title="<?php echo $modalTitle; ?>"
+                           href="<?php echo getAdminModalRequestUri() . "editLesson" . $urlParams; ?>"
+                           data-target="#editModal_<?php echo $ID; ?>"
+                           data-remote="false">
+                            <span class="fa fa-pencil" aria-hidden="true"></span>
+                        </a>
+
+                        <?php
+                        $modalTitle = "Delete Class";
+                        $modalText = "You are about to delete a class. Are you sure?";
+                        $urlParams = addParamsToUrl(
+                            array('modalTitle', 'modalText', 'id', 'hiddenName'),
+                            array(urlencode($modalTitle), urlencode($modalText), $ID, $hiddenName)) ?>
+                        <a type="button"
+                           data-toggle="modal"
+                           class="btn btn-default btn-sm" title="<?php echo $modalTitle; ?>"
+                           href="<?php echo getAdminModalRequestUri() . "confirmDeleteLesson" . $urlParams; ?>"
+                           data-target="#confirmModal_<?php echo $ID; ?>"
+                           data-remote="false">
+                            <span class="fa fa-minus" aria-hidden="true"></span>
+                        </a>
+                    </div>
                 <?php } ?>
             </div>
 
+            <?php
+            /* @var $lesson Lesson */
+            foreach ($lessons as $lesson) {
+                $ID = $lesson->getID();
+                ?>
+                <div class="ak_modal modal fade" id="confirmModal_<?php echo $ID; ?>"
+                     tabindex="-1"
+                     role="dialog" aria-labelledby="confirmModalLabel_<?php echo $ID; ?>"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+
+                <div class="ak_modal modal fade" id="editModal_<?php echo $ID; ?>"
+                     tabindex="-1"
+                     role="dialog" aria-labelledby="editModalLabel_<?php echo $ID; ?>"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+            <?php } ?>
+
             <!-- Button trigger modal -->
-            <?php $urlParams = addParamsToUrl(array('modalTitle'), array(urlencode("Lesson Management"))) ?>
+            <?php
+            $modalTitle = "Add Class";
+            $urlParams = addParamsToUrl(array('modalTitle'), array(urlencode($modalTitle))) ?>
             <a type="button"
                data-toggle="modal"
-               class="btn btn-default btn-sm" title="Add Lesson"
-               href="<?php echo getAdminModalRequestUri() . "eventManagement" . $urlParams; ?>"
+               class="btn btn-default btn-block btn-m" title="<?php echo $modalTitle; ?>"
+               href="<?php echo getAdminModalRequestUri() . "createLesson" . $urlParams; ?>"
                data-target="#eventModal_"
                data-remote="false">
                 <span class="fa fa-plus" aria-hidden="true"></span>
             </a>
+
             <!-- Modal-->
             <div class="ak_modal modal fade" id="eventModal_"
                  tabindex="-1"

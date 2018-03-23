@@ -35,6 +35,20 @@ class ProgramHandler
     }
 
     /**
+     * @param $id
+     * @return bool|Lesson
+     * @throws SystemException
+     */
+    static function getLessonById($id) {
+        if(isNotEmpty($id)){
+            $query = "SELECT * FROM " . getDb()->lessons . " WHERE " . self::ID . " = ? ";
+            $row = getDb()->selectStmtSingle($query, array('i'), array($id));
+            return self::populateLesson($row);
+        }
+        return null;
+    }
+
+    /**
      * @param $events Event[]
      * @return array
      */
@@ -124,22 +138,6 @@ class ProgramHandler
     }
 
     /**
-     * @param $day
-     * @param $start
-     * @param $end
-     * @param $lesson
-     * @param string $secondLesson
-     * @return Event
-     */
-    static function addLesson($day, $start, $end, $lesson, $secondLesson = '') {
-        $lessonStr = $lesson;
-        if ($secondLesson !== '') {
-            $lessonStr .= ' / ' . $secondLesson;
-        }
-        return Event::createEvent(null, $lessonStr, null, EventStatus::ACTIVE, $day, $start, $end);
-    }
-
-    /**
      * @return Event[]|bool
      * @throws SystemException
      */
@@ -190,15 +188,32 @@ class ProgramHandler
         return $createdLesson;
     }
 
+
     /**
+     * @param $ID
      * @param $lesson
      * @return bool|mysqli_result|null
      * @throws SystemException
      */
-    public static function deleteLesson($lesson) {
-        $query = "DELETE FROM " . getDb()->lessons . " WHERE " . self::LESSON . " = ?";
-        $createdLesson = getDb()->createStmt($query, array('s'), array($lesson));
-        return $createdLesson;
+    public static function editLesson($ID, $lesson) {
+        $query = "UPDATE " . getDb()->lessons . " SET " . self::LESSON . " = ? WHERE " . self::ID . "= ?";
+        $editedLesson = getDb()->createStmt($query, array('s', 'i'), array($lesson, $ID));
+        return $editedLesson;
+    }
+
+    /**
+     * @param $lessonID
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function deleteLesson($lessonID) {
+        if (isNotEmpty($lessonID)) {
+            $query = "DELETE FROM " . getDb()->lessons . " WHERE " . self::ID . " = ?";
+            $createdLesson = getDb()->createStmt($query, array('s'), array($lessonID));
+            return $createdLesson;
+        } else {
+            return null;
+        }
     }
 
     /*Populate Functions*/
