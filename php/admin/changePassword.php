@@ -34,6 +34,9 @@ if(isNotEmpty($_POST['submit'])) {
                     <form role="form" action="<?php echo getAdminRequestUri() . 'changePassword' ?>" method="post">
                         <input type="hidden" name="<?php echo UserHandler::ID ?>"  value="<?php echo $loggedInUser->getID() ?>"/>
                         <fieldset>
+                            <div class="form-group" style="text-align: center;">
+                                A temporary password may only be used once. You must change it now to access your account.
+                            </div>
                             <div class="form-group">
                                 <label>Password</label>
                                 <input class="form-control" placeholder="Password" name="<?php echo UserHandler::PASSWORD ?>" type="password">
