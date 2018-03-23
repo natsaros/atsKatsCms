@@ -6,17 +6,26 @@ $interested = $_POST['interested'];
 $phone = $_POST['phone'];
 $goal = $_POST['goal'];
 
-if (isEmpty($name) || isEmpty($email_address) || isEmpty($interested)) {
-    addInfoMessage("Παρακαλώ συμπληρώστε όλες τις απαιτούμενες πληροφορίες");
+if (isEmpty(trim($name)) || isEmpty(trim($email_address)) || isEmpty(trim($interested))) {
+    addErrorMessage("Παρακαλώ συμπληρώστε όλες τις απαιτούμενες πληροφορίες");
 }
 
-
-if (!isValidMail($email_address)) {
+if (isNotEmpty(trim($email_address)) && !isValidMail($email_address)) {
     addErrorMessage('Μη έγκυρη διεύθυνση email');
 }
 
-if (!is_numeric($phone)) {
+if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
     addErrorMessage('Μη έγκυρος αριθμός τηλεφώνου');
+}
+
+if(hasErrors()) {
+    if (!empty($_POST)) {
+        foreach($_POST as $key => $value) {
+            $_SESSION['sendEmailForm'][$key] = $value;
+        }
+        $_SESSION['sendEmailForm'][$key] = $value;
+    }
+    Redirect(getRootUri() . "contact");
 }
 
 try {
@@ -28,6 +37,6 @@ try {
 
 if (!hasErrors()) {
     consumeFormData();
-    addInfoMessage('Λαβαμε το email σας και θα επικοινωνησουμε αμεσα μαζι σας! Ευχαριστουμε');
+    addInfoMessage('Λάβαμε το email σας και θα επικοινωνήσουμε άμεσα μαζί σας! Ευχαριστούμε!');
 }
 Redirect(getRootUri() . "contact");
