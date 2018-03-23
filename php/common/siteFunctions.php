@@ -9,7 +9,7 @@ const ADMIN_DATE_FORMAT = 'd/m/Y H:i:s';
  * @param $message
  * @param $file
  * @param $line
- * @throws Exception
+ * @throws SystemException
  */
 function exception_error_handler($severity, $message, $file, $line) {
     //TODO : check this is not throwing correct error in DB->connect()
@@ -17,7 +17,7 @@ function exception_error_handler($severity, $message, $file, $line) {
         $message = mysqli_connect_error();
 //        echo sprintf("Connect failed: %s\n", mysqli_connect_error());
     }
-    throw new Exception($message);
+    throw new SystemException($message);
 }
 
 //set_error_handler("exception_error_handler");
@@ -184,9 +184,9 @@ function getActiveAdminPage() {
  * @throws SystemException
  */
 function initLoad() {
+    initLogFile();
     initLoadDb();
     initGallery();
-    initLogFile();
 }
 
 function initLoadDb() {
@@ -196,7 +196,7 @@ function initLoadDb() {
         $init_queries = $db->db_schema_from_file();
         $result = $db->multi_query($init_queries);
         if ($result === false) {
-            throw new Exception('Database has not been initialized');
+            throw new SystemException('Database has not been initialized');
         }
         Globals::set('DB', $db);
     }
@@ -316,7 +316,7 @@ function require_safe($path) {
     if (file_exists(($path))) {
         require($path);
     } else {
-        throw new Exception($path . " doesn't exist");
+        throw new SystemException($path . " doesn't exist");
     }
 }
 
@@ -329,7 +329,7 @@ function exists_safe($path) {
     if (file_exists(($path))) {
         return true;
     } else {
-        throw new Exception($path . " doesn't exist");
+        throw new SystemException($path . " doesn't exist");
     }
 }
 
@@ -496,7 +496,9 @@ function defineSystemVariables() {
     defined('ADMIN_NAV_PATH') or define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
     defined('ADMIN_MODAL_NAV_PATH') or define('ADMIN_MODAL_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS . MODAL_STR . DS);
     defined('ADMIN_ACTION_PATH') or define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
-    defined('CLIENT_ACTION_PATH') or define('CLIENT_ACTION_PATH', PHP_ROOT_PATH . CLIENT_STR . DS . ACTION_STR . DS);
+
+    defined('CLIENT_ROOT_PATH') or define('CLIENT_ROOT_PATH', PHP_ROOT_PATH . CLIENT_STR . DS);
+    defined('CLIENT_ACTION_PATH') or define('CLIENT_ACTION_PATH', CLIENT_ROOT_PATH . ACTION_STR . DS);
     defined('CLIENT_AJAX_ACTION_PATH') or define('CLIENT_AJAX_ACTION_PATH', PHP_ROOT_PATH . CLIENT_STR . DS . AJAX_ACTION_STR . DS);
     defined('ADMIN_AJAX_ACTION_PATH') or define('ADMIN_AJAX_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . AJAX_ACTION_STR . DS);
     defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
@@ -546,6 +548,16 @@ function loadAppClasses() {
  */
 function logError($ex) {
     error_log($ex->errorMessage() . " with code: " . $ex->getCode() . "\r\n", 3, LOG_FILE);
+    error_log($ex->getTraceAsString(), 3, LOG_FILE);
+}
+
+/**
+ * logs system exceptions to file
+ * @param Exception $ex
+ */
+function logGeneralError($ex) {
+    error_log($ex->getMessage() . " with code: " . $ex->getCode() . "\r\n", 3, LOG_FILE);
+    error_log($ex->getTraceAsString(), 3, LOG_FILE);
 }
 
 /**
@@ -707,9 +719,10 @@ function is_session_started() {
  */
 function addParamsToUrl($params, $paramValues) {
     $urlParams = '';
-    if (isNotEmpty($params) && isNotEmpty($paramValues)) {
+    if (isNotEmpty($params)
+        && isNotEmpty($paramValues)) {
         if (count($params) !== count($paramValues)) {
-            throw new Exception('Parameter names and values don\'t match!');
+            throw new SystemException('Parameter names and values don\'t match!');
         }
 
         foreach ($params as $key => $param) {

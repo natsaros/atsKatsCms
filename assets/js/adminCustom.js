@@ -2,6 +2,9 @@ $(function() {
     $('#side-menu').metisMenu();
 });
 
+//Loads the correct sidebar on window load,
+//collapses the sidebar on window resize.
+// Sets the min-height of #page-wrapper to window size
 $(function() {
     $(window).bind("load resize", function() {
         var topOffset = 50;
@@ -56,7 +59,10 @@ function initBootstrapToggle() {
 $(document).ready(function () {
     $('.ak-dataTable').DataTable({responsive: true});
 
-    $('.posts-dataTable').DataTable({responsive: true});
+    $('.posts-dataTable').DataTable({
+        responsive: true,
+        "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
+    });
 
     $('.product-categories-dataTable').DataTable({
         responsive: true,

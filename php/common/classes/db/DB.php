@@ -6,6 +6,7 @@ class Db {
     const USER_META = 'USER_META';
     const PAGES = 'PAGES';
     const PAGE_META = 'PAGE_META';
+    const VISITORS = 'VISITORS';
 
     const USER_GROUPS = 'USER_GROUPS';
     const USER_GROUPS_META = 'USER_GROUPS_META';
@@ -22,8 +23,6 @@ class Db {
     const PRODUCT_DETAILS = 'PRODUCT_DETAILS';
     const PRODUCT_CATEGORIES = 'PRODUCT_CATEGORIES';
     const PROMOTION = 'PROMOTION';
-
-    const VISITORS = 'VISITORS';
 
     const NEWSLETTER_EMAILS = 'NEWSLETTER_EMAILS';
     const NEWSLETTER_CAMPAIGNS = 'NEWSLETTER_CAMPAIGNS';
@@ -53,6 +52,7 @@ class Db {
 
     public $settings;
     public $users;
+    public $visitors;
     public $user_meta;
     public $pages;
     public $page_meta;
@@ -72,8 +72,6 @@ class Db {
     public $access_rights_meta;
     public $acr_assoc;
 
-    public $visitors;
-
     public $newsletter_emails;
     public $newsletter_campaigns;
 
@@ -89,7 +87,7 @@ class Db {
 
     /**
      * @return bool|mysqli|string
-     * @throws SystemException
+     * @throws SystemException | Exception
      */
     private static function connect() {
         // Try and connect to the database, if a connection has not been established yet
@@ -221,7 +219,7 @@ class Db {
         // Connect to the database
         $connection = self::connect();
         if ($connection == mysqli_connect_error()) {
-            throw new Exception($connection);
+            throw new SystemException($connection);
         }
 
         $param_type = '';
@@ -262,7 +260,7 @@ class Db {
             }
 
         } else {
-            throw new Exception($connection->error);
+            throw new SystemException($connection->error);
         }
         return $mysqli_result;
     }
@@ -276,12 +274,12 @@ class Db {
         // Connect to the database
         $connection = self::connect();
         if ($connection == mysqli_connect_error()) {
-            throw new Exception(self::db_error());
+            throw new SystemException(self::db_error());
         }
         // Query the database
         $mysqli_result = $connection->multi_query($query);
         if (!$mysqli_result) {
-            throw new Exception($connection->error);
+            throw new SystemException($connection->error);
         }
         return $mysqli_result;
     }
@@ -289,6 +287,7 @@ class Db {
     /**
      * @param $value
      * @return string
+     * @throws SystemException
      */
     public static function db_quote($value) {
         $connection = self::connect();
@@ -297,6 +296,7 @@ class Db {
 
     /**
      * @return string
+     * @throws SystemException
      */
     public static function db_error() {
         $connection = self::connect();
@@ -317,7 +317,7 @@ class Db {
      */
     public function setCustomPrefix($prefix, $set_table_names = true) {
         if (preg_match('|[^a-z0-9_]|i', $prefix)) {
-            throw new Exception('Invalid database prefix');
+            throw new SystemException('Invalid database prefix');
         }
         $prefix = strtoupper($prefix);
 
