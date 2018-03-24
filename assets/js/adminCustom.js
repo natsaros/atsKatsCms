@@ -57,6 +57,8 @@ function initBootstrapToggle() {
 }
 
 $(document).ready(function () {
+    $.fn.DataTable.ext.pager.numbers_length = 5;
+    
     $('.ak-dataTable').DataTable({responsive: true});
 
     $('.posts-dataTable').DataTable({
