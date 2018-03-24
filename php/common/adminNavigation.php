@@ -7,8 +7,6 @@ if (isAdminModal()) {
 try {
 
     if (exists_safe($path)) {
-        //TODO : evolve session mechanism to handle session time out.
-
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
             // last request was more than 30 minutes ago
             session_unset();     // unset $_SESSION variable for the run-time
