@@ -56,6 +56,15 @@
 
     <script src="<?php echo JS_URI ?>google-analytics/google-analytics-plugins.min.js"></script>
 
-    <script>var oath_client_id = '<?php echo GA_OATH_CLIENT_ID;?>';</script>
+    <?php
+    $accessToken = 'ya29.GlyKBXVIIisDc8MP6KjUwGjKIqyzSyDYfrCIsZLMIZcowUZyJrmYISuwPppQZalZeC_m3KISfp1pSEH4nPOtIhd8fucaEWCOaDmest9gIFhvMhw2TrxROuZidnt4uA';
+    $accessTokenHasExpired = checkIfAccessTokenHasExpired($accessToken);
+    if ($accessTokenHasExpired){
+        $accessToken = refreshTokenForGACharts();
+    }
+    ?>
+    <script>
+        var accessToken = '<?php echo $accessToken?>';
+    </script>
     <script src="<?php echo JS_URI ?>google-analytics/google-analytics-initialization.min.js"></script>
 <?php } ?>

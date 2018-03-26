@@ -46,7 +46,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
     <!-- /.navbar-header -->
 
     <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
+        <div class="sidebar-nav navbar-collapse collapse">
             <ul class="nav" id="side-menu">
                 <li>
                     <a href="<?php echo $adminRequestUri . 'dashboard' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'dashboard') !== false) {
