@@ -64,5 +64,6 @@
     <script src="<?php echo JS_URI ?>google-analytics/google-analytics-plugins.min.js"></script>
 
     <script>var oath_client_id = '<?php echo GA_OATH_CLIENT_ID;?>';</script>
-    <script src="<?php echo JS_URI ?>google-analytics/google-analytics-initialization.min.js"></script>
+    <script src="https://apis.google.com/js/client.js"></script>
+    <script src="<?php echo JS_URI ?>google-analytics/google-analytics-initialization.js"></script>
 <?php } ?>
