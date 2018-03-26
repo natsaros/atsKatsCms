@@ -10,9 +10,42 @@ $(document).ready(function(){
          * If no access has been created, render an authorize button inside the
          * element with the ID "embed-api-auth-container".
          */
+
+
+
+        // ATTENTION:
+        // There are two ways to authorize:
+        // 1. By using oath client id. The access token is valid as long as the user is logged in. Once the user logs out, authorization has to take place again. In this case, we hide the after authorization.
+
+        // gapi.analytics.auth.authorize({
+        //     container: 'embed-api-auth-container',
+        //     clientid: oath_client_id
+        // });
+
+        // gapi.analytics.auth.on('success', function() {
+        //     $('#embed-api-auth-container').hide();
+        // });
+
+        // 2. By using and refreshing an access token. We can retrieve the access token by authorizing with client id, as mentioned above. Then we authorize with access token.
+        // gapi.analytics.auth.authorize({
+        //     container: 'embed-api-auth-container',
+        //     clientid: oath_client_id
+        // });
+
+        // gapi.analytics.auth.on('success', function() {
+        //     console.log(gapi.analytics.auth.getAuthResponse().access_token);
+        // });
+
+        // gapi.analytics.auth.authorize({
+        //     serverAuth: {
+        //         access_token: 'ya29.GlyKBSG0GLQENxp1Zfg04a95PbxoNTH83bALH2MCrnMQYyxXLqs5NeKYCYsrD-kPKX1MDhGNVb6fSHFvMTg7Mnao5X7z4ifrQ9k4y9XbrpBJC30tzYUrlHDiun4_vg'
+        //     }
+        // });
+
         gapi.analytics.auth.authorize({
-            container: 'embed-api-auth-container',
-            clientid: oath_client_id
+            serverAuth: {
+                access_token: 'ya29.GlyKBSG0GLQENxp1Zfg04a95PbxoNTH83bALH2MCrnMQYyxXLqs5NeKYCYsrD-kPKX1MDhGNVb6fSHFvMTg7Mnao5X7z4ifrQ9k4y9XbrpBJC30tzYUrlHDiun4_vg'
+            }
         });
 
 
