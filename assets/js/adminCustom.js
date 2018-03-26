@@ -257,18 +257,16 @@ $(document).ready(function () {
         ignoreReadonly: true
     });
 
-    $(document).ready(function(){
-        $('#productCategoryId_input').on('change', function(){
-            $.ajax({
-                type: 'POST',
-                url: getContextPath() + '/admin/ajaxAction/updateSecondaryProductCategorySelect',
-                data: ({currentProductCategoryId:$('#productCategoryId_input').val()}),
-                success: function(data) {
-                    $('#secondaryProductCategoryId_input').find('option').remove().end().append(data).val('');
-                },
-                error: function(){
-                }
-            });
+    $('#productCategoryId_input').on('change', function(){
+        $.ajax({
+            type: 'POST',
+            url: getContextPath() + '/admin/ajaxAction/updateSecondaryProductCategorySelect',
+            data: ({currentProductCategoryId:$('#productCategoryId_input').val()}),
+            success: function(data) {
+                $('#secondaryProductCategoryId_input').find('option').remove().end().append(data).val('');
+            },
+            error: function(){
+            }
         });
     });
 });

@@ -7,46 +7,126 @@
 <?php require("messageSection.php"); ?>
 
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="information-header">Active Promotion</h3>
+    <div class="col-lg-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="fa fa-envelope fa-4x"></i>
+                    </div>
+                    <div class="col-xs-10 text-right">
+                        <?php $latestNewsletterSubscriptions = NewsletterHandler::getLatestNewsletterSubscriptions();
+                        $newsletterSubscriptionMessage = 'Newsletter' . (($latestNewsletterSubscriptions == 1) ? ' subscription ' : ' subscriptions ') . 'the last 3 Days';?>
+                        <div class="huge">
+                            <?php echo $latestNewsletterSubscriptions;?>
+                        </div>
+                        <div>
+                            <?php echo $newsletterSubscriptionMessage;?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?php echo getAdminRequestUri() . 'newsletter';?>">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
     </div>
-</div>
-<?php $activePromotion = PromotionHandler::getPromotedInstance();
-if (!is_null($activePromotion)) {
-    if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) {
-        $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
-    } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) {
-        $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
-    } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PLAIN_TEXT) {
-        $isPromotedInstanceActive = true;
+    <?php $activePromotion = PromotionHandler::getPromotedInstance();
+    if (!is_null($activePromotion)) {
+        if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) {
+            $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
+        } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) {
+            $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
+        } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PLAIN_TEXT) {
+            $isPromotedInstanceActive = true;
+        }
     }
-}
-if (!is_null($activePromotion) && $isPromotedInstanceActive) { ?>
-    <div class="row dashboard-information">
-        <div class="col-sm-12">
-            <?php echo 'The promotion';?>
-            <?php if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) { echo ' for category '; } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) { echo ' for product '; } ?>
-            <?php if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY || $activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) { echo '\' <b>' . $activePromotion->getPromotedInstance()->getTitle() . '</b>\''; }?>
-            <?php echo ' with promotion text \'' . $activePromotion->getPromotionText() . '\'';?>
-            <?php echo ' is active until ' . date(ADMIN_DATE_FORMAT, strtotime($activePromotion->getPromotedTo())) . '.<br/>';?>
-            <?php echo 'So far it has been seen <b>' . $activePromotion->getTimesSeen() . '</b> times.';?>
+    if (!is_null($activePromotion) && $isPromotedInstanceActive) {
+        $timesSeen = $activePromotion->getTimesSeen();
+        $activePromotionMessage = 'Views for Promotion';
+        $activePromotionMessage .= ' with Promotion Text \'' . $activePromotion->getPromotionText() . '\'';
+    } else {
+        $timesSeen = '&nbsp;';
+        $activePromotionMessage = 'There are no Active Promotions';
+    }
+    ?>
+    <div class="col-lg-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="fa fa-rocket fa-4x"></i>
+                    </div>
+                    <div class="col-xs-10 text-right">
+                        <div class="huge">
+                            <?php echo $timesSeen;?>
+                        </div>
+                        <div>
+                            <?php echo $activePromotionMessage;?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?php echo getAdminRequestUri() . 'promotions';?>">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
         </div>
     </div>
-<?php } else { ?>
-    <div class="row dashboard-information">
-        <div class="col-sm-12">
-            <?php echo 'There are no active promotions.';?>
+</div>
+
+<?php if (isNotEmpty(GA_OATH_CLIENT_ID)) { ?>
+    <div id="GA-stats">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="embed-api-auth-container"></div>
+                <div id="view-selector-container"></div>
+                <div id="view-name"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="active-users-container"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 chart-container">
+                <div class="Chartjs">
+                    <h3>Last 30 Days</h3>
+                    <figure class="Chartjs-figure" id="chart-1-container"></figure>
+                    <ol class="Chartjs-legend" id="legend-1-container"></ol>
+                </div>
+            </div>
+            <div class="col-md-12 chart-container">
+                <div class="Chartjs">
+                    <h3>This Week Session vs Last Week Sessions</h3>
+                    <figure class="Chartjs-figure" id="chart-2-container"></figure>
+                    <ol class="Chartjs-legend" id="legend-2-container"></ol>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 chart-container">
+                <div class="Chartjs">
+                    <h3>Sessions by device</h3>
+                    <figure class="Chartjs-figure" id="chart-3-container"></figure>
+                    <ol class="Chartjs-legend" id="legend-3-container"></ol>
+                </div>
+            </div>
+            <div class="col-sm-6 chart-container">
+                <div class="Chartjs">
+                    <h3>Sessions by country</h3>
+                    <figure class="Chartjs-figure" id="chart-4-container"></figure>
+                    <ol class="Chartjs-legend" id="legend-4-container"></ol>
+                </div>
+            </div>
         </div>
     </div>
-<?php }  ?>
-<div class="row">
-    <div class="col-sm-12">
-        <h3 class="information-header">Latest Newsletter Subscriptions</h3>
-    </div>
-</div>
-<div class="row dashboard-information">
-    <div class="col-sm-12">
-        <?php $latestNewsletterSubscriptions = NewsletterHandler::getLatestNewsletterSubscriptions();
-        echo 'There ' . (($latestNewsletterSubscriptions > 0) ? ((($latestNewsletterSubscriptions > 1) ? 'are <b>' . $latestNewsletterSubscriptions . '</b> subscriptions' : 'is <b>' . $latestNewsletterSubscriptions . '</b> subscription')) : 'are no subscriptions') . ' to our Newsletter the last 3 days.';?>
-    </div>
-</div>
+<?php } ?>

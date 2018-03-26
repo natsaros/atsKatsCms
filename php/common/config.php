@@ -39,6 +39,7 @@ if($config) {
     defined('SITE_TITLE') or define('SITE_TITLE', $config['site_title']);
 
     defined('GA_ID') or define('GA_ID', $config['google_analytics_id']);
+    defined('GA_OATH_CLIENT_ID') or define('GA_OATH_CLIENT_ID', $config['google_analytics_oath_client_id']);
 } else {
     $die = sprintf(
             "There doesn't seem to be a %s file. I need this before we can get started.",

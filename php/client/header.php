@@ -61,4 +61,18 @@
         <script src="http://maps.googleapis.com/maps/api/js"></script>
     <?php } ?>
     <script src="<?php echo ASSETS_URI ?>js/custom.min.js"></script>
+    <?php if ($pageId == "home") { ?>
+        <script src="<?php echo ASSETS_URI ?>js/instafeed/instafeed.min.js"></script>
+    <?php } ?>
+
+    <?php if (isNotEmpty(GA_ID)) { ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo GA_ID;?>"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '<?php echo GA_ID;?>');
+        </script>
+    <?php } ?>
 </head>

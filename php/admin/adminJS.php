@@ -49,3 +49,20 @@
 
 <script src="<?php echo JS_URI ?>fullcalendar/fullcalendar.min.js"></script>
 <script src="<?php echo JS_URI ?>fullcalendar/scheduler.min.js"></script>
+
+<?php if (isNotEmpty(GA_OATH_CLIENT_ID)) { ?>
+    <!--Provide access to application and enable api. To provide access, make div#embed-api-auth-container visible.-->
+    <script>
+        (function(w,d,s,g,js,fs){
+            g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+            js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+            js.src='https://apis.google.com/js/platform.js';
+            fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+        }(window,document,'script'));
+    </script>
+
+    <script src="<?php echo JS_URI ?>google-analytics/google-analytics-plugins.min.js"></script>
+
+    <script>var oath_client_id = '<?php echo GA_OATH_CLIENT_ID;?>';</script>
+    <script src="<?php echo JS_URI ?>google-analytics/google-analytics-initialization.min.js"></script>
+<?php } ?>
