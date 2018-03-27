@@ -64,7 +64,7 @@
     <script src="<?php echo JS_URI ?>google-analytics/google-analytics-plugins.min.js"></script>
 
     <?php
-    $accessToken = 'ya29.GlyKBXVIIisDc8MP6KjUwGjKIqyzSyDYfrCIsZLMIZcowUZyJrmYISuwPppQZalZeC_m3KISfp1pSEH4nPOtIhd8fucaEWCOaDmest9gIFhvMhw2TrxROuZidnt4uA';
+    $accessToken = 'ya29.GluLBTkBn-UiHzNHJ7u0Vud4DiHfUt_f10HAThygkRxeSrVDQxxvYAkNZz4TMuANv5kLer1UvqKByHLa-bk1nEAqFRO73CanUg4oaSflU-E4dJiDosKIQdRrYj8X';
     $accessTokenHasExpired = checkIfAccessTokenHasExpired($accessToken);
     if ($accessTokenHasExpired){
         $accessToken = refreshTokenForGACharts();

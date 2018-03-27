@@ -1,0 +1,75 @@
+1) We create a project through https://console.developers.google.com.
+
+2) We hit the following URL and we log in with the created google account:
+
+   https://myaccount.google.com/u/0/permissions
+
+   If the account has access to Google Analytics, we remove access for the specific account.
+
+3) We need a code to exchange it for an access token.
+
+   To get a code, we hit the following URL and we proceed to authentication with the created google account:
+
+   https://accounts.google.com/o/oauth2/v2/auth
+   ?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fanalytics.readonly
+   &access_type=offline&include_granted_scopes=true
+   &state=state_parameter_passthrough_value
+   &redirect_uri=http%3A%2F%2Flocalhost:90%2Fpeny%2Fadmin
+   &response_type=code
+   &client_id=CLIENT_ID_OF_CREATED_PROJECT
+
+   The response URL looks like this:
+
+   http://localhost:90/peny/admin
+   ?state=state_parameter_passthrough_value
+   &code=CODE
+   &scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fanalytics.readonly#
+
+   (CODE example = 4%2FAABf3fKQ4Q3FWaccGvHaiLWRc2vsDuBf0g5zB1j0gQkgvEcNYdAEpMg9ic8Yl7cDWyhI_NY1kZdA_jdHpHxk3JI)
+
+4) By using an API request tool like POSTMAN (please refer to https://www.getpostman.com/ - there is also a chrome extension available), we make a POST request with the following attributes:
+
+   URL: https://www.googleapis.com/oauth2/v4/token
+   Header: "key":"Content-Type","value":"application/x-www-form-urlencoded"
+   Body: "key":"code","value":"CODE"
+         "key":"client_id","value":"CLIENT_ID_OF_CREATED_PROJECT"
+         "key":"client_secret","value":"CLIENT_SECRET_OF_CREATED_PROJECT"
+         "key":"redirect_uri","value":"http://localhost:90/peny/admin"
+         "key":"grant_type","value":"authorization_code"
+
+   The response looks like this:
+
+   {
+       "access_token": "ya29.GluLBbslWj8dxftGnYA7SA08aqJ443QZa3tZyrSGarNGyG9nGjscdtzrgosMYa6tYPNurxf9TjD0R93G3474E5VJVDVjvbIowh-wEmdJf-afWQdSrz1PtycM-9P7",
+       "token_type": "Bearer",
+       "expires_in": 3600,
+       "refresh_token": "1/tKHQKYmPTCIq_6lQEQmL5-EbRMUXO1ytmQQXZ1rcQk0"
+   }
+
+5) By hitting the following URL, we can check the expiration time of our access token:
+
+   https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=ACCESS_TOKEN
+
+   (ACCESS_TOKEN example = ya29.GluLBbslWj8dxftGnYA7SA08aqJ443QZa3tZyrSGarNGyG9nGjscdtzrgosMYa6tYPNurxf9TjD0R93G3474E5VJVDVjvbIowh-wEmdJf-afWQdSrz1PtycM-9P7)
+
+   The initial expiration time of an access token is 3600 seconds.
+
+6) The retrieved refresh token is used to issue a new access token.
+   To refresh the access token, we use POSTMAN extension to make a POST request with the following attributes:
+
+   URL: https://www.googleapis.com/oauth2/v4/token
+   Header: "key":"Content-Type","value":"application/x-www-form-urlencoded"
+   Body: "key":"refresh_token","value":"REFRESH_TOKEN"
+         "key":"client_id","value":"CLIENT_ID_OF_CREATED_PROJECT"
+         "key":"client_secret","value":"CLIENT_SECRET_OF_CREATED_PROJECT"
+         "key":"grant_type","value":"refresh_token"
+
+   (REFRESH_TOKEN example = 1/tKHQKYmPTCIq_6lQEQmL5-EbRMUXO1ytmQQXZ1rcQk0)
+
+   The response looks like this:
+
+   {
+       "access_token": "ya29.GluLBTkBn-UiHzNHJ7u0Vud4DiHfUt_f10HAThygkRxeSrVDQxxvYAkNZz4TMuANv5kLer1UvqKByHLa-bk1nEAqFRO73CanUg4oaSflU-E4dJiDosKIQdRrYj8X",
+       "token_type": "Bearer",
+       "expires_in": 3600
+   }
