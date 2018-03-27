@@ -802,26 +802,27 @@ function formValueFromSession($key) {
 }
 
 /**
- * @param $accessToken
  * @return bool
  */
-function checkIfAccessTokenHasExpired($accessToken){
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => GA_API_TOKEN_INFO_URL . $accessToken
-    ));
-    $resultArray = curl_exec($curl);
-    curl_close($curl);
-    $resultArray = json_decode($resultArray, true);
-    $expires_in = $resultArray['expires_in'];
-    return isEmpty($expires_in);
+function checkIfAccessTokenIsNotSetOrHasExpired(){
+    if (isset($_SESSION['access_token']) && isNotEmpty($_SESSION['access_token'])){
+        $accessToken = $_SESSION['access_token'];
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => GA_API_TOKEN_INFO_URL . $accessToken
+        ));
+        $resultArray = curl_exec($curl);
+        curl_close($curl);
+        $resultArray = json_decode($resultArray, true);
+        $expires_in = $resultArray['expires_in'];
+        return isEmpty($expires_in);
+    } else {
+        return true;
+    }
 }
 
-/**
- * @return string
- */
-function refreshTokenForGACharts(){
+function issueOrRefreshTokenForGACharts(){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, GA_REFRESH_TOKEN_URL);
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -831,5 +832,5 @@ function refreshTokenForGACharts(){
     $server_output = curl_exec($ch);
     curl_close ($ch);
     $server_output = json_decode($server_output, true);
-    return $server_output['access_token'];
+    $_SESSION['access_token'] = $server_output['access_token'];
 }

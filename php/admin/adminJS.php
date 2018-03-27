@@ -43,8 +43,15 @@
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/moment.min.js"></script>
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
-<?php if (isNotEmpty(GA_OATH_CLIENT_ID)) { ?>
-    <!--Provide access to application and enable api. To provide access, make div#embed-api-auth-container visible.-->
+<?php
+if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLoggedIn() && !forceUserChangePassword()){
+    $accessTokenIsNotSetOrHasExpired = checkIfAccessTokenIsNotSetOrHasExpired();
+    if ($accessTokenIsNotSetOrHasExpired){
+        issueOrRefreshTokenForGACharts();
+    }
+    ?>
+
+    <!--GA Admin Charts-->
     <script>
         (function(w,d,s,g,js,fs){
             g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
@@ -56,15 +63,11 @@
 
     <script src="<?php echo JS_URI ?>google-analytics/google-analytics-plugins.min.js"></script>
 
-    <?php
-    $accessToken = 'ya29.GlyKBXVIIisDc8MP6KjUwGjKIqyzSyDYfrCIsZLMIZcowUZyJrmYISuwPppQZalZeC_m3KISfp1pSEH4nPOtIhd8fucaEWCOaDmest9gIFhvMhw2TrxROuZidnt4uA';
-    $accessTokenHasExpired = checkIfAccessTokenHasExpired($accessToken);
-    if ($accessTokenHasExpired){
-        $accessToken = refreshTokenForGACharts();
-    }
-    ?>
     <script>
-        var accessToken = '<?php echo $accessToken?>';
+        var accessToken = '<?php echo $_SESSION['access_token'];?>';
     </script>
+
     <script src="<?php echo JS_URI ?>google-analytics/google-analytics-initialization.min.js"></script>
-<?php } ?>
+<?php
+}
+?>
