@@ -86,7 +86,6 @@
     <div id="GA-stats">
         <div class="row">
             <div class="col-sm-12">
-                <div id="embed-api-auth-container"></div>
                 <div id="view-selector-container"></div>
                 <div id="view-name"></div>
             </div>
