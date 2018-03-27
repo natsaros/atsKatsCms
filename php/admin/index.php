@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="gr">
 <?php
 if (isset($_GET["action"])) {
     $action = $_GET["action"];
@@ -71,3 +73,5 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
         require(ADMIN_ROOT_PATH . '404.php');
     }
 }
+?>
+</html>

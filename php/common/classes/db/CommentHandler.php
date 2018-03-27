@@ -1,5 +1,6 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'comments' . DS . 'Comment.php');
+require_once(CLASSES_ROOT_PATH . 'db' . DS  . 'VisitorHandler.php');
 
 class CommentHandler {
 
@@ -11,10 +12,10 @@ class CommentHandler {
 
     /**
      * @param $postId
-     * @return Comment
+     * @return Comment[]
      * @throws SystemException
      */
-    static function getCommentByPostId($postId) {
+    static function getCommentsByPostId($postId) {
         $query = "SELECT * FROM " . getDb()->comments . " WHERE " . self::POST_ID . " = ?";
         $rows = getDb()->selectStmt($query, array('i'), array($postId));
         return self::populateComments($rows);
@@ -61,6 +62,7 @@ class CommentHandler {
             return null;
         }
         $comment = Comment::createComment($row[self::ID], $row[self::COMMENT], $row[self::USER_ID], $row[self::POST_ID], $row[self::DATE]);
+        $comment->setUser(VisitorHandler::getVisitorById($row[self::USER_ID]));
         return $comment;
     }
 

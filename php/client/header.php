@@ -1,5 +1,5 @@
 <head>
-    <title>Fitness House</title>
+    <title><?php echo SITE_TITLE;?></title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,7 @@
 
     <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"])) {
         $post = PostHandler::getPostByFriendlyTitleWithDetails($_GET["post_friendly_url"]);
+        $postComments = CommentHandler::getCommentsByPostId($post->getID());
     } else {
         $post = null;
     } ?>
@@ -74,5 +75,9 @@
             gtag('js', new Date());
             gtag('config', '<?php echo GA_ID;?>');
         </script>
+    <?php } ?>
+
+    <?php if (!is_null($post)) { ?>
+        <script src="<?php echo ASSETS_URI ?>js/fb-login.min.js"></script>
     <?php } ?>
 </head>

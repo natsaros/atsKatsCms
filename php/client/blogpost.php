@@ -1,6 +1,4 @@
 <?php if (!is_null($post)) { ?>
-    <script src="<?php echo ASSETS_URI ?>js/fb-login.min.js"></script>
-
     <div class="container-fluid text-center belowHeader blogContainer">
         <div class="row">
             <div class="col-sm-12">
@@ -54,6 +52,32 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="blogPostBorder"></div>
+        </div>
+
+        <?php if(!is_null($postComments) && count($postComments) > 0) {
+            foreach($postComments as $key => $postComment) { ?>
+                <div style="width: 100%;display: inline-block;">
+                    <div style="float:left;">
+                        <img style="width:100px;" src="<?php echo $postComment->getUser()->getImagePath();?>"/>
+                    </div>
+                    <div style="float:left;">
+                        <?php echo $postComment->getUser()->getFirstName() . " " . $postComment->getUser()->getLastName();?>
+                    </div>
+                    <div style="float:left;">
+                        <?php echo $postComment->getComment();?>
+                    </div>
+                    <div style="float:left;">
+                        <?php echo date(ADMIN_DATE_FORMAT, strtotime($postComment->getDate()));?>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+        ?>
+
         <div class="row">
             <div class="blogPostBorder"></div>
         </div>
@@ -78,7 +102,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="commentsTitle">
-                            Σχόλια
+                            Σχόλιο
                         </div>
                     </div>
                 </div>

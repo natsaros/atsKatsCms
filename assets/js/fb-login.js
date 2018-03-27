@@ -47,10 +47,13 @@ function backendFBLogin(accessToken) {
             url: "/peny/ajaxAction/registerFbUser",
             data: {"fbAccessToken" : accessToken},
             success: function(data) {
-                // alert(data);
-                // $('#loggedInUserId').();
-                $('#newCommentSection').fadeIn();
-                $('#loadingImg').hide();
+                if (data != null && data != ''){
+                    $('#loggedInUserId').val(data);
+                    $('#newCommentSection').fadeIn();
+                    $('#loadingImg').hide();
+                } else {
+                    // alert("ERROR");
+                }
             }
         });
     });

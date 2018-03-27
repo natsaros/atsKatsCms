@@ -11,8 +11,15 @@ if (!isset($_SESSION['locale'])){
     $_SESSION['locale'] = 'el_GR';
 }
 
-?>
-<?php if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
+if (isset($_GET["action"])) {
+    $action = $_GET["action"];
+}
+
+if (isset($_GET["ajaxAction"])) {
+    $ajaxAction = $_GET["ajaxAction"];
+}
+
+if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
     try {
         require_safe(CLIENT_AJAX_ACTION_PATH . $ajaxAction . PHP_POSTFIX);
     } catch (SystemException $e) {
@@ -44,7 +51,11 @@ if (!isset($_SESSION['locale'])){
     } else {
         $pageId = $_GET["id"];
     }
+    ?>
     //Default behavior: if no action is set to happen navigation occurs.
+    <!DOCTYPE html>
+    <html lang="gr">
+    <?php
     try {
         ?>
         <?php require("header.php"); ?>
@@ -67,6 +78,7 @@ if (!isset($_SESSION['locale'])){
     }
     ?>
     </body>
+    </html>
 <?php } else {
     try {
         //All action pass through here

@@ -6,8 +6,6 @@ if(!is_session_started()) {
     session_start();
 }
 ?>
-<!DOCTYPE html>
-<html lang="gr">
 <?php
 if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
     require_once(COMMON_ROOT_PATH . 'config.php');
@@ -22,4 +20,3 @@ if(isAdmin()) {
     @include("php/client/index.php");
 }
 ?>
-</html>
