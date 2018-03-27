@@ -17,6 +17,7 @@
                 </div>
             </div>
         </div>
+        <?php if (isNotEmpty($post->getImagePath())) { ?>
         <div class="row">
             <div class="col-sm-12">
                  <div class="blogPostImage">
@@ -24,6 +25,7 @@
                 </div>
             </div>
         </div>
+        <?php } ?>
         <div class="row">
             <div class="col-sm-12">
                 <div class="blogPostTextContainer">
@@ -59,7 +61,7 @@
         <div class="row" id="fbLoginSection">
             <div class="col-sm-12">
                 <a class="facebook-login-button" href="javascript:void(0);" onclick="fbLogin();">
-                    Συνδεθείτε στο Facebook για να σχολιάσετε το άρθρο
+                    Συνδεθείτε για να σχολιάσετε το άρθρο
                     <span class="fa"></span>
                 </a>
             </div>
@@ -84,7 +86,7 @@
                 <form method="post" accept-charset="utf-8" id="blogPostCommentsForm" action="<?php echo $action;?>">
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <textarea class="form-control" id="comments" name="<?php echo CommentHandler::COMMENT ?>" placeholder="Γράψτε το σχόλιό σας *" rows="5" required></textarea>
+                            <textarea class="form-control" id="comments" name="<?php echo CommentHandler::COMMENT ?>" placeholder="Προσθέστε το σχόλιό σας *" rows="5" required></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -92,9 +94,8 @@
                             <button class="btn btn-block btn-default" type="submit" onclick="checkLoginState(true);">Δημοσίευση</button>
                         </div>
                     </div>
-                    <input type="hidden" name="<?php echo PostHandler::POST_ID ?>"
-                           value="<?php echo $post->getID(); ?>"/>
-                    <input type="hidden" name="<?php echo PostHandler::USER_ID ?>" id="loggedInUserId" value="1"/>
+                    <input type="hidden" name="<?php echo PostHandler::POST_ID ?>" value="<?php echo $post->getID(); ?>"/>
+                    <input type="hidden" name="<?php echo PostHandler::USER_ID ?>" id="loggedInUserId"/>
                     <input type="hidden" name="<?php echo PostHandler::FRIENDLY_TITLE ?>" value="<?php echo $post->getFriendlyTitle(); ?>"/>
                 </form>
             </div>

@@ -17,5 +17,3 @@ try{
 
 Redirect(getBlogUri() . $friendlyTitle);
 
-?>
-

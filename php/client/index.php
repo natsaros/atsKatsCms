@@ -12,8 +12,18 @@ if (!isset($_SESSION['locale'])){
 }
 
 ?>
-<?php if (!isset($action) || isEmpty($action)) {
-
+<?php if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
+    try {
+        require_safe(CLIENT_AJAX_ACTION_PATH . $ajaxAction . PHP_POSTFIX);
+    } catch (SystemException $e) {
+        logError($e);
+        addErrorMessage(ErrorMessages::WENT_WRONG);
+        $statusCode = 500;
+        $status_string = $statusCode . ' ' . 'Internal Server Error';
+        header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
+        require(ADMIN_ROOT_PATH . '404.php');
+    }
+} else if (!isset($action) || isEmpty($action)) {
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
         // last request was more than 30 minutes ago
         session_unset();     // unset $_SESSION variable for the run-time
@@ -36,19 +46,18 @@ if (!isset($_SESSION['locale'])){
     }
     //Default behavior: if no action is set to happen navigation occurs.
     try {
-
-    ?>
-    <?php require("header.php"); ?>
-    <body id=<?php echo $pageId; ?>>
-    <?php
-    $path = dirname(__FILE__) . DS . $pageId . ".php";
-    if (realpath($path)) {
-        require("menu.php");
-        require($path);
-        require("footer.php");
-    } else {
-        require('404.php');
-    }
+        ?>
+        <?php require("header.php"); ?>
+        <body id=<?php echo $pageId; ?>>
+        <?php
+        $path = dirname(__FILE__) . DS . $pageId . ".php";
+        if (realpath($path)) {
+            require("menu.php");
+            require($path);
+            require("footer.php");
+        } else {
+            require('404.php');
+        }
     } catch (Exception $e) {
         logGeneralError($e);
         $statusCode = 500;

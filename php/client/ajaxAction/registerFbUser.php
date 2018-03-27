@@ -24,15 +24,15 @@ try{
         $visitorRes = VisitorHandler::createVisitor($visitor2Insert);
     }
 
-    if ($visitorRes !== null || $visitorRes) {
-        addSuccessMessage("Visitor '" . $visitor2Insert->getFirstName() . " " . $visitor2Insert->getLastName() . "' successfully inserted");
-    } else {
-        addErrorMessage("Visitor '" . $visitor2Insert->getFirstName() . " " .  $visitor2Insert->getLastName() . "' failed to be inserted");
-    }
+//    if ($visitorRes !== null || $visitorRes) {
+//        addSuccessMessage("Visitor '" . $visitor2Insert->getFirstName() . " " . $visitor2Insert->getLastName() . "' successfully inserted");
+//    } else {
+//        addErrorMessage("Visitor '" . $visitor2Insert->getFirstName() . " " .  $visitor2Insert->getLastName() . "' failed to be inserted");
+//    }
 
 } catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-?>
+echo 'aaaaa';

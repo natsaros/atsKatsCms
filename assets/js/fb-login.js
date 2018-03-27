@@ -44,9 +44,11 @@ function backendFBLogin(accessToken) {
     FB.api('/me', function(response) {
         $.ajax({
             type: "POST",
-            url: "/registerFbUser",
+            url: "/peny/ajaxAction/registerFbUser",
             data: {"fbAccessToken" : accessToken},
-            success: function() {
+            success: function(data) {
+                // alert(data);
+                // $('#loggedInUserId').();
                 $('#newCommentSection').fadeIn();
                 $('#loadingImg').hide();
             }
