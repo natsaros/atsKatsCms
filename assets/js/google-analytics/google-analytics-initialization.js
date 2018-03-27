@@ -10,9 +10,11 @@ $(document).ready(function(){
          * If no access has been created, render an authorize button inside the
          * element with the ID "embed-api-auth-container".
          */
+
         gapi.analytics.auth.authorize({
-            container: 'embed-api-auth-container',
-            clientid: oath_client_id
+            serverAuth: {
+                access_token: accessToken
+            }
         });
 
 
@@ -84,7 +86,7 @@ $(document).ready(function(){
                     metrics: 'ga:sessions',
                     dimensions: 'ga:date',
                     'start-date': '30daysAgo',
-                    'end-date': 'today'
+                    'end-date': 'yesterday'
                 },
                 chart: {
                     container: 'chart-1-container',

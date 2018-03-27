@@ -39,7 +39,11 @@ if($config) {
     defined('SITE_TITLE') or define('SITE_TITLE', $config['site_title']);
 
     defined('GA_ID') or define('GA_ID', $config['google_analytics_id']);
-    defined('GA_OATH_CLIENT_ID') or define('GA_OATH_CLIENT_ID', $config['google_analytics_oath_client_id']);
+    defined('GA_REFRESH_TOKEN_URL') or define('GA_REFRESH_TOKEN_URL', $config['google_analytics_refresh_token_url']);
+    defined('GA_REFRESH_TOKEN_ID') or define('GA_REFRESH_TOKEN_ID', $config['google_analytics_refresh_token_id']);
+    defined('GA_API_CLIENT_ID') or define('GA_API_CLIENT_ID', $config['google_analytics_api_client_id']);
+    defined('GA_API_CLIENT_SECRET') or define('GA_API_CLIENT_SECRET', $config['google_analytics_api_client_secret']);
+    defined('GA_API_TOKEN_INFO_URL') or define('GA_API_TOKEN_INFO_URL', $config['google_analytics_api_token_info_url']);
 } else {
     $die = sprintf(
             "There doesn't seem to be a %s file. I need this before we can get started.",

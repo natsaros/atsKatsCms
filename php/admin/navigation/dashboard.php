@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-xs-10 text-right">
                         <?php $latestNewsletterSubscriptions = NewsletterHandler::getLatestNewsletterSubscriptions();
-                        $newsletterSubscriptionMessage = 'Newsletter' . (($latestNewsletterSubscriptions == 1) ? ' subscription ' : ' subscriptions ') . 'the last 3 days';?>
+                        $newsletterSubscriptionMessage = 'Newsletter' . (($latestNewsletterSubscriptions == 1) ? ' subscription ' : ' subscriptions ') . 'the last 3 Days';?>
                         <div class="huge">
                             <?php echo $latestNewsletterSubscriptions;?>
                         </div>
@@ -86,7 +86,6 @@
     <div id="GA-stats">
         <div class="row">
             <div class="col-sm-12">
-                <div id="embed-api-auth-container"></div>
                 <div id="view-selector-container"></div>
                 <div id="view-name"></div>
             </div>
