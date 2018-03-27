@@ -44,7 +44,7 @@
     <link href="<?php echo CSS_URI ?>fullCalendar/fullcalendar.min.css" rel="stylesheet">
     <link href="<?php echo CSS_URI ?>fullCalendar/scheduler.min.css" rel="stylesheet">
 
-    <?php if (isNotEmpty(GA_OATH_CLIENT_ID)) { ?>
+    <?php if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLoggedIn() && !forceUserChangePassword()){ ?>
         <!-- Include the CSS that styles the Google Analytics charts. -->
         <link href="<?php echo CSS_URI ?>google-analytics/google-analytics-plugins.min.css" rel="stylesheet">
     <?php } ?>
