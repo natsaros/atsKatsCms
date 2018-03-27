@@ -825,7 +825,7 @@ function refreshTokenForGACharts(){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, GA_REFRESH_TOKEN_URL);
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, "refresh_token=" . GA_REFRESH_TOKEN_ID . "&client_id=" . GA_API_CLIENT_ID . "&client_secret=" . GA_API_CLIENT_SECRET . "&grant_type=refresh_token");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "refresh_token=" . GA_REFRESH_TOKEN_ID . "&client_id=" . GA_API_PROJECT_CLIENT_ID . "&client_secret=" . GA_API_PROJECT_CLIENT_SECRET . "&grant_type=refresh_token");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $server_output = curl_exec($ch);
