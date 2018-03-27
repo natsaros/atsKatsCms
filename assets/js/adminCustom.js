@@ -117,21 +117,6 @@ $(document).ready(function () {
         "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
-    $('.calendar-dataTable').DataTable({
-        responsive: true,
-        searching: false,
-        ordering: false,
-        "paging": false,
-        "info": false,
-        // select : {
-        //     selector: 'td:not(:first-child)',
-        //     blurable: true,
-        //     style: 'os',
-        //     items: 'cell'
-        // }
-
-    });
-
 
     // hide tabs after datatable initialization
     $('.tab-content div.fade').addClass('tab-pane');

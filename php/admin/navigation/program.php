@@ -23,7 +23,7 @@
     }
 
     .fc-lesson {
-        width: 70%;
+        width: 55%;
     }
 
     @media screen and (min-width: 768px) and (max-width: 960px) {
@@ -243,6 +243,21 @@ $events = json_encode($rawEvents);
             console.log('drop events');
         },
         eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
+            var start = $.fullCalendar.formatDate(event.start, "yyyy-MM-dd HH:mm:ss");
+            var end = $.fullCalendar.formatDate(event.end, "yyyy-MM-dd HH:mm:ss");
+            $.ajax({
+                url: getContextPath() + '/admin/ajaxAction/updateDraftEvent?ajaAction=true',
+                data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id=' + event.id,
+                type: "POST",
+                success: function (data, text) {
+                    alert("Updated Successfully");
+                },
+                fail: function (xhr, ajaxOptions, thrownError) {
+                    alert("Error");
+                }
+            });
+
+
             console.log('eventDrop event : ' + event.id);
             event.color = draftColor;
             $calendar.fullCalendar('updateEvent', event);
