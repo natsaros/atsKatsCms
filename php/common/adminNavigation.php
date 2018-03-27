@@ -54,5 +54,7 @@ try {
     <?php }
 } catch (SystemException $e) {
     logError($e);
-    require_safe(ADMIN_ROOT_PATH . '404.php');
-} ?>
+} catch (Exception $e) {
+    logGeneralError($e);
+}
+?>
