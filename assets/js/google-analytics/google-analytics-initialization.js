@@ -173,21 +173,25 @@ $(document).ready(function(){
             query({
                 'ids': ids,
                 'dimensions': 'ga:deviceCategory',
-                'metrics': 'ga:pageviews',
-                'sort': '-ga:pageviews',
+                'metrics': 'ga:sessions',
+                'sort': '-ga:sessions',
                 'max-results': 3
             }).then(function(response) {
 
-                    var data = [];
-                    var colors = ['#daa508', '#ffc825', '#ffdb6f'];
+                var data = [];
+                var colors = ['#daa508', '#ffc825', '#ffdb6f'];
 
+                if (typeof response.rows !== "undefined"){
                     response.rows.forEach(function(row, i) {
                         data.push({ value: +row[1], color: colors[i], label: row[0] });
                     });
 
                     new Chart(makeCanvas('chart-3-container')).Doughnut(data);
                     generateLegend('legend-3-container', data);
-                });
+                } else {
+                    $('#chart-3-container').parents().closest('.chart-container').hide();
+                }
+            });
         }
 
 
@@ -205,9 +209,11 @@ $(document).ready(function(){
                 'max-results': 5
             }).then(function(response) {
 
-                    var data = [];
-                    var colors = ['#daa508', '#ffc825', '#ffdb6f','#fde7a6','#fff4d2'];
+                var data = [];
+                var colors = ['#daa508', '#ffc825', '#ffdb6f','#fde7a6','#fff4d2'];
 
+
+                if (typeof response.rows !== "undefined"){
                     response.rows.forEach(function(row, i) {
                         data.push({
                             label: row[0],
@@ -218,7 +224,10 @@ $(document).ready(function(){
 
                     new Chart(makeCanvas('chart-4-container')).Doughnut(data);
                     generateLegend('legend-4-container', data);
-                });
+                } else {
+                    $('#chart-4-container').parents().closest('.chart-container').hide();
+                }
+            });
         }
 
 
