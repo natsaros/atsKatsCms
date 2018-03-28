@@ -13,7 +13,9 @@
 
     <?php if ($pageId == "blogpost" && isset($_GET["post_friendly_url"])) {
         $post = PostHandler::getPostByFriendlyTitleWithDetails($_GET["post_friendly_url"]);
-        $postComments = CommentHandler::getCommentsByPostId($post->getID());
+        if (isNotEmpty($post)){
+            $postComments = CommentHandler::getCommentsByPostId($post->getID());
+        }
     } else {
         $post = null;
     } ?>

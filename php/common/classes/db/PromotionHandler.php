@@ -42,8 +42,9 @@ class PromotionHandler {
      * @throws SystemException
      */
     static function getPromotedInstance() {
-        $query = "SELECT * FROM " . getDb()->promotions . " WHERE " . self::PROMOTED_FROM . " <= now() AND " . self::PROMOTED_TO . " >= now() ORDER BY " . self::PROMOTION_ACTIVATION . " DESC LIMIT 1";
-        $row = getDb()->selectStmtSingleNoParams($query);
+        $now = date(DEFAULT_DATE_FORMAT);
+        $query = "SELECT * FROM " . getDb()->promotions . " WHERE " . self::PROMOTED_FROM . " <= ? AND " . self::PROMOTED_TO . " >= ? ORDER BY " . self::PROMOTION_ACTIVATION . " DESC LIMIT 1";
+        $row = getDb()->selectStmtSingle($query, array('s', 's'), array($now, $now));
         return self::populatePromotion($row);
     }
 
