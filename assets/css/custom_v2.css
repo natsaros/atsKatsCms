@@ -213,7 +213,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .blogPostPreviewTextGrid a, .blogPostPreviewTextGrid a:hover, .blogPostPreviewTextGrid a:active, .blogPostPreviewTextList a, .blogPostPreviewTextList a:hover, .blogPostPreviewTextList a:active{color: #000;}
 .blogPostPreviewTitleGrid a, .blogPostPreviewTitleGrid a:hover, .blogPostPreviewTitleGrid a:active, .blogPostPreviewTitleList a, .blogPostPreviewTitleList a:hover, .blogPostPreviewTitleList a:active{color: #000;}
 .blogPostBorder {margin: 20px auto;border: 1px solid #FDC300;border-radius: 2px;width: 100%;opacity: 0.6;}
-.blogPostTextContainer {padding: 3% 0;font-size: 18px;text-align: left;}
+.blogPostTextContainer {padding: 2% 0;font-size: 18px;text-align: left;}
 .blogPostShareContainer {font-size: 14px; text-align: right;}
 .blogPostsDateList {margin-bottom: 15px;text-align: left;font-size: 12px;}
 .blogPostsDateGrid {margin-bottom: 15px;font-size: 12px;}
@@ -229,7 +229,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .facebook-login-button:hover, .facebook-login-button:active, .facebook-login-button:focus {color: white;}
 .facebook-login-button span{background: #fff;color: #3b5998;border-radius: 4px;font-size: 18px;line-height: 24px;margin: 0 5px;width: 24px;height: 24px;}
 .facebook-login-button span:before{content: "\f09a";}
-.post-comment {min-height: 45px;font-size: 16px;margin-bottom: 15px;}
+.post-comment {min-height: 3vw;font-size: 16px;margin-bottom: 1.2vw;}
 .post-commenter {font-size: 14px;}
 .post-comment-text-container {text-align: left;display: inline-block;}
 .post-comment-image-container img{width: 100%;}
@@ -261,6 +261,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     /*.blogPostImage {height: 300px;}*/
     .blogPostImage img { max-height: 300px; }
     .fa {font-size: 14px;width: 22px;height: 22px;line-height: 22px;}
+    .post-comment {min-height: 4vw;margin-bottom: 1vw;}
 }
 
 @media screen and (max-width: 768px) {
@@ -315,6 +316,17 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .fa {font-size: 12px;width: 20px;height: 20px;line-height: 20px;}
     .facebook-login-button {font-size: 12px;padding:8px 10px;margin: 10px 0;}
     .facebook-login-button span{font-size: 12px;line-height: 20px;margin: 0 5px;width: 20px;height: 20px;}
+    .post-comment {min-height: 10vw;font-size: 14px;margin-bottom: 2vw;}
+    .post-commenter {font-size: 12px;}
+    .blogPostDate {margin-bottom: 10px;text-align: right;font-size: 10px;}
+    #loadingImg img {width: 56px;}
+    .blogPostPreviewTitleGrid {font-size: 16px;}
+    .blogPostPreviewTitleList {font-size: 16px;text-align: center;margin: 10px 0 0;}
+    .blogPostPreviewTextGrid {font-size: 14px;max-height: 50px;min-height: 50px;margin-bottom: 15px;}
+    .blogPostPreviewTextList {font-size: 14px;max-height: 50px;min-height: 50px;margin-bottom: 15px;text-align:center;}
+    .blogPostsDateGrid {margin-bottom: 5px;font-size: 10px;}
+    .blogPostsDateList {margin-bottom: 5px;font-size: 10px;text-align:center;}
+    .blogImageList img {max-height: 170px;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {
@@ -334,4 +346,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .partnerCV{font-size: 16px;}
     footer ul{margin: 60px 0 20px 0;}
     footer li {padding: 0 5px;}
+    .post-comment {min-height: 10vw;font-size: 12px;margin-bottom: 1vw;}
+    .post-commenter {font-size: 10px;}
+    footer li a {font-size: 12px;}
 }

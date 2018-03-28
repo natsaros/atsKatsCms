@@ -60,22 +60,22 @@
         <?php if(!is_null($postComments) && count($postComments) > 0) {
             foreach($postComments as $key => $postComment) { ?>
                 <div class="row row-no-padding row-no-margin">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <div class="row row-no-padding row-no-margin">
-                            <div class="col-sm-1 post-comment-image-container">
+                            <div class="col-xs-2 col-sm-1 post-comment-image-container">
                                 <img src="<?php echo $postComment->getUser()->getImagePath();?>"/>
                             </div>
-                            <div class="col-sm-11 post-comment-text-container">
+                            <div class="col-xs-10 col-sm-11 post-comment-text-container">
                                 <div class="row row-no-margin">
-                                    <div class="col-sm-12 post-comment">
+                                    <div class="col-xs-12 post-comment">
                                         <?php echo $postComment->getComment();?>
                                     </div>
                                 </div>
                                 <div class="row row-no-margin post-commenter">
-                                    <div class="col-sm-3">
+                                    <div class="col-xs-7">
                                         <?php echo $postComment->getUser()->getFirstName() . " " . $postComment->getUser()->getLastName();?>
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="col-xs-5" style="text-align: right;">
                                         <?php echo formatDateBasedOnLocale($postComment->getDate());?>
                                     </div>
                                 </div>
