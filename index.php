@@ -1,6 +1,7 @@
 <?php
 ob_start();
 header("Content-type: text/html; charset=utf-8");
+date_default_timezone_set(DEFAULT_TIME_ZONE);
 require_once("php/common/siteFunctions.php");
 if(!is_session_started()) {
     session_start();
