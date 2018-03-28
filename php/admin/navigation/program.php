@@ -243,24 +243,27 @@ $events = json_encode($rawEvents);
             console.log('drop events');
         },
         eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-            var start = $.fullCalendar.formatDate(event.start, "yyyy-MM-dd HH:mm:ss");
-            var end = $.fullCalendar.formatDate(event.end, "yyyy-MM-dd HH:mm:ss");
+            var start = $.fullCalendar.formatDate(event.start, "HH:mm");
+            var end = $.fullCalendar.formatDate(event.end, "HH:mm");
             $.ajax({
                 url: getContextPath() + '/admin/ajaxAction/updateDraftEvent?ajaAction=true',
-                data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id=' + event.id,
+                data: 'start=' + start + '&end=' + end + '&id=' + event.id,
                 type: "POST",
+                // dataType: 'json',
+                // accepts: {
+                //     text: 'application/json'
+                // },
                 success: function (data, text) {
-                    alert("Updated Successfully");
+                    console.log("Updated Successfully");
                 },
                 fail: function (xhr, ajaxOptions, thrownError) {
-                    alert("Error");
+                    console.log("Error");
+                },
+                complete: function (data) {
+                    event.color = draftColor;
+                    $calendar.fullCalendar('updateEvent', event);
                 }
             });
-
-
-            console.log('eventDrop event : ' + event.id);
-            event.color = draftColor;
-            $calendar.fullCalendar('updateEvent', event);
         },
         eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
             event.color = draftColor;

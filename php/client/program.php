@@ -10,7 +10,7 @@ const TIME_FRAME = 'timeframe';
 const LESSON = 'lesson';
 const DAY = 'day';
 
-$events = ProgramHandler::fetchEvents();
+$events = ProgramHandler::fetchActiveEvents();
 
 $mobileProgram = ProgramHandler::mobileProgram($events);
 $lessons = ProgramHandler::desktopProgram($events);

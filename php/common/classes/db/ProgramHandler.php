@@ -197,7 +197,34 @@ class ProgramHandler
     static function fetchEvents() {
         $query = "SELECT * FROM " . getDb()->events;
         $rows = getDb()->selectStmtNoParams($query);
-        return self::populateProgram($rows);
+        return self::populateEvents($rows);
+    }
+
+    /**
+     * @return Event[]|bool
+     * @throws SystemException
+     */
+    static function fetchActiveEvents() {
+        $query = "SELECT * FROM " . getDb()->events . " WHERE " . self::STATUS . " = " . EventStatus::ACTIVE;
+        $rows = getDb()->selectStmtNoParams($query);
+        return self::populateEvents($rows);
+    }
+
+    /**
+     * @param $id
+     * @return Event
+     * @throws SystemException
+     */
+    static function fetchEventById($id) {
+        if (isNotEmpty($id)) {
+            $query = "SELECT * FROM " . getDb()->events . " WHERE " . self::ID . " = ?";
+            $row = getDb()->selectStmtSingle($query, array('i'), array($id));
+            if ($row) {
+                return self::populateEvent($row);
+            }
+            return null;
+        }
+        return null;
     }
 
     /**
@@ -231,6 +258,28 @@ class ProgramHandler
     }
 
     /**
+     * @param $event Event
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function updateDBEvent($event) {
+        $query = "UPDATE " . getDb()->events .
+            " SET "
+            . self::NAME . " = ?, "
+            . self::DESCRIPTION . " = ?, "
+            . self::STATUS . " = ?, "
+            . self::DAY . " = ?, "
+            . self::START . " = ?, "
+            . self::END . " = ?"
+            . " WHERE "
+            . self::ID . "= ?";
+        $updatedEvent = getDb()->updateStmt($query,
+            array('s', 's', 'i', 's', 's', 's', 'i'),
+            array($event->getName(), $event->getDescription(), $event->getStatus(), $event->getDay(), $event->getStart(), $event->getEnd(), $event->getID()));
+        return $updatedEvent;
+    }
+
+    /**
      * @param $lesson
      * @return bool|mysqli_result|null
      * @throws SystemException
@@ -240,7 +289,6 @@ class ProgramHandler
         $createdLesson = getDb()->createStmt($query, array('s'), array($lesson));
         return $createdLesson;
     }
-
 
     /**
      * @param $ID
@@ -274,7 +322,7 @@ class ProgramHandler
      * @param $rows
      * @return Event[]|bool
      */
-    private static function populateProgram($rows) {
+    private static function populateEvents($rows) {
         if ($rows === false) {
             return false;
         }
@@ -283,7 +331,7 @@ class ProgramHandler
 
         foreach ($rows as $row) {
             $day
-                = self::populateDays($row);
+                = self::populateEvent($row);
             $days[] = $day;
         }
         return $days;
@@ -293,7 +341,7 @@ class ProgramHandler
      * @param $row
      * @return Event|bool
      */
-    private static function populateDays($row) {
+    private static function populateEvent($row) {
         if ($row === false) {
             return false;
         }
