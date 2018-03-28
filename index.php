@@ -1,18 +1,18 @@
 <?php
 ob_start();
 header("Content-type: text/html; charset=utf-8");
-date_default_timezone_set(DEFAULT_TIME_ZONE);
 require_once("php/common/siteFunctions.php");
 if(!is_session_started()) {
     session_start();
 }
+if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
+    require_once(COMMON_ROOT_PATH . 'config.php');
+}
+date_default_timezone_set(DEFAULT_TIME_ZONE);
 ?>
 <!DOCTYPE html>
 <html lang="gr">
 <?php
-if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
-    require_once(COMMON_ROOT_PATH . 'config.php');
-}
 if(isAdmin()) {
     if(isAdminAction() && isEmpty($_GET["action"])) {
         @include("php/admin/404.php");
