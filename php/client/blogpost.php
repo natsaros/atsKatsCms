@@ -11,18 +11,18 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="blogPostDate">
-                    <?php echo date_format(date_create($post->getActivationDate()), 'd M Y'); ?>
+                    <?php echo formatDateBasedOnLocale($post->getActivationDate()) . (isNotEmpty($postComments) ? "&nbsp;&nbsp;|&nbsp;&nbsp;" . count($postComments) . " comments" : "" );?>
                 </div>
             </div>
         </div>
         <?php if (isNotEmpty($post->getImagePath())) { ?>
-        <div class="row">
-            <div class="col-sm-12">
-                 <div class="blogPostImage">
-                    <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="blogPostImage">
+                        <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php } ?>
         <div class="row">
             <div class="col-sm-12">
@@ -59,28 +59,37 @@
 
         <?php if(!is_null($postComments) && count($postComments) > 0) {
             foreach($postComments as $key => $postComment) { ?>
-                <div style="width: 100%;display: inline-block;">
-                    <div style="float:left;">
-                        <img style="width:100px;" src="<?php echo $postComment->getUser()->getImagePath();?>"/>
+                <div class="row row-no-padding row-no-margin">
+                    <div class="col-sm-12">
+                        <div class="row row-no-padding row-no-margin">
+                            <div class="col-sm-1 post-comment-image-container">
+                                <img src="<?php echo $postComment->getUser()->getImagePath();?>"/>
+                            </div>
+                            <div class="col-sm-11 post-comment-text-container">
+                                <div class="row row-no-margin">
+                                    <div class="col-sm-12 post-comment">
+                                        <?php echo $postComment->getComment();?>
+                                    </div>
+                                </div>
+                                <div class="row row-no-margin post-commenter">
+                                    <div class="col-sm-3">
+                                        <?php echo $postComment->getUser()->getFirstName() . " " . $postComment->getUser()->getLastName();?>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <?php echo formatDateBasedOnLocale($postComment->getDate());?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="float:left;">
-                        <?php echo $postComment->getUser()->getFirstName() . " " . $postComment->getUser()->getLastName();?>
-                    </div>
-                    <div style="float:left;">
-                        <?php echo $postComment->getComment();?>
-                    </div>
-                    <div style="float:left;">
-                        <?php echo date(ADMIN_DATE_FORMAT, strtotime($postComment->getDate()));?>
-                    </div>
+                </div>
+                <div class="row">
+                    <div class="blogPostBorder"></div>
                 </div>
                 <?php
             }
         }
         ?>
-
-        <div class="row">
-            <div class="blogPostBorder"></div>
-        </div>
 
         <div class="row" id="fbLoginSection">
             <div class="col-sm-12">
@@ -93,7 +102,7 @@
 
         <div class="row" id="loadingImg" style="display: none;">
             <div class="col-sm-12">
-                <img style="width:100px;" src="<?php echo ASSETS_URI ?>img/loading-dots.gif">
+                <img src="<?php echo ASSETS_URI ?>img/loading-dots.gif">
             </div>
         </div>
 

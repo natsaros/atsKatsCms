@@ -229,6 +229,11 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .facebook-login-button:hover, .facebook-login-button:active, .facebook-login-button:focus {color: white;}
 .facebook-login-button span{background: #fff;color: #3b5998;border-radius: 4px;font-size: 18px;line-height: 24px;margin: 0 5px;width: 24px;height: 24px;}
 .facebook-login-button span:before{content: "\f09a";}
+.post-comment {min-height: 45px;font-size: 16px;margin-bottom: 15px;}
+.post-commenter {font-size: 14px;}
+.post-comment-text-container {text-align: left;display: inline-block;}
+.post-comment-image-container img{width: 100%;}
+#loadingImg img {width: 84px;}
 
 @media screen and (min-width: 768px) and (max-width: 960px) {
     .carousel-info{max-height: 380px;}
