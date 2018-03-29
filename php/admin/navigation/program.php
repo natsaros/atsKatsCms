@@ -241,33 +241,13 @@ $events = json_encode($rawEvents);
         events: <?php echo $events;?>,
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop events');
+            createDraftEventAjax(date);
         },
         eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-            var start = $.fullCalendar.formatDate(event.start, "HH:mm");
-            var end = $.fullCalendar.formatDate(event.end, "HH:mm");
-            $.ajax({
-                url: getContextPath() + '/admin/ajaxAction/updateDraftEvent?ajaAction=true',
-                data: 'start=' + start + '&end=' + end + '&id=' + event.id,
-                type: "POST",
-                // dataType: 'json',
-                // accepts: {
-                //     text: 'application/json'
-                // },
-                success: function (data, text) {
-                    console.log("Updated Successfully");
-                },
-                fail: function (xhr, ajaxOptions, thrownError) {
-                    console.log("Error");
-                },
-                complete: function (data) {
-                    event.color = draftColor;
-                    $calendar.fullCalendar('updateEvent', event);
-                }
-            });
+            updateDraftEventAjax(event);
         },
         eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
-            event.color = draftColor;
-            $calendar.fullCalendar('updateEvent', event);
+            updateDraftEventAjax(event);
         },
         eventClick: function (event, jsEvent, view) {
             console.log('event clicked' + event.id);
@@ -282,4 +262,28 @@ $events = json_encode($rawEvents);
             }
         }
     });
+
+    function updateDraftEventAjax($event) {
+        var start = $.fullCalendar.formatDate($event.start, "HH:mm");
+        var end = $.fullCalendar.formatDate($event.end, "HH:mm");
+        $.ajax({
+            url: getContextPath() + '/admin/ajaxAction/updateDraftEvent',
+            data: {start: start, end: end, id: $event.id},
+            type: "POST",
+            success: function (data, text) {
+                console.log("Updated Successfully : " + data.responseText);
+            },
+            fail: function (xhr, ajaxOptions, thrownError) {
+                console.log("Error : " + xhr.responseText);
+            },
+            complete: function (data) {
+                event.color = draftColor;
+                $calendar.fullCalendar('updateEvent', event);
+            }
+        });
+    }
+
+    function createDraftEventAjax($date){
+
+    }
 </script>
