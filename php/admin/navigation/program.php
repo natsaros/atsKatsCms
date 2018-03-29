@@ -264,11 +264,12 @@ $events = json_encode($rawEvents);
     });
 
     function updateDraftEventAjax($event) {
+        var day = $.fullCalendar.formatDate($event.start, "dddd");
         var start = $.fullCalendar.formatDate($event.start, "HH:mm");
         var end = $.fullCalendar.formatDate($event.end, "HH:mm");
         $.ajax({
             url: getContextPath() + '/admin/ajaxAction/updateDraftEvent',
-            data: {start: start, end: end, id: $event.id},
+            data: {day: day, start: start, end: end, id: $event.id},
             type: "POST",
             success: function (data, text) {
                 console.log("Updated Successfully : " + data.responseText);
@@ -283,7 +284,7 @@ $events = json_encode($rawEvents);
         });
     }
 
-    function createDraftEventAjax($date){
+    function createDraftEventAjax($date) {
 
     }
 </script>

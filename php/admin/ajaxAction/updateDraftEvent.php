@@ -3,6 +3,7 @@
  * this function updates a draft event on db
  */
 
+$day = $_POST['day'];
 $start = $_POST['start'];
 $end = $_POST['end'];
 $id = $_POST['id'];
@@ -11,6 +12,7 @@ try {
     $event = ProgramHandler::fetchEventById($id);
     if (isNotEmpty($event)) {
         $event
+            ->setDay($day)
             ->setStart($start)
             ->setEnd($end)
             ->setStatus(EventStatus::INACTIVE);
