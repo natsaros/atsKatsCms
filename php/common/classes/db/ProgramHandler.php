@@ -4,8 +4,7 @@ require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'DaysOfWeek.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Event.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Lesson.php');
 
-class ProgramHandler
-{
+class ProgramHandler {
     const PILATES_EQUIP = 'Pilates equipment';
     const YOGA = 'Yoga';
     const PILATES_MAT = 'Pilates mat';
@@ -238,6 +237,31 @@ class ProgramHandler
     }
 
     /**
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function deleteDBEvents() {
+        $query = "DELETE FROM " . getDb()->events;
+        $createdLesson = getDb()->deleteStmt($query);
+        return $createdLesson;
+    }
+
+    /**
+     * @param $ID
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function deleteDBEvent($ID) {
+        if (isNotEmpty($ID)) {
+            $query = "DELETE FROM " . getDb()->events . " WHERE " . self::ID . " = ?";
+            $createdLesson = getDb()->deleteStmt($query, array('s'), array($ID));
+            return $createdLesson;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param $event Event
      * @return bool|mysqli_result|null
      * @throws SystemException
@@ -280,6 +304,22 @@ class ProgramHandler
     }
 
     /**
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function saveDBEvents() {
+        $query = "UPDATE " . getDb()->events .
+            " SET "
+            . self::STATUS . " = ?"
+            . " WHERE "
+            . self::STATUS . " = ?";
+        $updatedEvent = getDb()->updateStmt($query,
+            array('s', 's'),
+            array(EventStatus::ACTIVE, EventStatus::INACTIVE));
+        return $updatedEvent;
+    }
+
+    /**
      * @param $lesson
      * @return bool|mysqli_result|null
      * @throws SystemException
@@ -310,7 +350,7 @@ class ProgramHandler
     public static function deleteLesson($lessonID) {
         if (isNotEmpty($lessonID)) {
             $query = "DELETE FROM " . getDb()->lessons . " WHERE " . self::ID . " = ?";
-            $createdLesson = getDb()->createStmt($query, array('s'), array($lessonID));
+            $createdLesson = getDb()->deleteStmt($query, array('s'), array($lessonID));
             return $createdLesson;
         } else {
             return null;

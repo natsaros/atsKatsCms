@@ -28,7 +28,6 @@ try {
 } catch (SystemException $e) {
     logError($ex);
     throwJSONError();
-
 }
 
 function throwJSONError() {

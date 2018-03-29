@@ -25,7 +25,6 @@ $weekDays = array(MONDAY => MONDAY, TUESDAY => TUESDAY, WEDNESDAY => WEDNESDAY, 
  */
 function renderMobileProgram($program, $weekDaysGr) {
     if (isNotEmpty($program)) {
-        echo '<div class="timeTable panel-group" id="accordion">';
         foreach ($program as $day => $weekDay) {
             $collapseClass = MONDAY === $day ? ' in' : '';
             echo '<div class="panel panel-default">';
@@ -50,29 +49,14 @@ function renderMobileProgram($program, $weekDaysGr) {
             echo '</div>';
             echo '</div>';
         }
-        echo '</div>';
     }
 }
 
 /**
  * @param $lessons array
  * @param $timeFrames array
- * @param $weekDaysGr array
  */
-function renderDesktopProgram($lessons, $timeFrames, $weekDaysGr) {
-    echo '<table class="aboutTimeTable table table-responsive">
-                <thead>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>' . $weekDaysGr[DaysOfWeek::MONDAY] . '</th>
-                    <th>' . $weekDaysGr[DaysOfWeek::TUESDAY] . '</th>
-                    <th>' . $weekDaysGr[DaysOfWeek::WEDNESDAY] . '</th>
-                    <th>' . $weekDaysGr[DaysOfWeek::THURSDAY] . '</th>
-                    <th>' . $weekDaysGr[DaysOfWeek::FRIDAY] . '</th>
-                    <th>' . $weekDaysGr[DaysOfWeek::SATURDAY] . '</th>
-                </tr>
-                </thead>
-                <tbody>';
+function renderDesktopProgram($lessons, $timeFrames) {
     foreach ($timeFrames as $timeFrame) {
         echo '<tr>';
         echo '<td>' . $timeFrame . '</td>';
@@ -84,7 +68,6 @@ function renderDesktopProgram($lessons, $timeFrames, $weekDaysGr) {
         echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::SATURDAY . '_' . $timeFrame) . '</td>';
         echo '</tr>';
     }
-    echo '</tbody></table>';
 }
 
 function getDesktopLesson($lessons, $key) {
@@ -110,18 +93,33 @@ function getDesktopLesson($lessons, $key) {
             <p>Πρόγραμμα</p>
             <div class="titlesBorder"></div>
         </div>
-        <div class="col-sm-12">
-            <?php
-            renderDesktopProgram($lessons, $timeFrames, $weekDaysGr);
-            ?>
-        </div>
+        <div class="col-sm-12"><!--
+        --><table class="aboutTimeTable table table-responsive">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th><?php $weekDaysGr[DaysOfWeek::MONDAY] ?></th>
+                    <th><?php $weekDaysGr[DaysOfWeek::TUESDAY] ?></th>
+                    <th><?php $weekDaysGr[DaysOfWeek::WEDNESDAY] ?></th>
+                    <th><?php $weekDaysGr[DaysOfWeek::THURSDAY] ?></th>
+                    <th><?php $weekDaysGr[DaysOfWeek::FRIDAY] ?></th>
+                    <th><?php $weekDaysGr[DaysOfWeek::SATURDAY] ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php renderDesktopProgram($lessons, $timeFrames); ?>
+                </tbody>
+            </table><!--
+        --></div>
     </div>
     <div class="row mobile">
         <div class="headerTitle">
             <p>Πρόγραμμα</p>
             <div class="titlesBorder"></div>
         </div>
-        <?php renderMobileProgram($mobileProgram, $weekDaysGr); ?>
+        <div class="timeTable panel-group" id="accordion">
+            <?php renderMobileProgram($mobileProgram, $weekDaysGr); ?>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">

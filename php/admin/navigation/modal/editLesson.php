@@ -15,12 +15,14 @@
         <input type="hidden" name="<?php echo $hiddenName; ?>" value="<?php echo $ID; ?>"/>
         <?php require_safe(ADMIN_NAV_PATH . 'modalMessageSection' . PHP_POSTFIX) ?>
         <div class="modal-body text-center">
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="control-label" for="lesson_input">Lesson</label>
-                    <input class="form-control" placeholder="Lesson Name"
-                           name="<?php echo ProgramHandler::LESSON ?>" id="lesson_input"
-                           value="<?php echo $existingLesson->getName(); ?>" required>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="control-label" for="lesson_input">Lesson</label>
+                        <input class="form-control" placeholder="Lesson Name"
+                               name="<?php echo ProgramHandler::LESSON ?>" id="lesson_input"
+                               value="<?php echo $existingLesson->getName(); ?>" required>
+                    </div>
                 </div>
             </div>
         </div>

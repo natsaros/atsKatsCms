@@ -11,31 +11,35 @@
         <input type="hidden" name="<?php echo AccessRightsHandler::USER_ID ?>" value="<?php echo $id ?>"/>
         <?php require_safe(ADMIN_NAV_PATH . 'modalMessageSection' . PHP_POSTFIX) ?>
         <div class="modal-body text-center">
-            <?php
-            $userAccessRights = AccessRightsHandler::getAccessRightByUserId($id);
-            $allGroups = AccessRightsHandler::fetchAllAccessRights();
-            ?>
-            <?php
-            /* @var $right AccessRight */
-            foreach ($allGroups as $key => $right) {
-                ?>
-                <div class="form-group">
-                    <label class="control-label"
-                           for="right_input_<?php echo $right->getID(); ?>"><?php echo $right->getDescription(); ?></label>
-                    <div class="checkbox">
-                        <label>
-                            <?php $isChecked = isNotEmpty($userAccessRights) ? in_array($right, $userAccessRights) ? 'checked' : '' : '' ?>
-                            <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
-                                   type="checkbox" <?php echo $isChecked ?>
-                                   value="<?php echo $right->getID(); ?>"
-                                   id="right_input_<?php echo $right->getID(); ?>"
-                                   data-toggle="toggle"
-                                   data-custom-on-val="<?php echo $right->getID(); ?>"
-                                   data-custom-off-val="">
-                        </label>
-                    </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <?php
+                    $userAccessRights = AccessRightsHandler::getAccessRightByUserId($id);
+                    $allGroups = AccessRightsHandler::fetchAllAccessRights();
+                    ?>
+                    <?php
+                    /* @var $right AccessRight */
+                    foreach ($allGroups as $key => $right) {
+                        ?>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="right_input_<?php echo $right->getID(); ?>"><?php echo $right->getDescription(); ?></label>
+                            <div class="checkbox">
+                                <label>
+                                    <?php $isChecked = isNotEmpty($userAccessRights) ? in_array($right, $userAccessRights) ? 'checked' : '' : '' ?>
+                                    <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
+                                           type="checkbox" <?php echo $isChecked ?>
+                                           value="<?php echo $right->getID(); ?>"
+                                           id="right_input_<?php echo $right->getID(); ?>"
+                                           data-toggle="toggle"
+                                           data-custom-on-val="<?php echo $right->getID(); ?>"
+                                           data-custom-off-val="">
+                                </label>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
-            <?php } ?>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

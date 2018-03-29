@@ -119,7 +119,7 @@ class Db {
      * @return mixed|null
      * @throws SystemException
      */
-    public static function deleteStmt($query, array $param_types, array $parameters) {
+    public static function deleteStmt($query, array $param_types = array(), array $parameters = array()) {
         return self::queryStmt($query, $param_types, $parameters, false, false, true);
     }
 

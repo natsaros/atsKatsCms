@@ -13,6 +13,11 @@
         cursor: pointer;
     }
 
+    .fc-event {
+        background-color: #f1b900;
+        border: 1px solid #f1b900;
+    }
+
     .published {
         background-color: #20BB2A;
         border: 1px solid #20BB2A;
@@ -136,43 +141,71 @@ $events = json_encode($rawEvents);
         </div>
     </div>
     <div class="col-lg-10">
-        <div class="alert text-center alert-info alert-dismissable fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            Click on lesson to view details and actions.
-            Move or resize lessons on calendar to change time.
-            <strong>Remember!</strong> You need to always save your changes to take effect on front end side
-        </div>
-        <div class="panel-body">
-            <div id="calendar"></div>
-        </div>
-        <div class="text-right form-group">
-            <a type="button" href="<?php echo getAdminRequestUri() . 'users' ?>"
-               class="btn btn-default">Back</a>
-            <input type="submit" name="submit" class="btn btn-primary" value="Save"
-                   placeholder="Save"/>
+        <?php $action = getAdminActionRequestUri() . "events" . DS . "saveEvents"; ?>
+        <form name="saveProgramForm" role="form" action="<?php echo $action; ?>" data-toggle="validator" method="post"
+              enctype="multipart/form-data">
+            <div class="alert text-center alert-info alert-dismissable fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Click on lesson to view details and actions.
+                Move or resize lessons on calendar to change time.
+                <strong>Remember!</strong> You need to always save your changes to take effect on front end side
+            </div>
+            <div class="panel-body">
+                <div id="calendar"></div>
+            </div>
+            <div class="text-right form-group">
+                <?php
+                $modalTitle = "Delete All Classes";
+                $modalText = "You are about to delete all classes. Are you sure?";
+                $urlParams = addParamsToUrl(array('modalTitle', 'modalText'), array(urlencode($modalTitle), urlencode($modalText))) ?>
+                <a type="button"
+                   data-toggle="modal"
+                   href="<?php echo getAdminModalRequestUri() . 'confirmDeleteAllEvents' . $urlParams ?>"
+                   class="btn btn-default"
+                   title="Delete All"
+                   data-target="#deleteAllModal_"
+                   data-remote="false"
+                >Delete All</a>
+
+                <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal-->
+    <div class="ak_modal modal fade" id="deleteAllModal_"
+         tabindex="-1"
+         role="dialog" aria-labelledby="deleteAll_events_"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content"></div>
         </div>
     </div>
+
     <!-- Modal-->
     <div id="eventContent" class="ak_modal modal fade"
          tabindex="-1"
          role="dialog" aria-labelledby="eventContent_title"
          aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="eventContent_title">Lesson Details</h4>
                 </div>
                 <div class="modal-body text-center">
-                    <div class="col-lg-12">
-                        Start: <span id="startTime"></span><br>
-                        End: <span id="endTime"></span><br><br>
-                        <p id="eventInfo"></p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Start: <span id="startTime"></span><br>
+                            End: <span id="endTime"></span><br><br>
+                            <p id="eventInfo"></p>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Delete</button>
+                    <button id="deleteBtn" type="button" class="btn btn-primary">Delete</button>
                 </div>
             </div>
         </div>
@@ -180,26 +213,26 @@ $events = json_encode($rawEvents);
 </div>
 
 <script type="application/javascript">
+    TIME_FORMAT = 'HH:mm';
+    DAY_FORMAT = 'dddd';
 
     var $external = $('#external-events');
 
-    $external.find('.fc-event')
-        .each(function () {
-            var externalEvents = {
-                title: $.trim($(this).text())
-            }; // creating event object and makes event text as its title
+    $external.find('.fc-event').each(function () {
+        var externalEvents = {
+            title: $.trim($(this).text())
+        }; // creating event object and makes event text as its title
 
-            $(this).data('event', externalEvents); //saving events into DOM
+        $(this).data('event', externalEvents); //saving events into DOM
 
 
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-                zIndex: 999,
-                revert: true, // will cause the event to go back to its
-                revertDuration: 0 //  original position after the drag
-            });
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+            zIndex: 999,
+            revert: true, // will cause the event to go back to its
+            revertDuration: 0 //  original position after the drag
         });
-
+    });
 
     window.mobilecheck = function () {
         var check = false;
@@ -209,8 +242,8 @@ $events = json_encode($rawEvents);
         return check;
     };
 
-    var draftColor = '#3a87ad';
     var $calendar = $('#calendar');
+    var draftColor = '#f1b900';
 
     $calendar.fullCalendar({
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
@@ -233,27 +266,34 @@ $events = json_encode($rawEvents);
         hiddenDays: [0],
         slotMinutes: 60,
         minTime: "08:00:00",
-        slotLabelFormat: "HH:mm",
-        timeFormat: "HH:mm",
-        columnFormat: 'dddd',
+        slotLabelFormat: TIME_FORMAT,
+        timeFormat: TIME_FORMAT,
+        columnFormat: DAY_FORMAT,
         height: 'auto',
         nowIndicator: true,
         events: <?php echo $events;?>,
         drop: function (date, jsEvent, ui, resourceId) {
-            console.log('drop events');
-            createDraftEventAjax(date);
+            var defaultTimedEventDuration = $('#calendar').fullCalendar('option', 'defaultTimedEventDuration');
+            var event = $(this).data('event');
+
+            var minutesToAdd = parseMinutes(defaultTimedEventDuration);
+            var day = date.format(DAY_FORMAT).toLowerCase();
+            var start = date.format(TIME_FORMAT);
+            var end = date.add(minutesToAdd, 'minutes').format(TIME_FORMAT);
+
+            createDraftEventAjax(event.title, day, start, end);
         },
         eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-            updateDraftEventAjax(event);
+            updateDraftEventAjax(event, draftColor);
         },
         eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
-            updateDraftEventAjax(event);
+            updateDraftEventAjax(event, draftColor);
         },
         eventClick: function (event, jsEvent, view) {
             console.log('event clicked' + event.id);
             $("#startTime").html(moment(event.start).format('MMM Do H:mm A'));
             $("#endTime").html(moment(event.end).format('MMM Do H:mm A'));
-            $("#eventInfo").html(event.title);
+            $("#eventInfo").html(event.title).data('id', event.id);
             $("#eventContent").modal('show');
         },
         eventRender: function (event, element, view) {
@@ -263,28 +303,61 @@ $events = json_encode($rawEvents);
         }
     });
 
-    function updateDraftEventAjax($event) {
-        var day = $.fullCalendar.formatDate($event.start, "dddd");
-        var start = $.fullCalendar.formatDate($event.start, "HH:mm");
-        var end = $.fullCalendar.formatDate($event.end, "HH:mm");
+    function parseMinutes(duration) {
+        var split = duration.split(':');
+        return parseInt(split[0]) * 60 + parseInt(split[1]);
+    }
+
+    function updateDraftEventAjax($event, $draftColor) {
+        var day = $.fullCalendar.formatDate($event.start, DAY_FORMAT).toLowerCase();
+        var start = $.fullCalendar.formatDate($event.start, TIME_FORMAT);
+        var end = $.fullCalendar.formatDate($event.end, TIME_FORMAT);
         $.ajax({
             url: getContextPath() + '/admin/ajaxAction/updateDraftEvent',
             data: {day: day, start: start, end: end, id: $event.id},
             type: "POST",
             success: function (data, text) {
-                console.log("Updated Successfully : " + data.responseText);
+                //do something on success
             },
             fail: function (xhr, ajaxOptions, thrownError) {
                 console.log("Error : " + xhr.responseText);
             },
             complete: function (data) {
-                event.color = draftColor;
-                $calendar.fullCalendar('updateEvent', event);
+                $event.color = $draftColor;
+                $calendar.fullCalendar('updateEvent', $event);
             }
         });
     }
 
-    function createDraftEventAjax($date) {
-
+    function createDraftEventAjax($title, $day, $start, $end) {
+        $.ajax({
+            url: getContextPath() + '/admin/ajaxAction/createDraftEvent',
+            data: {title: $title, day: $day, start: $start, end: $end},
+            type: "POST",
+            success: function (data, text) {
+                //do something on success
+            },
+            fail: function (xhr, ajaxOptions, thrownError) {
+                console.log("Error : " + xhr.responseText);
+            }
+        });
     }
+
+    //handle delete events
+    $('#eventContent').find('#deleteBtn').click(function () {
+        var eventId = $('#eventInfo').data('id');
+        $.ajax({
+            url: getContextPath() + '/admin/ajaxAction/deleteEvent',
+            data: {id: eventId},
+            type: "POST",
+            success: function (data, text) {
+                $("#eventContent").modal('hide');
+                $calendar.fullCalendar('removeEvents', eventId);
+            },
+            fail: function (xhr, ajaxOptions, thrownError) {
+                console.log("Error : " + xhr.responseText);
+            }
+        });
+
+    });
 </script>
