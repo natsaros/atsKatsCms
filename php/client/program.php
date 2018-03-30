@@ -93,24 +93,24 @@ function getDesktopLesson($lessons, $key) {
             <p>Πρόγραμμα</p>
             <div class="titlesBorder"></div>
         </div>
-        <div class="col-sm-12"><!--
-        --><table class="aboutTimeTable table table-responsive">
+        <div class="col-sm-12">
+            <table class="aboutTimeTable table table-responsive text-center">
                 <thead>
                 <tr>
                     <th>&nbsp;</th>
-                    <th><?php $weekDaysGr[DaysOfWeek::MONDAY] ?></th>
-                    <th><?php $weekDaysGr[DaysOfWeek::TUESDAY] ?></th>
-                    <th><?php $weekDaysGr[DaysOfWeek::WEDNESDAY] ?></th>
-                    <th><?php $weekDaysGr[DaysOfWeek::THURSDAY] ?></th>
-                    <th><?php $weekDaysGr[DaysOfWeek::FRIDAY] ?></th>
-                    <th><?php $weekDaysGr[DaysOfWeek::SATURDAY] ?></th>
+                    <th><?php echo $weekDaysGr[DaysOfWeek::MONDAY]; ?></th>
+                    <th><?php echo $weekDaysGr[DaysOfWeek::TUESDAY]; ?></th>
+                    <th><?php echo $weekDaysGr[DaysOfWeek::WEDNESDAY]; ?></th>
+                    <th><?php echo $weekDaysGr[DaysOfWeek::THURSDAY]; ?></th>
+                    <th><?php echo $weekDaysGr[DaysOfWeek::FRIDAY]; ?></th>
+                    <th><?php echo $weekDaysGr[DaysOfWeek::SATURDAY]; ?></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php renderDesktopProgram($lessons, $timeFrames); ?>
                 </tbody>
-            </table><!--
-        --></div>
+            </table>
+        </div>
     </div>
     <div class="row mobile">
         <div class="headerTitle">
@@ -123,7 +123,7 @@ function getDesktopLesson($lessons, $key) {
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="textHolder">
+            <div class="textHolder" style="height: 200px;">
                 <div class="textHolderInside">
                     <div class="noteTitle">
                         <p> * Σημείωση</p>

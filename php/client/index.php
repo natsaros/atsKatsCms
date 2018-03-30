@@ -52,7 +52,7 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
         $pageId = $_GET["id"];
     }
     ?>
-    //Default behavior: if no action is set to happen navigation occurs.
+<!--    Default behavior: if no action is set to happen navigation occurs.-->
     <!DOCTYPE html>
     <html lang="gr">
     <?php

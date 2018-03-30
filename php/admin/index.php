@@ -30,7 +30,7 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
         require(ADMIN_ROOT_PATH . '404.php');
     }
 } else if (!isset($action) || isEmpty($action)) {
-    //Default behavior: if no action is set to happen navigation occurs.
+//    Default behavior: if no action is set to happen navigation occurs.
 
     if (!isLoggedIn() && (!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] !== 'remindPassword'))) {
         include(ADMIN_ROOT_PATH . 'login.php');
