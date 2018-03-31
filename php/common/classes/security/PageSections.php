@@ -6,6 +6,10 @@ class PageSections {
     const DASHBOARD = 'dashboard';
     const PAGES = 'pages';
     const POSTS = 'posts';
+    const PRODUCTS = 'products';
+    const PRODUCT_CATEGORIES = 'product_categories';
+    const PROMOTIONS = 'promotions';
+    const NEWSLETTER = 'newsletter';
     const USER = 'users';
     const SETTINGS = 'settings';
     const PROGRAM = 'program';
@@ -16,9 +20,9 @@ class PageSections {
      */
     static function getPagesByAccessRights($accessRights) {
         $pages = array();
-        foreach($accessRights as $accessRight) {
+        foreach ($accessRights as $accessRight) {
             $pageByAccessRight = self::getPageByAccessRight($accessRight);
-            if(!in_array($pageByAccessRight, $pages)) {
+            if (!in_array($pageByAccessRight, $pages)) {
                 $pages[] = $pageByAccessRight;
             }
         }
@@ -30,7 +34,7 @@ class PageSections {
      * @return mixed|string
      */
     static function getPageByAccessRight($accessRight) {
-        if($accessRight === AccessRight::ALL) {
+        if ($accessRight === AccessRight::ALL) {
             return self::DASHBOARD;
         } else {
             return self::getPageSections()[$accessRight];
@@ -38,15 +42,22 @@ class PageSections {
     }
 
     /**
+     * correlation between access rights and pages
+     *
      * @return array
      */
     static function getPageSections() {
         $sections = array(
-            AccessRight::SETTINGS_SECTION => self::SETTINGS,
+            AccessRight::DASHBOARD_SECTION => self::DASHBOARD,
             AccessRight::PAGES_SECTION => self::PAGES,
-            AccessRight::POSTS_SECTION => self::POSTS,
             AccessRight::USER_SECTION => self::USER,
+            AccessRight::POSTS_SECTION => self::POSTS,
+            AccessRight::PRODUCTS_SECTION => self::PRODUCTS,
+            AccessRight::PRODUCT_CATEGORIES_SECTION => self::PRODUCT_CATEGORIES,
+            AccessRight::PROMOTIONS_SECTION => self::PROMOTIONS,
+            AccessRight::NEWSLETTER_SECTION => self::NEWSLETTER,
             AccessRight::PROGRAM_SECTION => self::PROGRAM,
+            AccessRight::SETTINGS_SECTION => self::SETTINGS,
         );
         return $sections;
     }

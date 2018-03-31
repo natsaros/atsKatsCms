@@ -1,8 +1,18 @@
 <?php
+$loggedInUser = getFullUserFromSession();
+
+//TODO : check access under those paths also
 if (isAdminModal()) {
     $path = ADMIN_MODAL_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
 } else {
-    $path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
+    if (isNotEmpty($loggedInUser)) {
+        $pagesAllowed = PageSections::getPagesByAccessRights(getFullUserFromSession()->getAccessRightsStr());
+        if (in_array(ADMIN_PAGE_ID, $pagesAllowed)) {
+            $path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
+        } else {
+            $path = ADMIN_ROOT_PATH . '404' . PHP_POSTFIX;
+        }
+    }
 }
 try {
 

@@ -50,9 +50,9 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
             if (isNotEmpty(DEV_MODE) && DEV_MODE) {
                 define('ADMIN_PAGE_ID', PageSections::DASHBOARD);
             } else {
-                $pagesAllowed = PageSections::getPagesByAccessRights(getFullUserFromSession()->getAccessRightsStr());
-                $startPage = $pagesAllowed[0];
-                define('ADMIN_PAGE_ID', $startPage);
+//                $pagesAllowed = PageSections::getPagesByAccessRights(getFullUserFromSession()->getAccessRightsStr());
+//                $startPage = $pagesAllowed[0];
+                define('ADMIN_PAGE_ID', PageSections::DASHBOARD);
             }
         } else {
             define('ADMIN_PAGE_ID', $page);

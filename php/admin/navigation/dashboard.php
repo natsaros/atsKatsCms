@@ -1,86 +1,95 @@
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Dashboard</h1>
+<?php
+$loggedInUser = getFullUserFromSession();
+?>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dashboard</h1>
+        </div>
     </div>
-</div>
 
 <?php require("messageSection.php"); ?>
 
-<div class="row">
-    <div class="col-lg-6 col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-envelope fa-4x"></i>
-                    </div>
-                    <div class="col-xs-10 text-right">
-                        <?php $latestNewsletterSubscriptions = NewsletterHandler::getLatestNewsletterSubscriptions();
-                        $newsletterSubscriptionMessage = 'Newsletter' . (($latestNewsletterSubscriptions == 1) ? ' subscription ' : ' subscriptions ') . 'the last 3 Days';?>
-                        <div class="huge">
-                            <?php echo $latestNewsletterSubscriptions;?>
+    <div class="row">
+        <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION)) { ?>
+            <div class="col-lg-6 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa-envelope fa-4x"></i>
+                            </div>
+                            <div class="col-xs-10 text-right">
+                                <?php $latestNewsletterSubscriptions = NewsletterHandler::getLatestNewsletterSubscriptions();
+                                $newsletterSubscriptionMessage = 'Newsletter' . (($latestNewsletterSubscriptions == 1) ? ' subscription ' : ' subscriptions ') . 'the last 3 Days'; ?>
+                                <div class="huge">
+                                    <?php echo $latestNewsletterSubscriptions; ?>
+                                </div>
+                                <div>
+                                    <?php echo $newsletterSubscriptionMessage; ?>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <?php echo $newsletterSubscriptionMessage;?>
-                        </div>
                     </div>
+                    <a href="<?php echo getAdminRequestUri() . PageSections::NEWSLETTER; ?>">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <a href="<?php echo getAdminRequestUri() . 'newsletter';?>">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <?php $activePromotion = PromotionHandler::getPromotedInstance();
-    if (!is_null($activePromotion)) {
-        if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) {
-            $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
-        } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) {
-            $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
-        } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PLAIN_TEXT) {
-            $isPromotedInstanceActive = true;
-        }
-    }
-    if (!is_null($activePromotion) && $isPromotedInstanceActive) {
-        $timesSeen = $activePromotion->getTimesSeen();
-        $activePromotionMessage = 'Views for Promotion';
-        $activePromotionMessage .= ' with Promotion Text \'' . $activePromotion->getPromotionText() . '\'';
-    } else {
-        $timesSeen = '&nbsp;';
-        $activePromotionMessage = 'There are no Active Promotions';
-    }
-    ?>
-    <div class="col-lg-6 col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-rocket fa-4x"></i>
-                    </div>
-                    <div class="col-xs-10 text-right">
-                        <div class="huge">
-                            <?php echo $timesSeen;?>
-                        </div>
-                        <div>
-                            <?php echo $activePromotionMessage;?>
+        <?php } ?>
+
+
+        <?php if (hasAccess($loggedInUser, AccessRight::PROMOTIONS_SECTION)) { ?>
+            <?php $activePromotion = PromotionHandler::getPromotedInstance();
+            if (!is_null($activePromotion)) {
+                if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) {
+                    $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductStatus::ACTIVE);
+                } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT_CATEGORY) {
+                    $isPromotedInstanceActive = (!is_null($activePromotion->getPromotedInstance()) && $activePromotion->getPromotedInstance()->getState() == ProductCategoryStatus::ACTIVE);
+                } else if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PLAIN_TEXT) {
+                    $isPromotedInstanceActive = true;
+                }
+            }
+            if (!is_null($activePromotion) && $isPromotedInstanceActive) {
+                $timesSeen = $activePromotion->getTimesSeen();
+                $activePromotionMessage = 'Views for Promotion';
+                $activePromotionMessage .= ' with Promotion Text \'' . $activePromotion->getPromotionText() . '\'';
+            } else {
+                $timesSeen = '&nbsp;';
+                $activePromotionMessage = 'There are no Active Promotions';
+            }
+            ?>
+            <div class="col-lg-6 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa-rocket fa-4x"></i>
+                            </div>
+                            <div class="col-xs-10 text-right">
+                                <div class="huge">
+                                    <?php echo $timesSeen; ?>
+                                </div>
+                                <div>
+                                    <?php echo $activePromotionMessage; ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <a href="<?php echo getAdminRequestUri() . PageSections::PROMOTIONS; ?>">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <a href="<?php echo getAdminRequestUri() . 'promotions';?>">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
-        </div>
+        <?php } ?>
     </div>
-</div>
 
 <?php if (isNotEmpty(GA_OATH_CLIENT_ID)) { ?>
     <div id="GA-stats">
