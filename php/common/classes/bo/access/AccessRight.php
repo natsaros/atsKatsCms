@@ -9,6 +9,7 @@ class AccessRight {
 
 //    TODO : make access rights dynamic according to DB access rights
     const ALL = 'ALL';
+    const DASHBOARD_SECTION = 'DASHBOARD_SECTION';
     const PAGES_SECTION = 'PAGES_SECTION';
     const POSTS_SECTION = 'POSTS_SECTION';
     const PRODUCTS_SECTION = 'PRODUCTS_SECTION';
