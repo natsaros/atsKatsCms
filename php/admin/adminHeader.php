@@ -40,9 +40,9 @@
     <!-- Bootstrap Datetimepicker CSS -->
     <link href="<?php echo CSS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
-    <?php if (isNotEmpty(GA_OATH_CLIENT_ID)) { ?>
+    <?php if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLoggedIn() && !forceUserChangePassword()){ ?>
     <!-- Include the CSS that styles the Google Analytics charts. -->
-    <link href="<?php echo CSS_URI ?>google-analytics/google-analytics-plugins.min.css" rel="stylesheet">
+        <link href="<?php echo CSS_URI ?>google-analytics/google-analytics-plugins.min.css" rel="stylesheet">
     <?php } ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

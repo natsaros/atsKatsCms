@@ -834,3 +834,20 @@ function issueOrRefreshTokenForGACharts(){
     $server_output = json_decode($server_output, true);
     $_SESSION['access_token'] = $server_output['access_token'];
 }
+
+/**
+ * @param $date
+ * @return string
+ */
+function formatDateBasedOnLocale($date){
+    $locale = $_SESSION['locale'];
+    if ($locale == 'el_GR'){
+        $greekMonths = array('Ιανουαρίου','Φεβρουαρίου','Μαρτίου','Απριλίου','Μαΐου','Ιουνίου','Ιουλίου','Αυγούστου','Σεπτεμβρίου','Οκτωβρίου','Νοεμβρίου','Δεκεμβρίου');
+        $time = strtotime($date);
+        $newformat = date('Y-m-d', $time);
+        $dateToReturn = date('j', strtotime($newformat)).' '.$greekMonths[date('m', strtotime($newformat))-1]. ' '. date('Y', strtotime($newformat));
+    } else {
+        $dateToReturn = date_format(date_create($date), 'd M Y');
+    }
+    return $dateToReturn;
+}

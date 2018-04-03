@@ -201,14 +201,10 @@ class ProductHandler {
         $updatedRes = getDb()->updateStmt($query,
             array('s', 's', 's', 's', 'i', 'i'),
             array($product->getTitle(), $product->getTitleEn(), $product->getFriendlyTitle(), $product->getState(), $product->getUserId(), $product->getID()));
-        if($updatedRes) {
-            $updatedId = getDb()->selectStmtSingleNoParams("SELECT LAST_INSERT_ID() AS " . self::ID . "");
-            $updatedId = $updatedId["" . self::ID . ""];
-            $query = "UPDATE " . getDb()->product_details . " SET " . self::CODE . " = ?, " . self::DESCRIPTION . " = ?, " . self::DESCRIPTION_EN . " = ?, " .self::PRODUCT_CATEGORY_ID . " = ?, " .self::SECONDARY_PRODUCT_CATEGORY_ID . " = ?, " . self::PRICE . " = ?, " .self::OFFER_PRICE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ? WHERE " . self::PRODUCT_ID . " = ?";
-            $updatedRes = getDb()->updateStmt($query,
-                array('s', 's', 's', 'i', 'i', 'd', 'd', 's', 's', 'i'),
-                array($product->getCode(), $product->getDescription(), $product->getDescriptionEn(), $product->getProductCategoryId(), $product->getSecondaryProductCategoryId(), $product->getPrice(), $product->getOfferPrice(), $product->getImagePath(), '', $updatedId));
-        }
+        $query = "UPDATE " . getDb()->product_details . " SET " . self::CODE . " = ?, " . self::DESCRIPTION . " = ?, " . self::DESCRIPTION_EN . " = ?, " .self::PRODUCT_CATEGORY_ID . " = ?, " .self::SECONDARY_PRODUCT_CATEGORY_ID . " = ?, " . self::PRICE . " = ?, " .self::OFFER_PRICE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ? WHERE " . self::PRODUCT_ID . " = ?";
+        $updatedRes = getDb()->updateStmt($query,
+            array('s', 's', 's', 'i', 'i', 'd', 'd', 's', 's', 'i'),
+            array($product->getCode(), $product->getDescription(), $product->getDescriptionEn(), $product->getProductCategoryId(), $product->getSecondaryProductCategoryId(), $product->getPrice(), $product->getOfferPrice(), $product->getImagePath(), '', $product->getID()));
         return $updatedRes;
     }
 

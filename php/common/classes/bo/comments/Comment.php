@@ -4,6 +4,7 @@ class Comment {
     private $ID;
     private $comment;
     private $user_id;
+    private $user;
     private $post_id;
     private $date;
 
@@ -101,6 +102,24 @@ class Comment {
     public function setDate($date)
     {
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     * @return Comment
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
         return $this;
     }
 

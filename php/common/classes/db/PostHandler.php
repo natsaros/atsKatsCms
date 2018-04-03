@@ -138,18 +138,14 @@ class PostHandler {
      * @throws SystemException
      */
     public static function update($post) {
-        $query = "UPDATE " . getDb()->posts . " SET " . self::TITLE . " = ?, " . self::FRIENDLY_TITLE . " = ?, " . self::STATE . " = ?, " . self::USER_ID . " = ?, " . self::ID . " = LAST_INSERT_ID(" . $post->getID() . ") WHERE " . self::ID . " = ?;";
+        $query = "UPDATE " . getDb()->posts . " SET " . self::TITLE . " = ?, " . self::FRIENDLY_TITLE . " = ?, " . self::STATE . " = ?, " . self::USER_ID . " = ?, " . self::ID . " = LAST_INSERT_ID(" . $post->getID() . ") WHERE " . self::ID . " = ?";
         $updatedRes = getDb()->updateStmt($query,
             array('s', 's', 's', 'i', 'i'),
             array($post->getTitle(), $post->getFriendlyTitle(), $post->getState(), $post->getUserId(), $post->getID()));
-        if($updatedRes) {
-            $updatedId = getDb()->selectStmtSingleNoParams("SELECT LAST_INSERT_ID() AS " . self::ID . "");
-            $updatedId = $updatedId["" . self::ID . ""];
-            $query = "UPDATE " . getDb()->post_meta . " SET " . self::TEXT . " = ?, " . self::SEQUENCE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ? WHERE " . self::POST_ID . " = ?";
-            $updatedRes = getDb()->updateStmt($query,
-                array('s', 's', 's', 's', 'i'),
-                array($post->getText(), $post->getSequence(), $post->getImagePath(), '', $updatedId));
-        }
+        $query = "UPDATE " . getDb()->post_meta . " SET " . self::TEXT . " = ?, " . self::SEQUENCE . " = ?, " . self::IMAGE_PATH . " = ?, " . self::IMAGE . " = ? WHERE " . self::POST_ID . " = ?";
+        $updatedRes = getDb()->updateStmt($query,
+            array('s', 's', 's', 's', 'i'),
+            array($post->getText(), $post->getSequence(), $post->getImagePath(), '', $post->getID()));
         return $updatedRes;
     }
 

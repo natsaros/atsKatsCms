@@ -8,6 +8,7 @@ class VisitorHandler {
     const FIRST_NAME = 'FIRST_NAME';
     const LAST_NAME = 'LAST_NAME';
     const EMAIL = 'EMAIL';
+    const IMAGE_PATH = 'IMAGE_PATH';
     const USER_STATUS = 'USER_STATUS';
     const INSERTION_DATE = 'INSERTION_DATE';
     const LAST_LOGIN_DATE = 'LAST_LOGIN_DATE';
@@ -31,18 +32,37 @@ class VisitorHandler {
     }
 
     /**
+     * @param $id string
+     * @return Visitor
+     * @throws SystemException
+     */
+    static function getVisitorById($id) {
+        if (isNotEmpty($id)) {
+            $query = "SELECT * FROM " . getDb()->visitors . " WHERE " . self::ID . " = ?";
+            $row = getDb()->selectStmtSingle($query, array('s'), array($id));
+            if ($row) {
+                $visitor = self::populateVisitor($row);
+                return $visitor;
+            }
+            return null;
+        }
+        return null;
+    }
+
+    /**
      * @param $visitor Visitor
      * @return bool|mysqli_result|null
      * @throws SystemException
      */
     static function updateVisitor($visitor) {
         if (isNotEmpty($visitor)) {
-            $query = "UPDATE " . getDb()->visitors . " SET " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LAST_LOGIN_DATE . " = ?  WHERE " . self::FB_ID . " = ?";
+            $query = "UPDATE " . getDb()->visitors . " SET " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, "  . self::IMAGE_PATH . " = ?, " . self::LAST_LOGIN_DATE . " = ?  WHERE " . self::FB_ID . " = ?";
             return getDb()->updateStmt($query,
-                array('s', 's', 's', 's', 's'),
+                array('s', 's', 's', 's', 's', 's'),
                 array($visitor->getFirstName(),
                     $visitor->getLastName(),
                     $visitor->getEmail(),
+                    $visitor->getImagePath(),
                     date(DEFAULT_DATE_FORMAT),
                     $visitor->getFBID()
                 ));
@@ -63,6 +83,7 @@ class VisitorHandler {
                 "," . self::FIRST_NAME .
                 "," . self::LAST_NAME .
                 "," . self::EMAIL .
+                "," . self::IMAGE_PATH .
                 "," . self::INSERTION_DATE .
                 "," . self::LAST_LOGIN_DATE .
                 ") VALUES (?
@@ -71,15 +92,17 @@ class VisitorHandler {
                 , ?
                 , ?
                 , ?
+                , ?
                 , ?)";
 
             return getDb()->createStmt($query,
-                array('s', 'i', 's', 's', 's', 's', 's'),
+                array('s', 'i', 's', 's', 's', 's', 's', 's'),
                 array($visitor->getFBID(),
                     $visitor->getUserStatus(),
                     $visitor->getFirstName(),
                     $visitor->getLastName(),
                     $visitor->getEmail(),
+                    $visitor->getImagePath(),
                     date(DEFAULT_DATE_FORMAT),
                     date(DEFAULT_DATE_FORMAT)
                 ));
@@ -96,7 +119,7 @@ class VisitorHandler {
         if($row === false || null === $row) {
             return null;
         }
-        $visitor = Visitor::createVisitor($row[self::ID], $row[self::FB_ID], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::USER_STATUS], $row[self::INSERTION_DATE], $row[self::LAST_LOGIN_DATE]);
+        $visitor = Visitor::createVisitor($row[self::ID], $row[self::FB_ID], $row[self::FIRST_NAME], $row[self::LAST_NAME], $row[self::EMAIL], $row[self::IMAGE_PATH], $row[self::USER_STATUS], $row[self::INSERTION_DATE], $row[self::LAST_LOGIN_DATE]);
         return $visitor;
     }
 }

@@ -6,6 +6,7 @@ class Visitor {
     private $first_name;
     private $last_name;
     private $email;
+    private $image_path;
     private $user_status;
     private $insertion_date;
     private $last_login_date;
@@ -110,6 +111,24 @@ class Visitor {
     /**
      * @return mixed
      */
+    public function getImagePath()
+    {
+        return $this->image_path;
+    }
+
+    /**
+     * @param mixed $image_path
+     * @return Visitor
+     */
+    public function setImagePath($image_path)
+    {
+        $this->image_path = $image_path;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getUserStatus()
     {
         return $this->user_status;
@@ -169,13 +188,14 @@ class Visitor {
         return $instance;
     }
 
-    public static function createVisitor($ID, $FBID, $first_name, $last_name, $email, $user_status, $insertion_date, $last_login_date) {
+    public static function createVisitor($ID, $FBID, $first_name, $last_name, $email, $imagePath, $user_status, $insertion_date, $last_login_date) {
         return self::create()
             ->setID($ID)
             ->setFBID($FBID)
             ->setFirstName($first_name)
             ->setLastName($last_name)
             ->setEmail($email)
+            ->setImagePath($imagePath)
             ->setUserStatus($user_status)
             ->setInsertionDate($insertion_date)
             ->setLastLoginDate($last_login_date);

@@ -1,4 +1,5 @@
 <?php
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'access' . DS . 'AccessRight.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'users' . DS . 'UserStatus.php');
 
 class User {
@@ -218,7 +219,8 @@ class User {
     function getAccessRightsStr() {
         $accessRightsStr = array();
         if(isNotEmpty($this->getAccessRights())) {
-
+            //add dashboard by default
+            $accessRightsStr[] = AccessRight::DASHBOARD_SECTION;
             /** @var AccessRight $right */
             foreach($this->getAccessRights() as $right) {
                 if(!in_array($right, $accessRightsStr)) {
@@ -247,8 +249,7 @@ class User {
     /**
      * @return mixed
      */
-    public function getForceChangePassword()
-    {
+    public function getForceChangePassword() {
         return $this->force_change_password;
     }
 
@@ -427,8 +428,7 @@ class User {
      * @param mixed $force_change_password
      * @return User
      */
-    public function setForceChangePassword($force_change_password)
-    {
+    public function setForceChangePassword($force_change_password) {
         $this->force_change_password = $force_change_password;
         return $this;
     }
