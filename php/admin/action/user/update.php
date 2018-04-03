@@ -8,11 +8,11 @@ $phone = safe_input($_POST[UserHandler::PHONE]);
 $password = safe_input($_POST[UserHandler::PASSWORD]);
 $passwordConfirmation = safe_input($_POST[UserHandler::PASSWORD_CONFIRMATION]);
 
-if(isEmpty($userName) || isEmpty($email)) {
+if (isEmpty($userName) || isEmpty($email)) {
     addErrorMessage("Please fill in required info");
 }
 
-if((isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
+if ((isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
     addErrorMessage("Please fill in a valid password");
 }
 
@@ -41,20 +41,21 @@ if (!$imageValid) {
     addErrorMessage("Please select a valid image file");
 }
 
-if(hasErrors()) {
+$updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
+if (hasErrors()) {
     if (!empty($_POST)) {
-        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
-            foreach($_POST as $key => $value) {
+        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+            foreach ($_POST as $key => $value) {
                 $_SESSION['updateUserForm'][$key] = $value;
             }
             $_SESSION['updateUserForm'][$key] = $value;
-            Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
+            Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
         } else {
-            foreach($_POST as $key => $value) {
+            foreach ($_POST as $key => $value) {
                 $_SESSION['updateMyProfileForm'][$key] = $value;
             }
             $_SESSION['updateMyProfileForm'][$key] = $value;
-            Redirect(getAdminRequestUri() . "updateMyProfile");
+            Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "updateMyProfile");
         }
     }
 }
@@ -66,7 +67,7 @@ $gender = safe_input($_POST[UserHandler::GENDER]);
 $link = safe_input($_POST[UserHandler::LINK]);
 
 $groupIds = '';
-if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
+if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
     $groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
 }
 
@@ -76,7 +77,7 @@ try {
     $user2Update = UserHandler::getUserById($ID);
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
-    if(isNotEmpty($user2Update)) {
+    if (isNotEmpty($user2Update)) {
         $user2Update->
         setUserName($userName)->
         setFirstName($first_name)->
@@ -88,11 +89,11 @@ try {
         setPhone($phone)->
         setForceChangePassword(0);
 
-        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
+        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
             $user2Update->setPassword(password_hash($password, PASSWORD_DEFAULT));
         }
 
-        if($imgContent) {
+        if ($imgContent) {
             //only saving in filesystem for performance reasons
             $user2Update->setPicturePath($picturePath);
 
@@ -102,25 +103,25 @@ try {
 
         $updateUserRes = UserHandler::updateUser($user2Update);
 
-        if($updateUserRes && isNotEmpty($groupIds)) {
+        if ($updateUserRes && isNotEmpty($groupIds)) {
             UserHandler::updateUserGroups($user2Update->getID(), $groupIds);
         }
-        if($updateUserRes !== null || $updateUserRes) {
-            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
+        if ($updateUserRes !== null || $updateUserRes) {
+            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
                 addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
             } else {
                 addSuccessMessage("Your profile has been successfully updated");
             }
-            if(!$emptyFile) {
+            if (!$emptyFile) {
                 $fileName = basename($image2Upload[ImageUtil::NAME]);
                 ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Update->getUserName(), $fileName, $imgContent);
             }
-            if (isNotEmpty($updateLoggedInUser) && boolval($updateLoggedInUser)){
+            if (isNotEmpty($updateLoggedInUser) && boolval($updateLoggedInUser)) {
                 $user2Update->setAccessRights(AccessRightsHandler::getAccessRightByUserId($user2Update->getID()));
                 setUserToSession($user2Update);
             }
         } else {
-            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
+            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
                 addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
             } else {
                 addErrorMessage("Your profile failed to be updated");
@@ -129,21 +130,21 @@ try {
     } else {
         addErrorMessage(ErrorMessages::GENERIC_ERROR);
     }
-} catch(SystemException $ex) {
+} catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
+    Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
 }
 
-if(hasErrors()) {
-    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
-        Redirect(getAdminRequestUri() . "updateUser" . addParamsToUrl(array('id'), array($ID)));
+if (hasErrors()) {
+    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+        Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
     } else {
-        Redirect(getAdminRequestUri() . "updateMyProfile");
+        Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "updateMyProfile");
     }
 } else {
-    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)){
-        Redirect(getAdminRequestUri() . "users");
+    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+        Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "users");
     } else {
         Redirect(getAdminRequestUriNoDelim());
     }

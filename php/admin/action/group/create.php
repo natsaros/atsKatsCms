@@ -26,7 +26,7 @@ try {
 }
 
 if (hasErrors()) {
-    Redirect(getAdminRequestUri() . "updateGroup");
+    Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "updateGroup");
 } else {
-    Redirect(getAdminRequestUri() . 'users' . addParamsToUrl(array('activeTab'), array('groups')));
+    Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . 'users' . addParamsToUrl(array('activeTab'), array('groups')));
 }

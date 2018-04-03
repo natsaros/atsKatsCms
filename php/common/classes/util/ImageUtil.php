@@ -207,6 +207,10 @@ class ImageUtil {
         self::rrmdir($pathToDel);
     }
 
+    /**
+     * Used to remove directory and subfiles recursively
+     * @param $dir
+     */
     static function rrmdir($dir) {
         foreach(glob($dir . '/*') as $file) {
             if(is_dir($file)) {

@@ -13,7 +13,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
             <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="<?php echo $adminRequestUri . $startPage ?>"><?php echo SITE_TITLE;?> Admin</a>
+        <a class="navbar-brand" href="<?php echo $adminRequestUri . $startPage ?>"><?php echo SITE_TITLE; ?> Admin</a>
         <div class="navbar-brand" style="cursor: default;width: 50px;">
             <img class="img-rounded img-responsive"
                  src="<?php echo ImageUtil::renderUserImage($loggedInUser) ?>"
@@ -22,40 +22,40 @@ $adminActionRequestUri = getAdminActionRequestUri();
         <div class="navbar-brand" style="cursor: default;">
             Welcome <?php echo $loggedInUser->getUserName() ?>!
         </div>
-    <ul class="nav navbar-top-links navbar-right">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
                         <a href="<?php echo $adminRequestUri . "updateMyProfile"; ?>">
-                        <i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="<?php echo $adminActionRequestUri . "logout" ?>"><i class="fa fa-sign-out fa-fw"></i>
-                        Logout</a>
-                </li>
-            </ul>
-            <!-- /.dropdown-user -->
-        </li>
-        <!-- /.dropdown -->
-    </ul>
-    <!-- /.navbar-top-links -->
+                            <i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="<?php echo $adminActionRequestUri . "logout" ?>"><i class="fa fa-sign-out fa-fw"></i>
+                            Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
     </div>
     <!-- /.navbar-header -->
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse collapse">
             <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="<?php echo $adminRequestUri . 'dashboard' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'dashboard') !== false) {
-                            echo 'class="active"';
-                        } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
+                <li>
+                    <a href="<?php echo $adminRequestUri . 'dashboard' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'dashboard') !== false) {
+                        echo 'class="active"';
+                    } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
                 <?php if (hasAccess($loggedInUser, AccessRight::USER_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
+                        <a href="<?php echo $adminRequestUri . DS . PageSections::USERS . DS . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                     </li>
@@ -98,8 +98,8 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <!--<?php if (hasAccess($loggedInUser, AccessRight::PAGES_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'pages' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'pages') !== false) {
-                            echo 'class="active"';
-                        } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
+                    echo 'class="active"';
+                } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                     </li>
                 <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>

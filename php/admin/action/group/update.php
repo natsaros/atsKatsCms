@@ -49,7 +49,7 @@ try {
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 if (hasErrors()) {
-    Redirect(getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "updateGroup" . addParamsToUrl(array('id'), array($ID)));
 } else {
-    Redirect(getAdminRequestUri() . 'users' . addParamsToUrl(array('activeTab'), array('groups')));
+    Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . 'users' . addParamsToUrl(array('activeTab'), array('groups')));
 }

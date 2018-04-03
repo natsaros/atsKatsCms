@@ -219,12 +219,17 @@ class User {
     function getAccessRightsStr() {
         $accessRightsStr = array();
         if (isNotEmpty($this->getAccessRights())) {
-            //add dashboard by default
-            $accessRightsStr[] = AccessRight::DASHBOARD_SECTION;
-            /** @var AccessRight $right */
-            foreach ($this->getAccessRights() as $right) {
-                if (!in_array($right, $accessRightsStr)) {
-                    $accessRightsStr[] = $right->getName();
+            if (sizeof($this->getAccessRights()) === 1 && $this->getAccessRights()[0]->getName() === AccessRight::ALL) {
+                $accessRightsStr[] = AccessRight::ALL;
+                return $accessRightsStr;
+            } else {
+                //add dashboard by default
+                $accessRightsStr[] = AccessRight::DASHBOARD_SECTION;
+                /** @var AccessRight $right */
+                foreach ($this->getAccessRights() as $right) {
+                    if (!in_array($right, $accessRightsStr)) {
+                        $accessRightsStr[] = $right->getName();
+                    }
                 }
             }
         }

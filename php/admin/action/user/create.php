@@ -32,6 +32,7 @@ if (!$imageValid) {
     addErrorMessage("Please select a valid image file");
 }
 
+$updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
 if(hasErrors()) {
     if (!empty($_POST)) {
         foreach($_POST as $key => $value) {
@@ -39,7 +40,7 @@ if(hasErrors()) {
         }
         $_SESSION['updateUserForm'][$key] = $value;
     }
-    Redirect(getAdminRequestUri() . "updateUser");
+    Redirect($updateUserUrl);
 }
 
 $first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
@@ -96,11 +97,11 @@ try {
 } catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect(getAdminRequestUri() . "updateUser");
+    Redirect($updateUserUrl);
 }
 
 if (hasErrors()) {
-    Redirect(getAdminRequestUri() . "updateUser");
+    Redirect($updateUserUrl);
 } else {
-    Redirect(getAdminRequestUri() . "users");
+    Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "users");
 }

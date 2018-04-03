@@ -63,7 +63,7 @@ a:focus, a:hover {color: @secondaryFontColor}
 .dataTable .btn-default.focus, .btn-default:focus {color: @fontColor;background-color: #f5f5f5;border-color: #ddd;outline: none;}
 .dataTable .btn-default:active:focus {color: @fontColor;background-color: #f5f5f5;border-color: #ddd;outline: none;}
 form .btn-primary {transition: all .3s;color: @buttonFontColor;background-color: @buttonColor;border-color: @buttonColor;}
-form .btn-primary:hover {color: @buttonFontColor;background-color: @buttonSecondaryColor;border-color: @buttonSecondaryColor;outline: none;}
+form .btn-primary:active:hover {color: @buttonFontColor;background-color: @buttonSecondaryColor;border-color: @buttonSecondaryColor;outline: none;}
 form .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {color: @buttonFontColor;background-color: @buttonSecondaryColor;border-color: @buttonSecondaryColor;outline: none;}
 form .btn-primary.focus, .btn-primary:focus {color: @buttonFontColor;background-color: @buttonSecondaryColor;border-color: @buttonSecondaryColor;outline: none;}
 form .btn-primary:active:focus {color: @buttonFontColor;background-color: @buttonSecondaryColor;border-color: @buttonSecondaryColor;outline: none;}
@@ -132,10 +132,10 @@ table.dataTable thead .sorting:after {content: "\f0dc";float: right;font-family:
 /*.timeline-title {margin-top: 0;color: inherit;}*/
 /*.timeline-body > p,.timeline-body > ul {margin-bottom: 0;}*/
 /*.timeline-body > p + p {margin-top: 5px;}*/
-.imgCont {width: 20%;display: inline-block;}
-.imgCont .btn {position: relative;visibility: hidden;transition: all .2s;}
+.imgCont {width: 20%;display: inline-block;position: relative;}
+.imgCont .btn {cursor: pointer;position: absolute;top: 0;visibility: hidden;transition: all .2s;}
 .btn-file {position: relative;overflow: hidden;}
-.btn-file input[type=file] {position: absolute;top: 0;right: 0;min-width: 100%;min-height: 100%;font-size: 100px;text-align: right;filter: alpha(opacity=0);opacity: 0;outline: none;background: white;cursor: inherit;display: block;}
+.btn-file input[type=file] {position:absolute;top: 0;left: 0;width: 200px;height: 50px;min-width: 100%;min-height: 100%;font-size: 100px;text-align: right;filter: alpha(opacity=0);opacity: 0;outline: none;background: white;cursor: pointer;display: block;}
 .uploadPreview {text-align: center;}
 .uploadPreview > img {max-width: 25%;height: auto;}
 /*.vcenter {display: inline-block;vertical-align: middle;float: none;}*/

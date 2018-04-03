@@ -89,7 +89,7 @@ $pageTitle = $isCreate ? "Create Group" : "Update Group";
 
             <!--TODO: add metas functionality-->
             <div class="text-right form-group">
-                <?php $backUrl = getAdminRequestUri() . 'users' . addParamsToUrl(array('activeTab'), array('groups')); ?>
+                <?php $backUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . 'users' . addParamsToUrl(array('activeTab'), array('groups')); ?>
                 <a type="button" href="<?php echo $backUrl; ?>" class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>

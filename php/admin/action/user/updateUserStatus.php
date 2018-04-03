@@ -14,4 +14,4 @@ try {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
-Redirect(getAdminRequestUri() . 'users');
+Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . 'users');
