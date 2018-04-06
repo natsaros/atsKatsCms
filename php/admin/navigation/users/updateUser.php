@@ -3,13 +3,8 @@ $userId = $_GET["id"];
 $isCreate = isEmpty($userId);
 $loggedInUser = getFullUserFromSession();
 
-$afterFormSubmission = false;
 
-if (isset($_SESSION['updateUserForm']) && !empty($_SESSION['updateUserForm'])) {
-    $afterFormSubmission = true;
-    $form_data = $_SESSION['updateUserForm'];
-    unset($_SESSION['updateUserForm']);
-}
+FormHandler::unsetSessionForm('updateUserForm');
 
 $activeTab = $_GET['activeTab'];
 $activeTabClass = 'class="active"';
@@ -82,44 +77,36 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
                                     <label class="control-label" for="username_input">User Name *</label>
                                     <input class="form-control" placeholder="User Name"
                                            name="<?php echo UserHandler::USERNAME ?>" id="username_input"
-                                           value="<?php if ($afterFormSubmission) { ?><?= $form_data[UserHandler::USERNAME] ?><?php } else {
-                                               echo $currentUser->getUserName();
-                                           } ?>" required>
+                                           value="<?php echo FormHandler::getEditFormData(UserHandler::USERNAME, $currentUser->getUserName()); ?>"
+                                           >
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="firstname_input">First Name</label>
                                     <input class="form-control" placeholder="First Name"
                                            name="<?php echo UserHandler::FIRST_NAME ?>"
                                            id="firstname_input"
-                                           value="<?php if ($afterFormSubmission) { ?><?= $form_data[UserHandler::FIRST_NAME] ?><?php } else {
-                                               echo $currentUser->getFirstName();
-                                           } ?>">
+                                           value="<?php echo FormHandler::getEditFormData(UserHandler::FIRST_NAME, $currentUser->getFirstName()); ?>">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="lastname_input">Last Name</label>
                                     <input class="form-control" placeholder="Last Name"
                                            name="<?php echo UserHandler::LAST_NAME ?>" id="lastname_input"
-                                           value="<?php if ($afterFormSubmission) { ?><?= $form_data[UserHandler::LAST_NAME] ?><?php } else {
-                                               echo $currentUser->getLastName();
-                                           } ?>">
+                                           value="<?php echo FormHandler::getEditFormData(UserHandler::LAST_NAME, $currentUser->getLastName()); ?>">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="mail_input">E-mail *</label>
                                     <input class="form-control" type="email" placeholder="E-mail"
                                            name="<?php echo UserHandler::EMAIL ?>"
                                            id="mail_input"
-                                           value="<?php if ($afterFormSubmission) { ?><?= $form_data[UserHandler::EMAIL] ?><?php } else {
-                                               echo $currentUser->getEmail();
-                                           } ?>" required>
+                                           value="<?php echo FormHandler::getEditFormData(UserHandler::EMAIL, $currentUser->getEmail()); ?>"
+                                           required>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label" for="phone_input">Phone</label>
                                     <input class="form-control numeric" type="tel" placeholder="Phone"
                                            name="<?php echo UserHandler::PHONE ?>" id="phone_input"
-                                           value="<?php if ($afterFormSubmission) { ?><?= $form_data[UserHandler::PHONE] ?><?php } else {
-                                               echo $currentUser->getPhone();
-                                           } ?>">
+                                           value="<?php echo FormHandler::getEditFormData(UserHandler::PHONE, $currentUser->getPhone()); ?>">
                                 </div>
                             </div>
                         </div>

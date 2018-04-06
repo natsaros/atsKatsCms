@@ -33,13 +33,8 @@ if (!$imageValid) {
 }
 
 $updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
-if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['updateUserForm'][$key] = $value;
-        }
-        $_SESSION['updateUserForm'][$key] = $value;
-    }
+if (hasErrors()) {
+    FormHandler::unsetSessionForm('updateUserForm');
     Redirect($updateUserUrl);
 }
 
@@ -56,20 +51,20 @@ try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     $user2Create = User::createFullUser(null,
-                                        $userName,
-                                        null,
-                                        $first_name,
-                                        $last_name,
-                                        $email,
-                                        null,
-                                        null,
-                                        true,
-                                        $gender,
-                                        $link,
-                                        $phone,
-                                        null,
-                                        null,
-                                        1);
+        $userName,
+        null,
+        $first_name,
+        $last_name,
+        $email,
+        null,
+        null,
+        true,
+        $gender,
+        $link,
+        $phone,
+        null,
+        null,
+        1);
 
     if ($imgContent) {
         //only saving in filesystem for performance reasons
@@ -86,7 +81,7 @@ try {
     }
     if ($createUserRes !== null || $createUserRes) {
         addSuccessMessage("User " . $user2Create->getUserName() . " successfully created");
-        if(!$emptyFile){
+        if (!$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Create->getUserName(), $fileName, $imgContent);
         }

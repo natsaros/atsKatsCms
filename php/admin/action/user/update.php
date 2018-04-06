@@ -1,5 +1,6 @@
 <?php
-$updateLoggedInUser = safe_input($_POST['updateLoggedInUser']);
+
+$updateLoggedInUser = filter_var(safe_input($_POST['updateLoggedInUser']), FILTER_VALIDATE_BOOLEAN);;
 
 $ID = safe_input($_POST[UserHandler::ID]);
 $userName = safe_input($_POST[UserHandler::USERNAME]);
@@ -12,7 +13,9 @@ if (isEmpty($userName) || isEmpty($email)) {
     addErrorMessage("Please fill in required info");
 }
 
-if ((isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
+if ((isEmpty($updateLoggedInUser)
+        || !boolval($updateLoggedInUser))
+    && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
     addErrorMessage("Please fill in a valid password");
 }
 
@@ -45,10 +48,7 @@ $updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateU
 if (hasErrors()) {
     if (!empty($_POST)) {
         if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
-            foreach ($_POST as $key => $value) {
-                $_SESSION['updateUserForm'][$key] = $value;
-            }
-            $_SESSION['updateUserForm'][$key] = $value;
+            FormHandler::setSessionForm('updateUserForm');
             Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
         } else {
             foreach ($_POST as $key => $value) {
