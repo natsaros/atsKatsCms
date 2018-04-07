@@ -22,7 +22,7 @@ $pageTitle = $isCreate ? "Create Group" : "Update Group";
     </div>
 </div>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">

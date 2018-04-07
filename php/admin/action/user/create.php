@@ -1,4 +1,7 @@
 <?php
+
+$updateLoggedInUser = filter_var(safe_input($_POST['updateLoggedInUser']), FILTER_VALIDATE_BOOLEAN);
+
 $userName = safe_input($_POST[UserHandler::USERNAME]);
 $email = safe_input($_POST[UserHandler::EMAIL]);
 $phone = safe_input($_POST[UserHandler::PHONE]);
@@ -17,7 +20,8 @@ if ($userEmailExists == 1) {
     addErrorMessage("There is already a user with this email");
 }
 
-if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
+if (isNotEmpty(trim($phone))
+    && !is_numeric($phone)) {
     addErrorMessage('Please fill in a valid phone number');
 }
 
@@ -34,7 +38,7 @@ if (!$imageValid) {
 
 $updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
 if (hasErrors()) {
-    FormHandler::unsetSessionForm('updateUserForm');
+    FormHandler::setSessionForm('updateUserForm');
     Redirect($updateUserUrl);
 }
 
@@ -98,5 +102,5 @@ try {
 if (hasErrors()) {
     Redirect($updateUserUrl);
 } else {
-    Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "users");
+    Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
 }

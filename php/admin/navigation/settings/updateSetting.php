@@ -19,7 +19,7 @@ $pageTitle = $isCreate ? "Create Setting" : "Update Setting";
     </div>
 </div>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH ."messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -104,7 +104,7 @@ $pageTitle = $isCreate ? "Create Setting" : "Update Setting";
             <?php } ?>
 
             <div class="text-right form-group">
-                <a type="button" href="<?php echo getAdminRequestUri() . 'settings' ?>"
+                <a type="button" href="<?php echo getAdminRequestUri() . PageSections::SETTINGS . DS . 'settings' ?>"
                    class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>

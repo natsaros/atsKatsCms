@@ -55,7 +55,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 </li>
                 <?php if (hasAccess($loggedInUser, AccessRight::USER_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . DS . PageSections::USERS . DS . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::USERS . DS . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                     </li>
@@ -104,7 +104,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::SETTINGS . DS . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-cog fa-fw"></i> Settings</a>
                     </li>

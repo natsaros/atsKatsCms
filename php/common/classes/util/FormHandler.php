@@ -11,6 +11,7 @@ class FormHandler {
     /**
      * unsets form data from session and initiliazes form_data objects
      *
+     * USED IN NAVIGATION SECTIONS
      * @param $formName
      */
     static function unsetSessionForm($formName) {
@@ -23,11 +24,19 @@ class FormHandler {
 
     /**
      * sets form data to session
+     *
+     * USED IN ACTION SECTIONS
      * @param $formName
      */
     static function setSessionForm($formName) {
         if (isNotEmpty($_POST)) {
             foreach ($_POST as $key => $value) {
+                $_SESSION[$formName][$key] = $value;
+            }
+        }
+
+        if (isNotEmpty($_FILES)) {
+            foreach ($_FILES as $key => $value) {
                 $_SESSION[$formName][$key] = $value;
             }
         }

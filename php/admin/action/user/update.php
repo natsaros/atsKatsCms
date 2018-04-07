@@ -1,6 +1,6 @@
 <?php
 
-$updateLoggedInUser = filter_var(safe_input($_POST['updateLoggedInUser']), FILTER_VALIDATE_BOOLEAN);;
+$updateLoggedInUser = filter_var(safe_input($_POST['updateLoggedInUser']), FILTER_VALIDATE_BOOLEAN);
 
 $ID = safe_input($_POST[UserHandler::ID]);
 $userName = safe_input($_POST[UserHandler::USERNAME]);
@@ -140,11 +140,11 @@ if (hasErrors()) {
     if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
         Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
     } else {
-        Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "updateMyProfile");
+        Redirect(getAdminRequestUri() . PageSections::USERS . DS . "updateMyProfile");
     }
 } else {
     if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
-        Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "users");
+        Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
     } else {
         Redirect(getAdminRequestUriNoDelim());
     }
