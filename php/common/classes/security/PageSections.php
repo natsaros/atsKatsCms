@@ -7,7 +7,7 @@ class PageSections {
     const PAGES = 'pages';
     const POSTS = 'posts';
     const PRODUCTS = 'products';
-    const PRODUCT_CATEGORIES = 'product_categories';
+    const PRODUCT_CATEGORIES = 'productCategories';
     const PROMOTIONS = 'promotions';
     const NEWSLETTER = 'newsletter';
     const USERS = 'users';
