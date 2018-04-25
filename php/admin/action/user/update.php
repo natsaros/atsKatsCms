@@ -14,7 +14,7 @@ if (isEmpty($userName) || isEmpty($email)) {
 }
 
 if ((isEmpty($updateLoggedInUser)
-        || !boolval($updateLoggedInUser))
+        || !$updateLoggedInUser)
     && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
     addErrorMessage("Please fill in a valid password");
 }
@@ -40,7 +40,7 @@ if (!$emptyFile) {
     $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
 
-if (!$imageValid) {
+if (!$imageValid || $emptyFile) {
     addErrorMessage("Please select a valid image file");
 }
 
@@ -143,6 +143,7 @@ if (hasErrors()) {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "updateMyProfile");
     }
 } else {
+    ImageUtil::removeImageFromFileSystem(TEMP_PICTURES_ROOT);
     if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
     } else {

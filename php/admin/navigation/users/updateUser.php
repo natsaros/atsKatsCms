@@ -62,12 +62,19 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
                                 <div class="form-group text-center">
                                     <div class="imgCont">
                                         <img data-preview="true" class="img-thumbnail img-responsive"
-                                             src="<?php echo ImageUtil::renderUserImage($currentUser) ?>"
+                                             src="<?php
+                                             $draftPicturePath = FormHandler::getFormData(UserHandler::PICTURE . FormHandler::DRAFT_PATH);
+                                             if (isNotEmpty($draftPicturePath)) {
+                                                 $draftPicture = FormHandler::getFormData(UserHandler::PICTURE);
+                                                 echo ImageUtil::renderGalleryImage($draftPicturePath);
+                                             } else {
+                                                 echo ImageUtil::renderUserImage($currentUser);
+                                             }
+                                             ?>"
                                              alt="<?php echo $currentUser->getUserName() ?>">
                                         <span class="btn btn-outline btn-primary btn-file">Edit Picture
-                                        <input type="file" id="uploadImage" name="<?php echo UserHandler::PICTURE ?>"
-                                               multiple">
-                                        <input type="hidden" value="<?php echo $currentUser->getPicturePath(); ?>"
+                                        <input type="file" id="uploadImage" value="<?php echo isNotEmpty($draftPicture) ?  $draftPicture : '';?>" name="<?php echo UserHandler::PICTURE ?>" multiple">
+                                        <input type="hidden" value="<?php echo isNotEmpty($draftPicturePath) ? $draftPicturePath : $currentUser->getPicturePath(); ?>"
                                                name="<?php echo UserHandler::PICTURE_PATH ?>" class="hiddenLabel">
                                     </span>
                                     </div>
@@ -78,7 +85,7 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
                                     <input class="form-control" placeholder="User Name"
                                            name="<?php echo UserHandler::USERNAME ?>" id="username_input"
                                            value="<?php echo FormHandler::getEditFormData(UserHandler::USERNAME, $currentUser->getUserName()); ?>"
-                                           >
+                                    >
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="firstname_input">First Name</label>

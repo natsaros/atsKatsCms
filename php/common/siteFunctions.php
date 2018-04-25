@@ -519,6 +519,7 @@ function defineSystemVariables() {
     defined('PRODUCTS_PICTURES_ROOT') or define('PRODUCTS_PICTURES_ROOT', 'products' . DS);
     defined('USERS_PICTURES_ROOT') or define('USERS_PICTURES_ROOT', 'users');
     defined('POSTS_PICTURES_ROOT') or define('POSTS_PICTURES_ROOT', 'posts');
+    defined('TEMP_PICTURES_ROOT') or define('TEMP_PICTURES_ROOT', 'temp');
 }
 
 function loadAppClasses() {

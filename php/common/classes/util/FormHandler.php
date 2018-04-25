@@ -5,6 +5,7 @@
 
 class FormHandler {
 
+    const DRAFT_PATH = '_draft_path';
     private static $afterFormSubmission = false;
     private static $form_data;
 
@@ -37,7 +38,13 @@ class FormHandler {
 
         if (isNotEmpty($_FILES)) {
             foreach ($_FILES as $key => $value) {
-                $_SESSION[$formName][$key] = $value;
+                $simpleImage = ImageUtil::readImageContentFromFile($_FILES[$key]);
+                $fileName = $_FILES[$key][ImageUtil::NAME];
+                $saved = ImageUtil::saveImageToFileSystem(TEMP_PICTURES_ROOT, null, $fileName, $simpleImage);
+                if ($saved) {
+                    $_SESSION[$formName][$key . '_draft_path'] = PICTURES_ROOT . TEMP_PICTURES_ROOT . DS . $fileName;
+                    $_SESSION[$formName][$key] = $value;
+                }
             }
         }
     }
@@ -53,7 +60,7 @@ class FormHandler {
     }
 
     /**
-     * retrieves data from form_data object
+     * retrieves data from form_data object with fallback option
      *
      * @param $fieldName
      * @param $field
