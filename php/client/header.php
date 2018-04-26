@@ -65,14 +65,14 @@
     <script src="<?php echo ASSETS_URI ?>js/elevatezoom/jquery.elevateZoom-3.0.8.min.js"></script>
 
     <?php if (isNotEmpty(GA_ID)) { ?>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo GA_ID;?>"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '<?php echo GA_ID;?>');
-    </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo GA_ID;?>"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '<?php echo GA_ID;?>');
+        </script>
     <?php } ?>
 
     <?php if (!is_null($post)) { ?>

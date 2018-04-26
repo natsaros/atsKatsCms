@@ -1,4 +1,7 @@
 <?php
+
+$updateLoggedInUser = filter_var(safe_input($_POST['updateLoggedInUser']), FILTER_VALIDATE_BOOLEAN);
+
 $userName = safe_input($_POST[UserHandler::USERNAME]);
 $email = safe_input($_POST[UserHandler::EMAIL]);
 $phone = safe_input($_POST[UserHandler::PHONE]);
@@ -17,7 +20,8 @@ if ($userEmailExists == 1) {
     addErrorMessage("There is already a user with this email");
 }
 
-if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
+if (isNotEmpty(trim($phone))
+    && !is_numeric($phone)) {
     addErrorMessage('Please fill in a valid phone number');
 }
 
@@ -32,14 +36,10 @@ if (!$imageValid) {
     addErrorMessage("Please select a valid image file");
 }
 
-if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['updateUserForm'][$key] = $value;
-        }
-        $_SESSION['updateUserForm'][$key] = $value;
-    }
-    Redirect(getAdminRequestUri() . "updateUser");
+$updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
+if (hasErrors()) {
+    FormHandler::setSessionForm('updateUserForm');
+    Redirect($updateUserUrl);
 }
 
 $first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
@@ -55,20 +55,20 @@ try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     $user2Create = User::createFullUser(null,
-                                        $userName,
-                                        null,
-                                        $first_name,
-                                        $last_name,
-                                        $email,
-                                        null,
-                                        null,
-                                        true,
-                                        $gender,
-                                        $link,
-                                        $phone,
-                                        null,
-                                        null,
-                                        1);
+        $userName,
+        null,
+        $first_name,
+        $last_name,
+        $email,
+        null,
+        null,
+        true,
+        $gender,
+        $link,
+        $phone,
+        null,
+        null,
+        1);
 
     if ($imgContent) {
         //only saving in filesystem for performance reasons
@@ -85,7 +85,7 @@ try {
     }
     if ($createUserRes !== null || $createUserRes) {
         addSuccessMessage("User " . $user2Create->getUserName() . " successfully created");
-        if(!$emptyFile){
+        if (!$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Create->getUserName(), $fileName, $imgContent);
         }
@@ -96,11 +96,11 @@ try {
 } catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect(getAdminRequestUri() . "updateUser");
+    Redirect($updateUserUrl);
 }
 
 if (hasErrors()) {
-    Redirect(getAdminRequestUri() . "updateUser");
+    Redirect($updateUserUrl);
 } else {
-    Redirect(getAdminRequestUri() . "users");
+    Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
 }

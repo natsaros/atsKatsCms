@@ -13,7 +13,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
             <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="<?php echo $adminRequestUri . $startPage ?>"><?php echo SITE_TITLE;?> Admin</a>
+        <a class="navbar-brand" href="<?php echo $adminRequestUri . $startPage ?>"><?php echo SITE_TITLE; ?> Admin</a>
         <div class="navbar-brand" style="cursor: default;width: 50px;">
             <img class="img-rounded img-responsive"
                  src="<?php echo ImageUtil::renderUserImage($loggedInUser) ?>"
@@ -55,18 +55,18 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 </li>
                 <?php if (hasAccess($loggedInUser, AccessRight::USER_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::USERS . DS . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                     </li>
                 <?php } ?>
-                <!--<?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'posts' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'posts') !== false) {
-                    echo 'class="active"';
-                } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
                     </li>
-                <?php } ?>-->
+                <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::PRODUCTS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'products' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'products') !== false) {
@@ -104,9 +104,16 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::SETTINGS . DS . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-cog fa-fw"></i> Settings</a>
+                    </li>
+                <?php } ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::PROGRAM_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . 'program' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'program') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-calendar fa-fw"></i> Program</a>
                     </li>
                 <?php } ?>
                 <?php if (isNotEmpty(DEV_MODE) && DEV_MODE) { ?>

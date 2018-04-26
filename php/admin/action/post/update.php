@@ -24,12 +24,7 @@ if(isNotEmpty($imagePath)) {
 }
 
 if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['updatePostForm'][$key] = $value;
-        }
-        $_SESSION['updatePostForm'][$key] = $value;
-    }
+    FormHandler::setSessionForm('updatePostForm');
     Redirect(getAdminRequestUri() . "updatePost");
 }
 

@@ -9,7 +9,7 @@ try{
     $fbInfo = file_get_contents("https://graph.facebook.com/v2.8/me?fields=id%2Cfirst_name%2Clast_name%2Cemail%2Cpicture.type%28large%29&access_token=" . $fbAccessToken);
     $visitor2Insert = Visitor::create();
 
-    $jsonArray = json_decode($fbInfo,true);
+    $jsonArray = json_decode($fbInfo, true);
 
     $existingVisitor = VisitorHandler::getVisitorByFbId(safe_input($jsonArray["id"]));
 

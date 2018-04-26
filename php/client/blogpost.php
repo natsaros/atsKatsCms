@@ -16,13 +16,13 @@
             </div>
         </div>
         <?php if (isNotEmpty($post->getImagePath())) { ?>
-        <div class="row">
-            <div class="col-sm-12">
-                 <div class="blogPostImage">
-                    <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="blogPostImage">
+                        <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php } ?>
         <div class="row">
             <div class="col-sm-12">

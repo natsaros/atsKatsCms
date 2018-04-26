@@ -22,10 +22,10 @@ $loggedInUser = getFullUserFromSession();
                                 <?php $latestNewsletterSubscriptions = NewsletterHandler::getLatestNewsletterSubscriptions();
                                 $newsletterSubscriptionMessage = 'Newsletter' . (($latestNewsletterSubscriptions == 1) ? ' subscription ' : ' subscriptions ') . 'the last 3 Days'; ?>
                                 <div class="huge">
-                                    <?php echo $latestNewsletterSubscriptions;?>
+                                    <?php echo $latestNewsletterSubscriptions; ?>
                                 </div>
                                 <div>
-                                    <?php echo $newsletterSubscriptionMessage;?>
+                                    <?php echo $newsletterSubscriptionMessage; ?>
                                 </div>
                             </div>
                         </div>
@@ -71,10 +71,10 @@ $loggedInUser = getFullUserFromSession();
                             </div>
                             <div class="col-xs-10 text-right">
                                 <div class="huge">
-                                    <?php echo $timesSeen;?>
+                                    <?php echo $timesSeen; ?>
                                 </div>
                                 <div>
-                                    <?php echo $activePromotionMessage;?>
+                                    <?php echo $activePromotionMessage; ?>
                                 </div>
                             </div>
                         </div>

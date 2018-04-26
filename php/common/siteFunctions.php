@@ -519,6 +519,7 @@ function defineSystemVariables() {
     defined('PRODUCTS_PICTURES_ROOT') or define('PRODUCTS_PICTURES_ROOT', 'products' . DS);
     defined('USERS_PICTURES_ROOT') or define('USERS_PICTURES_ROOT', 'users');
     defined('POSTS_PICTURES_ROOT') or define('POSTS_PICTURES_ROOT', 'posts');
+    defined('TEMP_PICTURES_ROOT') or define('TEMP_PICTURES_ROOT', 'temp');
 }
 
 function loadAppClasses() {
@@ -537,6 +538,7 @@ function loadAppClasses() {
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'NewsletterHandler.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'EmailHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'util' . DS . 'FormHandler.php');
     require_once(CLASSES_ROOT_PATH . 'security' . DS . 'PageSections.php');
     require_once(CLASSES_ROOT_PATH . 'Globals.php');
     require_once(CLASSES_ROOT_PATH . 'MessageTypes.php');

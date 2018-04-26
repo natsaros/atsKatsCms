@@ -21,7 +21,7 @@ $posts = PostHandler::fetchAllPosts();
                 <tbody>
                 <?php
                 /* @var $post Post */
-                foreach($posts as $key => $post) {
+                foreach ($posts as $key => $post) {
                     $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                     $postId = $post->getID();
                     ?>
@@ -51,7 +51,7 @@ $posts = PostHandler::fetchAllPosts();
                             </a>
 
                             <a type="button"
-                               href="<?php echo getAdminRequestUri()  . "updatePost" . addParamsToUrl(array('id'), array($postId)); ?>"
+                               href="<?php echo getAdminRequestUri() . "updatePost" . addParamsToUrl(array('id'), array($postId)); ?>"
                                class="btn btn-default btn-sm" title="Edit Post">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>

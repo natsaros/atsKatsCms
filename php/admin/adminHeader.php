@@ -41,7 +41,7 @@
     <link href="<?php echo CSS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <?php if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLoggedIn() && !forceUserChangePassword()){ ?>
-    <!-- Include the CSS that styles the Google Analytics charts. -->
+        <!-- Include the CSS that styles the Google Analytics charts. -->
         <link href="<?php echo CSS_URI ?>google-analytics/google-analytics-plugins.min.css" rel="stylesheet">
     <?php } ?>
 

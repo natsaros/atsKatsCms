@@ -1,16 +1,16 @@
 <?php
 $id = $_GET['id'];
 
-if(isEmpty($id)) {
+if (isEmpty($id)) {
     addInfoMessage("Choose setting to delete");
-    Redirect(getAdminRequestUri() . "settings");
+    Redirect(getAdminRequestUri() . PageSections::SETTINGS . DS . "settings");
 }
 
 try {
     $setting = SettingsHandler::getSettingByID($id);
-    if(isNotEmpty($setting)) {
+    if (isNotEmpty($setting)) {
         $result = SettingsHandler::delete($id);
-        if($result == null || !$result) {
+        if ($result == null || !$result) {
             addErrorMessage("Setting failed to be deleted");
         } else {
             addSuccessMessage("Setting successfully deleted");
@@ -18,9 +18,9 @@ try {
     } else {
         addInfoMessage(ErrorMessages::WENT_WRONG);
     }
-} catch(SystemException $ex) {
+} catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-Redirect(getAdminRequestUri() . "settings");
+Redirect(getAdminRequestUri() . PageSections::SETTINGS . DS . "settings");

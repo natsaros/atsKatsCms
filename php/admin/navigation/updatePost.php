@@ -2,10 +2,7 @@
 
 $postId = $_GET["id"];
 $isCreate = isEmpty($postId);
-//TODO server side validation
-/*include('validatePost.php');*/ ?>
 
-<?php
 $loggedInUser = getFullUserFromSession();
 if ($isCreate) {
     $currentPost = Post::create();
@@ -14,13 +11,7 @@ if ($isCreate) {
 }
 $pageTitle = $isCreate ? "Create Post" : "Update Post";
 
-$afterFormSubmission = false;
-
-if (isset($_SESSION['updatePostForm']) && !empty($_SESSION['updatePostForm'])) {
-    $afterFormSubmission = true;
-    $form_data = $_SESSION['updatePostForm'];
-    unset($_SESSION['updatePostForm']);
-}
+FormHandler::unsetSessionForm('updatePostForm');
 ?>
 
 <div class="row">
@@ -51,7 +42,7 @@ if (isset($_SESSION['updatePostForm']) && !empty($_SESSION['updatePostForm'])) {
                 <label class="control-label" for="title_input">Title *</label>
                 <input class="form-control" placeholder="Title"
                        name="<?php echo PostHandler::TITLE ?>" id="title_input" required
-                       value="<?php if($afterFormSubmission) {?><?=$form_data[PostHandler::TITLE]?><?php } else { echo $currentPost->getTitle(); } ?>"
+                       value="<?php echo FormHandler::getEditFormData(PostHandler::TITLE, $currentPost->getTitle()); ?>"
                 >
             </div>
 
@@ -65,7 +56,8 @@ if (isset($_SESSION['updatePostForm']) && !empty($_SESSION['updatePostForm'])) {
                                           multiple>
                     </span>
                     </label>
-                    <input type="text" value="<?php echo $currentPost->getImagePath(); ?>"
+                    <input type="text"
+                           value="<?php echo FormHandler::getEditFormData(PostHandler::IMAGE_PATH, $currentPost->getImagePath()); ?>"
                            name="<?php echo PostHandler::IMAGE_PATH ?>" class="form-control hiddenLabel" readonly>
                 </div>
             </div>
@@ -77,7 +69,7 @@ if (isset($_SESSION['updatePostForm']) && !empty($_SESSION['updatePostForm'])) {
             <div class="form-group">
                 <label class="control-label" for="content_input">Content *</label>
                 <textarea class="editor" name="<?php echo PostHandler::TEXT ?>" id="content_input" required>
-                    <?php if($afterFormSubmission) {?><?=$form_data[PostHandler::TEXT]?><?php } else { echo $currentPost->getText(); } ?>
+                    <?php echo FormHandler::getEditFormData(PostHandler::TEXT, $currentPost->getText()); ?>
                 </textarea>
             </div>
             <div class="text-right form-group">

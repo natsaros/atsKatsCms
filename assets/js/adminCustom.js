@@ -58,7 +58,7 @@ function initBootstrapToggle() {
 
 $(document).ready(function () {
     $.fn.DataTable.ext.pager.numbers_length = 5;
-    
+
     $('.ak-dataTable').DataTable({responsive: true});
 
     $('.posts-dataTable').DataTable({
@@ -124,7 +124,9 @@ $(document).ready(function () {
     initializeCheckBoxes();
     initBootstrapToggle();
 
-    $('.imgCont').hover(handlerImageIn, handlerImageOut);
+    var $imgCont = $('.imgCont');
+    initProfileImage($imgCont);
+    $imgCont.hover(handlerImageIn, handlerImageOut);
 
     if (typeof tinymce !== 'undefined' && tinymce !== null) {
         tinymce.init({
@@ -186,7 +188,6 @@ $(document).ready(function () {
             $(this).modal('show');
         }
     });
-
 
     $(document).on('submit', '.ak_modal form', function (e) {
         e.preventDefault();
@@ -256,10 +257,19 @@ $(document).ready(function () {
     });
 });
 
+function initProfileImage($img) {
+    if ($img.length !== 0) {
+        var width = $img.width();
+        var btn = $img.find('.btn');
+        var btnWidth = btn.outerWidth();
+        btn.css('left', (width / 2) - (btnWidth / 2) + 'px')
+    }
+}
+
 function handlerImageIn() {
     var height = $(this).height();
     var btn = $(this).find('.btn');
-    btn.css('visibility', 'visible').css('top', '-' + height / 3 + 'px');
+    btn.css('visibility', 'visible').css('top', height / 3 + 'px');
 }
 
 function handlerImageOut() {

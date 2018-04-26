@@ -110,9 +110,10 @@ class ImageUtil {
         return 'data:' . self::getMimeType($imagePath) . ';base64,' . $base64;
     }
 
+
     /**
-     * @param $path
-     * @param $fallBack
+     * @param $path string
+     * @param $fallBack string
      * @return string
      * @throws SystemException
      */
@@ -123,6 +124,15 @@ class ImageUtil {
         $content = file_get_contents($path);
         $base64 = base64_encode($content);
         return 'data:' . self::getMimeType($path) . ';base64,' . $base64;
+    }
+
+    /**
+     * @param $path
+     * @return string
+     * @throws SystemException
+     */
+    static function renderGalleryImage($path) {
+        return self::renderImageFromGallery($path, 'default.png');
     }
 
     private static function getMimeType($fileName) {
@@ -191,22 +201,28 @@ class ImageUtil {
      */
     static function saveImageToFileSystem($entity, $extraPath, $fileName, $tmpFile) {
         $pathToSave = PICTURES_ROOT;
-        $pathToSave .= isNotEmpty($entity) ? $entity : '';
+        $pathToSave .= isNotEmpty($entity) ? $entity .DS  : '';
         $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
         createDirIfNotExists($pathToSave);
         $pathToSave .= $fileName;
-//        move_uploaded_file($tmpFile[self::TMP_NAME], $pathToSave);
-
         return $tmpFile->save($pathToSave);
     }
 
-    static function removeImageFromFileSystem($entity, $path) {
+    /**
+     * @param $entity
+     * @param null $path
+     */
+    static function removeImageFromFileSystem($entity, $path = null) {
         $pathToDel = PICTURES_ROOT;
         $pathToDel .= isNotEmpty($entity) ? $entity : '';
-        $pathToDel .= $path . '/';
+        $pathToDel .= isNotEmpty($path) ? $path . '/' : '';
         self::rrmdir($pathToDel);
     }
 
+    /**
+     * Used to remove directory and subfiles recursively
+     * @param $dir
+     */
     static function rrmdir($dir) {
         foreach(glob($dir . '/*') as $file) {
             if(is_dir($file)) {

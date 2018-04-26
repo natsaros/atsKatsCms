@@ -14,13 +14,13 @@
     echo '<script src="' . JS_URI . 'tinymce/tinymce.min.js"></script>';
 } ?>
 
-<?php if(strpos(ADMIN_PAGE_ID, 'morris') !== false) {
+<?php if (strpos(ADMIN_PAGE_ID, 'morris') !== false) {
 //    || strpos(ADMIN_PAGE_ID, 'tables') !== false
     echo '<script src="' . JS_URI . 'morrisjs/morris.min.js"></script>';
     echo '<script src="' . JS_URI . 'morris-data.js"></script>';
 } ?>
 
-<?php if(strpos(ADMIN_PAGE_ID, 'flot') !== false) {
+<?php if (strpos(ADMIN_PAGE_ID, 'flot') !== false) {
     echo '<!-- Flot Charts JavaScript -->';
     echo '<script src="' . JS_URI . 'flot/excanvas.min.js"></script>';
     echo '<script src="' . JS_URI . 'flot/jquery.flot.js"></script>';
@@ -68,6 +68,6 @@ if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLo
     </script>
 
     <script src="<?php echo JS_URI ?>google-analytics/google-analytics-initialization.min.js"></script>
-<?php
+    <?php
 }
 ?>

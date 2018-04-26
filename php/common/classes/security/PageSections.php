@@ -7,25 +7,47 @@ class PageSections {
     const PAGES = 'pages';
     const POSTS = 'posts';
     const PRODUCTS = 'products';
-    const PRODUCT_CATEGORIES = 'product_categories';
+    const PRODUCT_CATEGORIES = 'productCategories';
     const PROMOTIONS = 'promotions';
     const NEWSLETTER = 'newsletter';
-    const USER = 'users';
+    const USERS = 'users';
     const SETTINGS = 'settings';
+
+    /**
+     **
+     * @param string $pageRequested
+     * @param array $accessRights
+     * @return mixed|boolean
+     */
+    static function hasAccessToPageSection($pageRequested, $accessRights) {
+        $hasAccess = false;
+        $pagesAllowed = PageSections::getPagesByAccessRights($accessRights);
+        foreach ($pagesAllowed as $page) {
+            if (preg_match('/^' . $page . '/', $pageRequested)) {
+                $hasAccess = true;
+                break;
+            }
+        }
+        return $hasAccess;
+    }
 
     /**
      * @param array $accessRights
      * @return mixed|string[]
      */
     static function getPagesByAccessRights($accessRights) {
-        $pages = array();
-        foreach ($accessRights as $accessRight) {
-            $pageByAccessRight = self::getPageByAccessRight($accessRight);
-            if (!in_array($pageByAccessRight, $pages)) {
-                $pages[] = $pageByAccessRight;
+        if (sizeof($accessRights) === 1 && $accessRights[0] === AccessRight::ALL) {
+            return array_values(self::getPageSections());
+        } else {
+            $pages = array();
+            foreach ($accessRights as $accessRight) {
+                $pageByAccessRight = self::getPageByAccessRight($accessRight);
+                if (!in_array($pageByAccessRight, $pages)) {
+                    $pages[] = $pageByAccessRight;
+                }
             }
+            return $pages;
         }
-        return $pages;
     }
 
     /**
@@ -33,11 +55,8 @@ class PageSections {
      * @return mixed|string
      */
     static function getPageByAccessRight($accessRight) {
-        if ($accessRight === AccessRight::ALL) {
-            return self::DASHBOARD;
-        } else {
-            return self::getPageSections()[$accessRight];
-        }
+        return self::getPageSections()[$accessRight];
+
     }
 
     /**
@@ -49,7 +68,7 @@ class PageSections {
         $sections = array(
             AccessRight::DASHBOARD_SECTION => self::DASHBOARD,
             AccessRight::PAGES_SECTION => self::PAGES,
-            AccessRight::USER_SECTION => self::USER,
+            AccessRight::USER_SECTION => self::USERS,
             AccessRight::POSTS_SECTION => self::POSTS,
             AccessRight::PRODUCTS_SECTION => self::PRODUCTS,
             AccessRight::PRODUCT_CATEGORIES_SECTION => self::PRODUCT_CATEGORIES,

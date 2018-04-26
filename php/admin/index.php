@@ -30,30 +30,24 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
         require(ADMIN_ROOT_PATH . '404.php');
     }
 } else if (!isset($action) || isEmpty($action)) {
-    //Default behavior: if no action is set to happen navigation occurs.
+//    Default behavior: if no action is set to happen navigation occurs.
 
     if (!isLoggedIn() && (!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] !== 'remindPassword'))) {
         include(ADMIN_ROOT_PATH . 'login.php');
-    } else if (!isLoggedIn() && (isset($_GET["page"]) && $_GET["page"] === 'remindPassword')){
+    } else if (!isLoggedIn() && (isset($_GET["page"]) && $_GET["page"] === 'remindPassword')) {
         include(ADMIN_ROOT_PATH . 'remindPassword.php');
-    } else if (isLoggedIn() && (isset($_GET["page"]) && $_GET["page"] === 'remindPassword')){
+    } else if (isLoggedIn() && (isset($_GET["page"]) && $_GET["page"] === 'remindPassword')) {
         Redirect(getAdminRequestUriNoDelim());
-    } else if (isLoggedIn() && !forceUserChangePassword() && (isset($_GET["page"]) && $_GET["page"] === 'changePassword')){
+    } else if (isLoggedIn() && !forceUserChangePassword() && (isset($_GET["page"]) && $_GET["page"] === 'changePassword')) {
         Redirect(getAdminRequestUriNoDelim());
-    } else if (isLoggedIn() && forceUserChangePassword() && (isset($_GET["page"]) && $_GET["page"] === 'changePassword')){
+    } else if (isLoggedIn() && forceUserChangePassword() && (isset($_GET["page"]) && $_GET["page"] === 'changePassword')) {
         include(ADMIN_ROOT_PATH . 'changePassword.php');
-    } else if (isLoggedIn() && forceUserChangePassword() && (!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] !== 'changePassword'))){
+    } else if (isLoggedIn() && forceUserChangePassword() && (!isset($_GET["page"]) || (isset($_GET["page"]) && $_GET["page"] !== 'changePassword'))) {
         Redirect(getAdminActionRequestUri() . "logout");
-    } else if (!forceUserChangePassword()){
+    } else if (!forceUserChangePassword()) {
         $page = $_GET["page"];
         if (isEmpty($page)) {
-            if (isNotEmpty(DEV_MODE) && DEV_MODE) {
-                define('ADMIN_PAGE_ID', PageSections::DASHBOARD);
-            } else {
-//                $pagesAllowed = PageSections::getPagesByAccessRights(getFullUserFromSession()->getAccessRightsStr());
-//                $startPage = $pagesAllowed[0];
-                define('ADMIN_PAGE_ID', PageSections::DASHBOARD);
-            }
+            define('ADMIN_PAGE_ID', PageSections::DASHBOARD);
         } else {
             define('ADMIN_PAGE_ID', $page);
         }

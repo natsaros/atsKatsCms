@@ -1,6 +1,6 @@
-<?php require("pageHeader.php"); ?>
+<?php require(ADMIN_NAV_PATH . "pageHeader.php"); ?>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <?php
 $settings = SettingsHandler::fetchAllSettings();
@@ -21,7 +21,7 @@ $settings = SettingsHandler::fetchAllSettings();
                 <tbody>
                 <?php
                 /* @var $setting Setting */
-                foreach($settings as $key => $setting) {
+                foreach ($settings as $key => $setting) {
                     $oddEvenClass = $key % 2 == 0 ? 'odd' : 'even';
                     $settingID = $setting->getID();
                     ?>
@@ -32,7 +32,7 @@ $settings = SettingsHandler::fetchAllSettings();
                         <td>
 
                             <a type="button"
-                               href="<?php echo getAdminRequestUri() . "updateSetting" . addParamsToUrl(array('id'), array($settingID)); ?>"
+                               href="<?php echo getAdminRequestUri() . PageSections::SETTINGS . DS . "updateSetting" . addParamsToUrl(array('id'), array($settingID)); ?>"
                                class="btn btn-default btn-sm" title="Edit Setting">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
@@ -47,7 +47,7 @@ $settings = SettingsHandler::fetchAllSettings();
 
 <div class="row">
     <div class="col-lg-12 text-center">
-        <a href="<?php echo getAdminRequestUri() . "updateSetting"; ?>" type="button"
+        <a href="<?php echo getAdminRequestUri() . PageSections::SETTINGS . DS . "updateSetting"; ?>" type="button"
            class="btn btn-outline btn-primary">
             Add <span class="fa fa-cog fa-fw" aria-hidden="true"></span>
         </a>

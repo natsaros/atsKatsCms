@@ -7,7 +7,7 @@ $id = $_GET['id'];
 
 if (isEmpty($id)) {
     addInfoMessage("Choose group to delete");
-    Redirect(getAdminRequestUri() . 'users' . addParamsToUrl(array('activeTab'), array('groups')));
+    Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . 'users' . addParamsToUrl(array('activeTab'), array('groups')));
 }
 
 try {
@@ -31,4 +31,4 @@ try {
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-Redirect(getAdminRequestUri() . 'users' . addParamsToUrl(array('activeTab'), array('groups')));
+Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . 'users' . addParamsToUrl(array('activeTab'), array('groups')));

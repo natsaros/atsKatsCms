@@ -6,8 +6,8 @@ if (isAdminModal()) {
     $path = ADMIN_MODAL_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
 } else {
     if (isNotEmpty($loggedInUser)) {
-        $pagesAllowed = PageSections::getPagesByAccessRights(getFullUserFromSession()->getAccessRightsStr());
-        if (in_array(ADMIN_PAGE_ID, $pagesAllowed)) {
+        if (PageSections::hasAccessToPageSection(ADMIN_PAGE_ID,
+            getFullUserFromSession()->getAccessRightsStr())) {
             $path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
         } else {
             $path = ADMIN_ROOT_PATH . '404' . PHP_POSTFIX;
