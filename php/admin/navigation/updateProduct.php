@@ -2,10 +2,7 @@
 
 $productId = $_GET["id"];
 $isCreate = isEmpty($productId);
-//TODO server side validation
-/*include('validateProduct.php');*/ ?>
 
-<?php
 $loggedInUser = getFullUserFromSession();
 if ($isCreate) {
     $currentProduct = Product::create();

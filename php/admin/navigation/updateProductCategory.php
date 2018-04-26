@@ -2,10 +2,7 @@
 
 $productCategoryId = $_GET["id"];
 $isCreate = isEmpty($productCategoryId);
-//TODO server side validation
-/*include('validateProductCategory.php');*/ ?>
 
-<?php
 $loggedInUser = getFullUserFromSession();
 if ($isCreate) {
     $currentProductCategory = ProductCategory::create();

@@ -60,13 +60,13 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
+                <!--<?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'posts' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'posts') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
                     </li>
-                <?php } ?>
+                <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::PRODUCTS_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'products' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'products') !== false) {
@@ -109,13 +109,13 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         } ?>><i class="fa fa-cog fa-fw"></i> Settings</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::PROGRAM_SECTION)) { ?>
+                <!--<?php //if (hasAccess($loggedInUser, AccessRight::PROGRAM_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'program' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'program') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-calendar fa-fw"></i> Program</a>
                     </li>
-                <?php } ?>
+                <?php //} ?>-->
                 <?php if (isNotEmpty(DEV_MODE) && DEV_MODE) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'tables' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'tables') !== false) {

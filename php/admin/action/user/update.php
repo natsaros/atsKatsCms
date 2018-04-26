@@ -13,9 +13,7 @@ if (isEmpty($userName) || isEmpty($email)) {
     addErrorMessage("Please fill in required info");
 }
 
-if ((isEmpty($updateLoggedInUser)
-        || !$updateLoggedInUser)
-    && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
+if (boolval($updateLoggedInUser) && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
     addErrorMessage("Please fill in a valid password");
 }
 
@@ -47,7 +45,7 @@ if (!$imageValid || $emptyFile) {
 $updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
 if (hasErrors()) {
     if (!empty($_POST)) {
-        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+        if (!boolval($updateLoggedInUser)) {
             FormHandler::setSessionForm('updateUserForm');
             Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
         } else {
@@ -67,7 +65,7 @@ $gender = safe_input($_POST[UserHandler::GENDER]);
 $link = safe_input($_POST[UserHandler::LINK]);
 
 $groupIds = '';
-if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+if (!boolval($updateLoggedInUser)) {
     $groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
 }
 
@@ -89,7 +87,7 @@ try {
         setPhone($phone)->
         setForceChangePassword(0);
 
-        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+        if (!boolval($updateLoggedInUser)) {
             $user2Update->setPassword(password_hash($password, PASSWORD_DEFAULT));
         }
 
@@ -107,7 +105,7 @@ try {
             UserHandler::updateUserGroups($user2Update->getID(), $groupIds);
         }
         if ($updateUserRes !== null || $updateUserRes) {
-            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+            if (!boolval($updateLoggedInUser)) {
                 addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
             } else {
                 addSuccessMessage("Your profile has been successfully updated");
@@ -116,12 +114,12 @@ try {
                 $fileName = basename($image2Upload[ImageUtil::NAME]);
                 ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Update->getUserName(), $fileName, $imgContent);
             }
-            if (isNotEmpty($updateLoggedInUser) && boolval($updateLoggedInUser)) {
+            if (boolval($updateLoggedInUser)) {
                 $user2Update->setAccessRights(AccessRightsHandler::getAccessRightByUserId($user2Update->getID()));
                 setUserToSession($user2Update);
             }
         } else {
-            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+            if (!boolval($updateLoggedInUser)) {
                 addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
             } else {
                 addErrorMessage("Your profile failed to be updated");
@@ -137,14 +135,14 @@ try {
 }
 
 if (hasErrors()) {
-    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+    if (!boolval($updateLoggedInUser)) {
         Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
     } else {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "updateMyProfile");
     }
 } else {
     ImageUtil::removeImageFromFileSystem(TEMP_PICTURES_ROOT);
-    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+    if (!boolval($updateLoggedInUser)) {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
     } else {
         Redirect(getAdminRequestUriNoDelim());

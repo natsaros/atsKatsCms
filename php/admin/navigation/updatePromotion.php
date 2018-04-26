@@ -2,10 +2,7 @@
 
 $promotionId = $_GET["id"];
 $isCreate = isEmpty($promotionId);
-//TODO server side validation
-/*include('validatePromotion.php');*/ ?>
 
-<?php
 $loggedInUser = getFullUserFromSession();
 if ($isCreate) {
     $currentPromotion = Promotion::create();
