@@ -74,4 +74,8 @@
         gtag('config', '<?php echo GA_ID;?>');
     </script>
     <?php } ?>
+
+    <?php if (!is_null($post)) { ?>
+        <script src="<?php echo ASSETS_URI ?>js/fb-login.min.js"></script>
+    <?php } ?>
 </head>

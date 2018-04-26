@@ -117,6 +117,7 @@ $(document).ready(function () {
         "dom": '<"row"<"col-sm-12"f>>t<"row"<"col-sm-6"i><"col-sm-6"p>><"row"<"col-sm-12"l>>'
     });
 
+
     // hide tabs after datatable initialization
     $('.tab-content div.fade').addClass('tab-pane');
 

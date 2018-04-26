@@ -44,11 +44,16 @@ function backendFBLogin(accessToken) {
     FB.api('/me', function(response) {
         $.ajax({
             type: "POST",
-            url: "/registerFbUser",
+            url: "/peny/ajaxAction/registerFbUser",
             data: {"fbAccessToken" : accessToken},
-            success: function() {
-                $('#newCommentSection').fadeIn();
-                $('#loadingImg').hide();
+            success: function(data) {
+                if (data != null && data != ''){
+                    $('#loggedInUserId').val(data);
+                    $('#newCommentSection').fadeIn();
+                    $('#loadingImg').hide();
+                } else {
+                    // alert("ERROR");
+                }
             }
         });
     });

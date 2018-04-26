@@ -19,9 +19,9 @@ class PageSections {
      */
     static function getPagesByAccessRights($accessRights) {
         $pages = array();
-        foreach($accessRights as $accessRight) {
+        foreach ($accessRights as $accessRight) {
             $pageByAccessRight = self::getPageByAccessRight($accessRight);
-            if(!in_array($pageByAccessRight, $pages)) {
+            if (!in_array($pageByAccessRight, $pages)) {
                 $pages[] = $pageByAccessRight;
             }
         }
@@ -33,7 +33,7 @@ class PageSections {
      * @return mixed|string
      */
     static function getPageByAccessRight($accessRight) {
-        if($accessRight === AccessRight::ALL) {
+        if ($accessRight === AccessRight::ALL) {
             return self::DASHBOARD;
         } else {
             return self::getPageSections()[$accessRight];

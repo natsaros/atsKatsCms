@@ -99,7 +99,7 @@ try {
     Redirect(getAdminRequestUri() . "updateUser");
 }
 
-if(hasErrors()) {
+if (hasErrors()) {
     Redirect(getAdminRequestUri() . "updateUser");
 } else {
     Redirect(getAdminRequestUri() . "users");

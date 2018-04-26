@@ -353,7 +353,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .form-control:focus{box-shadow: none;border: 1px solid #ccc;}
 
 .instagram-user-info-container {text-align: left;margin-bottom: 1%;display: inline-block;width: 100%;}
-.instagram-user-info {float:left;}
+.instagram-user-info {float:left;width: 100%;}
 .instagram-user-info-container a{color: #2d200c;}
 .instagram-feed-container {margin: 0 0 7%;}
 .instagram-feed {width: 90%;margin: 0 auto;}
@@ -361,7 +361,7 @@ footer .glyphicon { font-size: 20px; color: #fff; display: inline-block; vertica
 .instagram-name {height: 30px;line-height: 30px;font-weight:700;}
 .instagram-username {font-size: 16px;float:left;}
 .instagram-fullname {font-size: 16px;float:left;margin-right: 5px;}
-.instagram-bio {;height: 30px;line-height: 30px;}
+.instagram-bio {;height: 30px;line-height: 30px;text-overflow: ellipsis;width: 100%;overflow-x: hidden;white-space: nowrap;}
 .instagram-feed-items {display: inline-block;width: 100%;}
 .instagram-feed-items img {padding: 2px;width:100%;}
 .instagram-feed-load-more {width: 120px;margin: 1% auto;}

@@ -54,7 +54,7 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                         <div class="row row-no-padding">
                             <div class="col-sm-12">
                                 <div class="blogPostsDateGrid">
-                                    <?php echo date_format(date_create($post->getActivationDate()), 'd M Y'); ?>
+                                    <?php echo formatDateBasedOnLocale($post->getActivationDate()); ?>
                                 </div>
                             </div>
                         </div>

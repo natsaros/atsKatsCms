@@ -34,8 +34,7 @@ if (!$maintenancePageEnabled){
     }
 }
 
-?>
-<?php if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
+if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
     try {
         require_safe(CLIENT_AJAX_ACTION_PATH . $ajaxAction . PHP_POSTFIX);
     } catch (SystemException $e) {

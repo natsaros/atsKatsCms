@@ -9,13 +9,13 @@ if(isEmpty($title) || isEmpty($text)) {
 }
 
 if(isNotEmpty($imagePath)) {
-$imageValid = true;
-$image2Upload = $_FILES[PostHandler::IMAGE];
-if($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
-    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
-}
+    $imageValid = true;
+    $image2Upload = $_FILES[PostHandler::IMAGE];
+    if($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
+        $imageValid = ImageUtil::validateImageAllowed($image2Upload);
+    }
 
-if(!$imageValid) {
+    if(!$imageValid) {
         addErrorMessage("Please select a valid image file");
     }
 }

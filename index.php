@@ -9,10 +9,6 @@ if(file_exists(COMMON_ROOT_PATH . 'config.php')) {
     require_once(COMMON_ROOT_PATH . 'config.php');
 }
 date_default_timezone_set(DEFAULT_TIME_ZONE);
-?>
-<!DOCTYPE html>
-<html lang="gr">
-<?php
 if(isAdmin()) {
     if(isAdminAction() && isEmpty($_GET["action"])) {
         @include("php/admin/404.php");
@@ -22,5 +18,3 @@ if(isAdmin()) {
 } else {
     @include("php/client/index.php");
 }
-?>
-</html>

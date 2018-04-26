@@ -514,7 +514,7 @@ function defineSystemVariables() {
     defined('VIDEOS_ROOT') or define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
     defined('DOCUMENTS_ROOT') or define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
     defined('LOGS_ROOT') or define('LOGS_ROOT', getRootPath() . 'logs' . DS);
-    defined('PICTURES_URI') or define('PICTURES_URI', getRootUri() . 'gallery' . DS. 'pictures' . DS);
+    defined('PICTURES_URI') or define('PICTURES_URI', getRootUri() . 'gallery' . DS . 'pictures' . DS);
     defined('PRODUCT_CATEGORIES_PICTURES_ROOT') or define('PRODUCT_CATEGORIES_PICTURES_ROOT', 'productCategories' . DS);
     defined('PRODUCTS_PICTURES_ROOT') or define('PRODUCTS_PICTURES_ROOT', 'products' . DS);
     defined('USERS_PICTURES_ROOT') or define('USERS_PICTURES_ROOT', 'users');

@@ -1,6 +1,4 @@
 <?php if (!is_null($post)) { ?>
-    <script src="<?php echo ASSETS_URI ?>js/fb-login.min.js"></script>
-
     <div class="container-fluid text-center belowHeader blogContainer">
         <div class="row">
             <div class="col-sm-12">
@@ -13,10 +11,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="blogPostDate">
-                    <?php echo date_format(date_create($post->getActivationDate()), 'd M Y'); ?>
+                    <?php echo formatDateBasedOnLocale($post->getActivationDate()) . (isNotEmpty($postComments) ? "&nbsp;&nbsp;|&nbsp;&nbsp;" . count($postComments) . " comments" : "" );?>
                 </div>
             </div>
         </div>
+        <?php if (isNotEmpty($post->getImagePath())) { ?>
         <div class="row">
             <div class="col-sm-12">
                  <div class="blogPostImage">
@@ -24,6 +23,7 @@
                 </div>
             </div>
         </div>
+        <?php } ?>
         <div class="row">
             <div class="col-sm-12">
                 <div class="blogPostTextContainer">
@@ -52,9 +52,44 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="blogPostBorder"></div>
         </div>
+
+        <?php if(!is_null($postComments) && count($postComments) > 0) {
+            foreach($postComments as $key => $postComment) { ?>
+                <div class="row row-no-padding row-no-margin">
+                    <div class="col-xs-12">
+                        <div class="row row-no-padding row-no-margin">
+                            <div class="col-xs-2 col-sm-1 post-comment-image-container">
+                                <img src="<?php echo $postComment->getUser()->getImagePath();?>"/>
+                            </div>
+                            <div class="col-xs-10 col-sm-11 post-comment-text-container">
+                                <div class="row row-no-margin">
+                                    <div class="col-xs-12 post-comment">
+                                        <?php echo $postComment->getComment();?>
+                                    </div>
+                                </div>
+                                <div class="row row-no-margin post-commenter">
+                                    <div class="col-xs-7">
+                                        <?php echo $postComment->getUser()->getFirstName() . " " . $postComment->getUser()->getLastName();?>
+                                    </div>
+                                    <div class="col-xs-5" style="text-align: right;">
+                                        <?php echo formatDateBasedOnLocale($postComment->getDate());?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="blogPostBorder"></div>
+                </div>
+                <?php
+            }
+        }
+        ?>
 
         <div class="row" id="fbLoginSection">
             <div class="col-sm-12">
@@ -67,7 +102,7 @@
 
         <div class="row" id="loadingImg" style="display: none;">
             <div class="col-sm-12">
-                <img style="width:100px;" src="<?php echo ASSETS_URI ?>img/loading-dots.gif">
+                <img src="<?php echo ASSETS_URI ?>img/loading-dots.gif">
             </div>
         </div>
 
@@ -76,7 +111,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="commentsTitle">
-                            Σχόλια
+                            Σχόλιο
                         </div>
                     </div>
                 </div>
@@ -84,7 +119,7 @@
                 <form method="post" accept-charset="utf-8" id="blogPostCommentsForm" action="<?php echo $action;?>">
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <textarea class="form-control" id="comments" name="<?php echo CommentHandler::COMMENT ?>" placeholder="Γράψτε το σχόλιό σας *" rows="5" required></textarea>
+                            <textarea class="form-control" id="comments" name="<?php echo CommentHandler::COMMENT ?>" placeholder="Προσθέστε το σχόλιό σας *" rows="5" required></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -92,9 +127,8 @@
                             <button class="btn btn-block btn-default" type="submit" onclick="checkLoginState(true);">Δημοσίευση</button>
                         </div>
                     </div>
-                    <input type="hidden" name="<?php echo PostHandler::POST_ID ?>"
-                           value="<?php echo $post->getID(); ?>"/>
-                    <input type="hidden" name="<?php echo PostHandler::USER_ID ?>" id="loggedInUserId" value="1"/>
+                    <input type="hidden" name="<?php echo PostHandler::POST_ID ?>" value="<?php echo $post->getID(); ?>"/>
+                    <input type="hidden" name="<?php echo PostHandler::USER_ID ?>" id="loggedInUserId"/>
                     <input type="hidden" name="<?php echo PostHandler::FRIENDLY_TITLE ?>" value="<?php echo $post->getFriendlyTitle(); ?>"/>
                 </form>
             </div>
