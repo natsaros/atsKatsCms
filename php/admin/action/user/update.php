@@ -1,6 +1,6 @@
 <?php
 
-$updateLoggedInUser = filter_var(safe_input($_POST['updateLoggedInUser']), FILTER_VALIDATE_BOOLEAN);
+$updateFromMyProfile = filter_var(safe_input($_POST['updateFromMyProfile']), FILTER_VALIDATE_BOOLEAN);
 
 $ID = safe_input($_POST[UserHandler::ID]);
 $userName = safe_input($_POST[UserHandler::USERNAME]);
@@ -13,13 +13,12 @@ if (isEmpty($userName) || isEmpty($email)) {
     addErrorMessage("Please fill in required info");
 }
 
-if ((isEmpty($updateLoggedInUser)
-        || !$updateLoggedInUser)
+if ($updateFromMyProfile
     && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
     addErrorMessage("Please fill in a valid password");
 }
 
-if (!isValidMail($email)) {
+if (isValidMail($email)) {
     addErrorMessage("Please fill in a valid email address");
 }
 
@@ -55,7 +54,7 @@ if (!$imageValid) {
 $updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
 if (hasErrors()) {
     if (!empty($_POST)) {
-        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+        if (!$updateFromMyProfile) {
             FormHandler::setSessionForm('updateUserForm');
             Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
         } else {
@@ -75,11 +74,14 @@ $gender = safe_input($_POST[UserHandler::GENDER]);
 $link = safe_input($_POST[UserHandler::LINK]);
 
 $groupIds = '';
-if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+if (!$updateFromMyProfile) {
     $groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
 }
 
 $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
+if (isEmpty($picturePath)) {
+    $picturePath = FormHandler::getFormPictureDraftPath(UserHandler::PICTURE);
+}
 
 try {
     $user2Update = UserHandler::getUserById($ID);
@@ -97,7 +99,7 @@ try {
         setPhone($phone)->
         setForceChangePassword(0);
 
-        if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+        if ($updateFromMyProfile) {
             $user2Update->setPassword(password_hash($password, PASSWORD_DEFAULT));
         }
 
@@ -115,7 +117,7 @@ try {
             UserHandler::updateUserGroups($user2Update->getID(), $groupIds);
         }
         if ($updateUserRes !== null || $updateUserRes) {
-            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+            if (!$updateFromMyProfile) {
                 addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
             } else {
                 addSuccessMessage("Your profile has been successfully updated");
@@ -124,12 +126,12 @@ try {
                 $fileName = basename($image2Upload[ImageUtil::NAME]);
                 ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Update->getUserName(), $fileName, $imgContent);
             }
-            if (isNotEmpty($updateLoggedInUser) && boolval($updateLoggedInUser)) {
+            if ($updateFromMyProfile) {
                 $user2Update->setAccessRights(AccessRightsHandler::getAccessRightByUserId($user2Update->getID()));
                 setUserToSession($user2Update);
             }
         } else {
-            if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+            if (!$updateFromMyProfile) {
                 addErrorMessage("User " . $user2Update->getUserName() . " failed to be updated");
             } else {
                 addErrorMessage("Your profile failed to be updated");
@@ -145,14 +147,14 @@ try {
 }
 
 if (hasErrors()) {
-    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+    if ($updateFromMyProfile) {
         Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
     } else {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "updateMyProfile");
     }
 } else {
     FormHandler::unsetFormSessionToken();
-    if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
+    if (!$updateFromMyProfile) {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
     } else {
         Redirect(getAdminRequestUriNoDelim());

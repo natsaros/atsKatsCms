@@ -21,7 +21,7 @@ if (isset($_SESSION['updateMyProfileForm']) && !empty($_SESSION['updateMyProfile
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <input type="hidden" name="updateLoggedInUser" value="true">
+                        <input type="hidden" name="updateFromMyProfile" value="true">
                         <input type="hidden" name="<?php echo UserHandler::ID ?>"
                                value="<?php echo $currentUser->getID() ?>">
                         <input type="hidden" name="<?php echo UserHandler::USERNAME ?>"

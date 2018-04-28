@@ -49,7 +49,7 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
                         <div class="row">
                             <div class="col-lg-12">
                                 <?php $requiredClass = $isCreate ? 'required' : ''; ?>
-                                <input type="hidden" name="updateLoggedInUser" value="false">
+                                <input type="hidden" name="updateFromMyProfile" value="false">
                                 <input type="hidden" name="<?php echo UserHandler::ID ?>"
                                        value="<?php echo $currentUser->getID() ?>">
                                 <input type="hidden" name="<?php echo UserHandler::GENDER ?>"

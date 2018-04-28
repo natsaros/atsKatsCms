@@ -168,7 +168,7 @@ function getBlogUri() {
  * @return string
  */
 function getProductCategoriesUri() {
-    return getRootUri() . PRODUCT_CATEGORIES_PATH. DS;
+    return getRootUri() . PRODUCT_CATEGORIES_PATH . DS;
 }
 
 /**
@@ -204,10 +204,10 @@ function initLoadDb() {
 
 function initGallery() {
     createDirIfNotExists(PICTURES_ROOT);
-    createDirIfNotExists(PICTURES_ROOT . PRODUCT_CATEGORIES_PICTURES_ROOT);
-    createDirIfNotExists(PICTURES_ROOT . PRODUCTS_PICTURES_ROOT);
-    createDirIfNotExists(PICTURES_ROOT . USERS_PICTURES_ROOT);
-    createDirIfNotExists(PICTURES_ROOT . POSTS_PICTURES_ROOT);
+    createDirIfNotExists(PRODUCT_CATEGORIES_PICTURES_ROOT);
+    createDirIfNotExists(PRODUCTS_PICTURES_ROOT);
+    createDirIfNotExists(USERS_PICTURES_ROOT);
+    createDirIfNotExists(POSTS_PICTURES_ROOT);
     createDirIfNotExists(VIDEOS_ROOT);
     createDirIfNotExists(DOCUMENTS_ROOT);
 }
@@ -514,12 +514,11 @@ function defineSystemVariables() {
     defined('VIDEOS_ROOT') or define('VIDEOS_ROOT', GALLERY_ROOT . 'videos' . DS);
     defined('DOCUMENTS_ROOT') or define('DOCUMENTS_ROOT', GALLERY_ROOT . 'docs' . DS);
     defined('LOGS_ROOT') or define('LOGS_ROOT', getRootPath() . 'logs' . DS);
-    defined('PICTURES_URI') or define('PICTURES_URI', getRootUri() . 'gallery' . DS . 'pictures' . DS);
-    defined('PRODUCT_CATEGORIES_PICTURES_ROOT') or define('PRODUCT_CATEGORIES_PICTURES_ROOT', 'productCategories' . DS);
-    defined('PRODUCTS_PICTURES_ROOT') or define('PRODUCTS_PICTURES_ROOT', 'products' . DS);
-    defined('USERS_PICTURES_ROOT') or define('USERS_PICTURES_ROOT', 'users');
-    defined('POSTS_PICTURES_ROOT') or define('POSTS_PICTURES_ROOT', 'posts');
-    defined('TEMP_PICTURES_ROOT') or define('TEMP_PICTURES_ROOT', 'temp');
+    defined('PRODUCT_CATEGORIES_PICTURES_ROOT') or define('PRODUCT_CATEGORIES_PICTURES_ROOT', PICTURES_ROOT . 'productCategories' . DS);
+    defined('PRODUCTS_PICTURES_ROOT') or define('PRODUCTS_PICTURES_ROOT', PICTURES_ROOT . 'products' . DS);
+    defined('USERS_PICTURES_ROOT') or define('USERS_PICTURES_ROOT', PICTURES_ROOT . 'users' . DS);
+    defined('POSTS_PICTURES_ROOT') or define('POSTS_PICTURES_ROOT', PICTURES_ROOT . 'posts' . DS);
+    defined('TEMP_PICTURES_ROOT') or define('TEMP_PICTURES_ROOT', PICTURES_ROOT . 'temp');
 }
 
 function loadAppClasses() {
@@ -807,8 +806,8 @@ function formValueFromSession($key) {
 /**
  * @return bool
  */
-function checkIfAccessTokenIsNotSetOrHasExpired(){
-    if (isset($_SESSION['access_token']) && isNotEmpty($_SESSION['access_token'])){
+function checkIfAccessTokenIsNotSetOrHasExpired() {
+    if (isset($_SESSION['access_token']) && isNotEmpty($_SESSION['access_token'])) {
         $accessToken = $_SESSION['access_token'];
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -825,7 +824,7 @@ function checkIfAccessTokenIsNotSetOrHasExpired(){
     }
 }
 
-function issueOrRefreshTokenForGACharts(){
+function issueOrRefreshTokenForGACharts() {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, GA_REFRESH_TOKEN_URL);
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -833,7 +832,7 @@ function issueOrRefreshTokenForGACharts(){
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $server_output = curl_exec($ch);
-    curl_close ($ch);
+    curl_close($ch);
     $server_output = json_decode($server_output, true);
     $_SESSION['access_token'] = $server_output['access_token'];
 }
@@ -842,13 +841,13 @@ function issueOrRefreshTokenForGACharts(){
  * @param $date
  * @return string
  */
-function formatDateBasedOnLocale($date){
+function formatDateBasedOnLocale($date) {
     $locale = $_SESSION['locale'];
-    if ($locale == 'el_GR'){
-        $greekMonths = array('Ιανουαρίου','Φεβρουαρίου','Μαρτίου','Απριλίου','Μαΐου','Ιουνίου','Ιουλίου','Αυγούστου','Σεπτεμβρίου','Οκτωβρίου','Νοεμβρίου','Δεκεμβρίου');
+    if ($locale == 'el_GR') {
+        $greekMonths = array('Ιανουαρίου', 'Φεβρουαρίου', 'Μαρτίου', 'Απριλίου', 'Μαΐου', 'Ιουνίου', 'Ιουλίου', 'Αυγούστου', 'Σεπτεμβρίου', 'Οκτωβρίου', 'Νοεμβρίου', 'Δεκεμβρίου');
         $time = strtotime($date);
         $newformat = date('Y-m-d', $time);
-        $dateToReturn = date('j', strtotime($newformat)).' '.$greekMonths[date('m', strtotime($newformat))-1]. ' '. date('Y', strtotime($newformat));
+        $dateToReturn = date('j', strtotime($newformat)) . ' ' . $greekMonths[date('m', strtotime($newformat)) - 1] . ' ' . date('Y', strtotime($newformat));
     } else {
         $dateToReturn = date_format(date_create($date), 'd M Y');
     }

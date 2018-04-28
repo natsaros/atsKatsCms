@@ -6,6 +6,7 @@
 class FormHandler {
 
     const DRAFT_PATH = '_draft_path';
+    const DRAFT_TMP_NAME = '_draft_tmp_name';
     const TEMP_IMAGE_SAVED_TOKEN = 'tempImageSavedToken';
     private static $afterFormSubmission = false;
     private static $form_data;
@@ -55,7 +56,8 @@ class FormHandler {
                         $formToken = md5(time());
                         $_SESSION[self::TEMP_IMAGE_SAVED_TOKEN] = $formToken;
                         $_SESSION[$formToken][$key] = $value;
-                        $_SESSION[$formToken][$key][self::DRAFT_PATH] = PICTURES_ROOT . TEMP_PICTURES_ROOT . DS . $fileName;
+                        $_SESSION[$formToken][$key][self::DRAFT_TMP_NAME] = $fileName;
+                        $_SESSION[$formToken][$key][self::DRAFT_PATH] = TEMP_PICTURES_ROOT . DS . $fileName;
                     }
                 }
             }
@@ -89,8 +91,8 @@ class FormHandler {
     }
 
     static function unsetFormSessionToken() {
-        unset($_SESSION[self::TEMP_IMAGE_SAVED_TOKEN]);
         unset($_SESSION[self::getTempPictureToken()]);
+        unset($_SESSION[self::TEMP_IMAGE_SAVED_TOKEN]);
         ImageUtil::removeImageFromFileSystem(TEMP_PICTURES_ROOT);
     }
 

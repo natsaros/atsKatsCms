@@ -18,7 +18,7 @@ class ImageUtil {
      */
     static function renderProductCategoryImage($productCategory) {
         $imagePath = isNotEmpty($productCategory->getImagePath()) ? $productCategory->getImagePath() : $productCategory->getID() . '.jpg';
-        $path2productCategory = PICTURES_ROOT . PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
+        $path2productCategory = PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
         if (!file_exists($path2productCategory)) {
             $imageData = $productCategory->getImage();
             if (isNotEmpty($imageData)) {
@@ -29,7 +29,7 @@ class ImageUtil {
                 return self::renderImageFromGallery($path2productCategory, 'blog_default.png');
             }
         } else {
-            return PICTURES_URI . PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
+            return PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
         }
     }
 
@@ -40,7 +40,7 @@ class ImageUtil {
      */
     static function renderProductImage($product) {
         $imagePath = isNotEmpty($product->getImagePath()) ? $product->getImagePath() : $product->getID() . '.jpg';
-        $path2product = PICTURES_ROOT . PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
+        $path2product = PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
         if (!file_exists($path2product)) {
             $imageData = $product->getImage();
             if (isNotEmpty($imageData)) {
@@ -51,7 +51,7 @@ class ImageUtil {
                 return self::renderImageFromGallery($path2product, 'blog_default.png');
             }
         } else {
-            return PICTURES_URI . PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
+            return PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
         }
     }
 
@@ -62,7 +62,7 @@ class ImageUtil {
      */
     static function renderBlogImage($post) {
         $imagePath = isNotEmpty($post->getImagePath()) ? $post->getImagePath() : $post->getID() . '.jpg';
-        $path2post = PICTURES_ROOT . $post->getID() . DS . $imagePath;
+        $path2post = POSTS_PICTURES_ROOT . $post->getID() . DS . $imagePath;
         if (!file_exists($path2post)) {
             $imageData = $post->getImage();
             if (isNotEmpty($imageData)) {
@@ -73,7 +73,7 @@ class ImageUtil {
                 return self::renderImageFromGallery($path2post, 'blog_default.png');
             }
         } else {
-            return PICTURES_URI . $post->getID() . DS . $imagePath;
+            return PICTURES_ROOT . $post->getID() . DS . $imagePath;
         }
     }
 
@@ -84,7 +84,7 @@ class ImageUtil {
      */
     static function renderUserImage($user) {
         $imagePath = isNotEmpty($user->getPicturePath()) ? $user->getPicturePath() : $user->getUserName() . '.jpg';
-        $path = PICTURES_ROOT . $user->getUserName() . DS . $imagePath;
+        $path = USERS_PICTURES_ROOT . $user->getUserName() . DS . $imagePath;
         if (!file_exists($path)) {
             $imageData = $user->getPicture();
             if (isNotEmpty($imageData)) {
@@ -200,8 +200,7 @@ class ImageUtil {
      * @return bool
      */
     static function saveImageToFileSystem($entity, $extraPath, $fileName, $tmpFile) {
-        $pathToSave = PICTURES_ROOT;
-        $pathToSave .= isNotEmpty($entity) ? $entity . DS : '';
+        $pathToSave = isNotEmpty($entity) ? $entity . DS : '';
         $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
         createDirIfNotExists($pathToSave);
         $pathToSave .= $fileName;
@@ -213,12 +212,11 @@ class ImageUtil {
      * @param null $path
      */
     static function removeImageFromFileSystem($entity, $path = null) {
-        $pathToDel = PICTURES_ROOT;
-        $pathToDel .= isNotEmpty($entity) ? $entity : '';
+        $pathToDel = isNotEmpty($entity) ? $entity : '';
         $pathToDel .= isNotEmpty($path) ? $path . '/' : '';
         if (file_exists($pathToDel)) {
             self::rrmdir($pathToDel);
-        }else{
+        } else {
             //TODO : log warning here that path does not exist
         }
     }
