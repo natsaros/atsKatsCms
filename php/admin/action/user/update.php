@@ -35,12 +35,20 @@ if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
 
 $imageValid = true;
 $image2Upload = $_FILES[UserHandler::PICTURE];
-$emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+$emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+if ($emptyFile) {
+    $imageSavedToSession = FormHandler::getFormPictureData(UserHandler::PICTURE);
+    if (isNotEmpty($imageSavedToSession)) {
+        $image2Upload = $imageSavedToSession;
+        $emptyFile = false;
+    }
+}
+
 if (!$emptyFile) {
     $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
 
-if (!$imageValid || $emptyFile) {
+if (!$imageValid) {
     addErrorMessage("Please select a valid image file");
 }
 
@@ -143,7 +151,7 @@ if (hasErrors()) {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "updateMyProfile");
     }
 } else {
-    ImageUtil::removeImageFromFileSystem(TEMP_PICTURES_ROOT);
+    FormHandler::unsetFormSessionToken();
     if (isEmpty($updateLoggedInUser) || !boolval($updateLoggedInUser)) {
         Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
     } else {

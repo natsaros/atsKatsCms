@@ -19,9 +19,9 @@ class ImageUtil {
     static function renderProductCategoryImage($productCategory) {
         $imagePath = isNotEmpty($productCategory->getImagePath()) ? $productCategory->getImagePath() : $productCategory->getID() . '.jpg';
         $path2productCategory = PICTURES_ROOT . PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
-        if(!file_exists($path2productCategory)) {
+        if (!file_exists($path2productCategory)) {
             $imageData = $productCategory->getImage();
-            if(isNotEmpty($imageData)) {
+            if (isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
                 self::saveImageContentToFile($path2productCategory, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
@@ -41,9 +41,9 @@ class ImageUtil {
     static function renderProductImage($product) {
         $imagePath = isNotEmpty($product->getImagePath()) ? $product->getImagePath() : $product->getID() . '.jpg';
         $path2product = PICTURES_ROOT . PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
-        if(!file_exists($path2product)) {
+        if (!file_exists($path2product)) {
             $imageData = $product->getImage();
-            if(isNotEmpty($imageData)) {
+            if (isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
                 self::saveImageContentToFile($path2product, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
@@ -63,9 +63,9 @@ class ImageUtil {
     static function renderBlogImage($post) {
         $imagePath = isNotEmpty($post->getImagePath()) ? $post->getImagePath() : $post->getID() . '.jpg';
         $path2post = PICTURES_ROOT . $post->getID() . DS . $imagePath;
-        if(!file_exists($path2post)) {
+        if (!file_exists($path2post)) {
             $imageData = $post->getImage();
-            if(isNotEmpty($imageData)) {
+            if (isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
                 self::saveImageContentToFile($path2post, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
@@ -85,9 +85,9 @@ class ImageUtil {
     static function renderUserImage($user) {
         $imagePath = isNotEmpty($user->getPicturePath()) ? $user->getPicturePath() : $user->getUserName() . '.jpg';
         $path = PICTURES_ROOT . $user->getUserName() . DS . $imagePath;
-        if(!file_exists($path)) {
+        if (!file_exists($path)) {
             $imageData = $user->getPicture();
-            if(isNotEmpty($imageData)) {
+            if (isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
                 self::saveImageContentToFile($path, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
@@ -118,7 +118,7 @@ class ImageUtil {
      * @throws SystemException
      */
     static function renderImageFromGallery($path, $fallBack) {
-        if(is_dir($path) || !file_exists($path)) {
+        if (is_dir($path) || !file_exists($path)) {
             $path = PICTURES_ROOT . $fallBack;
         }
         $content = file_get_contents($path);
@@ -137,12 +137,12 @@ class ImageUtil {
 
     private static function getMimeType($fileName) {
         $allowedTypes = [];
-        if(isNotEmpty(ALLOWED_TYPES)) {
+        if (isNotEmpty(ALLOWED_TYPES)) {
             $allowedTypes = explode('|', ALLOWED_TYPES);
         }
 
         $mimes = [];
-        foreach($allowedTypes as $type) {
+        foreach ($allowedTypes as $type) {
             $mimes[$type] = 'image/' . $type;
         }
 
@@ -159,7 +159,7 @@ class ImageUtil {
      */
     static function validateImageAllowed($image) {
         $allowedTypes = [];
-        if(isNotEmpty(ALLOWED_TYPES)) {
+        if (isNotEmpty(ALLOWED_TYPES)) {
             $allowedTypes = explode('|', ALLOWED_TYPES);
         }
         $fileType = explode('/', $image['type'])[1];
@@ -201,7 +201,7 @@ class ImageUtil {
      */
     static function saveImageToFileSystem($entity, $extraPath, $fileName, $tmpFile) {
         $pathToSave = PICTURES_ROOT;
-        $pathToSave .= isNotEmpty($entity) ? $entity .DS  : '';
+        $pathToSave .= isNotEmpty($entity) ? $entity . DS : '';
         $pathToSave .= isNotEmpty($extraPath) ? $extraPath . DS : '';
         createDirIfNotExists($pathToSave);
         $pathToSave .= $fileName;
@@ -216,7 +216,11 @@ class ImageUtil {
         $pathToDel = PICTURES_ROOT;
         $pathToDel .= isNotEmpty($entity) ? $entity : '';
         $pathToDel .= isNotEmpty($path) ? $path . '/' : '';
-        self::rrmdir($pathToDel);
+        if (file_exists($pathToDel)) {
+            self::rrmdir($pathToDel);
+        }else{
+            //TODO : log warning here that path does not exist
+        }
     }
 
     /**
@@ -224,8 +228,8 @@ class ImageUtil {
      * @param $dir
      */
     static function rrmdir($dir) {
-        foreach(glob($dir . '/*') as $file) {
-            if(is_dir($file)) {
+        foreach (glob($dir . '/*') as $file) {
+            if (is_dir($file)) {
                 self::rrmdir($file);
             } else {
                 unlink($file);
