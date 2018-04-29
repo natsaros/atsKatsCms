@@ -18,7 +18,7 @@ if ($updateFromMyProfile
     addErrorMessage("Please fill in a valid password");
 }
 
-if (isValidMail($email)) {
+if (!isValidMail($email)) {
     addErrorMessage("Please fill in a valid email address");
 }
 
@@ -39,6 +39,7 @@ if ($emptyFile) {
     $imageSavedToSession = FormHandler::getFormPictureData(UserHandler::PICTURE);
     if (isNotEmpty($imageSavedToSession)) {
         $image2Upload = $imageSavedToSession;
+        $image2Upload[ImageUtil::TMP_NAME] = $image2Upload[FormHandler::DRAFT_PATH];
         $emptyFile = false;
     }
 }
@@ -80,7 +81,7 @@ if (!$updateFromMyProfile) {
 
 $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
 if (isEmpty($picturePath)) {
-    $picturePath = FormHandler::getFormPictureDraftPath(UserHandler::PICTURE);
+    $picturePath = FormHandler::getFormPictureDraftName(UserHandler::PICTURE);
 }
 
 try {

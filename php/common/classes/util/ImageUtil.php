@@ -177,8 +177,6 @@ class ImageUtil {
         $image = new SimpleImage();
         $image->load($tmpFileContent);
         $image->resize(MAX_IMAGE_WIDTH, MAX_IMAGE_HEIGHT);
-
-//        $imgContent = file_get_contents($tmpFileContent);
         return $image;
     }
 
