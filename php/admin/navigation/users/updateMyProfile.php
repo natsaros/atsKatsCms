@@ -11,9 +11,9 @@ if (isset($_SESSION['updateMyProfileForm']) && !empty($_SESSION['updateMyProfile
 }
 ?>
 
-<?php require("pageHeader.php"); ?>
+<?php require(ADMIN_NAV_PATH ."pageHeader.php"); ?>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH ."messageSection.php"); ?>
 
 <form name="updateMyProfileForm" role="form" action="<?php echo getAdminActionRequestUri() . "user" . DS . "update"; ?>" data-toggle="validator" method="post" enctype="multipart/form-data">
     <div class="row">
@@ -58,10 +58,10 @@ if (isset($_SESSION['updateMyProfileForm']) && !empty($_SESSION['updateMyProfile
                                    id="password_input" required>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="password_input">Confirm Password *</label>
+                            <label class="control-label" for="password_input_confirm">Confirm Password *</label>
                             <input class="form-control" type="password" placeholder="Confirm Password"
                                    name="<?php echo UserHandler::PASSWORD_CONFIRMATION ?>"
-                                   id="password_input" required>
+                                   id="password_input_confirm" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="firstname_input">First Name</label>

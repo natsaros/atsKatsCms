@@ -27,7 +27,16 @@ if (isNotEmpty(trim($phone))
 
 $imageValid = true;
 $image2Upload = $_FILES[UserHandler::PICTURE];
-$emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+$emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+if ($emptyFile) {
+    $imageSavedToSession = FormHandler::getFormPictureData(UserHandler::PICTURE);
+    if (isNotEmpty($imageSavedToSession)) {
+        $image2Upload = $imageSavedToSession;
+        $image2Upload[ImageUtil::TMP_NAME] = $image2Upload[FormHandler::DRAFT_PATH];
+        $emptyFile = false;
+    }
+}
+
 if (!$emptyFile) {
     $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
@@ -50,6 +59,9 @@ $link = safe_input($_POST[UserHandler::LINK]);
 $groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
 
 $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
+if (isEmpty($picturePath)) {
+    $picturePath = FormHandler::getFormPictureDraftName(UserHandler::PICTURE);
+}
 
 try {
     $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
@@ -102,5 +114,6 @@ try {
 if (hasErrors()) {
     Redirect($updateUserUrl);
 } else {
+    FormHandler::unsetFormSessionToken();
     Redirect(getAdminRequestUri() . PageSections::USERS . DS . "users");
 }

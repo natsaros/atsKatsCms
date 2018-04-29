@@ -1,8 +1,7 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'EventStatus.php');
 
-class Event implements JsonSerializable
-{
+class Event implements JsonSerializable {
 
     private $ID;
     private $name;
@@ -85,7 +84,7 @@ class Event implements JsonSerializable
      * @return mixed
      */
     public function getDescription() {
-        return $this->description;
+        return isNotEmpty($this->description) ? $this->description : '';
     }
 
     /**
@@ -101,7 +100,7 @@ class Event implements JsonSerializable
      * @return mixed
      */
     public function getStatus() {
-        return $this->status;
+        return isNotEmpty($this->status) ? $this->status : '';
     }
 
     /**
@@ -149,7 +148,7 @@ class Event implements JsonSerializable
      * @return mixed
      */
     public function getDay() {
-        return $this->day;
+        return isNotEmpty($this->day) ? $this->day : '';
     }
 
     /**
@@ -167,6 +166,11 @@ class Event implements JsonSerializable
      * @return false|string
      */
     private function getTimeAndMinutes($day, $time) {
+        //TODO : fix issue when it is sunday
+        $whichWeek = 'this';
+        if ((date('D') == 'Sun')) {
+            $whichWeek = 'next';
+        }
         $date = new DateTime(date('Y-m-d', strtotime("{$day} this week midnight")));
         $explodeTime = explode(':', $time);
         $hoursToAdd = $explodeTime[0];
