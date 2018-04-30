@@ -14,20 +14,20 @@ $parentCategory = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY]);
 $parentCategoryId = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY_ID]);
 
 $emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
-if(!$emptyFile) {
+if (!$emptyFile) {
     $imageValid = ImageUtil::validateImageAllowed($image2Upload);
 }
 
 $imagePath = safe_input($_POST[ProductCategoryHandler::IMAGE_PATH]);
 
-if(isEmpty($title) || isEmpty($title_en)) {
+if (isEmpty($title) || isEmpty($title_en)) {
     addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . "productCategories");
+    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
 }
 
-if(!$imageValid) {
+if (!$imageValid) {
     addInfoMessage("Please select a valid image file");
-    Redirect(getAdminRequestUri() . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
 }
 
 try {
@@ -35,12 +35,12 @@ try {
 
     //Get product category from db to edit
     $productCategory = ProductCategoryHandler::getProductCategoryByID($ID);
-    if (is_null($parentCategory)){
+    if (is_null($parentCategory)) {
         $parentCategory = 0;
     }
     $productCategory->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title_en))->setState($state)->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)->setParentCategory($parentCategory)->setParentCategoryId($parentCategoryId);
 
-    if($imgContent) {
+    if ($imgContent) {
         //only saving in filesystem for performance reasons
         $productCategory->setImagePath($imagePath);
 
@@ -49,10 +49,10 @@ try {
     }
 
     $productCategoryRes = ProductCategoryHandler::update($productCategory);
-    if($productCategoryRes !== null || $productCategoryRes) {
+    if ($productCategoryRes !== null || $productCategoryRes) {
         addSuccessMessage("Product category '" . $productCategory->getTitle() . "' successfully updated");
         //save image under id of created product category in file system
-        if(!$emptyFile) {
+        if (!$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(PRODUCT_CATEGORIES_PICTURES_ROOT, $ID, $fileName, $imgContent);
         }
@@ -60,13 +60,13 @@ try {
         addErrorMessage("Product category '" . $productCategory->getTitle() . "' failed to be updated");
     }
 
-} catch(SystemException $ex) {
+} catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-if(hasErrors()) {
-    Redirect(getAdminRequestUri() . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
+if (hasErrors()) {
+    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
 } else {
-    Redirect(getAdminRequestUri() . "productCategories");
+    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
 }

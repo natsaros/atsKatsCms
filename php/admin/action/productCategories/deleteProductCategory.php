@@ -3,7 +3,7 @@ $id = $_GET['id'];
 
 if (isEmpty($id)) {
     addInfoMessage("Choose product category to delete");
-    Redirect(getAdminRequestUri() . "productCategories");
+    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
 }
 
 try {
@@ -33,4 +33,4 @@ try {
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-Redirect(getAdminRequestUri() . "productCategories");
+Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");

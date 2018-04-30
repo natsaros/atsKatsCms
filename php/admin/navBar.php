@@ -76,7 +76,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::PRODUCT_CATEGORIES_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'productCategories' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'productCategories') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::PRODUCT_CATEGORIES . DS . 'productCategories' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'productCategories') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-list  fa-fw"></i> Product Categories</a>
                     </li>
@@ -102,18 +102,18 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                     </li>
                 <?php } ?>-->
-                <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>
-                    <li>
-                        <a href="<?php echo $adminRequestUri . PageSections::SETTINGS . DS . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {
-                            echo 'class="active"';
-                        } ?>><i class="fa fa-cog fa-fw"></i> Settings</a>
-                    </li>
-                <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::PROGRAM_SECTION)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'program' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'program') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-calendar fa-fw"></i> Program</a>
+                    </li>
+                <?php } ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>
+                    <li>
+                        <a href="<?php echo $adminRequestUri . PageSections::SETTINGS . DS . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {
+                            echo 'class="active"';
+                        } ?>><i class="fa fa-cog fa-fw"></i> Settings</a>
                     </li>
                 <?php } ?>
                 <?php if (isNotEmpty(DEV_MODE) && DEV_MODE) { ?>
