@@ -62,7 +62,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'posts' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'posts') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::POSTS . DS . 'posts' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'posts') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
                     </li>

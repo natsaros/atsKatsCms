@@ -3,7 +3,6 @@ $userId = $_GET["id"];
 $isCreate = isEmpty($userId);
 $loggedInUser = getFullUserFromSession();
 
-
 FormHandler::unsetSessionForm('updateUserForm');
 
 $activeTab = $_GET['activeTab'];
@@ -74,20 +73,19 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
                                              alt="<?php echo $currentUser->getUserName() ?>">
                                         <?php
                                         if (!FormHandler::isTempPictureSaved()) { ?>
-                                        <span class="btn btn-outline btn-primary btn-file">Edit Picture
+                                            <span class="btn btn-outline btn-primary btn-file">Edit Picture
                                         <input type="file" id="uploadImage"
                                                name="<?php echo UserHandler::PICTURE; ?>" multiple">
                                         <input type="hidden"
                                                value="<?php echo $currentUser->getPicturePath(); ?>"
                                                name="<?php echo UserHandler::PICTURE_PATH; ?>" class="hiddenLabel">
-                                            <?php } else { ?>
-                                                <input type="hidden"
-                                                       value="<?php echo FormHandler::getTempPictureToken(); ?>"
-                                                       name="<?php echo FormHandler::TEMP_IMAGE_SAVED_TOKEN ?>"
-                                                       class="hiddenLabel">
-                                            <?php } ?>
-
-                                    </span>
+                                        <?php } else { ?>
+                                            <input type="hidden"
+                                                   value="<?php echo FormHandler::getTempPictureToken(); ?>"
+                                                   name="<?php echo FormHandler::TEMP_IMAGE_SAVED_TOKEN ?>"
+                                                   class="hiddenLabel">
+                                            </span>
+                                        <?php } ?>
                                     </div>
                                 </div>
 

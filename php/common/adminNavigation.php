@@ -10,6 +10,7 @@ if (isAdminModal()) {
             getFullUserFromSession()->getAccessRightsStr())) {
             $path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
         } else {
+            addErrorMessage(sprintf("User %s doesn't have access to %s page", $loggedInUser->getUserName(), ADMIN_PAGE_ID));
             $path = ADMIN_ROOT_PATH . '404' . PHP_POSTFIX;
         }
     }

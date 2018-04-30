@@ -62,18 +62,18 @@ class ImageUtil {
      */
     static function renderBlogImage($post) {
         $imagePath = isNotEmpty($post->getImagePath()) ? $post->getImagePath() : $post->getID() . '.jpg';
-        $path2post = POSTS_PICTURES_ROOT . $post->getID() . DS . $imagePath;
-        if (!file_exists($path2post)) {
+        $path = POSTS_PICTURES_ROOT . $post->getID() . DS . $imagePath;
+        if (!file_exists($path)) {
             $imageData = $post->getImage();
             if (isNotEmpty($imageData)) {
                 //save image to file system to serve it from there next time
-                self::saveImageContentToFile($path2post, $imageData);
+                self::saveImageContentToFile($path, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
             } else {
-                return self::renderImageFromGallery($path2post, 'blog_default.png');
+                return self::renderImageFromGallery($path, 'blog_default.png');
             }
         } else {
-            return PICTURES_ROOT . $post->getID() . DS . $imagePath;
+            return self::renderImageFromGallery($path, 'blog_default.png');
         }
     }
 

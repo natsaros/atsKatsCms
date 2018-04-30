@@ -3,6 +3,9 @@ $title = safe_input($_POST[PostHandler::TITLE]);
 $text = $_POST[PostHandler::TEXT];
 $userID = safe_input($_POST[PostHandler::USER_ID]);
 $imagePath = safe_input($_POST[PostHandler::IMAGE_PATH]);
+if (isEmpty($imagePath)) {
+    $imagePath = FormHandler::getFormPictureDraftName(PostHandler::IMAGE);
+}
 
 if (isEmpty($title) || isEmpty($text)) {
     addErrorMessage("Please fill in required info");
@@ -11,7 +14,17 @@ if (isEmpty($title) || isEmpty($text)) {
 if (isNotEmpty($imagePath)) {
     $imageValid = true;
     $image2Upload = $_FILES[PostHandler::IMAGE];
-    if ($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
+    $emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+    if ($emptyFile) {
+        $imageSavedToSession = FormHandler::getFormPictureData(PostHandler::IMAGE);
+        if (isNotEmpty($imageSavedToSession)) {
+            $image2Upload = $imageSavedToSession;
+            $image2Upload[ImageUtil::TMP_NAME] = $image2Upload[FormHandler::DRAFT_PATH];
+            $emptyFile = false;
+        }
+    }
+
+    if (!$emptyFile) {
         $imageValid = ImageUtil::validateImageAllowed($image2Upload);
     }
 
@@ -22,7 +35,7 @@ if (isNotEmpty($imagePath)) {
 
 if (hasErrors()) {
     FormHandler::setSessionForm('updatePostForm');
-    Redirect(getAdminRequestUri() . "updatePost");
+    Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "updatePost");
 }
 
 try {
@@ -40,6 +53,7 @@ try {
 
     $postRes = PostHandler::createPost($post2Create);
     if ($postRes !== null || $postRes) {
+        FormHandler::unsetFormSessionToken();
         addSuccessMessage("Post '" . $post2Create->getTitle() . "' successfully created");
         //save image under id of created post in file system
         if (isNotEmpty($imagePath) && !$emptyFile) {
@@ -56,7 +70,7 @@ try {
 }
 
 if (hasErrors()) {
-    Redirect(getAdminRequestUri() . "updatePost");
+    Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "updatePost");
 } else {
-    Redirect(getAdminRequestUri() . "posts");
+    Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "posts");
 }
