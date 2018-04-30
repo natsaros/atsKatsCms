@@ -167,11 +167,12 @@ class Event implements JsonSerializable {
      */
     private function getTimeAndMinutes($day, $time) {
         //TODO : fix issue when it is sunday
-        $whichWeek = 'this';
-        if ((date('D') == 'Sun')) {
-            $whichWeek = 'next';
+        //if current day is sunday get next weeks date to complete the calendar
+        $whichWeek = '0';
+        if ((date('D') === 'Sun')) {
+            $whichWeek = '1';
         }
-        $date = new DateTime(date('Y-m-d', strtotime("{$day} this week midnight")));
+        $date = new DateTime(date('Y-m-d', strtotime("{$day} +{$whichWeek} weeks midnight")));
         $explodeTime = explode(':', $time);
         $hoursToAdd = $explodeTime[0];
         $date->modify("+{$hoursToAdd} hours");
