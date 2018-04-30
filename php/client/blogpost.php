@@ -1,4 +1,6 @@
-<?php if (!is_null($post)) { ?>
+<?php
+// TODO : where is post filled? is should be here!!!!
+if (isNotEmpty($post)) { ?>
     <div class="container-fluid text-center belowHeader blogContainer">
         <div class="row">
             <div class="col-sm-12">
