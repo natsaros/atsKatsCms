@@ -9,7 +9,16 @@ try {
     <?php require_safe(ADMIN_ROOT_PATH . "adminHeader.php"); ?>
     <body>
     <div id="wrapper">
-        Ooops something went wrong
+        <?php $pageTitle = "How did you end up here?";?>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    <?php echo $pageTitle; ?>
+                </h1>
+            </div>
+        </div>
+
+        <?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
     </div>
     </body>
     </html>

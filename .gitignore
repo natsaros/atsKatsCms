@@ -2,4 +2,6 @@
 gallery/pictures/*
 !gallery/pictures/default.png
 !gallery/pictures/blog_default.png
-logs/
+logs/*
+*.min.js
+*.min.css

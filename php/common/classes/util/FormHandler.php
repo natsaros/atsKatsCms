@@ -5,7 +5,9 @@
 
 class FormHandler {
 
-    const DRAFT_PATH = '_draft_path';
+    const DRAFT_PATH = 'draft_path';
+    const DRAFT_NAME = 'draft_name';
+    const TEMP_IMAGE_SAVED_TOKEN = 'tempImageSavedToken';
     private static $afterFormSubmission = false;
     private static $form_data;
 
@@ -36,17 +38,66 @@ class FormHandler {
             }
         }
 
+        self::saveTempImage();
+    }
+
+    /**
+     * save temp image of form while validation error exist
+     */
+    static function saveTempImage() {
         if (isNotEmpty($_FILES)) {
             foreach ($_FILES as $key => $value) {
-                $simpleImage = ImageUtil::readImageContentFromFile($_FILES[$key]);
-                $fileName = $_FILES[$key][ImageUtil::NAME];
-                $saved = ImageUtil::saveImageToFileSystem(TEMP_PICTURES_ROOT, null, $fileName, $simpleImage);
-                if ($saved) {
-                    $_SESSION[$formName][$key . '_draft_path'] = PICTURES_ROOT . TEMP_PICTURES_ROOT . DS . $fileName;
-                    $_SESSION[$formName][$key] = $value;
+                $image2Upload = $_FILES[$key];
+                if ($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
+                    $simpleImage = ImageUtil::readImageContentFromFile($image2Upload);
+                    $fileName = $image2Upload[ImageUtil::NAME];
+                    $saved = ImageUtil::saveImageToFileSystem(TEMP_PICTURES_ROOT, null, $fileName, $simpleImage);
+                    if ($saved) {
+                        $formToken = md5(time());
+                        $_SESSION[self::TEMP_IMAGE_SAVED_TOKEN] = $formToken;
+                        $_SESSION[$formToken][$key] = $value;
+                        $_SESSION[$formToken][$key][self::DRAFT_NAME] = $fileName;
+                        $_SESSION[$formToken][$key][self::DRAFT_PATH] = TEMP_PICTURES_ROOT . DS . $fileName;
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * determines if picture is save to temp for use in form submission
+     *
+     * @return bool
+     */
+    static function isTempPictureSaved() {
+        return isNotEmpty($_SESSION[self::TEMP_IMAGE_SAVED_TOKEN]);
+    }
+
+    /**
+     * returns the token created at temp picture save process
+     *
+     * @return string
+     */
+    static function getTempPictureToken() {
+        return $_SESSION[self::TEMP_IMAGE_SAVED_TOKEN];
+    }
+
+    static function getFormPictureData($key) {
+        return $_SESSION[self::getTempPictureToken()][$key];
+    }
+
+    static function getFormPictureDraftName($key) {
+        return $_SESSION[self::getTempPictureToken()][$key][self::DRAFT_NAME];
+    }
+
+    static function getFormPictureDraftPath($key) {
+        return $_SESSION[self::getTempPictureToken()][$key][self::DRAFT_PATH];
+    }
+
+    static function unsetFormSessionToken() {
+        unset($_SESSION[self::getTempPictureToken()]);
+        unset($_SESSION[self::TEMP_IMAGE_SAVED_TOKEN]);
+        ImageUtil::removeImageFromFileSystem(TEMP_PICTURES_ROOT);
     }
 
     /**

@@ -20,7 +20,7 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
     </div>
 </div>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -29,13 +29,15 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
         $action = $isCreate ? $productCategoryUrl . DS . "create" : $productCategoryUrl . DS . "update";
         $parentProductCategories = ProductCategoryHandler::fetchAllParentProductCategories();
         ?>
-        <form name="updateProductCategoryForm" role="form" action="<?php echo $action ?>" data-toggle="validator" method="post"
+        <form name="updateProductCategoryForm" role="form" action="<?php echo $action ?>" data-toggle="validator"
+              method="post"
               enctype="multipart/form-data">
             <input type="hidden" name="<?php echo ProductCategoryHandler::USER_ID ?>"
                    value="<?php echo $loggedInUser->getID() ?>"/>
             <input type="hidden" name="<?php echo ProductCategoryHandler::STATE ?>"
                    value="<?php echo $currentProductCategory->getState() ?>"/>
-            <input type="hidden" name="<?php echo ProductCategoryHandler::ID ?>" value="<?php echo $currentProductCategory->getID() ?>"/>
+            <input type="hidden" name="<?php echo ProductCategoryHandler::ID ?>"
+                   value="<?php echo $currentProductCategory->getID() ?>"/>
 
             <div class="form-group">
                 <label class="control-label" for="title_input">Title *</label>
@@ -64,12 +66,14 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
                     </span>
                     </label>
                     <input type="text" value="<?php echo $currentProductCategory->getImagePath(); ?>"
-                           name="<?php echo ProductCategoryHandler::IMAGE_PATH ?>" class="form-control hiddenLabel" readonly>
+                           name="<?php echo ProductCategoryHandler::IMAGE_PATH ?>" class="form-control hiddenLabel"
+                           readonly>
                 </div>
             </div>
 
             <div class="form-group uploadPreview">
-                <img data-preview="true" src="<?php echo ImageUtil::renderProductCategoryImage($currentProductCategory); ?>"/>
+                <img data-preview="true"
+                     src="<?php echo ImageUtil::renderProductCategoryImage($currentProductCategory); ?>"/>
             </div>
 
             <div class="form-group">
@@ -92,7 +96,7 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
                 <label class="control-label" for="parent_category">Is Parent Category</label>
                 <div class="checkbox">
                     <label>
-                        <?php $isChecked = $currentProductCategory->getParentCategory() === 1 ? 'checked' : ''?>
+                        <?php $isChecked = $currentProductCategory->getParentCategory() === 1 ? 'checked' : '' ?>
                         <input name="<?php echo ProductCategoryHandler::PARENT_CATEGORY; ?>"
                                type="checkbox" <?php echo $isChecked ?>
                                value="<?php echo $currentProductCategory->getParentCategory(); ?>"
@@ -104,16 +108,18 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
                 </div>
             </div>
 
-            <div id="parentCategoryIdContainer" class="form-group"<?php if($currentProductCategory->getParentCategory() === 1) { ?> style="visibility: hidden;"<?php } ?>>
+            <div id="parentCategoryIdContainer"
+                 class="form-group"<?php if ($currentProductCategory->getParentCategory() === 1) { ?> style="visibility: hidden;"<?php } ?>>
                 <label class="control-label" for="parentCategoryId_input">Parent Category</label>
-                <select class="form-control" name="<?php echo ProductCategoryHandler::PARENT_CATEGORY_ID?>" id="parentCategoryId_input"
+                <select class="form-control" name="<?php echo ProductCategoryHandler::PARENT_CATEGORY_ID ?>"
+                        id="parentCategoryId_input"
                         value="<?php echo $currentProductCategory->getParentCategoryId() ?>">
                     <option value="0">Please Select</option>
                     <?php
-                    if(!is_null($parentProductCategories) && count($parentProductCategories) > 0) {
-                        foreach ($parentProductCategories as $key => $parentProductCategory){
+                    if (!is_null($parentProductCategories) && count($parentProductCategories) > 0) {
+                        foreach ($parentProductCategories as $key => $parentProductCategory) {
                             ?>
-                            <option value="<?php echo $parentProductCategory->getID()?>"<?php if($currentProductCategory->getParentCategoryId() == $parentProductCategory->getID()) { ?> selected<?php } ?>><?php echo $parentProductCategory->getTitle()?></option>
+                            <option value="<?php echo $parentProductCategory->getID() ?>"<?php if ($currentProductCategory->getParentCategoryId() == $parentProductCategory->getID()) { ?> selected<?php } ?>><?php echo $parentProductCategory->getTitle() ?></option>
                             <?php
                         }
                     }
@@ -122,7 +128,8 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
             </div>
 
             <div class="text-right form-group">
-                <a type="button" href="<?php echo getAdminRequestUri() . 'productCategories' ?>"
+                <a type="button"
+                   href="<?php echo getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . 'productCategories' ?>"
                    class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>

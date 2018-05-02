@@ -3,7 +3,6 @@ $userId = $_GET["id"];
 $isCreate = isEmpty($userId);
 $loggedInUser = getFullUserFromSession();
 
-
 FormHandler::unsetSessionForm('updateUserForm');
 
 $activeTab = $_GET['activeTab'];
@@ -49,7 +48,7 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
                         <div class="row">
                             <div class="col-lg-12">
                                 <?php $requiredClass = $isCreate ? 'required' : ''; ?>
-                                <input type="hidden" name="updateLoggedInUser" value="false">
+                                <input type="hidden" name="updateFromMyProfile" value="false">
                                 <input type="hidden" name="<?php echo UserHandler::ID ?>"
                                        value="<?php echo $currentUser->getID() ?>">
                                 <input type="hidden" name="<?php echo UserHandler::GENDER ?>"
@@ -61,22 +60,32 @@ $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getA
 
                                 <div class="form-group text-center">
                                     <div class="imgCont">
+                                        <?php
+                                        if (FormHandler::isTempPictureSaved()) {
+                                            $draftPicturePath = FormHandler::getFormPictureDraftPath(UserHandler::PICTURE);
+                                            $pictureVal = ImageUtil::renderGalleryImage($draftPicturePath);
+                                        } else {
+                                            $pictureVal = ImageUtil::renderUserImage($currentUser);
+                                        }
+                                        ?>
                                         <img data-preview="true" class="img-thumbnail img-responsive"
-                                             src="<?php
-                                             $draftPicturePath = FormHandler::getFormData(UserHandler::PICTURE . FormHandler::DRAFT_PATH);
-                                             if (isNotEmpty($draftPicturePath)) {
-                                                 $draftPicture = FormHandler::getFormData(UserHandler::PICTURE);
-                                                 echo ImageUtil::renderGalleryImage($draftPicturePath);
-                                             } else {
-                                                 echo ImageUtil::renderUserImage($currentUser);
-                                             }
-                                             ?>"
+                                             src="<?php echo $pictureVal; ?>"
                                              alt="<?php echo $currentUser->getUserName() ?>">
-                                        <span class="btn btn-outline btn-primary btn-file">Edit Picture
-                                        <input type="file" id="uploadImage" value="<?php echo isNotEmpty($draftPicture) ?  $draftPicture : '';?>" name="<?php echo UserHandler::PICTURE ?>" multiple">
-                                        <input type="hidden" value="<?php echo isNotEmpty($draftPicturePath) ? $draftPicturePath : $currentUser->getPicturePath(); ?>"
-                                               name="<?php echo UserHandler::PICTURE_PATH ?>" class="hiddenLabel">
-                                    </span>
+                                        <?php
+                                        if (!FormHandler::isTempPictureSaved()) { ?>
+                                            <span class="btn btn-outline btn-primary btn-file">Edit Picture
+                                        <input type="file" id="uploadImage"
+                                               name="<?php echo UserHandler::PICTURE; ?>" multiple">
+                                        <input type="hidden"
+                                               value="<?php echo $currentUser->getPicturePath(); ?>"
+                                               name="<?php echo UserHandler::PICTURE_PATH; ?>" class="hiddenLabel">
+                                        <?php } else { ?>
+                                            <input type="hidden"
+                                                   value="<?php echo FormHandler::getTempPictureToken(); ?>"
+                                                   name="<?php echo FormHandler::TEMP_IMAGE_SAVED_TOKEN ?>"
+                                                   class="hiddenLabel">
+                                            </span>
+                                        <?php } ?>
                                     </div>
                                 </div>
 

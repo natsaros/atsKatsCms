@@ -19,7 +19,7 @@ $pageTitle = $isCreate ? "Create Setting" : "Update Setting";
     </div>
 </div>
 
-<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH ."messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">

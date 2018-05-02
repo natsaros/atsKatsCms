@@ -22,7 +22,7 @@ FormHandler::unsetSessionForm('updatePostForm');
     </div>
 </div>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -49,13 +49,26 @@ FormHandler::unsetSessionForm('updatePostForm');
             <div class="form-group">
                 <label class="control-label" for="uploadImage">Image</label>
                 <div class="form-group input-group">
-                    <label class="input-group-btn">
-                    <span class="btn btn-primary btn-file">
-                    Browse&hellip; <input type="file" style="display: none;" id="uploadImage"
-                                          name="<?php echo PostHandler::IMAGE ?>"
-                                          multiple>
-                    </span>
-                    </label>
+                    <?php
+                    if (!FormHandler::isTempPictureSaved()) { ?>
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                            Browse&hellip; <input type="file" style="display: none;" id="uploadImage"
+                                                  name="<?php echo PostHandler::IMAGE ?>"
+                                                  multiple>
+                            </span>
+                        </label>
+                    <?php } else { ?>
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                            Browse&hellip;
+                            </span>
+                        </label>
+                        <input type="hidden"
+                               value="<?php echo FormHandler::getTempPictureToken(); ?>"
+                               name="<?php echo FormHandler::TEMP_IMAGE_SAVED_TOKEN ?>"
+                               class="hiddenLabel">
+                    <?php } ?>
                     <input type="text"
                            value="<?php echo FormHandler::getEditFormData(PostHandler::IMAGE_PATH, $currentPost->getImagePath()); ?>"
                            name="<?php echo PostHandler::IMAGE_PATH ?>" class="form-control hiddenLabel" readonly>
@@ -63,7 +76,16 @@ FormHandler::unsetSessionForm('updatePostForm');
             </div>
 
             <div class="form-group uploadPreview">
-                <img data-preview="true" src="<?php echo ImageUtil::renderBlogImage($currentPost); ?>"/>
+                <?php
+                if (FormHandler::isTempPictureSaved()) {
+                    $draftPicturePath = FormHandler::getFormPictureDraftPath(PostHandler::IMAGE);
+                    $pictureVal = ImageUtil::renderGalleryImage($draftPicturePath);
+                } else {
+                    $pictureVal = ImageUtil::renderBlogImage($currentPost);
+                }
+                ?>
+
+                <img data-preview="true" src="<?php echo $pictureVal; ?>"/>
             </div>
 
             <div class="form-group">
@@ -73,7 +95,7 @@ FormHandler::unsetSessionForm('updatePostForm');
                 </textarea>
             </div>
             <div class="text-right form-group">
-                <a type="button" href="<?php echo getAdminRequestUri() . 'posts' ?>"
+                <a type="button" href="<?php echo getAdminRequestUri() . DS . PageSections::POSTS . 'posts' ?>"
                    class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>

@@ -5,27 +5,39 @@ $text = $_POST[PostHandler::TEXT];
 $state = safe_input($_POST[PostHandler::STATE]);
 $userID = safe_input($_POST[PostHandler::USER_ID]);
 $imagePath = safe_input($_POST[PostHandler::IMAGE_PATH]);
+if (isEmpty($imagePath)) {
+    $imagePath = FormHandler::getFormPictureDraftName(PostHandler::IMAGE);
+}
 
-if(isEmpty($title) || isEmpty($text)) {
+if (isEmpty($title) || isEmpty($text)) {
     addErrorMessage("Please fill in required info");
 }
 
-if(isNotEmpty($imagePath)) {
+if (isNotEmpty($imagePath)) {
     $imageValid = true;
     $image2Upload = $_FILES[PostHandler::IMAGE];
-    $emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
-    if(!$emptyFile) {
+    $emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+    if ($emptyFile) {
+        $imageSavedToSession = FormHandler::getFormPictureData(PostHandler::IMAGE);
+        if (isNotEmpty($imageSavedToSession)) {
+            $image2Upload = $imageSavedToSession;
+            $image2Upload[ImageUtil::TMP_NAME] = $image2Upload[FormHandler::DRAFT_PATH];
+            $emptyFile = false;
+        }
+    }
+
+    if (!$emptyFile) {
         $imageValid = ImageUtil::validateImageAllowed($image2Upload);
     }
 
-    if(!$imageValid) {
+    if (!$imageValid) {
         addErrorMessage("Please select a valid image file");
     }
 }
 
-if(hasErrors()) {
+if (hasErrors()) {
     FormHandler::setSessionForm('updatePostForm');
-    Redirect(getAdminRequestUri() . "updatePost");
+    Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "updatePost");
 }
 
 try {
@@ -35,7 +47,7 @@ try {
     $post = PostHandler::getPostByIDWithDetails($ID);
     $post->setTitle($title)->setFriendlyTitle(transliterateString($title))->setState($state)->setUserId($userID)->setText($text);
 
-    if($imgContent) {
+    if ($imgContent) {
         //only saving in filesystem for performance reasons
         $post->setImagePath($imagePath);
         //save image content also in blob on db for back up reasons if needed
@@ -43,10 +55,10 @@ try {
     }
 
     $postRes = PostHandler::update($post);
-    if($postRes !== null || $postRes) {
+    if ($postRes !== null || $postRes) {
         addSuccessMessage("Post '" . $post->getTitle() . "' successfully updated");
         //save image under id of created post in file system
-        if(isNotEmpty($imagePath) && !$emptyFile) {
+        if (isNotEmpty($imagePath) && !$emptyFile) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(POSTS_PICTURES_ROOT, $ID, $fileName, $imgContent);
         }
@@ -54,13 +66,13 @@ try {
         addErrorMessage("Post '" . $post->getTitle() . "' failed to be updated");
     }
 
-} catch(SystemException $ex) {
+} catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-if(hasErrors()) {
-    Redirect(getAdminRequestUri() . "updatePost" . addParamsToUrl(array('id'), array($ID)));
+if (hasErrors()) {
+    Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "updatePost" . addParamsToUrl(array('id'), array($ID)));
 } else {
-    Redirect(getAdminRequestUri() . "posts");
+    Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "posts");
 }
