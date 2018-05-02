@@ -14,7 +14,7 @@ class ImageUtil {
     /**
      * @param ProductCategory $productCategory
      * @return string
-     * @throws SystemException
+     * @throws Exception
      */
     static function renderProductCategoryImage($productCategory) {
         $imagePath = isNotEmpty($productCategory->getImagePath()) ? $productCategory->getImagePath() : $productCategory->getID() . '.jpg';
@@ -26,17 +26,17 @@ class ImageUtil {
                 self::saveImageContentToFile($path2productCategory, $imageData);
                 return self::renderImageFromBlob($imageData, $imagePath);
             } else {
-                return self::renderImageFromGallery($path2productCategory, 'blog_default.png');
+                return self::renderImageFromGallery($path2productCategory, 'default.png');
             }
         } else {
-            return PRODUCT_CATEGORIES_PICTURES_ROOT . $productCategory->getID() . DS . $imagePath;
+            return self::renderImageFromGallery($path2productCategory, 'default.png');
         }
     }
 
     /**
      * @param Product $product
      * @return string
-     * @throws SystemException
+     * @throws Exception
      */
     static function renderProductImage($product) {
         $imagePath = isNotEmpty($product->getImagePath()) ? $product->getImagePath() : $product->getID() . '.jpg';
@@ -51,14 +51,14 @@ class ImageUtil {
                 return self::renderImageFromGallery($path2product, 'blog_default.png');
             }
         } else {
-            return PRODUCTS_PICTURES_ROOT . $product->getID() . DS . $imagePath;
+            return self::renderImageFromGallery($path2product, 'blog_default.png');
         }
     }
 
     /**
      * @param Post $post
      * @return string
-     * @throws SystemException
+     * @throws Exception
      */
     static function renderBlogImage($post) {
         $imagePath = isNotEmpty($post->getImagePath()) ? $post->getImagePath() : $post->getID() . '.jpg';
@@ -80,7 +80,7 @@ class ImageUtil {
     /**
      * @param User $user
      * @return string
-     * @throws SystemException
+     * @throws Exception
      */
     static function renderUserImage($user) {
         $imagePath = isNotEmpty($user->getPicturePath()) ? $user->getPicturePath() : $user->getUserName() . '.jpg';
@@ -103,7 +103,7 @@ class ImageUtil {
      * @param $image
      * @param $imagePath
      * @return string
-     * @throws SystemException
+     * @throws Exception
      */
     private static function renderImageFromBlob($image, $imagePath) {
         $base64 = base64_encode($image);
@@ -115,7 +115,7 @@ class ImageUtil {
      * @param $path string
      * @param $fallBack string
      * @return string
-     * @throws SystemException
+     * @throws Exception
      */
     static function renderImageFromGallery($path, $fallBack) {
         if (is_dir($path) || !file_exists($path)) {
@@ -129,7 +129,7 @@ class ImageUtil {
     /**
      * @param $path
      * @return string
-     * @throws SystemException
+     * @throws Exception
      */
     static function renderGalleryImage($path) {
         return self::renderImageFromGallery($path, 'default.png');
@@ -155,7 +155,7 @@ class ImageUtil {
     /**
      * @param $image
      * @return boolean
-     * @throws SystemException
+     * @throws Exception
      */
     static function validateImageAllowed($image) {
         $allowedTypes = [];

@@ -31,26 +31,7 @@ if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
     addErrorMessage('Please fill in a valid phone number');
 }
 
-
-$imageValid = true;
-$image2Upload = $_FILES[UserHandler::PICTURE];
-$emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
-if ($emptyFile) {
-    $imageSavedToSession = FormHandler::getFormPictureData(UserHandler::PICTURE);
-    if (isNotEmpty($imageSavedToSession)) {
-        $image2Upload = $imageSavedToSession;
-        $image2Upload[ImageUtil::TMP_NAME] = $image2Upload[FormHandler::DRAFT_PATH];
-        $emptyFile = false;
-    }
-}
-
-if (!$emptyFile) {
-    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
-}
-
-if (!$imageValid) {
-    addErrorMessage("Please select a valid image file");
-}
+$image2Upload = FormHandler::validateUploadedImage(UserHandler::PICTURE);
 
 $updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
 if (hasErrors()) {
@@ -86,7 +67,7 @@ if (isEmpty($picturePath)) {
 
 try {
     $user2Update = UserHandler::getUserById($ID);
-    $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
+    $imgContent = isNotEmpty($image2Upload) ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     if (isNotEmpty($user2Update)) {
         $user2Update->
@@ -123,7 +104,7 @@ try {
             } else {
                 addSuccessMessage("Your profile has been successfully updated");
             }
-            if (!$emptyFile) {
+            if (isNotEmpty($image2Upload)) {
                 $fileName = basename($image2Upload[ImageUtil::NAME]);
                 ImageUtil::saveImageToFileSystem(USERS_PICTURES_ROOT, $user2Update->getUserName(), $fileName, $imgContent);
             }
