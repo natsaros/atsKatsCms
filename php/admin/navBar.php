@@ -69,7 +69,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::PRODUCTS_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'products' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'products') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::PRODUCTS . DS . 'products' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'products') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-shopping-cart fa-fw"></i> Products</a>
                     </li>
@@ -83,14 +83,14 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::PROMOTIONS_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'promotions' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'promotions') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::PROMOTIONS . DS . 'promotions' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'promotions') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-rocket fa-fw"></i> Promotions</a>
                     </li>
                 <?php } ?>
                 <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'newsletter' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'newsletter') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::NEWSLETTER . DS . 'newsletter' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'newsletter') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-envelope"></i> Newsletter</a>
                     </li>
