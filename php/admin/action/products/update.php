@@ -84,7 +84,7 @@ try {
 } catch(SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect(getAdminRequestUri() . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
 }
 
-Redirect(getAdminRequestUri() . "products");
+Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "products");
