@@ -44,7 +44,7 @@ if(hasErrors()) {
         }
         $_SESSION['updateProductForm'][$key] = $value;
     }
-    Redirect(getAdminRequestUri() . "updateProduct");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct");
 }
 
 try {
@@ -73,13 +73,13 @@ try {
         }
     } else {
         addErrorMessage("Product '" . $product2Create->getTitle() . "' failed to be created");
-        Redirect(getAdminRequestUri() . "updateProduct");
+        Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct");
     }
 
 } catch(SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect(getAdminRequestUri() . "updateProduct");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct");
 }
 
-Redirect(getAdminRequestUri() . "products");
+Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "products");

@@ -129,7 +129,7 @@ $pageTitle = $isCreate ? "Create Product Category" : "Update Product Category";
 
             <div class="text-right form-group">
                 <a type="button"
-                   href="<?php echo getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . 'productCategories' ?>"
+                   href="<?php echo getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . 'productCategories' ?>"
                    class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>

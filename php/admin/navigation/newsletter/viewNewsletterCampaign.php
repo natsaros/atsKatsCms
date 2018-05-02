@@ -3,9 +3,9 @@ $campaignId = $_GET["id"];
 $campaign = NewsletterHandler::getNewsletterCampaign($campaignId);
 ?>
 
-<?php require("pageHeader.php"); ?>
+<?php require(ADMIN_NAV_PATH . "pageHeader.php"); ?>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -45,7 +45,7 @@ $campaign = NewsletterHandler::getNewsletterCampaign($campaignId);
             </div>
         </div>
         <div class="text-right form-group">
-            <a type="button" href="<?php echo getAdminRequestUri() . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterCampaigns')); ?>"
+            <a type="button" href="<?php echo getAdminRequestUri() . PageSections::NEWSLETTER . DS . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterCampaigns')); ?>"
                class="btn btn-default">Back</a>
         </div>
     </div>

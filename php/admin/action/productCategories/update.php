@@ -22,12 +22,12 @@ $imagePath = safe_input($_POST[ProductCategoryHandler::IMAGE_PATH]);
 
 if (isEmpty($title) || isEmpty($title_en)) {
     addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
 }
 
 if (!$imageValid) {
     addInfoMessage("Please select a valid image file");
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
 }
 
 try {
@@ -66,7 +66,7 @@ try {
 }
 
 if (hasErrors()) {
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
 } else {
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
 }

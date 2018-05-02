@@ -83,7 +83,7 @@ $products = ProductHandler::fetchAllProducts();
     </div>
 </div>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -182,7 +182,7 @@ $products = ProductHandler::fetchAllProducts();
             <input type="hidden" id="promotionInstanceId_input" name="<?php echo PromotionHandler::PROMOTED_INSTANCE_ID?>"/>
 
             <div class="text-right form-group">
-                <a type="button" href="<?php echo getAdminRequestUri() . 'promotions' ?>"
+                <a type="button" href="<?php echo getAdminRequestUri() . PageSections::PROMOTIONS . DS . 'promotions' ?>"
                    class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>

@@ -3,7 +3,7 @@ $id = $_GET['id'];
 
 if (isEmpty($id)) {
     addInfoMessage("Choose post to delete");
-    Redirect(getAdminRequestUri() . DS . PageSections::POSTS . "posts");
+    Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "posts");
 }
 
 try {
@@ -28,4 +28,4 @@ try {
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-Redirect(getAdminRequestUri() . DS . PageSections::POSTS . "posts");
+Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "posts");

@@ -39,7 +39,7 @@ if($afterFormSubmission) {
     </div>
 </div>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -163,7 +163,7 @@ if($afterFormSubmission) {
             </div>
 
             <div class="text-right form-group">
-                <a type="button" href="<?php echo getAdminRequestUri() . 'products' ?>"
+                <a type="button" href="<?php echo getAdminRequestUri() . PageSections::PRODUCTS . DS . 'products' ?>"
                    class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>

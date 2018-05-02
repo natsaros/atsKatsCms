@@ -17,12 +17,12 @@ $parentCategoryId = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY_ID
 
 if (isEmpty($title) || isEmpty($title_en)) {
     addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
 }
 
 if (!$imageValid) {
     addInfoMessage("Please select a valid image file");
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
 }
 
 try {
@@ -59,7 +59,7 @@ try {
 }
 
 if (hasErrors()) {
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
 } else {
-    Redirect(getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "productCategories");
 }
