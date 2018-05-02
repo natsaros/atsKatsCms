@@ -1,6 +1,6 @@
-<?php require("pageHeader.php"); ?>
+<?php require(ADMIN_NAV_PATH . "pageHeader.php"); ?>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <?php
 $products = ProductHandler::fetchAllProductsWithDetails();
@@ -53,7 +53,7 @@ $products = ProductHandler::fetchAllProductsWithDetails();
                                 </a>
 
                                 <a type="button"
-                                   href="<?php echo getAdminRequestUri() . "updateProduct" . addParamsToUrl(array('id'), array($productId)); ?>"
+                                   href="<?php echo getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct" . addParamsToUrl(array('id'), array($productId)); ?>"
                                    class="btn btn-default btn-sm" title="Edit Product">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 </a>
@@ -71,7 +71,7 @@ $products = ProductHandler::fetchAllProductsWithDetails();
 
 <div class="row">
     <div class="col-lg-12 text-center">
-        <a href="<?php echo getAdminRequestUri() . "updateProduct"; ?>" type="button" class="btn btn-outline btn-primary">
+        <a href="<?php echo getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct"; ?>" type="button" class="btn btn-outline btn-primary">
             Add <span class="fa fa-shopping-cart fa-fw" aria-hidden="true"></span>
         </a>
     </div>

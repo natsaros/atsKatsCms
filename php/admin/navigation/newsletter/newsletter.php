@@ -1,6 +1,6 @@
-<?php require("pageHeader.php"); ?>
+<?php require(ADMIN_NAV_PATH . "pageHeader.php"); ?>
 
-<?php require("messageSection.php"); ?>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <?php
 $newsletterEmails = NewsletterHandler::getAllNewsletterEmails();
@@ -131,7 +131,7 @@ if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterFo
                                     <td data-sort="<?php echo $newsletterCampaign->getSendingDate(); ?>"><?php echo date(ADMIN_DATE_FORMAT, strtotime($newsletterCampaign->getSendingDate())); ?></td>
                                     <td>
                                         <a type="button"
-                                           href="<?php echo getAdminRequestUri() . "viewNewsletterCampaign" . addParamsToUrl(array('id'), array($newsletterCampaign->getID())); ?>"
+                                           href="<?php echo getAdminRequestUri() . PageSections::NEWSLETTER . DS . "viewNewsletterCampaign" . addParamsToUrl(array('id'), array($newsletterCampaign->getID())); ?>"
                                            class="btn btn-default btn-sm" title="Edit Product">
                                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                         </a>

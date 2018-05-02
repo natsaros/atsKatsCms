@@ -3,7 +3,7 @@ $id = $_GET['id'];
 
 if (isEmpty($id)) {
     addInfoMessage("Choose product to delete");
-    Redirect(getAdminRequestUri() . "products");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "products");
 }
 
 try {
@@ -28,4 +28,4 @@ try {
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
 
-Redirect(getAdminRequestUri() . "products");
+Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "products");

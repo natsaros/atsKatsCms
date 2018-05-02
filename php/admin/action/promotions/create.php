@@ -19,7 +19,7 @@ if(hasErrors()) {
         }
         $_SESSION['updatePromotionForm'][$key] = $value;
     }
-    Redirect(getAdminRequestUri() . "updatePromotion");
+    Redirect(getAdminRequestUri() . PageSections::PROMOTIONS . DS . "updatePromotion");
 }
 
 try {
@@ -41,13 +41,13 @@ try {
         addSuccessMessage("Promotion successfully created");
     } else {
         addErrorMessage("Promotion failed to be created");
-        Redirect(getAdminRequestUri() . "updatePromotion");
+        Redirect(getAdminRequestUri() . PageSections::PROMOTIONS . DS . "updatePromotion");
     }
 
 } catch(SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect(getAdminRequestUri() . "updatePromotion");
+    Redirect(getAdminRequestUri() . PageSections::PROMOTIONS . DS . "updatePromotion");
 }
 
-Redirect(getAdminRequestUri() . "promotions");
+Redirect(getAdminRequestUri() . PageSections::PROMOTIONS . DS . "promotions");

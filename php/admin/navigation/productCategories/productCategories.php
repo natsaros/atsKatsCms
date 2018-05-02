@@ -52,7 +52,7 @@ $productCategories = ProductCategoryHandler::fetchAllProductCategories();
                                 </a>
 
                                 <a type="button"
-                                   href="<?php echo getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($productCategoryId)); ?>"
+                                   href="<?php echo getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($productCategoryId)); ?>"
                                    class="btn btn-default btn-sm" title="Edit Product Category">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 </a>
@@ -70,7 +70,7 @@ $productCategories = ProductCategoryHandler::fetchAllProductCategories();
 
 <div class="row">
     <div class="col-lg-12 text-center">
-        <a href="<?php echo getAdminRequestUri() . DS . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory"; ?>" type="button"
+        <a href="<?php echo getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory"; ?>" type="button"
            class="btn btn-outline btn-primary">
             Add <span class="fa fa-list fa-fw" aria-hidden="true"></span>
         </a>

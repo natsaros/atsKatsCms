@@ -25,7 +25,7 @@ if(hasErrors()) {
         }
         $_SESSION['sendNewsletterForm'][$key] = $value;
     }
-    Redirect(getAdminRequestUri() . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterEmailForm')));
+    Redirect(getAdminRequestUri() . PageSections::NEWSLETTER . DS . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterEmailForm')));
 }
 
 try {
@@ -71,5 +71,5 @@ try {
     addErrorMessage(ErrorMessages::GENERIC_ERROR_GR);
 }
 
-Redirect(getAdminRequestUri() . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterCampaigns')));
+Redirect(getAdminRequestUri() . PageSections::NEWSLETTER . DS . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterCampaigns')));
 //    https://drive.google.com/uc?export=view&id=1tOGEB8k_4faK3s8Oocb7WHRa0y_LZpOn

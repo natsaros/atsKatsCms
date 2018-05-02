@@ -5,7 +5,7 @@ $status = $_GET['status'];
 
 if (isEmpty($id) || isEmpty($status)) {
     addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . "products");
+    Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "products");
 }
 
 try {
@@ -20,4 +20,4 @@ try {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
 }
-Redirect(getAdminRequestUri() . 'products');
+Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . 'products');

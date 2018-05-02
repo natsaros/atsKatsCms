@@ -47,7 +47,7 @@ if(hasErrors()) {
         }
         $_SESSION['updateProductForm'][$key] = $value;
     }
-    Redirect(getAdminRequestUri() . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
 }
 
 try {
@@ -78,13 +78,13 @@ try {
         }
     } else {
         addErrorMessage("Product '" . $product->getTitle() . "' failed to be updated");
-        Redirect(getAdminRequestUri() . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
+        Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
     }
 
 } catch(SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect(getAdminRequestUri() . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
 }
 
-Redirect(getAdminRequestUri() . "products");
+Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "products");
