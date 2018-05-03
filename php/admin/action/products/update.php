@@ -11,17 +11,26 @@ $price = $_POST[ProductHandler::PRICE];
 $offerPrice = $_POST[ProductHandler::OFFER_PRICE];
 $state = safe_input($_POST[ProductHandler::STATE]);
 $userID = safe_input($_POST[ProductHandler::USER_ID]);
-$imageValid = true;
-$image2Upload = $_FILES[PostHandler::IMAGE];
 
-$imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
-
-if(isEmpty($title) || isEmpty($description) || isEmpty($title_en) || isEmpty($description_en) || isEmpty($code) || isEmpty($productCategoryId) || isEmpty($price)) {
+if(isEmpty($title)
+    || isEmpty($description)
+    || isEmpty($title_en)
+    || isEmpty($description_en)
+    || isEmpty($code)
+    || isEmpty($productCategoryId)
+    || isEmpty($price)) {
     addErrorMessage("Please fill in required info");
 }
 
 if(isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
     addErrorMessage("Offer price cannot be higher than price");
+}
+
+$imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
+if (isEmpty($imagePath)) {
+    $imagePath = FormHandler::getFormPictureDraftName(ProductHandler::IMAGE);
+} else {
+    addErrorMessage("Please fill in required info");
 }
 
 if (isNotEmpty($title)){
@@ -41,24 +50,23 @@ if(!$imageValid) {
 }
 
 if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['updateProductForm'][$key] = $value;
-        }
-        $_SESSION['updateProductForm'][$key] = $value;
-    }
+    FormHandler::setSessionForm('updateProductForm');
     Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct" . addParamsToUrl(array('id'), array($ID)));
 }
 
 try {
-    $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
+    $imgContent = isNotEmpty($image2Upload) ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     //Get product from db to edit
     $product = ProductHandler::getProductByIDWithDetails($ID);
     if (isEmpty($secondaryProductCategoryId)){
         $secondaryProductCategoryId = null;
     }
-    $product->setCode($code)->setTitle($title)->setTitleEn($title_en)->setFriendlyTitle(transliterateString($title_en))->setState($state)->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)->setSecondaryProductCategoryId($secondaryProductCategoryId)->setProductCategoryId($productCategoryId)->setPrice($price)->setOfferPrice($offerPrice);
+    $product->setCode($code)->setTitle($title)->setTitleEn($title_en)
+        ->setFriendlyTitle(transliterateString($title_en))->setState($state)
+        ->setUserId($userID)->setDescription($description)->setDescriptionEn($description_en)
+        ->setSecondaryProductCategoryId($secondaryProductCategoryId)->setProductCategoryId($productCategoryId)
+        ->setPrice($price)->setOfferPrice($offerPrice);
 
     if($imgContent) {
         //only saving in filesystem for performance reasons
@@ -71,8 +79,9 @@ try {
     $productRes = ProductHandler::update($product);
     if($productRes !== null || $productRes) {
         addSuccessMessage("Product '" . $product->getTitle() . "' successfully updated");
+        FormHandler::unsetFormSessionToken();
         //save image under id of created product in file system
-        if(!$emptyFile) {
+        if(isNotEmpty($image2Upload)) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(PRODUCTS_PICTURES_ROOT, $ID, $fileName, $imgContent);
         }
