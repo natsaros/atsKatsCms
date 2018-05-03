@@ -5,28 +5,29 @@ $description = $_POST[ProductCategoryHandler::DESCRIPTION];
 $description_en = $_POST[ProductCategoryHandler::DESCRIPTION_EN];
 $userID = safe_input($_POST[ProductCategoryHandler::USER_ID]);
 
-$imageValid = true;
-$image2Upload = $_FILES[ProductCategoryHandler::IMAGE];
-if ($image2Upload['error'] !== UPLOAD_ERR_NO_FILE) {
-    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
+$imagePath = safe_input($_POST[ProductCategoryHandler::IMAGE_PATH]);
+if (isEmpty($imagePath)) {
+    $imagePath = FormHandler::getFormPictureDraftName(ProductCategoryHandler::IMAGE);
 }
 
-$imagePath = safe_input($_POST[ProductCategoryHandler::IMAGE_PATH]);
+if (isNotEmpty($imagePath)) {
+    $image2Upload = FormHandler::validateUploadedImage(ProductCategoryHandler::IMAGE);
+}
+
 $parentCategory = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY]);
 $parentCategoryId = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY_ID]);
 
 if (isEmpty($title) || isEmpty($title_en)) {
-    addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
+    addErrorMessage("Please fill in required info");
 }
 
-if (!$imageValid) {
-    addInfoMessage("Please select a valid image file");
+if (hasErrors()) {
+    FormHandler::setSessionForm('updateProductCategoryForm');
     Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory");
 }
 
 try {
-    $imgContent = !$emptyFile ? ImageUtil::readImageContentFromFile($image2Upload) : false;
+    $imgContent = isNotEmpty($image2Upload) ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     $productCategory2Create = ProductCategory::create();
     if (is_null($parentCategory)) {
@@ -43,14 +44,15 @@ try {
 
     $productCategoryRes = ProductCategoryHandler::createProductCategory($productCategory2Create);
     if ($productCategoryRes !== null || $productCategoryRes) {
-        addSuccessMessage("Product Category '" . $productCategory2Create->getTitle() . "' successfully created");
+        addSuccessMessage("Product Category '{$productCategory2Create->getTitle()}' successfully created");
+        FormHandler::unsetFormSessionToken();
         //save image under id of created product in file system
-        if (!$emptyFile) {
+        if (isNotEmpty($image2Upload)) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(PRODUCT_CATEGORIES_PICTURES_ROOT, $productCategoryRes, $fileName, $imgContent);
         }
     } else {
-        addErrorMessage("Product Category '" . $productCategory2Create->getTitle() . "' failed to be created");
+        addErrorMessage("Product Category '{$productCategory2Create->getTitle()}' failed to be created");
     }
 
 } catch (SystemException $ex) {

@@ -1,42 +1,6 @@
-<?php require("pageHeader.php"); ?>
+<?php require(ADMIN_NAV_PATH . "pageHeader.php"); ?>
 
-<?php require("messageSection.php"); ?>
-
-<style>
-    #external-events {
-        margin-bottom: 20px;
-    }
-
-    #external-events .fc-event {
-        margin: 10px 0;
-        padding: 6px 10px;
-        cursor: pointer;
-    }
-
-    .fc-event {
-        background-color: #f1b900;
-        border: 1px solid #f1b900;
-    }
-
-    .published {
-        background-color: #20BB2A;
-        border: 1px solid #20BB2A;
-    }
-
-    .fc-event-container > * {
-        display: inline-block;
-    }
-
-    .fc-lesson {
-        width: 55%;
-    }
-
-    @media screen and (min-width: 768px) and (max-width: 960px) {
-        .fc-lesson {
-            width: 60%;
-        }
-    }
-</style>
+<?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
 <?php
 $lessons = ProgramHandler::fetchLessons();

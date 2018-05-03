@@ -12,25 +12,7 @@ if (isEmpty($title) || isEmpty($text)) {
 }
 
 if (isNotEmpty($imagePath)) {
-    $imageValid = true;
-    $image2Upload = $_FILES[PostHandler::IMAGE];
-    $emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
-    if ($emptyFile) {
-        $imageSavedToSession = FormHandler::getFormPictureData(PostHandler::IMAGE);
-        if (isNotEmpty($imageSavedToSession)) {
-            $image2Upload = $imageSavedToSession;
-            $image2Upload[ImageUtil::TMP_NAME] = $image2Upload[FormHandler::DRAFT_PATH];
-            $emptyFile = false;
-        }
-    }
-
-    if (!$emptyFile) {
-        $imageValid = ImageUtil::validateImageAllowed($image2Upload);
-    }
-
-    if (!$imageValid) {
-        addErrorMessage("Please select a valid image file");
-    }
+    $image2Upload = FormHandler::validateUploadedImage(PostHandler::IMAGE);
 }
 
 if (hasErrors()) {
@@ -39,7 +21,7 @@ if (hasErrors()) {
 }
 
 try {
-    $imgContent = (isNotEmpty($imagePath) && !$emptyFile) ? ImageUtil::readImageContentFromFile($image2Upload) : false;
+    $imgContent = (isNotEmpty($imagePath) && isNotEmpty($image2Upload)) ? ImageUtil::readImageContentFromFile($image2Upload) : false;
 
     $post2Create = Post::create();
     $post2Create->setTitle($title)->setFriendlyTitle(transliterateString($title))->setUserId($userID)->setText($text);
@@ -56,7 +38,7 @@ try {
         FormHandler::unsetFormSessionToken();
         addSuccessMessage("Post '" . $post2Create->getTitle() . "' successfully created");
         //save image under id of created post in file system
-        if (isNotEmpty($imagePath) && !$emptyFile) {
+        if (isNotEmpty($imagePath) && isNotEmpty($image2Upload)) {
             $fileName = basename($image2Upload[ImageUtil::NAME]);
             ImageUtil::saveImageToFileSystem(POSTS_PICTURES_ROOT, $postRes, $fileName, $imgContent);
         }

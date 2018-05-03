@@ -104,7 +104,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 <?php } ?>-->
                 <?php if (hasAccess($loggedInUser, AccessRight::PROGRAM_SECTION)) { ?>
                     <li>
-                        <a href="<?php echo $adminRequestUri . 'program' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'program') !== false) {
+                        <a href="<?php echo $adminRequestUri . PageSections::PROGRAM . DS . 'program' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'program') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-calendar fa-fw"></i> Program</a>
                     </li>
