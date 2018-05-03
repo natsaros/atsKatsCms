@@ -12,6 +12,8 @@ class PageSections {
     const NEWSLETTER = 'newsletter';
     const USERS = 'users';
     const SETTINGS = 'settings';
+    const PROGRAM = 'program';
+
 
     /**
      **
@@ -74,6 +76,7 @@ class PageSections {
             AccessRight::PRODUCT_CATEGORIES_SECTION => self::PRODUCT_CATEGORIES,
             AccessRight::PROMOTIONS_SECTION => self::PROMOTIONS,
             AccessRight::NEWSLETTER_SECTION => self::NEWSLETTER,
+            AccessRight::PROGRAM_SECTION => self::PROGRAM,
             AccessRight::SETTINGS_SECTION => self::SETTINGS,
         );
         return $sections;

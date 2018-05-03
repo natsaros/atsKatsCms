@@ -33,9 +33,6 @@
     <meta property="og:image:width" content="1444" >
     <meta property="og:image:height" content="960" >
 
-
-    <!--    <link rel="image_src" href="http://fitnesshousebypenny.gr/img/gallery3.jpg" />-->
-
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic&subset=latin,greek,greek-ext'
           rel='stylesheet' type='text/css'>
 

@@ -22,9 +22,6 @@
     <!-- DataTables Responsive CSS -->
     <link href="<?php echo CSS_URI ?>datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo CSS_URI ?>adminCustom.css"/>
-
     <!-- Morris Charts CSS -->
     <link href="<?php echo CSS_URI ?>morrisjs/morris.css" rel="stylesheet">
 
@@ -39,6 +36,13 @@
 
     <!-- Bootstrap Datetimepicker CSS -->
     <link href="<?php echo CSS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Full Calendar CSS -->
+    <link href="<?php echo CSS_URI ?>fullCalendar/fullcalendar.min.css" rel="stylesheet">
+    <link href="<?php echo CSS_URI ?>fullCalendar/scheduler.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS_URI ?>adminCustom.css"/>
 
     <?php if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLoggedIn() && !forceUserChangePassword()){ ?>
         <!-- Include the CSS that styles the Google Analytics charts. -->

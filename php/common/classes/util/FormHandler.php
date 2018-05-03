@@ -115,9 +115,39 @@ class FormHandler {
      *
      * @param $fieldName
      * @param $field
-     * @return null|string
+     * @return null|mixed
      */
     static function getEditFormData($fieldName, $field) {
         return self::$afterFormSubmission ? self::$form_data[$fieldName] : $field;
+    }
+
+    /**
+     * @param $imageField
+     * @return bool | mixed
+     * @throws SystemException
+     */
+    public static function validateUploadedImage($imageField) {
+        $imageValid = true;
+        $image2Upload = $_FILES[$imageField];
+        $emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
+        if ($emptyFile) {
+            $imageSavedToSession = self::getFormPictureData($imageField);
+            if (isNotEmpty($imageSavedToSession)) {
+                $image2Upload = $imageSavedToSession;
+                $image2Upload[ImageUtil::TMP_NAME] = $image2Upload[self::DRAFT_PATH];
+                $emptyFile = false;
+            }
+        }
+
+        if (!$emptyFile) {
+            $imageValid = ImageUtil::validateImageAllowed($image2Upload);
+        }
+
+        if (!$imageValid) {
+            addErrorMessage("Please select a valid image file");
+            return false;
+        }
+
+        return $image2Upload;
     }
 }

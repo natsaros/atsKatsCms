@@ -535,6 +535,7 @@ function loadAppClasses() {
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'AccessRightsHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'SettingsHandler.php');
     require_once(CLASSES_ROOT_PATH . 'db' . DS . 'NewsletterHandler.php');
+    require_once(CLASSES_ROOT_PATH . 'db' . DS . 'ProgramHandler.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'ImageUtil.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'EmailHandler.php');
     require_once(CLASSES_ROOT_PATH . 'util' . DS . 'FormHandler.php');

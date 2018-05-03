@@ -5,3 +5,5 @@ gallery/pictures/*
 logs/*
 *.min.js
 *.min.css
+#admin css gets generated from less
+adminCustom.css

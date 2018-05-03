@@ -1,5 +1,8 @@
+<script src="<?php echo JS_URI ?>fullcalendar/moment.min.js"></script>
+
 <!-- jQuery -->
 <script src="<?php echo JS_URI ?>jquery.min.js"></script>
+<script src="<?php echo JS_URI ?>jquery-ui.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="<?php echo JS_URI ?>bootstrap.min.js"></script>
@@ -34,6 +37,7 @@
 <!-- Morris Charts JavaScript -->
 <script src="<?php echo JS_URI ?>datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo JS_URI ?>datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo JS_URI ?>datatables-plugins/dataTables.select.min.js"></script>
 <script src="<?php echo JS_URI ?>datatables-responsive/dataTables.responsive.js"></script>
 
 <script src="<?php echo JS_URI ?>bootstrap-toggle/bootstrap-toggle.min.js"></script>
@@ -42,6 +46,9 @@
 <script src="<?php echo JS_URI ?>adminCustom.js"></script>
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/moment.min.js"></script>
 <script src="<?php echo JS_URI ?>bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+<script src="<?php echo JS_URI ?>fullcalendar/fullcalendar.min.js"></script>
+<script src="<?php echo JS_URI ?>fullcalendar/scheduler.min.js"></script>
 
 <?php
 if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLoggedIn() && !forceUserChangePassword()){

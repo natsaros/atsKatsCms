@@ -24,6 +24,9 @@ class Db {
     const PRODUCT_CATEGORIES = 'PRODUCT_CATEGORIES';
     const PROMOTION = 'PROMOTION';
 
+    const LESSONS = 'LESSONS';
+    const EVENTS = 'EVENTS';
+
     const NEWSLETTER_EMAILS = 'NEWSLETTER_EMAILS';
     const NEWSLETTER_CAMPAIGNS = 'NEWSLETTER_CAMPAIGNS';
 
@@ -40,7 +43,11 @@ class Db {
 
     private $initialized;
 
-    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META, self::PAGES, self::PAGE_META, self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC, self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC, self::VISITORS);
+    private static $global_tables = array(self::SETTINGS, self::USERS, self::USER_META,
+        self::PAGES, self::PAGE_META,
+        self::USER_GROUPS, self::USER_GROUPS_META, self::UGR_ASSOC,
+        self::ACCESS_RIGHTS, self::ACCESS_RIGHTS_META, self::ACR_ASSOC,
+        self::VISITORS, self::LESSONS, self::EVENTS);
 
     private static $blog_tables = array(self::POSTS, self::POST_META, self::COMMENTS, self::COMMENT_META);
 
@@ -71,6 +78,9 @@ class Db {
     public $access_rights;
     public $access_rights_meta;
     public $acr_assoc;
+
+    public $lessons;
+    public $events;
 
     public $newsletter_emails;
     public $newsletter_campaigns;
@@ -388,6 +398,12 @@ class Db {
                     case self::VISITORS:
                         $this->setVisitors($updatedTable);
                         break;
+                    case self::LESSONS:
+                        $this->setLessons($updatedTable);
+                        break;
+                    case self::EVENTS:
+                        $this->setEvents($updatedTable);
+                        break;
                     case self::NEWSLETTER_EMAILS:
                         $this->setNewsletterEmails($updatedTable);
                         break;
@@ -609,6 +625,20 @@ class Db {
      */
     public function setVisitors($visitors) {
         $this->visitors = $visitors;
+    }
+
+    /**
+     * @param mixed $lessons
+     */
+    public function setLessons($lessons) {
+        $this->lessons = $lessons;
+    }
+
+    /**
+     * @param mixed $events
+     */
+    public function setEvents($events) {
+        $this->events = $events;
     }
 
     /**
