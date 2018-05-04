@@ -12,13 +12,7 @@ if ($isCreate) {
 
 $pageTitle = $isCreate ? "Create Product" : "Update Product";
 
-$afterFormSubmission = false;
-
-if (isset($_SESSION['updateProductForm']) && !empty($_SESSION['updateProductForm'])) {
-    $afterFormSubmission = true;
-    $form_data = $_SESSION['updateProductForm'];
-    unset($_SESSION['updateProductForm']);
-}
+FormHandler::unsetSessionForm('updateProductForm');
 
 $productCategories = ProductCategoryHandler::fetchAllProductCategoriesForAdmin();
 
