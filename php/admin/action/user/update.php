@@ -6,16 +6,9 @@ $ID = safe_input($_POST[UserHandler::ID]);
 $userName = safe_input($_POST[UserHandler::USERNAME]);
 $email = safe_input($_POST[UserHandler::EMAIL]);
 $phone = safe_input($_POST[UserHandler::PHONE]);
-$password = safe_input($_POST[UserHandler::PASSWORD]);
-$passwordConfirmation = safe_input($_POST[UserHandler::PASSWORD_CONFIRMATION]);
 
 if (isEmpty($userName) || isEmpty($email)) {
     addErrorMessage("Please fill in required info");
-}
-
-if ($updateFromMyProfile
-    && (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passwordConfirmation)) {
-    addErrorMessage("Please fill in a valid password");
 }
 
 if (!isValidMail($email)) {
@@ -40,11 +33,8 @@ if (hasErrors()) {
             FormHandler::setSessionForm('updateUserForm');
             Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
         } else {
-            foreach ($_POST as $key => $value) {
-                $_SESSION['updateMyProfileForm'][$key] = $value;
-            }
-            $_SESSION['updateMyProfileForm'][$key] = $value;
-            Redirect(getAdminRequestUri() . DS . PageSections::USERS . DS . "updateMyProfile");
+            FormHandler::setSessionForm('updateMyProfileForm');
+            Redirect(getAdminRequestUri() . "updateMyProfile");
         }
     }
 }
@@ -80,10 +70,6 @@ try {
         setLink($link)->
         setPhone($phone)->
         setForceChangePassword(0);
-
-        if ($updateFromMyProfile) {
-            $user2Update->setPassword(password_hash($password, PASSWORD_DEFAULT));
-        }
 
         if ($imgContent) {
             //only saving in filesystem for performance reasons
@@ -125,14 +111,18 @@ try {
 } catch (SystemException $ex) {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
-    Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
+    if ($updateFromMyProfile) {
+        Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
+    } else {
+        Redirect(getAdminRequestUri() . "updateMyProfile");
+    }
 }
 
 if (hasErrors()) {
     if ($updateFromMyProfile) {
         Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
     } else {
-        Redirect(getAdminRequestUri() . PageSections::USERS . DS . "updateMyProfile");
+        Redirect(getAdminRequestUri() . "updateMyProfile");
     }
 } else {
     FormHandler::unsetFormSessionToken();

@@ -5,7 +5,13 @@ $currentUser = $loggedInUser;
 FormHandler::unsetSessionForm('updateMyProfileForm');
 ?>
 
-<?php require(ADMIN_NAV_PATH . "pageHeader.php"); ?>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            My Profile
+        </h1>
+    </div>
+</div>
 
 <?php require(ADMIN_NAV_PATH . "messageSection.php"); ?>
 
@@ -67,18 +73,6 @@ FormHandler::unsetSessionForm('updateMyProfileForm');
                                    readonly>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="password_input">Password *</label>
-                            <input class="form-control" type="password" placeholder="Password"
-                                   name="<?php echo UserHandler::PASSWORD ?>"
-                                   id="password_input" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="password_input_confirm">Confirm Password *</label>
-                            <input class="form-control" type="password" placeholder="Confirm Password"
-                                   name="<?php echo UserHandler::PASSWORD_CONFIRMATION ?>"
-                                   id="password_input_confirm" required>
-                        </div>
-                        <div class="form-group">
                             <label class="control-label" for="firstname_input">First Name</label>
                             <input class="form-control" placeholder="First Name"
                                    name="<?php echo UserHandler::FIRST_NAME ?>"
@@ -106,6 +100,48 @@ FormHandler::unsetSessionForm('updateMyProfileForm');
                                    value="<?php echo FormHandler::getEditFormData(UserHandler::PHONE, $currentUser->getPhone()); ?>">
                         </div>
 
+                        <div class="text-right form-group">
+                            <a type="button" href="<?php echo getAdminRequestUri() ?>"
+                               class="btn btn-default">Back</a>
+                            <input type="submit" name="submit" class="btn btn-primary" value="Save"
+                                   placeholder="Save"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Change Password
+        </h1>
+    </div>
+</div>
+
+<form name="updateMyPasswordForm" role="form" action="<?php echo getAdminActionRequestUri() . "user" . DS . "updatePassword"; ?>"
+      data-toggle="validator" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input type="hidden" name="<?php echo UserHandler::ID ?>"
+                               value="<?php echo $currentUser->getID() ?>">
+                        <div class="form-group">
+                            <label class="control-label" for="password_input">Password *</label>
+                            <input class="form-control" type="password" placeholder="Password"
+                                   name="<?php echo UserHandler::PASSWORD ?>"
+                                   id="password_input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password_input_confirm">Confirm Password *</label>
+                            <input class="form-control" type="password" placeholder="Confirm Password"
+                                   name="<?php echo UserHandler::PASSWORD_CONFIRMATION ?>"
+                                   id="password_input_confirm" required>
+                        </div>
                         <div class="text-right form-group">
                             <a type="button" href="<?php echo getAdminRequestUri() ?>"
                                class="btn btn-default">Back</a>
