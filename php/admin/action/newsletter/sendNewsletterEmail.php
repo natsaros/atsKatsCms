@@ -39,11 +39,11 @@ try {
     $headers .= "Date: " . date(DEFAULT_DATE_FORMAT);
 
     if (isNotEmpty($link)){
-        $file_contents = file_get_contents("./assets/emailTemplates/sellinofos_newsletter_message_with_link.htm");
+        $file_contents = file_get_contents("./assets/emailTemplates/client/sellinofos_newsletter_message_with_link.htm");
         $file_contents = str_replace("%EMAIL_LINK%", $link, $file_contents);
         $file_contents = str_replace("%EMAIL_BUTTON%", $button_text, $file_contents);
     } else {
-        $file_contents = file_get_contents("./assets/emailTemplates/sellinofos_newsletter_message.htm");
+        $file_contents = file_get_contents("./assets/emailTemplates/client/sellinofos_newsletter_message.htm");
     }
 
     $file_contents = str_replace("%EMAIL_BODY%", $message, $file_contents);

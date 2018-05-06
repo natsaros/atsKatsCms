@@ -40,22 +40,19 @@ class EmailHandler {
      * @throws SystemException
      */
     static function sendResetPasswordToAdminUser($email, $password) {
-        $email_subject = "Sellinofos - Password Reset";
-        $email_body = "Your password has been reset.<br/>";
-        $email_body .= "You should use the following password in order to sign in to Sellinofos Administration console:<br/><br/>";
-        $email_body .= "<u>Password:</u>&nbsp;<b>" . $password . "</b><br/><br/>";
-        $email_body .= "Click <a href=\"https://sellinofos.gr/admin\">here</a> to log in.<br/><br/>";
-        $email_body .= "Kind Regards,<br/>";
-        $email_body .= "Sellinfos.gr";
+        $email_subject = SITE_TITLE . " - Password Reset";
+        $email_body = file_get_contents("./assets/emailTemplates/admin/reset_password_message.htm");
+        $email_body = str_replace("%SITE_TITLE%", SITE_TITLE, $email_body);
+        $email_body = str_replace("%SITE_DOMAIN_NAME%", SITE_DOMAIN_NAME, $email_body);
+        $email_body = str_replace("%PASSWORD%", $password, $email_body);
         $headers = "MIME-Version: 1.1\r\n";
         $headers .= "Content-type: text/html; charset=utf-8\r\n";
-        $headers .= "From:admin@sellinofos.gr\r\n";
-        $headers .= "Reply-To:noreply@sellinofos.gr\r\n";
-//        $headers .= "Bcc: admin@sellinofos.com\r\n";
+        $headers .= "From:admin@" . SITE_DOMAIN_NAME . "\r\n";
+        $headers .= "Reply-To:noreply@" . SITE_DOMAIN_NAME . "\r\n";
         $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
         $headers .= "Date: " . date(DEFAULT_DATE_FORMAT);
 
-        $email = Email::createFull("admin@sellinofos.gr", $email, $email_subject, $email_body, $headers);
+        $email = Email::createFull("admin@" . SITE_DOMAIN_NAME, $email, $email_subject, $email_body, $headers);
         self::sendEmail($email);
     }
 
@@ -66,23 +63,20 @@ class EmailHandler {
      * @throws SystemException
      */
     static function sendPasswordToCreatedAdminUser($email, $username, $password) {
-        $email_subject = "Sellinofos - Welcome!";
-        $email_body = "Welcome to Sellinofos!<br/>";
-        $email_body .= "You can log in to Sellinofos Administration console by using the following credentials:<br/><br/>";
-        $email_body .= "<u>Username:</u>&nbsp;<b>" . $username . "</b><br/>";
-        $email_body .= "<u>Password:</u>&nbsp;<b>" . $password . "</b><br/><br/>";
-        $email_body .= "Click <a href=\"https://sellinofos.gr/admin\">here</a> to log in.<br/><br/>";
-        $email_body .= "Kind Regards,<br/>";
-        $email_body .= "Sellinfos.gr";
+        $email_subject = SITE_TITLE . " - Welcome!";
+        $email_body = file_get_contents("./assets/emailTemplates/admin/new_user_password_generation_message.htm");
+        $email_body = str_replace("%SITE_TITLE%", SITE_TITLE, $email_body);
+        $email_body = str_replace("%SITE_DOMAIN_NAME%", SITE_DOMAIN_NAME, $email_body);
+        $email_body = str_replace("%USERNAME%", $username, $email_body);
+        $email_body = str_replace("%PASSWORD%", $password, $email_body);
         $headers = "MIME-Version: 1.1\r\n";
         $headers .= "Content-type: text/html; charset=utf-8\r\n";
-        $headers .= "From:admin@sellinofos.gr\r\n";
-        $headers .= "Reply-To:noreply@sellinofos.gr\r\n";
-//        $headers .= "Bcc: admin@sellinofos.com\r\n";
+        $headers .= "From:admin@" . SITE_DOMAIN_NAME . "\r\n";
+        $headers .= "Reply-To:noreply@" . SITE_DOMAIN_NAME . "\r\n";
         $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
         $headers .= "Date: " . date(DEFAULT_DATE_FORMAT);
 
-        $email = Email::createFull("admin@sellinofos.gr", $email, $email_subject, $email_body, $headers);
+        $email = Email::createFull("admin@" . SITE_DOMAIN_NAME, $email, $email_subject, $email_body, $headers);
         self::sendEmail($email);
     }
 
