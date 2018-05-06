@@ -62,6 +62,17 @@ $(document).ready(function () {
             $(this).addClass('active');
         }
     });
+
+    var isMobileVersion  = function() {
+        return $(window).width() <= 768;
+    }
+
+    $('li.sub-category-menu-trigger').on('mouseenter', function () {
+        if (!isMobileVersion()) {
+            $('.sub-category-menu').fadeIn(150);
+        }
+    });
+
 });
 
 function initialize(myCenter) {

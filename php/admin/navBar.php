@@ -29,7 +29,7 @@ $adminActionRequestUri = getAdminActionRequestUri();
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li>
-                        <a href="<?php echo $adminRequestUri . PageSections::USERS . DS . "updateMyProfile"; ?>">
+                        <a href="<?php echo $adminRequestUri . "updateMyProfile"; ?>">
                             <i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
                     <li class="divider"></li>
