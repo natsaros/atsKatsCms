@@ -37,6 +37,7 @@ if($config) {
     defined('DEV_MODE') or define('DEV_MODE', $config['dev_mode'] === 'true');
 
     defined('SITE_TITLE') or define('SITE_TITLE', $config['site_title']);
+    defined('SITE_DOMAIN_NAME') or define('SITE_DOMAIN_NAME', $config['site_domain_name']);
     defined('DEFAULT_TIME_ZONE') or define('DEFAULT_TIME_ZONE', $config['default_timezone']);
 
     defined('GA_ID') or define('GA_ID', $config['google_analytics_id']);

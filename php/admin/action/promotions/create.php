@@ -13,12 +13,7 @@ if (isEmpty($promoted_from) || isEmpty($promoted_to) || isEmpty($promotion_text)
 }
 
 if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['updatePromotionForm'][$key] = $value;
-        }
-        $_SESSION['updatePromotionForm'][$key] = $value;
-    }
+    FormHandler::setSessionForm('updatePromotionForm');
     Redirect(getAdminRequestUri() . PageSections::PROMOTIONS . DS . "updatePromotion");
 }
 

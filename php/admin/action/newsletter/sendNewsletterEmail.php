@@ -19,12 +19,7 @@ if (isNotEmpty($link) && isEmpty($button_text)){
 }
 
 if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['sendNewsletterForm'][$key] = $value;
-        }
-        $_SESSION['sendNewsletterForm'][$key] = $value;
-    }
+    FormHandler::setSessionForm('sendNewsletterForm');
     Redirect(getAdminRequestUri() . PageSections::NEWSLETTER . DS . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterEmailForm')));
 }
 
@@ -39,11 +34,11 @@ try {
     $headers .= "Date: " . date(DEFAULT_DATE_FORMAT);
 
     if (isNotEmpty($link)){
-        $file_contents = file_get_contents("./assets/emailTemplates/sellinofos_newsletter_message_with_link.htm");
+        $file_contents = file_get_contents("./assets/emailTemplates/client/sellinofos_newsletter_message_with_link.htm");
         $file_contents = str_replace("%EMAIL_LINK%", $link, $file_contents);
         $file_contents = str_replace("%EMAIL_BUTTON%", $button_text, $file_contents);
     } else {
-        $file_contents = file_get_contents("./assets/emailTemplates/sellinofos_newsletter_message.htm");
+        $file_contents = file_get_contents("./assets/emailTemplates/client/sellinofos_newsletter_message.htm");
     }
 
     $file_contents = str_replace("%EMAIL_BODY%", $message, $file_contents);

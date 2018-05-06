@@ -1,5 +1,4 @@
 <?php
-preserveFormData();
 $name = $_POST['name'];
 $email_address = $_POST['email'];
 $phone = $_POST['phone'];
@@ -18,12 +17,7 @@ if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
 }
 
 if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['sendEmailForm'][$key] = $value;
-        }
-        $_SESSION['sendEmailForm'][$key] = $value;
-    }
+    FormHandler::setSessionForm('sendEmailForm');
     Redirect(getRootUri() . "contact");
 }
 
@@ -35,7 +29,6 @@ try {
 }
 
 if (!hasErrors()) {
-    consumeFormData();
     addInfoMessage('Λάβαμε το email σας και θα επικοινωνήσουμε άμεσα μαζί σας! Ευχαριστούμε!');
 }
 Redirect(getRootUri() . "contact");

@@ -8,13 +8,7 @@ $newsletterCampaigns = NewsletterHandler::getAllNewsletterCampaigns();
 $activeTab = $_GET['activeTab'];
 $activeTabClass = 'class="active"';
 
-$afterFormSubmission = false;
-
-if (isset($_SESSION['sendNewsletterForm']) && !empty($_SESSION['sendNewsletterForm'])) {
-    $afterFormSubmission = true;
-    $form_data = $_SESSION['sendNewsletterForm'];
-    unset($_SESSION['sendNewsletterForm']);
-}
+FormHandler::unsetSessionForm('sendNewsletterForm');
 ?>
 
 <ul class="nav nav-tabs">

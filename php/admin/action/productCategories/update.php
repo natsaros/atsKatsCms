@@ -15,6 +15,8 @@ if (isEmpty($imagePath)) {
 
 if (isNotEmpty($imagePath)) {
     $image2Upload = FormHandler::validateUploadedImage(ProductCategoryHandler::IMAGE);
+} else {
+    addErrorMessage("Please fill in required info");
 }
 
 $parentCategory = safe_input($_POST[ProductCategoryHandler::PARENT_CATEGORY]);

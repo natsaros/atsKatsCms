@@ -42,9 +42,10 @@ function statusChangeCallback(response, toPostComment) {
 
 function backendFBLogin(accessToken) {
     FB.api('/me', function(response) {
+        var contextRoot = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
         $.ajax({
             type: "POST",
-            url: "/peny/ajaxAction/registerFbUser",
+            url: contextRoot + "/ajaxAction/registerFbUser",
             data: {"fbAccessToken" : accessToken},
             success: function(data) {
                 if (data != null && data != ''){
