@@ -19,12 +19,7 @@ if (isNotEmpty($link) && isEmpty($button_text)){
 }
 
 if(hasErrors()) {
-    if (!empty($_POST)) {
-        foreach($_POST as $key => $value) {
-            $_SESSION['sendNewsletterForm'][$key] = $value;
-        }
-        $_SESSION['sendNewsletterForm'][$key] = $value;
-    }
+    FormHandler::setSessionForm('sendNewsletterForm');
     Redirect(getAdminRequestUri() . PageSections::NEWSLETTER . DS . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterEmailForm')));
 }
 

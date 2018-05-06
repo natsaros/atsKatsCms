@@ -771,39 +771,6 @@ function startsWith($string, $query) {
 }
 
 /**
- * Preserves form data to session
- */
-function preserveFormData() {
-    if (isNotEmpty($_POST)) {
-        foreach ($_POST as $index => $formValue) {
-            $_SESSION[FORM_PREFIX . $index] = $formValue;
-        }
-    }
-}
-
-
-/**
- * Consumes preserved data of form from session
- */
-function consumeFormData() {
-    if (isNotEmpty($_SESSION)) {
-        foreach ($_SESSION as $index => $sessionValue) {
-            if (startsWith($index, FORM_PREFIX)) {
-                unset($_SESSION[$index]);
-            }
-        }
-    }
-}
-
-/**
- * @param $key
- * @return mixed
- */
-function formValueFromSession($key) {
-    return $_SESSION[FORM_PREFIX . $key];
-}
-
-/**
  * @return bool
  */
 function checkIfAccessTokenIsNotSetOrHasExpired() {
