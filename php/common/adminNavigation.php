@@ -6,7 +6,7 @@ if (isAdminModal()) {
     $path = ADMIN_MODAL_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
 } else {
     if (isNotEmpty($loggedInUser)) {
-        if (PageSections::hasAccessToPageSection(ADMIN_PAGE_ID,
+        if ($pageSections->hasAccessToPageSection(ADMIN_PAGE_ID,
             getFullUserFromSession()->getAccessRightsStr())) {
             $path = ADMIN_NAV_PATH . ADMIN_PAGE_ID . PHP_POSTFIX;
         } else {
@@ -50,13 +50,9 @@ try {
             <body>
             <div id="wrapper">
                 <!-- Navigation -->
-                <?php require_safe(ADMIN_ROOT_PATH . "navBar.php"); ?>
+                <?php require(ADMIN_ROOT_PATH . "navBar.php"); ?>
                 <div id="page-wrapper">
-                    <?php
-                    //TODO : evolve navigation to be able to add folders under 'navigation' directory and redirect correctly
-                    // now it only navigates to the php passed by name
-                    @require_safe($path);
-                    ?>
+                    <?php require($path); ?>
                 </div>
             </div>
             </body>

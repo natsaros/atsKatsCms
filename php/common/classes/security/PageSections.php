@@ -14,6 +14,11 @@ class PageSections {
     const SETTINGS = 'settings';
     const PROGRAM = 'program';
 
+    //by default active sections
+    private $activeSiteSections = array(
+        AccessRight::DASHBOARD_SECTION => self::DASHBOARD,
+        AccessRight::SETTINGS_SECTION => self::SETTINGS
+    );
 
     /**
      **
@@ -21,15 +26,20 @@ class PageSections {
      * @param array $accessRights
      * @return mixed|boolean
      */
-    static function hasAccessToPageSection($pageRequested, $accessRights) {
+    function hasAccessToPageSection($pageRequested, $accessRights) {
         $hasAccess = false;
-        $pagesAllowed = PageSections::getPagesByAccessRights($accessRights);
-        foreach ($pagesAllowed as $page) {
-            if (preg_match('/^' . $page . '/', $pageRequested)) {
-                $hasAccess = true;
-                break;
+        if (in_array($pageRequested, self::getExcludedPages())) {
+            $hasAccess = true;
+        } else {
+            $pagesAllowed = self::getPagesByAccessRights($accessRights);
+            foreach ($pagesAllowed as $page) {
+                if (preg_match('/^' . $page . '/', $pageRequested)) {
+                    $hasAccess = true;
+                    break;
+                }
             }
         }
+
         return $hasAccess;
     }
 
@@ -37,9 +47,9 @@ class PageSections {
      * @param array $accessRights
      * @return mixed|string[]
      */
-    static function getPagesByAccessRights($accessRights) {
+    private function getPagesByAccessRights($accessRights) {
         if (sizeof($accessRights) === 1 && $accessRights[0] === AccessRight::ALL) {
-            return array_values(self::getPageSections());
+            return array_values(self::getActiveSections());
         } else {
             $pages = array();
             foreach ($accessRights as $accessRight) {
@@ -56,8 +66,8 @@ class PageSections {
      * @param $accessRight
      * @return mixed|string
      */
-    static function getPageByAccessRight($accessRight) {
-        return self::getPageSections()[$accessRight];
+    private function getPageByAccessRight($accessRight) {
+        return self::getActiveSections()[$accessRight];
 
     }
 
@@ -77,8 +87,28 @@ class PageSections {
             AccessRight::PROMOTIONS_SECTION => self::PROMOTIONS,
             AccessRight::NEWSLETTER_SECTION => self::NEWSLETTER,
             AccessRight::PROGRAM_SECTION => self::PROGRAM,
-            AccessRight::SETTINGS_SECTION => self::SETTINGS,
+            AccessRight::SETTINGS_SECTION => self::SETTINGS
         );
         return $sections;
+    }
+
+    static function getExcludedPages() {
+        return array('updateMyProfile');
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getActiveSections() {
+        return $this->activeSiteSections;
+    }
+
+    /**
+     * @param $key
+     * @param $activeSiteSection
+     */
+    public function addActiveSections($key, $activeSiteSection) {
+        $this->activeSiteSections[$key] = $activeSiteSection;
     }
 }
