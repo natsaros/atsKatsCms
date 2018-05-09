@@ -53,63 +53,63 @@ $adminActionRequestUri = getAdminActionRequestUri();
                         echo 'class="active"';
                     } ?>><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
-                <?php if (hasAccess($loggedInUser, AccessRight::USER_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::USER_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::USERS . DS . 'users' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'users') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-users fa-fw"></i> Users</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::POSTS_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::POSTS . DS . 'posts' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'posts') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-comments-o fa-fw"></i> Posts</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::PRODUCTS_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::PRODUCTS_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::PRODUCTS . DS . 'products' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'products') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-shopping-cart fa-fw"></i> Products</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::PRODUCT_CATEGORIES_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::PRODUCT_CATEGORIES_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::PRODUCT_CATEGORIES . DS . 'productCategories' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'productCategories') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-list  fa-fw"></i> Product Categories</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::PROMOTIONS_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::PROMOTIONS_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::PROMOTIONS . DS . 'promotions' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'promotions') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-rocket fa-fw"></i> Promotions</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::NEWSLETTER . DS . 'newsletter' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'newsletter') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-envelope"></i> Newsletter</a>
                     </li>
                 <?php } ?>
-                <!--<?php if (hasAccess($loggedInUser, AccessRight::PAGES_SECTION)) { ?>
+                <!--<?php if (hasAccess($loggedInUser, AccessRight::PAGES_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . 'pages' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'pages') !== false) {
                     echo 'class="active"';
                 } ?>><i class="fa fa-table fa-fw"></i> Pages</a>
                     </li>
                 <?php } ?>-->
-                <?php if (hasAccess($loggedInUser, AccessRight::PROGRAM_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::PROGRAM_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::PROGRAM . DS . 'program' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'program') !== false) {
                             echo 'class="active"';
                         } ?>><i class="fa fa-calendar fa-fw"></i> Program</a>
                     </li>
                 <?php } ?>
-                <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION)) { ?>
+                <?php if (hasAccess($loggedInUser, AccessRight::SETTINGS_SECTION, $pageSections)) { ?>
                     <li>
                         <a href="<?php echo $adminRequestUri . PageSections::SETTINGS . DS . 'settings' ?>" <?php if (strpos(ADMIN_PAGE_ID, 'settings') !== false) {
                             echo 'class="active"';

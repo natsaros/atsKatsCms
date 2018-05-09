@@ -10,6 +10,9 @@ if (file_exists(COMMON_ROOT_PATH . 'config.php')) {
 }
 date_default_timezone_set(DEFAULT_TIME_ZONE);
 if (isAdmin()) {
+    if (file_exists(COMMON_ROOT_PATH . 'siteSections.php')) {
+        require_once(COMMON_ROOT_PATH . 'siteSections.php');
+    }
     if (isAdminAction() && isEmpty($_GET["action"])) {
         @include("php/admin/404.php");
         return;
