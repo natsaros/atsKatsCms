@@ -112,17 +112,17 @@ try {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
     if ($updateFromMyProfile) {
-        Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
-    } else {
         Redirect(getAdminRequestUri() . "updateMyProfile");
+    } else {
+        Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
     }
 }
 
 if (hasErrors()) {
     if ($updateFromMyProfile) {
-        Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
-    } else {
         Redirect(getAdminRequestUri() . "updateMyProfile");
+    } else {
+        Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
     }
 } else {
     FormHandler::unsetFormSessionToken();

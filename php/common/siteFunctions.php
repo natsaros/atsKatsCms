@@ -751,12 +751,15 @@ function isAjax() {
 /**
  * @param $user User
  * @param $accessRight
+ * @param $pageSections PageSections
  * @return bool
  */
-function hasAccess($user, $accessRight) {
+function hasAccess($user, $accessRight, $pageSections) {
     $hasAccess = false;
     if (isNotEmpty($user->getAccessRights())) {
-        $hasAccess = in_array(AccessRight::ALL, $user->getAccessRightsStr()) || in_array($accessRight, $user->getAccessRightsStr());
+        $hasAccess = (in_array(AccessRight::ALL, $user->getAccessRightsStr())
+                || in_array($accessRight, $user->getAccessRightsStr()))
+            && in_array($accessRight, array_keys($pageSections->getActiveSections()));
     }
     return $hasAccess;
 }
