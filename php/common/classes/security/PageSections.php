@@ -27,6 +27,8 @@ class PageSections {
      * @return mixed|boolean
      */
     function hasAccessToPageSection($pageRequested, $accessRights) {
+//        TODO: resolve access right from pageRequested and also check if has access from access rights
+//        TODO: @see hasAccess from siteFunctions
         $hasAccess = false;
         if (in_array($pageRequested, self::getExcludedPages())) {
             $hasAccess = true;
@@ -103,6 +105,23 @@ class PageSections {
     public function getActiveSections() {
         return $this->activeSiteSections;
     }
+
+    /**
+     * @param array $activeSiteSections
+     * @return PageSections
+     */
+    public function setActiveSiteSections($activeSiteSections) {
+        foreach ($activeSiteSections as $section) {
+            $key = array_search($section, PageSections::getPageSections());
+            $index = array_search($section, array_values(PageSections::getPageSections()));
+            if ($key && $index && !in_array($section, self::getActiveSections())) {
+                self::addActiveSections(array_keys(PageSections::getPageSections())[$index], PageSections::getPageSections()[$key]);
+            }
+        }
+        return $this;
+    }
+
+
 
     /**
      * @param $key
