@@ -14,7 +14,7 @@
         <div class="modal-body text-center">
             <?php
             $userAccessRights = AccessRightsHandler::getAccessRightByGroupId($id);
-            $allAccessRights = AccessRightsHandler::fetchAllAccessRights();
+            $allAccessRights = AccessRightsHandler::fetchAllActiveAccessRights();
             ?>
             <div class="row">
                 <div class="col-lg-12">

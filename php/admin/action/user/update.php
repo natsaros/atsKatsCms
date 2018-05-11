@@ -86,7 +86,7 @@ try {
         }
         if ($updateUserRes !== null || $updateUserRes) {
             if (!$updateFromMyProfile) {
-                addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
+                addSuccessMessage("User {$user2Update->getUserName()} successfully updated");
             } else {
                 addSuccessMessage("Your profile has been successfully updated");
             }

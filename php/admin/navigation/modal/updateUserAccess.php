@@ -15,11 +15,11 @@
                 <div class="col-lg-12">
                     <?php
                     $userAccessRights = AccessRightsHandler::getAccessRightByUserId($id);
-                    $allGroups = AccessRightsHandler::fetchAllAccessRights();
+                    $allAccessRights = AccessRightsHandler::fetchAllActiveAccessRights();
                     ?>
                     <?php
                     /* @var $right AccessRight */
-                    foreach ($allGroups as $key => $right) {
+                    foreach ($allAccessRights as $key => $right) {
                         ?>
                         <div class="form-group">
                             <label class="control-label"

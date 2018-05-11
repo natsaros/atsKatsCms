@@ -3,11 +3,11 @@
 /**
  * Signifies access rights of users and groups of the application
  */
-class AccessRight {
+class AccessRight
+{
 
     const DESCRIPTION = 'description';
 
-//    TODO : make access rights dynamic according to DB access rights
     const ALL = 'ALL';
     const DASHBOARD_SECTION = 'DASHBOARD_SECTION';
     const PAGES_SECTION = 'PAGES_SECTION';
@@ -22,6 +22,7 @@ class AccessRight {
 
     private $ID;
     private $name;
+    private $status;
 
     /**
      * @var AccessRightMeta[]
@@ -32,6 +33,7 @@ class AccessRight {
      * AccessRight constructor.
      */
     public function __construct() {
+        $this->setStatus(AccessRightStatus::ACTIVE);
         $this->setAccessMeta(AccessRightMeta::create());
     }
 
@@ -46,10 +48,11 @@ class AccessRight {
     /**
      * @param $ID
      * @param $name
+     * @param $status
      * @return $this
      */
-    public static function createAccessRight($ID, $name) {
-        return self::create()->setID($ID)->setName($name);
+    public static function createAccessRight($ID, $name, $status) {
+        return self::create()->setID($ID)->setName($name)->setStatus($status);
     }
 
     /**
@@ -80,6 +83,15 @@ class AccessRight {
     }
 
     /**
+     * @param mixed $status
+     * @return AccessRight
+     */
+    public function setStatus($status) {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getID() {
@@ -101,15 +113,39 @@ class AccessRight {
     }
 
     /**
+     * @return mixed
+     */
+    public function getStatus() {
+        return $this->status;
+    }
+
+
+    /**
      * @return string|null
      */
     public function getDescription() {
-        foreach(self::getAccessMeta() as $meta) {
-            if($meta->getMetaKey() === self::DESCRIPTION) {
+        foreach (self::getAccessMeta() as $meta) {
+            if ($meta->getMetaKey() === self::DESCRIPTION) {
                 return $meta->getMetaValue();
             }
         }
         return null;
+    }
+
+    static function getAccessRights() {
+        return array(
+            self::ALL => self::ALL,
+            self::DASHBOARD_SECTION => self::DASHBOARD_SECTION,
+            self::PAGES_SECTION => self::PAGES_SECTION,
+            self::USER_SECTION => self::USER_SECTION,
+            self::POSTS_SECTION => self::POSTS_SECTION,
+            self::PRODUCTS_SECTION => self::PRODUCTS_SECTION,
+            self::PRODUCT_CATEGORIES_SECTION => self::PRODUCT_CATEGORIES_SECTION,
+            self::PROMOTIONS_SECTION => self::PROMOTIONS_SECTION,
+            self::NEWSLETTER_SECTION => self::NEWSLETTER_SECTION,
+            self::PROGRAM_SECTION => self::PROGRAM_SECTION,
+            self::SETTINGS_SECTION => self::SETTINGS_SECTION
+        );
     }
 
 }

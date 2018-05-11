@@ -1,11 +1,4 @@
 <?php
-try {
-    initLoad();
-} catch (SystemException $e) {
-    logError($e);
-    require(COMMON_ROOT_PATH . 'noDb.php');
-    return;
-}
 
 if (!isset($_SESSION['locale'])){
     $_SESSION['locale'] = 'el_GR';

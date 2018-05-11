@@ -181,7 +181,7 @@ function getActiveAdminPage() {
 }
 
 /**
- * @throws SystemException
+ * @throws Exception
  */
 function initLoad() {
     initLogFile();
@@ -189,6 +189,9 @@ function initLoad() {
     initGallery();
 }
 
+/**
+ * @throws SystemException
+ */
 function initLoadDb() {
     $db = getDb();
 
@@ -271,7 +274,6 @@ function Redirect($url, $refreshRate = null, $permanent = false) {
 
 /**
  * @return DB
- * @throws SystemException
  */
 function getDb() {
     if (is_null(Globals::get('DB'))) {

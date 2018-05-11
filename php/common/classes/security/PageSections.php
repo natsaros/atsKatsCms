@@ -1,7 +1,8 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'access' . DS . 'AccessRight.php');
 
-class PageSections {
+class PageSections
+{
 
     const DASHBOARD = 'dashboard';
     const PAGES = 'pages';
@@ -27,8 +28,6 @@ class PageSections {
      * @return mixed|boolean
      */
     function hasAccessToPageSection($pageRequested, $accessRights) {
-//        TODO: resolve access right from pageRequested and also check if has access from access rights
-//        TODO: @see hasAccess from siteFunctions
         $hasAccess = false;
         if (in_array($pageRequested, self::getExcludedPages())) {
             $hasAccess = true;
@@ -70,8 +69,14 @@ class PageSections {
      */
     private function getPageByAccessRight($accessRight) {
         return self::getActiveSections()[$accessRight];
-
     }
+
+
+    public function getActiveAccessRights() {
+        $ret = array(AccessRight::ALL);
+        return array_merge($ret, array_keys(self::getActiveSections()));
+    }
+
 
     /**
      * correlation between access rights and pages
@@ -79,7 +84,7 @@ class PageSections {
      * @return array
      */
     static function getPageSections() {
-        $sections = array(
+        return array(
             AccessRight::DASHBOARD_SECTION => self::DASHBOARD,
             AccessRight::PAGES_SECTION => self::PAGES,
             AccessRight::USER_SECTION => self::USERS,
@@ -91,7 +96,6 @@ class PageSections {
             AccessRight::PROGRAM_SECTION => self::PROGRAM,
             AccessRight::SETTINGS_SECTION => self::SETTINGS
         );
-        return $sections;
     }
 
     static function getExcludedPages() {
@@ -120,7 +124,6 @@ class PageSections {
         }
         return $this;
     }
-
 
 
     /**
