@@ -31,10 +31,13 @@ try {
     }
 
     $allActiveAccessRights = AccessRightsHandler::fetchAccessRightsStr(AccessRightsHandler::fetchAllActiveAccessRights());
-    $array_diff = array_diff($allActiveAccessRights, $pageSections->getActiveAccessRights());
-    if (isNotEmpty($array_diff)) {
+    $activeAccessRights = $pageSections->getActiveAccessRights();
+    asort($allActiveAccessRights);
+    asort($activeAccessRights);
+    $areEqual = array_values($allActiveAccessRights) == array_values($activeAccessRights);
+    if (!$areEqual) {
         $accessRightsStr = AccessRightsHandler::fetchAccessRightsStr(AccessRightsHandler::fetchAllAccessRights());
-        AccessRightsHandler::resetDbAccessRights($accessRightsStr, $pageSections->getActiveAccessRights());
+        AccessRightsHandler::resetDbAccessRights($accessRightsStr, $activeAccessRights);
     }
 } catch (SystemException $e) {
     logError($e);
