@@ -3,7 +3,8 @@
  * Handles form data
  */
 
-class FormHandler {
+class FormHandler
+{
 
     const DRAFT_PATH = 'draft_path';
     const DRAFT_NAME = 'draft_name';
@@ -123,10 +124,11 @@ class FormHandler {
 
     /**
      * @param $imageField
+     * @param bool $mandatory
      * @return bool | mixed
-     * @throws SystemException
+     * @throws Exception
      */
-    public static function validateUploadedImage($imageField) {
+    public static function validateUploadedImage($imageField, $mandatory = false) {
         $imageValid = true;
         $image2Upload = $_FILES[$imageField];
         $emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
@@ -141,6 +143,8 @@ class FormHandler {
 
         if (!$emptyFile) {
             $imageValid = ImageUtil::validateImageAllowed($image2Upload);
+        } else if (!$mandatory) {
+            return null;
         }
 
         if (!$imageValid) {
