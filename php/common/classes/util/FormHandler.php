@@ -143,8 +143,13 @@ class FormHandler
 
         if (!$emptyFile) {
             $imageValid = ImageUtil::validateImageAllowed($image2Upload);
-        } else if (!$mandatory) {
-            return null;
+        } else {
+            if ($mandatory) {
+                addErrorMessage("Please select an image file");
+                return false;
+            } else {
+                return null;
+            }
         }
 
         if (!$imageValid) {
