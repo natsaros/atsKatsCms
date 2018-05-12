@@ -122,6 +122,12 @@ class FormHandler
         return self::$afterFormSubmission ? self::$form_data[$fieldName] : $field;
     }
 
+    public static function validateMandatoryField($field, $message = 'Please fill in mandatory value') {
+        if (isEmpty($field)) {
+            addErrorMessage($message);
+        }
+    }
+
     /**
      * @param $imageField
      * @param bool $mandatory
@@ -129,7 +135,6 @@ class FormHandler
      * @throws Exception
      */
     public static function validateUploadedImage($imageField, $mandatory = false) {
-        $imageValid = true;
         $image2Upload = $_FILES[$imageField];
         $emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
         if ($emptyFile) {

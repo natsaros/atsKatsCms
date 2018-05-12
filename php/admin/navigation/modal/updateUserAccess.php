@@ -26,11 +26,15 @@
                                    for="right_input_<?php echo $right->getID(); ?>"><?php echo $right->getDescription(); ?></label>
                             <div class="checkbox">
                                 <label>
-                                    <?php $isChecked = isNotEmpty($userAccessRights) ? in_array($right, $userAccessRights) ? 'checked' : '' : '' ?>
+                                    <?php
+                                    $isAll = AccessRight::ALL == $right->getName();
+                                    $isChecked = isNotEmpty($userAccessRights) ? in_array($right, $userAccessRights) ? 'checked' : '' : ''
+                                    ?>
                                     <input name="<?php echo AccessRightsHandler::ACCESS_ID; ?>[]"
                                            type="checkbox" <?php echo $isChecked ?>
                                            value="<?php echo $right->getID(); ?>"
                                            id="right_input_<?php echo $right->getID(); ?>"
+                                           data-is-all="<?php echo $isAll ?>"
                                            data-toggle="toggle"
                                            data-custom-on-val="<?php echo $right->getID(); ?>"
                                            data-custom-off-val="">

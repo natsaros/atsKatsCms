@@ -122,7 +122,7 @@ class AccessRightsHandler
     static function getAccessRightByUserId($id) {
         if (isNotEmpty($id)) {
             $query = "SELECT a.* FROM " . getDb()->access_rights . " a 
-                      JOIN " . getDb()->acr_assoc . " acr ON a." . self::ID . " = acr." . self::ACC_ID . " 
+                      LEFT JOIN " . getDb()->acr_assoc . " acr ON a." . self::ID . " = acr." . self::ACC_ID . " 
                       LEFT JOIN  " . getDb()->users . " u ON u." . self::ID . " = acr." . self::USER_ID . " 
                       LEFT JOIN " . getDb()->user_groups . " g ON g." . self::ID . " = acr." . self::GROUP_ID . " 
                       WHERE acr." . self::USER_ID . " = ? 

@@ -222,6 +222,23 @@ $(document).ready(function () {
         }
     });
 
+
+    var rightsCheckboxesSelector = 'div.toggle:visible > input[type=checkbox][id^="right_input_"]';
+    $(document).on('change', rightsCheckboxesSelector, function () {
+        var isAllSelector = '[data-is-all="1"]';
+        if ($(this).is(":checked")) {
+            if ($(this).data('isAll')) {
+                $(rightsCheckboxesSelector).not($(this)).bootstrapToggle('off');
+            } else {
+                $(rightsCheckboxesSelector + isAllSelector).bootstrapToggle('off');
+            }
+            var checkBoxesSize = $(rightsCheckboxesSelector + ':not([data-is-all="1"])').size();
+            if($(rightsCheckboxesSelector + ':not([data-is-all="1"]):checked').size() === checkBoxesSize){
+                $(rightsCheckboxesSelector + isAllSelector).bootstrapToggle('on');
+            }
+        }
+    });
+
     $('.numeric').numeric({ negative : false });
 
     $('#parent_category').on('change', function(){

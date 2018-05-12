@@ -159,7 +159,7 @@ $activeTabClass = 'class="active"';
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </a>
                                     <a type="button"
-                                       href="<?php echo getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
+                                       href="<?php echo getAdminRequestUri() . PageSections::USERS . DS . "updateGroup" . addParamsToUrl(array('id'), array($groupId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit Group">
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
@@ -202,7 +202,7 @@ $activeTabClass = 'class="active"';
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <a href="<?php echo getAdminRequestUri() . "updateGroup"; ?>" type="button"
+                <a href="<?php echo getAdminRequestUri() . PageSections::USERS . DS . "updateGroup"; ?>" type="button"
                    class="btn btn-outline btn-primary">
                     Add <span class="fa fa-users fa-fw" aria-hidden="true"></span>
                 </a>
