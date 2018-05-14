@@ -17,6 +17,7 @@ FormHandler::unsetSessionForm('updateMyProfileForm');
 
 <form name="updateMyProfileForm" role="form" action="<?php echo getAdminActionRequestUri() . "user" . DS . "update"; ?>"
       data-toggle="validator" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="<?php FormHandler::PAGE_ID ?>" value="<?php echo ADMIN_PAGE_ID ?>">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel-body">

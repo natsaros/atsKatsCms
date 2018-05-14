@@ -39,6 +39,7 @@ $pageTitle = $isCreate ? "Create User" : "Update User";
 $action = $isCreate ? getAdminActionRequestUri() . "user" . DS . "create" : getAdminActionRequestUri() . "user" . DS . "update"; ?>
 <form name="updateUserForm" role="form" action="<?php echo $action; ?>" data-toggle="validator" method="post"
       enctype="multipart/form-data">
+    <input type="hidden" name="<?php FormHandler::PAGE_ID ?>" value="<?php echo ADMIN_PAGE_ID ?>">
     <div class="tab-content">
         <div class="tab-pane fade <?php if (isEmpty($activeTab) || $activeTab === 'general') { ?> in active<?php } ?>"
              id="general">

@@ -6,6 +6,7 @@ $userName = safe_input($_POST[UserHandler::USERNAME]);
 $email = safe_input($_POST[UserHandler::EMAIL]);
 $phone = safe_input($_POST[UserHandler::PHONE]);
 
+
 if (isEmpty($userName) || isEmpty($email)) {
     addErrorMessage("Please fill in required info");
 }
@@ -27,18 +28,20 @@ if (isNotEmpty(trim($phone))
 
 $image2Upload = FormHandler::validateUploadedImage(UserHandler::PICTURE);
 
-$updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
-if (hasErrors()) {
-    FormHandler::setSessionForm('updateUserForm');
-    Redirect($updateUserUrl);
-}
-
 $first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
 $last_name = safe_input($_POST[UserHandler::LAST_NAME]);
 $gender = safe_input($_POST[UserHandler::GENDER]);
 $link = safe_input($_POST[UserHandler::LINK]);
 
 $groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
+
+FormHandler::validateMandatoryField($groupIds, 'Please choose a group for the user');
+
+$updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
+if (hasErrors()) {
+    FormHandler::setSessionForm('updateUserForm', $_POST[FormHandler::PAGE_ID]);
+    Redirect($updateUserUrl);
+}
 
 $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);
 if (isEmpty($picturePath)) {
