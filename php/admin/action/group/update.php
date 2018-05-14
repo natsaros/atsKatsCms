@@ -14,7 +14,7 @@ $meta_values = safe_input($_POST[GroupHandler::META_VALUE]);
 
 if (isEmpty($name)) {
     addInfoMessage("Please fill in required info");
-    Redirect(getAdminRequestUri() . "updateGroup" . addParamsToUrl(array('id'), array($ID)));
+    Redirect(getAdminRequestUri() . PageSections::USERS . DS . "updateGroup" . addParamsToUrl(array('id'), array($ID)));
 }
 
 try {

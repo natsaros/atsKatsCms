@@ -9,14 +9,7 @@ if (isset($_GET["ajaxAction"])) {
     $ajaxAction = $_GET["ajaxAction"];
 }
 
-try {
-    initLoad();
-    initAdminCustomCss();
-} catch (SystemException $e) {
-    logError($e);
-    require(COMMON_ROOT_PATH . 'noDb.php');
-    return;
-}
+initAdminCustomCss();
 
 if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
     try {

@@ -8,6 +8,8 @@
 @addButtonSecondaryColor: #daa508;
 @addButtonFontColor: #222;
 @addButtonSecondaryFontColor: #fff;
+@programPublishedColor : #20BB2A;
+@programColor : #f1b900;
 
 body {background-color: #f8f8f8;color: @fontColor;}
 a {color: @fontColor;}
@@ -162,6 +164,40 @@ div.dataTables_filter input {width: auto;}
 
 .panel-primary {border-color: @basicColor;}
 .panel-primary>.panel-heading {color: #fff;background-color: @basicColor;border-color: @basicColor;min-height: 130px;min-height: 130px;overflow-y:hidden;}
+
+#external-events {
+  margin-bottom: 20px;
+}
+
+#external-events .fc-event {
+  margin: 10px 0;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.fc-event {
+  background-color: @programColor;
+  border: 1px solid @programColor;
+}
+
+.published {
+  background-color: @programPublishedColor;
+  border: 1px solid @programPublishedColor;
+}
+
+.fc-event-container > * {
+  display: inline-block;
+}
+
+.fc-lesson {
+  width: 55%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 960px) {
+  .fc-lesson {
+    width: 60%;
+  }
+}
 
 #GA-stats #view-selector-container, #GA-stats #view-name {display: none;}
 

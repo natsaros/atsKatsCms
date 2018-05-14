@@ -3,7 +3,8 @@
  * Handles form data
  */
 
-class FormHandler {
+class FormHandler
+{
 
     const DRAFT_PATH = 'draft_path';
     const DRAFT_NAME = 'draft_name';
@@ -121,13 +122,19 @@ class FormHandler {
         return self::$afterFormSubmission ? self::$form_data[$fieldName] : $field;
     }
 
+    public static function validateMandatoryField($field, $message = 'Please fill in mandatory value') {
+        if (isEmpty($field)) {
+            addErrorMessage($message);
+        }
+    }
+
     /**
      * @param $imageField
+     * @param bool $mandatory
      * @return bool | mixed
-     * @throws SystemException
+     * @throws Exception
      */
-    public static function validateUploadedImage($imageField) {
-        $imageValid = true;
+    public static function validateUploadedImage($imageField, $mandatory = false) {
         $image2Upload = $_FILES[$imageField];
         $emptyFile = isEmpty($image2Upload) || $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
         if ($emptyFile) {
@@ -141,6 +148,13 @@ class FormHandler {
 
         if (!$emptyFile) {
             $imageValid = ImageUtil::validateImageAllowed($image2Upload);
+        } else {
+            if ($mandatory) {
+                addErrorMessage("Please select an image file");
+                return false;
+            } else {
+                return null;
+            }
         }
 
         if (!$imageValid) {

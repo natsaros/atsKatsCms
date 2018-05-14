@@ -181,7 +181,7 @@ function getActiveAdminPage() {
 }
 
 /**
- * @throws SystemException
+ * @throws Exception
  */
 function initLoad() {
     initLogFile();
@@ -189,6 +189,9 @@ function initLoad() {
     initGallery();
 }
 
+/**
+ * @throws SystemException
+ */
 function initLoadDb() {
     $db = getDb();
 
@@ -271,7 +274,6 @@ function Redirect($url, $refreshRate = null, $permanent = false) {
 
 /**
  * @return DB
- * @throws SystemException
  */
 function getDb() {
     if (is_null(Globals::get('DB'))) {
@@ -746,22 +748,6 @@ function isAjax() {
     $isAjaxGet = isset($_GET['isAjax']) ? $_GET['isAjax'] : false;
     $is_ajax = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') || $isAjaxPost || $isAjaxGet;
     return $is_ajax;
-}
-
-/**
- * @param $user User
- * @param $accessRight
- * @param $pageSections PageSections
- * @return bool
- */
-function hasAccess($user, $accessRight, $pageSections) {
-    $hasAccess = false;
-    if (isNotEmpty($user->getAccessRights())) {
-        $hasAccess = (in_array(AccessRight::ALL, $user->getAccessRightsStr())
-                || in_array($accessRight, $user->getAccessRightsStr()))
-            && in_array($accessRight, array_keys($pageSections->getActiveSections()));
-    }
-    return $hasAccess;
 }
 
 /**

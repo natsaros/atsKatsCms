@@ -86,7 +86,7 @@ try {
         }
         if ($updateUserRes !== null || $updateUserRes) {
             if (!$updateFromMyProfile) {
-                addSuccessMessage("User " . $user2Update->getUserName() . " successfully updated");
+                addSuccessMessage("User {$user2Update->getUserName()} successfully updated");
             } else {
                 addSuccessMessage("Your profile has been successfully updated");
             }
@@ -112,17 +112,17 @@ try {
     logError($ex);
     addErrorMessage(ErrorMessages::GENERIC_ERROR);
     if ($updateFromMyProfile) {
-        Redirect(getAdminRequestUri() . "updateMyProfile");
-    } else {
         Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
+    } else {
+        Redirect(getAdminRequestUri() . "updateMyProfile");
     }
 }
 
 if (hasErrors()) {
     if ($updateFromMyProfile) {
-        Redirect(getAdminRequestUri() . "updateMyProfile");
-    } else {
         Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
+    } else {
+        Redirect(getAdminRequestUri() . "updateMyProfile");
     }
 } else {
     FormHandler::unsetFormSessionToken();

@@ -1,7 +1,8 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'access' . DS . 'AccessRight.php');
 
-class PageSections {
+class PageSections
+{
 
     const DASHBOARD = 'dashboard';
     const PAGES = 'pages';
@@ -68,8 +69,14 @@ class PageSections {
      */
     private function getPageByAccessRight($accessRight) {
         return self::getActiveSections()[$accessRight];
-
     }
+
+
+    public function getActiveAccessRights() {
+        $ret = array(AccessRight::ALL);
+        return array_merge($ret, array_keys(self::getActiveSections()));
+    }
+
 
     /**
      * correlation between access rights and pages
@@ -77,7 +84,7 @@ class PageSections {
      * @return array
      */
     static function getPageSections() {
-        $sections = array(
+        return array(
             AccessRight::DASHBOARD_SECTION => self::DASHBOARD,
             AccessRight::PAGES_SECTION => self::PAGES,
             AccessRight::USER_SECTION => self::USERS,
@@ -89,7 +96,6 @@ class PageSections {
             AccessRight::PROGRAM_SECTION => self::PROGRAM,
             AccessRight::SETTINGS_SECTION => self::SETTINGS
         );
-        return $sections;
     }
 
     static function getExcludedPages() {
@@ -103,6 +109,22 @@ class PageSections {
     public function getActiveSections() {
         return $this->activeSiteSections;
     }
+
+    /**
+     * @param array $activeSiteSections
+     * @return PageSections
+     */
+    public function setActiveSiteSections($activeSiteSections) {
+        foreach ($activeSiteSections as $section) {
+            $key = array_search($section, PageSections::getPageSections());
+            $index = array_search($section, array_values(PageSections::getPageSections()));
+            if ($key && $index && !in_array($section, self::getActiveSections())) {
+                self::addActiveSections(array_keys(PageSections::getPageSections())[$index], PageSections::getPageSections()[$key]);
+            }
+        }
+        return $this;
+    }
+
 
     /**
      * @param $key

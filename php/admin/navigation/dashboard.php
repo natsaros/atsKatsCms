@@ -10,7 +10,7 @@ $loggedInUser = getFullUserFromSession();
 <?php require("messageSection.php"); ?>
 
     <div class="row">
-        <?php if (hasAccess($loggedInUser, AccessRight::NEWSLETTER_SECTION, $pageSections)) { ?>
+        <?php if ($pageSections->hasAccessToPageSection(PageSections::NEWSLETTER, $loggedInUser->getAccessRightsStr())) { ?>
             <div class="col-lg-6 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -40,7 +40,7 @@ $loggedInUser = getFullUserFromSession();
                 </div>
             </div>
         <?php } ?>
-        <?php if (hasAccess($loggedInUser, AccessRight::PROMOTIONS_SECTION, $pageSections)) { ?>
+        <?php if ($pageSections->hasAccessToPageSection(PageSections::PROMOTIONS, $loggedInUser->getAccessRightsStr())) { ?>
             <?php $activePromotion = PromotionHandler::getPromotedInstance();
             if (!is_null($activePromotion)) {
                 if ($activePromotion->getPromotedInstanceType() == PromotionInstanceType::PRODUCT) {
