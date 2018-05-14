@@ -193,7 +193,15 @@ class User {
      */
     public
     function getUserStatus() {
-        return $this->user_status === 1;
+        return $this->user_status;
+    }
+
+    /**
+     * @return boolean
+     */
+    public
+    function isUserActive() {
+        return self::getUserStatus() === UserStatus::ACTIVE;
     }
 
     /**
@@ -234,6 +242,10 @@ class User {
             }
         }
         return $accessRightsStr;
+    }
+
+    public function isAdmin() {
+        return in_array(AccessRight::ALL, self::getAccessRightsStr());
     }
 
     /**
@@ -428,6 +440,7 @@ class User {
         $this->groups = $groups;
         return $this;
     }
+
 
     /**
      * @param mixed $force_change_password

@@ -30,7 +30,7 @@ FormHandler::unsetSessionForm('updateMyProfileForm');
                         <input type="hidden" name="<?php echo UserHandler::GENDER ?>"
                                value="<?php echo $currentUser->getGender() ?>">
                         <input type="hidden" name="<?php echo UserHandler::USER_STATUS ?>"
-                               value="<?php echo $currentUser->getUserStatus() ?>">
+                               value="<?php echo $currentUser->isUserActive() ?>">
                         <input type="hidden" name="<?php echo UserHandler::LINK ?>"
                                value="<?php echo $currentUser->getLink() ?>">
 

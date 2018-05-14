@@ -51,19 +51,29 @@ $activeTabClass = 'class="active"';
                                 <td>
                                     <?php
                                     //Opposite set to '$updatedStatus' so that this gets passed to the db
-                                    $updatedStatus = $user->getUserStatus() ? UserStatus::INACTIVE : UserStatus::ACTIVE;
-                                    $activDeactivText = $user->getUserStatus() ? 'Deactivate' : 'Activate';
+                                    $updatedStatus = $user->isUserActive() ? UserStatus::INACTIVE : UserStatus::ACTIVE;
+                                    $activeDeactivText = $user->isUserActive() ? 'Deactivate' : 'Activate';
                                     $updateStatusUrl = getAdminActionRequestUri() . "user" . DS . "updateUserStatus" . addParamsToUrl(array('id', 'status'), array($userId, $updatedStatus));
+                                    $deleteUserUrl = getAdminActionRequestUri() . "user" . DS . "deleteUser" . addParamsToUrl(array('id'), array($userId));
                                     ?>
                                     <?php if ($loggedInUser->getID() != $user->getID()) { ?>
                                         <a type="button"
                                            href="<?php echo $updateStatusUrl; ?>"
-                                           class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> User">
-                                            <?php $statusClass = $user->getUserStatus() ? 'active-item' : 'inactive-item' ?>
+                                           class="btn btn-default btn-sm" title="<?php echo $activeDeactivText ?> User">
+                                            <?php $statusClass = $user->isUserActive() ? 'active-item' : 'inactive-item' ?>
                                             <span class="fa fa-user <?php echo $statusClass ?>"
                                                   aria-hidden="true"></span>
                                         </a>
                                     <?php } ?>
+
+                                    <?php if ($loggedInUser->getID() != $user->getID() && $loggedInUser->isAdmin()) { ?>
+                                        <a type="button"
+                                           href="<?php echo $deleteUserUrl; ?>"
+                                           class="btn btn-default btn-sm" title="Delete User">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </a>
+                                    <?php } ?>
+
                                     <a type="button"
                                        href="<?php echo $updateUserUrl . addParamsToUrl(array('id'), array($userId)); ?>"
                                        class="btn btn-default btn-sm" title="Edit User">
@@ -142,13 +152,13 @@ $activeTabClass = 'class="active"';
                                     <?php
                                     //Opposite set to '$updatedStatus' so that this gets passed to the db
                                     $updatedStatus = $group->getStatus() ? GroupStatus::INACTIVE : GroupStatus::ACTIVE;
-                                    $activDeactivText = $group->getStatus() ? 'Deactivate' : 'Activate';
+                                    $activeDeactivText = $group->getStatus() ? 'Deactivate' : 'Activate';
                                     $updateStatusUrl = getAdminActionRequestUri() . "group" . DS . "updateGroupStatus" . addParamsToUrl(array('id', 'status'), array($groupId, $updatedStatus));
                                     ?>
 
                                     <a type="button"
                                        href="<?php echo $updateStatusUrl; ?>"
-                                       class="btn btn-default btn-sm" title="<?php echo $activDeactivText ?> Group">
+                                       class="btn btn-default btn-sm" title="<?php echo $activeDeactivText ?> Group">
                                         <?php $statusClass = $group->getStatus() ? 'active-item' : 'inactive-item' ?>
                                         <span class="fa fa-users <?php echo $statusClass ?>"
                                               aria-hidden="true"></span>

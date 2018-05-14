@@ -54,7 +54,7 @@ class UserHandler {
         $password = password_hash($generated_password, PASSWORD_DEFAULT);
         $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = 1 WHERE " . self::EMAIL . " = ?";
         $result = getDb()->updateStmt($query, array('s', 's'), array($password, $email));
-        if ($result === 1){
+        if ($result === 1) {
             EmailHandler::sendResetPasswordToAdminUser($email, $generated_password);
         }
         return $result;
@@ -127,6 +127,8 @@ class UserHandler {
             } else {
                 return false;
             }
+        } else {
+            throw new SystemException('Given email is empty');
         }
     }
 
@@ -145,6 +147,39 @@ class UserHandler {
     }
 
     /**
+     * @param $id
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function deleteUser($id) {
+        if (isNotEmpty($id)) {
+            $res = true;
+            $user = self::getUserById($id);
+            if (isNotEmpty($user->getAccessRights())) {
+                $res = AccessRightsHandler::deleteAccessRightsForUser($id);
+            }
+            if ($res) {
+                if (isNotEmpty($user->getUserMeta())) {
+                    $query = "DELETE FROM " . getDb()->user_meta . " WHERE " . self::USER_ID . " = ?";
+                    $res = getDb()->deleteStmt($query, array('i'), array($id));
+                }
+                if ($res) {
+                    $query = "DELETE FROM " . getDb()->users . " WHERE " . self::ID . " = ?";
+                    $res = getDb()->deleteStmt($query, array('i'), array($id));
+                    if (!$res) {
+                        throw new SystemException("User with {$id} failed to be deleted");
+                    }
+                } else {
+                    throw new SystemException("User meta data for user with {$id} failed to be deleted");
+                }
+            }
+            return $res;
+        } else {
+            throw new SystemException('Given ID is empty');
+        }
+    }
+
+    /**
      * @param $user User
      * @return bool|mysqli_result|null
      * @throws SystemException
@@ -155,7 +190,7 @@ class UserHandler {
             $query = "UPDATE " . getDb()->users . " SET " . self::USER_STATUS . " = ?, " . self::USERNAME . " = ?, " . self::FIRST_NAME . " = ?, " . self::LAST_NAME . " = ?, " . self::EMAIL . " = ?, " . self::LINK . " = ?, " . self::GENDER . " = ?, " . self::PHONE . " = ?, " . self::PICTURE . " = ?, " . self::PICTURE_PATH . " = ?, " . self::FORCE_CHANGE_PASSWORD . " = ? WHERE " . self::ID . " = ?";
             $result = getDb()->updateStmt($query,
                 array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 'i'),
-                array($user->getUserStatus(),
+                array($user->isUserActive(),
                     $user->getUserName(),
                     $user->getFirstName(),
                     $user->getLastName(),
@@ -169,7 +204,7 @@ class UserHandler {
                     $user->getID()
                 ));
 
-            if (isNotEmpty($user->getPassword())){
+            if (isNotEmpty($user->getPassword())) {
                 $query = "UPDATE " . getDb()->users . " SET " . self::PASSWORD . " = ? WHERE " . self::ID . " = ?";
                 $result = getDb()->updateStmt($query,
                     array('s', 'i'),
@@ -221,7 +256,7 @@ class UserHandler {
 
             $result = getDb()->createStmt($query,
                 array('i', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'i', 's'),
-                array($user->getUserStatus(),
+                array($user->isUserActive(),
                     $user->getUserName(),
                     $password,
                     $user->getFirstName(),
@@ -269,7 +304,7 @@ class UserHandler {
         }
         return null;
     }
-    
+
 
     /*Populate Functions*/
 
