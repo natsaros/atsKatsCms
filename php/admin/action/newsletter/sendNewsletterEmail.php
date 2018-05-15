@@ -19,7 +19,7 @@ if (isNotEmpty($link) && isEmpty($button_text)){
 }
 
 if(hasErrors()) {
-    FormHandler::setSessionForm('sendNewsletterForm');
+    FormHandler::setSessionForm('sendNewsletterForm', $_POST[FormHandler::PAGE_ID]);
     Redirect(getAdminRequestUri() . PageSections::NEWSLETTER . DS . "newsletter" . addParamsToUrl(array('activeTab'), array('newsletterEmailForm')));
 }
 

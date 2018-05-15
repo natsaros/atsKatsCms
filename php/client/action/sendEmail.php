@@ -18,7 +18,7 @@ if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
 }
 
 if(hasErrors()) {
-    FormHandler::setSessionForm('sendEmailForm');
+    FormHandler::setSessionForm('sendEmailForm', $_POST[FormHandler::PAGE_ID]);
     Redirect(getRootUri() . "contact");
 }
 
