@@ -43,6 +43,7 @@ if($afterFormSubmission) {
         ?>
         <form name="updateProductForm" role="form" action="<?php echo $action ?>" data-toggle="validator" method="post"
               enctype="multipart/form-data">
+            <input type="hidden" name="<?php echo FormHandler::PAGE_ID ?>" value="<?php echo ADMIN_PAGE_ID ?>">
             <input type="hidden" name="<?php echo ProductHandler::USER_ID ?>"
                    value="<?php echo $loggedInUser->getID() ?>"/>
             <input type="hidden" name="<?php echo ProductHandler::STATE ?>"
