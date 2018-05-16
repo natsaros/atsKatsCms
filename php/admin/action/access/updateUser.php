@@ -11,7 +11,9 @@ try {
         Redirect(getAdminModalRequestUri() . "updateUserAccess", addParamsToUrl(array('id'), array($userID)));
     }
 
-    $res = AccessRightsHandler::updateUserAccessRights($userID, $accessRights);
+    $user = UserHandler::getUserById($userID);
+
+    $res = AccessRightsHandler::updateUserAccessRights($user, $accessRights);
     if ($res !== null || $res) {
         addSuccessMessage("Access rights successfully updated");
     } else {

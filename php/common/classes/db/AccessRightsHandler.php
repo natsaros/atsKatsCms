@@ -20,31 +20,40 @@ class AccessRightsHandler {
     const ACC_ID = 'ACC_ID';
 
     /**
-     * @param $id
+     * @param $user User
      * @param $accessRights array
      * @return bool|mysqli_result|null
      * @throws SystemException
      */
-    public static function updateUserAccessRights($id, $accessRights) {
-        if (isNotEmpty($id)) {
-            $accessRightsFetched = self::getAccessRightByUserId($id);
-            $res = false;
-            if (isNotEmpty($accessRightsFetched)) {
-                $res = self::deleteAccessRightsForUser($id);
-            } else {
-                $res = true;
+    public static function updateUserAccessRights($user, $accessRights) {
+        $res = true;
+        if (isNotEmpty($user)) {
+            $ID = $user->getID();
+            $groups = $user->getGroups();
+            $groupAccessRightsFetched = array();
+
+            foreach ($groups as $group) {
+                $groupAccessRightsFetched = array_merge($groupAccessRightsFetched, self::getAccessRightByGroupId($group->getID()));
             }
+
+            $userAccessRightsFetched = self::getStrictlyAccessRightsByUserID($ID);
+            if (isNotEmpty($userAccessRightsFetched)) {
+                $res = self::deleteAccessRightsForUser($ID);
+            }
+
             if ($res && isNotEmpty($accessRights)) {
                 foreach ($accessRights as $right) {
                     $query = "INSERT INTO " . getDb()->acr_assoc . " (" . self::ACC_ID . "," . self::USER_ID . ") VALUES (?,?)";
-                    $res = getDb()->createStmt($query, array('i', 'i'), array($right, $id));
+                    $res = getDb()->createStmt($query, array('i', 'i'), array($right, $ID));
                 }
             } else {
-                return null;
+                $res = false;
             }
-            return $res;
+        } else {
+            $res = false;
         }
-        return null;
+
+        return $res;
     }
 
     /**
@@ -128,15 +137,13 @@ class AccessRightsHandler {
 
     /**
      * @param $id
-     * @return AccessRight[]|bool
+     * @return AccessRight[]|null
      * @throws SystemException
      */
     static function getAccessRightByUserId($id) {
         if (isNotEmpty($id)) {
             $query = "SELECT a.* FROM " . getDb()->access_rights . " a 
                       LEFT JOIN " . getDb()->acr_assoc . " acr ON a." . self::ID . " = acr." . self::ACC_ID . " 
-                      LEFT JOIN  " . getDb()->users . " u ON u." . self::ID . " = acr." . self::USER_ID . " 
-                      LEFT JOIN " . getDb()->user_groups . " g ON g." . self::ID . " = acr." . self::GROUP_ID . " 
                       WHERE acr." . self::USER_ID . " = ? 
                       OR acr." . self::GROUP_ID . " = (SELECT " . self::GROUP_ID . " FROM " . getDb()->ugr_assoc . " WHERE " . self::USER_ID . " = ?)";
             $rows = getDb()->selectStmt($query, array('i', 'i'), array($id, $id));
@@ -145,7 +152,26 @@ class AccessRightsHandler {
                 return $accessRights;
             }
         }
-        return false;
+        return null;
+    }
+
+    /**
+     * @param $userID
+     * @return AccessRight[]|null
+     * @throws SystemException
+     */
+    static function getStrictlyAccessRightsByUserID($userID) {
+        if (isNotEmpty($userID)) {
+            $query = "SELECT a.* FROM " . getDb()->access_rights . " a 
+                      LEFT JOIN  " . getDb()->acr_assoc . " acr ON a." . self::ID . " = acr." . self::ACC_ID . " 
+                      WHERE acr." . self::USER_ID . " = ?";
+            $rows = getDb()->selectStmt($query, array('i'), array($userID));
+            if ($rows) {
+                $accessRights = self::populateAccessRights($rows);
+                return $accessRights;
+            }
+        }
+        return null;
     }
 
     /**
@@ -156,9 +182,7 @@ class AccessRightsHandler {
     static function getAccessRightByGroupId($id) {
         if (isNotEmpty($id)) {
             $query = "SELECT a.* FROM " . getDb()->access_rights . " a 
-                      JOIN " . getDb()->acr_assoc . " acr ON a." . self::ID . " = acr." . self::ACC_ID . " 
-                      LEFT JOIN  " . getDb()->users . " u ON u." . self::ID . " = acr." . self::USER_ID . " 
-                      LEFT JOIN " . getDb()->user_groups . " g ON g." . self::ID . " = acr." . self::GROUP_ID . " 
+                      LEFT JOIN " . getDb()->acr_assoc . " acr ON a." . self::ID . " = acr." . self::ACC_ID . "
                       WHERE acr." . self::GROUP_ID . " = ?";
             $rows = getDb()->selectStmt($query, array('i'), array($id));
             if ($rows) {
