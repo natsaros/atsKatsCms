@@ -88,6 +88,7 @@ $products = ProductHandler::fetchAllProducts();
         <form name="updatePromotionForm" role="form" action="<?php echo $action ?>" data-toggle="validator" method="post">
             <input type="hidden" name="<?php echo PromotionHandler::USER_ID ?>"
                    value="<?php echo $loggedInUser->getID() ?>"/>
+            <input type="hidden" name="<?php echo FormHandler::PAGE_ID ?>" value="<?php echo ADMIN_PAGE_ID ?>">
             <input type="hidden" name="<?php echo PromotionHandler::ID ?>" value="<?php echo $currentPromotion->getID() ?>"/>
 
             <div class="form-group">

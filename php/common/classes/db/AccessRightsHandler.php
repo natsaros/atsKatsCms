@@ -6,8 +6,7 @@ require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'access' . DS . 'AccessRightStatus.
 /**
  * Handles access rights
  */
-class AccessRightsHandler
-{
+class AccessRightsHandler {
     const ID = 'ID';
     const NAME = 'NAME';
     const STATUS = 'STATUS';
@@ -31,8 +30,7 @@ class AccessRightsHandler
             $accessRightsFetched = self::getAccessRightByUserId($id);
             $res = false;
             if (isNotEmpty($accessRightsFetched)) {
-                $query = "DELETE FROM " . getDb()->acr_assoc . " WHERE " . self::USER_ID . " = ?";
-                $res = getDb()->deleteStmt($query, array('i'), array($id));
+                $res = self::deleteAccessRightsForUser($id);
             } else {
                 $res = true;
             }
@@ -47,6 +45,20 @@ class AccessRightsHandler
             return $res;
         }
         return null;
+    }
+
+    /**
+     * @param $userID
+     * @return mixed|null
+     * @throws SystemException
+     */
+    public static function deleteAccessRightsForUser($userID) {
+        $query = "DELETE FROM " . getDb()->acr_assoc . " WHERE " . self::USER_ID . " = ?";
+        $res = getDb()->deleteStmt($query, array('i'), array($userID));
+        if (!$res) {
+            throw new SystemException("Access rights for user with id :{$userID} failed to be deleted");
+        }
+        return $res;
     }
 
     /**
@@ -281,7 +293,6 @@ class AccessRightsHandler
             self::deleteAccessRight($accessRight->getName());
         }
     }
-
 
     /**
      * @param $accessRight

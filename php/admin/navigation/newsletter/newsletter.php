@@ -60,6 +60,7 @@ FormHandler::unsetSessionForm('sendNewsletterForm');
                     $action = getAdminActionRequestUri() . "newsletter" . DS . "sendNewsletterEmail";
                     ?>
                     <form name="sendNewsletterForm" role="form" action="<?php echo $action?>" data-toggle="validator" method="post">
+                        <input type="hidden" name="<?php echo FormHandler::PAGE_ID ?>" value="<?php echo ADMIN_PAGE_ID ?>">
                         <input type="hidden" name="<?php echo NewsletterHandler::CURRENT_TAB ?>"  value="newsletterEmailForm"/>
 
                         <div class="form-group">

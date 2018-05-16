@@ -26,19 +26,6 @@ if (isNotEmpty(trim($phone)) && !is_numeric($phone)) {
 
 $image2Upload = FormHandler::validateUploadedImage(UserHandler::PICTURE);
 
-$updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
-if (hasErrors()) {
-    if (!empty($_POST)) {
-        if (!$updateFromMyProfile) {
-            FormHandler::setSessionForm('updateUserForm');
-            Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
-        } else {
-            FormHandler::setSessionForm('updateMyProfileForm');
-            Redirect(getAdminRequestUri() . "updateMyProfile");
-        }
-    }
-}
-
 $first_name = safe_input($_POST[UserHandler::FIRST_NAME]);
 $last_name = safe_input($_POST[UserHandler::LAST_NAME]);
 $user_status = safe_input($_POST[UserHandler::USER_STATUS]);
@@ -48,6 +35,20 @@ $link = safe_input($_POST[UserHandler::LINK]);
 $groupIds = '';
 if (!$updateFromMyProfile) {
     $groupIds = safe_input($_POST[GroupHandler::GROUP_ID]);
+    FormHandler::validateMandatoryField($groupIds, 'Please choose a group for the user');
+}
+
+$updateUserUrl = getAdminRequestUri() . DS . PageSections::USERS . DS . "updateUser";
+if (hasErrors()) {
+    if (!empty($_POST)) {
+        if (!$updateFromMyProfile) {
+            FormHandler::setSessionForm('updateUserForm', $_POST[FormHandler::PAGE_ID]);
+            Redirect($updateUserUrl . addParamsToUrl(array('id'), array($ID)));
+        } else {
+            FormHandler::setSessionForm('updateMyProfileForm', $_POST[FormHandler::PAGE_ID]);
+            Redirect(getAdminRequestUri() . "updateMyProfile");
+        }
+    }
 }
 
 $picturePath = safe_input($_POST[UserHandler::PICTURE_PATH]);

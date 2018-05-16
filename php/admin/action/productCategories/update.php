@@ -27,7 +27,7 @@ if (isEmpty($title) || isEmpty($title_en)) {
 }
 
 if (hasErrors()) {
-    FormHandler::setSessionForm('updateProductCategoryForm');
+    FormHandler::setSessionForm('updateProductCategoryForm', $_POST[FormHandler::PAGE_ID]);
     Redirect(getAdminRequestUri() . PageSections::PRODUCT_CATEGORIES . DS . "updateProductCategory" . addParamsToUrl(array('id'), array($ID)));
 }
 

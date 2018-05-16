@@ -10,7 +10,7 @@ if (isEmpty($password) || isEmpty($passwordConfirmation) || $password !== $passw
 
 if (hasErrors()) {
     if (!empty($_POST)) {
-        FormHandler::setSessionForm('updateMyProfileForm');
+        FormHandler::setSessionForm('updateMyProfileForm', $_POST[FormHandler::PAGE_ID]);
         Redirect(getAdminRequestUri() . "updateMyProfile");
     }
 }

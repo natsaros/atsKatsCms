@@ -3,12 +3,12 @@
  * Handles form data
  */
 
-class FormHandler
-{
+class FormHandler {
 
     const DRAFT_PATH = 'draft_path';
     const DRAFT_NAME = 'draft_name';
     const TEMP_IMAGE_SAVED_TOKEN = 'tempImageSavedToken';
+    const PAGE_ID = 'PAGE_ID';
     private static $afterFormSubmission = false;
     private static $form_data;
 
@@ -31,9 +31,13 @@ class FormHandler
      *
      * USED IN ACTION SECTIONS
      * @param $formName
+     * @param null $adminPageID
      */
-    static function setSessionForm($formName) {
+    static function setSessionForm($formName, $adminPageID = null) {
         if (isNotEmpty($_POST)) {
+            if(isNotEmpty($adminPageID)){
+                $_SESSION[self::PAGE_ID] = $adminPageID;
+            }
             foreach ($_POST as $key => $value) {
                 $_SESSION[$formName][$key] = $value;
             }
@@ -163,5 +167,14 @@ class FormHandler
         }
 
         return $image2Upload;
+    }
+
+    public static function ensureSessionIntegrity($pageId) {
+        $savedPageID = $_SESSION[self::PAGE_ID];
+        if (isNotEmpty($savedPageID)
+            && $savedPageID != $pageId
+            && isNotEmpty(self::getTempPictureToken())) {
+            self::unsetFormSessionToken();
+        }
     }
 }

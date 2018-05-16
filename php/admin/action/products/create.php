@@ -46,7 +46,7 @@ if (isNotEmpty($title)) {
 }
 
 if (hasErrors()) {
-    FormHandler::setSessionForm('updateProductForm');
+    FormHandler::setSessionForm('updateProductForm', $_POST[FormHandler::PAGE_ID]);
     Redirect(getAdminRequestUri() . PageSections::PRODUCTS . DS . "updateProduct");
 }
 

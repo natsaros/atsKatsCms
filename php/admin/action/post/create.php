@@ -16,7 +16,7 @@ if (isNotEmpty($imagePath)) {
 }
 
 if (hasErrors()) {
-    FormHandler::setSessionForm('updatePostForm');
+    FormHandler::setSessionForm('updatePostForm', $_POST[FormHandler::PAGE_ID]);
     Redirect(getAdminRequestUri() . PageSections::POSTS . DS . "updatePost");
 }
 
