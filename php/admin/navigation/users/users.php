@@ -80,18 +80,20 @@ $activeTabClass = 'class="active"';
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
 
-                                    <?php if ($loggedInUser->getID() != $user->getID() && $loggedInUser->isAdmin()) { ?>
-                                        <!-- Button trigger modal -->
-                                        <?php $urlParams = addParamsToUrl(array('id', 'modalTitle'), array($userId, urlencode("Access Management"))) ?>
-                                        <a type="button"
-                                           data-toggle="modal"
-                                           class="btn btn-default btn-sm" title="Edit Access"
-                                           href="<?php echo getAdminModalRequestUri() . "updateUserAccess" . $urlParams; ?>"
-                                           data-target="#userModal_<?php echo $userId ?>"
-                                           data-remote="false">
-                                            <span class="fa fa-lock" aria-hidden="true"></span>
-                                        </a>
-                                    <?php } ?>
+<!--                                    removed user access functionality-->
+
+<!--                                    --><?php //if ($loggedInUser->getID() != $user->getID() && $loggedInUser->isAdmin()) { ?>
+<!--                                        <!-- Button trigger modal -->-->
+<!--                                        --><?php //$urlParams = addParamsToUrl(array('id', 'modalTitle'), array($userId, urlencode("Access Management"))) ?>
+<!--                                        <a type="button"-->
+<!--                                           data-toggle="modal"-->
+<!--                                           class="btn btn-default btn-sm" title="Edit Access"-->
+<!--                                           href="--><?php //echo getAdminModalRequestUri() . "updateUserAccess" . $urlParams; ?><!--"-->
+<!--                                           data-target="#userModal_--><?php //echo $userId ?><!--"-->
+<!--                                           data-remote="false">-->
+<!--                                            <span class="fa fa-lock" aria-hidden="true"></span>-->
+<!--                                        </a>-->
+<!--                                    --><?php //} ?>
                                 </td>
                             </tr>
                         <?php } ?>
