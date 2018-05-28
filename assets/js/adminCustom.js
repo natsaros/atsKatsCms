@@ -184,10 +184,10 @@ $(document).ready(function () {
         if (modal.data('refresh')) {
             if (modal.data('hasError')){
                 modal.removeData('hasError');
-            var target = $(e.target);
-            target.removeData('bs.modal')
-                .find(".modal-content").html('');
-            $(this).modal('show');
+                var target = $(e.target);
+                target.removeData('bs.modal')
+                    .find(".modal-content").html('');
+                $(this).modal('show');
             } else {
                 window.location.href=window.location.href;
             }
