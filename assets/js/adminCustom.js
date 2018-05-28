@@ -182,10 +182,15 @@ $(document).ready(function () {
     akModals.on('hidden.bs.modal', function (e) {
         var modal = $(this);
         if (modal.data('refresh')) {
-            var target = $(e.target);
-            target.removeData('bs.modal')
-                .find(".modal-content").html('');
-            $(this).modal('show');
+            if (modal.data('hasError')){
+                modal.removeData('hasError');
+                var target = $(e.target);
+                target.removeData('bs.modal')
+                    .find(".modal-content").html('');
+                $(this).modal('show');
+            } else {
+                window.location.href=window.location.href;
+            }
         }
     });
 
@@ -203,6 +208,7 @@ $(document).ready(function () {
         }).fail(function (xhr, textStatus, error) {
             var msg = "Sorry but there was an error: ";
             console.log(msg + xhr.status + " " + xhr.statusText + " " + error);
+            modal.data('hasError', true);
         }).complete(function (data) {
             modal.data('refresh', true);
             modal.modal('toggle');

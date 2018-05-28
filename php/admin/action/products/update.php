@@ -12,6 +12,17 @@ $offerPrice = $_POST[ProductHandler::OFFER_PRICE];
 $state = safe_input($_POST[ProductHandler::STATE]);
 $userID = safe_input($_POST[ProductHandler::USER_ID]);
 
+$imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
+if (isEmpty($imagePath)) {
+    $imagePath = FormHandler::getFormPictureDraftName(ProductHandler::IMAGE);
+}
+
+if (isNotEmpty($imagePath)) {
+    $image2Upload = FormHandler::validateUploadedImage(ProductHandler::IMAGE);
+} else {
+    addErrorMessage("Please fill in required info");
+}
+
 if(isEmpty($title)
     || isEmpty($description)
     || isEmpty($title_en)
@@ -26,27 +37,11 @@ if(isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
     addErrorMessage("Offer price cannot be higher than price");
 }
 
-$imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
-if (isEmpty($imagePath)) {
-    $imagePath = FormHandler::getFormPictureDraftName(ProductHandler::IMAGE);
-} else {
-    addErrorMessage("Please fill in required info");
-}
-
 if (isNotEmpty($title)){
     $productWithSameName = ProductHandler::existProductWithTitle($ID, $title_en);
     if($productWithSameName) {
         addErrorMessage("There is a product with the same title");
     }
-}
-
-$emptyFile = $image2Upload['error'] === UPLOAD_ERR_NO_FILE;
-if(!$emptyFile) {
-    $imageValid = ImageUtil::validateImageAllowed($image2Upload);
-}
-
-if(!$imageValid) {
-    addErrorMessage("Please select a valid image file");
 }
 
 if(hasErrors()) {

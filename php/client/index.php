@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="gr">
 <?php
 try {
     initLoad();
@@ -104,3 +106,4 @@ if (isset($ajaxAction) && isNotEmpty($ajaxAction)) {
         require(ADMIN_ROOT_PATH . '404.php');
     }
 } ?>
+</html>
