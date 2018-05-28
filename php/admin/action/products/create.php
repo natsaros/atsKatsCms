@@ -11,6 +11,17 @@ $price = $_POST[ProductHandler::PRICE];
 $offerPrice = $_POST[ProductHandler::OFFER_PRICE];
 
 
+$imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
+if (isEmpty($imagePath)) {
+    $imagePath = FormHandler::getFormPictureDraftName(ProductHandler::IMAGE);
+}
+
+if (isNotEmpty($imagePath)) {
+    $image2Upload = FormHandler::validateUploadedImage(ProductHandler::IMAGE);
+} else {
+    addErrorMessage("Please fill in required info");
+}
+
 if (isEmpty($title)
     || isEmpty($description)
     || isEmpty($title_en)
@@ -23,19 +34,6 @@ if (isEmpty($title)
 
 if (isNotEmpty($offerPrice) && floatval($offerPrice) > floatval($price)) {
     addErrorMessage("Offer price cannot be higher than price");
-}
-
-$imagePath = safe_input($_POST[ProductHandler::IMAGE_PATH]);
-if (isEmpty($imagePath)) {
-    $imagePath = FormHandler::getFormPictureDraftName(ProductHandler::IMAGE);
-} else {
-    addErrorMessage("Please fill in required info");
-}
-
-if (isNotEmpty($imagePath)) {
-    $image2Upload = FormHandler::validateUploadedImage(ProductHandler::IMAGE);
-} else {
-    addErrorMessage("Please fill in required info");
 }
 
 if (isNotEmpty($title)) {

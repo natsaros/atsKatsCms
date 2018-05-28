@@ -126,6 +126,10 @@ class FormHandler {
         return self::$afterFormSubmission ? self::$form_data[$fieldName] : $field;
     }
 
+    public static function isAfterFormSubmission() {
+        return self::$afterFormSubmission;
+    }
+
     public static function validateMandatoryField($field, $message = 'Please fill in mandatory value') {
         if (isEmpty($field)) {
             addErrorMessage($message);
