@@ -38,7 +38,7 @@ class UserHandler {
         if (password_verify($password, $user->getPassword())) {
             $user->setPassword(null);
             $user->setAccessRights(AccessRightsHandler::getAccessRightByUserId($user->getID()));
-//            $user->setGroups(GroupHandler::fetchGroupsByUser($user->getID()));
+            $user->setGroups(GroupHandler::fetchGroupsByUser($user->getID()));
             return $user;
         }
         return null;
@@ -104,6 +104,7 @@ class UserHandler {
             $row = getDb()->selectStmtSingle($query, array('i'), array($id));
             if ($row) {
                 $user = self::populateUser($row);
+                $user->setGroups(GroupHandler::fetchGroupsByUser($id));
                 return $user;
             }
             return null;
