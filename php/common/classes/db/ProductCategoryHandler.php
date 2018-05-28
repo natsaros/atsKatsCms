@@ -45,7 +45,7 @@ class ProductCategoryHandler {
      * @throws SystemException
      */
     static function fetchAllProductCategoriesForAdmin() {
-        $query = "SELECT * FROM " . getDb()->product_categories;
+        $query = "SELECT * FROM " . getDb()->product_categories . " ORDER BY " . ProductCategoryHandler::TITLE_EN;
         $rows = getDb()->selectStmtNoParams($query);
         return self::populateProductCategories($rows);
     }

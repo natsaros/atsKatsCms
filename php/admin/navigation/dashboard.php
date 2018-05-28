@@ -30,7 +30,7 @@ $loggedInUser = getFullUserFromSession();
                             </div>
                         </div>
                     </div>
-                    <a href="<?php echo getAdminRequestUri() . PageSections::NEWSLETTER; ?>">
+                    <a href="<?php echo getAdminRequestUri() . PageSections::NEWSLETTER . DS . 'newsletter'; ?>">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -77,7 +77,7 @@ $loggedInUser = getFullUserFromSession();
                             </div>
                         </div>
                     </div>
-                    <a href="<?php echo getAdminRequestUri() . PageSections::PROMOTIONS; ?>">
+                    <a href="<?php echo getAdminRequestUri() . PageSections::PROMOTIONS . DS . 'promotions'; ?>">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

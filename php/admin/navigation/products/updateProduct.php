@@ -139,7 +139,7 @@ if(FormHandler::isAfterFormSubmission()) {
                     if(!is_null($productCategories) && count($productCategories) > 0) {
                         foreach ($productCategories as $key => $productCategory){
                             ?>
-                            <option value="<?php echo $productCategory->getID()?>"<?php if(FormHandler::getEditFormData(ProductHandler::PRODUCT_CATEGORY_ID, $currentProduct->getProductCategoryId()) == $productCategory->getID()) { ?> selected<?php } ?>><?php echo $productCategory->getTitle()?></option>
+                            <option value="<?php echo $productCategory->getID()?>"<?php if(FormHandler::getEditFormData(ProductHandler::PRODUCT_CATEGORY_ID, $currentProduct->getProductCategoryId()) == $productCategory->getID()) { ?> selected<?php } ?>><?php echo $productCategory->getTitleEn()?></option>
                             <?php
                         }
                     }
@@ -157,7 +157,7 @@ if(FormHandler::isAfterFormSubmission()) {
                         foreach ($productCategories as $key => $productCategory){
                             if ($selectedProductCategoryId != $productCategory->getID()) {
                                 ?>
-                                <option value="<?php echo $productCategory->getID()?>"<?php if(FormHandler::getEditFormData(ProductHandler::SECONDARY_PRODUCT_CATEGORY_ID, $currentProduct->getSecondaryProductCategoryId()) == $productCategory->getID()) { ?> selected<?php } ?>><?php echo $productCategory->getTitle()?></option>
+                                <option value="<?php echo $productCategory->getID()?>"<?php if(FormHandler::getEditFormData(ProductHandler::SECONDARY_PRODUCT_CATEGORY_ID, $currentProduct->getSecondaryProductCategoryId()) == $productCategory->getID()) { ?> selected<?php } ?>><?php echo $productCategory->getTitleEn()?></option>
                                 <?php
                             }
                         }
