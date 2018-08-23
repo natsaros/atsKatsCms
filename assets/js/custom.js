@@ -65,7 +65,7 @@ $(document).ready(function () {
 
     var isMobileVersion  = function() {
         return $(window).width() <= 768;
-    }
+    };
 
     $('li.sub-category-menu-trigger').on('mouseenter', function () {
         if (!isMobileVersion()) {
@@ -87,7 +87,7 @@ function initialize(myCenter) {
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
     var marker = new google.maps.Marker({
-        position: myCenter,
+        position: myCenter
     });
 
     marker.setMap(map);

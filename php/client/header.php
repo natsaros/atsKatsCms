@@ -61,9 +61,10 @@
     <script src="<?php echo ASSETS_URI ?>js/jquery.min.js"></script>
     <script src="<?php echo ASSETS_URI ?>js/bootstrap.min.js"></script>
     <?php if ($pageId == "contact") { ?>
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo GM_KEY; ?>"></script>
     <?php } ?>
     <script src="<?php echo ASSETS_URI ?>js/custom.min.js"></script>
+
     <?php if ($pageId == "home") { ?>
         <script src="<?php echo ASSETS_URI ?>js/instafeed/instafeed.min.js"></script>
     <?php } ?>

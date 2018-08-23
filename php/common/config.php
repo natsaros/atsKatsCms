@@ -40,6 +40,7 @@ if($config) {
     defined('SITE_DOMAIN_NAME') or define('SITE_DOMAIN_NAME', $config['site_domain_name']);
     defined('DEFAULT_TIME_ZONE') or define('DEFAULT_TIME_ZONE', $config['default_timezone']);
 
+    defined('GM_KEY') or define('GM_KEY', $config['google_maps_api_key']);
     defined('GA_ID') or define('GA_ID', $config['google_analytics_id']);
     defined('GA_REFRESH_TOKEN_URL') or define('GA_REFRESH_TOKEN_URL', $config['google_analytics_refresh_token_url']);
     defined('GA_REFRESH_TOKEN_ID') or define('GA_REFRESH_TOKEN_ID', $config['google_analytics_refresh_token_id']);

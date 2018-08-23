@@ -1,6 +1,7 @@
 <?php
 $systemEmailAdrs = SettingsHandler::getSettingValueByKey(Setting::EMAILS);
 $basicAdr = explode(';', $systemEmailAdrs)[0];
+FormHandler::unsetSessionForm('sendEmailForm');
 ?>
 
     <div class="container-fluid belowHeader text-center">
@@ -19,7 +20,7 @@ $basicAdr = explode(';', $systemEmailAdrs)[0];
 
     <div class="container">
         <?php $action = getClientActionRequestUri() . "sendEmail"; ?>
-        <form method="post" accept-charset="utf-8" action="<?php echo $action; ?>" data-toggle="validator">
+        <form name="sendEmailForm" method="post" accept-charset="utf-8" action="<?php echo $action; ?>" data-toggle="validator">
             <div class="formContainer">
                 <div class="row">
                     <div class="col-sm-12 text-center">
@@ -33,28 +34,30 @@ $basicAdr = explode(';', $systemEmailAdrs)[0];
                     <div class="col-sm-4 form-group">
                         <input class="form-control" id="name" name="name" placeholder="Ονοματεπώνυμο *" type="text"
                                required
-                               value="<?php echo formValueFromSession('name') ?>"
+                               value="<?php echo FormHandler::getFormData('name'); ?>"
                         >
                     </div>
                     <div class="col-sm-4 form-group">
                         <input class="form-control" id="email" name="email" placeholder="Email *" type="email" required
-                               value="<?php echo formValueFromSession('email') ?>">
+                               value="<?php echo FormHandler::getFormData('email'); ?>"
+                        >
                     </div>
                     <div class="col-sm-4 form-group">
                         <input class="form-control" id="phone" name="phone" placeholder="Τηλέφωνο" type="text"
-                               value="<?php echo formValueFromSession('phone') ?>">
+                               value="<?php echo FormHandler::getFormData('phone'); ?>"
+                        >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-8 form-group">
                 <textarea class="form-control" id="comments" name="goal"
                           placeholder="Τί θέλετε να επιτύχετε; Ποιος είναι ο στόχος;"
-                          rows="5"><?php echo formValueFromSession('goal') ?></textarea>
+                          rows="5"><?php echo FormHandler::getFormData('goal'); ?></textarea>
                     </div>
                     <div class="col-sm-4 form-group">
                 <textarea class="form-control" id="interest" name="interested"
                           placeholder="Για ποιές υπηρεσίες μας ενδιαφέρεστε; *"
-                          rows="5"><?php echo formValueFromSession('interested') ?></textarea>
+                          rows="5"><?php echo FormHandler::getFormData('interested'); ?></textarea>
                     </div>
                 </div>
 
@@ -103,6 +106,3 @@ $basicAdr = explode(';', $systemEmailAdrs)[0];
             </div>
         </div>
     </div>
-<?php
-consumeFormData();
-?>
