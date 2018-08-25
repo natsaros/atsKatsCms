@@ -166,13 +166,15 @@ class Event implements JsonSerializable {
      * @return false|string
      */
     private function getTimeAndMinutes($day, $time) {
-        //TODO : fix issue when it is sunday
         //if current day is sunday get next weeks date to complete the calendar
-//        $whichWeek = '0';
-//        if ((date('D') === 'Sun')) {
-//            $whichWeek = '1';
-//        }
-        $date = new DateTime(date('Y-m-d', strtotime("{$day} this week midnight")));
+//        date('D',strtotime('+1 day', time()))
+
+        $timestamp = strtotime("{$day} this week midnight");
+        if ((date('D') === 'Sun')) {
+            $timestamp = strtotime("{$day} next week midnight");
+        }
+
+        $date = new DateTime(date('Y-m-d', $timestamp));
         $explodeTime = explode(':', $time);
         $hoursToAdd = $explodeTime[0];
         $date->modify("+{$hoursToAdd} hours");
