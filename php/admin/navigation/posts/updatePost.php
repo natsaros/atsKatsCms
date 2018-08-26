@@ -96,7 +96,7 @@ FormHandler::unsetSessionForm('updatePostForm');
                 </textarea>
             </div>
             <div class="text-right form-group">
-                <a type="button" href="<?php echo getAdminRequestUri() . DS . PageSections::POSTS . 'posts' ?>"
+                <a type="button" href="<?php echo getAdminRequestUri() . DS . PageSections::POSTS . DS . 'posts' ?>"
                    class="btn btn-default">Back</a>
                 <input type="submit" name="submit" class="btn btn-primary" value="Save" placeholder="Save"/>
             </div>
