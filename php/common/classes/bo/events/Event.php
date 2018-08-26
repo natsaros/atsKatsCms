@@ -171,7 +171,7 @@ class Event implements JsonSerializable {
 
         $timestamp = strtotime("{$day} this week midnight");
         if ((date('D') === 'Sun')) {
-            $timestamp = strtotime("{$day} next week midnight");
+            $timestamp = strtotime("next {$day} midnight");
         }
 
         $date = new DateTime(date('Y-m-d', $timestamp));
