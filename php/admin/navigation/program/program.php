@@ -278,7 +278,7 @@ $events = json_encode($rawEvents);
         var end = $.fullCalendar.formatDate($event.end, TIME_FORMAT);
         $.ajax({
             url: getContextPath() + '/admin/ajaxAction/updateDraftEvent',
-            data: {day: day, start: start, end: end, id: $event.id},
+            data: {day: day, start: start, end: end, place: '', id: $event.id},
             type: "POST",
             success: function (data, text) {
                 //do something on success
@@ -296,7 +296,7 @@ $events = json_encode($rawEvents);
     function createDraftEventAjax($title, $day, $start, $end) {
         $.ajax({
             url: getContextPath() + '/admin/ajaxAction/createDraftEvent',
-            data: {title: $title, day: $day, start: $start, end: $end},
+            data: {title: $title, day: $day, start: $start, end: $end, place: ''},
             type: "POST",
             success: function (data, text) {
                 //do something on success

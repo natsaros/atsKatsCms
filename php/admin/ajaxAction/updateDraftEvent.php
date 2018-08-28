@@ -6,6 +6,7 @@
 $day = $_POST['day'];
 $start = $_POST['start'];
 $end = $_POST['end'];
+$place = $_POST['place'];
 $id = $_POST['id'];
 
 try {
@@ -15,8 +16,10 @@ try {
             ->setDay($day)
             ->setStart($start)
             ->setEnd($end)
+            ->setPlace($place)
             ->setStatus(EventStatus::INACTIVE);
         $updateEventRes = ProgramHandler::updateDBEvent($event);
+
         if ($updateEventRes !== null || $updateEventRes) {
             echo json_encode($event);
         } else {

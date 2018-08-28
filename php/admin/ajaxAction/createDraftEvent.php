@@ -7,9 +7,10 @@ $day = $_POST['day'];
 $start = $_POST['start'];
 $end = $_POST['end'];
 $title = $_POST['title'];
+$place = $_POST['place'];
 
 try {
-    $event = Event::createEvent(null, $title, null, EventStatus::INACTIVE, $day, $start, $end);
+    $event = Event::createEvent(null, $title, null, EventStatus::INACTIVE, $day, $start, $end, $place);
     $res = ProgramHandler::addDBEvent($event);
     if ($res !== null || $res) {
         echo json_encode($event);

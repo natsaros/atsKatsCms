@@ -8,6 +8,8 @@ class Event implements JsonSerializable {
     private $description;
     private $status;
 
+    private $place;
+
     private $day;
     private $start;
     private $end;
@@ -35,9 +37,10 @@ class Event implements JsonSerializable {
      * @param $day
      * @param $start
      * @param $end
+     * @param $place
      * @return $this
      */
-    public static function createEvent($ID, $name, $description, $status, $day, $start, $end) {
+    public static function createEvent($ID, $name, $description, $status, $day, $start, $end, $place) {
         return self::create()
             ->setID($ID)
             ->setName($name)
@@ -45,7 +48,8 @@ class Event implements JsonSerializable {
             ->setStatus($status)
             ->setDay($day)
             ->setStart($start)
-            ->setEnd($end);
+            ->setEnd($end)
+            ->setPlace($place);
     }
 
     /**
@@ -161,6 +165,24 @@ class Event implements JsonSerializable {
     }
 
     /**
+     * @return mixed
+     */
+    public function getPlace() {
+        return isNotEmpty($this->place) ? $this->place : '';
+    }
+
+    /**
+     * @param mixed $place
+     * @return Event
+     */
+    public function setPlace($place) {
+        $this->place = $place;
+        return $this;
+    }
+
+
+
+    /**
      * @param $day
      * @param $time
      * @return false|string
@@ -191,6 +213,7 @@ class Event implements JsonSerializable {
             'id' => $this->getID(),
             'title' => $this->getName(),
             'description' => $this->getDescription(),
+            'place' => $this->getPlace(),
             'day' => $this->getDay(),
             'start' => $start,
             'end' => $end,

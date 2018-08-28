@@ -516,3 +516,8 @@ INSERT INTO CMS_SETTINGS (SKEY, SVALUE)
 VALUES ('email.addresses', 'pkasfiki@gmail.com;info@fitnesshousebypenny.gr;natsaros@hotmail.com');
 INSERT INTO CMS_SETTINGS (SKEY, SVALUE)
 VALUES ('maintenance', 'on');
+
+
+#ADDED PLACE TO CMS_EVENTS
+
+ALTER TABLE CMS_EVENTS ADD COLUMN PLACE VARCHAR(250);
