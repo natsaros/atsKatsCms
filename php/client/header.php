@@ -64,6 +64,8 @@
         <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo GM_KEY; ?>"></script>
     <?php } ?>
     <script src="<?php echo ASSETS_URI ?>js/custom.min.js"></script>
+    <script src="<?php echo ASSETS_URI ?>js/masonry.min.js"></script>
+    <script src="<?php echo ASSETS_URI ?>js/imagesLoaded.min.js"></script>
 
     <?php if ($pageId == "home") { ?>
         <script src="<?php echo ASSETS_URI ?>js/instafeed/instafeed.min.js"></script>

@@ -104,8 +104,7 @@ textarea { resize: vertical; }
 .textHolderPilatesInside { display: inline-block; vertical-align: middle; width: 88%; color: white; font-size:20px;}
 #program .textHolderInside{ color: #2d200c;}
 
-.imageHolder { background: url("../img/recent/peny_nat.jpeg") no-repeat center 30% /cover; }
-
+.imageHolder { background: url("../img/recent/ALM_8477.jpg") no-repeat center 30% /cover; }
 .parallaxImage { background: url("../img/recent/peny_prof.jpeg") no-repeat fixed center / cover; display: inline-block; width: 100%; opacity: .6; -moz-opacity: .6; -webkit-opacity: .6; }
 
 .parallaxImage:before { content: ''; display: inline-block; vertical-align: middle; height: 100%; }
@@ -235,6 +234,25 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .post-comment-image-container img{width: 100%;}
 #loadingImg img {width: 84px;}
 
+.gallery-container #container {
+    max-width: 100%;
+}
+
+.gallery-container .item-sizer {
+    width: 33.333%;
+}
+
+.gallery-container .item {
+    width: 33%;
+    float: left;
+}
+
+.gallery-container .item img {
+    display: inline-block;
+    width: 101%;
+}
+
+
 @media screen and (min-width: 768px) and (max-width: 960px) {
     .carousel-info{max-height: 380px;}
     .quote h3 { font-size: 40px;text-shadow: 3px 0 1px #000;}
@@ -299,12 +317,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .partnerImage{height: 276px;width: 80%;}
     .partner .simple-caption {width: 80%;font-size:16px;}
     .partnerCV{font-size: 16px;}
-    .parallaxImage {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 42%;
-        background-attachment: fixed;
-    }
+    .parallaxImage {background-size: cover;background-repeat: no-repeat;background-position: 42%;background-attachment: fixed;}
     .aboutImageBigLeft{ height: 275px;background-size: 100%; margin-top:0;}
     .aboutImageBigRight{ height: 275px;background-size: 110%;background-position-x: 80%;}
     .blogHeaderTitle{font-size: 20px;}
@@ -327,6 +340,9 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
     .blogPostsDateGrid {margin-bottom: 5px;font-size: 10px;}
     .blogPostsDateList {margin-bottom: 5px;font-size: 10px;text-align:center;}
     .blogImageList img {max-height: 170px;}
+
+    .gallery-container .item-sizer {width: 50%;}
+    .gallery-container .item {width: 49.5%;}
 }
 
 @media screen and (min-width: 512px) and (max-width: 640px) {
