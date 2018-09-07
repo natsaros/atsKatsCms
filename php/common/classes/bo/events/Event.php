@@ -14,6 +14,8 @@ class Event implements JsonSerializable {
     private $start;
     private $end;
 
+    private $owner;
+
     /**
      * Event constructor.
      */
@@ -37,10 +39,11 @@ class Event implements JsonSerializable {
      * @param $day
      * @param $start
      * @param $end
+     * @param $owner
      * @param $place
      * @return $this
      */
-    public static function createEvent($ID, $name, $description, $status, $day, $start, $end, $place) {
+    public static function createEvent($ID, $name, $description, $status, $day, $start, $end, $owner, $place) {
         return self::create()
             ->setID($ID)
             ->setName($name)
@@ -49,7 +52,8 @@ class Event implements JsonSerializable {
             ->setDay($day)
             ->setStart($start)
             ->setEnd($end)
-            ->setPlace($place);
+            ->setPlace($place)
+            ->setOwner($owner);
     }
 
     /**
@@ -167,6 +171,23 @@ class Event implements JsonSerializable {
     /**
      * @return mixed
      */
+    public function getOwner() {
+        return $this->owner;
+    }
+
+    /**
+     * @param mixed $owner
+     * @return Event
+     */
+    public function setOwner($owner) {
+        $this->owner = $owner;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getPlace() {
         return isNotEmpty($this->place) ? $this->place : '';
     }
@@ -179,8 +200,6 @@ class Event implements JsonSerializable {
         $this->place = $place;
         return $this;
     }
-
-
 
     /**
      * @param $day
@@ -217,7 +236,8 @@ class Event implements JsonSerializable {
             'day' => $this->getDay(),
             'start' => $start,
             'end' => $end,
-            'status' => $this->getStatus()
+            'status' => $this->getStatus(),
+            'owner' => $this->getOwner()
         ];
     }
 }

@@ -4,8 +4,7 @@ require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'DaysOfWeek.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Event.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Lesson.php');
 
-class ProgramHandler
-{
+class ProgramHandler {
     const PILATES_EQUIP = 'Pilates equipment';
     const YOGA = 'Yoga';
     const PILATES_MAT = 'Pilates mat';
@@ -23,6 +22,7 @@ class ProgramHandler
     const PLACE = 'PLACE';
 
     const LESSON = 'LESSON';
+    const OWNER = 'OWNER';
 
 
     /**
@@ -277,10 +277,11 @@ class ProgramHandler
             "," . self::START .
             "," . self::END .
             "," . self::PLACE .
-            ") VALUES (?,?,?,?,?,?,?)";
+            "," . self::OWNER .
+            ") VALUES (?,?,?,?,?,?,?,?)";
         $createdEvent = getDb()->createStmt($query,
-            array('s', 's', 'i', 's', 's', 's', 's'),
-            array($event->getName(), $event->getDescription(), $event->getStatus(), $event->getDay(), $event->getStart(), $event->getEnd(), $event->getPlace()));
+            array('s', 's', 'i', 's', 's', 's', 's', 's'),
+            array($event->getName(), $event->getDescription(), $event->getStatus(), $event->getDay(), $event->getStart(), $event->getEnd(), $event->getOwner(), $event->getPlace()));
         return $createdEvent;
     }
 
@@ -298,12 +299,13 @@ class ProgramHandler
             . self::DAY . " = ?, "
             . self::START . " = ?, "
             . self::END . " = ?, "
+            . self::OWNER . " = ?, "
             . self::PLACE . " = ?"
             . " WHERE "
             . self::ID . "= ?";
         $updatedEvent = getDb()->updateStmt($query,
-            array('s', 's', 'i', 's', 's', 's', 's', 'i'),
-            array($event->getName(), $event->getDescription(), $event->getStatus(), $event->getDay(), $event->getStart(), $event->getEnd(), $event->getPlace(), $event->getID()));
+            array('s', 's', 'i', 's', 's', 's', 's', 's', 'i'),
+            array($event->getName(), $event->getDescription(), $event->getStatus(), $event->getDay(), $event->getStart(), $event->getEnd(), $event->getOwner(), $event->getPlace(), $event->getID()));
         return $updatedEvent;
     }
 
@@ -389,7 +391,7 @@ class ProgramHandler
         if ($row === false) {
             return false;
         }
-        return Event::createEvent($row[self::ID], $row[self::NAME], $row[self::DESCRIPTION], $row[self::STATUS], $row[self::DAY], $row[self::START], $row[self::END], $row[self::PLACE]);
+        return Event::createEvent($row[self::ID], $row[self::NAME], $row[self::DESCRIPTION], $row[self::STATUS], $row[self::DAY], $row[self::START], $row[self::END], $row[self::OWNER], $row[self::PLACE]);
     }
 
 
