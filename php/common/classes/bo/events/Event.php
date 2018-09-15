@@ -184,7 +184,6 @@ class Event implements JsonSerializable {
         return $this;
     }
 
-
     /**
      * @return mixed
      */
@@ -199,6 +198,16 @@ class Event implements JsonSerializable {
     public function setPlace($place) {
         $this->place = $place;
         return $this;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getNameWithOwner() {
+        if ($this->getOwner()) {
+            return $this->getName() . ' by ' . $this->getOwner();
+        }
+        return $this->getName();
     }
 
     /**

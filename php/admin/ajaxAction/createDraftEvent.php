@@ -8,11 +8,13 @@ $start = $_POST['start'];
 $end = $_POST['end'];
 $title = $_POST['title'];
 $place = $_POST['place'];
+$owner = $_POST['owner'];
 
 try {
-    $event = Event::createEvent(null, $title, null, EventStatus::INACTIVE, $day, $start, $end, $place);
+    $event = Event::createEvent(null, $title, null, EventStatus::INACTIVE, $day, $start, $end, $owner, $place);
     $res = ProgramHandler::addDBEvent($event);
     if ($res !== null || $res) {
+        $event->setID($res);
         echo json_encode($event);
     } else {
         throwJSONError();

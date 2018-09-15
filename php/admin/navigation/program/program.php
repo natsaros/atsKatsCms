@@ -158,19 +158,37 @@ $events = json_encode($rawEvents);
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="eventContent_title">Lesson Details</h4>
                 </div>
-                <div class="modal-body text-center">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            Start: <span id="startTime"></span><br>
-                            End: <span id="endTime"></span><br><br>
-                            <p id="eventInfo"></p>
+                <?php $action = getAdminActionRequestUri() . "events" . DS . "updateTeacherName"; ?>
+                <form name="saveTeacherForm" role="form" action="<?php echo $action; ?>" data-toggle="validator"
+                      method="post">
+                    <div class="modal-body text-center">
+                        <input id="hiddenID" type="hidden" name="<?php echo ProgramHandler::ID; ?>" value=""/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Start: <span id="startTime"></span><br>
+                                End: <span id="endTime"></span><br><br>
+                                <p id="eventInfo"></p>
+                                <div class="modal-body text-center">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="lesson_input">Teacher</label>
+                                                <input class="form-control" placeholder="Teacher Name"
+                                                       name="<?php echo ProgramHandler::OWNER ?>" id="lesson_input"
+                                                       value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="deleteBtn" type="button" class="btn btn-primary">Delete</button>
-                </div>
+                    <div class="modal-footer">
+                        <button id="deleteBtn" type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" name="submit" value="Save" placeholder="Save" class="btn btn-primary"/>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -208,8 +226,7 @@ $events = json_encode($rawEvents);
 
     var $calendar = $('#calendar');
     var draftColor = '#f1b900';
-
-    $calendar.fullCalendar({
+    var calendarOptions = {
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         defaultView: window.mobilecheck() ? 'agendaDay' : 'agendaWeek',
         header: window.mobilecheck() ? {
@@ -220,16 +237,16 @@ $events = json_encode($rawEvents);
         allDayDefault: false,
         allDaySlot: false,
         defaultTimedEventDuration: '01:00:00',
+        slotDuration: '00:15:00',
         forceEventDuration: true,
-
         editable: true,
         droppable: true,
         dragRevertDuration: 0,
-
         eventLimit: true, // allow "more" link when too many events
         hiddenDays: [0],
         slotMinutes: 60,
         minTime: "08:00:00",
+        maxTime: "22:00:00",
         slotLabelFormat: TIME_FORMAT,
         timeFormat: TIME_FORMAT,
         columnFormat: DAY_FORMAT,
@@ -237,78 +254,148 @@ $events = json_encode($rawEvents);
         nowIndicator: true,
         events: <?php echo $events;?>,
         drop: function (date, jsEvent, ui, resourceId) {
-            var defaultTimedEventDuration = $('#calendar').fullCalendar('option', 'defaultTimedEventDuration');
-            var event = $(this).data('event');
+            var defaultTimedEventDuration = $calendar.fullCalendar('option', 'defaultTimedEventDuration');
+            var $event = $(this).data('event');
 
             var minutesToAdd = parseMinutes(defaultTimedEventDuration);
             var day = date.format(DAY_FORMAT).toLowerCase();
             var start = date.format(TIME_FORMAT);
             var end = date.add(minutesToAdd, 'minutes').format(TIME_FORMAT);
-
-            createDraftEventAjax(event.title, day, start, end);
+            createDraftEventAjax($event.title, day, start, end)
+                .success(function (data, text) {
+                    $event.id = $.parseJSON($(data).text()).id;
+                    console.log('new id : ' + $event.id);
+                })
+                .error(handleError);
         },
         eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-            updateDraftEventAjax(event, draftColor);
+            if (!event.id) {
+                fetchLastEvent()
+                    .success(function (data, text) {
+                        successFunctionFetch(event, data);
+                    })
+                    .error(handleError)
+                    .done(function (data) {
+                        updateDraftEventAjax(event, draftColor).error(handleError);
+                    });
+            } else {
+                updateDraftEventAjax(event, draftColor).error(handleError);
+            }
         },
         eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
-            updateDraftEventAjax(event, draftColor);
+            if (!event.id) {
+                fetchLastEvent()
+                    .success(function (data, text) {
+                        successFunctionFetch(event, data);
+                    })
+                    .error(handleError)
+                    .done(function (data) {
+                        updateDraftEventAjax(event, draftColor).error(handleError);
+                    });
+            } else {
+                updateDraftEventAjax(event, draftColor).error(handleError);
+            }
         },
         eventClick: function (event, jsEvent, view) {
-            console.log('event clicked' + event.id);
-            $("#startTime").html(moment(event.start).format('MMM Do H:mm A'));
-            $("#endTime").html(moment(event.end).format('MMM Do H:mm A'));
-            $("#eventInfo").html(event.title).data('id', event.id);
-            $("#eventContent").modal('show');
+            if (!event.id) {
+                fetchLastEvent()
+                    .success(function (data, text) {
+                        successFunctionFetch(event, data);
+                    })
+                    .error(handleError)
+                    .done(function (data) {
+                        console.log('event clicked : ' + event.id);
+                        updateModalValuesAndShow(event);
+                    });
+            } else {
+                console.log('event clicked : ' + event.id);
+                updateModalValuesAndShow(event);
+            }
         },
         eventRender: function (event, element, view) {
+            console.log('rendering event : ' + event.id);
+
             if (event.status === 1) {
                 element.addClass('published');
             }
+
+            element.find('.fc-title')
+                .html("<span>Lesson : </span><span>" + event.title + "</span>");
+
+            if (event.place) {
+                element.find('.fc-content')
+                    .append("<div class='fc-place'><span>Class : </span><span>" + event.place + "</span></div>");
+            }
+
+            if (event.owner) {
+                element.find('.fc-content')
+                    .append("<div class='fc-owner'><span>Teacher : </span><span>" + event.owner + "</span></div>");
+            }
         }
-    });
+    };
+    $calendar.fullCalendar(calendarOptions);
+
+    function successFunctionFetch(event, data) {
+        var dataText = $(data).text();
+        if (dataText) {
+            //variable to hold last
+            event.id = $.parseJSON(dataText).id;
+            $calendar.fullCalendar('updateEvent', event);
+        }
+    }
+
+    function fetchLastEvent() {
+        return $.ajax({
+            url: getContextPath() + '/admin/ajaxAction/fetchLastEvent',
+            type: "POST"
+        });
+    }
+
+    function updateModalValuesAndShow(event) {
+        $("#startTime").html(moment(event.start).format('MMM Do H:mm A'));
+        $("#endTime").html(moment(event.end).format('MMM Do H:mm A'));
+        $("#eventInfo").html(event.title).data('id', event.id);
+        var $eventContent = $("#eventContent");
+        $eventContent.find('#hiddenID').val(event.id);
+        $eventContent.find('#lesson_input').val(event.owner);
+        $eventContent.modal('show');
+    }
+
+    function handleError(xhr, ajaxOptions, thrownError) {
+        console.log("Error : " + xhr.responseText);
+    }
 
     function parseMinutes(duration) {
         var split = duration.split(':');
         return parseInt(split[0]) * 60 + parseInt(split[1]);
     }
 
-    function updateDraftEventAjax($event, $draftColor) {
-        var day = $.fullCalendar.formatDate($event.start, DAY_FORMAT).toLowerCase();
-        var start = $.fullCalendar.formatDate($event.start, TIME_FORMAT);
-        var end = $.fullCalendar.formatDate($event.end, TIME_FORMAT);
-        $.ajax({
+    function updateDraftEventAjax(event, draftColor) {
+        var day = $.fullCalendar.formatDate(event.start, DAY_FORMAT).toLowerCase();
+        var start = $.fullCalendar.formatDate(event.start, TIME_FORMAT);
+        var end = $.fullCalendar.formatDate(event.end, TIME_FORMAT);
+        return $.ajax({
             url: getContextPath() + '/admin/ajaxAction/updateDraftEvent',
-            data: {day: day, start: start, end: end, place: '', id: $event.id},
+            data: {day: day, start: start, end: end, place: '', id: event.id},
             type: "POST",
-            success: function (data, text) {
-                //do something on success
-            },
-            fail: function (xhr, ajaxOptions, thrownError) {
-                console.log("Error : " + xhr.responseText);
-            },
             complete: function (data) {
-                $event.color = $draftColor;
-                $calendar.fullCalendar('updateEvent', $event);
+                event.color = draftColor;
+                $calendar.fullCalendar('updateEvent', event);
             }
         });
     }
 
     function createDraftEventAjax($title, $day, $start, $end) {
-        $.ajax({
+        return $.ajax({
             url: getContextPath() + '/admin/ajaxAction/createDraftEvent',
             data: {title: $title, day: $day, start: $start, end: $end, place: ''},
-            type: "POST",
-            success: function (data, text) {
-                //do something on success
-            },
-            fail: function (xhr, ajaxOptions, thrownError) {
-                console.log("Error : " + xhr.responseText);
-            }
+            type: "POST"
         });
     }
 
     //handle delete events
-    $('#eventContent').find('#deleteBtn').click(function () {
+    var $eventContentElement = $("#eventContent");
+    $eventContentElement.find('#deleteBtn').click(function () {
         var eventId = $('#eventInfo').data('id');
         $.ajax({
             url: getContextPath() + '/admin/ajaxAction/deleteEvent',
@@ -322,6 +409,5 @@ $events = json_encode($rawEvents);
                 console.log("Error : " + xhr.responseText);
             }
         });
-
     });
 </script>

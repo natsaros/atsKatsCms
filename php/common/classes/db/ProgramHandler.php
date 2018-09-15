@@ -79,42 +79,42 @@ class ProgramHandler {
 
             switch ($event->getDay()) {
                 case DaysOfWeek::MONDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getName(), $mondayTimeFrames, $mondayLessons);
+                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $mondayTimeFrames, $mondayLessons);
                     if (isNotEmpty($lesson2add)) {
                         $mondayLessons[] = $lesson2add;
                     }
                     $mondayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::TUESDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getName(), $tuesdayTimeFrames, $tuesdayLessons);
+                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $tuesdayTimeFrames, $tuesdayLessons);
                     if (isNotEmpty($lesson2add)) {
                         $tuesdayLessons[] = $lesson2add;
                     }
                     $tuesdayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::WEDNESDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getName(), $wednesdayTimeFrames, $wednesdayLessons);
+                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $wednesdayTimeFrames, $wednesdayLessons);
                     if (isNotEmpty($lesson2add)) {
                         $wednesdayLessons[] = $lesson2add;
                     }
                     $wednesdayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::THURSDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getName(), $thursdayTimeFrames, $thursdayLessons);
+                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $thursdayTimeFrames, $thursdayLessons);
                     if (isNotEmpty($lesson2add)) {
                         $thursdayLessons[] = $lesson2add;
                     }
                     $thursdayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::FRIDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getName(), $fridayTimeFrames, $fridayLessons);
+                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $fridayTimeFrames, $fridayLessons);
                     if (isNotEmpty($lesson2add)) {
                         $fridayLessons[] = $lesson2add;
                     }
                     $fridayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::SATURDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getName(), $saturdayTimeFrames, $saturdayLessons);
+                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $saturdayTimeFrames, $saturdayLessons);
                     if (isNotEmpty($lesson2add)) {
                         $saturdayLessons[] = $lesson2add;
                     }
@@ -146,9 +146,9 @@ class ProgramHandler {
                     $timeSpace = $event->getDay() . '_' . $timeFrame;
                     $key = array_search($timeSpace, array_keys($lessons));
                     if ($key !== false) {
-                        $lessons[$timeSpace] = $lessons[$timeSpace] . ' / ' . $event->getName();
+                        $lessons[$timeSpace] = $lessons[$timeSpace] . ' / ' . $event->getNameWithOwner();
                     } else {
-                        $lessons[$timeSpace] = $event->getName();
+                        $lessons[$timeSpace] = $event->getNameWithOwner();
                     }
                     break;
             }
@@ -178,7 +178,7 @@ class ProgramHandler {
      * @param $daysLessons array
      * @return array
      */
-    static function addMobileLesson($timeFrame, $lesson, $daysTimeFrames, &$daysLessons) {
+    private static function addMobileLesson($timeFrame, $lesson, $daysTimeFrames, &$daysLessons) {
         $lesson2Add = array(TIME_FRAME => $timeFrame, LESSON => $lesson);
         $key = array_search($timeFrame, $daysTimeFrames);
         if ($key !== false) {
@@ -199,6 +199,19 @@ class ProgramHandler {
         $query = "SELECT * FROM " . getDb()->events;
         $rows = getDb()->selectStmtNoParams($query);
         return self::populateEvents($rows);
+    }
+
+    /**
+     * @return Event|bool
+     * @throws SystemException
+     */
+    static function fetchLastEvent() {
+        $query = "SELECT * FROM " . getDb()->events . " WHERE " . self::ID . "=(SELECT MAX(" . self::ID . ") FROM " . getDb()->events . ");";
+        $row = getDb()->selectStmtSingleNoParams($query);
+        if ($row) {
+            return self::populateEvent($row);
+        }
+        return null;
     }
 
     /**
@@ -300,12 +313,29 @@ class ProgramHandler {
             . self::START . " = ?, "
             . self::END . " = ?, "
             . self::OWNER . " = ?, "
-            . self::PLACE . " = ?"
+            . self::PLACE . " = ? "
             . " WHERE "
             . self::ID . "= ?";
         $updatedEvent = getDb()->updateStmt($query,
             array('s', 's', 'i', 's', 's', 's', 's', 's', 'i'),
             array($event->getName(), $event->getDescription(), $event->getStatus(), $event->getDay(), $event->getStart(), $event->getEnd(), $event->getOwner(), $event->getPlace(), $event->getID()));
+        return $updatedEvent;
+    }
+
+    /**
+     * @param $event Event
+     * @return bool|mysqli_result|null
+     * @throws SystemException
+     */
+    public static function updateDBEventOwner($event) {
+        $query = "UPDATE " . getDb()->events .
+            " SET "
+            . self::OWNER . " = ? "
+            . " WHERE "
+            . self::ID . "= ?";
+        $updatedEvent = getDb()->updateStmt($query,
+            array('s', 'i'),
+            array($event->getOwner(), $event->getID()));
         return $updatedEvent;
     }
 
