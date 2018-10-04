@@ -41,7 +41,7 @@ class EmailHandler {
      */
     static function sendResetPasswordToAdminUser($email, $password) {
         $email_subject = SITE_TITLE . " - Password Reset";
-        $email_body = file_get_contents("./assets/emailTemplates/admin/reset_password_message.htm");
+        $email_body = file_get_contents("./admin/assets/emailTemplates/admin/reset_password_message.htm");
         $email_body = str_replace("%SITE_TITLE%", SITE_TITLE, $email_body);
         $email_body = str_replace("%SITE_DOMAIN_NAME%", SITE_DOMAIN_NAME, $email_body);
         $email_body = str_replace("%PASSWORD%", $password, $email_body);
@@ -64,7 +64,7 @@ class EmailHandler {
      */
     static function sendPasswordToCreatedAdminUser($email, $username, $password) {
         $email_subject = SITE_TITLE . " - Welcome!";
-        $email_body = file_get_contents("./assets/emailTemplates/admin/new_user_password_generation_message.htm");
+        $email_body = file_get_contents("./admin/assets/emailTemplates/admin/new_user_password_generation_message.htm");
         $email_body = str_replace("%SITE_TITLE%", SITE_TITLE, $email_body);
         $email_body = str_replace("%SITE_DOMAIN_NAME%", SITE_DOMAIN_NAME, $email_body);
         $email_body = str_replace("%USERNAME%", $username, $email_body);

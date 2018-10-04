@@ -504,13 +504,13 @@ function defineSystemVariables() {
     defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
     defined('CLASSES_ROOT_PATH') or define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 
-    defined('ASSETS_URI') or define('ASSETS_URI', REQUEST_URI . DS . ADMIN_ROOT_PATH . 'assets' . DS);
-    defined('CSS_URI') or define('CSS_URI', ASSETS_URI . DS . ADMIN_ROOT_PATH . 'css' . DS);
-    defined('JS_URI') or define('JS_URI', ASSETS_URI . DS . ADMIN_ROOT_PATH . 'js' . DS);
+    defined('ASSETS_URI') or define('ASSETS_URI', REQUEST_URI  . ADMIN_STR . DS . 'assets' . DS);
+    defined('CSS_URI') or define('CSS_URI', ASSETS_URI . 'css' . DS);
+    defined('JS_URI') or define('JS_URI', ASSETS_URI . 'js' . DS);
 
-    defined('CLIENT_ASSETS_URI') or define('CLIENT_ASSETS_URI', REQUEST_URI . DS . CLIENT_ROOT_PATH . 'assets' . DS);
-    defined('CLIENT_CSS_URI') or define('CLIENT_CSS_URI', ASSETS_URI . DS . CLIENT_ROOT_PATH . 'css' . DS);
-    defined('CLIENT_JS_URI') or define('CLIENT_JS_URI', ASSETS_URI . DS . CLIENT_ROOT_PATH . 'js' . DS);
+    defined('CLIENT_ASSETS_URI') or define('CLIENT_ASSETS_URI', REQUEST_URI  . CLIENT_STR . DS . 'assets' . DS);
+    defined('CLIENT_CSS_URI') or define('CLIENT_CSS_URI', CLIENT_ASSETS_URI . 'css' . DS);
+    defined('CLIENT_JS_URI') or define('CLIENT_JS_URI', CLIENT_ASSETS_URI . 'js' . DS);
 
     defined('GALLERY_ROOT') or define('GALLERY_ROOT', getRootPath() . 'gallery' . DS);
     defined('PICTURES_ROOT') or define('PICTURES_ROOT', GALLERY_ROOT . 'pictures' . DS);
