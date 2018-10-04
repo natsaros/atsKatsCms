@@ -469,6 +469,7 @@ function safe_input($data) {
  */
 function defineSystemVariables() {
     defined('PHP_POSTFIX') or define('PHP_POSTFIX', '.php');
+    defined('PHP_STR') or define('PHP_STR', 'php');
     defined('ADMIN_STR') or define('ADMIN_STR', 'admin');
     defined('CLIENT_STR') or define('CLIENT_STR', 'client');
     defined('NAV_STR') or define('NAV_STR', 'navigation');
@@ -491,10 +492,10 @@ function defineSystemVariables() {
         define('PHP_ROOT_PATH', $str);
     }
 
-    defined('ADMIN_ROOT_PATH') or define('ADMIN_ROOT_PATH', PHP_ROOT_PATH . ADMIN_STR . DS);
-    defined('ADMIN_NAV_PATH') or define('ADMIN_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS);
-    defined('ADMIN_MODAL_NAV_PATH') or define('ADMIN_MODAL_NAV_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . NAV_STR . DS . MODAL_STR . DS);
-    defined('ADMIN_ACTION_PATH') or define('ADMIN_ACTION_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . ACTION_STR . DS);
+    defined('ADMIN_ROOT_PATH') or define('ADMIN_ROOT_PATH', PHP_ROOT_PATH . ADMIN_STR . DS . PHP_STR . DS);
+    defined('ADMIN_NAV_PATH') or define('ADMIN_NAV_PATH', ADMIN_ROOT_PATH . NAV_STR . DS);
+    defined('ADMIN_MODAL_NAV_PATH') or define('ADMIN_MODAL_NAV_PATH', ADMIN_NAV_PATH . MODAL_STR . DS);
+    defined('ADMIN_ACTION_PATH') or define('ADMIN_ACTION_PATH', ADMIN_ROOT_PATH . ACTION_STR . DS);
 
     defined('CLIENT_ROOT_PATH') or define('CLIENT_ROOT_PATH', PHP_ROOT_PATH . CLIENT_STR . DS);
     defined('CLIENT_ACTION_PATH') or define('CLIENT_ACTION_PATH', CLIENT_ROOT_PATH . ACTION_STR . DS);
@@ -504,11 +505,11 @@ function defineSystemVariables() {
     defined('COMMON_ROOT_PATH') or define('COMMON_ROOT_PATH', PHP_ROOT_PATH . COMMON_STR . DS);
     defined('CLASSES_ROOT_PATH') or define('CLASSES_ROOT_PATH', COMMON_ROOT_PATH . CLASSES_STR . DS);
 
-    defined('ASSETS_URI') or define('ASSETS_URI', REQUEST_URI  . ADMIN_STR . DS . 'assets' . DS);
+    defined('ASSETS_URI') or define('ASSETS_URI', REQUEST_URI . ADMIN_STR . DS . 'assets' . DS);
     defined('CSS_URI') or define('CSS_URI', ASSETS_URI . 'css' . DS);
     defined('JS_URI') or define('JS_URI', ASSETS_URI . 'js' . DS);
 
-    defined('CLIENT_ASSETS_URI') or define('CLIENT_ASSETS_URI', REQUEST_URI  . CLIENT_STR . DS . 'assets' . DS);
+    defined('CLIENT_ASSETS_URI') or define('CLIENT_ASSETS_URI', REQUEST_URI . CLIENT_STR . DS . 'assets' . DS);
     defined('CLIENT_CSS_URI') or define('CLIENT_CSS_URI', CLIENT_ASSETS_URI . 'css' . DS);
     defined('CLIENT_JS_URI') or define('CLIENT_JS_URI', CLIENT_ASSETS_URI . 'js' . DS);
 
