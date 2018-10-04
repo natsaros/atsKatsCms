@@ -1,7 +1,8 @@
 <?php
 ob_start();
 header("Content-type: text/html; charset=utf-8");
-require_once("php/common/siteFunctions.php");
+
+require_once("core/siteFunctions.php");
 if (!is_session_started()) {
     session_start();
 }
@@ -23,10 +24,10 @@ if (isAdmin()) {
         require_once(COMMON_ROOT_PATH . 'siteSections.php');
     }
     if (isAdminAction() && isEmpty($_GET["action"])) {
-        @include("php/admin/404.php");
+        @include("admin/php/404.php");
         return;
     }
-    @include("php/admin/index.php");
+    @include("admin/php/index.php");
 } else {
-    @include("php/client/index.php");
+    @include("client/php/index.php");
 }
