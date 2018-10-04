@@ -17,7 +17,6 @@ loadAppClasses();
  * @throws SystemException
  */
 function exception_error_handler($severity, $message, $file, $line) {
-    //TODO : check this is not throwing correct error in DB->connect()
     if (mysqli_connect_errno()) {
         $message = mysqli_connect_error();
 //        echo sprintf("Connect failed: %s\n", mysqli_connect_error());
@@ -148,7 +147,6 @@ function getAdminActionRequestUri() {
 function getClientActionRequestUri() {
     return getRootUri() . ACTION_STR . DS;
 }
-
 
 /**
  * @return string
