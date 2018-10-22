@@ -28,7 +28,7 @@
         <meta property="og:url" content="http://fitnesshousebypenny.gr" >
         <meta property="og:type" content="website"/>
         <meta property="og:title" itemprop="name" content="Fitness House by Penny" >
-        <meta property="og:image" content="http://fitnesshousebypenny.gr/img/gallery3.jpg" >
+        <meta property="og:image" content="http://fitnesshousebypenny.gr/assets/img/recent/magazine.jpeg" >
     <?php } ?>
     <meta property="og:site_name" content="fitnesshousebypenny.gr" >
     <meta property="og:description" content="Fitness house by Penny - a place to start your new life!" >
