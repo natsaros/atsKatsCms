@@ -23,7 +23,7 @@
         <meta property="og:url" content="http://fitnesshousebypenny.gr/blog/<?php echo $post->getFriendlyTitle()?>" >
         <meta property="og:type" content="article"/>
         <meta property="og:title" itemprop="name" content="<?php echo $post->getTitle()?>" >
-        <meta property="og:image" content="<?php echo ImageUtil::renderBlogImage($post)?>" >
+        <meta property="og:image" content="<?php echo ImageUtil::renderBlogImageUrl($post)?>" >
     <?php } else { ?>
         <meta property="og:url" content="http://fitnesshousebypenny.gr" >
         <meta property="og:type" content="website"/>

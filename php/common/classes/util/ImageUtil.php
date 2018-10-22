@@ -6,7 +6,8 @@ require_once(CLASSES_ROOT_PATH . 'util' . DS . 'SimpleImage.php');
 /**
  * Used to facilitate image related functions
  */
-class ImageUtil {
+class ImageUtil
+{
 
     const TMP_NAME = 'tmp_name';
     const NAME = 'name';
@@ -73,9 +74,16 @@ class ImageUtil {
                 return self::renderImageFromGallery($path, 'blog_default.png');
             }
         } else {
-            return self::renderImageFromGallery($path, 'blog_default.png');
+            return getRootUri() . "gallery" . DS . "pictures" . DS . "posts" . DS . $post->getID() . DS . $imagePath;
+//            return self::renderImageFromGallery($path, 'blog_default.png');
         }
     }
+
+    static function renderBlogImageUrl($post) {
+        $rootUrl = "http://fitnesshousebypenny.gr";
+        return $rootUrl . self::renderBlogImage($post);
+    }
+
 
     /**
      * @param User $user
