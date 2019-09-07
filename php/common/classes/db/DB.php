@@ -1,34 +1,34 @@
 <?php
 
 class Db {
-    const SETTINGS = 'SETTINGS';
-    const USERS = 'USERS';
-    const USER_META = 'USER_META';
-    const PAGES = 'PAGES';
-    const PAGE_META = 'PAGE_META';
-    const VISITORS = 'VISITORS';
+    const SETTINGS = 'settings';
+    const USERS = 'users';
+    const USER_META = 'user_meta';
+    const PAGES = 'pages';
+    const PAGE_META = 'page_meta';
+    const VISITORS = 'visitors';
 
-    const USER_GROUPS = 'USER_GROUPS';
-    const USER_GROUPS_META = 'USER_GROUPS_META';
-    const UGR_ASSOC = 'UGR_ASSOC';
-    const ACCESS_RIGHTS = 'ACCESS_RIGHTS';
-    const ACCESS_RIGHTS_META = 'ACCESS_RIGHTS_META';
-    const ACR_ASSOC = 'ACR_ASSOC';
+    const USER_GROUPS = 'user_groups';
+    const USER_GROUPS_META = 'user_groups_meta';
+    const UGR_ASSOC = 'ugr_assoc';
+    const ACCESS_RIGHTS = 'access_rights';
+    const ACCESS_RIGHTS_META = 'access_rights_meta';
+    const ACR_ASSOC = 'acr_assoc';
 
-    const POSTS = 'POSTS';
-    const POST_META = 'POST_DETAILS';
-    const COMMENTS = 'COMMENTS';
-    const COMMENT_META = 'COMMENT_META';
-    const PRODUCTS = 'PRODUCTS';
-    const PRODUCT_DETAILS = 'PRODUCT_DETAILS';
-    const PRODUCT_CATEGORIES = 'PRODUCT_CATEGORIES';
-    const PROMOTION = 'PROMOTION';
+    const POSTS = 'posts';
+    const POST_META = 'post_details';
+    const COMMENTS = 'comments';
+    const COMMENT_META = 'comment_meta';
+    const PRODUCTS = 'products';
+    const PRODUCT_DETAILS = 'product_details';
+    const PRODUCT_CATEGORIES = 'product_categories';
+    const PROMOTION = 'promotion';
 
-    const LESSONS = 'LESSONS';
-    const EVENTS = 'EVENTS';
+    const LESSONS = 'lessons';
+    const EVENTS = 'events';
 
-    const NEWSLETTER_EMAILS = 'NEWSLETTER_EMAILS';
-    const NEWSLETTER_CAMPAIGNS = 'NEWSLETTER_CAMPAIGNS';
+    const NEWSLETTER_EMAILS = 'newsletter_emails';
+    const NEWSLETTER_CAMPAIGNS = 'newsletter_campaigns';
 
     const DB_ALL = 'all';
     const DB_GLOBAL = 'global';
@@ -329,7 +329,6 @@ class Db {
         if (preg_match('|[^a-z0-9_]|i', $prefix)) {
             throw new SystemException('Invalid database prefix');
         }
-        $prefix = strtoupper($prefix);
 
         $this->setPrefix($prefix);
 
@@ -466,7 +465,7 @@ class Db {
 
             $tableNames = null;
             foreach ($rows as $row) {
-                $tableNames[] = strtoupper($row['TABLE_NAME']);
+                $tableNames[] = $row['TABLE_NAME'];
             }
             $db->setInitialized(isNotEmpty($tableNames) && in_array($db->settings, $tableNames));
         }
