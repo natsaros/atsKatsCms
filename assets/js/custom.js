@@ -103,7 +103,7 @@ $(window).scroll(function () {
         var winTop = $(window).scrollTop();
         var belowHeaderTop = $('.belowHeader').offset().top;
         var nav = $(this).closest('nav');
-        var isHover = $(this).closest('nav:hover').length != 0;
+        var isHover = $(this).closest('nav:hover').length !== 0;
 
         if (winTop > belowHeaderTop + 10 && !isHover) {
             nav.addClass("opacity70");
