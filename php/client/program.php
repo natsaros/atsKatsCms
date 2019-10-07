@@ -39,8 +39,8 @@ function renderMobileProgram($program, $weekDaysGr) {
             echo '<tbody>';
             foreach ($weekDay as $timeFrame) {
                 echo '<tr>';
-                echo '<td>' . $timeFrame[TIME_FRAME] . '</td>';
                 echo '<td>' . $timeFrame[LESSON] . '</td>';
+                echo '<td>' . $timeFrame[TIME_FRAME] . '</td>';
                 echo '</tr>';
             }
             echo '</tbody>';
