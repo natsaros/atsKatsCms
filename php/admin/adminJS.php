@@ -49,6 +49,7 @@
 
 <script src="<?php echo JS_URI ?>fullcalendar/fullcalendar.min.js"></script>
 <script src="<?php echo JS_URI ?>fullcalendar/scheduler.min.js"></script>
+<script src="<?php echo JS_URI ?>fullcalendar/program.js"></script>
 
 <?php
 if ((isEmpty($_GET["page"]) || $_GET["page"] == PageSections::DASHBOARD) && isLoggedIn() && !forceUserChangePassword()){

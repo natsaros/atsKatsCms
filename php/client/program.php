@@ -8,12 +8,12 @@ const SATURDAY = DaysOfWeek::SATURDAY;
 
 const TIME_FRAME = 'timeframe';
 const LESSON = 'lesson';
-const DAY = 'day';
 
-$events = ProgramHandler::fetchActiveEvents();
+$events = ProgramHandler::fetchActiveEventsGrouped();
+$lessonsPerDay = ProgramHandler::countActiveEventsPerDay();
 
 $mobileProgram = ProgramHandler::mobileProgram($events);
-$lessons = ProgramHandler::desktopProgram($events);
+$lessons = ProgramHandler::getLessonsTimeFrames($events);
 $timeFrames = ProgramHandler::getTimeFrames($events);
 
 $weekDaysGr = array(MONDAY => 'Δευτέρα', TUESDAY => 'Τρίτη', WEDNESDAY => 'Τετάρτη', THURSDAY => 'Πέμπτη', FRIDAY => 'Παρασκευή', SATURDAY => 'Σάββατο');
@@ -53,25 +53,73 @@ function renderMobileProgram($program, $weekDaysGr) {
 }
 
 /**
- * @param $lessons array
- * @param $timeFrames array
+ * @param $lessons Lesson[]
+ * @param $lessonsPerDay LessonsPerDay[]
  */
-function renderDesktopProgram($lessons, $timeFrames) {
-    foreach ($timeFrames as $timeFrame) {
+function renderDesktopProgram($lessons, $lessonsPerDay) {
+    echo '<tr>';
+    echo '<td>' . ProgramHandler::PILATES_EQUIP . '</td>';
+    echo '<td colspan="6">' . '08:00 - 13:00 (διάρκεια μαθήματος 1 ωρα) <br> 17:00 - 22:00 (διάρκεια μαθήματος 1 ωρα)' . '</td>';
+    echo '</tr>';
+
+    foreach (array_keys($lessons) as $lessonName) {
         echo '<tr>';
-        echo '<td>' . $timeFrame . '</td>';
-        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::MONDAY . '_' . $timeFrame) . '</td>';
-        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::TUESDAY . '_' . $timeFrame) . '</td>';
-        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::WEDNESDAY . '_' . $timeFrame) . '</td>';
-        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::THURSDAY . '_' . $timeFrame) . '</td>';
-        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::FRIDAY . '_' . $timeFrame) . '</td>';
-        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::SATURDAY . '_' . $timeFrame) . '</td>';
+        echo '<td>' . $lessonName . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::MONDAY, $lessonName) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::TUESDAY, $lessonName) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::WEDNESDAY, $lessonName) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::THURSDAY, $lessonName) . '</td>';
+        echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::FRIDAY, $lessonName) . '</td>';
+        if (countLessonsPerDay($lessonsPerDay, DaysOfWeek::SATURDAY) > 0) {
+            echo '<td>' . getDesktopLesson($lessons, DaysOfWeek::SATURDAY, $lessonName) . '</td>';
+        }
         echo '</tr>';
     }
 }
 
-function getDesktopLesson($lessons, $key) {
-    return isNotEmpty($lessons[$key]) ? $lessons[$key] : '&nbsp;';
+/**
+ * @param  $weekDays array
+ * @param $lessonsPerDay LessonsPerDay[]
+ */
+function renderWeekDays($weekDays, $lessonsPerDay) {
+    foreach (array_keys($weekDays) as $day) {
+        if (countLessonsPerDay($lessonsPerDay, $day) > 0) {
+            echo '<th>' . $weekDays[$day] . '</th>';
+        }
+    }
+}
+
+
+/**
+ * @param $countLessonsPerDay LessonsPerDay[]
+ * @param $day
+ * @return mixed
+ */
+function countLessonsPerDay($countLessonsPerDay, $day) {
+    $lessonsPerDayArray = array();
+    foreach ($countLessonsPerDay as $item) {
+        $lessonsPerDayArray[$item->getDay()] = $item->getCount();
+    }
+
+    return $lessonsPerDayArray[$day] !== null ? $lessonsPerDayArray[$day] : 0;
+}
+
+function getDesktopLesson($lessons, $day, $lesson) {
+    $ret = '';
+    $hoursPerDay = $lessons[$lesson][$day];
+
+    if (isNotEmpty($hoursPerDay)) {
+        foreach ($hoursPerDay as $i => $timeFrame) {
+            if ($i + 1 == count($hoursPerDay)) {
+                $ret .= $timeFrame;
+            } else {
+                $ret .= $timeFrame . '<br>';
+            }
+        }
+        return $ret;
+    }
+
+    return '&nbsp;';
 }
 
 ?>
@@ -98,16 +146,11 @@ function getDesktopLesson($lessons, $key) {
                 <thead>
                 <tr>
                     <th>&nbsp;</th>
-                    <th><?php echo $weekDaysGr[DaysOfWeek::MONDAY]; ?></th>
-                    <th><?php echo $weekDaysGr[DaysOfWeek::TUESDAY]; ?></th>
-                    <th><?php echo $weekDaysGr[DaysOfWeek::WEDNESDAY]; ?></th>
-                    <th><?php echo $weekDaysGr[DaysOfWeek::THURSDAY]; ?></th>
-                    <th><?php echo $weekDaysGr[DaysOfWeek::FRIDAY]; ?></th>
-                    <th><?php echo $weekDaysGr[DaysOfWeek::SATURDAY]; ?></th>
+                    <?php renderWeekDays($weekDaysGr, $lessonsPerDay); ?>
                 </tr>
                 </thead>
                 <tbody>
-                <?php renderDesktopProgram($lessons, $timeFrames); ?>
+                <?php renderDesktopProgram($lessons, $lessonsPerDay); ?>
                 </tbody>
             </table>
         </div>

@@ -1,15 +1,13 @@
 <?php
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'EventStatus.php');
+require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'LessonsPerDay.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'DaysOfWeek.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Event.php');
 require_once(CLASSES_ROOT_PATH . 'bo' . DS . 'events' . DS . 'Lesson.php');
 
-class ProgramHandler {
+class ProgramHandler
+{
     const PILATES_EQUIP = 'Pilates equipment';
-    const YOGA = 'Yoga';
-    const PILATES_MAT = 'Pilates mat';
-    const FAT_BURN = 'Fat burn';
-    const AERIAL_YOGA = 'Aerial yoga';
 
     const ID = 'ID';
     const NAME = 'NAME';
@@ -136,31 +134,6 @@ class ProgramHandler {
      * @param $events Event[]
      * @return array
      */
-    static function desktopProgram($events) {
-        $lessons = array();
-        $timeFrames = self::getTimeFrames($events);
-        foreach ($events as $event) {
-            $timeFrame = $event->getStart() . '-' . $event->getEnd();
-            switch ($timeFrame) {
-                case $timeFrames[$timeFrame] :
-                    $timeSpace = $event->getDay() . '_' . $timeFrame;
-                    $key = array_search($timeSpace, array_keys($lessons));
-                    if ($key !== false) {
-                        $lessons[$timeSpace] = $lessons[$timeSpace] . ' / ' . $event->getNameWithOwner();
-                    } else {
-                        $lessons[$timeSpace] = $event->getNameWithOwner();
-                    }
-                    break;
-            }
-        }
-
-        return $lessons;
-    }
-
-    /**
-     * @param $events Event[]
-     * @return array
-     */
     static function getTimeFrames($events) {
         $timeFrames = array();
         foreach ($events as $event) {
@@ -169,6 +142,34 @@ class ProgramHandler {
         }
         ksort($timeFrames);
         return $timeFrames;
+    }
+
+    /**
+     * @param $events Event[]
+     * @return array
+     */
+    static function getLessonsTimeFrames($events) {
+        $lessons = array();
+        $days = array();
+        $hours = array();
+        foreach ($events as $i => $event) {
+            $day = $event->getDay();
+            $time = $event->getStart() . '-' . $event->getEnd();
+            $lesson = $event->getName();
+
+            if ($i <> 0 && array_search($lesson, array_keys($lessons)) === false) {
+                $days = array();
+            }
+
+            if ($i <> 0 && array_search($day, array_keys($days)) === false) {
+                $hours = array();
+            }
+
+            $hours[] = $time;
+            $days[$day] = $hours;
+            $lessons[$lesson] = $days;
+        }
+        return $lessons;
     }
 
     /**
@@ -218,10 +219,26 @@ class ProgramHandler {
      * @return Event[]|bool
      * @throws SystemException
      */
-    static function fetchActiveEvents() {
-        $query = "SELECT * FROM " . getDb()->events . " WHERE " . self::STATUS . " = " . EventStatus::ACTIVE;
+    static function fetchActiveEventsGrouped() {
+        $query = "SELECT NAME, DAY, START_TIME, END_TIME FROM "
+            . getDb()->events .
+            " WHERE " . self::STATUS . " = " . EventStatus::ACTIVE
+            . " GROUP BY NAME, DAY, START_TIME, END_TIME ORDER BY NAME";
         $rows = getDb()->selectStmtNoParams($query);
         return self::populateEvents($rows);
+    }
+
+    /**
+     * @return LessonsPerDay[]|bool
+     * @throws SystemException
+     */
+    static function countActiveEventsPerDay() {
+        $query = "select DAY, count(ID) as COUNT FROM "
+            . getDb()->events .
+            " WHERE " . self::STATUS . " = " . EventStatus::ACTIVE
+            . " GROUP BY DAY ";
+        $rows = getDb()->selectStmtNoParams($query);
+        return self::populateLessonsPerDay($rows);
     }
 
     /**
@@ -396,6 +413,36 @@ class ProgramHandler {
     /*Populate Functions*/
     /**
      * @param $rows
+     * @return LessonsPerDay[]|bool
+     */
+    private static function populateLessonsPerDay($rows) {
+        if ($rows === false) {
+            return false;
+        }
+
+        $days = [];
+
+        foreach ($rows as $row) {
+            $day
+                = self::populateLessonPerDay($row);
+            $days[] = $day;
+        }
+        return $days;
+    }
+
+    /**
+     * @param $row
+     * @return LessonsPerDay|bool
+     */
+    private static function populateLessonPerDay($row) {
+        if ($row === false) {
+            return false;
+        }
+        return LessonsPerDay::createLessonsPerDay($row[self::DAY], $row['COUNT']);
+    }
+
+    /**
+     * @param $rows
      * @return Event[]|bool
      */
     private static function populateEvents($rows) {
@@ -423,7 +470,6 @@ class ProgramHandler {
         }
         return Event::createEvent($row[self::ID], $row[self::NAME], $row[self::DESCRIPTION], $row[self::STATUS], $row[self::DAY], $row[self::START], $row[self::END], $row[self::OWNER], $row[self::PLACE]);
     }
-
 
     /**
      * @param $rows
