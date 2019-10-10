@@ -55,71 +55,60 @@ class ProgramHandler
         $mobileProgram = array();
 
         $mondayLessons = array();
-        $mondayTimeFrames = array();
-
         $tuesdayLessons = array();
-        $tuesdayTimeFrames = array();
-
         $wednesdayLessons = array();
-        $wednesdayTimeFrames = array();
-
         $thursdayLessons = array();
-        $thursdayTimeFrames = array();
-
         $fridayLessons = array();
-        $fridayTimeFrames = array();
-
         $saturdayLessons = array();
-        $saturdayTimeFrames = array();
 
         foreach ($events as $event) {
             $timeFrame = $event->getStart() . '-' . $event->getEnd();
 
             switch ($event->getDay()) {
                 case DaysOfWeek::MONDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $mondayTimeFrames, $mondayLessons);
+                    $lesson2add = array(TIME_FRAME => $timeFrame, LESSON => $event->getNameWithOwner());
                     if (isNotEmpty($lesson2add)) {
                         $mondayLessons[] = $lesson2add;
                     }
-                    $mondayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::TUESDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $tuesdayTimeFrames, $tuesdayLessons);
+                    $lesson2add = array(TIME_FRAME => $timeFrame, LESSON => $event->getNameWithOwner());
                     if (isNotEmpty($lesson2add)) {
                         $tuesdayLessons[] = $lesson2add;
                     }
-                    $tuesdayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::WEDNESDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $wednesdayTimeFrames, $wednesdayLessons);
+                    $lesson2add = array(TIME_FRAME => $timeFrame, LESSON => $event->getNameWithOwner());
                     if (isNotEmpty($lesson2add)) {
                         $wednesdayLessons[] = $lesson2add;
                     }
-                    $wednesdayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::THURSDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $thursdayTimeFrames, $thursdayLessons);
+                    $lesson2add = array(TIME_FRAME => $timeFrame, LESSON => $event->getNameWithOwner());
                     if (isNotEmpty($lesson2add)) {
                         $thursdayLessons[] = $lesson2add;
                     }
-                    $thursdayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::FRIDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $fridayTimeFrames, $fridayLessons);
+                    $lesson2add = array(TIME_FRAME => $timeFrame, LESSON => $event->getNameWithOwner());
                     if (isNotEmpty($lesson2add)) {
                         $fridayLessons[] = $lesson2add;
                     }
-                    $fridayTimeFrames[] = $timeFrame;
                     break;
                 case DaysOfWeek::SATURDAY:
-                    $lesson2add = self::addMobileLesson($timeFrame, $event->getNameWithOwner(), $saturdayTimeFrames, $saturdayLessons);
+                    $lesson2add = array(TIME_FRAME => $timeFrame, LESSON => $event->getNameWithOwner());
                     if (isNotEmpty($lesson2add)) {
                         $saturdayLessons[] = $lesson2add;
                     }
-                    $saturdayTimeFrames[] = $timeFrame;
                     break;
             }
         }
+        asort($mondayLessons);
+        asort($tuesdayLessons);
+        asort($wednesdayLessons);
+        asort($thursdayLessons);
+        asort($fridayLessons);
+        asort($saturdayLessons);
 
         $mobileProgram[DaysOfWeek::MONDAY] = $mondayLessons;
         $mobileProgram[DaysOfWeek::TUESDAY] = $tuesdayLessons;
@@ -128,20 +117,6 @@ class ProgramHandler
         $mobileProgram[DaysOfWeek::FRIDAY] = $fridayLessons;
         $mobileProgram[DaysOfWeek::SATURDAY] = $saturdayLessons;
         return $mobileProgram;
-    }
-
-    /**
-     * @param $events Event[]
-     * @return array
-     */
-    static function getTimeFrames($events) {
-        $timeFrames = array();
-        foreach ($events as $event) {
-            $timeFrame = $event->getStart() . '-' . $event->getEnd();
-            $timeFrames[$timeFrame] = $timeFrame;
-        }
-        ksort($timeFrames);
-        return $timeFrames;
     }
 
     /**
@@ -178,6 +153,7 @@ class ProgramHandler
      * @param $daysTimeFrames array
      * @param $daysLessons array
      * @return array
+     * @deprecated
      */
     private static function addMobileLesson($timeFrame, $lesson, $daysTimeFrames, &$daysLessons) {
         $lesson2Add = array(TIME_FRAME => $timeFrame, LESSON => $lesson);

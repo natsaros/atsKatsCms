@@ -14,7 +14,6 @@ $lessonsPerDay = ProgramHandler::countActiveEventsPerDay();
 
 $mobileProgram = ProgramHandler::mobileProgram($events);
 $lessons = ProgramHandler::getLessonsTimeFrames($events);
-$timeFrames = ProgramHandler::getTimeFrames($events);
 
 $weekDaysGr = array(MONDAY => 'Δευτέρα', TUESDAY => 'Τρίτη', WEDNESDAY => 'Τετάρτη', THURSDAY => 'Πέμπτη', FRIDAY => 'Παρασκευή', SATURDAY => 'Σάββατο');
 $weekDays = array(MONDAY => MONDAY, TUESDAY => TUESDAY, WEDNESDAY => WEDNESDAY, THURSDAY => THURSDAY, FRIDAY => FRIDAY, SATURDAY => SATURDAY);
@@ -26,6 +25,9 @@ $weekDays = array(MONDAY => MONDAY, TUESDAY => TUESDAY, WEDNESDAY => WEDNESDAY, 
 function renderMobileProgram($program, $weekDaysGr) {
     if (isNotEmpty($program)) {
         foreach ($program as $day => $weekDay) {
+            if (sizeof($weekDay) == 0) {
+                return;
+            }
             $collapseClass = MONDAY === $day ? ' in' : '';
             echo '<div class="panel panel-default">';
             echo '<div class="panel-heading">
