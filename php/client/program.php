@@ -17,6 +17,7 @@ $lessons = ProgramHandler::getLessonsTimeFrames($events);
 
 $weekDaysGr = array(MONDAY => 'Δευτέρα', TUESDAY => 'Τρίτη', WEDNESDAY => 'Τετάρτη', THURSDAY => 'Πέμπτη', FRIDAY => 'Παρασκευή', SATURDAY => 'Σάββατο');
 $weekDays = array(MONDAY => MONDAY, TUESDAY => TUESDAY, WEDNESDAY => WEDNESDAY, THURSDAY => THURSDAY, FRIDAY => FRIDAY, SATURDAY => SATURDAY);
+$equipmentLessons = '08:00 - 13:00 (διάρκεια μαθήματος 1 ωρα) <br> 17:00 - 22:00 (διάρκεια μαθήματος 1 ωρα)';
 
 /**
  * @param $program array
@@ -57,11 +58,12 @@ function renderMobileProgram($program, $weekDaysGr) {
 /**
  * @param $lessons Lesson[]
  * @param $lessonsPerDay LessonsPerDay[]
+ * @param $equipmentLessons string
  */
-function renderDesktopProgram($lessons, $lessonsPerDay) {
+function renderDesktopProgram($lessons, $lessonsPerDay, $equipmentLessons) {
     echo '<tr>';
     echo '<td>' . ProgramHandler::PILATES_EQUIP . '</td>';
-    echo '<td colspan="6">' . '08:00 - 13:00 (διάρκεια μαθήματος 1 ωρα) <br> 17:00 - 22:00 (διάρκεια μαθήματος 1 ωρα)' . '</td>';
+    echo '<td colspan="6">' . $equipmentLessons . '</td>';
     echo '</tr>';
 
     foreach (array_keys($lessons) as $lessonName) {
@@ -152,7 +154,7 @@ function getDesktopLesson($lessons, $day, $lesson) {
                 </tr>
                 </thead>
                 <tbody>
-                <?php renderDesktopProgram($lessons, $lessonsPerDay); ?>
+                <?php renderDesktopProgram($lessons, $lessonsPerDay, $equipmentLessons); ?>
                 </tbody>
             </table>
         </div>
@@ -161,6 +163,9 @@ function getDesktopLesson($lessons, $day, $lesson) {
         <div class="headerTitle">
             <p>Πρόγραμμα</p>
             <div class="titlesBorder"></div>
+        </div>
+        <div class="timeTable panel-group">
+            <?php echo ProgramHandler::PILATES_EQUIP . '<br><br>' . $equipmentLessons ?>
         </div>
         <div class="timeTable panel-group" id="accordion">
             <?php renderMobileProgram($mobileProgram, $weekDaysGr); ?>
