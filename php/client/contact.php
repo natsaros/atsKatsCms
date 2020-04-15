@@ -9,7 +9,7 @@ FormHandler::unsetSessionForm('sendEmailForm');
             <div class="col-sm-12">
                 <div class="heroHeader contactHero">
                     <div class="headerTitle">
-                        <p>ΒΑΛΤΕ ΤΗ ΓΥΜΝΑΣΤΙΚΗ ΣΤΗ ΖΩΗ ΣΑΣ!</p>
+                        <p>Βάλτε τη γυμναστική στη ζωή σας!</p>
                         <div class="titlesBorder"></div>
                     </div>
                     <div class="heroSubTitle">Μιλήστε μας για τους στόχους σας...</div>

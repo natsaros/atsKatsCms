@@ -41,6 +41,7 @@ textarea { resize: vertical; }
 .brown_background { background-color: #f2f1ef; }
 .grayish { background-color: #68625d; }
 .contactHero { background: url("../img/pilatesRoom_m.jpg") no-repeat center 30% /cover;}
+.onlineHero { background: url("../img/pilates-precision1-1.jpg") no-repeat center 60% /cover;}
 .text_color { color: #2d200c; }
 /*Color Pallete End*/
 
@@ -72,7 +73,7 @@ textarea { resize: vertical; }
 
 .headerTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 34px; display: inline-block; margin: 10px 0 20px 0; }
 .commentsTitle { font-family: Roboto,Arial,sans-serif; font-weight: 300; font-size: 34px; margin: 10px 0 20px 0; text-align: left;}
-.contactHero .headerTitle { text-shadow: 1px 0 1px #000;}
+.contactHero .headerTitle,.onlineHero .headerTitle { text-shadow: 1px 0 1px #000;}
 .noteTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-size: 30px; display: inline-block; margin: 10px 0 20px 0;font-style: italic;}
 .titlesBorder { margin: 20px auto; border: 2px solid #bfbfbf; border-radius: 2px; width: 70%; }
 .titlesBorder.invisible{margin: 40px auto;border: 2px solid transparent;}
@@ -135,7 +136,8 @@ footer a.toTop:before { content: ''; display: inline-block; height: 100%; vertic
 footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vertical-align: middle; top: 0; left: -1px; }
 /*Footer End*/
 
-.heroHeader { padding: 90px 0; color: white; }
+.heroHeader { padding: 160px 0; color: white; }
+.heroHeader.onlineHero{padding: 160px 0;}
 .heroHeader .heroSubTitle { font-family: Roboto, Arial, sans-serif; font-weight: 300; font-style: italic; font-size: 26px;text-shadow: 1px 0 1px #000;}
 .contactInfo { display: inline-block; width: 80%; }
 .formContainer { float: left; width: 100%; margin: 85px 0; }
@@ -143,7 +145,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .formContainer .row, .timeTableContainer .row { margin: 20px 0; }
 .form-control:focus { border-color: #f2f1ef; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 80, 65, .6); box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 80, 65, .6); }
 
-.aboutHero{background: url("../img/recent/ALM_8477.jpg") no-repeat center 60% /cover; text-align: center; padding: 108px 0;}
+.aboutHero{background: url("../img/recent/ALM_8477.jpg") no-repeat center 60% /cover; text-align: center;}
 .aboutHeroTitle{ display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding:100px 0;}
 
 .aboutIntroduceMyselfImageContainer { display: inline-block;padding: 5%; }
@@ -165,7 +167,7 @@ footer .glyphicon { font-size: 20px; color: #2c2207; display: inline-block; vert
 .aboutTimeTable tr:last-child td:last-child { border-bottom-right-radius: 4px; }
 
 
-.programHero { background: url("../img/reformer_m.jpg") no-repeat center 45% /cover; text-align: center;padding: 108px 0; }
+.programHero { background: url("../img/reformer_m.jpg") no-repeat center 45% /cover; text-align: center; }
 .programHeroTitle { display: inline-block; vertical-align: middle; color: white; width: 35%; font-size: 42px; font-family: Roboto, Arial, sans-serif; font-weight: 100; font-style: italic; padding: 100px 0}
 
 .panel-group { margin: 20px; }
