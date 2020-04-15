@@ -24,9 +24,10 @@
                     <li class="<?php if($pageId == "blog" || $pageId == "blogpost") { ?>active<?php } ?>"><a
                                 href="<?php echo REQUEST_URI ?>blog">Blog</a></li>
                 <?php } ?>
+                <li class="<?php if($pageId == "online_courses") { ?>active<?php } ?>"><a
+                            href="<?php echo REQUEST_URI ?>online_courses">Γυμνάσου τώρα</a></li>
                 <li class="<?php if($pageId == "contact") { ?>active<?php } ?>"><a
                             href="<?php echo REQUEST_URI ?>contact">Επικοινωνία</a></li>
-                <!--<li><a href="#bookNow">Book Now</a></li>-->
             </ul>
         </div>
     </div>

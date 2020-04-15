@@ -760,7 +760,6 @@
             this.isLoaded = isLoaded;
             this.emit( 'confirm', this, message );
         };
-
         // trigger specified handler for event type
         LoadingImage.prototype.handleEvent = function( event ) {
             var method = 'on' + event.type;

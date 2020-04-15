@@ -23,7 +23,7 @@ $(document).ready(function () {
             //window.location.hash = hash;
         });
     });
-    if (body.attr('id') == 'contact') {
+    if (body.attr('id') === 'contact') {
         mapInit();
     }
 
@@ -121,5 +121,4 @@ $(window).scroll(function () {
             $(this).addClass("slide");
         }
     });
-
 });
