@@ -16,7 +16,7 @@ FormHandler::unsetSessionForm('sendEmailForm');
     </div>
 
     <div class="container">
-        <iframe src="https://renkont.com"
+        <iframe src="https://renkont.com?sessionId=<?php session_id()?>"
                 width="98%" height="1200"
                 style="margin-top: 20px"
                 allowfullscreen="allowfullscreen"
