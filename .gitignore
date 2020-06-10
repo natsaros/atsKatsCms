@@ -1,0 +1,7 @@
+.idea/
+gallery/pictures/*
+!gallery/pictures/default.png
+!gallery/pictures/blog_default.png
+logs/*
+#admin css gets generated from less
+adminCustom.css

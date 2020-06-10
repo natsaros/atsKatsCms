@@ -1,0 +1,3 @@
+Important!
+
+Run init.sql before running the app for the first time. It has a bug with the connection and crashes. Will be fixed!

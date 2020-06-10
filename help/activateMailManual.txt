@@ -1,0 +1,13 @@
+go to C:\xampp\php\php.ini
+find [mail function]
+comment sendmail_path="C:\xampp\mailtodisk\mailtodisk.exe"
+uncomment sendmail_path="C:\xampp\mailtodisk\sendmail.exe"
+
+go to C:\xampp\sendmail\sendmail.ini
+fill in the values
+smtp_server=smtp.gmail.com
+smtp_port=587
+auth_username=***@gmail.com
+auth_password=****
+
+force_sender=***@gmail.com
