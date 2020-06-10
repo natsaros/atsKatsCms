@@ -19,7 +19,7 @@ FormHandler::unsetSessionForm('sendEmailForm');
     <div class="formContainer">
         <div class="row">
             <div class="col-md-12 text-center">
-                <a href="https://fitnesshousebypenny-onlinecourses.gr/" class="btn btn-block btn-default" style="width: 50%;margin: 0 auto" type="submit">Ξεκίνα τώρα</a>
+                <a target="_blank" href="https://fitnesshousebypenny-onlinecourses.gr/" class="btn btn-block btn-default" style="width: 50%;margin: 0 auto" type="submit">Ξεκίνα τώρα</a>
             </div>
         </div>
     </div>
