@@ -7,8 +7,8 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
 ?>
 
 <div class="container-fluid text-center belowHeader blogContainer">
-    <?php if(!is_null($posts) && count($posts) > 0) { ?>
-        <?php if($isBoth) { ?>
+    <?php if (!is_null($posts) && count($posts) > 0) { ?>
+        <?php if ($isBoth) { ?>
             <div class="blogPostsViewTypes">
                 <a href="javascript:void(0);" class="blogPostsViewType active" data-viewType="postsViewTypeList">
                     <img src="<?php echo ASSETS_URI ?>img/list.png">
@@ -20,17 +20,19 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
 
         <?php } ?>
 
-        <?php if($isBoth) { ?>
+        <?php if ($isBoth) { ?>
             <div id="postsViewTypeGrid" style="display: none">
                 <?php
                 $count = 0;
-                if($count == 0) {
+                if ($count == 0) {
                 ?>
                 <div class="row">
                     <?php
                     }
                     /* @var $post Post */
-                    foreach($posts as $key => $post) {
+                    foreach ($posts
+
+                    as $key => $post) {
                     $count++;
                     ?>
                     <div class="col-sm-4">
@@ -44,7 +46,7 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                         <div class="row row-no-padding row-no-margin">
                             <div class="col-sm-12">
                                 <div class="blogPostPreviewTitleGrid">
-                                    <a href="<?php echo getBlogUri() . $post->getFriendlyTitle();?>">
+                                    <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
                                         <?php echo $post->getTitle(); ?>
                                     </a>
                                     <div class="blogTitlesBorderGrid"></div>
@@ -68,7 +70,7 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                             </div>
                         </div>
                     </div>
-                    <?php if($count == 3 || $key == (sizeof($posts) - 1)) {
+                    <?php if ($count == 3 || $key == (sizeof($posts) - 1)) {
                     $count = 0; ?>
                 </div>
             <?php
@@ -79,7 +81,7 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
             <div id="postsViewTypeList">
                 <?php
                 /* @var $post Post */
-                foreach($posts as $key => $post) { ?>
+                foreach ($posts as $key => $post) { ?>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
@@ -124,67 +126,54 @@ $isGridStyle = SettingsHandler::getSettingValueByKey(Setting::BLOG_STYLE) === 'g
                 <?php } ?>
             </div>
         <?php } else { ?>
-            <?php if($isGridStyle) { ?>
+            <?php if ($isGridStyle) { ?>
                 <div id="postsViewTypeGrid">
-                    <?php
-                    $count = 0;
-                    if($count == 0) {
-                    ?>
-                    <div class="row">
-                        <?php
-                        }
-                        /* @var $post Post */
-                        foreach($posts as $key => $post) {
-                        $count++;
-                        ?>
-                        <div class="col-sm-4">
-                            <div class="row row-no-padding row-no-margin">
-                                <div class="col-sm-12">
-                                    <div class="blogImageGrid">
-                                        <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                    <div class="row row-no-padding row-no-margin">
+                        <?php /* @var $post Post */
+                        foreach ($posts as $key => $post) { ?>
+                            <div class="col-sm-4">
+                                <div class="row row-no-padding row-no-margin">
+                                    <div class="col-sm-12">
+                                        <div class="blogImageGrid">
+                                            <img src="<?php echo ImageUtil::renderBlogImage($post); ?>"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-no-padding row-no-margin">
+                                    <div class="col-sm-12">
+                                        <div class="blogPostPreviewTitleGrid">
+                                            <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                                <?php echo $post->getTitle(); ?>
+                                            </a>
+                                            <div class="blogTitlesBorderGrid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-no-padding">
+                                    <div class="col-sm-12">
+                                        <div class="blogPostsDateGrid">
+                                            <?php echo formatDateBasedOnLocale($post->getActivationDate()); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-no-padding row-no-margin">
+                                    <div class="col-sm-12">
+                                        <div class="blogPostPreviewTextGrid">
+                                            <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
+                                                <?php echo postTextPreview($post->getText(), "grid"); ?>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row row-no-padding row-no-margin">
-                                <div class="col-sm-12">
-                                    <div class="blogPostPreviewTitleGrid">
-                                        <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
-                                            <?php echo $post->getTitle(); ?>
-                                        </a>
-                                        <div class="blogTitlesBorderGrid"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row row-no-padding">
-                                <div class="col-sm-12">
-                                    <div class="blogPostsDateGrid">
-                                        <?php echo formatDateBasedOnLocale($post->getActivationDate()); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row row-no-padding row-no-margin">
-                                <div class="col-sm-12">
-                                    <div class="blogPostPreviewTextGrid">
-                                        <a href="<?php echo getBlogUri() . $post->getFriendlyTitle(); ?>">
-                                            <?php echo postTextPreview($post->getText(), "grid"); ?>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php if($count == 3 || $key == (sizeof($posts) - 1)) {
-                        $count = 0; ?>
+                        <?php } ?>
                     </div>
-                <?php
-                }
-                }
-                ?>
                 </div>
             <?php } else { ?>
                 <div id="postsViewTypeList">
                     <?php
                     /* @var $post Post */
-                    foreach($posts as $key => $post) { ?>
+                    foreach ($posts as $key => $post) { ?>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="row">

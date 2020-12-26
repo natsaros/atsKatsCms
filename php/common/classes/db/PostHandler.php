@@ -42,8 +42,9 @@ class PostHandler {
      * @return Post[]|bool
      * @throws SystemException
      */
-    static function fetchAllActivePostsWithDetails() {
-        $query = "SELECT * FROM " . getDb()->posts . " WHERE " . self::STATE . " = " . PostStatus::PUBLISHED;
+    static function fetchAllActivePostsWithDetails()
+    {
+        $query = "SELECT * FROM " . getDb()->posts . " WHERE " . self::STATE . " = " . PostStatus::PUBLISHED . " ORDER BY " . self::ACTIVATION_DATE . " DESC";
         $rows = getDb()->selectStmtNoParams($query);
         return self::populatePosts($rows, true);
     }
